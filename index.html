@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>바이브 코딩이란 무엇인가?</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+    }
+
+    html, body { background: var(--bg-0) !important; }
+    /* restored gradient mesh background */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 2vh 4vw; }
+
+    /* HARD RULE: every text descendant defaults to pure white. */
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+    }
+
+    /* Sharp definition shadows — no harsh outline, no big blur. */
+    /* Headings get a tight 1px drop + small blur for depth */
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    /* Body text: tight 1px shadow just enough to read on bright gradient spots */
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    /* Quote / bubble text: subtle definition */
+    .reveal .quote, .reveal .quote *,
+    .reveal .bubble, .reveal .bubble * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    /* Gradient text: skip heavy shadow so the gradient stays crisp */
+    .reveal .grad {
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 3.0rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right with multiple buttons */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn.alt {
+      background: rgba(15, 30, 36, 0.85);
+      border-color: rgba(91, 255, 224, 0.45);
+    }
+    .dl-btn.alt:hover {
+      background: rgba(0, 224, 199, 0.32);
+      border-color: rgba(155, 130, 255, 0.7);
+    }
+    .dl-btn .dl-arrow {
+      display: inline-block;
+      animation: dlBounce 2s ease-in-out infinite;
+    }
+    .dl-btn .dl-arrow-out {
+      display: inline-block;
+      animation: dlArrowOut 2s ease-in-out infinite;
+    }
+    @keyframes dlBounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(2px); }
+    }
+    @keyframes dlArrowOut {
+      0%, 100% { transform: translate(0, 0); }
+      50%      { transform: translate(2px, -2px); }
+    }
+
+    /* SVG <text> on dark bg: tight outline + shadow for readability */
+    .reveal section svg text:not(.no-outline):not(.prob-cell) {
+      paint-order: stroke fill;
+      stroke: #06080F;
+      stroke-width: 1.2px;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.85));
+    }
+
+    .reveal .slide-number { color: #E6D9FF; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility — bright accent variants for readability on dark bg */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .pad { padding: 2rem; }
+    .small { font-size: 1.05rem; }
+    .tiny  { font-size: 0.85rem; }
+
+    /* animated gradient text */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* floating particles */
+    .particles {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .particles span {
+      position: absolute;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.35;
+      filter: blur(0.5px);
+      animation: floatUp 8s linear infinite;
+    }
+    .particles span:nth-child(odd){ background: var(--accent-2); }
+    .particles span:nth-child(3n){ background: var(--accent-3); }
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) scale(0.6); opacity: 0; }
+      10%  { opacity: 0.5; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    /* card — glassmorphism + readable text-shadow handles contrast */
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.9rem 2rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(155,130,255,0.9);
+      box-shadow:
+        0 36px 70px -20px rgba(124,92,255,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    /* Spacing INSIDE cards: pill → h3 → p with proper breathing room */
+    .card > .pill { margin-bottom: 1.2rem; }
+    .card > .pill + h3 { margin-top: 0; }
+    .card h3 {
+      font-size: 1.55rem;
+      margin: 0 0 0.9rem 0;
+      color: #FFFFFF !important;
+    }
+    .card h3 + p, .card p + p { margin-top: 0.6rem; }
+    .card p {
+      font-size: 1.12rem;
+      line-height: 1.65;
+      margin: 0;
+      color: #E8ECF5 !important;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    /* big number */
+    .big {
+      font-size: 8rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* go board */
+    .goboard {
+      width: 460px; height: 460px;
+      background: linear-gradient(145deg, #d9b377, #c69a5e);
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6), inset 0 0 60px rgba(0,0,0,0.15);
+    }
+    .goboard svg { width: 100%; height: 100%; display: block; }
+    .stone-anim { animation: stoneDrop .5s cubic-bezier(.2,1.4,.4,1) both; }
+    @keyframes stoneDrop {
+      0%   { transform: translateY(-30px) scale(0.4); opacity: 0; }
+      60%  { transform: translateY(2px)   scale(1.05); opacity: 1; }
+      100% { transform: translateY(0)     scale(1); }
+    }
+    .heat-cell { animation: heatPulse 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+    /* AlphaGo probability calculation animation */
+    .prob-cell-bg { fill: rgba(255, 247, 230, 0.92); }
+    .prob-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 800;
+      fill: #0a0a0a;
+      pointer-events: none;
+    }
+    .best-move {
+      filter: drop-shadow(0 0 6px rgba(255,94,126,0.7));
+    }
+
+    /* ========= Word vector space (slide 7) & Library space (slide 13) ========= */
+    .word-space, .library-space {
+      position: relative;
+      height: 320px;
+      border: 1px solid rgba(155,130,255,0.3);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 25% 35%, rgba(124,92,255,0.18), transparent 55%),
+        radial-gradient(circle at 75% 70%, rgba(0,224,199,0.12), transparent 55%),
+        rgba(11,14,26,0.6);
+      overflow: hidden;
+      margin: 0.6rem 0;
+    }
+    .library-space { height: 340px; }
+    .word-space::before, .library-space::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+    .ws-label {
+      position: absolute;
+      top: 0.7rem; left: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(229, 217, 255, 0.6) !important;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .word-chip {
+      position: absolute;
+      background: rgba(20, 22, 44, 0.92);
+      border: 1px solid rgba(155, 130, 255, 0.4);
+      padding: 0.45rem 0.85rem;
+      border-radius: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      transition: transform 0.45s cubic-bezier(.2,1,.4,1),
+                  border-color 0.4s ease,
+                  background 0.4s ease,
+                  box-shadow 0.4s ease,
+                  opacity 0.45s ease,
+                  filter 0.45s ease;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+    .word-chip .w {
+      font-size: 1rem; font-weight: 800; color: #FFFFFF !important;
+      letter-spacing: -0.01em;
+    }
+    .word-chip .prob-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; font-weight: 700;
+      color: #B5A1FF !important;
+      fill: none;
+    }
+    .word-chip.top {
+      background: rgba(124, 92, 255, 0.55);
+      border-color: #5BFFE0;
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow:
+        0 0 28px rgba(91, 255, 224, 0.7),
+        0 0 60px rgba(124, 92, 255, 0.5);
+      z-index: 6;
+    }
+    .word-chip.top .prob-cell { color: #5BFFE0 !important; }
+    .word-chip.fetched {
+      animation: chipFetch 1s forwards cubic-bezier(.4, 0, .2, 1);
+    }
+    @keyframes chipFetch {
+      0%   { transform: translate(-50%, -50%) scale(1.3); opacity: 1; filter: blur(0); }
+      35%  { transform: translate(-50%, -120%) scale(1.5); opacity: 0.85; filter: blur(1px); }
+      100% { transform: translate(-50%, -260%) scale(0.5); opacity: 0; filter: blur(10px); }
+    }
+    /* Library space: after settle, dim the non-top chips */
+    .library-space.settled .word-chip:not(.top) {
+      opacity: 0.3;
+      filter: blur(1px);
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+    .library-space .word-chip.top {
+      animation: libGlow 2.4s ease-in-out infinite;
+    }
+    @keyframes libGlow {
+      0%, 100% { box-shadow: 0 0 28px rgba(91,255,224,0.7), 0 0 60px rgba(124,92,255,0.5); }
+      50%      { box-shadow: 0 0 40px rgba(91,255,224,0.95), 0 0 90px rgba(124,92,255,0.7); }
+    }
+
+    /* Prompt blank that fills with the predicted word */
+    .blank {
+      display: inline-block;
+      min-width: 92px;
+      padding: 0 0.4em;
+      border-bottom: 3px solid #B5A1FF;
+      text-align: center;
+      color: #B5A1FF !important;
+      font-weight: 800;
+      vertical-align: baseline;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .blank.filled {
+      animation: blankFill 0.7s ease forwards;
+      color: #5BFFE0 !important;
+      border-bottom-color: #5BFFE0;
+    }
+    @keyframes blankFill {
+      0%   { transform: scale(0.4); opacity: 0; filter: blur(6px); }
+      60%  { transform: scale(1.2); opacity: 1; filter: blur(0); }
+      100% { transform: scale(1); }
+    }
+    /* Cascade word: each new predicted word fades in */
+    .cascade-word {
+      display: inline-block;
+      color: #FFE08A !important;
+      font-weight: 700;
+      opacity: 0;
+      animation: wordAppear 0.55s ease forwards;
+    }
+    @keyframes wordAppear {
+      0%   { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes heatPulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 0.9;  transform: scale(1.08); }
+    }
+
+    /* probability bars */
+    .probs { display: flex; flex-direction: column; gap: 0.7rem; }
+    .prob-row { display: grid; grid-template-columns: 160px 1fr 80px; gap: 1rem; align-items: center; }
+    .prob-row .word { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: var(--fg); }
+    .prob-row .bar { height: 24px; border-radius: 999px; background: rgba(255,255,255,0.16); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .prob-row .bar > i {
+      display: block; height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 999px;
+      animation: fillBar 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .prob-row .num { font-family: 'JetBrains Mono', monospace; color: #E6D9FF; }
+    @keyframes fillBar { from { width: 0; } to { width: var(--w); } }
+    .prob-row.top .bar > i { background: linear-gradient(90deg, var(--accent-3), var(--accent-4)); }
+
+    /* timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ""; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+    .tline { position: relative; padding: 0.8rem 0 0.8rem 1.2rem; }
+    .tline::before {
+      content: ""; position: absolute; left: -2rem; top: 1.2rem;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--bg-0); border: 3px solid var(--accent);
+      box-shadow: 0 0 18px rgba(124,92,255,0.6);
+    }
+    .tline.green::before { border-color: var(--accent-2); box-shadow: 0 0 18px rgba(0,224,199,0.6); }
+    .tline.pink::before  { border-color: var(--accent-3); box-shadow: 0 0 18px rgba(255,94,126,0.6); }
+    .tline.amber::before { border-color: var(--accent-4); box-shadow: 0 0 18px rgba(255,200,87,0.6); }
+    .tline h4 { font-size: 1.6rem; margin-bottom: 0.2rem; color: var(--fg); }
+    .tline p { color: #E6D9FF; }
+    .tline .yr {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-4);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.15em 0.6em;
+      border-radius: 6px;
+      background: rgba(255, 200, 87, 0.12);
+      border: 1px solid rgba(255, 212, 107, 0.4);
+      margin-bottom: .35rem;
+    }
+
+    /* code block */
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+
+    /* glitch */
+    .glitch {
+      position: relative; display: inline-block;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text); position: absolute; left: 0; top: 0;
+      width: 100%; opacity: 0.85;
+    }
+    .glitch::before { color: var(--accent-3); transform: translate(-2px, 0); mix-blend-mode: screen; animation: glitch1 3s infinite linear alternate-reverse; }
+    .glitch::after  { color: var(--accent-2); transform: translate(2px, 0);  mix-blend-mode: screen; animation: glitch2 2.4s infinite linear alternate-reverse; }
+    @keyframes glitch1 {
+      0%, 100% { clip-path: inset(0 0 80% 0); }
+      50%      { clip-path: inset(60% 0 0 0); }
+    }
+    @keyframes glitch2 {
+      0%, 100% { clip-path: inset(70% 0 0 0); }
+      50%      { clip-path: inset(0 0 70% 0); }
+    }
+
+    /* ========= Auto-sequential reveal — plays on slide entry, no click required ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in     { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    /* stagger by DOM position among siblings — works inside cards / grids / timelines / chat alike */
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+
+    /* library bookshelf */
+    .bookshelf {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px;
+      align-items: end; height: 240px;
+    }
+    .book {
+      width: 100%; border-radius: 4px 4px 1px 1px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      transform-origin: bottom;
+      animation: bookRise 1.2s cubic-bezier(.2,1.2,.4,1) both;
+    }
+    .book:nth-child(2n) { background: linear-gradient(180deg, var(--accent-3), var(--accent-4)); }
+    .book:nth-child(3n) { background: linear-gradient(180deg, var(--accent-2), var(--accent)); }
+    .book:nth-child(5n) { background: linear-gradient(180deg, var(--accent-4), var(--accent-3)); }
+    @keyframes bookRise {
+      0%   { transform: scaleY(0); opacity: 0; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* shaking emphasis */
+    .shake { display: inline-block; animation: shake 0.5s ease-in-out; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    /* tag for slide chapter */
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    /* underline draw */
+    .uline { position: relative; }
+    .uline::after {
+      content: ""; position: absolute; left: 0; bottom: -6px;
+      height: 4px; width: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform-origin: left; transform: scaleX(0);
+      animation: drawLine 1.2s .3s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    @keyframes drawLine { to { transform: scaleX(1); } }
+
+    /* arrow */
+    .arrow {
+      width: 60px; height: 2px; background: var(--fg-dim); position: relative;
+    }
+    .arrow::after {
+      content: ""; position: absolute; right: -1px; top: -5px;
+      border: 6px solid transparent; border-left-color: #E6D9FF;
+    }
+
+    /* end slide */
+    .end-card {
+      text-align: center; padding: 4rem 2rem;
+    }
+    .end-card .big { font-size: 7rem; }
+
+    /* chat */
+    .chat {
+      display: flex; flex-direction: column; gap: 0.7rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .bubble {
+      max-width: 72%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 18px;
+      line-height: 1.45;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 22px -10px rgba(0,0,0,0.5);
+    }
+    .bubble .who {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      opacity: 0.85;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #7C5CFF, #5B3FD9);
+      color: #FFFFFF;
+      border: 1px solid rgba(155,130,255,0.5);
+      border-bottom-right-radius: 6px;
+    }
+    .bubble.user .who { color: #E1D9FF; }
+    .bubble.ai {
+      align-self: flex-start;
+      background: #1B2138;
+      border: 1px solid rgba(43, 234, 208, 0.6);
+      color: #FFFFFF !important;
+      border-bottom-left-radius: 6px;
+    }
+    .bubble.ai * { color: #FFFFFF !important; }
+    .bubble.ai .who { color: #5BFFE0 !important; }
+    .bubble.ai b { color: #FFE08A !important; }
+    .bubble.user * { color: #FFFFFF !important; }
+    .bubble.user .who { color: #E1D9FF !important; }
+    .bubble.user b { color: #FFE08A !important; }
+    .bubble code {
+      background: rgba(0,0,0,0.3); padding: 0.1em 0.35em; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.95em;
+    }
+    .bubble.user b, .bubble.ai b { color: #FFD46B; }
+
+    /* speakerNotes-friendly */
+    @media print { body::before, body::after { display: none; } }
+  </style>
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <a class="dl-btn alt" href="https://syngha.com" target="_blank" rel="noopener" title="더 많은 글 보기 — syngha.com">
+    <span class="dl-arrow-out">↗</span><span>More articles</span>
+  </a>
+  <a class="dl-btn" href="seminar.html" download="vibe-coding-seminar-2026.html" title="이 슬라이드의 원본 HTML을 다운로드합니다">
+    <span class="dl-arrow">⬇</span><span>HTML</span>
+  </a>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. Title ============= -->
+    <section data-background-color="#06080F">
+      <div class="particles">
+        <span style="left:5%;  animation-delay:0s;  animation-duration:9s;"></span>
+        <span style="left:12%; animation-delay:1.5s;animation-duration:11s;"></span>
+        <span style="left:22%; animation-delay:3s;  animation-duration:8s;"></span>
+        <span style="left:35%; animation-delay:0.7s;animation-duration:12s;"></span>
+        <span style="left:48%; animation-delay:2s;  animation-duration:9s;"></span>
+        <span style="left:60%; animation-delay:4s;  animation-duration:10s;"></span>
+        <span style="left:72%; animation-delay:1s;  animation-duration:13s;"></span>
+        <span style="left:84%; animation-delay:2.6s;animation-duration:9.5s;"></span>
+        <span style="left:92%; animation-delay:5s;  animation-duration:11s;"></span>
+      </div>
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <div class="chip">SEMINAR · 2026</div>
+        <h1 style="font-size:5.5rem;">
+          <span class="grad">바이브 코딩</span>이란<br/>
+          무엇인가?
+        </h1>
+        <p style="font-size:1.7rem; margin-top: 1.5rem; color: var(--fg); max-width: 900px;">
+          AI가 뭐고, AI로 증가되는 생산성이란?
+          <span class="accent2">(feat. vibecoding)</span>
+        </p>
+        <p class="muted" style="margin-top: 2rem; font-size: 1rem;">
+          출처 · <a href="https://syngha.com/vibe-coding-2605/" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">syngha.com/vibe-coding-2605</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 2. Hook ============= -->
+    <section>
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div class="chip">CHAPTER 0 · HOOK</div>
+        <h1 style="font-size: 6rem;">
+          <span class="uline">AI</span>가
+        </h1>
+        <h1 style="font-size: 6rem; animation-delay: .3s;" class="autoshow fade-up">
+          <span class="grad">무엇</span>일까요?
+        </h1>
+        <p class="muted autoshow fade-in" style="margin-top: 3rem; font-size: 1.3rem; animation-delay: .9s;">
+          1시간 안에, 가장 중요한 한 가지만 가져갑니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 3. AlphaGo intro ============= -->
+    <section>
+      <div class="chip">CHAPTER 1 · AI의 본질</div>
+      <h2>먼저, <span class="accent">알파고</span> 이야기로 시작하죠.</h2>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="goboard">
+          <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+            <!-- grid 9x9 simplified -->
+            <g stroke="#3b2c14" stroke-width="1.2">
+              <!-- vertical lines -->
+              <line x1="40"  y1="40" x2="40"  y2="420" />
+              <line x1="87"  y1="40" x2="87"  y2="420" />
+              <line x1="135" y1="40" x2="135" y2="420" />
+              <line x1="182" y1="40" x2="182" y2="420" />
+              <line x1="230" y1="40" x2="230" y2="420" />
+              <line x1="277" y1="40" x2="277" y2="420" />
+              <line x1="325" y1="40" x2="325" y2="420" />
+              <line x1="372" y1="40" x2="372" y2="420" />
+              <line x1="420" y1="40" x2="420" y2="420" />
+              <!-- horizontal lines -->
+              <line x1="40" y1="40"  x2="420" y2="40" />
+              <line x1="40" y1="87"  x2="420" y2="87" />
+              <line x1="40" y1="135" x2="420" y2="135" />
+              <line x1="40" y1="182" x2="420" y2="182" />
+              <line x1="40" y1="230" x2="420" y2="230" />
+              <line x1="40" y1="277" x2="420" y2="277" />
+              <line x1="40" y1="325" x2="420" y2="325" />
+              <line x1="40" y1="372" x2="420" y2="372" />
+              <line x1="40" y1="420" x2="420" y2="420" />
+            </g>
+            <!-- star points -->
+            <g fill="#3b2c14">
+              <circle cx="135" cy="135" r="3.5"/>
+              <circle cx="325" cy="135" r="3.5"/>
+              <circle cx="230" cy="230" r="4"/>
+              <circle cx="135" cy="325" r="3.5"/>
+              <circle cx="325" cy="325" r="3.5"/>
+            </g>
+            <!-- stones placed -->
+            <g>
+              <circle class="stone-anim" style="animation-delay: .2s;" cx="230" cy="230" r="20" fill="#0a0a0a"/>
+              <circle class="stone-anim" style="animation-delay: .55s;" cx="277" cy="230" r="20" fill="#f8f8f8"/>
+              <circle class="stone-anim" style="animation-delay: .9s;"  cx="230" cy="277" r="20" fill="#0a0a0a"/>
+              <circle class="stone-anim" style="animation-delay: 1.25s;" cx="277" cy="277" r="20" fill="#f8f8f8"/>
+              <circle class="stone-anim" style="animation-delay: 1.6s;" cx="325" cy="230" r="20" fill="#0a0a0a"/>
+            </g>
+
+            <!-- ===== PROBABILITY CALCULATION (auto reveal) ===== -->
+            <g class="prob-numbers autoshow fade-in" style="animation-delay: 1.8s;">
+              <g><circle class="prob-cell-bg" cx="372" cy="230" r="14"/><text class="prob-cell" data-final=".42" x="372" y="234" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="372" cy="277" r="14"/><text class="prob-cell" data-final=".15" x="372" y="281" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="277" cy="182" r="14"/><text class="prob-cell" data-final=".12" x="277" y="186" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="230" cy="182" r="14"/><text class="prob-cell" data-final=".08" x="230" y="186" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="325" cy="277" r="14"/><text class="prob-cell" data-final=".06" x="325" y="281" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="325" cy="135" r="14"/><text class="prob-cell" data-final=".04" x="325" y="139" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="135" cy="230" r="14"/><text class="prob-cell" data-final=".03" x="135" y="234" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="277" cy="325" r="14"/><text class="prob-cell" data-final=".03" x="277" y="329" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="230" cy="325" r="14"/><text class="prob-cell" data-final=".02" x="230" y="329" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="135" cy="277" r="14"/><text class="prob-cell" data-final=".02" x="135" y="281" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="87"  cy="230" r="14"/><text class="prob-cell" data-final=".01" x="87"  y="234" text-anchor="middle">.00</text></g>
+              <g><circle class="prob-cell-bg" cx="325" cy="372" r="14"/><text class="prob-cell" data-final=".01" x="325" y="376" text-anchor="middle">.00</text></g>
+              <!-- best-move pulsing ring (revealed by JS after settle) -->
+              <circle class="best-move" cx="372" cy="230" r="22" fill="none" stroke="#FF5E7E" stroke-width="3" style="opacity:0; transition: opacity 0.6s ease;">
+                <animate attributeName="r" values="22;28;22" dur="1.2s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values="1;0.35;1" dur="1.2s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+          </svg>
+        </div>
+        <div class="stack">
+          <p class="autoshow fade-up">
+            바둑판 위에 <span class="accent">19 × 19 = 361개</span>의 좌표가 있습니다.
+          </p>
+          <p class="autoshow fade-up">
+            알파고는 매 수마다 묻습니다.<br/>
+            <em>"여기 두면 이길 확률이 얼마야?"</em>
+          </p>
+          <p class="autoshow fade-up">
+            361칸 전부에 대해 답을 계산합니다.<br/>
+            그리고 가장 <span class="accent2">승률이 높은 칸</span>에 둡니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 4. AlphaGo heatmap ============= -->
+    <section>
+      <h2>그러니까 알파고가 하는 일은…</h2>
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="goboard">
+          <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#3b2c14" stroke-width="1.2" fill="none">
+              <line x1="40"  y1="40" x2="40"  y2="420"/>
+              <line x1="135" y1="40" x2="135" y2="420"/>
+              <line x1="230" y1="40" x2="230" y2="420"/>
+              <line x1="325" y1="40" x2="325" y2="420"/>
+              <line x1="420" y1="40" x2="420" y2="420"/>
+              <line x1="40" y1="40"  x2="420" y2="40"/>
+              <line x1="40" y1="135" x2="420" y2="135"/>
+              <line x1="40" y1="230" x2="420" y2="230"/>
+              <line x1="40" y1="325" x2="420" y2="325"/>
+              <line x1="40" y1="420" x2="420" y2="420"/>
+            </g>
+            <!-- heatmap cells -->
+            <g>
+              <rect class="heat-cell" x="200" y="200" width="60" height="60" rx="8" fill="#FF5E7E" opacity="0.85"/>
+              <rect class="heat-cell" style="animation-delay:.3s" x="260" y="170" width="50" height="50" rx="8" fill="#FFC857" opacity="0.7"/>
+              <rect class="heat-cell" style="animation-delay:.6s" x="160" y="260" width="45" height="45" rx="8" fill="#FFC857" opacity="0.6"/>
+              <rect class="heat-cell" style="animation-delay:.9s" x="290" y="260" width="40" height="40" rx="8" fill="#7C5CFF" opacity="0.45"/>
+              <rect class="heat-cell" style="animation-delay:1.2s" x="120" y="170" width="35" height="35" rx="8" fill="#7C5CFF" opacity="0.4"/>
+              <rect class="heat-cell" style="animation-delay:1.5s" x="320" y="120" width="30" height="30" rx="8" fill="#00E0C7" opacity="0.35"/>
+            </g>
+            <text class="no-outline" x="230" y="450" fill="#3b2c14" text-anchor="middle" font-size="14" font-family="JetBrains Mono">probability heatmap</text>
+          </svg>
+        </div>
+        <div class="stack">
+          <h3 class="autoshow fade-up">"수를 둔다"가 아니라</h3>
+          <h3 class="autoshow fade-up grad" style="font-size:2.6rem;">"확률 분포를 그린다"</h3>
+          <p class="autoshow fade-up muted">
+            그리고 그중 가장 빨갛게 빛나는 곳에 돌을 놓을 뿐입니다.
+          </p>
+          <div class="autoshow fade-up" style="margin-top: 1.4rem;">
+            <span class="pill pink">알파고 = 확률 계산기</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 5. Why does it work? ============= -->
+    <section>
+      <h2>그런데 알파고는 <span class="accent">왜</span> 그게 되죠?</h2>
+      <div class="grid-2" style="margin-top: 2rem; align-items: stretch;">
+        <div class="card autoshow fade-right">
+          <h3>📚 데이터</h3>
+          <p>지금까지 인류가 둔 <span class="accent">수천만 판</span>의 바둑 기보.</p>
+        </div>
+        <div class="card autoshow fade-left">
+          <h3>🎯 학습</h3>
+          <p>"이런 모양일 때 → <span class="accent2">이긴 사람</span>은 다음에 어디에 뒀는가"를 통계로 배움.</p>
+        </div>
+      </div>
+      <div class="quote autoshow fade-up" style="margin-top: 2.5rem; animation-delay: .5s;">
+        결국, "역사상 가장 <span class="accent">승률이 높았던</span> 다음 수"를 추천하는 기계.
+      </div>
+    </section>
+
+    <!-- ============= 6. Other AI same logic ============= -->
+    <section>
+      <h2>이건 알파고만의 이야기가 아닙니다.</h2>
+      <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card autoshow zoom-in">
+          <h3>🚗 자율주행 (E2E)</h3>
+          <p class="muted">카메라 영상 + 차량 상태 → <br/><span class="accent2">"다음 1초 동안 어떻게 움직일까"</span> 의 확률 분포를 그린다.</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <h3>🎮 알파고</h3>
+          <p class="muted">바둑판 상태 → <br/><span class="accent2">"다음 수는 어디일까"</span> 의 확률 분포를 그린다.</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <h3>💬 ChatGPT</h3>
+          <p class="muted">지금까지의 문맥 → <br/><span class="accent2">"다음 단어는 무엇일까"</span> 의 확률 분포를 그린다.</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 2rem; text-align:center; font-size: 1.6rem; animation-delay: .8s;">
+        형태만 다를 뿐, <span class="grad">전부 같은 로직</span>입니다.
+      </p>
+    </section>
+
+    <!-- ============= 7. Zoom into LLM ============= -->
+    <section>
+      <div class="chip">CHAPTER 2 · LLM의 정체</div>
+      <h2>그럼 우리가 매일 쓰는 <span class="accent2">LLM</span>은?</h2>
+      <p style="font-size: 1.7rem; margin-top: 2rem; animation-delay: .1s;" class="autoshow fade-up">
+        극단적으로 단순화하면 — <br/>
+        <span class="grad" style="font-size: 2.4rem; font-weight:800;">
+          "지금까지의 글자들을 보고, 다음에 올 단어를 예측하는 확률 계산기"
+        </span>
+      </p>
+      <p class="muted autoshow fade-up" style="margin-top: 1.5rem; animation-delay: .5s;">
+        그게 전부입니다. 진심으로요.
+      </p>
+    </section>
+
+    <!-- ============= 8. Word probability — vector space + fetch ============= -->
+    <section>
+      <h2>예를 들어볼까요?</h2>
+
+      <p class="mono autoshow fade-up" style="font-size: 1.45rem; margin: 0.8rem 0 0.4rem;">
+        <span class="muted">prompt:</span> "오늘 날씨가 정말<span id="prompt-grow"> <span id="blank1" class="blank">___</span></span>"
+      </p>
+
+      <div class="word-space autoshow fade-up"
+           data-blank="#blank1"
+           data-cascade-grow="#prompt-grow"
+           data-cascade-words="그래서|산책을|나가고|싶네요.">
+        <div class="ws-label">vector space · 단어 확률 분포</div>
+
+        <div class="word-chip" data-rank="1" style="left:48%; top:42%;"><span class="w">좋네요</span><span class="prob-cell" data-final=".42">.00</span></div>
+        <div class="word-chip" style="left:20%; top:24%;"><span class="w">덥네요</span><span class="prob-cell" data-final=".21">.00</span></div>
+        <div class="word-chip" style="left:74%; top:20%;"><span class="w">춥네요</span><span class="prob-cell" data-final=".13">.00</span></div>
+        <div class="word-chip" style="left:14%; top:62%;"><span class="w">맑아서</span><span class="prob-cell" data-final=".09">.00</span></div>
+        <div class="word-chip" style="left:78%; top:55%;"><span class="w">시원해</span><span class="prob-cell" data-final=".05">.00</span></div>
+        <div class="word-chip" style="left:42%; top:76%;"><span class="w">푹푹쪄</span><span class="prob-cell" data-final=".03">.00</span></div>
+        <div class="word-chip" style="left:88%; top:38%;"><span class="w">흐려서</span><span class="prob-cell" data-final=".02">.00</span></div>
+        <div class="word-chip" style="left:6%;  top:42%;"><span class="w">좋아서</span><span class="prob-cell" data-final=".02">.00</span></div>
+        <div class="word-chip" style="left:58%; top:8%;"><span class="w">청명해</span><span class="prob-cell" data-final=".01">.00</span></div>
+        <div class="word-chip" style="left:32%; top:53%;"><span class="w">안좋네</span><span class="prob-cell" data-final=".01">.00</span></div>
+        <div class="word-chip" style="left:65%; top:80%;"><span class="w">그리고</span><span class="prob-cell" data-final=".00">.00</span></div>
+        <div class="word-chip" style="left:88%; top:82%;"><span class="w">너무</span><span class="prob-cell" data-final=".00">.00</span></div>
+      </div>
+
+      <p class="autoshow fade-up" style="font-size: 1.15rem; margin-top: 0.6rem; animation-delay: 4.5s;">
+        한 단어 뽑고 → 다시 prompt에 넣고 → 또 뽑고… <span class="accent">반복</span>하면 우리가 보는 "긴 문장"이 됩니다.
+      </p>
+    </section>
+
+    <!-- ============= 9. Yann LeCun ============= -->
+    <section>
+      <h2>그래서 <span class="accent3">얀 르쿤</span>은 LLM을 까죠.</h2>
+      <div class="quote autoshow fade-up" style="margin-top: 2rem; font-size: 2rem; animation-delay: .1s;">
+        "이건 그냥 통계적 앵무새다.<br/>
+        세상을 이해하지 못하고, 다음 단어만 그럴듯하게 뱉을 뿐."
+      </div>
+      <p class="muted autoshow fade-up" style="margin-top: 2rem; animation-delay: .35s;">
+        — Meta Chief AI Scientist, Yann LeCun (요지)
+      </p>
+      <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.6rem; animation-delay: 1.4s;">
+        그리고 이 비판은 — <span class="accent">기술적으로는 맞습니다.</span>
+      </p>
+    </section>
+
+    <!-- ============= 10. But ============= -->
+    <section data-background-color="#0E1220">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <h1 style="font-size: 8rem;">
+          <span class="grad">하지만.</span>
+        </h1>
+        <p class="autoshow fade-up" style="font-size: 2rem; margin-top: 2rem; animation-delay: .5s;">
+          그렇다고 LLM이 <span class="accent3">의미가 없는 건 아닙니다.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 11. Bridge: AlphaGo ↔ LLM ============= -->
+    <section>
+      <h2>다시 알파고로 돌아가 보면…</h2>
+      <div class="grid-2" style="margin-top: 1.5rem;">
+        <div class="card">
+          <span class="pill">알파고</span>
+          <h3 style="margin-top:.6rem;">"다음 수의 승률"을<br/>계산할 수 있는 이유</h3>
+          <p>지금까지 인류가 둔 <span class="accent">수천만 판의 기보</span>가 있기 때문.</p>
+        </div>
+        <div class="card">
+          <span class="pill green">LLM</span>
+          <h3 style="margin-top:.6rem;">"다음 단어의 확률"을<br/>계산할 수 있는 이유</h3>
+          <p>인류가 써온 <span class="accent2">수십 조 단어의 글</span>이 있기 때문.</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 2rem; text-align:center; font-size: 1.7rem; animation-delay: .5s;">
+        둘 다 결국, <span class="grad">"역사상 가장 승률 높았던 답"을 찾는 기계.</span>
+      </p>
+    </section>
+
+    <!-- ============= 12. Beyond text ============= -->
+    <section>
+      <h2>그리고 요즘은 <span class="accent">"언어"</span>의 정의가 더 넓어졌죠.</h2>
+      <div class="grid-4" style="margin-top: 2rem;">
+        <div class="card center autoshow fade-up"><h3>📝</h3><p>텍스트</p></div>
+        <div class="card center autoshow fade-up"><h3>💻</h3><p>코드</p></div>
+        <div class="card center autoshow fade-up"><h3>🖼️</h3><p>이미지</p></div>
+        <div class="card center autoshow fade-up"><h3>🎬</h3><p>영상 / 음악</p></div>
+      </div>
+      <p class="muted autoshow fade-up" style="margin-top: 2rem; animation-delay: .8s;">
+        이미지도, 영상도, 음악도 — 결국 <span class="accent2">"language-tic한 시퀀스 데이터"</span>로 바꿔서<br/>
+        같은 방식으로 다음을 예측하면 됩니다.
+      </p>
+    </section>
+
+    <!-- ============= 13. AI = Intelligent Library — knowledge fetch ============= -->
+    <section>
+      <div class="chip">CHAPTER 3 · 그래서 AI는 무엇인가?</div>
+      <h2>저는 AI를 이렇게 이해합니다.</h2>
+
+      <p class="mono autoshow fade-up" style="font-size: 1.3rem; margin: 0.6rem 0 0.4rem;">
+        <span class="muted">Q:</span> "이번 분기 매출, 어떻게 올리지?"
+      </p>
+
+      <div class="library-space autoshow fade-up">
+        <div class="ws-label">history · 인류가 시도해온 모든 방법</div>
+        <div class="word-chip" data-rank="1" style="left:50%; top:42%;"><span class="w">가격 인하</span><span class="prob-cell" data-final=".28">.00</span></div>
+        <div class="word-chip" style="left:20%; top:22%;"><span class="w">신규 채널 확대</span><span class="prob-cell" data-final=".18">.00</span></div>
+        <div class="word-chip" style="left:76%; top:20%;"><span class="w">재구매 유도</span><span class="prob-cell" data-final=".14">.00</span></div>
+        <div class="word-chip" style="left:14%; top:64%;"><span class="w">고객 세분화</span><span class="prob-cell" data-final=".10">.00</span></div>
+        <div class="word-chip" style="left:80%; top:60%;"><span class="w">번들 상품</span><span class="prob-cell" data-final=".08">.00</span></div>
+        <div class="word-chip" style="left:42%; top:78%;"><span class="w">구독 전환</span><span class="prob-cell" data-final=".06">.00</span></div>
+        <div class="word-chip" style="left:90%; top:38%;"><span class="w">추천인 제도</span><span class="prob-cell" data-final=".04">.00</span></div>
+        <div class="word-chip" style="left:5%; top:42%;"><span class="w">시즌 할인</span><span class="prob-cell" data-final=".04">.00</span></div>
+        <div class="word-chip" style="left:60%; top:9%;"><span class="w">인플루언서 협업</span><span class="prob-cell" data-final=".03">.00</span></div>
+        <div class="word-chip" style="left:32%; top:56%;"><span class="w">리마케팅 광고</span><span class="prob-cell" data-final=".02">.00</span></div>
+        <div class="word-chip" style="left:65%; top:80%;"><span class="w">후기 이벤트</span><span class="prob-cell" data-final=".01">.00</span></div>
+        <div class="word-chip" style="left:88%; top:82%;"><span class="w">재고 소진 세일</span><span class="prob-cell" data-final=".01">.00</span></div>
+      </div>
+
+      <h3 class="grad center autoshow fade-up" style="font-size: 2rem; margin-top: 0.6rem; animation-delay: 2.6s;">
+        역사상 가장 승률 높은 정답을 찾는 <span style="font-weight:800;">"지능형 도서관"</span>
+      </h3>
+
+      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 1rem; font-size: 1.15rem; animation-delay: 3.1s;">
+        이 도서관과 끊임없이 대화하며 답을 찾아가는 것 — 그 방식에 이름을 붙이면 <span class="accent2" style="font-weight:700;">"바이브 코딩"</span>입니다.
+      </p>
+    </section>
+
+    <!-- ============= 13b. What is vibe coding, concretely ============= -->
+    <section>
+      <h2>그럼 <span class="accent2">"바이브 코딩"</span>, 구체적으로 뭘 하는 건가요?</h2>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card autoshow fade-right">
+          <span class="pill amber">기존 방식</span>
+          <h3 style="margin-top:.6rem;">📖 문법을 배우고<br/>한 줄씩 직접 작성</h3>
+          <p>내가 규칙을 외우고, 내가 손으로 만듭니다.</p>
+        </div>
+        <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5);">
+          <span class="pill">바이브 코딩</span>
+          <h3 style="margin-top:.6rem;">💬 원하는 걸 말로 설명하고<br/>AI가 만들고 실행</h3>
+          <p>내가 방향을 말하고, <span class="accent2">AI가 초안을 만들어 돌려봅니다.</span></p>
+        </div>
+      </div>
+      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 2rem; font-size: 1.2rem; animation-delay: .5s;">
+        즉, 이 넷을 계속 반복하는 것 — 그게 전부입니다 ↓
+      </p>
+    </section>
+
+    <!-- ============= 13c. The vibe coding loop ============= -->
+    <section>
+      <h2>바이브 코딩의 전부 — <span class="accent">이 루프 하나</span>입니다.</h2>
+      <div class="timeline" style="margin-top: 2rem;">
+        <div class="tline autoshow fade-up">
+          <div class="yr">요청</div>
+          <h4>원하는 걸 말로 설명</h4>
+          <p class="muted">→ "이런 자료를 만들어줘", "이 부분을 이렇게 바꿔줘"</p>
+        </div>
+        <div class="tline green autoshow fade-up">
+          <div class="yr">생성 · 실행</div>
+          <h4>AI가 초안을 만들고 직접 돌려봄</h4>
+          <p class="muted">→ 코드든 문서든, 일단 실제로 작동하는 결과물이 나옵니다.</p>
+        </div>
+        <div class="tline pink autoshow fade-up">
+          <div class="yr">확인</div>
+          <h4>결과를 눈으로 봄</h4>
+          <p class="muted">→ 원하던 것과 얼마나 가까운지 판단합니다.</p>
+        </div>
+        <div class="tline amber autoshow fade-up">
+          <div class="yr">수정</div>
+          <h4>마음에 안 들면 다시 말로 고침</h4>
+          <p class="muted">→ "이 부분은 이렇게", "색은 좀 더 밝게" — 대화로 반복.</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 1.5rem; font-size: 1.15rem; animation-delay: 1.4s;">
+        중요한 건 <span class="accent2" style="font-weight:700;">"코드를 아는 것"</span>이 아니라, <span class="accent2" style="font-weight:700;">"원하는 걸 표현하고 결과를 판단하는 것"</span>입니다.
+      </p>
+    </section>
+
+    <!-- ============= 14. Productivity boost: not automation ============= -->
+    <section>
+      <h2>그러면 AI로 <span class="accent2">생산성</span>을 올린다는 건<br/>대체 무슨 뜻일까요?</h2>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card autoshow fade-right" style="animation-delay: .1s;">
+          <span class="pill amber">흔한 답</span>
+          <h3 style="margin-top: .6rem;">⚙️ 자동화 / 인간 일 이양</h3>
+          <p>물론 훌륭하다. 하지만 이건 <span class="accent">절반의 정답</span>입니다.</p>
+        </div>
+        <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5); animation-delay: .7s;">
+          <span class="pill">진짜 답</span>
+          <h3 style="margin-top: .6rem;">🚀 인간 능력의 <span class="accent">Base를 끌어올리기</span></h3>
+          <p>AI는 <span class="accent2">사람과 결합</span>해서 그 사람의 능력 자체를 <br/>비약적으로 끌어올립니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 15. Capability boost visual ============= -->
+    <section>
+      <h2>이런 그림이에요.</h2>
+      <div style="margin-top: 1.4rem;">
+        <svg viewBox="0 0 1100 500" style="width: 100%; max-width: 1100px; display:block; margin: 0 auto;">
+          <defs>
+            <linearGradient id="gradJunior" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#B5A1FF"/>
+              <stop offset="100%" stop-color="#5B3FD9"/>
+            </linearGradient>
+            <linearGradient id="gradSenior" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#5BFFE0"/>
+              <stop offset="100%" stop-color="#149B89"/>
+            </linearGradient>
+            <linearGradient id="gradBase" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#5C6488"/>
+              <stop offset="100%" stop-color="#383E55"/>
+            </linearGradient>
+          </defs>
+
+          <!-- ===== ALWAYS VISIBLE: Before AI ===== -->
+          <text x="220" y="26" fill="#FFFFFF" text-anchor="middle" font-size="28" font-weight="800" font-family="Pretendard">Before AI</text>
+          <text x="220" y="48" fill="#FF94AC" text-anchor="middle" font-size="16" font-weight="700" font-style="italic" opacity="0.9">주니어 ↔ 시니어 격차가 크다</text>
+          <line x1="40" y1="400" x2="430" y2="400" stroke="#B0B6C8" stroke-width="2"/>
+          <rect x="120" y="320" width="80" height="80" fill="url(#gradBase)" rx="2"/>
+          <text x="160" y="430" fill="#FFFFFF" text-anchor="middle" font-size="18" font-weight="700">Junior</text>
+          <rect x="280" y="140" width="80" height="260" fill="url(#gradBase)" rx="2"/>
+          <text x="320" y="430" fill="#FFFFFF" text-anchor="middle" font-size="18" font-weight="700">Senior</text>
+
+          <!-- ===== AUTO: gap indicator (plays immediately, no click) ===== -->
+          <g class="autoshow fade-in" style="animation-delay:.4s;">
+            <line x1="220" y1="180" x2="270" y2="180" stroke="#FF94AC" stroke-width="2" stroke-dasharray="6 4"/>
+            <line x1="220" y1="320" x2="270" y2="320" stroke="#FF94AC" stroke-width="2" stroke-dasharray="6 4"/>
+            <line x1="245" y1="180" x2="245" y2="320" stroke="#FF94AC" stroke-width="2.5"/>
+            <text x="265" y="255" fill="#FF94AC" font-size="15" font-weight="700" font-style="italic">큰 격차</text>
+          </g>
+
+          <!-- ===== AUTO: arrow + After AI title + baseline + gray bases ===== -->
+          <g class="autoshow fade-in" style="animation-delay: .9s;">
+            <text x="555" y="285" fill="#B5A1FF" text-anchor="middle" font-size="56" font-weight="900">→</text>
+            <text x="880" y="26" fill="#FFFFFF" text-anchor="middle" font-size="28" font-weight="800" font-family="Pretendard">After AI</text>
+            <text x="880" y="48" fill="#5BFFE0" text-anchor="middle" font-size="16" font-weight="700" font-style="italic" opacity="0.95">base 자체가 통째로 올라감</text>
+            <line x1="680" y1="400" x2="1080" y2="400" stroke="#B0B6C8" stroke-width="2"/>
+            <!-- base portions that match Before AI heights -->
+            <rect x="760" y="320" width="80" height="80" fill="url(#gradBase)" rx="2"/>
+            <rect x="920" y="140" width="80" height="260" fill="url(#gradBase)" rx="2"/>
+            <text x="800" y="430" fill="#FFFFFF" text-anchor="middle" font-size="18" font-weight="700">Junior</text>
+            <text x="960" y="430" fill="#FFFFFF" text-anchor="middle" font-size="18" font-weight="700">Senior</text>
+          </g>
+
+          <!-- ===== AUTO: colored LIFT portions + legend (revealed together) ===== -->
+          <g class="autoshow fade-in svg-lifts" style="animation-delay: 1.5s;">
+            <rect class="lift-bar" x="760" y="180" width="80" height="140" fill="url(#gradJunior)" rx="2"/>
+            <rect class="lift-bar" x="920" y="60"  width="80" height="80"  fill="url(#gradSenior)" rx="2"/>
+          </g>
+
+          <g class="autoshow fade-in" style="animation-delay: 1.5s;">
+            <rect x="380" y="468" width="18" height="18" fill="url(#gradBase)" rx="3"/>
+            <text x="408" y="482" fill="#FFFFFF" font-size="15" font-weight="600">기존 능력</text>
+            <rect x="540" y="468" width="18" height="18" fill="url(#gradJunior)" rx="3"/>
+            <text x="568" y="482" fill="#B5A1FF" font-size="15" font-weight="700">Junior가 AI로 올라간 base</text>
+            <rect x="800" y="468" width="18" height="18" fill="url(#gradSenior)" rx="3"/>
+            <text x="828" y="482" fill="#5BFFE0" font-size="15" font-weight="700">Senior가 AI로 올라간 base</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============= 16. Real cases ============= -->
+    <section>
+      <h2>구체적인 예시.</h2>
+      <div class="grid-2" style="margin-top: 1.5rem; gap: 1.5rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">CASE 1</span>
+          <h3>숫자에 약했던 마케터</h3>
+          <p>AI가 옆에서 <span class="accent2">손익계산서 / 재무제표</span> 읽는 법을 매 순간 가이드해 줍니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">CASE 2</span>
+          <h3>기획만 하던 신입</h3>
+          <p>처음 만들어보는 <span class="accent2">예산안 / 실행 일정표</span>도, "보통 이렇게 짠다"는 <span class="accent">역사적 정답</span>을 받아볼 수 있습니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill pink">CASE 3</span>
+          <h3>새 산업의 신입</h3>
+          <p>"이 도메인에서는 보통 이런 흐름으로 일이 굴러간다"는 <span class="accent4">패턴</span>을 즉시 흡수.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">CASE 4</span>
+          <h3>새 프로젝트를 시작하는 팀</h3>
+          <p>유사한 프로젝트들이 <span class="accent">어떤 선택에서 성공했고 실패했는지</span>를 곧장 활용 가능.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 17. Daily dev with AI ============= -->
+    <section>
+      <h2>좀 더 작게 — <span class="accent">매일의 업무</span>에서는요?</h2>
+      <p style="margin-top: 1.5rem; font-size: 1.5rem;" class="autoshow fade-up">
+        매 순간, AI는 이런 일을 합니다 ↓
+      </p>
+      <div class="timeline" style="margin-top: 1.5rem;">
+        <div class="tline autoshow fade-up">
+          <div class="yr">문제</div>
+          <h4>예상 밖의 문제 상황을 만남</h4>
+          <p class="muted">→ "비슷한 상황에서 보통 어떻게 풀더라" 의 정답을 추천.</p>
+        </div>
+        <div class="tline green autoshow fade-up">
+          <div class="yr">설계</div>
+          <h4>다음 일의 계획을 짬</h4>
+          <p class="muted">→ "이 정도 규모에서는 보통 이런 순서로 간다" 를 가이드.</p>
+        </div>
+        <div class="tline pink autoshow fade-up">
+          <div class="yr">실행</div>
+          <h4>실제로 진행하는 단계</h4>
+          <p class="muted">→ "이 작업은 보통 이렇게 처리한다"를 곧바로 제안.</p>
+        </div>
+        <div class="tline amber autoshow fade-up">
+          <div class="yr">개선</div>
+          <h4>검토 / 다듬기</h4>
+          <p class="muted">→ "이런 결과물은 보통 이런 식으로 다듬는다"의 표준을 제안.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 17b. Chatbot vs agent tool spectrum ============= -->
+    <section>
+      <h2>그럼 <span class="accent2">챗봇 창에 물어보는 것</span>도<br/>바이브 코딩인가요?</h2>
+      <p class="autoshow fade-up" style="margin-top: 1.5rem; font-size: 1.5rem;">
+        네, 그것도 이미 시작입니다. 다만 <span class="accent">두 단계</span>가 있어요.
+      </p>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card autoshow fade-right">
+          <span class="pill">대화형</span>
+          <h3 style="margin-top:.6rem;">💬 ChatGPT, Claude.ai (웹)</h3>
+          <p>물어보고 → 답을 보고 → <span class="accent2">내가 직접 옮겨 씁니다.</span></p>
+        </div>
+        <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5);">
+          <span class="pill green">실행형</span>
+          <h3 style="margin-top:.6rem;">🤖 Claude Code, Cursor, Codex</h3>
+          <p>물어보면 → <span class="accent2">AI가 직접 만들고, 돌리고, 결과까지 확인합니다.</span></p>
+        </div>
+      </div>
+      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 2rem; font-size: 1.2rem; animation-delay: .8s;">
+        한 번 쓰고 끝이면 <span class="accent2">챗봇으로 충분</span>, 반복해서 만들고 돌려야 한다면 <span class="accent">실행형이 유리</span>합니다.<br/>
+        그래서 "어떤 도구를 배워야 하냐"는 질문이 남죠 —
+      </p>
+    </section>
+
+    <!-- ============= 18. Section break ============= -->
+    <section data-background-color="#0E1220">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <div class="chip">CHAPTER 4 · 그래서 어떤 AI 도구를 배워야 할까?</div>
+        <h1 style="font-size: 5.5rem;">자, 그러면<br/>본론이에요.</h1>
+        <p class="muted" style="margin-top: 2rem; font-size: 1.5rem;">
+          많은 분들이 묻습니다. "Claude Code? Cursor? Codex? 뭐 배울까요?"
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 19. AI tool history ============= -->
+    <section>
+      <h2>지난 4년, 코딩 AI 도구의 변천사.</h2>
+      <div class="timeline" style="margin-top: 1.5rem;">
+        <div class="tline autoshow fade-up">
+          <div class="yr">~2022</div>
+          <h4>Chatbot에 물어보고 복붙</h4>
+          <p class="muted">ChatGPT 창에 질문 → 답을 IDE로 복사 → 붙여넣기.</p>
+        </div>
+        <div class="tline green autoshow fade-up">
+          <div class="yr">2022–2023</div>
+          <h4>FIM 기반 IDE Autocomplete</h4>
+          <p class="muted">Copilot, Tabnine. <span class="accent2">"한 줄을 채워주는"</span> 시대.</p>
+        </div>
+        <div class="tline pink autoshow fade-up">
+          <div class="yr">2023–2024</div>
+          <h4>AI-native Desktop App</h4>
+          <p class="muted">Cursor, Windsurf. IDE 자체가 LLM을 중심으로 재설계.</p>
+        </div>
+        <div class="tline amber autoshow fade-up">
+          <div class="yr">2024–현재</div>
+          <h4>Terminal-based Agent</h4>
+          <p class="muted">Claude Code, Codex CLI. <span class="accent4">파일을 직접 만지고 명령을 실행하는 에이전트.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 20. Crown changes ============= -->
+    <section>
+      <h2>왕관은 <span class="accent3">계속 바뀌어 왔습니다.</span></h2>
+      <p class="autoshow fade-up" style="margin-top: 1rem; font-size: 1.5rem;">
+        4년 동안 "어떤 AI가 가장 좋으냐"의 논쟁은 — <span class="accent">3개월마다 답이 바뀌었어요.</span>
+      </p>
+      <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card autoshow zoom-in">
+          <h3>당시의 최강자</h3>
+          <p class="muted">"이건 세상을 집어삼킬 거야"<br/>라고 했던 그 도구.</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <h3>지금의 현실</h3>
+          <p class="muted">cowork? 더 이상 바이럴되지 않습니다.<br/>요즘은 <span class="accent2">"Claude보다 Codex가 낫다"</span>는 후기도 흔해요.</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <h3>3개월 후?</h3>
+          <p class="muted">아무도 모릅니다. <br/>그게 바로 <span class="accent">함정</span>입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 21. Bold statement ============= -->
+    <section data-background-color="#06080F">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <p class="muted" style="font-size: 1.4rem; margin-bottom: 2rem;">그래서 저는 이렇게 생각합니다 —</p>
+        <h1 style="font-size: 5.5rem;">
+          <span class="glitch grad" data-text="AI 도구의 사용법">AI 도구의 사용법</span>을
+        </h1>
+        <h1 class="autoshow fade-up" style="font-size: 5.5rem; margin-top: 1rem; animation-delay: .7s;">
+          깊게 배우는 건<br/>
+          <span class="accent3">의미가 없습니다.</span>
+        </h1>
+      </div>
+    </section>
+
+    <!-- ============= 22. Why ============= -->
+    <section>
+      <h2>왜냐면…</h2>
+      <div class="stack" style="margin-top: 2rem;">
+        <div class="card autoshow fade-up">
+          <h3>① 도구 자체가 너무 빨리 바뀐다</h3>
+          <p>당신이 Cursor 단축키를 외우고 나면, 6개월 뒤엔 다른 도구가 표준이 됩니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <h3>② 모델도 너무 빨리 바뀐다</h3>
+          <p>오늘의 GPT-X가 내일의 Claude 4.X에 밀립니다. 그 반대도 마찬가지.</p>
+        </div>
+        <div class="card autoshow fade-up" style="animation-delay: .5s;">
+          <h3>③ 그러면 무엇이 변하지 않을까?</h3>
+          <p class="grad" style="font-size: 1.6rem; font-weight: 800;">
+            → "AI라는 것의 본질"과, "AI를 다루는 나의 사고 방식"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 23. The real skill ============= -->
+    <section>
+      <div class="chip">CHAPTER 5 · 진짜 중요한 것</div>
+      <h2>그래서 진짜 길러야 할 능력은요.</h2>
+      <div class="stack" style="margin-top: 2rem;">
+        <div class="card autoshow fade-right" style="border-color: rgba(0,224,199,0.4);">
+          <span class="pill green">Skill 1</span>
+          <h3>AI의 <span class="accent2">본질</span>을 이해한다</h3>
+          <p>"AI는 역사 속에서 가장 승률 높은 답을 추천하는 기계다."<br/>
+          이것만 진짜로 이해하면, 어떤 도구가 와도 적응할 수 있습니다.</p>
+        </div>
+        <div class="card autoshow fade-right" style="border-color: rgba(124,92,255,0.4);">
+          <span class="pill">Skill 2</span>
+          <h3>모든 일에서 <span class="accent">AI에게 조언을 받고, 선택하고, 다시 묻는</span> 사이클을 연습한다</h3>
+          <p>구현, 수정, 설계, 업무 — 어디서든.<br/>
+          이건 <span class="accent3">근육</span>입니다. 도구가 바뀌어도 그대로 갑니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 24. Subjective choice ============= -->
+    <section>
+      <h2>그리고 한 가지 더 —</h2>
+      <h3 class="autoshow fade-up" style="font-size: 2.4rem; margin-top: 1rem; animation-delay: .3s;">
+        그 선택은 <span class="grad">주체적</span>일수록 좋습니다.
+      </h3>
+      <div class="grid-2" style="margin-top: 2.5rem;">
+        <div class="card autoshow fade-up">
+          <h3>🤖 AI의 강점</h3>
+          <p>"<span class="accent2">단기적으로</span> 가장 그럴듯한 답"을 빠르게 찾아준다.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(255,94,126,0.5);">
+          <h3>⚠️ AI의 약점</h3>
+          <p>"<span class="accent3">장기적</span> 옳음"엔 약합니다.<br/>
+          단기 그럴듯함에 과적합하는 경향이 있어요.</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up muted" style="margin-top: 2rem; font-size: 1.3rem; animation-delay: .9s;">
+        → 그래서 마지막 결정은 <span class="accent">사람</span>이 해야 합니다. <br/>
+        AI가 추천한 답을 그대로 따르지 말고, "이게 장기적으로도 옳은가"를 한 번 더 묻는 습관.
+      </p>
+    </section>
+
+    <!-- ============= 25. Recap ============= -->
+    <section>
+      <div class="chip">RECAP</div>
+      <h2>오늘의 한 페이지 요약.</h2>
+      <div class="stack" style="margin-top: 2rem;">
+        <p style="font-size: 1.6rem;" class="autoshow fade-up">
+          1. AI는 <span class="accent">"역사상 가장 승률 높은 다음 답"</span>을 찾아주는 확률 계산기다.
+        </p>
+        <p style="font-size: 1.6rem;" class="autoshow fade-up">
+          2. 그래서 LLM도 본질은 <span class="accent2">"다음 단어 예측기"</span> 다. 하지만 강력하다.
+        </p>
+        <p style="font-size: 1.6rem;" class="autoshow fade-up">
+          3. AI 생산성의 진짜 의미는 <span class="accent3">"인간 능력의 base를 끌어올리는 것"</span>.
+        </p>
+        <p style="font-size: 1.6rem;" class="autoshow fade-up">
+          4. 도구의 사용법이 아니라 <span class="accent4">AI의 본질</span>과 <span class="accent4">선택 근육</span>을 길러라.
+        </p>
+        <p style="font-size: 1.6rem;" class="autoshow fade-up">
+          5. 그리고 그 선택은 <span class="grad" style="font-weight:800;">주체적</span>일수록 좋다 — AI는 단기 최적화에 치우치니까.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 26. What is vibe coding then ============= -->
+    <section data-background-color="#0E1220">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <p class="muted" style="font-size: 1.4rem;">그래서, 다시 처음 질문으로 —</p>
+        <h1 style="font-size: 5.5rem; margin-top: 1rem;">
+          <span class="grad">바이브 코딩</span>이란<br/>
+          무엇인가?
+        </h1>
+        <p style="font-size: 1.8rem; margin-top: 2rem; animation-delay: .1s;" class="autoshow fade-up">
+          특정 도구의 이름이 아니라,
+        </p>
+        <p style="font-size: 2.2rem; margin-top: 1rem; font-weight: 700; animation-delay: .6s;" class="autoshow fade-up">
+          <span class="accent">AI라는 지능형 도서관과 끊임없이 대화하면서</span><br/>
+          <span class="accent2">매 순간 가장 좋은 선택을 골라나가는 작업 방식</span>
+        </p>
+        <p class="muted autoshow fade-up" style="margin-top: 2rem; font-size: 1.2rem; animation-delay: 1.2s;">
+          그게 vibe coding 입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 27. Final example — intro ============= -->
+    <section>
+      <div class="chip">LAST EXAMPLE</div>
+      <h2>마지막에, <span class="grad">가장 간단한 예시</span> 하나.</h2>
+      <p style="font-size: 1.6rem; margin-top: 1.5rem;" class="autoshow fade-up">
+        AI Tool이 <span class="accent">가장 강력하게</span> 동작하려면, 어떻게 해야 할까요?
+      </p>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card autoshow fade-right">
+          <span class="pill">흔한 방법</span>
+          <h3 style="margin-top:.5rem;">바로 부탁한다</h3>
+          <p>"이거 만들어줘" 한 방.<br/>물론 이것도 좋습니다. 하지만 한계가 있어요.</p>
+        </div>
+        <div class="card autoshow fade-left" style="border-color: rgba(43,234,208,0.5);">
+          <span class="pill green">더 강력한 방법</span>
+          <h3 style="margin-top:.5rem;">가이드라인을 <span class="accent2">같이</span> 잡아간다</h3>
+          <p>대화하며, 선택지를 비교하고, 한 단계씩 결정해 나가기.</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.3rem; animation-delay: .8s;">
+        이 방식엔 세 가지가 한 번에 일어납니다 ↓
+      </p>
+      <div style="margin-top: 1rem; display:flex; gap: .8rem; flex-wrap: wrap;">
+        <span class="pill autoshow fade-up" style="animation-delay: 1.5s;">① 성공 확률이 가장 높은 선택</span>
+        <span class="pill green autoshow fade-up" style="animation-delay: 1.5s;">② 그 선택을 하면서 학습이 일어남</span>
+        <span class="pill pink autoshow fade-up" style="animation-delay: 1.5s;">③ AI의 단기 뷰 편향을 막을 수 있음</span>
+      </div>
+    </section>
+
+    <!-- ============= 28. Final example — chat flow ============= -->
+    <section>
+      <div class="chip">SAMPLE CONVERSATION</div>
+      <h3 style="font-size: 1.7rem; margin-bottom: 1rem;">예를 들어, 이런 흐름이에요.</h3>
+      <div class="chat">
+        <div class="bubble user autoshow fade-up" style="animation-delay:.1s;">
+          <span class="who">YOU</span>
+          100명 대상으로 1시간짜리 <b>바이브 코딩 개론</b> 슬라이드를 만들고 싶어. 어떻게 시작할까?
+        </div>
+        <div class="bubble ai autoshow fade-up" style="animation-delay:.5s;">
+          <span class="who">CLAUDE / CODEX</span>
+          PowerPoint, Keynote, HTML 슬라이드(<code>reveal.js</code>) 셋이 흔합니다. 청중·디자인 자유도에 따라 골라 보세요.
+        </div>
+
+        <div class="bubble user autoshow fade-up" style="animation-delay:.9s;">
+          <span class="who">YOU</span>
+          애니메이션이 좀 더 돋보이고, 디자인도 <b>현대적</b>이었으면 좋겠어.
+        </div>
+        <div class="bubble ai autoshow fade-up" style="animation-delay:1.3s;">
+          <span class="who">CLAUDE / CODEX</span>
+          그럼 <b>HTML 기반</b>이 가장 자유롭습니다. <code>reveal.js</code> + 커스텀 CSS로 충분히 됩니다.
+        </div>
+
+        <div class="bubble user autoshow fade-up" style="animation-delay:1.7s;">
+          <span class="who">YOU</span>
+          인터랙티브한 요소도 넣으려면?
+        </div>
+        <div class="bubble ai autoshow fade-up" style="animation-delay:2.1s;">
+          <span class="who">CLAUDE / CODEX</span>
+          <b>AWS EC2 + React</b>로 웹앱화하는 걸 추천. 클릭/드래그/실시간 입력까지 됩니다.
+        </div>
+
+        <div class="bubble user autoshow fade-up" style="animation-delay:2.5s;">
+          <span class="who">YOU</span>
+          만들었더니 <b>4명만 써도 느려져.</b> 원인이 뭘까?
+        </div>
+        <div class="bubble ai autoshow fade-up" style="animation-delay:2.9s;">
+          <span class="who">CLAUDE / CODEX</span>
+          동시 접속마다 매번 렌더링이 도는 게 주범 같아요. ① <b>캐시</b>, ② <b>I/O 큐 관리</b> 두 방향을 보세요.
+        </div>
+
+        <div class="bubble user autoshow fade-up" style="animation-delay:3.3s;">
+          <span class="who">YOU</span>
+          그중에서도 <b>실시간성</b>이 가장 중요하다면?
+        </div>
+        <div class="bubble ai autoshow fade-up" style="animation-delay:3.7s;">
+          <span class="who">CLAUDE / CODEX</span>
+          <b>Redis</b> 도입을 검토하세요. 캐시 + Pub/Sub으로 동시성·지연을 한 번에 잡을 수 있습니다.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 29. Final example — takeaway ============= -->
+    <section>
+      <h2>이 짧은 대화에서, <span class="grad">세 가지</span>가 한꺼번에 일어났습니다.</h2>
+      <div class="grid-3" style="margin-top: 2.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">①</span>
+          <h3 style="margin-top:.5rem;">성공률이 가장 높은 선택</h3>
+          <p>"PPT vs HTML vs React" 같은 갈림길에서, 매번 <span class="accent2">조건에 맞는 답</span>을 추천받음.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">②</span>
+          <h3 style="margin-top:.5rem;">학습이 자연스럽게 따라옴</h3>
+          <p>Redis, Pub/Sub, 큐 — 몰랐던 개념을 <span class="accent2">필요한 순간</span>에 정확히 배움.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill pink">③</span>
+          <h3 style="margin-top:.5rem;">단기 뷰 편향을 막음</h3>
+          <p>"그냥 만들어줘" 였다면 첫 답인 <span class="accent3">PPT</span>로 끝났을 것. 질문을 거듭하니 <span class="accent2">장기적으로 옳은 길</span>이 보임.</p>
+        </div>
+      </div>
+      <div class="quote autoshow fade-up" style="margin-top: 2.5rem; animation-delay: 1.1s;">
+        <span class="grad" style="font-weight:800;">"답을 받는 것"</span>이 아니라
+        <span class="grad" style="font-weight:800;">"같이 길을 잡아가는 것"</span> —<br/>
+        그게 바로 vibe coding 입니다.
+      </div>
+    </section>
+
+    <!-- ============= 30. Section opener: AI Labs 현황 ============= -->
+    <section data-background-color="#06080F">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <div class="chip">CHAPTER 6 · 그래서 다음은?</div>
+        <h1 style="font-size: 5.5rem;">
+          그럼 <span class="grad">다음은</span><br/>
+          무엇일까요?
+        </h1>
+        <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.6rem;">
+          AGI를 향한 <span class="accent">각 진영의 전략</span> — 2026년 5월 기준
+        </p>
+        <div class="autoshow fade-up" style="margin-top: 2.5rem; display:flex; gap: 0.8rem; flex-wrap: wrap; animation-delay: .8s;">
+          <span class="pill amber">🅖 Google DeepMind</span>
+          <span class="pill pink">🅐 Anthropic</span>
+          <span class="pill">🇨🇳 중국 AI Labs</span>
+          <span class="pill green">🅞 OpenAI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 31. Google DeepMind ============= -->
+    <section>
+      <div class="chip">LABS 1/4</div>
+      <h2><span class="accent4">Google DeepMind</span> — 전문가 모델 군단.</h2>
+
+      <div class="grid-2" style="margin-top: 1.6rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">강점</span>
+          <h3>전문가 모델을 찍어낸다</h3>
+          <p>AlphaGo · AlphaFold · AlphaCode · AlphaProof…<br/>
+          20+ 년의 AI 연구 저력과 거대 연구인력 풀의 발현.</p>
+        </div>
+
+        <div class="card autoshow fade-up">
+          <span class="pill green">진심인 분야</span>
+          <h3>Multi-Modal — <span class="accent2">Gemini 3.1</span></h3>
+          <p>2026.02 출시 · 2M 토큰 컨텍스트.<br/>
+          텍스트·이미지·영상·코드까지 하나로. 체감상 현재 가장 강력한 멀티모달.</p>
+        </div>
+
+        <div class="card autoshow fade-up">
+          <span class="pill amber">Tool 군단</span>
+          <h3>Flow · Stitch · Jules · Antigravity</h3>
+          <p>영상(Flow), UI 디자인(Stitch), 비동기 코딩(Jules), 에이전틱 IDE(Antigravity).<br/>
+          AI를 <span class="accent4">전방위로 확산</span>시킨다.</p>
+        </div>
+
+        <div class="card autoshow fade-up" style="border-color: rgba(255,212,107,0.55);">
+          <span class="pill amber">그리는 미래</span>
+          <h3>전문가들의 협업 → AGI</h3>
+          <p>각자 분야의 전문가 모델들이 협력하고,<br/>
+          그 흐름을 <span class="accent2">Gemini 3.1</span>이 지휘하는 체계.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 32. Anthropic ============= -->
+    <section>
+      <div class="chip">LABS 2/4</div>
+      <h2><span class="accent3">Anthropic</span> — Opus의 손발을 늘리다.</h2>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.4rem;">
+        <span class="pill pink">전략</span>
+        <h3>모델은 그대로, 도구는 무한 확장</h3>
+        <p>가장 강력한 모델 <span class="accent3">Opus</span>가 <span class="accent2">실제로 할 수 있는 일</span>을 늘리는 데 사활을 걸고 있다.<br/>
+        지금의 <span class="accent">"하네스 엔지니어링" 트렌드</span>의 시작점.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top: 1.1rem; gap: 1rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">코딩</span>
+          <h3 style="font-size: 1.4rem;">🛠 Claude Code · Cowork</h3>
+          <p style="font-size: 1.05rem;">CLI 에이전트 + 데스크톱 knowledge work 에이전트.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">확장</span>
+          <h3 style="font-size: 1.4rem;">🔌 Plugins · Skills · MCP</h3>
+          <p style="font-size: 1.05rem;">생태계로 능력을 외부에 위임.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">디자인</span>
+          <h3 style="font-size: 1.4rem;">🎨 Fusion · Blender · Adobe</h3>
+          <p style="font-size: 1.05rem;">2026.04.28 — 9종 creative connector 출시.</p>
+        </div>
+      </div>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.1rem; border-color: rgba(255,148,172,0.6); animation-delay: .9s;">
+        <span class="pill pink">근본 비전 — Dario가 인터뷰마다 강조하는 것</span>
+        <h3>Feedback Loop — AI가 AI를 발전시키는 사이클</h3>
+        <p>모델이 자가 발전으로 끊임없이 똑똑해지는 루프의 완성.<br/>
+        <span class="accent3">"Model + 고도화된 Tool"</span> 이 곧 AGI 도달점이라는 믿음.</p>
+      </div>
+    </section>
+
+    <!-- ============= 33. China AI Labs ============= -->
+    <section>
+      <div class="chip">LABS 3/4</div>
+      <h2><span class="accent">중국 AI Labs</span> — 개인화 Agent의 시대.</h2>
+
+      <div class="grid-2" style="margin-top: 1.6rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">대표 트렌드</span>
+          <h3>OpenClaw · Manus 계열</h3>
+          <p>"각자 손에 비서를 하나씩" — <span class="accent">개인화 에이전트</span>가 대 흥행.<br/>
+          중국 token 소비의 대부분을 견인.</p>
+        </div>
+
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.6);">
+          <span class="pill pink">놀라운 숫자</span>
+          <h3>~ <span class="accent3">2경 토큰</span> / 년 <span class="muted" style="font-size:1rem; font-weight:600;">(2025)</span></h3>
+          <p>중국의 연간 토큰 소비량은 <span class="accent3">미국을 초과</span>.<br/>
+          2026년에 더 폭발적으로 증가 중.</p>
+        </div>
+
+        <div class="card autoshow fade-up">
+          <span class="pill green">자국화</span>
+          <h3>화웨이 Ascend (昇腾)</h3>
+          <p>자체 AI 가속기 + 비용 절감.<br/>
+          NVIDIA 의존도 탈피 + 학습/추론 비용 다이어트.</p>
+        </div>
+
+        <div class="card autoshow fade-up">
+          <span class="pill amber">최근 사건</span>
+          <h3>Manus 인수 차단</h3>
+          <p>Meta의 인수($2-3B 규모)를 <span class="accent4">중국 NDRC가 거절</span> (2026.04.27).<br/>
+          국가 차원의 AI 자산 보호 신호.</p>
+        </div>
+      </div>
+
+      <p class="muted autoshow fade-up" style="margin-top: 1.4rem; font-size: 1.1rem; text-align:center; animation-delay: .8s;">
+        → 그리는 미래는 외부에 잘 안 보임. 다만 <span class="accent">"많이 · 싸게 · 모두에게"</span> 라는 방향성은 분명합니다.
+      </p>
+    </section>
+
+    <!-- ============= 34. OpenAI ============= -->
+    <section>
+      <div class="chip">LABS 4/4</div>
+      <h2><span class="accent2">OpenAI</span> — 알트만, 조용한 한 해.</h2>
+
+      <p class="autoshow fade-up" style="font-size: 1.4rem; margin-top: 1.2rem;">
+        한때 모든 헤드라인을 가져갔던 그들이, 2026년에는 <span class="accent3">의외로 조용합니다.</span>
+      </p>
+
+      <div class="grid-2" style="margin-top: 1.4rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill amber">현재 모드</span>
+          <h3>내부 효율화</h3>
+          <p>외부에 던지기보다 <span class="accent2">안으로 정리하는 분위기</span>.<br/>
+          대형 발표가 눈에 띄게 줄었습니다.</p>
+        </div>
+
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.55);">
+          <span class="pill pink">상징적 사건</span>
+          <h3>Sora 종료</h3>
+          <p><span class="accent3">2026.04.26</span> 웹/앱 종료,<br/>
+          <span class="accent3">2026.09.24</span> API까지 종료 예정.<br/>
+          비용·전력 부담을 못 이겼다는 분석.</p>
+        </div>
+      </div>
+
+      <p class="autoshow fade-up" style="margin-top: 1.4rem; font-size: 1.2rem; text-align:center; animation-delay: .8s;">
+        → Codex CLI는 여전히 강하지만, <span class="accent">다음 한 수</span>가 무엇일지는<br/>
+        <span class="muted">다들 알트만의 입을 보고 있습니다.</span>
+      </p>
+    </section>
+
+    <!-- ============= 35. Meta + x.AI: AI가 디바이스 속으로 ============= -->
+    <section>
+      <div class="chip">LABS · BONUS</div>
+      <h2>그리고 — <span class="grad">다른 색깔의 두 진영</span>.</h2>
+
+      <p class="autoshow fade-up" style="font-size: 1.35rem; margin-top: 1rem;">
+        빅 4가 LLM 챗봇을 두고 경쟁할 때, 이 둘은 다른 질문을 던집니다 →<br/>
+        <span class="accent2" style="font-size: 1.5rem; font-weight: 800;">"AI를 어디에 박을 것인가?"</span>
+      </p>
+
+      <div class="grid-2" style="margin-top: 1.4rem; gap: 1.4rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">🅢 Meta</span>
+          <h3>다양한 디바이스 + 특수 AI</h3>
+          <p>
+            Ray-Ban Meta 글래스 · Quest 헤드셋 · WhatsApp / Instagram 임베드 +
+            <span class="accent2">SAM 3</span>(영상 분할), <span class="accent2">V-JEPA</span>(월드 모델) 등 <span class="accent">특수 목적 AI</span>에 집중.<br/>
+            <span class="muted">Meta Glass의 방향 — "일상 디바이스가 곧 AI 인터페이스" — 와 정확히 일치.</span>
+          </p>
+        </div>
+
+        <div class="card autoshow fade-up">
+          <span class="pill green">🅧 x.AI</span>
+          <h3>현실 세계로 들어가는 AI</h3>
+          <p>
+            <span class="accent2">Grok 4</span> + Tesla 자율주행 + <span class="accent">Optimus 로봇</span>.<br/>
+            2026.03 <span class="accent4">Digital Optimus</span> 발표 — Grok이 "전략 두뇌(System&nbsp;2)" + Tesla AI가 "실행 본능(System&nbsp;1)" 의 hybrid 구조.<br/>
+            <span class="muted">차·로봇·PC까지 — AI를 물리 세계의 모든 표면에 박는다.</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="autoshow fade-up" style="margin-top: 1.3rem; font-size: 1.2rem; text-align:center; animation-delay: .8s;">
+        공통점 — 챗봇 자리 다툼이 아니라 → <span class="grad">"AI가 들어갈 디바이스" 자리 다툼</span>.
+      </p>
+    </section>
+
+    <!-- ============= 36. Yann LeCun — Meta를 떠나 무엇을? ============= -->
+    <section>
+      <div class="chip">EPILOGUE · 한 명의 이단아</div>
+      <h2>그럼 — <span class="accent3">Meta를 나온 얀 르쿤</span>은<br/>뭘 하고 있을까요?</h2>
+
+      <p class="autoshow fade-up muted" style="font-size: 1.15rem; margin-top: 0.8rem;">
+        앞서 봤던 그분 — "LLM은 통계적 앵무새, 막다른 길" 이라고 4년째 외쳐온 분.
+      </p>
+
+      <div class="grid-2" style="margin-top: 1.4rem; gap: 1.4rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill pink">2025.11 — Meta 퇴사</span>
+          <h3>12년 만의 결별</h3>
+          <p>
+            Llama 4 실패 → Zuckerberg가 <span class="accent">Scale AI 인수 ($14.3B)</span> + Alex Wang 영입 + Superintelligence Labs 신설.<br/>
+            "LLM을 더 크게 키운다" 방향으로 메타가 선회. 르쿤의 신념과 정면 충돌.
+          </p>
+        </div>
+
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.6);">
+          <span class="pill pink">2026.03 — AMI Labs 창립</span>
+          <h3>파리 · 시드 <span class="accent3">$1.03B</span></h3>
+          <p>
+            <em>Advanced Machine Intelligence Labs</em>.<br/>
+            <span class="accent3">유럽 역대 최대 시드</span> (pre-money $3.5B). 자기 길로 가겠다고 단단히 베팅.
+          </p>
+        </div>
+      </div>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.1rem; border-color: rgba(91,255,224,0.5); animation-delay: .9s;">
+        <span class="pill green">기술 비전 — JEPA / World Model</span>
+        <h3>"언어가 아니라 <span class="accent2">세상</span>을 보고 배워야 한다"</h3>
+        <p>
+          텍스트 다음 단어 예측이 아니라, <span class="accent2">영상 · 소리 · 센서 데이터</span>로 물리 세계를 이해하는 모델을 만든다.<br/>
+          <span class="muted">→ AI 산업 전체가 잘못된 방향이라는 베팅. LLM 시대 다음을 꿈꾸는 사람.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 37. Final: Thanks + Q&A ============= -->
+    <section data-background-color="#06080F">
+      <div class="particles">
+        <span style="left:10%; animation-duration:9s;"></span>
+        <span style="left:30%; animation-duration:11s;"></span>
+        <span style="left:50%; animation-duration:8s;"></span>
+        <span style="left:70%; animation-duration:12s;"></span>
+        <span style="left:88%; animation-duration:9.5s;"></span>
+      </div>
+      <div class="end-card" style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="chip">END</div>
+        <h1 class="big">
+          <span class="grad">감사합니다.</span>
+        </h1>
+        <p class="muted" style="margin-top: 1.2rem; font-size: 1.3rem;">
+          코딩하는 매 순간에, 좋은 vibe가 함께하기를.
+        </p>
+
+        <div style="margin-top: 3.5rem; display:flex; flex-direction:column; align-items:center; gap: 1rem;">
+          <h2 style="font-size: 4rem; margin: 0;">
+            <span class="grad">Q &amp; A</span>
+          </h2>
+          <p class="muted" style="font-size: 1.2rem; max-width: 720px;">
+            가장 동의가 안 되는 지점은 어디였나요?<br/>
+            반례, 이의, 감상 — 무엇이든 환영합니다.
+          </p>
+          <div style="margin-top: 1.4rem; display:flex; gap: .6rem; flex-wrap: wrap; justify-content:center;">
+            <span class="pill">이의 환영</span>
+            <span class="pill green">반례 환영</span>
+            <span class="pill pink">감상 환영</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.4,
+    maxScale: 2.0,
+  });
+
+  // ====== Probability calculation animation (slides 3, 8, 13) ======
+  function flickerAndSettle(scope, opts) {
+    if (scope.dataset.played === '1') return;
+    scope.dataset.played = '1';
+    const cells = scope.querySelectorAll('.prob-cell');
+    const highlight = scope.querySelector('.best-move');
+    if (highlight) highlight.style.opacity = '0';
+    let tick = 0;
+    const ticks = (opts && opts.ticks) || 26;
+    const interval = (opts && opts.interval) || 75;
+    const id = setInterval(() => {
+      cells.forEach(c => {
+        if (c.dataset.frozen === '1') return;
+        const v = (Math.random() * 0.99).toFixed(2);
+        c.textContent = v.replace(/^0/, '');
+      });
+      tick++;
+      if (tick >= ticks) {
+        clearInterval(id);
+        cells.forEach(c => {
+          if (c.dataset.frozen === '1') return;
+          c.textContent = c.dataset.final || c.textContent;
+          c.classList.add('settled');
+        });
+        if (highlight) {
+          requestAnimationFrame(() => { highlight.style.opacity = '0.95'; });
+        }
+        if (opts && typeof opts.onSettle === 'function') opts.onSettle(scope);
+      }
+    }, interval);
+  }
+
+  // Word-space fetch: highest prob word flies to fill the blank, then cascade more
+  function fetchTopWord(scope) {
+    const top = scope.querySelector('.word-chip[data-rank="1"]');
+    const blankSel = scope.dataset.blank;
+    const blank = blankSel ? document.querySelector(blankSel) : null;
+    // Mark library-space as settled so non-top chips dim out
+    if (scope.classList.contains('library-space')) {
+      scope.classList.add('settled');
+    }
+    if (!top) return;
+    setTimeout(() => {
+      top.classList.add('top');
+      // For library-space: top chip stays glowing, no fetch-flying
+      if (scope.classList.contains('library-space')) return;
+      setTimeout(() => {
+        if (!blank) return;
+        const word = top.querySelector('.w').textContent;
+        blank.textContent = word;
+        blank.classList.add('filled');
+        top.classList.add('fetched');
+
+        // Cascade: append more predicted words to grow the prompt
+        const growSel = scope.dataset.cascadeGrow;
+        const cascadeStr = scope.dataset.cascadeWords;
+        if (growSel && cascadeStr) {
+          const growEl = document.querySelector(growSel);
+          const words = cascadeStr.split('|');
+          if (growEl && words.length) {
+            let i = 0;
+            (function step() {
+              if (i >= words.length) return;
+              const span = document.createElement('span');
+              span.className = 'cascade-word';
+              span.textContent = (i === 0 ? '. ' : ' ') + words[i];
+              growEl.appendChild(span);
+              i++;
+              setTimeout(step, 420);
+            })();
+          }
+        }
+      }, 650);
+    }, 280);
+  }
+
+  function triggerScope(scope) {
+    if (!scope || scope.dataset.played === '1') return;
+    if (scope.classList.contains('word-space')) {
+      flickerAndSettle(scope, { onSettle: fetchTopWord, ticks: 24, interval: 70 });
+    } else if (scope.classList.contains('library-space')) {
+      flickerAndSettle(scope, { onSettle: fetchTopWord, ticks: 28, interval: 70 });
+    } else {
+      flickerAndSettle(scope, { ticks: 26, interval: 75 });
+    }
+  }
+
+  // Start the flicker right as the scope's own auto-reveal animation begins
+  function scheduleTrigger(scope) {
+    const delay = (parseFloat(getComputedStyle(scope).animationDelay) || 0) * 1000;
+    setTimeout(() => triggerScope(scope), delay);
+  }
+
+  function resetScope(scope) {
+    delete scope.dataset.played;
+    scope.classList.remove('settled');
+    scope.querySelectorAll('.prob-cell').forEach(c => {
+      c.textContent = '.00';
+      c.classList.remove('settled');
+    });
+    const h = scope.querySelector('.best-move');
+    if (h) h.style.opacity = '0';
+    scope.querySelectorAll('.word-chip').forEach(c => {
+      c.classList.remove('top', 'fetched');
+      const p = c.querySelector('.p');
+      if (p) p.textContent = '.00';
+    });
+    if (scope.dataset.blank) {
+      const b = document.querySelector(scope.dataset.blank);
+      if (b) { b.textContent = '___'; b.classList.remove('filled'); }
+    }
+    if (scope.dataset.cascadeGrow) {
+      const g = document.querySelector(scope.dataset.cascadeGrow);
+      if (g) g.querySelectorAll('.cascade-word').forEach(el => el.remove());
+    }
+  }
+
+  Reveal.on('slidechanged', event => {
+    if (event.previousSlide) {
+      event.previousSlide.querySelectorAll('.prob-numbers, .word-space, .library-space').forEach(resetScope);
+    }
+    if (event.currentSlide) {
+      event.currentSlide.querySelectorAll('.prob-numbers, .word-space, .library-space').forEach(scheduleTrigger);
+    }
+  });
+
+  Reveal.on('ready', () => {
+    const slide = Reveal.getCurrentSlide();
+    if (!slide) return;
+    slide.querySelectorAll('.prob-numbers, .word-space, .library-space').forEach(scheduleTrigger);
+  });
+</script>
+
+</body>
+</html>
