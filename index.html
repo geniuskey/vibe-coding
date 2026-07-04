@@ -55,7 +55,7 @@
 
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
     .reveal .slides { text-align: left; }
-    .reveal section { padding: 2vh 4vw; }
+    .reveal section { padding: 2vh 4vw; box-sizing: border-box; }
 
     /* HARD RULE: every text descendant defaults to pure white. */
     .reveal section,
@@ -159,6 +159,25 @@
       display: inline-block;
       animation: dlArrowOut 2s ease-in-out infinite;
     }
+    .transition-select {
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      color: #E1D9FF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      cursor: pointer;
+      outline: none;
+    }
+    .transition-select:hover {
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .transition-select option {
+      background: #14162C;
+      color: #E1D9FF;
+    }
     @keyframes dlBounce {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(2px); }
@@ -224,7 +243,7 @@
       background: var(--accent);
       opacity: 0.35;
       filter: blur(0.5px);
-      animation: floatUp 8s linear infinite;
+      animation: floatUp 8s linear infinite backwards;
     }
     .particles span:nth-child(odd){ background: var(--accent-2); }
     .particles span:nth-child(3n){ background: var(--accent-3); }
@@ -404,14 +423,6 @@
       z-index: 6;
     }
     .word-chip.top .prob-cell { color: #5BFFE0 !important; }
-    .word-chip.fetched {
-      animation: chipFetch 1s forwards cubic-bezier(.4, 0, .2, 1);
-    }
-    @keyframes chipFetch {
-      0%   { transform: translate(-50%, -50%) scale(1.3); opacity: 1; filter: blur(0); }
-      35%  { transform: translate(-50%, -120%) scale(1.5); opacity: 0.85; filter: blur(1px); }
-      100% { transform: translate(-50%, -260%) scale(0.5); opacity: 0; filter: blur(10px); }
-    }
     /* Library space: after settle, dim the non-top chips */
     .library-space.settled .word-chip:not(.top) {
       opacity: 0.3;
@@ -694,6 +705,14 @@
   <a class="dl-btn" href="seminar.html" download="vibe-coding-seminar-2026.html" title="이 슬라이드의 원본 HTML을 다운로드합니다">
     <span class="dl-arrow">⬇</span><span>HTML</span>
   </a>
+  <select id="transitionSelect" class="transition-select" title="화면 전환 효과">
+    <option value="none">전환 끄기</option>
+    <option value="fade">페이드 (부드럽게)</option>
+    <option value="slide">슬라이드 (기본)</option>
+    <option value="convex">컨벡스</option>
+    <option value="concave">콘케이브</option>
+    <option value="zoom">줌</option>
+  </select>
 </div>
 
 <div class="reveal">
@@ -738,9 +757,6 @@
         <h1 style="font-size: 6rem; animation-delay: .3s;" class="autoshow fade-up">
           <span class="grad">무엇</span>일까요?
         </h1>
-        <p class="muted autoshow fade-in" style="margin-top: 3rem; font-size: 1.3rem; animation-delay: .9s;">
-          1시간 안에, 가장 중요한 한 가지만 가져갑니다.
-        </p>
       </div>
     </section>
 
@@ -962,7 +978,7 @@
 
     <!-- ============= 9. Yann LeCun ============= -->
     <section>
-      <h2>그래서 <span class="accent3">얀 르쿤</span>은 LLM을 까죠.</h2>
+      <h2>그래서 <span class="accent3">Meta 수석 AI 과학자 얀 르쿤</span>은 LLM을 까죠.</h2>
       <div class="quote autoshow fade-up" style="margin-top: 2rem; font-size: 2rem; animation-delay: .1s;">
         "이건 그냥 통계적 앵무새다.<br/>
         세상을 이해하지 못하고, 다음 단어만 그럴듯하게 뱉을 뿐."
@@ -1844,18 +1860,27 @@
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
 <script>
+  const savedTransition = localStorage.getItem('revealTransition') || 'fade';
+
   Reveal.initialize({
     hash: true,
     controls: true,
     progress: true,
     slideNumber: 'c/t',
-    transition: 'slide',
+    transition: savedTransition,
     backgroundTransition: 'fade',
     width: 1280,
     height: 800,
     margin: 0.04,
     minScale: 0.4,
     maxScale: 2.0,
+  });
+
+  const transitionSelect = document.getElementById('transitionSelect');
+  transitionSelect.value = savedTransition;
+  transitionSelect.addEventListener('change', () => {
+    Reveal.configure({ transition: transitionSelect.value });
+    localStorage.setItem('revealTransition', transitionSelect.value);
   });
 
   // ====== Probability calculation animation (slides 3, 8, 13) ======
@@ -1909,7 +1934,6 @@
         const word = top.querySelector('.w').textContent;
         blank.textContent = word;
         blank.classList.add('filled');
-        top.classList.add('fetched');
 
         // Cascade: append more predicted words to grow the prompt
         const growSel = scope.dataset.cascadeGrow;
@@ -1961,7 +1985,7 @@
     const h = scope.querySelector('.best-move');
     if (h) h.style.opacity = '0';
     scope.querySelectorAll('.word-chip').forEach(c => {
-      c.classList.remove('top', 'fetched');
+      c.classList.remove('top');
       const p = c.querySelector('.p');
       if (p) p.textContent = '.00';
     });
