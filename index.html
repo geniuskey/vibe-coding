@@ -160,18 +160,28 @@
       animation: dlArrowOut 2s ease-in-out infinite;
     }
     .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
       background: rgba(20, 22, 44, 0.85);
       border: 1px solid rgba(155, 130, 255, 0.5);
       border-radius: 999px;
-      color: #E1D9FF;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       font-weight: 700;
-      padding: 7px 10px;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       cursor: pointer;
       outline: none;
     }
     .transition-select:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
       border-color: rgba(91, 255, 224, 0.7);
     }
     .transition-select option {
@@ -700,15 +710,15 @@
 
 <div class="dl-toolbar">
   <a class="dl-btn alt" href="https://syngha.com" target="_blank" rel="noopener" title="더 많은 글 보기 — syngha.com">
-    <span class="dl-arrow-out">↗</span><span>More articles</span>
+    <span class="dl-arrow-out">↗</span><span>Syngha's more articles</span>
   </a>
-  <a class="dl-btn" href="seminar.html" download="vibe-coding-seminar-2026.html" title="이 슬라이드의 원본 HTML을 다운로드합니다">
+  <a class="dl-btn" href="index.html" download="vibe-coding-seminar-2026.html" title="이 슬라이드의 원본 HTML을 다운로드합니다">
     <span class="dl-arrow">⬇</span><span>HTML</span>
   </a>
   <select id="transitionSelect" class="transition-select" title="화면 전환 효과">
     <option value="none">전환 끄기</option>
     <option value="fade">페이드 (부드럽게)</option>
-    <option value="slide">슬라이드 (기본)</option>
+    <option value="slide">슬라이드</option>
     <option value="convex">컨벡스</option>
     <option value="concave">콘케이브</option>
     <option value="zoom">줌</option>
