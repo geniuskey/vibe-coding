@@ -51,7 +51,50 @@
       mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
       -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
     }
-    .reveal { background: transparent; }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    /* Title-slide living background — nebula + vignette are CSS (GPU-composited),
+       the canvas only renders the particle layer at a capped resolution */
+    #hero-bg {
+      position: fixed; inset: 0;
+      z-index: 0;
+      background: #06080F;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    #hero-bg.on { opacity: 1; }
+    #hero-bg:not(.on) .hb-nebula { animation-play-state: paused; }
+    .hb-nebula {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+    }
+    .hb-n1 {
+      width: 95vmax; height: 95vmax; left: -20vmax; top: -25vmax;
+      background: radial-gradient(circle, rgba(124,92,255,0.17), transparent 65%);
+      animation: hbDrift1 36s ease-in-out infinite alternate;
+    }
+    .hb-n2 {
+      width: 85vmax; height: 85vmax; right: -28vmax; bottom: -32vmax;
+      background: radial-gradient(circle, rgba(0,224,199,0.13), transparent 65%);
+      animation: hbDrift2 44s ease-in-out infinite alternate;
+    }
+    .hb-n3 {
+      width: 60vmax; height: 60vmax; left: 28vw; top: -22vmax;
+      background: radial-gradient(circle, rgba(255,94,126,0.10), transparent 65%);
+      animation: hbDrift3 52s ease-in-out infinite alternate;
+    }
+    @keyframes hbDrift1 { to { transform: translate(10vw, 7vh) scale(1.15); } }
+    @keyframes hbDrift2 { to { transform: translate(-9vw, -6vh) scale(1.1); } }
+    @keyframes hbDrift3 { to { transform: translate(-8vw, 9vh) scale(1.2); } }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hb-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.4) 100%);
+    }
+    @media print { #hero-bg { display: none; } }
 
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
     .reveal .slides { text-align: left; }
@@ -708,6 +751,14 @@
 </head>
 <body>
 
+<div id="hero-bg" aria-hidden="true">
+  <div class="hb-nebula hb-n1"></div>
+  <div class="hb-nebula hb-n2"></div>
+  <div class="hb-nebula hb-n3"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hb-vignette"></div>
+</div>
+
 <div class="dl-toolbar">
   <a class="dl-btn alt" href="https://syngha.com" target="_blank" rel="noopener" title="더 많은 글 보기 — syngha.com">
     <span class="dl-arrow-out">↗</span><span>Syngha's more articles</span>
@@ -729,18 +780,7 @@
   <div class="slides">
 
     <!-- ============= 1. Title ============= -->
-    <section data-background-color="#06080F">
-      <div class="particles">
-        <span style="left:5%;  animation-delay:0s;  animation-duration:9s;"></span>
-        <span style="left:12%; animation-delay:1.5s;animation-duration:11s;"></span>
-        <span style="left:22%; animation-delay:3s;  animation-duration:8s;"></span>
-        <span style="left:35%; animation-delay:0.7s;animation-duration:12s;"></span>
-        <span style="left:48%; animation-delay:2s;  animation-duration:9s;"></span>
-        <span style="left:60%; animation-delay:4s;  animation-duration:10s;"></span>
-        <span style="left:72%; animation-delay:1s;  animation-duration:13s;"></span>
-        <span style="left:84%; animation-delay:2.6s;animation-duration:9.5s;"></span>
-        <span style="left:92%; animation-delay:5s;  animation-duration:11s;"></span>
-      </div>
+    <section>
       <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
         <div class="chip">SEMINAR · 2026</div>
         <h1 style="font-size:5.5rem;">
@@ -2023,6 +2063,425 @@
     if (!slide) return;
     slide.querySelectorAll('.prob-numbers, .word-space, .library-space').forEach(scheduleTrigger);
   });
+
+  // ====== Title slide — living "neural nebula" background ======
+  // Drifting neuron network + firing signal pulses + probability glyphs,
+  // pulled around by the mouse (gravity well + HUD reticle). When the mouse
+  // goes idle, a phantom attractor wanders on its own so the scene never dies.
+  // Perf: nebula/vignette live in CSS (#hero-bg), the canvas renders at a
+  // capped backing resolution and ~60fps, and quality self-degrades if slow.
+  (function () {
+    const wrap = document.getElementById('hero-bg');
+    const canvas = document.getElementById('hero-canvas');
+    if (!wrap || !canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ctx = canvas.getContext('2d');
+
+    const NODE_COLORS = [
+      [181, 161, 255],
+      [91, 255, 224],
+      [255, 148, 172],
+      [255, 224, 138],
+    ];
+    const alphaTable = (rgb, steps, maxA) =>
+      Array.from({ length: steps }, (_, i) => `rgba(${rgb.join(',')},${(i / (steps - 1) * maxA).toFixed(3)})`);
+    // midpoint tables so bucket 0 stays faintly visible instead of alpha 0
+    const alphaTableMid = (rgb, steps, maxA) =>
+      Array.from({ length: steps }, (_, i) => `rgba(${rgb.join(',')},${((i + 0.5) / steps * maxA).toFixed(3)})`);
+    const NODE_FILL = NODE_COLORS.map(c => alphaTable(c, 16, 1));
+    const STAR_FILL = alphaTableMid([210, 220, 255], 8, 0.7);
+    const LINK_STYLE = [
+      alphaTableMid([150, 130, 255], 6, 0.22),
+      alphaTableMid([91, 255, 224], 6, 0.45),
+    ];
+    const linkSegs = Array.from({ length: 12 }, () => []);
+
+    let W = 0, H = 0, backingScale = 1;
+    let nodes = [], stars = [], pairs = [], pulses = [], ripples = [], comets = [], glyphs = [];
+    let glowSprite = null;
+    let LINK = 120, PULL = 280;
+    let active = false, rafId = null, offTimer = null;
+    let nextPulseAt = 0, nextCometAt = 0;
+    let quality = 2, emaDt = 16, checkFrames = 0, lastDraw = 0, flip = false;
+    const QSCALE = [0.55, 0.75, 1];
+
+    const pointer = { x: innerWidth / 2, y: innerHeight / 2, movedAt: -1e9 };
+    const attr = { x: innerWidth / 2, y: innerHeight * 0.45 };
+
+    function makeGlow(rgb, size, coreAlpha) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const g = c.getContext('2d');
+      const grd = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      grd.addColorStop(0, `rgba(${rgb.join(',')},${coreAlpha})`);
+      grd.addColorStop(1, `rgba(${rgb.join(',')},0)`);
+      g.fillStyle = grd;
+      g.fillRect(0, 0, size, size);
+      return c;
+    }
+
+    function applyQuality() {
+      backingScale = Math.min(devicePixelRatio || 1, 1) * Math.min(1, 1500 / W) * QSCALE[quality];
+      canvas.width = Math.max(1, Math.round(W * backingScale));
+      canvas.height = Math.max(1, Math.round(H * backingScale));
+      ctx.setTransform(backingScale, 0, 0, backingScale, 0, 0);
+    }
+
+    function rebuild() {
+      W = innerWidth; H = innerHeight;
+      applyQuality();
+
+      LINK = Math.max(90, Math.min(140, Math.hypot(W, H) * 0.07)) * (0.86 + 0.07 * quality);
+      PULL = Math.max(220, Math.min(340, W * 0.18));
+
+      const density = [22000, 17000, 13000][quality];
+      const count = Math.round(Math.min(140, Math.max(60, (W * H) / density)));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+        r: 1.1 + Math.random() * 1.8,
+        tw: Math.random() * Math.PI * 2,
+        da: 1e9,
+        ci: (Math.random() * NODE_COLORS.length) | 0,
+      }));
+
+      stars = Array.from({ length: quality === 2 ? 100 : 60 }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        r: 0.4 + Math.random() * 1.1,
+        tw: Math.random() * Math.PI * 2,
+        z: 0.25 + Math.random() * 0.75,
+      }));
+
+      glowSprite = makeGlow([140, 110, 255], 256, 0.55);
+      ctx.clearRect(0, 0, W, H);
+    }
+
+    function phantom(t) {
+      return {
+        x: W * 0.5 + Math.sin(t * 0.00026) * W * 0.32 + Math.sin(t * 0.00007 + 2) * W * 0.08,
+        y: H * 0.46 + Math.sin(t * 0.00021 + 1.3) * H * 0.28 + Math.cos(t * 0.00009) * H * 0.08,
+      };
+    }
+
+    function drawStars(t) {
+      ctx.globalCompositeOperation = 'lighter';
+      const ox = attr.x - W / 2, oy = attr.y - H / 2;
+      for (const s of stars) {
+        const a = (0.16 + 0.4 * Math.abs(Math.sin(t * 0.0009 + s.tw))) * s.z;
+        ctx.fillStyle = STAR_FILL[Math.min(7, (a * 10) | 0)];
+        ctx.fillRect(s.x - ox * 0.02 * s.z, s.y - oy * 0.02 * s.z, s.r, s.r);
+      }
+    }
+
+    function updateNodes(t) {
+      for (const nd of nodes) {
+        const a = (Math.sin(nd.x * 0.0011 + t * 0.00019)
+                 + Math.cos(nd.y * 0.0014 - t * 0.00023)
+                 + Math.sin((nd.x + nd.y) * 0.0006 + t * 0.00011)) * 1.05;
+        nd.vx += Math.cos(a) * 0.02;
+        nd.vy += Math.sin(a) * 0.02;
+
+        const dx = attr.x - nd.x, dy = attr.y - nd.y;
+        const d = Math.sqrt(dx * dx + dy * dy) || 1;
+        nd.da = d;
+        if (d < PULL) {
+          const f = (1 - d / PULL) * 0.055;
+          nd.vx += (dx / d) * f - (dy / d) * f * 0.6;
+          nd.vy += (dy / d) * f + (dx / d) * f * 0.6;
+        }
+
+        nd.vx *= 0.965; nd.vy *= 0.965;
+        nd.x += nd.vx; nd.y += nd.vy;
+
+        if (nd.x < -30) nd.x = W + 28; else if (nd.x > W + 30) nd.x = -28;
+        if (nd.y < -30) nd.y = H + 28; else if (nd.y > H + 30) nd.y = -28;
+      }
+    }
+
+    function computePairs() {
+      pairs.length = 0;
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x; if (dx > LINK || dx < -LINK) continue;
+          const dy = a.y - b.y; if (dy > LINK || dy < -LINK) continue;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK) pairs.push({ a, b, d });
+        }
+      }
+    }
+
+    function drawLinks() {
+      for (const b of linkSegs) b.length = 0;
+      const hotR = PULL * 0.85;
+      for (const p of pairs) {
+        const g = 1 - p.d / LINK;
+        const hot = (p.a.da < hotR && p.b.da < hotR) ? 1 : 0;
+        linkSegs[hot * 6 + Math.min(5, (g * 6) | 0)].push(p.a.x, p.a.y, p.b.x, p.b.y);
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineWidth = backingScale < 0.85 ? 1.4 : 1;
+      for (let b = 0; b < 12; b++) {
+        const s = linkSegs[b];
+        if (!s.length) continue;
+        ctx.strokeStyle = LINK_STYLE[(b / 6) | 0][b % 6];
+        ctx.beginPath();
+        for (let i = 0; i < s.length; i += 4) {
+          ctx.moveTo(s[i], s[i + 1]);
+          ctx.lineTo(s[i + 2], s[i + 3]);
+        }
+        ctx.stroke();
+      }
+    }
+
+    function drawNodes(t) {
+      ctx.globalCompositeOperation = 'lighter';
+      for (const nd of nodes) {
+        const boost = nd.da < PULL ? (1 - nd.da / PULL) * 0.5 : 0;
+        const a = Math.min(1, 0.35 + 0.3 * (0.5 + 0.5 * Math.sin(t * 0.0021 + nd.tw)) + boost);
+        const fills = NODE_FILL[nd.ci];
+        ctx.fillStyle = fills[(a * 15) | 0];
+        ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.r, 0, 6.283); ctx.fill();
+        if (boost > 0.08) {
+          ctx.fillStyle = fills[Math.max(1, (a * 2.4) | 0)];
+          ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.r * 3.2, 0, 6.283); ctx.fill();
+        }
+      }
+    }
+
+    function spawnPulse(t, from, hops) {
+      let pr = null;
+      if (from) {
+        const cand = [];
+        for (const p of pairs) if (p.a === from || p.b === from) cand.push(p);
+        if (cand.length) pr = cand[(Math.random() * cand.length) | 0];
+      } else if (pairs.length) {
+        pr = pairs[(Math.random() * pairs.length) | 0];
+      }
+      if (!pr) return;
+      const a = from || pr.a;
+      const b = pr.a === a ? pr.b : pr.a;
+      const col = Math.random() < 0.55 ? '91,255,224' : '255,224,138';
+      pulses.push({
+        a, b, t0: t, dur: 240 + pr.d * 1.5, hops,
+        stroke: `rgba(${col},0.5)`, fill: `rgba(${col},0.9)`,
+      });
+    }
+
+    function glyphText() {
+      return Math.random() < 0.78
+        ? '.' + String(1 + ((Math.random() * 98) | 0)).padStart(2, '0')
+        : 'ΣΔλψθπ∇'[(Math.random() * 7) | 0];
+    }
+
+    function drawPulses(t) {
+      if (t > nextPulseAt && pulses.length < 10) {
+        spawnPulse(t, null, 1 + ((Math.random() * 2) | 0));
+        nextPulseAt = t + 300 + Math.random() * 500;
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        const k = (t - p.t0) / p.dur;
+        if (k >= 1) {
+          pulses.splice(i, 1);
+          if (p.hops > 0) spawnPulse(t, p.b, p.hops - 1);
+          else if (Math.random() < 0.45) glyphs.push({ x: p.b.x, y: p.b.y, t0: t, txt: glyphText() });
+          continue;
+        }
+        const x = p.a.x + (p.b.x - p.a.x) * k;
+        const y = p.a.y + (p.b.y - p.a.y) * k;
+        const k2 = Math.max(0, k - 0.18);
+        ctx.strokeStyle = p.stroke;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(p.a.x + (p.b.x - p.a.x) * k2, p.a.y + (p.b.y - p.a.y) * k2);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.fillStyle = p.fill;
+        ctx.beginPath(); ctx.arc(x, y, 2.1, 0, 6.283); ctx.fill();
+      }
+    }
+
+    function drawComets(t) {
+      if (t > nextCometAt) {
+        const fromLeft = Math.random() < 0.5;
+        const ang = 0.3 + Math.random() * 0.35;
+        const sp = 5.5 + Math.random() * 3;
+        comets.push({
+          x: fromLeft ? -90 : W + 90,
+          y: Math.random() * H * 0.4,
+          vx: Math.cos(ang) * sp * (fromLeft ? 1 : -1),
+          vy: Math.sin(ang) * sp,
+        });
+        nextCometAt = t + 4500 + Math.random() * 4000;
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = comets.length - 1; i >= 0; i--) {
+        const c = comets[i];
+        c.x += c.vx; c.y += c.vy;
+        if (c.x < -140 || c.x > W + 140 || c.y > H + 140) { comets.splice(i, 1); continue; }
+        const tx = c.x - c.vx * 15, ty = c.y - c.vy * 15;
+        const grd = ctx.createLinearGradient(tx, ty, c.x, c.y);
+        grd.addColorStop(0, 'rgba(140,200,255,0)');
+        grd.addColorStop(1, 'rgba(210,240,255,0.85)');
+        ctx.strokeStyle = grd;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(c.x, c.y); ctx.stroke();
+        ctx.fillStyle = 'rgba(230,248,255,0.95)';
+        ctx.beginPath(); ctx.arc(c.x, c.y, 2, 0, 6.283); ctx.fill();
+      }
+    }
+
+    function drawRipples(t) {
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        const k = (t - rp.t0) / 950;
+        if (k >= 1) { ripples.splice(i, 1); continue; }
+        // pointerdown timestamps can lead the rAF clock by a frame — clamp
+        const kc = Math.max(0, k);
+        const e = 1 - Math.pow(1 - kc, 3);
+        const alpha = (1 - kc) * 0.55;
+        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = `rgba(91,255,224,${alpha.toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(rp.x, rp.y, e * 300, 0, 6.283); ctx.stroke();
+        ctx.strokeStyle = `rgba(155,130,255,${(alpha * 0.8).toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(rp.x, rp.y, e * 190, 0, 6.283); ctx.stroke();
+      }
+    }
+
+    function drawGlyphs(t) {
+      if (!glyphs.length) return;
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.font = '600 11px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      for (let i = glyphs.length - 1; i >= 0; i--) {
+        const g = glyphs[i];
+        const k = (t - g.t0) / 1500;
+        if (k >= 1) { glyphs.splice(i, 1); continue; }
+        ctx.fillStyle = `rgba(200,190,255,${(Math.sin(Math.PI * k) * 0.85).toFixed(3)})`;
+        ctx.fillText(g.txt, g.x, g.y - 10 - k * 16);
+      }
+    }
+
+    function drawReticle(t, autoK) {
+      ctx.globalCompositeOperation = 'lighter';
+      // low alpha: the destination-out fade lets additive glow accumulate frame over frame
+      ctx.globalAlpha = 0.13;
+      ctx.drawImage(glowSprite, attr.x - 190, attr.y - 190, 380, 380);
+      ctx.globalAlpha = 1;
+
+      const a = 0.55 - autoK * 0.3;
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = `rgba(170,190,255,${a.toFixed(3)})`;
+      let rot = t * 0.0012;
+      for (let s = 0; s < 3; s++) {
+        ctx.beginPath();
+        ctx.arc(attr.x, attr.y, 52, rot + s * 2.094, rot + s * 2.094 + 0.7);
+        ctx.stroke();
+      }
+      const r1 = 30 + Math.sin(t * 0.0023) * 3;
+      rot = -t * 0.0017;
+      ctx.strokeStyle = `rgba(91,255,224,${(a * 0.9).toFixed(3)})`;
+      for (let s = 0; s < 2; s++) {
+        ctx.beginPath();
+        ctx.arc(attr.x, attr.y, r1, rot + s * Math.PI, rot + s * Math.PI + 1.15);
+        ctx.stroke();
+      }
+      ctx.fillStyle = `rgba(230,240,255,${Math.min(1, a + 0.2).toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(attr.x, attr.y, 1.8, 0, 6.283); ctx.fill();
+    }
+
+    function frame(t) {
+      rafId = requestAnimationFrame(frame);
+      if (t - lastDraw < 15) return;              // ~60fps cap, also on 120/165Hz displays
+      const dt = Math.min(50, t - lastDraw);
+      lastDraw = t;
+
+      emaDt = emaDt * 0.94 + dt * 0.06;
+      if (++checkFrames >= 48) {                  // sustained under ~38fps → drop a quality tier
+        checkFrames = 0;
+        if (emaDt > 26 && quality > 0) {
+          quality--;
+          applyQuality();
+          nodes.length = Math.round(nodes.length * 0.75);
+          stars.length = Math.round(stars.length * 0.7);
+          LINK *= 0.93;
+          emaDt = 16;
+        }
+      }
+
+      // fade toward transparent so the CSS nebula shows through the trails
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0,0,0,0.22)';
+      ctx.fillRect(0, 0, W, H);
+
+      const idle = t - pointer.movedAt;
+      const autoK = Math.min(1, Math.max(0, (idle - 2400) / 1600));
+      const ph = phantom(t);
+      attr.x += (pointer.x + (ph.x - pointer.x) * autoK - attr.x) * 0.05;
+      attr.y += (pointer.y + (ph.y - pointer.y) * autoK - attr.y) * 0.05;
+
+      drawStars(t);
+      updateNodes(t);
+      if ((flip = !flip)) computePairs();         // pair graph refreshes every other frame
+      drawLinks();
+      drawNodes(t);
+      drawPulses(t);
+      drawComets(t);
+      drawRipples(t);
+      drawGlyphs(t);
+      drawReticle(t, autoK);
+    }
+
+    function setActive(on) {
+      if (on === active) return;
+      active = on;
+      clearTimeout(offTimer);
+      if (on) {
+        wrap.classList.add('on');
+        if (rafId == null) {
+          ctx.clearRect(0, 0, W, H);
+          lastDraw = 0;
+          rafId = requestAnimationFrame(frame);
+        }
+      } else {
+        wrap.classList.remove('on');
+        offTimer = setTimeout(() => {
+          if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; }
+        }, 1000);
+      }
+    }
+
+    addEventListener('pointermove', e => {
+      pointer.x = e.clientX; pointer.y = e.clientY;
+      pointer.movedAt = performance.now();
+    }, { passive: true });
+
+    addEventListener('pointerdown', e => {
+      if (!active) return;
+      ripples.push({ x: e.clientX, y: e.clientY, t0: performance.now() });
+      for (const nd of nodes) {
+        const dx = nd.x - e.clientX, dy = nd.y - e.clientY;
+        const d = Math.hypot(dx, dy) || 1;
+        if (d < 320) {
+          const f = (1 - d / 320) * 7;
+          nd.vx += (dx / d) * f; nd.vy += (dy / d) * f;
+        }
+      }
+    }, { passive: true });
+
+    let resizeTimer = null;
+    addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(rebuild, 150);
+    });
+
+    rebuild();
+    Reveal.on('ready', e => setActive(e.indexh === 0));
+    Reveal.on('slidechanged', e => setActive(e.indexh === 0));
+  })();
 </script>
 
 </body>
