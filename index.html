@@ -374,6 +374,29 @@
       margin: 0;
       color: #E8ECF5 !important;
     }
+    /* chatbot vs agent — who-does-what flow lanes */
+    .flow-lane { display: flex; align-items: stretch; gap: 0.45rem; }
+    .flow-step {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0.65rem 0.4rem;
+      border-radius: 12px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      border: 1px solid;
+    }
+    .flow-step.me {
+      background: linear-gradient(135deg, rgba(124,92,255,0.5), rgba(91,63,217,0.35));
+      border-color: rgba(155,130,255,0.65);
+    }
+    .flow-step.ai {
+      background: rgba(0,224,199,0.13);
+      border-color: rgba(43,234,208,0.6);
+      color: #A9FFF0 !important;
+    }
+    .flow-arrow { color: #8A93B2; font-weight: 800; align-self: center; }
+
     /* before → after mini-story cards */
     .card .ba-before {
       font-style: italic;
@@ -1532,24 +1555,46 @@
     <!-- ============= 17b. Chatbot vs agent tool spectrum ============= -->
     <section>
       <h2>그럼 <span class="accent2">챗봇 창에 물어보는 것</span>도<br/>바이브 코딩인가요?</h2>
-      <p class="autoshow fade-up" style="margin-top: 1.5rem; font-size: 1.5rem;">
-        네, 그것도 이미 시작입니다. 다만 <span class="accent">두 단계</span>가 있어요.
+      <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.3rem;">
+        네, 이미 시작입니다. 다만 <span class="accent">누가 손발이 되느냐</span>가 다릅니다 —
+        <span style="margin-left: .5rem;"><span class="pill" style="padding:.15em .7em; font-size:.85rem;">보라 = 나</span> <span class="pill green" style="padding:.15em .7em; font-size:.85rem;">민트 = AI</span></span>
       </p>
-      <div class="grid-2" style="margin-top: 2rem;">
-        <div class="card autoshow fade-right">
-          <span class="pill">대화형</span>
-          <h3 style="margin-top:.6rem;">💬 ChatGPT, Claude.ai (웹)</h3>
-          <p>물어보고 → 답을 보고 → <span class="accent2">내가 직접 옮겨 씁니다.</span></p>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.1rem; padding: 1.2rem 1.5rem;">
+        <span class="pill">대화형 — ChatGPT, Claude.ai (웹)</span>
+        <div class="flow-lane" style="margin-top: .9rem;">
+          <div class="flow-step me">질문</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step ai">답변</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step me">복사</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step me">붙여넣고 실행</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step me">확인</div>
         </div>
-        <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5);">
-          <span class="pill green">실행형</span>
-          <h3 style="margin-top:.6rem;">🤖 Claude Code, Cursor, Codex</h3>
-          <p>물어보면 → <span class="accent2">AI가 직접 만들고, 돌리고, 결과까지 확인합니다.</span></p>
-        </div>
+        <p style="margin-top: .8rem; font-size: 1.02rem;" class="muted">AI는 조언만 — <span class="accent">손발은 전부 나</span>. 왕복이 잦을수록 여기서 시간이 샙니다.</p>
       </div>
-      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 2rem; font-size: 1.2rem; animation-delay: .8s;">
-        한 번 쓰고 끝이면 <span class="accent2">챗봇으로 충분</span>, 반복해서 만들고 돌려야 한다면 <span class="accent">실행형이 유리</span>합니다.<br/>
-        그래서 "어떤 도구를 배워야 하냐"는 질문이 남죠 —
+
+      <div class="card autoshow fade-up" style="margin-top: .9rem; padding: 1.2rem 1.5rem; border-color: rgba(43,234,208,0.5);">
+        <span class="pill green">실행형 — Claude Code, Cursor, Codex</span>
+        <div class="flow-lane" style="margin-top: .9rem;">
+          <div class="flow-step me">요청</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step ai">만들기</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step ai">실행</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step ai">확인·수정</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step me">결과 승인</div>
+        </div>
+        <p style="margin-top: .8rem; font-size: 1.02rem;" class="muted">나는 방향과 판단만 — <span class="accent2">중간 루프가 통째로 AI에게</span> 넘어갑니다.</p>
+      </div>
+
+      <p class="autoshow fade-up muted" style="text-align:center; margin-top: 1.3rem; font-size: 1.15rem; animation-delay: .9s;">
+        한 번 쓰고 끝이면 <span class="accent2">챗봇으로 충분</span>, 반복해서 만들고 돌려야 한다면 <span class="accent">실행형이 유리</span> —
+        그래서 "어떤 도구를 배워야 하냐"는 질문이 남죠.
       </p>
     </section>
 
