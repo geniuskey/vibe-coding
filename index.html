@@ -358,6 +358,21 @@
     .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
     .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
 
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
     .quote {
       font-size: 1.7rem;
       line-height: 1.5;
@@ -1628,13 +1643,379 @@
       </div>
     </section>
 
-    <!-- ============= 30. Section opener: AI Labs 현황 ============= -->
+    <!-- ============= 30. Section opener: Claude Code 실전 ============= -->
     <section data-background-color="#06080F">
       <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-        <div class="chip">CHAPTER 6 · 그래서 다음은?</div>
+        <div class="chip">CHAPTER 6 · 처음 쓰는 사람을 위해</div>
         <h1 style="font-size: 5.5rem;">
-          그럼 <span class="grad">다음은</span><br/>
-          무엇일까요?
+          그럼 <span class="grad">Claude Code</span><br/>
+          어떻게 쓰나요?
+        </h1>
+        <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.6rem;">
+          설치부터 실전까지 — <span class="accent">기본기 · 명령어 · Plugin · MCP · Agent Skills</span>
+        </p>
+        <div class="autoshow fade-up" style="margin-top: 2.5rem; display:flex; gap: 0.8rem; flex-wrap: wrap; animation-delay: .8s;">
+          <span class="pill">설치·실행</span>
+          <span class="pill">기본 조작</span>
+          <span class="pill">슬래시 명령어</span>
+          <span class="pill green">Plugins</span>
+          <span class="pill pink">MCP</span>
+          <span class="pill amber">Agent Skills</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 30a. Getting started: install & launch ============= -->
+    <section>
+      <div class="chip">시작하기</div>
+      <h2>설치는 <span class="accent">한 줄</span>, 실행은 <span class="accent2">폴더 안에서</span>.</h2>
+      <div class="grid-3" style="margin-top: 1.6rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">1</span>
+          <h3 style="font-size: 1.3rem;">설치</h3>
+          <p><code>npm install -g @anthropic-ai/claude-code</code> 한 줄이면 끝. Node.js만 있으면 됩니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">2</span>
+          <h3 style="font-size: 1.3rem;">실행 & 로그인</h3>
+          <p>터미널에 <code>claude</code>만 입력. 첫 실행 시 브라우저가 열리고 <span class="accent2">Claude.ai 계정</span>으로 로그인.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">3</span>
+          <h3 style="font-size: 1.3rem;">시작 위치가 중요</h3>
+          <p>반드시 <span class="accent2">작업할 프로젝트 폴더 안에서</span> 실행하세요. 그 폴더가 곧 작업 범위입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 30b. Basics: everyday operations ============= -->
+    <section>
+      <div class="chip">기본 조작법</div>
+      <h2>슬래시 명령어보다 <span class="accent">더 자주 쓰는</span> 것들.</h2>
+      <div class="grid-3" style="margin-top: 1.6rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill pink"><code>@</code> 파일 참조</span>
+          <h3 style="font-size: 1.25rem;">직접 끌어오기</h3>
+          <p style="font-size: 1.02rem;"><code>@</code>만 치면 파일·폴더가 검색됩니다. "그 파일 어디 있더라" 설명할 필요가 없어집니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill">이미지 붙여넣기</span>
+          <h3 style="font-size: 1.25rem;">스크린샷도 컨텍스트</h3>
+          <p style="font-size: 1.02rem;">화면을 캡처해 <span class="accent2">드래그하거나 Ctrl+V</span>만 해도 바로 시각적 맥락으로 활용됩니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">Esc 중단</span>
+          <h3 style="font-size: 1.25rem;">엉뚱하면 바로 멈추기</h3>
+          <p style="font-size: 1.02rem;">답변이 원하는 방향이 아니면 끝까지 기다리지 말고 <span class="accent2">Esc로 즉시 중단</span> 후 다시 지시하세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 31a. Essential slash commands — basics ============= -->
+    <section>
+      <div class="chip">TOOLKIT 1/7</div>
+      <h2>가장 먼저, <span class="accent">이 6개</span>부터 손에 익히세요.</h2>
+      <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.2rem;">
+        처음 며칠 안에 저절로 손에 붙는 <span class="accent2">우선순위 순서</span>입니다.
+      </p>
+      <div class="grid-3" style="margin-top: 1.4rem; gap: 1rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">1</span>
+          <h3 style="font-size: 1.25rem;"><code>/help</code> — 모든 것의 시작점</h3>
+          <p style="font-size: 1rem;">설치된 Plugin·연결된 MCP에 따라 쓸 수 있는 명령어가 달라집니다. 헷갈리면 먼저 <code>/help</code>.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">2</span>
+          <h3 style="font-size: 1.25rem;"><code>/init</code> — 새 프로젝트 필수 첫 실행</h3>
+          <p style="font-size: 1rem;">구조·빌드 명령어·컨벤션을 훑어 <span class="accent2">CLAUDE.md</span>를 자동 생성.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">3</span>
+          <h3 style="font-size: 1.25rem;"><code>/clear</code> — 주제 바뀌면 리셋</h3>
+          <p style="font-size: 1rem;">대화가 길어지며 답변 품질이 떨어지는 <span class="accent2">가장 흔한 문제</span>의 해법.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill">4</span>
+          <h3 style="font-size: 1.25rem;"><code>/compact</code> — 이어가야 할 땐 압축</h3>
+          <p style="font-size: 1rem;">히스토리를 압축해 컨텍스트를 확보. 숙련자는 <span class="accent2">20~30분마다 습관적으로</span> 실행.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">5</span>
+          <h3 style="font-size: 1.25rem;"><code>/permissions</code> — 승인 프롬프트가 귀찮아질 때</h3>
+          <p style="font-size: 1rem;">자동 허용할 도구·명령의 <span class="accent2">신뢰 경계</span>를 직접 설정.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">6</span>
+          <h3 style="font-size: 1.25rem;"><code>/doctor</code> — 설치 상태 점검</h3>
+          <p style="font-size: 1rem;">방금 설치했는데 뭔가 이상하다면 가장 먼저. <span class="accent2">환경·권한·연결 상태</span>를 한 번에 진단.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 31a2. Permission modes & Plan Mode ============= -->
+    <section>
+      <div class="chip">TOOLKIT 2/7</div>
+      <h2><span class="accent">권한 모드</span>와 <span class="accent2">Plan Mode</span> — 안심하고 맡기는 법.</h2>
+      <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.2rem;">
+        <code>/permissions</code>과 세트로 알아두면 <span class="accent2">불안 없이</span> 맡길 수 있습니다.
+      </p>
+      <div class="grid-2" style="margin-top: 1.3rem; gap: 1rem;">
+        <div class="card autoshow fade-up" style="padding: 1.5rem 1.7rem;">
+          <span class="pill">기본 모드</span>
+          <h3 style="font-size: 1.3rem;">매번 승인 요청</h3>
+          <p style="font-size: 1.02rem;">파일 수정·명령 실행마다 확인을 받습니다. <span class="accent2">처음엔 이 모드</span>로 시작하는 게 안전합니다.</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.5rem 1.7rem;">
+          <span class="pill green">자동 승인 모드</span>
+          <h3 style="font-size: 1.3rem;">파일 수정만 자동 승인</h3>
+          <p style="font-size: 1.02rem;">신뢰가 쌓이면 전환. <code>/permissions</code>으로 <span class="accent2">어디까지 자동 허용할지</span> 세밀하게 조정.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(155,130,255,0.6); padding: 1.5rem 1.7rem;">
+          <span class="pill amber">Plan Mode</span>
+          <h3 style="font-size: 1.3rem;">계획부터, 실행은 나중</h3>
+          <p style="font-size: 1.02rem;">코드를 바로 고치지 않고 <span class="accent2">계획을 먼저 보여주고</span> 승인 후에만 실행. 큰 작업 전엔 필수.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(255,122,149,0.6); padding: 1.5rem 1.7rem;">
+          <span class="pill pink">Auto 모드</span>
+          <h3 style="font-size: 1.3rem;">전부 자동 실행 (Bypass)</h3>
+          <p style="font-size: 1.02rem;">모든 승인을 건너뛰고 전부 자동 실행. <span class="accent2">격리된 샌드박스·컨테이너</span>가 아니면 권장하지 않습니다.</p>
+        </div>
+      </div>
+      <p class="muted autoshow fade-up" style="margin-top: 1.3rem; text-align:center; font-size: 1.1rem; animation-delay: .8s;">
+        → <kbd class="key">Shift</kbd> + <kbd class="key">Tab</kbd>으로 모드를 바로바로 전환할 수 있습니다.
+      </p>
+    </section>
+
+    <!-- ============= 31b. Essential slash commands — advanced ============= -->
+    <section>
+      <div class="chip">TOOLKIT 3/7</div>
+      <h2>손에 익으면, <span class="accent2">이 6개</span>도 챙기세요.</h2>
+      <div class="grid-3" style="margin-top: 1.4rem; gap: 1rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill amber">7</span>
+          <h3 style="font-size: 1.25rem;"><code>/model</code> (+ <code>/effort</code>)</h3>
+          <p style="font-size: 1rem;">난이도별 모델·추론 깊이 조절. 세션 중간 전환보다 <span class="accent2">새 세션 시작</span>이 낫다는 팁도.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill">8</span>
+          <h3 style="font-size: 1.25rem;"><code>/resume</code> — 어제 작업 이어가기</h3>
+          <p style="font-size: 1rem;">터미널을 닫아도 <span class="accent2">세션은 사라지지 않는다</span>는 걸 아는 순간 활용도가 오릅니다.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">9</span>
+          <h3 style="font-size: 1.25rem;"><code>/rewind</code> — 실수 되돌리기</h3>
+          <p style="font-size: 1rem;">Esc 두 번으로도 열림. 최근엔 <span class="accent2">/clear 이후 컨텍스트까지</span> 복원 가능.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">10</span>
+          <h3 style="font-size: 1.25rem;"><code>/memory</code> (+ <code>#</code> 접두사)</h3>
+          <p style="font-size: 1rem;">세션 간 유지되는 규칙 추가. 대화 중 <span class="accent2">"# ..."</span>만 입력해도 바로 기록.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill">11</span>
+          <h3 style="font-size: 1.25rem;"><code>/usage</code> (구 <code>/cost</code>)</h3>
+          <p style="font-size: 1rem;">토큰·비용 확인. 최신 버전에서 <code>/cost</code>는 <span class="accent2">/usage의 별칭</span>.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">12</span>
+          <h3 style="font-size: 1.25rem;"><code>/agents</code> — 전담 서브에이전트</h3>
+          <p style="font-size: 1rem;">역할별로 분리된 에이전트를 만들어 <span class="accent2">병렬로 작업</span>시키거나 컨텍스트를 깔끔하게 분리.</p>
+        </div>
+      </div>
+      <p class="muted autoshow fade-up" style="margin-top: 1.1rem; text-align:center; font-size: 1rem; animation-delay: .9s;">
+        → 사내 도입 시엔 Pro·Max·Team 중 <span class="accent2">어떤 플랜</span>인지, 사용량이 개인별인지 팀 단위인지 관리자에게 확인해두면 좋습니다.
+      </p>
+    </section>
+
+    <!-- ============= 32. Plugins ============= -->
+    <section>
+      <div class="chip">TOOLKIT 4/7</div>
+      <h2><span class="accent2">Plugin</span> — 명령어·스킬·에이전트를 한 번에.</h2>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.2rem;">
+        <span class="pill green">개념</span>
+        <h3>왜 필요한가</h3>
+        <p>슬래시 명령어, Agent Skill, 서브에이전트, MCP 서버를 <span class="accent2">패키지 하나</span>로 묶어 배포·설치.<br/>
+        팀 전체가 같은 워크플로우를 <span class="accent">한 줄 설치</span>로 공유합니다.</p>
+      </div>
+
+      <div class="grid-2" style="margin-top: 1.1rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill">마켓플레이스</span>
+          <h3 style="font-size: 1.35rem;">둘러보고 설치</h3>
+          <p><code>/plugin</code>으로 마켓플레이스를 열고, 필요한 것만 골라 설치.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">개인/팀 스킬</span>
+          <h3 style="font-size: 1.35rem;">직접 배포도 가능</h3>
+          <p><code>npx skills add</code> 한 줄로 개인 저장소의 스킬도 바로 설치.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 33. MCP ============= -->
+    <section>
+      <div class="chip">TOOLKIT 5/7</div>
+      <h2><span class="accent3">MCP</span> — 바깥세상과 연결하는 통로.</h2>
+
+      <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.2rem;">
+        Model Context Protocol. Claude가 <span class="accent">브라우저·DB·사내 도구</span>를 직접 조작하게 해주는 개방형 표준입니다.
+      </p>
+
+      <div class="grid-3" style="margin-top: 1.4rem; gap: 1rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill pink">브라우저</span>
+          <h3 style="font-size: 1.35rem;">Playwright MCP</h3>
+          <p style="font-size: 1.02rem;">실제 크롬을 띄워 클릭·스크린샷·폼 입력까지 <span class="accent2">직접 조작</span>.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">사내 시스템</span>
+          <h3 style="font-size: 1.35rem;">DB · 사내 API · 사내 위키</h3>
+          <p style="font-size: 1.02rem;">우리 회사 전용 도구도 <span class="accent2">MCP 서버 하나</span>로 연결.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.55);">
+          <span class="pill pink">사내망 주의</span>
+          <h3 style="font-size: 1.35rem;">사외 SaaS 커넥터는 대부분 차단</h3>
+          <p style="font-size: 1.02rem;">GitHub·Slack·Notion 같은 <span class="accent2">사외 연동형 MCP</span>는 보안 정책상 막혀 있는 경우가 많습니다 — 사내망에서 되는 것 위주로 검토하세요.</p>
+        </div>
+      </div>
+
+      <p class="muted autoshow fade-up" style="margin-top: 1.3rem; text-align:center; font-size: 1.1rem; animation-delay: .8s;">
+        → 이 세미나 자료의 화면 캡처·레이아웃 검증도 실제로 Playwright MCP로 진행했습니다.
+      </p>
+    </section>
+
+    <!-- ============= 34a. Agent Skills — concept ============= -->
+    <section>
+      <div class="chip">TOOLKIT 6/7</div>
+      <h2><span class="accent4">Agent Skills</span> — 필요할 때만 꺼내 쓰는 노하우.</h2>
+      <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.2rem;">
+        아직 낯선 개념일 수 있어서, 조금 더 자세히 보겠습니다.
+      </p>
+
+      <div class="grid-2" style="margin-top: 1.2rem; gap: 1.1rem;">
+        <div class="card autoshow fade-up" style="padding: 1.5rem 1.7rem;">
+          <span class="pill">정체</span>
+          <h3 style="font-size: 1.35rem;">SKILL.md 한 장</h3>
+          <p style="font-size: 1.02rem;">절차·체크리스트·팀 노하우를 <span class="accent2">파일 하나</span>에 적어두면, Claude가 상황에 맞을 때 알아서 찾아 씁니다.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(124,92,255,0.5); padding: 1.5rem 1.7rem;">
+          <span class="pill green">작동 원리</span>
+          <h3 style="font-size: 1.35rem;">"필요할 때만" 로드</h3>
+          <p style="font-size: 1.02rem;">평소엔 스킬 이름·설명만 보고 있다가, <span class="accent2">관련 상황에서만</span> 전체 내용을 불러와 컨텍스트를 아낍니다.</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.5rem 1.7rem;">
+          <span class="pill amber">저장 위치</span>
+          <h3 style="font-size: 1.35rem;">개인 · 프로젝트 · Plugin</h3>
+          <p style="font-size: 1.02rem;"><span class="accent2">개인용</span>(<code>~/.claude/skills</code>), <span class="accent2">프로젝트용</span>(<code>.claude/skills</code>), Plugin으로 배포된 것까지 3가지.</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.5rem 1.7rem;">
+          <span class="pill pink">예시</span>
+          <h3 style="font-size: 1.35rem;">"우리 팀만의 노하우"</h3>
+          <p style="font-size: 1.02rem;">코드리뷰 체크리스트, 배포 절차, 디버깅 방법론처럼 <span class="accent2">반복되는 절차</span>를 문서화.</p>
+        </div>
+      </div>
+
+      <p class="autoshow fade-up muted" style="margin-top: 1.2rem; text-align:center; font-size: 1.1rem; animation-delay: .8s;">
+        즉, "매번 같은 걸 설명하는 대신 → <span class="accent">한 번 문서화하고 재사용</span>" 하는 것.
+      </p>
+    </section>
+
+    <!-- ============= 34b. Agent Skills — sourcing & caution ============= -->
+    <section>
+      <div class="chip">TOOLKIT 7/7</div>
+      <h2>어디서 구하고, <span class="accent3">뭘 조심</span>해야 할까요?</h2>
+
+      <div class="grid-2" style="margin-top: 1.2rem; gap: 1.1rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill green">설치처</span>
+          <h3 style="font-size: 1.35rem;">skills.sh 마켓플레이스</h3>
+          <p style="font-size: 1.02rem;">인기 스킬을 검색해서 <span class="accent2"><code>npx skills add</code></span> 한 줄로 설치.</p>
+        </div>
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.55);">
+          <span class="pill pink">왜 조심해야 하나</span>
+          <h3 style="font-size: 1.35rem;">SKILL.md = 자연어 지시문</h3>
+          <p style="font-size: 1.02rem;">출처 불명 스킬은 <span class="accent2">프롬프트 인젝션</span>의 통로가 될 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="card autoshow fade-up" style="margin-top: 1rem; padding: 1.4rem 1.8rem; animation-delay: .7s;">
+        <span class="pill amber">설치 전 체크리스트</span>
+        <h3 style="font-size: 1.3rem;">popular = safe는 아니지만, 최소한의 필터는 된다</h3>
+        <p style="font-size: 1.02rem;">
+          인기도(스타·설치 수)와 <span class="accent2">검증된 저자·조직</span> 위주로 고르고 — 설치 전엔 평문인 <span class="accent2">SKILL.md 원문을 직접 읽어볼 것</span>.<br/>
+          "반드시", "무조건 따라야 한다"처럼 <span class="accent3">강압적인 어투</span>가 보이면 인젝션을 의심하세요.
+        </p>
+      </div>
+
+      <p class="muted autoshow fade-up" style="margin-top: 1rem; text-align:center; font-size: 1.05rem; animation-delay: .9s;">
+        → 이 세미나를 준비하는 동안에도, 도구 결과 속에 "반드시 따라야 한다"는 낯선 지시문이 섞여 들어온 적이 있습니다 — 전형적인 인젝션 패턴이라 무시했습니다.
+      </p>
+    </section>
+
+    <!-- ============= 35. Starter picks ============= -->
+    <section>
+      <div class="chip">먼저 설치할 것</div>
+      <h2>처음이라면, <span class="grad">이 3가지</span>부터.</h2>
+
+      <div class="grid-3" style="margin-top: 1.6rem; gap: 1.2rem;">
+        <div class="card autoshow fade-up">
+          <span class="pill pink">범용 워크플로우</span>
+          <h3>Superpowers</h3>
+          <p>브레인스토밍, 체계적 디버깅 등 <span class="accent2">검증된 작업 절차</span>를 모아둔 스킬 모음집.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill green">스킬 제작</span>
+          <h3>Skill Creator</h3>
+          <p>내 팀만의 노하우를 <span class="accent2">SKILL.md로 뽑아내는</span> 메타 스킬. 스킬 만드는 스킬.</p>
+        </div>
+        <div class="card autoshow fade-up">
+          <span class="pill amber">브라우저 자동화</span>
+          <h3>Playwright MCP</h3>
+          <p>웹 화면을 <span class="accent2">직접 보고 조작</span>하며 검증. 프론트엔드 작업의 필수품.</p>
+        </div>
+      </div>
+
+      <p class="autoshow fade-up muted" style="margin-top: 1.6rem; text-align:center; font-size: 1.2rem; animation-delay: .9s;">
+        이 셋만 있어도, <span class="accent">"생각하고 → 만들고 → 눈으로 확인"</span> 루프가 완성됩니다.
+      </p>
+    </section>
+
+    <!-- ============= 37. Final: Thanks + Q&A ============= -->
+    <section id="qna-slide">
+      <div class="end-card" style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="chip">END</div>
+        <h1 class="big">
+          <span class="grad">감사합니다.</span>
+        </h1>
+        <p class="muted" style="margin-top: 1.2rem; font-size: 1.3rem;">
+          코딩하는 매 순간에, 좋은 vibe가 함께하기를.
+        </p>
+
+        <div style="margin-top: 3.5rem; display:flex; flex-direction:column; align-items:center; gap: 1rem;">
+          <h2 style="font-size: 4rem; margin: 0;">
+            <span class="grad">Q &amp; A</span>
+          </h2>
+          <p class="muted" style="font-size: 1.2rem; max-width: 720px;">
+            가장 동의가 안 되는 지점은 어디였나요?<br/>
+            반례, 이의, 감상 — 무엇이든 환영합니다.
+          </p>
+          <div style="margin-top: 1.4rem; display:flex; gap: .6rem; flex-wrap: wrap; justify-content:center;">
+            <span class="pill">이의 환영</span>
+            <span class="pill green">반례 환영</span>
+            <span class="pill pink">감상 환영</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= Appendix opener: AI Labs 현황 ============= -->
+    <section data-background-color="#06080F">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <div class="chip">APPENDIX · 그래서 다음은?</div>
+        <h1 style="font-size: 5.5rem;">
+          부록 — <span class="grad">각 진영의</span><br/>
+          전략
         </h1>
         <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.6rem;">
           AGI를 향한 <span class="accent">각 진영의 전략</span> — 2026년 7월 기준
@@ -1648,7 +2029,7 @@
       </div>
     </section>
 
-    <!-- ============= 31. Google DeepMind ============= -->
+    <!-- ============= Appendix A. Google DeepMind ============= -->
     <section>
       <div class="chip">LABS 1/4</div>
       <h2><span class="accent4">Google DeepMind</span> — 전문가 모델 군단, 흔들리는 왕좌.</h2>
@@ -1684,7 +2065,7 @@
       </div>
     </section>
 
-    <!-- ============= 32. Anthropic ============= -->
+    <!-- ============= Appendix B. Anthropic ============= -->
     <section>
       <div class="chip">LABS 2/4</div>
       <h2><span class="accent3">Anthropic</span> — Opus의 손발을 늘리다.</h2>
@@ -1722,7 +2103,7 @@
       </div>
     </section>
 
-    <!-- ============= 33. China AI Labs ============= -->
+    <!-- ============= Appendix C. China AI Labs ============= -->
     <section>
       <div class="chip">LABS 3/4</div>
       <h2><span class="accent">중국 AI Labs</span> — 개인화 Agent의 시대.</h2>
@@ -1762,7 +2143,7 @@
       </p>
     </section>
 
-    <!-- ============= 34. OpenAI ============= -->
+    <!-- ============= Appendix D. OpenAI ============= -->
     <section>
       <div class="chip">LABS 4/4</div>
       <h2><span class="accent2">OpenAI</span> — 침묵을 깬 GPT-5.6.</h2>
@@ -1793,7 +2174,7 @@
       </p>
     </section>
 
-    <!-- ============= 35. Meta + x.AI: AI가 디바이스 속으로 ============= -->
+    <!-- ============= Appendix E. Meta + x.AI: AI가 디바이스 속으로 ============= -->
     <section>
       <div class="chip">LABS · BONUS</div>
       <h2>그리고 — <span class="grad">다른 색깔의 두 진영</span>.</h2>
@@ -1830,7 +2211,7 @@
       </p>
     </section>
 
-    <!-- ============= 36. Yann LeCun — Meta를 떠나 무엇을? ============= -->
+    <!-- ============= Appendix F. Yann LeCun — Meta를 떠나 무엇을? ============= -->
     <section>
       <div class="chip">EPILOGUE · 한 명의 이단아</div>
       <h2>그럼 — <span class="accent3">Meta를 나온 얀 르쿤</span>은<br/>뭘 하고 있을까요?</h2>
@@ -1866,41 +2247,6 @@
           텍스트 다음 단어 예측이 아니라, <span class="accent2">영상 · 소리 · 센서 데이터</span>로 물리 세계를 이해하는 모델을 만든다.<br/>
           <span class="muted">→ AI 산업 전체가 잘못된 방향이라는 베팅. LLM 시대 다음을 꿈꾸는 사람.</span>
         </p>
-      </div>
-    </section>
-
-    <!-- ============= 37. Final: Thanks + Q&A ============= -->
-    <section data-background-color="#06080F">
-      <div class="particles">
-        <span style="left:10%; animation-duration:9s;"></span>
-        <span style="left:30%; animation-duration:11s;"></span>
-        <span style="left:50%; animation-duration:8s;"></span>
-        <span style="left:70%; animation-duration:12s;"></span>
-        <span style="left:88%; animation-duration:9.5s;"></span>
-      </div>
-      <div class="end-card" style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <div class="chip">END</div>
-        <h1 class="big">
-          <span class="grad">감사합니다.</span>
-        </h1>
-        <p class="muted" style="margin-top: 1.2rem; font-size: 1.3rem;">
-          코딩하는 매 순간에, 좋은 vibe가 함께하기를.
-        </p>
-
-        <div style="margin-top: 3.5rem; display:flex; flex-direction:column; align-items:center; gap: 1rem;">
-          <h2 style="font-size: 4rem; margin: 0;">
-            <span class="grad">Q &amp; A</span>
-          </h2>
-          <p class="muted" style="font-size: 1.2rem; max-width: 720px;">
-            가장 동의가 안 되는 지점은 어디였나요?<br/>
-            반례, 이의, 감상 — 무엇이든 환영합니다.
-          </p>
-          <div style="margin-top: 1.4rem; display:flex; gap: .6rem; flex-wrap: wrap; justify-content:center;">
-            <span class="pill">이의 환영</span>
-            <span class="pill green">반례 환영</span>
-            <span class="pill pink">감상 환영</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -2478,8 +2824,11 @@
     });
 
     rebuild();
-    Reveal.on('ready', e => setActive(e.indexh === 0));
-    Reveal.on('slidechanged', e => setActive(e.indexh === 0));
+    const qnaIndex = Array.from(document.querySelectorAll('.slides > section'))
+      .findIndex(s => s.id === 'qna-slide');
+    const isHeroSlide = indexh => indexh === 0 || indexh === qnaIndex;
+    Reveal.on('ready', e => setActive(isHeroSlide(e.indexh)));
+    Reveal.on('slidechanged', e => setActive(isHeroSlide(e.indexh)));
   })();
 </script>
 
