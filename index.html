@@ -3682,5 +3682,169 @@
   })();
 </script>
 
+<style>
+  #qa-root.qa-hidden { display: none; }
+  #qa-root { position: fixed; inset: 0; z-index: 9000; pointer-events: none; font-family: 'Pretendard', system-ui, sans-serif; }
+  .qa-hidden { display: none !important; }
+
+  #qa-note-layer, #qa-float-layer { position: fixed; inset: 0; pointer-events: none; }
+
+  .qa-note {
+    position: absolute;
+    max-width: 240px;
+    padding: 14px 16px;
+    border-radius: 4px;
+    color: #14181f;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    transform: rotate(var(--rot, 0deg));
+    pointer-events: auto;
+    animation: qaNoteIn .35s ease both;
+  }
+  .qa-note.qa-leaving { animation: qaNoteOut .5s ease both; }
+  @keyframes qaNoteIn { from { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(12px) scale(.9); } to { opacity: 1; transform: rotate(var(--rot,0deg)) translateY(0) scale(1); } }
+  @keyframes qaNoteOut { to { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(-12px) scale(.92); } }
+  .qa-note-name { font-weight: 800; font-size: 11px; opacity: .65; margin-bottom: 4px; }
+  .qa-note-text { font-weight: 600; word-break: break-word; }
+  .qa-vote { margin-top: 8px; border: 0; background: rgba(0,0,0,0.12); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+  .qa-dock {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center;
+    background: rgba(14,18,32,0.85); border: 1px solid rgba(155,130,255,0.35);
+    border-radius: 999px; padding: 8px 10px; pointer-events: auto; backdrop-filter: blur(8px);
+  }
+  .qa-dock input { border: 0; outline: none; background: rgba(255,255,255,0.08); color: #fff; border-radius: 999px; padding: 8px 14px; width: 200px; font-size: 13px; }
+  .qa-dock button { border: 0; border-radius: 999px; padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; background: rgba(255,255,255,0.08); color: #fff; }
+  .qa-follow.on { background: var(--accent); color: #06080F; }
+
+  .qa-modal { position: fixed; inset: 0; background: rgba(6,8,15,0.75); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+  .qa-modal-box { background: #0E1220; border: 1px solid rgba(155,130,255,0.4); border-radius: 16px; padding: 28px; width: min(320px, 86vw); text-align: center; }
+  .qa-modal-box h3 { color: #fff; margin: 0 0 14px; }
+  .qa-modal-box input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #fff; margin-bottom: 12px; }
+  .qa-modal-box button { width: 100%; padding: 10px; border-radius: 10px; border: 0; background: var(--accent); color: #06080F; font-weight: 800; cursor: pointer; }
+
+  #qa-presenter-bar { position: fixed; top: 14px; right: 14px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+  .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
+  .qa-dot.on { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+  #qa-history-toggle { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; }
+
+  .qa-panel { position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-left: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
+  .qa-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 800; }
+  .qa-panel-head button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; margin-left: 6px; }
+  #qa-history-list { overflow-y: auto; padding: 10px 16px; }
+  .qa-history-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .qa-history-meta { display: flex; justify-content: space-between; font-size: 12px; color: #B8BFD0; margin-bottom: 4px; }
+  .qa-history-text { color: #fff; font-size: 13px; }
+  .qa-history-empty { color: #B8BFD0; font-size: 13px; padding: 20px 0; text-align: center; }
+
+  .qa-float { position: fixed; bottom: 70px; font-size: 28px; animation: qaFloatUp 2.6s ease forwards; }
+  @keyframes qaFloatUp { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60vh); } }
+</style>
+
+<div id="qa-root" class="qa-hidden">
+  <div id="qa-note-layer"></div>
+  <div id="qa-float-layer"></div>
+
+  <div id="qa-nick-modal" class="qa-modal qa-hidden">
+    <div class="qa-modal-box">
+      <h3>닉네임을 정해주세요</h3>
+      <input id="qa-nick-input" maxlength="24" placeholder="익명" />
+      <button id="qa-nick-go">입장하기 →</button>
+    </div>
+  </div>
+
+  <div id="qa-audience-dock" class="qa-dock qa-hidden">
+    <button id="qa-follow-toggle" class="qa-follow on">🔗 발표자 따라가기 ON</button>
+    <input id="qa-question-input" maxlength="280" placeholder="질문을 입력하세요" />
+    <button id="qa-question-send">보내기</button>
+    <button id="qa-react-up">👍 <span id="qa-tally-up">0</span></button>
+    <button id="qa-react-confused">🤔 <span id="qa-tally-confused">0</span></button>
+  </div>
+
+  <div id="qa-presenter-bar" class="qa-hidden">
+    <span id="qa-conn-dot" class="qa-dot"></span>
+    <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+  </div>
+
+  <div id="qa-history-panel" class="qa-panel qa-hidden">
+    <div class="qa-panel-head">
+      <span>질문 기록</span>
+      <div>
+        <button id="qa-history-clear">전체 삭제</button>
+        <button id="qa-history-close">닫기</button>
+      </div>
+    </div>
+    <div id="qa-history-list"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
+  const params = new URLSearchParams(location.search);
+  const PRESENT_KEY = params.get('present');
+  const IS_PRESENTER = !!PRESENT_KEY;
+
+  let following = true;
+  let liveSlide = 0;
+  const shownIds = new Set();
+  let history = [];
+
+  fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.ok) initLiveQa(); })
+    .catch(() => {});
+
+  function initLiveQa() {
+    document.getElementById('qa-root').classList.remove('qa-hidden');
+    if (IS_PRESENTER) {
+      document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
+    } else {
+      document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
+    }
+    connectSse();
+    setupSlideSync();
+    setupAudienceUI();
+    setupPresenterUI();
+  }
+
+  function api(path, body) {
+    const headers = { 'Content-Type': 'application/json' };
+    let url = path;
+    if (IS_PRESENTER) { headers['x-present-key'] = PRESENT_KEY; url += '?key=' + encodeURIComponent(PRESENT_KEY); }
+    return fetch(url, { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function goToSlide(h) {
+    if (!window.Reveal) return;
+    if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
+    else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  function getNickname() {
+    try { return JSON.parse(localStorage.getItem('qa_nickname') || 'null'); } catch { return null; }
+  }
+  function setNickname(name) {
+    localStorage.setItem('qa_nickname', JSON.stringify(name));
+  }
+
+  function connectSse() {}
+  function setupSlideSync() {}
+  function updateFollowUI() {}
+  function showNote(q) {}
+  function renderHistory() {}
+  function setTally(r) {}
+  function spawnFloat(kind) {}
+  function setupAudienceUI() {}
+  function setupPresenterUI() {}
+})();
+</script>
+
 </body>
 </html>
