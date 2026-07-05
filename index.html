@@ -3945,8 +3945,22 @@
       '</div>'
     ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
   }
-  function setTally(r) {}
-  function spawnFloat(kind) {}
+  function setTally(r) {
+    if (!r) return;
+    const up = document.getElementById('qa-tally-up');
+    const conf = document.getElementById('qa-tally-confused');
+    if (up) up.textContent = r.up || 0;
+    if (conf) conf.textContent = r.confused || 0;
+  }
+  function spawnFloat(kind) {
+    const layer = document.getElementById('qa-float-layer');
+    const el = document.createElement('div');
+    el.className = 'qa-float';
+    el.textContent = kind === 'confused' ? '🤔' : '👍';
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
   function setupAudienceUI() {
     if (IS_PRESENTER) return;
 
