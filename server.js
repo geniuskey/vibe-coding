@@ -42,6 +42,11 @@ function readBody(req) {
   });
 }
 
+function isPresenter(req) {
+  const q = new URL(req.url, 'http://x').searchParams.get('key');
+  return q === PRESENT_KEY || req.headers['x-present-key'] === PRESENT_KEY;
+}
+
 function sendJson(res, code, obj) {
   const body = JSON.stringify(obj);
   res.writeHead(code, {
@@ -101,6 +106,21 @@ const server = http.createServer(async (req, res) => {
     state.reactions[kind]++;
     broadcast('react', { kind, count: state.reactions[kind], total: state.reactions });
     return sendJson(res, 200, state.reactions);
+  }
+
+  if (url === '/qa/slide' && req.method === 'POST') {
+    if (!isPresenter(req)) return sendJson(res, 403, { error: 'forbidden' });
+    const body = await readBody(req);
+    state.slide = Math.max(0, Number(body.h) || 0);
+    broadcast('slide', { h: state.slide });
+    return sendJson(res, 200, { h: state.slide });
+  }
+
+  if (url === '/qa/clear' && req.method === 'POST') {
+    if (!isPresenter(req)) return sendJson(res, 403, { error: 'forbidden' });
+    state.questions = [];
+    broadcast('clear', {});
+    return sendJson(res, 200, { ok: true });
   }
 
   res.writeHead(404);
