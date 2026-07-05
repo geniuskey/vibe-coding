@@ -3692,7 +3692,7 @@
   .qa-note {
     position: absolute;
     max-width: 240px;
-    padding: 14px 16px;
+    padding: 16px 34px 14px 16px;
     border-radius: 4px;
     color: #14181f;
     font-size: 14px;
@@ -3708,6 +3708,13 @@
   .qa-note-name { font-weight: 800; font-size: 11px; opacity: .65; margin-bottom: 4px; }
   .qa-note-text { font-weight: 600; word-break: break-word; }
   .qa-vote { margin-top: 8px; border: 0; background: rgba(0,0,0,0.12); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .qa-note-close {
+    position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%; background: rgba(0,0,0,0.12); color: #14181f;
+    font-size: 17px; font-weight: 900; line-height: 1; cursor: pointer;
+  }
+  .qa-note-close:hover { background: rgba(0,0,0,0.22); }
 
   .qa-dock {
     position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
@@ -3725,12 +3732,13 @@
   .qa-modal-box input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #fff; margin-bottom: 12px; }
   .qa-modal-box button { width: 100%; padding: 10px; border-radius: 10px; border: 0; background: var(--accent); color: #06080F; font-weight: 800; cursor: pointer; }
 
-  #qa-presenter-bar { position: fixed; top: 14px; right: 14px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+  #qa-presenter-bar { position: fixed; top: 14px; left: 14px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
   .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
   .qa-dot.on { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
   #qa-history-toggle { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; }
+  .qa-presenter-tally { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 800; color: #fff; background: rgba(255,255,255,0.1); }
 
-  .qa-panel { position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-left: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
+  .qa-panel { position: fixed; top: 0; left: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-right: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
   .qa-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 800; }
   .qa-panel-head button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; margin-left: 6px; }
   #qa-history-list { overflow-y: auto; padding: 10px 16px; }
@@ -3766,6 +3774,10 @@
   <div id="qa-presenter-bar" class="qa-hidden">
     <span id="qa-conn-dot" class="qa-dot"></span>
     <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+    <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
+      👍 <span id="qa-presenter-tally-up">0</span>
+      🤔 <span id="qa-presenter-tally-confused">0</span>
+    </span>
   </div>
 
   <div id="qa-history-panel" class="qa-panel qa-hidden">
@@ -3922,15 +3934,21 @@
     note.style.top = (14 + Math.random() * 50) + 'vh';
     note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
     note.innerHTML =
+      (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
       '<div class="qa-note-name">' + esc(q.name) + '</div>' +
       '<div class="qa-note-text">' + esc(q.text) + '</div>' +
       '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
     note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
-    layer.appendChild(note);
-    setTimeout(() => {
+    const dismiss = () => {
+      if (note.dataset.dismissed === '1') return;
+      note.dataset.dismissed = '1';
       note.classList.add('qa-leaving');
       setTimeout(() => note.remove(), 500);
-    }, 14000);
+    };
+    const close = note.querySelector('.qa-note-close');
+    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    layer.appendChild(note);
+    const autoDismiss = setTimeout(dismiss, 14000);
   }
   function renderHistory() {
     const countEl = document.getElementById('qa-history-count');
@@ -3949,8 +3967,12 @@
     if (!r) return;
     const up = document.getElementById('qa-tally-up');
     const conf = document.getElementById('qa-tally-confused');
+    const presenterUp = document.getElementById('qa-presenter-tally-up');
+    const presenterConf = document.getElementById('qa-presenter-tally-confused');
     if (up) up.textContent = r.up || 0;
     if (conf) conf.textContent = r.confused || 0;
+    if (presenterUp) presenterUp.textContent = r.up || 0;
+    if (presenterConf) presenterConf.textContent = r.confused || 0;
   }
   function spawnFloat(kind) {
     const layer = document.getElementById('qa-float-layer');
