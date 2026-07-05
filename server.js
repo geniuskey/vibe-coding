@@ -23,12 +23,14 @@ function broadcast(event, data) {
 function readBody(req) {
   return new Promise((resolve) => {
     let data = '';
+    let overflowed = false;
     req.on('data', (chunk) => {
+      if (overflowed) return;
       data += chunk;
-      if (data.length > 1e6) req.destroy();
+      if (data.length > 1e6) { overflowed = true; data = ''; }
     });
     req.on('end', () => {
-      try { resolve(data ? JSON.parse(data) : {}); }
+      try { resolve(overflowed ? {} : (data ? JSON.parse(data) : {})); }
       catch { resolve({}); }
     });
   });
