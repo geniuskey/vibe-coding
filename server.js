@@ -123,6 +123,23 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, { ok: true });
   }
 
+  if (url === '/qa/events' && req.method === 'GET') {
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache, no-transform',
+      'Connection': 'keep-alive',
+    });
+    res.write('retry: 3000\n\n');
+    res.write(`event: snapshot\ndata: ${JSON.stringify(state)}\n\n`);
+    clients.add(res);
+    const hb = setInterval(() => {
+      try { res.write(': ping\n\n'); } catch { drop(); }
+    }, 15000);
+    function drop() { clients.delete(res); clearInterval(hb); }
+    req.on('close', drop);
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
