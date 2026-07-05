@@ -86,6 +86,23 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 201, q);
   }
 
+  if (url === '/qa/questions/vote' && req.method === 'POST') {
+    const body = await readBody(req);
+    const q = state.questions.find((x) => x.id === Number(body.id));
+    if (!q) return sendJson(res, 404, { error: 'not found' });
+    q.votes++;
+    broadcast('vote', { id: q.id, votes: q.votes });
+    return sendJson(res, 200, { id: q.id, votes: q.votes });
+  }
+
+  if (url === '/qa/react' && req.method === 'POST') {
+    const body = await readBody(req);
+    const kind = body.kind === 'confused' ? 'confused' : 'up';
+    state.reactions[kind]++;
+    broadcast('react', { kind, count: state.reactions[kind], total: state.reactions });
+    return sendJson(res, 200, state.reactions);
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
