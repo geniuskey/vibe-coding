@@ -7,6 +7,33 @@ const PORT = process.env.PORT || 8080;
 const PRESENT_KEY = process.env.PRESENT_KEY || 'change-me';
 const INDEX_PATH = path.join(__dirname, 'index.html');
 
+const state = {
+  slide: 0,
+  questions: [],
+  reactions: { up: 0, confused: 0 },
+};
+let nextQuestionId = 1;
+
+const clients = new Set();
+function broadcast(event, data) {
+  const payload = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
+  for (const res of clients) res.write(payload);
+}
+
+function readBody(req) {
+  return new Promise((resolve) => {
+    let data = '';
+    req.on('data', (chunk) => {
+      data += chunk;
+      if (data.length > 1e6) req.destroy();
+    });
+    req.on('end', () => {
+      try { resolve(data ? JSON.parse(data) : {}); }
+      catch { resolve({}); }
+    });
+  });
+}
+
 function sendJson(res, code, obj) {
   const body = JSON.stringify(obj);
   res.writeHead(code, {
@@ -34,11 +61,22 @@ function lanAddress() {
   return null;
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = req.url.split('?')[0];
 
   if (url === '/' && req.method === 'GET') return serveIndex(res);
   if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
+
+  if (url === '/qa/questions' && req.method === 'POST') {
+    const body = await readBody(req);
+    const text = (body.text || '').toString().trim().slice(0, 280);
+    if (!text) return sendJson(res, 400, { error: 'empty' });
+    const name = (body.name || '').toString().trim().slice(0, 24) || '익명';
+    const q = { id: nextQuestionId++, text, name, ts: Date.now(), votes: 0 };
+    state.questions.push(q);
+    broadcast('question', q);
+    return sendJson(res, 201, q);
+  }
 
   res.writeHead(404);
   res.end('Not found');
