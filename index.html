@@ -2237,6 +2237,90 @@
       </p>
     </section>
 
+    <!-- ============= 31c. Choosing a model — the four models ============= -->
+    <section>
+      <div class="chip">모델 고르기 · 1/2</div>
+      <h2>방금 그 <code>/model</code> — <span class="accent">4개</span> 중 언제 뭘 쓸까요?</h2>
+      <p class="autoshow fade-up" style="margin-top: .5rem; font-size: 1.12rem;">
+        외울 필요 없습니다. <span class="accent2">대부분 Sonnet</span>이면 되고, 필요할 때만 갈아탑니다.
+      </p>
+      <div class="grid-4" style="margin-top: 1.4rem; align-items: stretch;">
+        <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .2s;">
+          <span class="pill green">가벼운 보조</span>
+          <h3 style="font-size: 1.32rem;">Haiku</h3>
+          <p style="font-size: 1.02rem;">싸고 빠른 인턴. <span class="accent2">메인 구현엔 안 씁니다.</span></p>
+          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">긴 로그 훑기 · 여러 파일 요약 · 분류·추출 · diff 의도 정리</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .4s; border-color: rgba(155,130,255,0.75); box-shadow: 0 0 0 1px rgba(155,130,255,0.3), 0 30px 60px -20px rgba(0,0,0,0.6);">
+          <span class="pill">기본값 · 주력</span>
+          <h3 style="font-size: 1.32rem;">Sonnet</h3>
+          <p style="font-size: 1.02rem;">일상 코딩의 <span class="accent">기본 루프</span>. 속도·품질·비용 밸런스 최고.</p>
+          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">기능 구현 · 버그 수정 · 테스트 작성 · 일반 리팩토링</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .6s;">
+          <span class="pill pink">설계·리뷰</span>
+          <h3 style="font-size: 1.32rem;">Opus</h3>
+          <p style="font-size: 1.02rem;">비싼 시니어. <span class="accent3">판단</span>을 시키는 모델입니다.</p>
+          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">아키텍처 결정 · 복잡한 원인 분석 · 위험 변경·PR 리뷰</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .8s;">
+          <span class="pill amber">장기·대형</span>
+          <h3 style="font-size: 1.32rem;">Fable</h3>
+          <p style="font-size: 1.02rem;">며칠짜리 <span class="accent4">자율 에이전트</span>. 매일 켜는 모델이 아닙니다.</p>
+          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">대규모 마이그레이션 · 설계→구현→테스트→문서 일괄</p>
+        </div>
+      </div>
+      <p class="muted autoshow fade-up" style="margin-top: 1.1rem; text-align:center; font-size: 1rem; animation-delay: 1.1s;">
+        Fable은 최신 버전에서만 보이고, 응답이 느리며 사용량을 많이 씁니다 — <span class="accent2">정말 큰 덩어리</span>를 통째로 맡길 때만.
+      </p>
+    </section>
+
+    <!-- ============= 31d. Choosing a model — practical workflow ============= -->
+    <section>
+      <div class="chip">모델 고르기 · 2/2</div>
+      <h2>실전 운영법 — <span class="accent2">거의 Sonnet</span>, 가끔 갈아탑니다.</h2>
+
+      <div class="card autoshow fade-up" style="margin-top: 1.2rem; padding: 1.4rem 1.7rem; border-color: rgba(155,130,255,0.6);">
+        <span class="pill">골든 루프</span>
+        <div class="flow-lane" style="margin-top: .9rem;">
+          <div class="flow-step" style="background: rgba(255,122,149,0.16); border-color: rgba(255,122,149,0.6); color:#FFD0DA !important;">Opus로 설계·분해·리스크</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step me">Sonnet으로 구현</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step" style="background: rgba(255,122,149,0.16); border-color: rgba(255,122,149,0.6); color:#FFD0DA !important;">Opus로 최종 리뷰</div>
+        </div>
+        <p class="muted" style="margin-top: .8rem; font-size: 1rem;">
+          비싼 시니어(Opus)에게 <span class="accent3">판단</span>을 맡기고, 손발(Sonnet)에게 <span class="accent">구현</span>을 시키는 흐름.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-top: 1rem; gap: 1rem;">
+        <div class="card autoshow fade-up" style="padding: 1.2rem 1.5rem; animation-delay: .3s;">
+          <span class="pill pink">막혔을 때</span>
+          <p style="font-size: 1.05rem;"><span class="accent3">Opus</span>에게: "지금까지 시도·실패 로그·코드 구조를 보고 <span class="accent2">원인 후보를 좁혀줘.</span>"</p>
+        </div>
+        <div class="card autoshow fade-up" style="padding: 1.2rem 1.5rem; animation-delay: .5s;">
+          <span class="pill amber">정말 큰 작업</span>
+          <p style="font-size: 1.05rem;"><span class="accent4">Fable</span>엔 "어떻게"가 아니라 <span class="accent2">목표·제약·완료 조건</span>을 주고 통째로 위임.</p>
+        </div>
+      </div>
+
+      <div class="autoshow fade-up" style="margin-top: 1.1rem; animation-delay: .7s;">
+        <div style="display:flex; align-items:center; gap:.7rem;">
+          <span class="muted" style="font-size:.95rem; white-space:nowrap;">대략적인 비중</span>
+          <div style="flex:1; display:flex; height:26px; border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,0.12);">
+            <div style="flex:80; background:rgba(124,92,255,0.6);"></div>
+            <div style="flex:15; background:rgba(255,122,149,0.55);"></div>
+            <div style="flex:4; background:rgba(43,234,208,0.5);"></div>
+            <div style="flex:1; background:rgba(255,212,107,0.65);"></div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top: .55rem; text-align:center; font-size: .98rem;">
+          <span class="accent">Sonnet 80%</span> · <span class="accent3">Opus 15%</span> · <span class="accent2">Haiku 4%</span> · <span class="accent4">Fable 1%</span> — 대형 마이그레이션이 잦다면 Fable 비중을 올리세요.
+        </p>
+      </div>
+    </section>
+
     <!-- ============= 32. Ecosystem map: Plugin · MCP · Skills ============= -->
     <section>
       <div class="chip">TOOLKIT 4/5</div>
@@ -2341,31 +2425,109 @@
       </p>
     </section>
 
-    <!-- ============= 36. Chapter 6 closing ============= -->
+    <!-- ============= 36b. Chapter 7 opener — should we even teach 'how-to'? ============= -->
+    <section data-background-color="#0B0F1C">
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <div class="chip">CHAPTER 7 · 그래서, 무엇을 가르쳐야 하나</div>
+        <h1 style="font-size: 5rem; margin-top: 1rem;">
+          AI 시대에, <span class="grad">'사용법'</span>을<br/>
+          가르치는 게 맞을까?
+        </h1>
+        <p class="autoshow fade-up" style="margin-top: 1.8rem; font-size: 1.5rem;">
+          이 가이드를 준비하며 든 <span class="accent3">묘한 불편함</span> 하나.
+        </p>
+        <p class="autoshow fade-up muted" style="margin-top: .8rem; font-size: 1.2rem; animation-delay: .3s;">
+          AI 시대라면서 — 우리는 여전히 설치·명령어·모델 선택·권한 설정 <span class="accent2">사용법을 하나하나</span> 설명하는 세미나를 열고 있습니다.
+        </p>
+        <div class="quote autoshow fade-up" style="margin-top: 1.6rem; max-width: 1040px; animation-delay: .6s;">
+          정말 중요한 건 <span class="grad" style="font-weight:800;">"Claude Code 사용법"</span>을 아는 것일까,<br/>
+          아니면 <span class="grad" style="font-weight:800;">"모르는 도구를 AI와 함께 익혀가는 능력"</span>을 갖추는 것일까?
+        </div>
+        <p class="autoshow fade-up" style="margin-top: 1.4rem; font-size: 1.5rem; font-weight: 700; animation-delay: .9s;">
+          저는 <span class="accent">후자</span>가 훨씬 중요하다고 생각합니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= 36c. Chapter 7 — the center of education shifts ============= -->
     <section>
-      <div class="chip">CHAPTER 6 · 정리</div>
-      <h2>결국 중요한 건, <span class="grad">손에 익히는 순서</span>였습니다.</h2>
-      <div class="grid-3" style="margin-top: 2rem;">
-        <div class="card autoshow fade-up">
-          <span class="pill">시작</span>
-          <h3 style="margin-top:.5rem; font-size:1.3rem;">설치하고, 기본기부터</h3>
-          <p style="font-size:1.02rem;">설치·실행 → <code>@</code> 파일 참조·이미지 붙여넣기·Esc 중단, 몸에 붙이는 조작부터.</p>
+      <div class="chip">관점의 전환</div>
+      <h2>도구 교육의 <span class="accent">중심</span>이 달라져야 합니다.</h2>
+      <div class="grid-2" style="margin-top: 1.4rem; align-items: stretch;">
+        <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.45);">
+          <span class="pill pink">예전 도구 교육</span>
+          <h3 style="font-size: 1.3rem;">"정답 절차"를 알려주기</h3>
+          <p style="font-size: 1.05rem;">메뉴가 어디 있는지 · 명령어가 무엇인지 · 정해진 순서가 무엇인지. <span class="accent3">외우면</span> 끝나는 지식.</p>
         </div>
-        <div class="card autoshow fade-up">
-          <span class="pill green">중간</span>
-          <h3 style="margin-top:.5rem; font-size:1.3rem;">명령어와 권한으로 신뢰를 쌓고</h3>
-          <p style="font-size:1.02rem;">슬래시 명령어 12개, 권한 모드와 Plan Mode로 <span class="accent2">불안 없이 맡기는 법</span>.</p>
-        </div>
-        <div class="card autoshow fade-up">
-          <span class="pill pink">확장</span>
-          <h3 style="margin-top:.5rem; font-size:1.3rem;">Plugin·MCP·Agent Skills로 넓히기</h3>
-          <p style="font-size:1.02rem;">팀의 노하우와 바깥 시스템까지 — <span class="accent2">필요한 만큼만</span> 확장.</p>
+        <div class="card autoshow fade-up" style="border-color: rgba(43,234,208,0.5);">
+          <span class="pill green">AI 에이전트 도구 교육</span>
+          <h3 style="font-size: 1.3rem;">"함께 일하는 법"을 익히기</h3>
+          <p style="font-size: 1.05rem;">원하는 작업을 <span class="accent2">어떻게 설명</span>할까 · 실패하면 <span class="accent2">어떻게 다시 대화</span>할까 · 시행착오를 규칙·skill·hook·MCP로 <span class="accent2">어떻게 축적</span>할까.</p>
         </div>
       </div>
-      <div class="quote autoshow fade-up" style="margin-top: 2.2rem; animation-delay: 1.1s;">
-        처음부터 다 쓸 필요는 없습니다.<br/>
-        <span class="grad" style="font-weight:800;">오늘 하나만 손에 익혀도</span>, 내일은 더 많은 걸 맡길 수 있습니다.
+      <div class="quote autoshow fade-up" style="margin-top: 1.3rem; font-size: 1.45rem; animation-delay: .5s;">
+        Anthropic의 실제 사용 분석: 사람은 주로 <span class="grad" style="font-weight:800;">"무엇을 할지"</span>(계획), Claude는 <span class="grad" style="font-weight:800;">"어떻게 할지"</span>(실행)를 맡았고 —
+        사용자의 <span class="grad" style="font-weight:800;">도메인 전문성이 높을수록</span> 한 번의 지시로 더 많은 일을, 더 높은 성공률로 해냈습니다.
       </div>
+      <p class="muted autoshow fade-up" style="margin-top: 1rem; text-align:center; font-size: 1.1rem; animation-delay: .8s;">
+        → AI 시대에도 전문성은 사라지지 않습니다. <span class="accent">다른 방식으로 증폭</span>될 뿐.
+      </p>
+    </section>
+
+    <!-- ============= 36d. Chapter 7 — from user to designer ============= -->
+    <section>
+      <div class="chip">사용자 → 설계자</div>
+      <h2>좋은 질문을 던지는 순간, <span class="grad">설계자</span>가 됩니다.</h2>
+      <div class="grid-2" style="margin-top: 1.3rem; grid-template-columns: 1.25fr 1fr; align-items: start;">
+        <div class="term autoshow fade-up">
+          <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">my-project — claude</span>
+          </div>
+          <div class="term-body">
+            <div class="term-line"><span class="t-prompt">&gt;</span> <span class="t-cmd">이 프로젝트 구조를 읽고 설명해줘.</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: .4s;"><span class="t-prompt">&gt;</span> <span class="t-cmd">내가 뭘 먼저 해야 할지 작업 계획을 세워줘.</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: .7s;"><span class="t-prompt">&gt;</span> <span class="t-cmd">이 에러 로그를 보고 원인 후보를 좁혀줘.</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 1.0s;"><span class="t-prompt">&gt;</span> <span class="t-cmd">다음부터 더 잘하려면 <span class="t-hl">CLAUDE.md</span>에 뭘 남기면 좋을까?</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 1.3s;"><span class="t-prompt">&gt;</span> <span class="t-cmd">이 명령 매번 치기 귀찮은데, <span class="t-hl">custom command</span>로 만들 수 있을까?</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 1.6s;"><span class="t-prompt">&gt;</span> <span class="t-cmd">팀 코드 스타일·테스트 규칙을 에이전트가 기억하게 하려면?</span><span class="t-caret"></span></div>
+          </div>
+        </div>
+        <div class="term-notes">
+          <div class="note autoshow fade-left" style="animation-delay: .3s;">
+            <span class="ico">🧭</span>
+            <div><h4>실력이 이동한다</h4><p>"AI에게 한 번 물어보는 능력"이 아니라 <span class="accent2">"AI가 계속 잘 일할 환경을 만드는 능력"</span>으로.</p></div>
+          </div>
+          <div class="note autoshow fade-left" style="animation-delay: .6s;">
+            <span class="ico">📈</span>
+            <div><h4>반복은 승격시켜라</h4><p>같은 설명을 반복 중이라면 — 프롬프트가 아니라 <span class="accent2">CLAUDE.md·command·hook·skill·MCP</span>로 남길 순간입니다.</p></div>
+          </div>
+          <div class="note autoshow fade-left" style="animation-delay: .9s;">
+            <span class="ico">🛡️</span>
+            <div><h4>가이드는 '출발선'일 뿐</h4><p>보안·권한·사내코드 탓에 기본 가이드는 필요합니다. 목적은 "이대로 따라 하세요"가 아니라 <span class="accent2">"안전하게 출발하는 공통 기반"</span>.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 36e. Chapter 7 — the manifesto ============= -->
+    <section data-background-color="#0B0F1C">
+      <div class="chip">CHAPTER 7 · 정리</div>
+      <h2>그래서, 이 세미나를 이렇게 <span class="grad">정의</span>합니다.</h2>
+      <div class="quote autoshow fade-up" style="margin-top: 1.3rem;">
+        이 세미나는 Claude Code의 <span class="grad" style="font-weight:800;">모든 사용법</span>을 알려주는 시간이 아닙니다.<br/>
+        함께 스스로 학습하고, 실패를 개선하고, <span class="grad" style="font-weight:800;">자신의 업무 환경에 맞는 에이전트 작업 방식</span>을 만들어가기 위한 <span class="grad" style="font-weight:800;">출발점</span>입니다.
+      </div>
+      <div class="stack" style="margin-top: 1.4rem; gap: .65rem;">
+        <p style="font-size: 1.35rem;" class="autoshow fade-up">1. 일단 <span class="accent">써보자.</span></p>
+        <p style="font-size: 1.35rem;" class="autoshow fade-up">2. 막히면 <span class="accent2">Claude Code에게 물어보자.</span></p>
+        <p style="font-size: 1.35rem;" class="autoshow fade-up">3. 잘 안 되면 <span class="accent3">왜 안 되는지 함께 분석</span>하자.</p>
+        <p style="font-size: 1.35rem;" class="autoshow fade-up">4. 반복되는 문제는 <span class="accent4">규칙과 도구로 남기자.</span></p>
+        <p style="font-size: 1.35rem;" class="autoshow fade-up">5. 각자의 업무에 맞는 <span class="grad" style="font-weight:800;">더 좋은 에이전트 환경을 스스로</span> 만들자.</p>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 1.4rem; font-size: 1.7rem; font-weight: 800; text-align:center; animation-delay: .6s;">
+        그 과정 자체가 — <span class="grad">AI 시대의 실력</span>입니다.
+      </p>
     </section>
 
     <!-- ============= 37. Final: Thanks + Q&A ============= -->
