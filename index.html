@@ -3834,9 +3834,82 @@
     localStorage.setItem('qa_nickname', JSON.stringify(name));
   }
 
-  function connectSse() {}
-  function setupSlideSync() {}
-  function updateFollowUI() {}
+  let es;
+  function connectSse() {
+    es = new EventSource('/qa/events');
+    const dot = document.getElementById('qa-conn-dot');
+    es.onopen = () => dot && dot.classList.add('on');
+    es.onerror = () => dot && dot.classList.remove('on');
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      liveSlide = st.slide || 0;
+      if (!IS_PRESENTER && following) goToSlide(liveSlide);
+      setTally(st.reactions);
+      history = (st.questions || []).slice();
+      renderHistory();
+    });
+
+    es.addEventListener('slide', (e) => {
+      const { h } = JSON.parse(e.data);
+      liveSlide = h;
+      if (IS_PRESENTER) return;
+      if (following) goToSlide(h);
+      updateFollowUI();
+    });
+
+    es.addEventListener('question', (e) => {
+      const q = JSON.parse(e.data);
+      history.push(q);
+      renderHistory();
+      showNote(q);
+    });
+
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
+      if (el) el.textContent = votes;
+      const hq = history.find((q) => q.id === id);
+      if (hq) { hq.votes = votes; renderHistory(); }
+    });
+
+    es.addEventListener('react', (e) => {
+      const d = JSON.parse(e.data);
+      setTally(d.total);
+      spawnFloat(d.kind);
+    });
+
+    es.addEventListener('clear', () => {
+      document.getElementById('qa-note-layer').innerHTML = '';
+      shownIds.clear();
+      history = [];
+      renderHistory();
+    });
+  }
+
+  function setupSlideSync() {
+    if (!window.Reveal) return;
+    if (IS_PRESENTER) {
+      Reveal.on('slidechanged', (e) => { api('/qa/slide', { h: e.indexh }); });
+    } else {
+      Reveal.on('slidechanged', (e) => {
+        if (following && e.indexh !== liveSlide) { following = false; updateFollowUI(); }
+      });
+      const btn = document.getElementById('qa-follow-toggle');
+      btn.onclick = () => {
+        following = !following;
+        if (following) goToSlide(liveSlide);
+        updateFollowUI();
+      };
+    }
+  }
+
+  function updateFollowUI() {
+    const btn = document.getElementById('qa-follow-toggle');
+    if (!btn) return;
+    btn.classList.toggle('on', following);
+    btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
+  }
   function showNote(q) {}
   function renderHistory() {}
   function setTally(r) {}
