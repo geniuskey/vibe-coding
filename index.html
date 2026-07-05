@@ -3910,11 +3910,62 @@
     btn.classList.toggle('on', following);
     btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
   }
-  function showNote(q) {}
+  function showNote(q) {
+    if (shownIds.has(q.id)) return;
+    shownIds.add(q.id);
+    const layer = document.getElementById('qa-note-layer');
+    const note = document.createElement('div');
+    note.className = 'qa-note';
+    note.dataset.id = q.id;
+    note.style.background = QA_COLORS[q.id % QA_COLORS.length];
+    note.style.left = (6 + Math.random() * 60) + 'vw';
+    note.style.top = (14 + Math.random() * 50) + 'vh';
+    note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    note.innerHTML =
+      '<div class="qa-note-name">' + esc(q.name) + '</div>' +
+      '<div class="qa-note-text">' + esc(q.text) + '</div>' +
+      '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
+    note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
+    layer.appendChild(note);
+    setTimeout(() => {
+      note.classList.add('qa-leaving');
+      setTimeout(() => note.remove(), 500);
+    }, 14000);
+  }
   function renderHistory() {}
   function setTally(r) {}
   function spawnFloat(kind) {}
-  function setupAudienceUI() {}
+  function setupAudienceUI() {
+    if (IS_PRESENTER) return;
+
+    const nick = getNickname();
+    if (!nick) {
+      document.getElementById('qa-nick-modal').classList.remove('qa-hidden');
+      document.getElementById('qa-nick-go').onclick = () => {
+        const v = document.getElementById('qa-nick-input').value.trim().slice(0, 24) || '익명';
+        setNickname(v);
+        document.getElementById('qa-nick-modal').classList.add('qa-hidden');
+      };
+    }
+
+    const input = document.getElementById('qa-question-input');
+    const send = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      api('/qa/questions', { text, name: getNickname() || '익명' });
+      input.value = '';
+    };
+    document.getElementById('qa-question-send').onclick = send;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+      send();
+    });
+
+    document.getElementById('qa-react-up').onclick = () => api('/qa/react', { kind: 'up' });
+    document.getElementById('qa-react-confused').onclick = () => api('/qa/react', { kind: 'confused' });
+
+    updateFollowUI();
+  }
   function setupPresenterUI() {}
 })();
 </script>
