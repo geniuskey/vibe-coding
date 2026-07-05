@@ -422,6 +422,39 @@
     .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
     .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
 
+    /* ===== Surface-vs-core layer stack (Chapter 4) ===== */
+    .layerbox { display: flex; flex-direction: column; gap: 0.5rem; max-width: 860px; }
+    .layer {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      border: 1px solid rgba(155,130,255,0.28);
+      background: rgba(40, 30, 80, 0.20);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .layer .lname { font-weight: 800; font-size: 1.3rem; color: #FFFFFF !important; white-space: nowrap; }
+    .layer .lex { flex: 1; text-align: center; font-size: 1rem; color: #C9CFDF !important; font-family: 'JetBrains Mono', monospace; }
+    .layer .ltag {
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.03em;
+      padding: 0.25em 0.8em; border-radius: 999px; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .layer.surface { opacity: 0.5; }
+    .layer.surface .ltag { background: rgba(255,122,149,0.14); border: 1px solid rgba(255,122,149,0.5); color: #FF94AC !important; }
+    .layer.core {
+      opacity: 1; margin-top: 0.7rem;
+      border: 1px solid rgba(43,234,208,0.7);
+      background: linear-gradient(160deg, rgba(20,60,58,0.72), rgba(15,45,55,0.6));
+      box-shadow: 0 22px 50px -18px rgba(43,234,208,0.35), inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    .layer.core .lname { font-size: 1.55rem; white-space: normal; }
+    .layer.core .ltag { background: rgba(43,234,208,0.18); border: 1px solid rgba(43,234,208,0.7); color: #5BFFE0 !important; }
+    .layer-divider {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+      color: #8A93B2 !important; letter-spacing: 0.1em; margin: 0.1rem 0 0.15rem;
+    }
+
     kbd.key {
       display: inline-block;
       padding: 0.2em 0.65em;
@@ -1604,7 +1637,8 @@
         <div class="chip">CHAPTER 4 · 그래서 어떤 AI 도구를 배워야 할까?</div>
         <h1 style="font-size: 5.5rem;">자, 그러면<br/>본론이에요.</h1>
         <p class="muted" style="margin-top: 2rem; font-size: 1.5rem;">
-          많은 분들이 묻습니다. "Claude Code? Cursor? Codex? 뭐 배울까요?"
+          많은 분들이 묻습니다. "Claude Code? Cursor? Codex? 뭐 배울까요?"<br/>
+          요즘은 여기에 <span class="accent3">"MCP는요? Skill은요? 어떤 harness 깔면 돼요?"</span>까지 붙습니다.
         </p>
       </div>
     </section>
@@ -1629,9 +1663,14 @@
           <p class="muted">Cursor, Windsurf. IDE 자체가 LLM을 중심으로 재설계.</p>
         </div>
         <div class="tline amber autoshow fade-up">
-          <div class="yr">2024–현재</div>
+          <div class="yr">2024–2025</div>
           <h4>Terminal-based Agent</h4>
           <p class="muted">Claude Code, Codex CLI. <span class="accent4">터미널(명령창)에서 파일을 직접 만지고 명령까지 실행하는 에이전트.</span></p>
+        </div>
+        <div class="tline autoshow fade-up">
+          <div class="yr">2025–현재</div>
+          <h4>Agent + 확장 생태계</h4>
+          <p class="muted">MCP · Skill · Subagent · Harness. <span class="accent">에이전트 위에 새로운 층이 계속 얹히는 중.</span></p>
         </div>
       </div>
     </section>
@@ -1658,6 +1697,72 @@
       </div>
     </section>
 
+    <!-- ============= 20b. The question everyone asks ============= -->
+    <section>
+      <div class="chip">매일 듣는 질문</div>
+      <h2>"그래서, 뭐 하나만 깔면<br/>되는 거죠?"</h2>
+      <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card autoshow zoom-in">
+          <span class="pill pink">Q</span>
+          <h3 style="margin-top:.6rem;">"어떤 <span class="accent3">harness</span> 깔아요?"</h3>
+          <p class="muted">Claude Code? Codex? 하나만 정해주세요.</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <span class="pill pink">Q</span>
+          <h3 style="margin-top:.6rem;">"<span class="accent3">MCP</span>는 뭐부터 깔아요?"</h3>
+          <p class="muted">무슨 서버를 붙여야 '완성'인가요?</p>
+        </div>
+        <div class="card autoshow zoom-in">
+          <span class="pill pink">Q</span>
+          <h3 style="margin-top:.6rem;">"<span class="accent3">Skill</span>은 어디서 받아요?"</h3>
+          <p class="muted">그거 설치하면 다 되는 거 맞죠?</p>
+        </div>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 2rem; font-size: 1.5rem; animation-delay:.9s;">
+        다들 <span class="accent">"하나만 세팅하면 다 되는 그거"</span>를 찾습니다.
+        <span class="grad" style="font-weight:800;"> — 그런 건, 없어요.</span>
+      </p>
+    </section>
+
+    <!-- ============= 20c. It's all surface ============= -->
+    <section>
+      <h2>이건 전부 <span class="accent3">'표면'</span>이에요.</h2>
+      <p class="muted" style="margin-top:.6rem; font-size: 1.3rem;">
+        도구·모델·MCP·skill·harness — 매 분기 새로 얹히고, 또 바뀝니다.
+      </p>
+      <div class="layerbox autoshow fade-up" style="margin-top: 1.5rem;">
+        <div class="layer-divider">▲ 표면 — 계속 churn</div>
+        <div class="layer surface">
+          <span class="lname">harness</span>
+          <span class="lex">Claude Code · Codex CLI …</span>
+          <span class="ltag">3개월마다 바뀜</span>
+        </div>
+        <div class="layer surface">
+          <span class="lname">skill · MCP</span>
+          <span class="lex">확장 플러그인</span>
+          <span class="ltag">계속 새로 생김</span>
+        </div>
+        <div class="layer surface">
+          <span class="lname">model</span>
+          <span class="lex">GPT ↔ Claude ↔ Gemini</span>
+          <span class="ltag">순위 뒤집힘</span>
+        </div>
+        <div class="layer surface">
+          <span class="lname">tool</span>
+          <span class="lex">Cursor · Windsurf …</span>
+          <span class="ltag">표준이 바뀜</span>
+        </div>
+        <div class="layer core">
+          <span class="lname">AI의 정체 &nbsp;+&nbsp; 선택하는 사고방식</span>
+          <span class="ltag">안 바뀜</span>
+        </div>
+      </div>
+      <p class="autoshow fade-up" style="margin-top: 1.4rem; font-size: 1.4rem; animation-delay:.6s;">
+        <span class="accent3">"어떤 harness 깔지"</span>가 아니라,
+        <span class="accent2">"무엇을 안 바꿔도 되는지"</span>를 배우세요.
+      </p>
+    </section>
+
     <!-- ============= 21. Bold statement ============= -->
     <section data-background-color="#06080F">
       <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
@@ -1677,12 +1782,12 @@
       <h2>왜냐면…</h2>
       <div class="stack" style="margin-top: 2rem;">
         <div class="card autoshow fade-up">
-          <h3>① 도구 자체가 너무 빨리 바뀐다</h3>
-          <p>당신이 Cursor 단축키를 외우고 나면, 6개월 뒤엔 다른 도구가 표준이 됩니다.</p>
+          <h3>① 표면은 <span class="accent3">전부</span> 빨리 바뀐다</h3>
+          <p>도구·모델·MCP·skill·harness — 그 위에 <span class="accent3">새 층이 계속 생깁니다.</span> Cursor 단축키를 외우고 나면, 6개월 뒤엔 다른 게 표준이 되죠.</p>
         </div>
         <div class="card autoshow fade-up">
-          <h3>② 모델도 너무 빨리 바뀐다</h3>
-          <p>오늘의 1등이 다음 달엔 2등이 됩니다. GPT ↔ Claude ↔ Gemini — 순위는 계속 뒤집혀요.</p>
+          <h3>② 새 층이 생길 때마다 <span class="accent3">같은 착각</span>이 반복된다</h3>
+          <p>"이번엔 이거 하나만 세팅하면 돼." — MCP도, skill도, harness도 그랬어요. 그리고 다음 달, 또 새로운 '이거 하나'가 등장합니다.</p>
         </div>
         <div class="card autoshow fade-up" style="animation-delay: .5s;">
           <h3>③ 그러면 무엇이 변하지 않을까?</h3>
