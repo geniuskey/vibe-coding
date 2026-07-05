@@ -3932,7 +3932,19 @@
       setTimeout(() => note.remove(), 500);
     }, 14000);
   }
-  function renderHistory() {}
+  function renderHistory() {
+    const countEl = document.getElementById('qa-history-count');
+    if (countEl) countEl.textContent = history.length;
+    const list = document.getElementById('qa-history-list');
+    if (!list) return;
+    const sorted = history.slice().sort((a, b) => b.votes - a.votes || a.ts - b.ts);
+    list.innerHTML = sorted.map((q) =>
+      '<div class="qa-history-item">' +
+        '<div class="qa-history-meta"><span>' + esc(q.name) + '</span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="qa-history-text">' + esc(q.text) + '</div>' +
+      '</div>'
+    ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
+  }
   function setTally(r) {}
   function spawnFloat(kind) {}
   function setupAudienceUI() {
@@ -3966,7 +3978,18 @@
 
     updateFollowUI();
   }
-  function setupPresenterUI() {}
+  function setupPresenterUI() {
+    if (!IS_PRESENTER) return;
+    document.getElementById('qa-history-toggle').onclick = () => {
+      document.getElementById('qa-history-panel').classList.toggle('qa-hidden');
+    };
+    document.getElementById('qa-history-close').onclick = () => {
+      document.getElementById('qa-history-panel').classList.add('qa-hidden');
+    };
+    document.getElementById('qa-history-clear').onclick = () => {
+      if (confirm('화면의 질문과 질문 기록을 모두 정리할까요?')) api('/qa/clear');
+    };
+  }
 })();
 </script>
 
