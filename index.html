@@ -4269,6 +4269,8 @@ footer, header, hgroup, main, menu, nav, section {
     animation: qaNoteIn .35s ease both;
   }
   .qa-note.qa-leaving { animation: qaNoteOut .5s ease both; }
+  .qa-note.qa-draggable { cursor: grab; }
+  .qa-note.qa-dragging { cursor: grabbing; animation: none !important; box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 10; user-select: none; }
   @keyframes qaNoteIn { from { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(12px) scale(.9); } to { opacity: 1; transform: rotate(var(--rot,0deg)) translateY(0) scale(1); } }
   @keyframes qaNoteOut { to { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(-12px) scale(.92); } }
   .qa-note-name { font-weight: 800; font-size: 11px; opacity: .65; margin-bottom: 4px; }
@@ -4496,8 +4498,9 @@ footer, header, hgroup, main, menu, nav, section {
     note.className = 'qa-note';
     note.dataset.id = q.id;
     note.style.background = QA_COLORS[q.id % QA_COLORS.length];
-    note.style.left = (6 + Math.random() * 60) + 'vw';
-    note.style.top = (14 + Math.random() * 50) + 'vh';
+    const pos = edgePosition();
+    note.style.left = pos.left + 'vw';
+    note.style.top = pos.top + 'vh';
     note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
     note.innerHTML =
       (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
@@ -4515,6 +4518,47 @@ footer, header, hgroup, main, menu, nav, section {
     if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
     layer.appendChild(note);
     const autoDismiss = setTimeout(dismiss, 14000);
+    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+  }
+  // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
+  function edgePosition() {
+    const edge = Math.floor(Math.random() * 4);
+    if (edge === 0) return { left: 3 + Math.random() * 70, top: 3 + Math.random() * 9 };   // 위쪽
+    if (edge === 1) return { left: 60 + Math.random() * 18, top: 6 + Math.random() * 58 };  // 오른쪽
+    if (edge === 2) return { left: 3 + Math.random() * 70, top: 60 + Math.random() * 20 };  // 아래쪽
+    return { left: 2 + Math.random() * 7, top: 6 + Math.random() * 58 };                    // 왼쪽
+  }
+  // 발표자가 포스트잇을 드래그해서 위치를 옮길 수 있게 한다
+  function makeDraggable(note, onDragStart) {
+    note.classList.add('qa-draggable');
+    note.addEventListener('pointerdown', (e) => {
+      // 닫기/추천 버튼 클릭은 드래그로 취급하지 않음
+      if (e.target.closest('.qa-note-close, .qa-vote')) return;
+      if (note.dataset.dismissed === '1') return;
+      e.preventDefault();
+      if (onDragStart) onDragStart(); // 옮기는 중에는 자동으로 사라지지 않도록
+      const rect = note.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      note.classList.add('qa-dragging');
+      note.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        const maxLeft = window.innerWidth - rect.width;
+        const maxTop = window.innerHeight - rect.height;
+        const left = Math.max(0, Math.min(ev.clientX - offsetX, maxLeft));
+        const top = Math.max(0, Math.min(ev.clientY - offsetY, maxTop));
+        note.style.left = left + 'px';
+        note.style.top = top + 'px';
+      };
+      const onUp = (ev) => {
+        note.classList.remove('qa-dragging');
+        note.removeEventListener('pointermove', onMove);
+        note.removeEventListener('pointerup', onUp);
+        try { note.releasePointerCapture(ev.pointerId); } catch (_) {}
+      };
+      note.addEventListener('pointermove', onMove);
+      note.addEventListener('pointerup', onUp);
+    });
   }
   function renderHistory() {
     const countEl = document.getElementById('qa-history-count');
