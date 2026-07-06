@@ -99,7 +99,7 @@
 
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
     .reveal .slides { text-align: left; }
-    .reveal section { padding: 2vh 4vw; box-sizing: border-box; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; }
 
     /* HARD RULE: every text descendant defaults to pure white. */
     .reveal section,
@@ -766,6 +766,31 @@
     .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
     .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
 
+    /* ========= Print / PDF export: auto-reveal content must be visible ========= */
+    /* Only the .present slide gets its reveal animation, so in print every other
+       slide's .autoshow content would stay at opacity:0 (blank). Force it visible. */
+    @media print {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+
+    /* ========= Reduced motion: reveal content without animating it ========= */
+    /* Content visibility is coupled to animation (.autoshow starts at opacity:0),
+       so reduced-motion must REVEAL rather than merely freeze. */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .grad, .glitch, .particles span, .caret, .tline::before {
+        animation: none !important;
+      }
+    }
+
     /* library bookshelf */
     .bookshelf {
       display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px;
@@ -1224,15 +1249,15 @@
       <div class="grid-3" style="margin-top: 2rem;">
         <div class="card autoshow zoom-in">
           <h3>🚗 자율주행</h3>
-          <p class="muted">카메라 영상 + 차량 상태 → <br/><span class="accent2">"다음 1초 동안 어떻게 움직일까"</span> 의 확률 분포를 그린다.</p>
+          <p class="muted">카메라 영상 + 차량 상태 → <br/><span class="accent2">"다음 1초 동안 어떻게 움직일까"</span>의 확률 분포를 그린다.</p>
         </div>
         <div class="card autoshow zoom-in">
           <h3>🎮 알파고</h3>
-          <p class="muted">바둑판 상태 → <br/><span class="accent2">"다음 수는 어디일까"</span> 의 확률 분포를 그린다.</p>
+          <p class="muted">바둑판 상태 → <br/><span class="accent2">"다음 수는 어디일까"</span>의 확률 분포를 그린다.</p>
         </div>
         <div class="card autoshow zoom-in">
           <h3>💬 ChatGPT</h3>
-          <p class="muted">지금까지의 문맥 → <br/><span class="accent2">"다음 단어는 무엇일까"</span> 의 확률 분포를 그린다.</p>
+          <p class="muted">지금까지의 문맥 → <br/><span class="accent2">"다음 단어는 무엇일까"</span>의 확률 분포를 그린다.</p>
         </div>
       </div>
       <p class="autoshow fade-up" style="margin-top: 2rem; text-align:center; font-size: 1.6rem; animation-delay: .8s;">
@@ -1290,7 +1315,7 @@
 
     <!-- ============= 9. Yann LeCun ============= -->
     <section>
-      <h2>그래서 <span class="accent3">AI 4대 석학, 얀 르쿤</span>은 LLM을 까죠.</h2>
+      <h2>그래서 <span class="accent3">AI 3대 석학, 얀 르쿤</span>은 LLM을 까죠.</h2>
       <div class="quote autoshow fade-up" style="margin-top: 2rem; font-size: 2rem; animation-delay: .1s;">
         "세상을 이해하지 못한 채,<br/>
         다음 단어만 그럴듯하게 뱉는 기계다.<br/>
@@ -1328,7 +1353,7 @@
         <div class="card">
           <span class="pill green">LLM</span>
           <h3 style="margin-top:.6rem;">"다음 단어의 확률"을<br/>계산할 수 있는 이유</h3>
-          <p>인류가 써온 <span class="accent2">수십 조 단어의 글</span>이 있기 때문.</p>
+          <p>인류가 써온 <span class="accent2">수십조 단어의 글</span>이 있기 때문.</p>
         </div>
       </div>
       <p class="autoshow fade-up" style="margin-top: 2rem; text-align:center; font-size: 1.7rem; animation-delay: .5s;">
@@ -1456,7 +1481,7 @@
         </div>
         <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5); animation-delay: .7s;">
           <span class="pill">진짜 답</span>
-          <h3 style="margin-top: .6rem;">🚀 인간 능력의 <span class="accent">Base를 끌어올리기</span></h3>
+          <h3 style="margin-top: .6rem;">🚀 인간 능력의 <span class="accent">base를 끌어올리기</span></h3>
           <p>AI는 <span class="accent2">사람과 결합</span>해서 그 사람의 능력 자체를 <br/>비약적으로 끌어올립니다.</p>
         </div>
       </div>
@@ -1822,7 +1847,7 @@
         <div class="card autoshow fade-up" style="animation-delay: .5s;">
           <h3>③ 그러면 무엇이 변하지 않을까?</h3>
           <p class="grad" style="font-size: 1.6rem; font-weight: 800;">
-            → "AI라는 것의 본질"과, "AI를 다루는 나의 사고 방식"
+            → "AI라는 것의 본질"과, "AI를 다루는 나의 사고방식"
           </p>
         </div>
       </div>
@@ -1898,7 +1923,7 @@
         AI는 대체물이 아니라 <span class="grad" style="font-weight:800;">증폭기</span>다 — 무엇을 위임할지보다
         <span class="grad" style="font-weight:800;">무엇을 끝까지 내 사고로 남길지</span>가 더 중요합니다.
       </div>
-      <p class="muted autoshow fade-up" style="margin-top: 1rem; font-size: 1rem; opacity:.65;">
+      <p class="muted autoshow fade-up" style="margin-top: 1rem; font-size: 1rem; opacity:.82;">
         참고문헌 · 『AI, 신의 탄생 인간의 종말』, 『듀얼 브레인』
       </p>
     </section>
@@ -1912,7 +1937,7 @@
           1. AI는 <span class="accent">"역사상 가장 승률 높은 다음 답"</span>을 찾아주는 확률 계산기다.
         </p>
         <p style="font-size: 1.6rem;" class="autoshow fade-up">
-          2. 그래서 LLM도 본질은 <span class="accent2">"다음 단어 예측기"</span> 다. 하지만 강력하다.
+          2. 그래서 LLM도 본질은 <span class="accent2">"다음 단어 예측기"</span>다. 하지만 강력하다.
         </p>
         <p style="font-size: 1.6rem;" class="autoshow fade-up">
           3. AI 생산성의 진짜 의미는 <span class="accent3">"인간 능력의 base를 끌어올리는 것"</span>.
@@ -2045,7 +2070,7 @@
         <div class="card autoshow fade-up">
           <span class="pill pink">③</span>
           <h3 style="margin-top:.5rem;">단기 뷰 편향을 막음</h3>
-          <p>"그냥 만들어줘" 였다면 첫 답인 <span class="accent3">PPT</span>로 끝났을 것. 질문을 거듭하니 <span class="accent2">장기적으로 옳은 길</span>이 보임.</p>
+          <p>"그냥 만들어줘"였다면 첫 답인 <span class="accent3">PPT</span>로 끝났을 것. 질문을 거듭하니 <span class="accent2">장기적으로 옳은 길</span>이 보임.</p>
         </div>
       </div>
       <div class="quote autoshow fade-up" style="margin-top: 2.5rem; animation-delay: 1.1s;">
@@ -2114,7 +2139,7 @@
         </div>
       </div>
 
-      <p class="muted autoshow fade-up" style="margin-top: .9rem; text-align:center; font-size: .92rem; opacity:.6; animation-delay:.8s;">
+      <p class="muted autoshow fade-up" style="margin-top: .9rem; text-align:center; font-size: .92rem; opacity:.82; animation-delay:.8s;">
         출처 · Anthropic 공식 문서 「How Claude Code works」 (code.claude.com/docs)
       </p>
     </section>
@@ -2501,17 +2526,17 @@
 
       <div class="grid-3" style="margin-top: 1.6rem; gap: 1.2rem;">
         <div class="card autoshow fade-up">
-          <span class="pill pink">범용 워크플로우</span>
+          <span class="pill amber">범용 워크플로우</span>
           <h3>Superpowers</h3>
           <p>브레인스토밍, 체계적 디버깅 등 <span class="accent2">검증된 작업 절차</span>를 모아둔 스킬 모음집.</p>
         </div>
         <div class="card autoshow fade-up">
-          <span class="pill green">스킬 제작</span>
+          <span class="pill amber">스킬 제작</span>
           <h3>Skill Creator</h3>
           <p>내 팀만의 노하우를 <span class="accent2">SKILL.md로 뽑아내는</span> 메타 스킬. 스킬 만드는 스킬.</p>
         </div>
         <div class="card autoshow fade-up">
-          <span class="pill amber">브라우저 자동화</span>
+          <span class="pill pink">브라우저 자동화</span>
           <h3>Playwright MCP</h3>
           <p>웹 화면을 <span class="accent2">직접 보고 조작</span>하며 검증. 프론트엔드 작업의 필수품.</p>
         </div>
@@ -2788,7 +2813,7 @@
         <div class="card autoshow fade-up">
           <span class="pill">대표 트렌드</span>
           <h3>OpenClaw · Manus 계열</h3>
-          <p>"각자 손에 비서를 하나씩" — <span class="accent">개인화 에이전트</span>가 대 흥행.<br/>
+          <p>"각자 손에 비서를 하나씩" — <span class="accent">개인화 에이전트</span>가 대흥행.<br/>
           OpenClaw는 한 달 만에 <span class="accent3">2천만 MAU</span> · GitHub 25만 스타.</p>
         </div>
 
@@ -2875,7 +2900,7 @@
           <span class="pill green">🅧 x.AI</span>
           <h3>현실 세계로 들어가는 AI</h3>
           <p>
-            Grok 5 대신 <span class="accent2">Grok Build · Voice · Imagine</span>를 먼저 출시, Tesla 자율주행 + <span class="accent">Optimus 로봇</span>.<br/>
+            Grok 5 대신 <span class="accent2">Grok Build · Voice · Imagine</span>을 먼저 출시, Tesla 자율주행 + <span class="accent">Optimus 로봇</span>.<br/>
             <span class="accent4">Grok 4.5</span>(1.5조 파라미터, V9 기반)는 비공개 베타 — Databricks 제휴로 접점도 확장.<br/>
             <span class="muted">차·로봇·PC까지 — AI를 물리 세계의 모든 표면에 박는다.</span>
           </p>
@@ -2901,7 +2926,7 @@
           <span class="pill pink">2025.11 — Meta 퇴사</span>
           <h3>12년 만의 결별</h3>
           <p>
-            Llama 4 실패 → Zuckerberg가 <span class="accent">Scale AI 인수 ($14.3B)</span> + Alex Wang 영입 + Superintelligence Labs 신설.<br/>
+            Llama 4 실패 → Zuckerberg가 <span class="accent">Scale AI 지분 49% 인수 ($14.3B)</span> + Alex Wang 영입 + Superintelligence Labs 신설.<br/>
             "LLM을 더 크게 키운다" 방향으로 메타가 선회. 르쿤의 신념과 정면 충돌.
           </p>
         </div>
