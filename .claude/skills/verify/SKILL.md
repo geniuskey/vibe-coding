@@ -41,7 +41,12 @@ Flows worth driving:
   click at the cursor → harvest burst + `COMBO ×N` in `#hud-combo`.
 - `ArrowRight` / `ArrowLeft` navigate slides; the HUD must show only on
   slide 1 (`#hero-hud.on`), the canvas also runs on the Q&A slide.
-- Reload → score persists via `localStorage.heroSignal`.
+- Miss penalty: gather until charge rings appear, then yank the cursor to a
+  far corner → half-charged nodes escape the well, red `−1` popups, current
+  score drops while `#hud-best` (BEST) holds. Golden nodes expiring
+  uncaptured cost −5.
+- Reload → current score and best persist via `localStorage.heroSignal`
+  and `localStorage.heroSignalBest`.
 
 ## Gotchas
 

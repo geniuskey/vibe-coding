@@ -163,6 +163,8 @@ footer, header, hgroup, main, menu, nav, section {
     #hud-score { font-size: 24px; font-weight: 800; letter-spacing: .5px; color: #fff; }
     .hud-unit { font-size: 10px; color: #9BA6C0; letter-spacing: 2px; }
     .hud-combo { margin-left: auto; font-size: 11px; font-weight: 800; color: #5BFFE0; text-shadow: 0 0 8px rgba(91,255,224,.6); }
+    .hud-best-row { margin-top: 3px; font-size: 9.5px; letter-spacing: 1.5px; color: #C9A44C; }
+    #hud-best { font-weight: 800; font-size: 11px; color: #FFD866; margin-left: 4px; }
     .hud-mini { margin-top: 8px; font-size: 8.5px; letter-spacing: 2px; color: #7F88A3; }
     .hud-bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,0.09); overflow: hidden; margin-top: 4px; }
     .hud-fill { height: 100%; border-radius: 99px; transform-origin: left; transform: scaleX(0); transition: transform .18s ease; background: linear-gradient(90deg, #5BFFE0, #B5A1FF); }
@@ -1138,11 +1140,12 @@ footer, header, hgroup, main, menu, nav, section {
     <span class="hud-sig">⚡</span><span id="hud-score">0</span><span class="hud-unit">SIGNAL</span>
     <span id="hud-combo" class="hud-combo"></span>
   </div>
+  <div class="hud-best-row">BEST <span id="hud-best">0</span></div>
   <div class="hud-mini">GRAVITY WELL</div>
   <div class="hud-bar"><div id="hud-charge" class="hud-fill"></div></div>
   <div class="hud-level-row"><span id="hud-level">LV.1 관측자</span><span id="hud-next" class="hud-next"></span></div>
   <div class="hud-bar"><div id="hud-xp" class="hud-fill xp"></div></div>
-  <div class="hud-hint">커서로 노드를 모아 충전 → 클릭으로 수확<br/>✦ 황금 노드 ×10 · ☄ 혜성 클릭 +25</div>
+  <div class="hud-hint">커서로 노드를 모아 충전 → 클릭으로 수확 · 충전 노드를 놓치면 −1<br/>✦ 황금 노드 ×10 (놓치면 −5) · ☄ 혜성 클릭 +25</div>
   <div id="hud-toast" class="hud-toast"></div>
 </div>
 
@@ -3462,6 +3465,7 @@ footer, header, hgroup, main, menu, nav, section {
       charge: document.getElementById('hud-charge'),
       level: document.getElementById('hud-level'),
       next: document.getElementById('hud-next'),
+      best: document.getElementById('hud-best'),
       xp: document.getElementById('hud-xp'),
       toast: document.getElementById('hud-toast'),
     };
@@ -3469,11 +3473,15 @@ footer, header, hgroup, main, menu, nav, section {
       [0, '관측자'], [30, '수집가'], [100, '신호 사냥꾼'], [250, '뉴런 조련사'],
       [600, '신경망 설계자'], [1500, '특이점'], [4000, '초지능'],
     ];
-    let gameOn = false, score = 0, wellCharge = 0;
+    let gameOn = false, score = 0, best = 0, wellCharge = 0;
     let comboN = 0, lastCapAt = -1e9;
     let nextGoldAt = 0, lastHudAt = -1, saveTimer = null, toastTimer = null;
     const pops = [];
-    try { score = Math.max(0, parseInt(localStorage.getItem('heroSignal'), 10) || 0); } catch (e) { /* storage unavailable */ }
+    try {
+      score = Math.max(0, parseInt(localStorage.getItem('heroSignal'), 10) || 0);
+      best = Math.max(score, parseInt(localStorage.getItem('heroSignalBest'), 10) || 0);
+    } catch (e) { /* storage unavailable */ }
+    let toastedLv = levelIdx(score);              // hoisted fn — no re-toast for stored progress
 
     const comboMul = () => 1 + Math.min(7, (comboN / 4) | 0);
 
@@ -3492,20 +3500,37 @@ footer, header, hgroup, main, menu, nav, section {
     }
 
     function saveScore() {
-      try { localStorage.setItem('heroSignal', String(score)); } catch (e) { /* storage unavailable */ }
+      try {
+        localStorage.setItem('heroSignal', String(score));
+        localStorage.setItem('heroSignalBest', String(best));
+      } catch (e) { /* storage unavailable */ }
+    }
+
+    function scheduleSave() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveScore, 800);
     }
 
     function addScore(pts, x, y, txt, gold) {
-      const before = levelIdx(score);
       score += pts;
+      if (score > best) best = score;
       const li = levelIdx(score);
-      if (li > before) {
+      if (li > toastedLv) {
+        toastedLv = li;
         showToast(`LEVEL UP! LV.${li + 1} ${LEVELS[li][1]}`);
         ripples.push({ x: attr.x, y: attr.y, t0: performance.now() });
       }
       pops.push({ x, y, t0: performance.now(), txt: txt || `+${pts}`, gold: !!gold });
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(saveScore, 800);
+      scheduleSave();
+    }
+
+    // missing a charged/golden node costs signal (never below 0) and breaks the combo
+    function losePoints(pts, x, y, txt) {
+      if (score > 0) score = Math.max(0, score - pts);
+      comboN = 0;
+      lastCapAt = -1e9;
+      pops.push({ x, y, t0: performance.now(), txt, loss: true });
+      scheduleSave();
     }
 
     function bumpCombo(t) {
@@ -3519,6 +3544,7 @@ footer, header, hgroup, main, menu, nav, section {
       addScore(pts, nd.x, nd.y, `+${pts}`, nd.gold);
       nd.gold = false;
       nd.charge = 0;
+      nd.armed = false;
       // respawn on a random edge so the field never thins out
       if (Math.random() < 0.5) { nd.x = Math.random() < 0.5 ? -20 : W + 20; nd.y = Math.random() * H; }
       else { nd.x = Math.random() * W; nd.y = Math.random() < 0.5 ? -20 : H + 20; }
@@ -3531,6 +3557,7 @@ footer, header, hgroup, main, menu, nav, section {
       if (!hudEl.root || t - lastHudAt < 120) return;
       lastHudAt = t;
       hudEl.score.textContent = score.toLocaleString();
+      hudEl.best.textContent = best.toLocaleString();
       const m = (t - lastCapAt < 2600) ? comboMul() : 1;
       hudEl.combo.textContent = m > 1 ? `COMBO ×${m}` : '';
       hudEl.charge.style.transform = `scaleX(${wellCharge.toFixed(3)})`;
@@ -3631,12 +3658,23 @@ footer, header, hgroup, main, menu, nav, section {
         }
 
         if (gameOn) {
-          if (nd.gold && t > nd.goldUntil) nd.gold = false;
+          if (nd.gold && t > nd.goldUntil) {
+            nd.gold = false;
+            losePoints(5, nd.x, nd.y, '✦ MISS −5');
+          }
           if (d < capR) {
             // idle (phantom) attractor still collects, just slower — auto-game mode
             nd.charge = (nd.charge || 0) + (dt / 1400) * (1 - d / capR) * (1 - autoK * 0.5);
             if (nd.charge >= 1) captureNode(nd, t);
-            else wellSum += nd.charge;
+            else {
+              if (nd.charge >= 0.5) nd.armed = true;
+              wellSum += nd.charge;
+            }
+          } else if (nd.armed && d > capR * 1.15) {
+            // a half-charged node slipped out of the well — that's a miss
+            nd.armed = false;
+            nd.charge = 0;
+            losePoints(1, nd.x, nd.y, '−1');
           } else if (nd.charge) {
             nd.charge = Math.max(0, nd.charge - dt / 2600);
           }
@@ -3841,9 +3879,11 @@ footer, header, hgroup, main, menu, nav, section {
         if (k >= 1) { pops.splice(i, 1); continue; }
         const a = k < 0.15 ? k / 0.15 : 1 - (k - 0.15) / 0.85;
         ctx.font = p.gold ? '800 15px "JetBrains Mono", monospace' : '700 12px "JetBrains Mono", monospace';
-        ctx.fillStyle = p.gold
-          ? `rgba(255,216,102,${(a * 0.95).toFixed(3)})`
-          : `rgba(180,255,235,${(a * 0.9).toFixed(3)})`;
+        ctx.fillStyle = p.loss
+          ? `rgba(255,120,140,${(a * 0.95).toFixed(3)})`
+          : p.gold
+            ? `rgba(255,216,102,${(a * 0.95).toFixed(3)})`
+            : `rgba(180,255,235,${(a * 0.9).toFixed(3)})`;
         ctx.fillText(p.txt, p.x, p.y - 12 - k * 30);
       }
     }
@@ -3906,10 +3946,13 @@ footer, header, hgroup, main, menu, nav, section {
       attr.x += (pointer.x + (ph.x - pointer.x) * autoK - attr.x) * 0.05;
       attr.y += (pointer.y + (ph.y - pointer.y) * autoK - attr.y) * 0.05;
 
-      if (gameOn && t > nextGoldAt && nodes.length) {
-        const nd = nodes[(Math.random() * nodes.length) | 0];
-        if (!nd.gold) { nd.gold = true; nd.goldUntil = t + 7000; }
-        nextGoldAt = t + 9000 + Math.random() * 8000;
+      if (gameOn && nodes.length) {
+        if (!nextGoldAt) nextGoldAt = t + 5000 + Math.random() * 4000;  // grace before the first gold
+        else if (t > nextGoldAt) {
+          const nd = nodes[(Math.random() * nodes.length) | 0];
+          if (!nd.gold) { nd.gold = true; nd.goldUntil = t + 7000; }
+          nextGoldAt = t + 9000 + Math.random() * 8000;
+        }
       }
 
       drawStars(t);
@@ -3930,6 +3973,7 @@ footer, header, hgroup, main, menu, nav, section {
       gameOn = !!(on && game);
       if (hudEl.root) hudEl.root.classList.toggle('on', gameOn);
       if (gameOn) lastHudAt = -1;                 // repaint HUD immediately on entry
+      else for (const nd of nodes) { nd.charge = 0; nd.armed = false; }  // no phantom misses after leaving the slide
       if (on === active) return;
       active = on;
       clearTimeout(offTimer);
@@ -3967,11 +4011,12 @@ footer, header, hgroup, main, menu, nav, section {
           }
         }
       }
+      const harvestR = Math.max(150, PULL * 0.46);  // covers the whole charge well
       for (const nd of nodes) {
         const dx = nd.x - e.clientX, dy = nd.y - e.clientY;
         const d = Math.hypot(dx, dy) || 1;
         // a click harvests nearby nodes that were gathered first (charged or golden)
-        if (gameOn && d < 150 && (nd.charge > 0.12 || nd.gold)) {
+        if (gameOn && d < harvestR && (nd.charge > 0.12 || nd.gold)) {
           captureNode(nd, now);
           continue;
         }
