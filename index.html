@@ -140,6 +140,50 @@ footer, header, hgroup, main, menu, nav, section {
     }
     @media print { #hero-bg { display: none; } }
 
+    /* Title-slide signal-harvest mini game HUD */
+    #hero-hud {
+      position: fixed; left: 18px; bottom: 18px; z-index: 3;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', monospace;
+      color: #EAF0FF;
+      background: rgba(10, 14, 26, 0.55);
+      border: 1px solid rgba(155, 130, 255, 0.3);
+      border-radius: 14px;
+      padding: 12px 16px 11px;
+      min-width: 236px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    #hero-hud.on { opacity: 1; transform: translateY(0); }
+    .hud-top { display: flex; align-items: baseline; gap: 7px; }
+    .hud-sig { color: #FFD866; font-size: 14px; }
+    #hud-score { font-size: 24px; font-weight: 800; letter-spacing: .5px; color: #fff; }
+    .hud-unit { font-size: 10px; color: #9BA6C0; letter-spacing: 2px; }
+    .hud-combo { margin-left: auto; font-size: 11px; font-weight: 800; color: #5BFFE0; text-shadow: 0 0 8px rgba(91,255,224,.6); }
+    .hud-mini { margin-top: 8px; font-size: 8.5px; letter-spacing: 2px; color: #7F88A3; }
+    .hud-bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,0.09); overflow: hidden; margin-top: 4px; }
+    .hud-fill { height: 100%; border-radius: 99px; transform-origin: left; transform: scaleX(0); transition: transform .18s ease; background: linear-gradient(90deg, #5BFFE0, #B5A1FF); }
+    .hud-fill.xp { background: linear-gradient(90deg, #B5A1FF, #FF94AC); }
+    .hud-level-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 9px; font-size: 11px; gap: 12px; }
+    #hud-level { font-weight: 800; color: #B5A1FF; }
+    .hud-next { color: #9BA6C0; font-size: 10px; }
+    .hud-hint { margin-top: 8px; font-size: 9.5px; line-height: 1.5; color: #8B94AD; letter-spacing: .3px; }
+    .hud-toast {
+      position: absolute; left: 50%; top: -12px;
+      transform: translate(-50%, 0) scale(.9);
+      white-space: nowrap;
+      font-size: 12px; font-weight: 800; color: #06080F;
+      background: linear-gradient(90deg, #5BFFE0, #B5A1FF);
+      border-radius: 999px; padding: 6px 14px;
+      opacity: 0; transition: opacity .3s ease, transform .3s ease;
+      box-shadow: 0 6px 20px rgba(91,255,224,0.35);
+    }
+    .hud-toast.show { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+    @media print { #hero-hud { display: none; } }
+
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
     .reveal .slides { text-align: left; }
     .reveal section { padding: 16px 52px; box-sizing: border-box; }
@@ -1087,6 +1131,19 @@ footer, header, hgroup, main, menu, nav, section {
   <div class="hb-nebula hb-n3"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="hb-vignette"></div>
+</div>
+
+<div id="hero-hud" aria-hidden="true">
+  <div class="hud-top">
+    <span class="hud-sig">⚡</span><span id="hud-score">0</span><span class="hud-unit">SIGNAL</span>
+    <span id="hud-combo" class="hud-combo"></span>
+  </div>
+  <div class="hud-mini">GRAVITY WELL</div>
+  <div class="hud-bar"><div id="hud-charge" class="hud-fill"></div></div>
+  <div class="hud-level-row"><span id="hud-level">LV.1 관측자</span><span id="hud-next" class="hud-next"></span></div>
+  <div class="hud-bar"><div id="hud-xp" class="hud-fill xp"></div></div>
+  <div class="hud-hint">커서로 노드를 모아 충전 → 클릭으로 수확<br/>✦ 황금 노드 ×10 · ☄ 혜성 클릭 +25</div>
+  <div id="hud-toast" class="hud-toast"></div>
 </div>
 
 <div class="dl-toolbar">
@@ -3392,6 +3449,103 @@ footer, header, hgroup, main, menu, nav, section {
     const pointer = { x: innerWidth / 2, y: innerHeight / 2, movedAt: -1e9 };
     const attr = { x: innerWidth / 2, y: innerHeight * 0.45 };
 
+    // ── signal-harvest mini game (title slide only) ──
+    // Nodes held inside the gravity well charge up; fully charged ones are
+    // auto-collected (idle-game style), a click harvests every charged node
+    // at once. Combos multiply, golden nodes and comets pay bonuses, and the
+    // score persists in localStorage.
+    const GOLD_FILL = alphaTable([255, 216, 102], 16, 1);
+    const hudEl = {
+      root: document.getElementById('hero-hud'),
+      score: document.getElementById('hud-score'),
+      combo: document.getElementById('hud-combo'),
+      charge: document.getElementById('hud-charge'),
+      level: document.getElementById('hud-level'),
+      next: document.getElementById('hud-next'),
+      xp: document.getElementById('hud-xp'),
+      toast: document.getElementById('hud-toast'),
+    };
+    const LEVELS = [
+      [0, '관측자'], [30, '수집가'], [100, '신호 사냥꾼'], [250, '뉴런 조련사'],
+      [600, '신경망 설계자'], [1500, '특이점'], [4000, '초지능'],
+    ];
+    let gameOn = false, score = 0, wellCharge = 0;
+    let comboN = 0, lastCapAt = -1e9;
+    let nextGoldAt = 0, lastHudAt = -1, saveTimer = null, toastTimer = null;
+    const pops = [];
+    try { score = Math.max(0, parseInt(localStorage.getItem('heroSignal'), 10) || 0); } catch (e) { /* storage unavailable */ }
+
+    const comboMul = () => 1 + Math.min(7, (comboN / 4) | 0);
+
+    function levelIdx(s) {
+      let i = 0;
+      while (i + 1 < LEVELS.length && s >= LEVELS[i + 1][0]) i++;
+      return i;
+    }
+
+    function showToast(txt) {
+      if (!hudEl.toast) return;
+      hudEl.toast.textContent = txt;
+      hudEl.toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => hudEl.toast.classList.remove('show'), 2400);
+    }
+
+    function saveScore() {
+      try { localStorage.setItem('heroSignal', String(score)); } catch (e) { /* storage unavailable */ }
+    }
+
+    function addScore(pts, x, y, txt, gold) {
+      const before = levelIdx(score);
+      score += pts;
+      const li = levelIdx(score);
+      if (li > before) {
+        showToast(`LEVEL UP! LV.${li + 1} ${LEVELS[li][1]}`);
+        ripples.push({ x: attr.x, y: attr.y, t0: performance.now() });
+      }
+      pops.push({ x, y, t0: performance.now(), txt: txt || `+${pts}`, gold: !!gold });
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveScore, 800);
+    }
+
+    function bumpCombo(t) {
+      comboN = (t - lastCapAt < 2600) ? comboN + 1 : 1;
+      lastCapAt = t;
+    }
+
+    function captureNode(nd, t) {
+      bumpCombo(t);
+      const pts = (nd.gold ? 10 : 1) * comboMul();
+      addScore(pts, nd.x, nd.y, `+${pts}`, nd.gold);
+      nd.gold = false;
+      nd.charge = 0;
+      // respawn on a random edge so the field never thins out
+      if (Math.random() < 0.5) { nd.x = Math.random() < 0.5 ? -20 : W + 20; nd.y = Math.random() * H; }
+      else { nd.x = Math.random() * W; nd.y = Math.random() < 0.5 ? -20 : H + 20; }
+      nd.vx = (Math.random() - 0.5) * 0.4;
+      nd.vy = (Math.random() - 0.5) * 0.4;
+      nd.da = 1e9;
+    }
+
+    function updateHud(t) {
+      if (!hudEl.root || t - lastHudAt < 120) return;
+      lastHudAt = t;
+      hudEl.score.textContent = score.toLocaleString();
+      const m = (t - lastCapAt < 2600) ? comboMul() : 1;
+      hudEl.combo.textContent = m > 1 ? `COMBO ×${m}` : '';
+      hudEl.charge.style.transform = `scaleX(${wellCharge.toFixed(3)})`;
+      const li = levelIdx(score);
+      hudEl.level.textContent = `LV.${li + 1} ${LEVELS[li][1]}`;
+      if (li + 1 < LEVELS.length) {
+        const cur = LEVELS[li][0], nxt = LEVELS[li + 1][0];
+        hudEl.next.textContent = `${score.toLocaleString()} / ${nxt.toLocaleString()}`;
+        hudEl.xp.style.transform = `scaleX(${((score - cur) / (nxt - cur)).toFixed(3)})`;
+      } else {
+        hudEl.next.textContent = 'MAX';
+        hudEl.xp.style.transform = 'scaleX(1)';
+      }
+    }
+
     function makeGlow(rgb, size, coreAlpha) {
       const c = document.createElement('canvas');
       c.width = c.height = size;
@@ -3457,7 +3611,9 @@ footer, header, hgroup, main, menu, nav, section {
       }
     }
 
-    function updateNodes(t) {
+    function updateNodes(t, dt, autoK) {
+      const capR = PULL * 0.42;
+      let wellSum = 0;
       for (const nd of nodes) {
         const a = (Math.sin(nd.x * 0.0011 + t * 0.00019)
                  + Math.cos(nd.y * 0.0014 - t * 0.00023)
@@ -3474,12 +3630,25 @@ footer, header, hgroup, main, menu, nav, section {
           nd.vy += (dy / d) * f + (dx / d) * f * 0.6;
         }
 
+        if (gameOn) {
+          if (nd.gold && t > nd.goldUntil) nd.gold = false;
+          if (d < capR) {
+            // idle (phantom) attractor still collects, just slower — auto-game mode
+            nd.charge = (nd.charge || 0) + (dt / 1400) * (1 - d / capR) * (1 - autoK * 0.5);
+            if (nd.charge >= 1) captureNode(nd, t);
+            else wellSum += nd.charge;
+          } else if (nd.charge) {
+            nd.charge = Math.max(0, nd.charge - dt / 2600);
+          }
+        }
+
         nd.vx *= 0.965; nd.vy *= 0.965;
         nd.x += nd.vx; nd.y += nd.vy;
 
         if (nd.x < -30) nd.x = W + 28; else if (nd.x > W + 30) nd.x = -28;
         if (nd.y < -30) nd.y = H + 28; else if (nd.y > H + 30) nd.y = -28;
       }
+      wellCharge = Math.min(1, wellSum / 5);
     }
 
     function computePairs() {
@@ -3524,12 +3693,24 @@ footer, header, hgroup, main, menu, nav, section {
       for (const nd of nodes) {
         const boost = nd.da < PULL ? (1 - nd.da / PULL) * 0.5 : 0;
         const a = Math.min(1, 0.35 + 0.3 * (0.5 + 0.5 * Math.sin(t * 0.0021 + nd.tw)) + boost);
-        const fills = NODE_FILL[nd.ci];
+        const fills = nd.gold ? GOLD_FILL : NODE_FILL[nd.ci];
         ctx.fillStyle = fills[(a * 15) | 0];
-        ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.r, 0, 6.283); ctx.fill();
-        if (boost > 0.08) {
+        ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.gold ? nd.r + 1.2 : nd.r, 0, 6.283); ctx.fill();
+        if (nd.gold) {
+          ctx.fillStyle = GOLD_FILL[5];
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, nd.r * 4 + Math.sin(t * 0.006 + nd.tw) * 1.5, 0, 6.283);
+          ctx.fill();
+        } else if (boost > 0.08) {
           ctx.fillStyle = fills[Math.max(1, (a * 2.4) | 0)];
           ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.r * 3.2, 0, 6.283); ctx.fill();
+        }
+        if (gameOn && nd.charge > 0.04) {
+          ctx.strokeStyle = `rgba(91,255,224,${(0.25 + nd.charge * 0.6).toFixed(3)})`;
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, nd.r + 4, -1.5708, -1.5708 + nd.charge * 6.283);
+          ctx.stroke();
         }
       }
     }
@@ -3650,6 +3831,23 @@ footer, header, hgroup, main, menu, nav, section {
       }
     }
 
+    function drawPops(t) {
+      if (!pops.length) return;
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.textAlign = 'center';
+      for (let i = pops.length - 1; i >= 0; i--) {
+        const p = pops[i];
+        const k = Math.max(0, (t - p.t0) / 1100);
+        if (k >= 1) { pops.splice(i, 1); continue; }
+        const a = k < 0.15 ? k / 0.15 : 1 - (k - 0.15) / 0.85;
+        ctx.font = p.gold ? '800 15px "JetBrains Mono", monospace' : '700 12px "JetBrains Mono", monospace';
+        ctx.fillStyle = p.gold
+          ? `rgba(255,216,102,${(a * 0.95).toFixed(3)})`
+          : `rgba(180,255,235,${(a * 0.9).toFixed(3)})`;
+        ctx.fillText(p.txt, p.x, p.y - 12 - k * 30);
+      }
+    }
+
     function drawReticle(t, autoK) {
       ctx.globalCompositeOperation = 'lighter';
       // low alpha: the destination-out fade lets additive glow accumulate frame over frame
@@ -3708,8 +3906,14 @@ footer, header, hgroup, main, menu, nav, section {
       attr.x += (pointer.x + (ph.x - pointer.x) * autoK - attr.x) * 0.05;
       attr.y += (pointer.y + (ph.y - pointer.y) * autoK - attr.y) * 0.05;
 
+      if (gameOn && t > nextGoldAt && nodes.length) {
+        const nd = nodes[(Math.random() * nodes.length) | 0];
+        if (!nd.gold) { nd.gold = true; nd.goldUntil = t + 7000; }
+        nextGoldAt = t + 9000 + Math.random() * 8000;
+      }
+
       drawStars(t);
-      updateNodes(t);
+      updateNodes(t, dt, autoK);
       if ((flip = !flip)) computePairs();         // pair graph refreshes every other frame
       drawLinks();
       drawNodes(t);
@@ -3717,10 +3921,15 @@ footer, header, hgroup, main, menu, nav, section {
       drawComets(t);
       drawRipples(t);
       drawGlyphs(t);
+      drawPops(t);
       drawReticle(t, autoK);
+      if (gameOn) updateHud(t);
     }
 
-    function setActive(on) {
+    function setActive(on, game) {
+      gameOn = !!(on && game);
+      if (hudEl.root) hudEl.root.classList.toggle('on', gameOn);
+      if (gameOn) lastHudAt = -1;                 // repaint HUD immediately on entry
       if (on === active) return;
       active = on;
       clearTimeout(offTimer);
@@ -3746,16 +3955,34 @@ footer, header, hgroup, main, menu, nav, section {
 
     addEventListener('pointerdown', e => {
       if (!active) return;
-      ripples.push({ x: e.clientX, y: e.clientY, t0: performance.now() });
+      const now = performance.now();
+      ripples.push({ x: e.clientX, y: e.clientY, t0: now });
+      if (gameOn) {
+        for (let i = comets.length - 1; i >= 0; i--) {
+          const c = comets[i];
+          if (Math.hypot(c.x - e.clientX, c.y - e.clientY) < 70) {
+            comets.splice(i, 1);
+            bumpCombo(now);
+            addScore(25, c.x, c.y, 'COMET +25', true);
+          }
+        }
+      }
       for (const nd of nodes) {
         const dx = nd.x - e.clientX, dy = nd.y - e.clientY;
         const d = Math.hypot(dx, dy) || 1;
+        // a click harvests nearby nodes that were gathered first (charged or golden)
+        if (gameOn && d < 150 && (nd.charge > 0.12 || nd.gold)) {
+          captureNode(nd, now);
+          continue;
+        }
         if (d < 320) {
           const f = (1 - d / 320) * 7;
           nd.vx += (dx / d) * f; nd.vy += (dy / d) * f;
         }
       }
     }, { passive: true });
+
+    addEventListener('pagehide', saveScore);
 
     let resizeTimer = null;
     addEventListener('resize', () => {
@@ -3767,8 +3994,8 @@ footer, header, hgroup, main, menu, nav, section {
     const qnaIndex = Array.from(document.querySelectorAll('.slides > section'))
       .findIndex(s => s.id === 'qna-slide');
     const isHeroSlide = indexh => indexh === 0 || indexh === qnaIndex;
-    Reveal.on('ready', e => setActive(isHeroSlide(e.indexh)));
-    Reveal.on('slidechanged', e => setActive(isHeroSlide(e.indexh)));
+    Reveal.on('ready', e => setActive(isHeroSlide(e.indexh), e.indexh === 0));
+    Reveal.on('slidechanged', e => setActive(isHeroSlide(e.indexh), e.indexh === 0));
   })();
 </script>
 
