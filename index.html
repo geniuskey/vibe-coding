@@ -1122,6 +1122,187 @@ footer, header, hgroup, main, menu, nav, section {
     .eco-node.pink  { border-color: rgba(255,122,149,0.65); }
     .eco-node.amber { border-color: rgba(255,212,107,0.65); }
 
+    /* ========= A. Loop live demo — evolving timer widget (slide 13d) ========= */
+    .loopdemo-wrap { display:flex; justify-content:center; }
+    .loopdemo .ld-window {
+      width: 400px;
+      background: #EDEDEA; color: #17181C;
+      border: 1px solid #A9A9A9; border-radius: 4px;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      box-shadow: none;
+      transition: background .6s ease, border-color .6s ease, border-radius .6s ease, box-shadow .6s ease, color .6s ease;
+    }
+    .loopdemo .ld-title {
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 9px 14px;
+      background: #D8D8D4; color:#3A3A3A;
+      font-size: .85rem; font-weight: 600;
+      transition: background .6s ease, color .6s ease;
+    }
+    .loopdemo .ld-ver {
+      font-size:.72rem; font-weight:700; letter-spacing:.06em;
+      padding:.15em .7em; border-radius:999px;
+      background: rgba(0,0,0,.1);
+      transition: background .6s ease, color .6s ease;
+    }
+    .loopdemo .ld-body {
+      position: relative;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.3rem;
+      padding: 2.6rem 1rem 2.2rem;
+    }
+    .loopdemo .ld-ring {
+      position:absolute; left:50%; top:50%;
+      width: 218px; height: 218px;
+      transform: translate(-50%,-50%) rotate(-90deg);
+      opacity: 0;
+      transition: opacity .6s ease, filter .6s ease;
+      pointer-events: none;
+    }
+    .loopdemo .ld-ring-bg { fill:none; stroke: rgba(255,255,255,.10); stroke-width: 7; }
+    .loopdemo .ld-ring-fg {
+      fill:none; stroke:#B5A1FF; stroke-width:7; stroke-linecap:round;
+      stroke-dasharray: 326.7;
+      transition: stroke .6s ease;
+    }
+    .loopdemo .ld-time {
+      font-size: 3.2rem; font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .02em;
+      transition: color .6s ease, text-shadow .6s ease, font-family .6s ease;
+    }
+    .loopdemo .ld-label {
+      font-size:.78rem; letter-spacing:.28em; opacity:.55;
+      transition: color .6s ease;
+    }
+    /* v1+ : dark card */
+    .loopdemo:is(.v1,.v2,.v3) .ld-window {
+      background:#0E1220; color:#FFFFFF;
+      border:1px solid rgba(155,130,255,.45); border-radius:16px;
+      font-family:'JetBrains Mono', monospace;
+      box-shadow: 0 26px 60px -18px rgba(0,0,0,.7);
+    }
+    .loopdemo:is(.v1,.v2,.v3) .ld-title { background:#161B30; color:#B8BFD0; }
+    .loopdemo:is(.v1,.v2,.v3) .ld-ver { background:rgba(124,92,255,.25); color:#E1D9FF; }
+    /* v2+ : progress ring */
+    .loopdemo:is(.v2,.v3) .ld-ring { opacity:1; }
+    /* v3 : team colors + glow */
+    .loopdemo.v3 .ld-window { border-color: rgba(91,255,224,.55); box-shadow: 0 0 46px rgba(124,92,255,.35), 0 26px 60px -18px rgba(0,0,0,.7); }
+    .loopdemo.v3 .ld-ring-fg { stroke: url(#ldgrad); }
+    .loopdemo.v3 .ld-ring { filter: drop-shadow(0 0 10px rgba(91,255,224,.55)); }
+    .loopdemo.v3 .ld-time { color:#5BFFE0; text-shadow: 0 0 22px rgba(91,255,224,.5); }
+    .loopdemo.v3 .ld-label { color:#B5A1FF; opacity:.9; }
+
+    /* ========= B. Crown race (slide 20) ========= */
+    .race { max-width: 1090px; }
+    .race-year {
+      font-family:'JetBrains Mono', monospace;
+      font-size: 1.5rem; font-weight: 800; letter-spacing:.08em;
+      color:#FFE08A; margin-bottom:.65rem;
+    }
+    .race-row {
+      display:grid; grid-template-columns: 158px 1fr 46px;
+      align-items:center; gap:.85rem;
+      margin-bottom:.5rem;
+    }
+    .race-row .rr-label { font-size:1.02rem; font-weight:700; text-align:right; color:#D6DCEC; white-space:nowrap; }
+    .race-row .rr-track {
+      height:27px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .race-row .rr-bar { display:block; height:100%; width:0%; border-radius:999px; transition: width .8s cubic-bezier(.25,.8,.25,1); }
+    .race-row .rr-crown { font-size:1.35rem; opacity:0; transform:scale(.3) rotate(-20deg); transition: opacity .35s ease, transform .45s cubic-bezier(.2,1.4,.4,1); }
+    .race-row.lead .rr-crown { opacity:1; transform:scale(1) rotate(0deg); }
+    .race-row.mystery { max-height:0; opacity:0; overflow:hidden; margin-bottom:0; transition: max-height .7s ease, opacity .7s ease, margin-bottom .7s ease; }
+    .race.done .race-row.mystery { max-height:40px; opacity:1; margin-bottom:.5rem; }
+    .race-row.mystery .rr-label { color:#FFE08A; }
+    .race-row.mystery .rr-bar {
+      background: linear-gradient(90deg,#B5A1FF,#5BFFE0,#FF94AC);
+      background-size: 200% 100%;
+      animation: gradMove 3s linear infinite;
+      box-shadow: 0 0 18px rgba(155,130,255,.55);
+    }
+
+    /* ========= C. Domain × AI multiply demo (slide 38f) ========= */
+    .mult-demo {
+      display:flex; align-items:center; justify-content:center;
+      gap:1.3rem; flex-wrap:wrap;
+      margin: 1.1rem 0 .3rem;
+    }
+    .mult-demo .md-in {
+      display:flex; flex-direction:column; align-items:center; gap:.3rem;
+      background: rgba(20,22,44,.55);
+      border:1px solid rgba(155,130,255,.35); border-radius:16px;
+      padding:.85rem 1.4rem;
+    }
+    .mult-demo .md-name { font-size:1.3rem; font-weight:800; }
+    .mult-demo input[type=range] { width:215px; accent-color:#B5A1FF; cursor:pointer; }
+    .mult-demo .md-val { font-family:'JetBrains Mono', monospace; font-size:1.45rem; font-weight:800; color:#fff; }
+    .mult-demo .md-op { font-size:2.3rem; font-weight:800; color:var(--fg-soft); }
+    .mult-demo .md-out { display:flex; flex-direction:column; align-items:center; gap:.3rem; min-width:250px; }
+    .mult-demo .md-num {
+      font-family:'JetBrains Mono', monospace;
+      font-size:2.7rem; font-weight:900; line-height:1; color:#fff;
+      transition: color .3s ease, text-shadow .3s ease, transform .3s ease;
+    }
+    .mult-demo .md-bar {
+      width:235px; height:16px; border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+      overflow:hidden;
+    }
+    .mult-demo .md-bar i {
+      display:block; height:100%; width:4%; border-radius:999px;
+      background:linear-gradient(90deg,#5BFFE0,#B5A1FF);
+      transition:width .35s ease;
+    }
+    .mult-demo .md-cap { font-size:1.0rem; color:#9BA6C0; transition: color .3s ease; }
+    .mult-demo .md-out.boom .md-num { color:#5BFFE0; text-shadow:0 0 26px rgba(91,255,224,.85); transform:scale(1.12); }
+    .mult-demo .md-out.boom .md-bar i { box-shadow:0 0 20px rgba(91,255,224,.8); }
+    .mult-demo .md-out.boom .md-cap { color:#5BFFE0; font-weight:800; }
+
+    /* ========= D. Meta reveal pill (slide 28) ========= */
+    .meta-reveal {
+      position:absolute; left:50%; bottom:6px;
+      transform: translateX(-50%);
+      white-space:nowrap;
+      font-size:1.3rem; font-weight:700;
+      padding:.85rem 1.7rem; border-radius:999px;
+      background: rgba(10,14,26,.85);
+      border:1px solid rgba(155,130,255,.6);
+      box-shadow: 0 0 44px rgba(124,92,255,.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:5;
+    }
+
+    /* ========= E. Living agentic loop (slide 37) ========= */
+    .loop-live div.flow-step { animation: llPulse 5.4s ease-in-out infinite; }
+    .loop-live div.flow-step:nth-of-type(1) { animation-delay: 0s; }
+    .loop-live div.flow-step:nth-of-type(2) { animation-delay: 1.8s; }
+    .loop-live div.flow-step:nth-of-type(3) { animation-delay: 3.6s; }
+    .loop-live span.flow-arrow { animation: llArrow 5.4s ease-in-out infinite; }
+    .loop-live span.flow-arrow:nth-of-type(1) { animation-delay: .9s; }
+    .loop-live span.flow-arrow:nth-of-type(2) { animation-delay: 2.7s; }
+    @keyframes llPulse {
+      0%, 33%, 100% { border-color: rgba(190,200,224,0.5); box-shadow: none; }
+      8%, 22% { border-color: #5BFFE0; box-shadow: 0 0 20px rgba(91,255,224,.35); }
+    }
+    @keyframes llArrow {
+      0%, 30%, 100% { opacity:.55; transform: translateX(0); color:#8A93B2; }
+      10% { opacity:1; transform: translateX(5px); color:#5BFFE0; }
+    }
+
+    /* new interactive bits obey reduced-motion too */
+    @media (prefers-reduced-motion: reduce) {
+      .loop-live div.flow-step, .loop-live span.flow-arrow,
+      .race-row.mystery .rr-bar { animation: none !important; }
+      .race-row .rr-bar, .loopdemo .ld-window { transition: none !important; }
+    }
+
     /* speakerNotes-friendly */
     @media print { body::before, body::after { display: none; } }
   </style>
@@ -1180,7 +1361,7 @@ footer, header, hgroup, main, menu, nav, section {
     <!-- ============= 1. Title ============= -->
     <section>
       <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-        <div class="chip">SEMINAR · 2026</div>
+        <div class="chip">SEMINAR · 2026.07</div>
         <h1 style="font-size:5.5rem;">
           <span class="grad">바이브 코딩</span>이란<br/>
           무엇인가?
@@ -1288,6 +1469,9 @@ footer, header, hgroup, main, menu, nav, section {
           <p class="autoshow fade-up">
             361칸 전부에 대해 답을 계산합니다.<br/>
             그리고 가장 <span class="accent2">승률이 높은 칸</span>에 둡니다.
+          </p>
+          <p class="muted autoshow fade-up" style="font-size: 1.0rem;">
+            * 그림은 설명을 위해 9×9로 축약한 바둑판입니다.
           </p>
         </div>
       </div>
@@ -1581,13 +1765,57 @@ footer, header, hgroup, main, menu, nav, section {
       </p>
     </section>
 
+    <!-- ============= 13d. Loop live demo — the widget evolves on screen ============= -->
+    <section>
+      <h2>백문이 불여일견 — <span class="grad">루프가 결과물을 키우는</span> 장면.</h2>
+      <p class="autoshow fade-up muted" style="margin-top: .3rem; font-size: 1.1rem;">
+        방금 그 루프를 그대로 돌려보죠. 오른쪽 위젯은 <span class="accent2">지금 이 화면에서 실제로 작동 중</span>입니다.
+      </p>
+      <div class="grid-2" style="grid-template-columns: 1.15fr 1fr; margin-top: 1rem; align-items: center; gap: 1.8rem;">
+        <div class="chat compact" style="margin: 0;">
+          <div class="bubble user autoshow fade-up"><span class="who">YOU</span>회의 때 쓸 <b>타이머 위젯</b> 하나 만들어줘.</div>
+          <div class="bubble ai autoshow fade-up"><span class="who">CLAUDE</span>기본 타이머를 만들었어요. 바로 실행해 보세요 →</div>
+          <div class="bubble user fragment fade-up" data-fragment-index="0"><span class="who">YOU</span>너무 밋밋한데. <b>다크 테마</b>에 카드 느낌으로.</div>
+          <div class="bubble ai fragment fade-up" data-fragment-index="0" data-ld="1"><span class="who">CLAUDE</span>다크 카드 + 모노 폰트로 바꿨습니다 →</div>
+          <div class="bubble user fragment fade-up" data-fragment-index="1"><span class="who">YOU</span>좋아. 남은 시간이 <b>한눈에 보이게</b> — 링 같은 걸로.</div>
+          <div class="bubble ai fragment fade-up" data-fragment-index="1" data-ld="2"><span class="who">CLAUDE</span>진행률 링을 얹었어요. 시간이 줄면 링도 줄어듭니다 →</div>
+          <div class="bubble user fragment fade-up" data-fragment-index="2"><span class="who">YOU</span>마지막으로 <b>우리 발표 컬러</b>(보라·민트)로 맞춰줘.</div>
+          <div class="bubble ai fragment fade-up" data-fragment-index="2" data-ld="3"><span class="who">CLAUDE</span>완성입니다. 코드는 한 줄도 직접 안 쓰셨어요 →</div>
+        </div>
+        <div class="loopdemo-wrap autoshow fade-up" style="animation-delay: .25s;">
+          <div class="loopdemo v0" id="loopdemo">
+            <div class="ld-window">
+              <div class="ld-title"><span>meeting-timer</span><span class="ld-ver" id="ld-ver">v1 · 기본</span></div>
+              <div class="ld-body">
+                <svg class="ld-ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="ldgrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#B5A1FF"/>
+                      <stop offset="100%" stop-color="#5BFFE0"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="ld-ring-bg" cx="60" cy="60" r="52"/>
+                  <circle class="ld-ring-fg" id="ld-ringfg" cx="60" cy="60" r="52"/>
+                </svg>
+                <div class="ld-time" id="ld-time">05:00</div>
+                <div class="ld-label">TEAM SYNC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="muted autoshow fade-up center" style="margin-top: .9rem; font-size: 1.08rem;">
+        ① 요청 → ② 생성 → ③ 확인 → ④ 수정 — 방금 그 네 박자가 <span class="accent2">세 바퀴</span> 돈 겁니다.
+      </p>
+    </section>
+
     <!-- ============= 14. Productivity boost: not automation ============= -->
     <section>
       <h2>그러면 AI로 <span class="accent2">생산성</span>을 올린다는 건<br/>대체 무슨 뜻일까요?</h2>
       <div class="grid-2" style="margin-top: 2rem;">
         <div class="card autoshow fade-right" style="animation-delay: .1s;">
           <span class="pill amber">흔한 답</span>
-          <h3 style="margin-top: .6rem;">⚙️ 자동화 / 인간 일 이양</h3>
+          <h3 style="margin-top: .6rem;">⚙️ 자동화 — 사람 일을 대신하기</h3>
           <p>물론 훌륭합니다. 하지만 이건 <span class="accent">절반의 정답</span>입니다.</p>
         </div>
         <div class="card autoshow fade-left" style="border-color: rgba(124,92,255,0.5); animation-delay: .7s;">
@@ -1844,23 +2072,26 @@ footer, header, hgroup, main, menu, nav, section {
     <!-- ============= 20. Crown changes ============= -->
     <section>
       <h2>왕관은 <span class="accent3">계속 바뀌어 왔습니다.</span></h2>
-      <p class="autoshow fade-up" style="margin-top: 1rem; font-size: 1.5rem;">
-        5년 동안 "어떤 AI가 가장 좋으냐"의 논쟁은 — <span class="accent">3개월마다 답이 바뀌었어요.</span>
+      <p class="autoshow fade-up" style="margin-top: .5rem; font-size: 1.25rem;">
+        "어떤 AI 코딩 도구가 최고냐" — 지난 5년의 레이스를 <span class="accent">직접 돌려보죠.</span>
       </p>
-      <div class="grid-3" style="margin-top: 2rem;">
-        <div class="card autoshow zoom-in">
-          <h3>당시의 최강자</h3>
-          <p class="muted">Copilot → Cursor → Devin → Claude Code…<br/>"세상을 집어삼킬 거야"라던 도구들.</p>
-        </div>
-        <div class="card autoshow zoom-in">
-          <h3>지금의 현실</h3>
-          <p class="muted">그중 몇몇은 벌써 이름조차 뜸해졌습니다.<br/>요즘은 <span class="accent2">"Claude보다 Codex가 낫다"</span>는 후기도 흔해요.</p>
-        </div>
-        <div class="card autoshow zoom-in">
-          <h3>3개월 후?</h3>
-          <p class="muted">아무도 모릅니다. <br/>그게 바로 <span class="accent">함정</span>입니다.</p>
-        </div>
+      <div class="race autoshow fade-up" id="crownrace" style="margin-top: 1rem;">
+        <div class="race-year" id="race-year">2021</div>
+        <div class="race-row" data-r="0"><span class="rr-label">Copilot</span><div class="rr-track"><i class="rr-bar" style="background:#8A93B2;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row" data-r="1"><span class="rr-label">ChatGPT 복붙</span><div class="rr-track"><i class="rr-bar" style="background:#2BEAD0;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row" data-r="2"><span class="rr-label">Cursor</span><div class="rr-track"><i class="rr-bar" style="background:#FFD46B;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row" data-r="3"><span class="rr-label">Devin</span><div class="rr-track"><i class="rr-bar" style="background:#FF94AC;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row" data-r="4"><span class="rr-label">Claude Code</span><div class="rr-track"><i class="rr-bar" style="background:#B5A1FF;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row" data-r="5"><span class="rr-label">Codex CLI</span><div class="rr-track"><i class="rr-bar" style="background:#7EC8FF;"></i></div><span class="rr-crown">👑</span></div>
+        <div class="race-row mystery" data-r="6"><span class="rr-label">3개월 후…?</span><div class="rr-track"><i class="rr-bar"></i></div><span class="rr-crown">👑</span></div>
       </div>
+      <p class="autoshow fade-up" style="margin-top: .9rem; font-size: 1.3rem;">
+        그중 몇몇은 벌써 이름조차 뜸해졌고 — <span class="accent">3개월 후는 아무도 모릅니다.</span>
+        <span class="grad" style="font-weight:800;">그게 함정입니다.</span>
+      </p>
+      <p class="muted autoshow fade-up" style="margin-top: .4rem; font-size: .98rem;">
+        ※ 막대는 시기별 개발자 커뮤니티의 체감 인기를 재구성한 개념도입니다 — 정확한 점유율이 아닙니다.
+      </p>
     </section>
 
     <!-- ============= 20b. The question everyone asks ============= -->
@@ -1914,7 +2145,7 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="ltag">순위 뒤집힘</span>
         </div>
         <div class="layer surface">
-          <span class="lname">tool</span>
+          <span class="lname">tool · IDE</span>
           <span class="lex">Cursor · Windsurf …</span>
           <span class="ltag">표준이 바뀜</span>
         </div>
@@ -2042,7 +2273,7 @@ footer, header, hgroup, main, menu, nav, section {
     <!-- ============= 25. Recap ============= -->
     <section>
       <div class="chip">RECAP</div>
-      <h2>오늘의 한 페이지 요약.</h2>
+      <h2>여기까지의 한 페이지 요약.</h2>
       <div class="stack" style="margin-top: 2rem;">
         <p style="font-size: 1.6rem;" class="autoshow fade-up">
           1. AI는 <span class="accent">"역사상 가장 승률 높은 다음 답"</span>을 찾아주는 확률 계산기다.
@@ -2060,6 +2291,9 @@ footer, header, hgroup, main, menu, nav, section {
           5. 그리고 그 선택은 <span class="grad" style="font-weight:800;">주체적</span>일수록 좋다 — AI는 단기 최적화에 치우치니까.
         </p>
       </div>
+      <p class="muted autoshow fade-up" style="margin-top: 2rem; font-size: 1.1rem; animation-delay: .8s;">
+        이 다섯 줄을 들고 — 처음 질문으로 돌아가서, 실전으로 넘어갑니다.
+      </p>
     </section>
 
     <!-- ============= 26. What is vibe coding then ============= -->
@@ -2137,11 +2371,11 @@ footer, header, hgroup, main, menu, nav, section {
 
         <div class="bubble user fragment fade-up" data-fragment-index="1">
           <span class="who">YOU</span>
-          인터랙티브한 요소도 넣으려면?
+          청중이 <b>실시간으로 참여</b>하는 요소도 넣으려면?
         </div>
         <div class="bubble ai fragment fade-up" data-fragment-index="1">
           <span class="who">CLAUDE / CODEX</span>
-          <b>AWS EC2 + React</b>로 웹앱화하는 걸 추천. 클릭/드래그/실시간 입력까지 됩니다.
+          그건 입력을 모을 <b>서버가 필요</b>해요. <b>AWS EC2 + React</b> 웹앱화를 추천 — 실시간 입력까지 됩니다.
         </div>
 
         <div class="bubble user fragment fade-up" data-fragment-index="2">
@@ -2150,7 +2384,7 @@ footer, header, hgroup, main, menu, nav, section {
         </div>
         <div class="bubble ai fragment fade-up" data-fragment-index="2">
           <span class="who">CLAUDE / CODEX</span>
-          동시 접속마다 매번 렌더링이 도는 게 주범 같아요. ① <b>캐시</b>, ② <b>I/O 큐 관리</b> 두 방향을 보세요.
+          접속자마다 서버가 같은 데이터를 <b>매번 다시 만들어 보내는 게</b> 주범 같아요. ① <b>캐시</b>, ② <b>I/O 큐 관리</b> 두 방향을 보세요.
         </div>
 
         <div class="bubble user fragment fade-up" data-fragment-index="3">
@@ -2161,6 +2395,9 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="who">CLAUDE / CODEX</span>
           <b>Redis</b> 도입을 검토하세요. 캐시 + Pub/Sub으로 동시성·지연을 한 번에 잡을 수 있습니다.
         </div>
+      </div>
+      <div class="meta-reveal fragment fade-up" data-fragment-index="4" id="meta-reveal">
+        ✦ 그리고 이 대화의 결과물이 — <span class="grad">지금 보고 계신 이 슬라이드</span>입니다.
       </div>
     </section>
 
@@ -2192,7 +2429,7 @@ footer, header, hgroup, main, menu, nav, section {
     </section>
 
     <!-- ============= 30. Section opener: Claude Code 실전 ============= -->
-    <section data-background-color="#06080F">
+    <section id="ch6-opener">
       <div style="height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
         <div class="chip">CHAPTER 6 · 처음 쓰는 사람을 위해</div>
         <h1 style="font-size: 5.5rem;">
@@ -2214,6 +2451,9 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="pill pink">MCP</span>
           <span class="pill amber">Agent Skills</span>
         </div>
+        <p class="autoshow fade-up muted" style="margin-top: 1.8rem; font-size: 1.05rem; animation-delay: 1.2s;">
+          ✨ 뒤에 다시 펼쳐진 이 별밭 — 첫 화면의 미니게임까지, 전부 이 자료를 만들며 <span class="accent2">바이브 코딩으로 만든 결과물</span>입니다.
+        </p>
       </div>
     </section>
 
@@ -2227,7 +2467,7 @@ footer, header, hgroup, main, menu, nav, section {
 
       <div class="card autoshow fade-up" style="margin-top: 1.3rem; padding: 1.5rem 1.7rem; border-color: rgba(155,130,255,0.55);">
         <span class="pill">에이전틱 루프</span>
-        <div class="flow-lane" style="margin-top: 1rem;">
+        <div class="flow-lane loop-live" style="margin-top: 1rem;">
           <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>① 맥락 수집</span><span style="font-weight:500; font-size:.96rem; opacity:.92;">파일 검색·읽기로 코드 이해</span></div>
           <span class="flow-arrow">→</span>
           <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>② 실행</span><span style="font-weight:500; font-size:.96rem; opacity:.92;">편집·명령·테스트 실행</span></div>
@@ -2460,7 +2700,7 @@ footer, header, hgroup, main, menu, nav, section {
             <div class="mi autoshow fade-in" style="animation-delay:1.1s;"><span class="k">/resume</span><span class="d">어제 작업 이어가기 — 터미널을 닫아도 세션은 남습니다</span></div>
             <div class="mi sel autoshow fade-in" style="animation-delay:1.3s;"><span class="k">/rewind</span><span class="d">실수 되돌리기 — Esc 두 번으로도 열림</span></div>
             <div class="mi autoshow fade-in" style="animation-delay:1.5s;"><span class="k">/memory</span><span class="d">세션 간 유지되는 규칙 — 대화 중 "# ..."만 입력해도 기록</span></div>
-            <div class="mi autoshow fade-in" style="animation-delay:1.7s;"><span class="k">/usage</span><span class="d">토큰·비용 확인 (구 /cost)</span></div>
+            <div class="mi autoshow fade-in" style="animation-delay:1.7s;"><span class="k">/usage</span><span class="d">플랜 사용량·한도 확인 (API 종량제는 /cost)</span></div>
             <div class="mi autoshow fade-in" style="animation-delay:1.9s;"><span class="k">/agents</span><span class="d">역할별 서브에이전트 — 병렬 작업·컨텍스트 분리</span></div>
           </div>
         </div>
@@ -2933,23 +3173,38 @@ footer, header, hgroup, main, menu, nav, section {
     <section data-background-color="#0B0F1C">
       <div class="chip">8.5 · 핵심</div>
       <h2>비개발자의 생산성은 <span class="grad">도메인 지식 × AI 활용</span>.</h2>
-      <div class="autoshow fade-up" style="margin: 1.3rem 0; display:flex; align-items:center; justify-content:center; gap: 1.1rem; flex-wrap: wrap;">
-        <span style="font-size: 2.6rem; font-weight: 800; color: var(--accent-2);">도메인 지식</span>
-        <span style="font-size: 2.6rem; font-weight: 800; color: var(--fg-soft);">×</span>
-        <span style="font-size: 2.6rem; font-weight: 800; color: var(--accent);">AI 활용</span>
-        <span style="font-size: 2.6rem; font-weight: 800; color: var(--fg-soft);">=</span>
-        <span class="grad" style="font-size: 2.8rem; font-weight: 900;">생산성 폭발</span>
+      <div class="mult-demo autoshow fade-up" id="multdemo">
+        <div class="md-in">
+          <span class="md-name accent2">도메인 지식</span>
+          <input id="md-dom" type="range" min="1" max="10" value="2" aria-label="도메인 지식">
+          <span class="md-val" id="md-domv">2</span>
+        </div>
+        <span class="md-op">×</span>
+        <div class="md-in">
+          <span class="md-name accent">AI 활용</span>
+          <input id="md-ai" type="range" min="1" max="10" value="2" aria-label="AI 활용">
+          <span class="md-val" id="md-aiv">2</span>
+        </div>
+        <span class="md-op">=</span>
+        <div class="md-out" id="md-out">
+          <span class="md-num" id="md-num">4</span>
+          <div class="md-bar"><i id="md-fill"></i></div>
+          <span class="md-cap" id="md-cap">아직은 미미</span>
+        </div>
       </div>
-      <p class="muted autoshow fade-up" style="text-align:center; font-size: 1.05rem; animation-delay: .2s;">
+      <p class="muted autoshow fade-up" style="text-align:center; font-size: 1.0rem; margin-top:.1rem;">
+        직접 움직여보세요 — <span class="accent3">한쪽만 10이어도 크지 않습니다.</span> 덧셈이 아니라 <span class="accent2">곱셈</span>이니까요.
+      </p>
+      <p class="muted autoshow fade-up" style="text-align:center; font-size: 1.05rem; margin-top:.7rem; animation-delay: .2s;">
         정식 개발 과제가 되기엔 작지만, 현업에선 매일 시간을 잡아먹는 문제들 —
       </p>
       <div class="grid-3" style="margin-top: 1rem; align-items: stretch;">
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">📥 메일·엑셀 반복 취합</p></div>
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">📊 CSV 정리 · 시각화</p></div>
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">🔎 팀 문서 기반 검색</p></div>
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">💬 FAQ 챗봇</p></div>
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">🧮 작은 계산기 · 시뮬레이터</p></div>
-        <div class="card autoshow zoom-in"><p style="font-size: 1.02rem;">📈 업무용 대시보드</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">📥 메일·엑셀 반복 취합</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">📊 CSV 정리 · 시각화</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">🔎 팀 문서 기반 검색</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">💬 FAQ 챗봇</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">🧮 작은 계산기 · 시뮬레이터</p></div>
+        <div class="card autoshow zoom-in" style="padding:.85rem 1.2rem;"><p style="font-size: 1.02rem;">📈 업무용 대시보드</p></div>
       </div>
       <div class="quote autoshow fade-up" style="margin-top: 1.1rem; animation-delay: .6s;">
         도메인 지식이 <span class="grad" style="font-weight:800;">깊을수록</span> — AI로 만들 수 있는 것이 <span class="accent2" style="font-weight:800;">폭발적으로</span> 커집니다.
@@ -3143,15 +3398,15 @@ footer, header, hgroup, main, menu, nav, section {
       <div class="grid-2" style="margin-top: 1.6rem; gap: 1.2rem;">
         <div class="card autoshow fade-up">
           <span class="pill">대표 트렌드</span>
-          <h3>OpenClaw · Manus 계열</h3>
+          <h3>Manus 계열 — 개인화 Agent</h3>
           <p>"각자 손에 비서를 하나씩" — <span class="accent">개인화 에이전트</span>가 대흥행.<br/>
-          OpenClaw는 한 달 만에 <span class="accent3">2천만 MAU</span> · GitHub 25만 스타.</p>
+          해외 오픈소스 OpenClaw 열풍(<span class="accent3">2천만 MAU</span> · GitHub 25만 스타)과 같은 흐름.</p>
         </div>
 
         <div class="card autoshow fade-up" style="border-color: rgba(255,148,172,0.6);">
           <span class="pill pink">놀라운 숫자</span>
           <h3><span class="accent3">140조 토큰</span> / 일 <span class="muted" style="font-size:1rem; font-weight:600;">(2026.03)</span></h3>
-          <p>2년 전 하루 1000억 토큰에서 <span class="accent3">1,000배</span> 폭증.<br/>
+          <p>2년 전 하루 1000억 토큰에서 <span class="accent3">1,400배</span> 폭증.<br/>
           연산량 기준 이미 미국을 앞질렀다는 분석.</p>
         </div>
 
@@ -3218,7 +3473,7 @@ footer, header, hgroup, main, menu, nav, section {
 
       <div class="grid-2" style="margin-top: 1.4rem; gap: 1.4rem;">
         <div class="card autoshow fade-up">
-          <span class="pill">🅢 Meta</span>
+          <span class="pill">🅜 Meta</span>
           <h3>디바이스 확산 + 전략 선회</h3>
           <p>
             Ray-Ban Meta 글래스 · Quest 헤드셋 · WhatsApp / Instagram 임베드 +
@@ -4254,12 +4509,157 @@ footer, header, hgroup, main, menu, nav, section {
     });
 
     rebuild();
-    const qnaIndex = Array.from(document.querySelectorAll('.slides > section'))
-      .findIndex(s => s.id === 'qna-slide');
-    const isHeroSlide = indexh => indexh === 0 || indexh === qnaIndex;
-    Reveal.on('ready', e => setActive(isHeroSlide(e.indexh), e.indexh === 0));
-    Reveal.on('slidechanged', e => setActive(isHeroSlide(e.indexh), e.indexh === 0));
+    const heroSections = Array.from(document.querySelectorAll('.slides > section'));
+    const qnaIndex = heroSections.findIndex(s => s.id === 'qna-slide');
+    const ch6Index = heroSections.findIndex(s => s.id === 'ch6-opener');
+    const isHeroSlide = indexh => indexh === 0 || indexh === qnaIndex || indexh === ch6Index;
+    // meta-reveal already visible (e.g. navigating back onto the slide) also keeps the canvas lit
+    const metaLit = () => {
+      const cur = Reveal.getCurrentSlide();
+      return !!(cur && cur.querySelector('#meta-reveal.visible'));
+    };
+    Reveal.on('ready', e => setActive(isHeroSlide(e.indexh) || metaLit(), e.indexh === 0));
+    Reveal.on('slidechanged', e => setActive(isHeroSlide(e.indexh) || metaLit(), e.indexh === 0));
+    // slide 28's meta-reveal fragment briefly relights the starfield (canvas only, no game)
+    const hasMetaFrag = e => (e.fragments || [e.fragment]).some(f => f && f.id === 'meta-reveal');
+    Reveal.on('fragmentshown', e => { if (hasMetaFrag(e)) setActive(true, false); });
+    Reveal.on('fragmenthidden', e => {
+      if (hasMetaFrag(e)) {
+        const h = Reveal.getIndices().h;
+        setActive(isHeroSlide(h), h === 0);
+      }
+    });
   })();
+</script>
+
+<script>
+/* ========= Interactive infographics: loop demo · crown race · multiply demo ========= */
+(function () {
+  if (!window.Reveal) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const onThisSlide = el => el && Reveal.getCurrentSlide() === el.closest('section');
+
+  /* ---- A. Loop live demo (slide 13d) ---- */
+  (function () {
+    const box = document.getElementById('loopdemo');
+    if (!box) return;
+    const verEl = document.getElementById('ld-ver');
+    const timeEl = document.getElementById('ld-time');
+    const ringEl = document.getElementById('ld-ringfg');
+    const NAMES = ['v1 · 기본', 'v2 · 다크 카드', 'v3 · 진행률 링', 'v4 · 팀 컬러 ✦'];
+    function setStage(n) {
+      box.classList.remove('v0', 'v1', 'v2', 'v3');
+      box.classList.add('v' + n);
+      verEl.textContent = NAMES[n];
+    }
+    // 같은 fragment-index를 공유하는 그룹은 e.fragments(복수)로 온다
+    const ldOf = e => (e.fragments || [e.fragment])
+      .map(f => f && f.getAttribute && f.getAttribute('data-ld')).find(Boolean);
+    Reveal.on('fragmentshown', e => { const s = ldOf(e); if (s) setStage(+s); });
+    Reveal.on('fragmenthidden', e => { const s = ldOf(e); if (s) setStage(+s - 1); });
+    // the widget really runs: a looping 5-minute countdown + progress ring
+    const TOTAL = 300, C = 2 * Math.PI * 52;
+    const t0 = Date.now();
+    setInterval(() => {
+      if (!onThisSlide(box)) return;                       // no work while off-screen
+      const left = TOTAL - Math.floor((Date.now() - t0) / 1000) % TOTAL;
+      timeEl.textContent =
+        String(Math.floor(left / 60)).padStart(2, '0') + ':' + String(left % 60).padStart(2, '0');
+      ringEl.style.strokeDashoffset = (C * (1 - left / TOTAL)).toFixed(1);
+    }, 250);
+  })();
+
+  /* ---- B. Crown race (slide 20) ---- */
+  (function () {
+    const root = document.getElementById('crownrace');
+    if (!root) return;
+    const yearEl = document.getElementById('race-year');
+    const rows = Array.from(root.querySelectorAll('.race-row'));
+    const bars = rows.map(r => r.querySelector('.rr-bar'));
+    const YEARS = ['2021', '2022 상', '2022 하', '2023', '2024 상', '2024 중', '2024 하', '2025 상', '2025 하', '2026 상', '2026.07'];
+    const DATA = [ // rows × steps, 체감 인기 0-100 (개념도)
+      [78, 85, 62, 48, 38, 32, 26, 20, 16, 14, 12],   // Copilot
+      [ 0, 25, 88, 78, 55, 45, 34, 26, 20, 16, 14],   // ChatGPT 복붙
+      [ 0,  0,  6, 18, 34, 52, 88, 72, 55, 44, 38],   // Cursor
+      [ 0,  0,  0,  4, 62, 30, 18, 10,  6,  4,  3],   // Devin
+      [ 0,  0,  0,  0,  0,  8, 24, 90, 78, 62, 55],   // Claude Code
+      [ 0,  0,  0,  0,  0,  0,  4, 18, 48, 80, 84]    // Codex CLI
+    ];
+    let timer = null;
+    function apply(step) {
+      yearEl.textContent = YEARS[step];
+      let leadIdx = 0, leadVal = -1;
+      DATA.forEach((vals, i) => {
+        bars[i].style.width = vals[step] + '%';
+        if (vals[step] > leadVal) { leadVal = vals[step]; leadIdx = i; }
+      });
+      rows.forEach((r, i) => r.classList.toggle('lead', i === leadIdx));
+    }
+    function finale() {
+      root.classList.add('done');
+      yearEl.textContent = '20??';
+      rows.forEach(r => r.classList.remove('lead'));
+      const my = rows[rows.length - 1];
+      my.querySelector('.rr-bar').style.width = '100%';
+      my.classList.add('lead');
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function play() {
+      stop();
+      root.classList.remove('done');
+      rows[rows.length - 1].querySelector('.rr-bar').style.width = '0%';
+      if (reduceMotion) { apply(YEARS.length - 1); finale(); return; }
+      let step = 0;
+      apply(0);
+      timer = setInterval(() => {
+        step++;
+        if (step < YEARS.length) apply(step);
+        else { stop(); setTimeout(finale, 600); }
+      }, 850);
+    }
+    Reveal.on('ready', () => { if (onThisSlide(root)) play(); });
+    Reveal.on('slidechanged', () => { if (onThisSlide(root)) play(); else stop(); });
+  })();
+
+  /* ---- C. Domain × AI multiply demo (slide 38f) ---- */
+  (function () {
+    const out = document.getElementById('md-out');
+    if (!out) return;
+    const dom = document.getElementById('md-dom'), ai = document.getElementById('md-ai');
+    const domv = document.getElementById('md-domv'), aiv = document.getElementById('md-aiv');
+    const num = document.getElementById('md-num'), fill = document.getElementById('md-fill');
+    const cap = document.getElementById('md-cap');
+    let manual = false, seqTimer = null;
+    function update() {
+      const a = +dom.value, b = +ai.value, p = a * b;
+      domv.textContent = a; aiv.textContent = b; num.textContent = p;
+      fill.style.width = p + '%';
+      out.classList.toggle('boom', p >= 81);
+      cap.textContent = p >= 81 ? '생산성 폭발 🎆' : p >= 45 ? '꽤 커집니다' : p >= 20 ? '조금씩…' : '아직은 미미';
+    }
+    [dom, ai].forEach(el => el.addEventListener('input', () => { manual = true; stop(); update(); }));
+    function stop() { if (seqTimer) { clearInterval(seqTimer); seqTimer = null; } }
+    function autoplay() {
+      stop(); manual = false;
+      dom.value = 2; ai.value = 2; update();
+      if (reduceMotion) { dom.value = 10; ai.value = 10; update(); return; }
+      // 한쪽만 → 반대쪽만 → 둘 다: 곱셈임을 몸으로 보여주는 시퀀스
+      const SEQ = [[9, 2], [2, 9], [10, 10]];
+      let i = 0, hold = 0;
+      seqTimer = setInterval(() => {
+        if (manual) { stop(); return; }
+        const [ta, tb] = SEQ[i];
+        let moved = false;
+        if (+dom.value !== ta) { dom.value = +dom.value + Math.sign(ta - dom.value); moved = true; }
+        if (+ai.value !== tb) { ai.value = +ai.value + Math.sign(tb - ai.value); moved = true; }
+        update();
+        if (!moved && ++hold > 10) { hold = 0; i = Math.min(i + 1, SEQ.length - 1); }
+      }, 110);
+    }
+    Reveal.on('ready', () => { if (onThisSlide(out)) autoplay(); });
+    Reveal.on('slidechanged', () => { if (onThisSlide(out)) autoplay(); else stop(); });
+  })();
+})();
 </script>
 
 <style>
