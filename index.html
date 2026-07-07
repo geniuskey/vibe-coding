@@ -2075,7 +2075,7 @@ footer, header, hgroup, main, menu, nav, section {
       <p class="autoshow fade-up" style="margin-top: .5rem; font-size: 1.25rem;">
         "어떤 AI 코딩 도구가 최고냐" — 지난 5년의 레이스를 <span class="accent">직접 돌려보죠.</span>
       </p>
-      <div class="race autoshow fade-up" id="crownrace" style="margin-top: 1rem;">
+      <div class="race fragment fade-up" data-fragment-index="0" id="crownrace" style="margin-top: 1rem;">
         <div class="race-year" id="race-year">2021</div>
         <div class="race-row" data-r="0"><span class="rr-label">Copilot</span><div class="rr-track"><i class="rr-bar" style="background:#8A93B2;"></i></div><span class="rr-crown">👑</span></div>
         <div class="race-row" data-r="1"><span class="rr-label">ChatGPT 복붙</span><div class="rr-track"><i class="rr-bar" style="background:#2BEAD0;"></i></div><span class="rr-crown">👑</span></div>
@@ -2085,11 +2085,11 @@ footer, header, hgroup, main, menu, nav, section {
         <div class="race-row" data-r="5"><span class="rr-label">Codex CLI</span><div class="rr-track"><i class="rr-bar" style="background:#7EC8FF;"></i></div><span class="rr-crown">👑</span></div>
         <div class="race-row mystery" data-r="6"><span class="rr-label">3개월 후…?</span><div class="rr-track"><i class="rr-bar"></i></div><span class="rr-crown">👑</span></div>
       </div>
-      <p class="autoshow fade-up" style="margin-top: .9rem; font-size: 1.3rem;">
+      <p class="fragment fade-up" data-fragment-index="1" style="margin-top: .9rem; font-size: 1.3rem;">
         그중 몇몇은 벌써 이름조차 뜸해졌고 — <span class="accent">3개월 후는 아무도 모릅니다.</span>
         <span class="grad" style="font-weight:800;">그게 함정입니다.</span>
       </p>
-      <p class="muted autoshow fade-up" style="margin-top: .4rem; font-size: .98rem;">
+      <p class="muted fragment fade-up" data-fragment-index="0" style="margin-top: .4rem; font-size: .98rem;">
         ※ 막대는 시기별 개발자 커뮤니티의 체감 인기를 재구성한 개념도입니다 — 정확한 점유율이 아닙니다.
       </p>
     </section>
@@ -4617,8 +4617,14 @@ footer, header, hgroup, main, menu, nav, section {
         else { stop(); setTimeout(finale, 600); }
       }, 850);
     }
-    Reveal.on('ready', () => { if (onThisSlide(root)) play(); });
-    Reveal.on('slidechanged', () => { if (onThisSlide(root)) play(); else stop(); });
+    // 레이스는 fragment로 클릭해야 등장·재생. 뒤 슬라이드에서 돌아오면
+    // fragment가 이미 visible 상태이므로 그때는 바로 재생한다.
+    const raceShown = () => root.classList.contains('visible');
+    const raceInEvent = e => (e.fragments || [e.fragment]).includes(root);
+    Reveal.on('ready', () => { if (onThisSlide(root) && raceShown()) play(); });
+    Reveal.on('slidechanged', () => { if (onThisSlide(root) && raceShown()) play(); else stop(); });
+    Reveal.on('fragmentshown', e => { if (raceInEvent(e)) play(); });
+    Reveal.on('fragmenthidden', e => { if (raceInEvent(e)) stop(); });
   })();
 
   /* ---- C. Domain × AI multiply demo (slide 38f) ---- */
