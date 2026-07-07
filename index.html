@@ -389,8 +389,8 @@ footer, header, hgroup, main, menu, nav, section {
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
     .pad { padding: 2rem; }
-    .small { font-size: 1.05rem; }
-    .tiny  { font-size: 0.85rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
 
     /* animated gradient text */
     .reveal .grad, .reveal section .grad {
@@ -401,6 +401,7 @@ footer, header, hgroup, main, menu, nav, section {
       color: transparent !important;
       animation: gradMove 7s ease infinite;
       font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
     }
     @keyframes gradMove {
       0%   { background-position: 0% 50%; }
@@ -459,7 +460,7 @@ footer, header, hgroup, main, menu, nav, section {
     }
     .card h3 + p, .card p + p { margin-top: 0.6rem; }
     .card p {
-      font-size: 1.12rem;
+      font-size: 1.18rem;
       line-height: 1.65;
       margin: 0;
       color: #E8ECF5 !important;
@@ -472,7 +473,7 @@ footer, header, hgroup, main, menu, nav, section {
       text-align: center;
       padding: 0.65rem 0.4rem;
       border-radius: 12px;
-      font-size: 1.02rem;
+      font-size: 1.08rem;
       font-weight: 700;
       border: 1px solid;
     }
@@ -497,7 +498,7 @@ footer, header, hgroup, main, menu, nav, section {
     /* before → after mini-story cards */
     .card .ba-before {
       font-style: italic;
-      font-size: 1.05rem;
+      font-size: 1.12rem;
       color: #C9CFDF !important;
       padding-left: 0.85rem;
       border-left: 3px solid rgba(255,148,172,0.6);
@@ -511,7 +512,7 @@ footer, header, hgroup, main, menu, nav, section {
       background: #2A2150;
       border: 1px solid rgba(155,130,255,0.8);
       color: #E1D9FF !important;
-      font-size: 0.95rem;
+      font-size: 1.02rem;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
@@ -532,9 +533,9 @@ footer, header, hgroup, main, menu, nav, section {
       -webkit-backdrop-filter: blur(6px);
     }
     .layer .lname { font-weight: 800; font-size: 1.3rem; color: #FFFFFF !important; white-space: nowrap; }
-    .layer .lex { flex: 1; text-align: center; font-size: 1rem; color: #C9CFDF !important; font-family: 'JetBrains Mono', monospace; }
+    .layer .lex { flex: 1; text-align: center; font-size: 1.06rem; color: #C9CFDF !important; font-family: 'JetBrains Mono', monospace; }
     .layer .ltag {
-      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.03em;
+      font-size: 0.92rem; font-weight: 700; letter-spacing: 0.03em;
       padding: 0.25em 0.8em; border-radius: 999px; white-space: nowrap;
       font-family: 'JetBrains Mono', monospace;
     }
@@ -549,7 +550,7 @@ footer, header, hgroup, main, menu, nav, section {
     .layer.core .lname { font-size: 1.55rem; white-space: normal; }
     .layer.core .ltag { background: rgba(43,234,208,0.18); border: 1px solid rgba(43,234,208,0.7); color: #5BFFE0 !important; }
     .layer-divider {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.92rem;
       color: #8A93B2 !important; letter-spacing: 0.1em; margin: 0.1rem 0 0.15rem;
     }
 
@@ -643,9 +644,9 @@ footer, header, hgroup, main, menu, nav, section {
       position: absolute;
       top: 0.7rem; left: 1rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       letter-spacing: 0.1em;
-      color: rgba(229, 217, 255, 0.6) !important;
+      color: rgba(229, 217, 255, 0.72) !important;
       text-transform: uppercase;
       pointer-events: none;
     }
@@ -667,12 +668,12 @@ footer, header, hgroup, main, menu, nav, section {
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
     }
     .word-chip .w {
-      font-size: 1rem; font-weight: 800; color: #FFFFFF !important;
+      font-size: 1.08rem; font-weight: 800; color: #FFFFFF !important;
       letter-spacing: -0.01em;
     }
     .word-chip .prob-cell {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem; font-weight: 700;
+      font-size: 0.9rem; font-weight: 700;
       color: #B5A1FF !important;
       fill: none;
     }
@@ -967,7 +968,7 @@ footer, header, hgroup, main, menu, nav, section {
     }
     .bubble .who {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       letter-spacing: 0.08em;
       font-weight: 800;
       margin-bottom: 0.25rem;
@@ -1001,9 +1002,9 @@ footer, header, hgroup, main, menu, nav, section {
     }
     .bubble.user b, .bubble.ai b { color: #FFD46B; }
     /* compact chat — fits a 10-bubble conversation in one 800px slide */
-    .chat.compact { gap: 0.45rem; }
-    .chat.compact .bubble { padding: 0.55rem 1rem; font-size: 1.0rem; }
-    .chat.compact .bubble .who { margin-bottom: 0.15rem; font-size: 0.72rem; }
+    .chat.compact { gap: 0.38rem; }
+    .chat.compact .bubble { padding: 0.48rem 1rem; font-size: 1.02rem; }
+    .chat.compact .bubble .who { margin-bottom: 0.1rem; font-size: 0.8rem; }
 
     /* ========= Fake terminal (Chapter 6 mockups) ========= */
     .term {
@@ -1026,14 +1027,14 @@ footer, header, hgroup, main, menu, nav, section {
     .term-bar .dot.g { background: #28C840; }
     .term-bar .term-title {
       margin-left: 8px;
-      font-size: 0.72rem;
+      font-size: 0.84rem;
       letter-spacing: 0.08em;
-      color: #8A93B2;
+      color: #9CA6C6;
     }
     .term-body {
       padding: 1.1rem 1.3rem;
-      font-size: 0.98rem;
-      line-height: 1.8;
+      font-size: 1.05rem;
+      line-height: 1.75;
       text-align: left;
     }
     .term-line { white-space: pre-wrap; word-break: break-all; }
@@ -1069,7 +1070,7 @@ footer, header, hgroup, main, menu, nav, section {
       display: flex; gap: 1.1rem;
       padding: 0.16rem 0.55rem;
       border-radius: 6px;
-      font-size: 0.95rem;
+      font-size: 1.0rem;
     }
     .term-menu .mi .k { color: #B5A1FF; font-weight: 700; min-width: 150px; }
     .term-menu .mi .d { color: #C9D0E4; }
@@ -1085,8 +1086,8 @@ footer, header, hgroup, main, menu, nav, section {
       padding: 0.85rem 1rem;
     }
     .term-notes .note .ico { font-size: 1.4rem; line-height: 1.3; }
-    .term-notes .note h4 { font-size: 1.08rem; margin: 0 0 0.2rem; }
-    .term-notes .note p { font-size: 0.95rem; line-height: 1.5; margin: 0; color: #C9D0E4 !important; }
+    .term-notes .note h4 { font-size: 1.14rem; margin: 0 0 0.2rem; }
+    .term-notes .note p { font-size: 1.0rem; line-height: 1.5; margin: 0; color: #C9D0E4 !important; }
 
     /* ========= Ecosystem hub-spoke map ========= */
     .eco-map {
@@ -1108,7 +1109,7 @@ footer, header, hgroup, main, menu, nav, section {
       box-shadow: 0 14px 34px -12px rgba(0,0,0,0.6);
     }
     .eco-node h4 { margin: 0 0 0.25rem; font-size: 1.15rem; }
-    .eco-node p { margin: 0; font-size: 0.88rem; line-height: 1.45; color: #C9D0E4 !important; }
+    .eco-node p { margin: 0; font-size: 0.96rem; line-height: 1.45; color: #C9D0E4 !important; }
     .eco-node.hub {
       background: linear-gradient(135deg, rgba(124,92,255,0.5), rgba(0,224,199,0.28));
       border-color: rgba(91,255,224,0.7);
@@ -1575,7 +1576,7 @@ footer, header, hgroup, main, menu, nav, section {
       <p class="autoshow fade-up muted" style="text-align:center; margin-top: 1.4rem; font-size: 1.15rem; animation-delay: 1.4s;">
         중요한 건 <span class="accent2" style="font-weight:700;">"코드를 아는 것"</span>이 아니라, <span class="accent2" style="font-weight:700;">"원하는 걸 표현하고 결과를 판단하는 것"</span>입니다.
       </p>
-      <p class="muted center autoshow fade-up" style="margin-top: 0.9rem; font-size: 0.9rem; animation-delay: 1.7s;">
+      <p class="muted center autoshow fade-up" style="margin-top: 0.9rem; font-size: 1.0rem; animation-delay: 1.7s;">
         * "vibe coding"이라는 이름은 2025년 초, AI 연구자 Andrej Karpathy가 붙였습니다.
       </p>
     </section>
@@ -1755,7 +1756,7 @@ footer, header, hgroup, main, menu, nav, section {
       <h2>그럼 <span class="accent2">챗봇 창에 물어보는 것</span>도<br/>바이브 코딩인가요?</h2>
       <p class="autoshow fade-up" style="margin-top: .8rem; font-size: 1.3rem;">
         네, 이미 시작입니다. 다만 <span class="accent">누가 손발이 되느냐</span>가 다릅니다 —
-        <span style="margin-left: .5rem;"><span class="pill" style="padding:.15em .7em; font-size:.85rem;">보라 = 나</span> <span class="pill green" style="padding:.15em .7em; font-size:.85rem;">민트 = AI</span></span>
+        <span style="margin-left: .5rem;"><span class="pill" style="padding:.15em .7em; font-size:.95rem;">보라 = 나</span> <span class="pill green" style="padding:.15em .7em; font-size:.95rem;">민트 = AI</span></span>
       </p>
 
       <div class="card autoshow fade-up" style="margin-top: 1.1rem; padding: 1.2rem 1.5rem;">
@@ -2227,11 +2228,11 @@ footer, header, hgroup, main, menu, nav, section {
       <div class="card autoshow fade-up" style="margin-top: 1.3rem; padding: 1.5rem 1.7rem; border-color: rgba(155,130,255,0.55);">
         <span class="pill">에이전틱 루프</span>
         <div class="flow-lane" style="margin-top: 1rem;">
-          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>① 맥락 수집</span><span style="font-weight:500; font-size:.88rem; opacity:.9;">파일 검색·읽기로 코드 이해</span></div>
+          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>① 맥락 수집</span><span style="font-weight:500; font-size:.96rem; opacity:.92;">파일 검색·읽기로 코드 이해</span></div>
           <span class="flow-arrow">→</span>
-          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>② 실행</span><span style="font-weight:500; font-size:.88rem; opacity:.9;">편집·명령·테스트 실행</span></div>
+          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>② 실행</span><span style="font-weight:500; font-size:.96rem; opacity:.92;">편집·명령·테스트 실행</span></div>
           <span class="flow-arrow">→</span>
-          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>③ 검증</span><span style="font-weight:500; font-size:.88rem; opacity:.9;">결과 확인 · 틀리면 교정</span></div>
+          <div class="flow-step neutral" style="flex-direction:column; gap:.2rem; padding:.7rem .5rem;"><span>③ 검증</span><span style="font-weight:500; font-size:.96rem; opacity:.92;">결과 확인 · 틀리면 교정</span></div>
         </div>
         <p class="muted" style="margin-top: .9rem; text-align:center; font-size: 1rem;">
           ↻ 세 단계는 뒤섞이고 반복됩니다 — 질문 하나엔 ①만, 버그 수정엔 ①②③을 수십 번.
@@ -2249,7 +2250,7 @@ footer, header, hgroup, main, menu, nav, section {
         </div>
       </div>
 
-      <p class="muted autoshow fade-up" style="margin-top: .9rem; text-align:center; font-size: .92rem; opacity:.82; animation-delay:.8s;">
+      <p class="muted autoshow fade-up" style="margin-top: .9rem; text-align:center; font-size: 1.0rem; opacity:.85; animation-delay:.8s;">
         출처 · Anthropic 공식 문서 「How Claude Code works」 (code.claude.com/docs)
       </p>
     </section>
@@ -2481,25 +2482,25 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="pill green">가벼운 보조</span>
           <h3 style="font-size: 1.32rem;">Haiku</h3>
           <p style="font-size: 1.02rem;">싸고 빠른 인턴. <span class="accent2">메인 구현엔 안 씁니다.</span></p>
-          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">긴 로그 훑기 · 여러 파일 요약 · 분류·추출 · diff 의도 정리</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">긴 로그 훑기 · 여러 파일 요약 · 분류·추출 · diff 의도 정리</p>
         </div>
         <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .4s; border-color: rgba(155,130,255,0.75); box-shadow: 0 0 0 1px rgba(155,130,255,0.3), 0 30px 60px -20px rgba(0,0,0,0.6);">
           <span class="pill">기본값 · 주력</span>
           <h3 style="font-size: 1.32rem;">Sonnet</h3>
           <p style="font-size: 1.02rem;">일상 코딩의 <span class="accent">기본 루프</span>. 속도·품질·비용 밸런스 최고.</p>
-          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">기능 구현 · 버그 수정 · 테스트 작성 · 일반 리팩토링</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">기능 구현 · 버그 수정 · 테스트 작성 · 일반 리팩토링</p>
         </div>
         <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .6s;">
           <span class="pill pink">설계·리뷰</span>
           <h3 style="font-size: 1.32rem;">Opus</h3>
           <p style="font-size: 1.02rem;">비싼 시니어. <span class="accent3">판단</span>을 시키는 모델입니다.</p>
-          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">아키텍처 결정 · 복잡한 원인 분석 · 위험 변경·PR 리뷰</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">아키텍처 결정 · 복잡한 원인 분석 · 위험 변경·PR 리뷰</p>
         </div>
         <div class="card autoshow fade-up" style="padding: 1.4rem 1.35rem; animation-delay: .8s;">
           <span class="pill amber">장기·대형</span>
           <h3 style="font-size: 1.32rem;">Fable</h3>
           <p style="font-size: 1.02rem;">며칠짜리 <span class="accent4">자율 에이전트</span>. 매일 켜는 모델이 아닙니다.</p>
-          <p class="muted" style="font-size: .92rem; margin-top: .5rem;">대규모 마이그레이션 · 설계→구현→테스트→문서 일괄</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">대규모 마이그레이션 · 설계→구현→테스트→문서 일괄</p>
         </div>
       </div>
       <p class="muted autoshow fade-up" style="margin-top: 1.1rem; text-align:center; font-size: 1rem; animation-delay: 1.1s;">
@@ -2672,19 +2673,19 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="pill amber">범용 워크플로우</span>
           <h3>Superpowers</h3>
           <p>브레인스토밍, 체계적 디버깅 등 <span class="accent2">검증된 작업 절차</span>를 모아둔 스킬 모음집.</p>
-          <p class="muted" style="font-size: .9rem; margin-top: .5rem;">💸 절차가 다단계·서브에이전트를 부릅니다 — <span class="accent3">작업당 토큰↑</span>.</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">💸 절차가 다단계·서브에이전트를 부릅니다 — <span class="accent3">작업당 토큰↑</span>.</p>
         </div>
         <div class="card autoshow fade-up">
           <span class="pill amber">스킬 제작</span>
           <h3>Skill Creator</h3>
           <p>내 팀만의 노하우를 <span class="accent2">SKILL.md로 뽑아내는</span> 메타 스킬. 스킬 만드는 스킬.</p>
-          <p class="muted" style="font-size: .9rem; margin-top: .5rem;">🟢 만들 때만 잠깐 — <span class="accent">상시 비용은 거의 없음</span>.</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">🟢 만들 때만 잠깐 — <span class="accent">상시 비용은 거의 없음</span>.</p>
         </div>
         <div class="card autoshow fade-up">
           <span class="pill pink">브라우저 자동화</span>
           <h3>Playwright MCP</h3>
           <p>웹 화면을 <span class="accent2">직접 보고 조작</span>하며 검증. 프론트엔드 작업의 강력한 도구.</p>
-          <p class="muted" style="font-size: .9rem; margin-top: .5rem;">💸 매 조작마다 <span class="accent3">스냅샷/스크린샷</span>이 컨텍스트로 — 검증 루프에서 토큰↑↑.</p>
+          <p class="muted" style="font-size: .99rem; margin-top: .5rem;">💸 매 조작마다 <span class="accent3">스냅샷/스크린샷</span>이 컨텍스트로 — 검증 루프에서 토큰↑↑.</p>
         </div>
       </div>
 
