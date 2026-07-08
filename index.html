@@ -786,6 +786,51 @@ footer, header, hgroup, main, menu, nav, section {
       margin-bottom: .35rem;
     }
 
+    /* loop cycle diagram (slide 15) — 4 steps arranged in a circle */
+    .loopcycle { position: relative; width: 1040px; height: 400px; margin: 1.4rem auto 0; }
+    .lc-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .lc-arrows path.lc-arc { fill: none; stroke-width: 3.5; stroke-linecap: round; }
+    .lc-node {
+      position: absolute; width: 415px; box-sizing: border-box;
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 16px;
+      padding: 0.85rem 1.15rem;
+      box-shadow: 0 20px 40px -18px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    .lc-node.n1 { left: 0;  top: 0; }
+    .lc-node.n2 { right: 0; top: 0; }
+    .lc-node.n3 { right: 0; bottom: 0; }
+    .lc-node.n4 { left: 0;  bottom: 0; }
+    .lc-node h4 { font-size: 1.32rem; margin: 0 0 0.15rem; color: var(--fg); }
+    .lc-node p { font-size: 1.02rem; margin: 0; color: #E6D9FF; }
+    .lc-node .yr {
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem; font-weight: 700;
+      padding: 0.12em 0.55em; border-radius: 6px; margin-bottom: .3rem;
+    }
+    .lc-node.n1 { border-color: rgba(155,130,255,0.55); }
+    .lc-node.n1 .yr { color: var(--accent);   background: rgba(155,130,255,0.14); border: 1px solid rgba(155,130,255,0.45); }
+    .lc-node.n2 { border-color: rgba(43,234,208,0.5); }
+    .lc-node.n2 .yr { color: var(--accent-2); background: rgba(43,234,208,0.12);  border: 1px solid rgba(43,234,208,0.4); }
+    .lc-node.n3 { border-color: rgba(255,122,149,0.5); }
+    .lc-node.n3 .yr { color: var(--accent-3); background: rgba(255,122,149,0.12); border: 1px solid rgba(255,122,149,0.4); }
+    .lc-node.n4 { border-color: rgba(255,212,107,0.5); }
+    .lc-node.n4 .yr { color: var(--accent-4); background: rgba(255,200,87,0.12);  border: 1px solid rgba(255,212,107,0.4); }
+    .lc-center {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      font-size: 1.02rem; font-weight: 700; color: var(--fg); white-space: nowrap;
+      padding: 0.45em 0.9em; border-radius: 999px;
+      background: rgba(12, 16, 30, 0.85);
+      border: 1px solid rgba(155,130,255,0.55);
+      box-shadow: 0 0 24px rgba(124,92,255,0.35);
+    }
+    .lc-center .lc-inf { color: var(--accent-2); font-size: 1.25em; font-weight: 800; vertical-align: -0.05em; }
+    /* reveal.js fragments don't support transform-based fade-up on the absolutely
+       positioned center badge (translate would be overwritten) — fade only */
+    .reveal .slides section .fragment.lc-center { transform: translate(-50%, -50%); }
+    .reveal .slides section .fragment.lc-center.visible { transform: translate(-50%, -50%); }
+
     /* code block */
     pre.code {
       background: #131829;
@@ -1735,32 +1780,45 @@ footer, header, hgroup, main, menu, nav, section {
     <!-- ============= 13c. The vibe coding loop ============= -->
     <section>
       <h2>그 리듬이, <span class="accent">바로 이 루프</span>입니다.</h2>
-      <div class="timeline" style="margin-top: 2rem;">
-        <div class="tline fragment fade-up">
+      <div class="loopcycle">
+        <svg class="lc-arrows" viewBox="0 0 1040 400" aria-hidden="true">
+          <defs>
+            <marker id="lcm-mint"  markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2BEAD0"/></marker>
+            <marker id="lcm-pink"  markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#FF7A95"/></marker>
+            <marker id="lcm-amber" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#FFD46B"/></marker>
+            <marker id="lcm-purp"  markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9B82FF"/></marker>
+          </defs>
+          <path class="lc-arc fragment fade-in" data-fragment-index="1" d="M 437 68 Q 520 26 603 68"  stroke="#2BEAD0" marker-end="url(#lcm-mint)"/>
+          <path class="lc-arc fragment fade-in" data-fragment-index="2" d="M 838 152 Q 884 200 838 248" stroke="#FF7A95" marker-end="url(#lcm-pink)"/>
+          <path class="lc-arc fragment fade-in" data-fragment-index="3" d="M 603 332 Q 520 374 437 332" stroke="#FFD46B" marker-end="url(#lcm-amber)"/>
+          <path class="lc-arc fragment fade-in" data-fragment-index="4" d="M 202 248 Q 156 200 202 152" stroke="#9B82FF" marker-end="url(#lcm-purp)"/>
+        </svg>
+        <div class="lc-node n1 fragment fade-up" data-fragment-index="0">
           <div class="yr">① 요청</div>
           <h4>원하는 걸 말로 설명</h4>
           <p class="muted">→ "강의 슬라이드 <b class="accent" style="font-size:1.1em;">만들어줘</b>"</p>
         </div>
-        <div class="tline green fragment fade-up">
+        <div class="lc-node n2 fragment fade-up" data-fragment-index="1">
           <div class="yr">② 생성 · 실행</div>
           <h4>AI가 초안을 만들고 직접 돌려봄</h4>
           <p class="muted">→ 작동하는 초안이 바로 나옵니다. <span class="accent2" style="font-weight:700;">(AI 차례)</span></p>
         </div>
-        <div class="tline pink fragment fade-up">
+        <div class="lc-node n3 fragment fade-up" data-fragment-index="2">
           <div class="yr">③ 확인</div>
           <h4>결과를 눈으로 봄</h4>
           <p class="muted">→ "이거 맞는지 <b class="accent3" style="font-size:1.1em;">확인해줘</b>"</p>
         </div>
-        <div class="tline amber fragment fade-up">
+        <div class="lc-node n4 fragment fade-up" data-fragment-index="3">
           <div class="yr">④ 수정</div>
           <h4>마음에 안 들면 다시 말로 고침</h4>
-          <p class="muted">→ "이 부분 <b class="accent4" style="font-size:1.1em;">수정해줘</b>" — 그리고 다시 ①로</p>
+          <p class="muted">→ "이 부분 <b class="accent4" style="font-size:1.1em;">수정해줘</b>"</p>
         </div>
+        <div class="lc-center fragment fade-in" data-fragment-index="4"><span class="lc-inf">∞</span> 그리고 다시 ①로 — 루프</div>
       </div>
-      <p class="fragment fade-up muted" style="text-align:center; margin-top: 1.4rem; font-size: 1.15rem;">
+      <p class="fragment fade-up muted" data-fragment-index="5" style="text-align:center; margin-top: 1.1rem; font-size: 1.15rem;">
         중요한 건 <span class="accent2" style="font-weight:700;">"코드를 아는 것"</span>이 아니라, <span class="accent2" style="font-weight:700;">"원하는 걸 표현하고 결과를 판단하는 것"</span>입니다.
       </p>
-      <p class="muted center fragment fade-up" style="margin-top: 0.9rem; font-size: 1.0rem;">
+      <p class="muted center fragment fade-up" data-fragment-index="6" style="margin-top: 0.7rem; font-size: 1.0rem;">
         * "vibe coding"이라는 이름은 2025년 초, AI 연구자 Andrej Karpathy가 붙였습니다.
       </p>
     </section>
