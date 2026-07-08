@@ -2534,7 +2534,7 @@ footer, header, hgroup, main, menu, nav, section {
     <!-- ============= 30a. Getting started: install & launch ============= -->
     <section>
       <div class="chip">시작하기</div>
-      <h2>설치는 <span class="accent">한 줄</span>, 실행은 <span class="accent2">폴더 안에서</span>.</h2>
+      <h2>설치는 <span class="accent">한 줄</span> — 접속 설정은 <span class="accent3">환경 따라</span>, 실행은 <span class="accent2">폴더 안에서</span>.</h2>
       <div class="grid-2" style="margin-top: 1.4rem; grid-template-columns: 1.3fr 1fr; align-items: start;">
         <div class="term autoshow fade-up">
           <div class="term-bar">
@@ -2544,19 +2544,20 @@ footer, header, hgroup, main, menu, nav, section {
           <div class="term-body">
             <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd t-type" data-delay="0.4">npm install -g @anthropic-ai/claude-code</span></div>
             <div class="term-line autoshow fade-in" style="animation-delay: 2.1s;"><span class="t-out">added 1 package in 4s</span></div>
-            <div class="term-line autoshow fade-in" style="animation-delay: 2.5s;"><span class="t-prompt">$</span> <span class="t-cmd t-type" data-delay="2.9">claude</span></div>
-            <div class="term-line autoshow fade-in" style="animation-delay: 3.4s;"><span class="term-banner">✻ Welcome to Claude Code!<br/><span class="t-out">/help for help · cwd: D:\work\my-project</span></span></div>
-            <div class="term-line autoshow fade-in" style="animation-delay: 4.0s;"><span class="t-prompt">&gt;</span> <span class="t-cmd t-type" data-delay="4.4">이 프로젝트 구조부터 설명해줘</span><span class="t-caret"></span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 2.5s;"><span class="t-prompt">$</span> <span class="t-cmd t-type" data-delay="2.9">aws sso login</span> <span class="t-out"># 사내 Bedrock이라면 — 환경변수 설정 후</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 3.7s;"><span class="t-prompt">$</span> <span class="t-cmd t-type" data-delay="4.1">claude</span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 4.6s;"><span class="term-banner">✻ Welcome to Claude Code!<br/><span class="t-out">/help for help · cwd: D:\work\my-project</span></span></div>
+            <div class="term-line autoshow fade-in" style="animation-delay: 5.2s;"><span class="t-prompt">&gt;</span> <span class="t-cmd t-type" data-delay="5.6">이 프로젝트 구조부터 설명해줘</span><span class="t-caret"></span></div>
           </div>
         </div>
         <div class="term-notes">
           <div class="note autoshow fade-left" style="animation-delay: .3s;">
             <span class="ico">📦</span>
-            <div><h4>설치는 정말 이 한 줄</h4><p>Node.js만 있으면 어떤 OS든 동일합니다.</p></div>
+            <div><h4>설치 자체는 이 한 줄</h4><p>Node.js만 있으면 어떤 OS든 여기까진 동일합니다.</p></div>
           </div>
           <div class="note autoshow fade-left" style="animation-delay: .6s;">
             <span class="ico">🔑</span>
-            <div><h4>첫 실행 시 로그인</h4><p>Claude.ai 계정 — Pro 이상 유료 플랜(또는 API 키)이 필요합니다.</p></div>
+            <div><h4>접속 설정은 두 갈래</h4><p><b>개인</b> — 첫 실행 때 Claude.ai 유료 플랜(또는 API 키)으로 로그인 한 번.<br/><b>사내 AWS Bedrock</b> — 환경변수 설정에, 세션이 만료될 때마다 <code>aws sso login</code>까지. <span class="accent3">한 줄로는 안 끝납니다</span> — 사내 가이드를 따라 주세요.</p></div>
           </div>
           <div class="note autoshow fade-left" style="animation-delay: .9s;">
             <span class="ico">📁</span>
