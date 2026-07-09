@@ -619,6 +619,49 @@ footer, header, hgroup, main, menu, nav, section {
       stroke-linejoin: round;
     }
 
+    /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
+    .slide-refs {
+      position: absolute; left: 56px; bottom: 12px; z-index: 3;
+      display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
+      max-width: 66%;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      opacity: .8;
+    }
+    .slide-refs .rl { color: #9BA6C0 !important; font-weight: 800; letter-spacing: .12em; }
+    .slide-refs a {
+      color: #8FF5E2 !important; text-decoration: none !important;
+      border-bottom: 1px dotted rgba(91,255,224,.45); white-space: nowrap;
+    }
+    .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
+
+    /* ========= 하네스 다이어그램 ========= */
+    .harness-box {
+      position: relative; border: 2px dashed rgba(255,212,107,.65); border-radius: 20px;
+      padding: 2rem 1.5rem 1.3rem; background: rgba(70,56,23,.14);
+      display: flex; flex-direction: column; gap: 1rem; align-items: center;
+    }
+    .harness-tag {
+      position: absolute; top: -0.95em; left: 20px;
+      background: #463817; border: 1px solid rgba(255,212,107,.85);
+      color: #FFEFC2 !important; border-radius: 999px; padding: .22em .9em;
+      font-family: 'JetBrains Mono', monospace; font-size: .88rem; font-weight: 800;
+      white-space: nowrap;
+    }
+    .model-orb {
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      padding: 1.1rem 1.4rem; border-radius: 18px; text-align: center;
+      border: 2px solid rgba(155,130,255,.8); background: rgba(124,92,255,.18);
+      font-size: 2rem;
+    }
+    .model-orb span { font-size: .95rem; font-weight: 800; line-height: 1.35; }
+
+    /* ========= 참고자료 슬라이드 ========= */
+    .ref-col h3 { font-size: 1.3rem; }
+    .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+    .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
+    .ref-col li a { font-weight: 700; }
+    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
+
     /* ========= fallbacks: overview / print / reduced-motion =========
        .autoshow와 .ctx-seg 모두 — 가시성이 애니메이션에 묶여 있으므로
        세 모드 전부에서 강제로 완성 상태를 보여준다. */
@@ -739,6 +782,10 @@ footer, header, hgroup, main, menu, nav, section {
             <p class="tiny muted center" style="margin:0;">상자에 없는 정보 = 세상에 없는 정보</p>
           </div>
         </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Effective context engineering</a>
+        </div>
       </div>
     </section>
 
@@ -763,6 +810,10 @@ footer, header, hgroup, main, menu, nav, section {
           </div>
         </div>
         <p class="tiny muted" style="margin-top:1.6rem;">※ 이 발표의 모든 숫자는 감을 잡기 위한 <em>대략치</em>입니다. 모델·도구마다 다릅니다.</p>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Claude Code Docs · 컨텍스트 창</a>
+        </div>
       </div>
     </section>
 
@@ -781,7 +832,7 @@ footer, header, hgroup, main, menu, nav, section {
             <div class="ctx-seg seg-plan" style="--h:4%"></div>
           </figure>
           <div class="ctx-legend" style="flex:0 0 auto;">
-            <div class="lg-row"><i class="sw sw-sys"></i>System/Developer 지시 · 도구 정의<b class="mono">~24K</b></div>
+            <div class="lg-row"><i class="sw sw-sys"></i>System/Developer 지시 · 도구 정의 <span class="tiny mono">(도구가 자동 주입 — 다음 장)</span><b class="mono">~24K</b></div>
             <div class="lg-row"><i class="sw sw-mem"></i>메모리 · 프로젝트 지침 <span class="tiny mono">(CLAUDE.md · AGENTS.md · SKILL.md)</span><b class="mono">~4K</b></div>
             <div class="lg-row"><i class="sw sw-conv"></i>User 요청 + 대화 히스토리<b class="mono">~20K</b></div>
             <div class="lg-row"><i class="sw sw-tool"></i>검색 · 파일 · 도구 결과 <span class="tiny mono">(코드·로그·테스트)</span><b class="mono">~36K</b></div>
@@ -791,6 +842,54 @@ footer, header, hgroup, main, menu, nav, section {
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.3rem; font-size:1.3rem;">
           에이전트는 질문에 답하는 모델이 아니라, <strong>이 context를 재료로 다음 행동을 결정하는 시스템</strong>입니다.
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Claude Code Docs · 컨텍스트 창 시뮬레이션</a>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Effective context engineering</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 4b. 'System'의 정체 = 하네스 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 상자의 정체</div>
+        <h2>맨 아래 'System'은 누가 쓰나 — <span class="grad">하네스</span></h2>
+        <div class="grid-2" style="align-items:center; margin-top:.4rem;">
+          <div class="harness-box autoshow zoom-in">
+            <span class="harness-tag">harness = 에이전트 프로그램</span>
+            <div class="row" style="gap:1.6rem; align-items:center; justify-content:center;">
+              <div class="model-orb">🧠<span>모델<br/>Claude · GPT · Gemini</span></div>
+              <figure class="ctx-box mini" aria-label="하네스가 관리하는 컨텍스트 창">
+                <div class="ctx-freelabel"><span class="mono">context</span></div>
+                <div class="ctx-seg seg-sys" style="--h:24%"><span class="ctx-lab">System</span></div>
+                <div class="ctx-seg seg-conv" style="--h:12%"></div>
+                <div class="ctx-seg seg-tool" style="--h:14%"></div>
+              </figure>
+            </div>
+            <div class="row" style="gap:.5rem; flex-wrap:wrap; justify-content:center;">
+              <span class="pill">Claude Code</span>
+              <span class="pill">OpenAI Codex</span>
+              <span class="pill">Gemini CLI</span>
+              <span class="pill">Cursor</span>
+            </div>
+          </div>
+          <div class="stack" style="gap:.85rem;">
+            <p class="autoshow fade-up" style="font-size:1.28rem;">여러분이 설치해 쓰는 것은 모델 자체가 아니라, 모델을 감싼 프로그램 — <strong class="accent4">하네스(harness)</strong>입니다.</p>
+            <ul class="list-clean autoshow fade-up">
+              <li>🖊 <strong>System 프롬프트 · 도구 정의</strong>를 상자에 자동 주입</li>
+              <li>🔧 모델이 요청한 <strong>도구를 실제로 실행</strong>하고 결과를 상자에 추가</li>
+              <li>🗜 상자가 차면 <strong>자동 압축</strong> · CLAUDE.md 로드 등 컨텍스트 관리</li>
+              <li>🛡 권한 확인 · 샌드박스 같은 <strong>안전장치</strong></li>
+            </ul>
+            <p class="autoshow fade-up" style="font-size:1.22rem;">앞 장의 <i class="sw sw-sys" style="display:inline-block; vertical-align:-2px;"></i> 보라 세그먼트가 바로 <strong class="accent2">하네스가 매 세션 채워 넣는 부분</strong> — 같은 모델이라도 하네스가 다르면 다르게 일합니다.</p>
+          </div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">Claude Code Docs · How Claude Code works</a>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Effective context engineering</a>
         </div>
       </div>
     </section>
@@ -848,6 +947,10 @@ footer, header, hgroup, main, menu, nav, section {
               당신의 실제 작업 예산은 200K가 아니라 <strong class="accent2">~170K</strong>입니다.
             </div>
           </div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Claude Code Docs · 세션 시작 시 로드되는 것</a>
         </div>
       </div>
     </section>
@@ -921,6 +1024,11 @@ footer, header, hgroup, main, menu, nav, section {
         <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.32rem;">
           무조건 많이 넣는 것이 아니라, <strong class="accent2">지금 작업에 필요한 정보만</strong> 잘 넣어야 합니다.
         </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://research.trychroma.com/context-rot" target="_blank" rel="noopener">Chroma · Context Rot</a>
+          <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Liu et al. · Lost in the Middle</a>
+        </div>
       </div>
     </section>
 
@@ -956,6 +1064,54 @@ footer, header, hgroup, main, menu, nav, section {
               <text x="330" y="138" font-size="12" fill="#E6D9FF" font-family="JetBrains Mono">context 사용량 →</text>
             </svg>
           </div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://research.trychroma.com/context-rot" target="_blank" rel="noopener">Chroma · Context Rot</a>
+          <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Liu et al. · Lost in the Middle</a>
+          <a href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">Claude Code Docs · 가득 차면 일어나는 일</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 10b. 압축의 실체 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 2 · 상자는 어떻게 차오르는가</div>
+        <h2>압축의 실체 — zip이 아니라 <span class="grad">"요약해서 갈아끼우기"</span></h2>
+        <p class="small muted" style="margin:.1rem 0 .7rem;">파일 압축(zip · jpg)은 <em>알고리즘</em>이 계산하고 zip은 100% 복원됩니다. compaction은 <strong class="accent4">LLM에게 "지금까지를 요약해줘"라고 시킨 뒤</strong>, 그 요약문으로 원문 히스토리를 통째로 교체하는 것입니다.</p>
+        <div class="grid-2" style="align-items:start;">
+          <div>
+            <p class="tiny mono muted" style="margin:0 0 .35rem;">BEFORE — 원문 히스토리 <span class="accent3">141K</span></p>
+            <pre class="code bad" style="font-size:.95rem;">🙋 "로그인 버그 고쳐줘"
+🤖 auth.py 읽기 — 812줄 전체          <span class="nm">36K</span>
+🧪 pytest 로그 3,200줄 · 실패 2건     <span class="nm">40K</span>
+🤖 원인: exp를 <span class="st">로컬 시간</span>으로 계산해
+   UTC 서버와 1시간 어긋남
+🙋 "<span class="st">refresh token 로직은 건드리지 마</span>"
+🤖 수정 diff · 재테스트 통과 …</pre>
+          </div>
+          <div class="fragment">
+            <p class="tiny mono muted" style="margin:0 0 .35rem;">AFTER — 모델이 새로 쓴 요약 <span class="accent2">6K</span></p>
+            <pre class="code good" style="font-size:.95rem;">"로그인 버그를 수정했다.
+원인은 토큰 만료 시간 계산 오류였고,
+auth.py를 고쳐 테스트가 통과했다."</pre>
+            <div class="row fragment" style="gap:.5rem; flex-wrap:wrap; margin-top:.7rem;">
+              <span class="tiny mono muted" style="width:100%;">요약에서 사라진 것 ↓</span>
+              <span class="pill pink" style="text-decoration:line-through;">UTC vs 로컬 — 구체 원인</span>
+              <span class="pill pink" style="text-decoration:line-through;">"refresh token 금지" 제약</span>
+              <span class="pill pink" style="text-decoration:line-through;">코드 · 로그 원문</span>
+            </div>
+          </div>
+        </div>
+        <div class="quote fragment" style="margin-top:.9rem; font-size:1.22rem;">
+          요약은 <strong class="accent3">복원 불가</strong>이고, 무엇을 남길지는 요약 모델의 <em>추측</em>입니다.<br/>
+          <span class="small">그래서 <span class="mono">/compact "auth 버그 수정 내용 위주로 남겨줘"</span>처럼 남길 것을 직접 지시할 수 있습니다.</span>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/context-window#what-survives-compaction" target="_blank" rel="noopener">Claude Code Docs · 압축에서 살아남는 것</a>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Compaction</a>
         </div>
       </div>
     </section>
@@ -1059,6 +1215,10 @@ footer, header, hgroup, main, menu, nav, section {
           </div>
           <p style="font-size:1.32rem; flex:1;">파일과 함수를 <strong class="accent2">콕 집어주면</strong> 에이전트의 탐색 비용이 사라집니다.<br/><span class="muted small">"찾아서 고쳐줘" 대신 "src/auth/login.ts의 validateToken()을 고쳐줘"</span></p>
         </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
       </div>
     </section>
 
@@ -1126,13 +1286,53 @@ footer, header, hgroup, main, menu, nav, section {
             <p class="autoshow fade-right muted" style="font-size:1.22rem;">한 줄 한 줄이 <span class="mono">수십 토큰 × 매 세션</span>으로 곱해집니다.</p>
           </div>
         </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">Claude Code Docs · CLAUDE.md와 메모리</a>
+          <a href="https://agents.md" target="_blank" rel="noopener">AGENTS.md — 공통 규약</a>
+        </div>
       </div>
     </section>
 
-    <!-- ============= 16. 패턴 4 ============= -->
+    <!-- ============= 15b. 패턴 4: 기억은 파일로 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 실전 패턴 ④</div>
+        <h2>기억은 <span class="grad">파일로</span> — 상자는 휘발성, 파일은 영속</h2>
+        <p class="small muted" style="margin:.1rem 0 .7rem;">컨텍스트는 RAM, 파일은 디스크입니다. 압축(요약)과 <span class="mono">/clear</span>는 상자 안의 기억을 지우지만, <strong class="accent2">파일은 그대로 남아 언제든 다시 읽어올 수 있습니다.</strong></p>
+        <div class="grid-2" style="align-items:stretch;">
+          <div class="card bad autoshow fade-up">
+            <h3>💬 말로만 남긴 기억</h3>
+            <p><span class="pill pink">대화</span> "포트는 8081을 쓰기로 했어"</p>
+            <p style="margin-top:.5rem;">→ 30턴 뒤 자동 압축 → 요약에서 누락 →<br/><strong class="accent3">에이전트가 다시 8080으로 되돌립니다</strong></p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>📝 파일로 남긴 기억</h3>
+            <pre class="code tiny" style="font-size:.88rem; padding:.7rem;">"이번에 정한 규칙과 이유를
+ <span class="nm">docs/decisions.md</span>에 기록해줘"
+<span class="cm">──── /clear · 다음 날 새 세션 ────</span>
+"<span class="nm">docs/decisions.md</span> 읽고 이어가줘"</pre>
+            <p style="margin-top:.5rem;">압축 · 초기화 후에도 <strong class="accent2">그대로 복구</strong></p>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:.9rem;">
+          <div class="card autoshow zoom-in"><h3>📋 PLAN.md · TODO</h3><p>긴 작업의 체크리스트를 파일로 두고 단계마다 갱신 — "어디까지 했나"가 압축을 견딥니다</p></div>
+          <div class="card autoshow zoom-in"><h3>📓 NOTES.md</h3><p>대량 조사 결과·중간 발견을 노트 파일로. Claude가 공략 노트를 쓰며 포켓몬을 플레이한 것과 같은 원리</p></div>
+          <div class="card autoshow zoom-in"><h3>🗃 MEMORY.md · memory tool</h3><p>하네스가 기본 지원하는 파일 기반 장기 기억 — Claude Code의 auto memory, API의 memory tool</p></div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Structured note-taking</a>
+          <a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">Claude Code Docs · Auto memory</a>
+          <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener">Manus · 파일 시스템 = 궁극의 컨텍스트</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 16. 패턴 5 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · 실전 패턴 ⑤</div>
         <h2>길어지면 <span class="grad">요약하고, 비우고</span></h2>
         <div class="grid-3" style="margin-top:.5rem; align-items:start;">
           <div class="card autoshow zoom-in">
@@ -1166,37 +1366,55 @@ footer, header, hgroup, main, menu, nav, section {
         <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.3rem;">
           이어갈 이유가 없다면, <strong>비우는 게 항상 이득</strong>입니다.
         </div>
-      </div>
-    </section>
-
-    <!-- ============= 17. 패턴 5 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip">CH 4 · 실전 패턴 ⑤</div>
-        <h2>바뀐 결정은 <span class="accent3">명시적으로 폐기</span></h2>
-        <div class="row" style="align-items:center; gap:2.6rem; margin-top:.5rem;">
-          <figure class="ctx-box slim ctx-anim" style="flex:0 0 auto;" aria-label="폐기되지 않은 결정이 남아 있는 컨텍스트">
-            <div class="ctx-freelabel"><span class="mono">유령 결정이 남은 상자</span></div>
-            <div class="ctx-seg seg-sys" style="--h:14%"><span class="ctx-lab">System · 도구</span></div>
-            <div class="ctx-seg seg-ghost" style="--h:11%"><span class="ctx-lab">SQLite로 간다 (예전)</span></div>
-            <div class="ctx-seg seg-conv" style="--h:11%"><span class="ctx-lab">DuckDB로 간다 (현재)</span></div>
-            <div class="ctx-seg seg-tool" style="--h:16%"></div>
-          </figure>
-          <div class="stack" style="gap:.9rem; flex:1;">
-            <p class="autoshow fade-up" style="font-size:1.3rem;">에이전트는 상자 안의 <strong>과거 정보를 계속 참고할 수 있습니다.</strong> 방향이 바뀌었는데 옛 결정이 남아 있으면, 판단이 흔들립니다.</p>
-            <pre class="code good autoshow fade-up"><span class="cm"># ✅ 새 방향 + 이전 방향 폐기까지</span>
-"<span class="st">이전의 SQLite 기반 접근은 폐기</span>하고,
-이제부터는 <span class="nm">DuckDB + Parquet</span> 기준으로 진행해줘."</pre>
-            <p class="autoshow fade-up" style="font-size:1.26rem;" >"새 방향"만 말하지 말고 <strong class="accent4">"이전 방향 폐기"</strong>까지 선언하세요.</p>
-          </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Claude Code Docs · 컨텍스트로 비용 줄이기</a>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
         </div>
       </div>
     </section>
 
-    <!-- ============= 18. 패턴 6 ============= -->
+    <!-- ============= 17. 패턴 6: 명시적 폐기의 실체 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 실전 패턴 ⑥</div>
+        <h2>폐기 선언은 <span class="accent3">지우개가 아니라</span> 덮어쓰기 <span class="tiny mono muted">▸</span></h2>
+        <div class="row" style="align-items:center; gap:2.6rem; margin-top:.5rem;">
+          <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+            <figure class="ctx-box slim" id="dropBox" data-ctx-start='{"conv":"0%"}' aria-label="폐기 선언 후에도 옛 결정이 남아 있는 컨텍스트">
+              <div class="ctx-freelabel"><span class="mono">append-only 히스토리</span></div>
+              <div class="ctx-seg seg-sys" style="--h:14%"><span class="ctx-lab">System · 도구</span></div>
+              <div class="ctx-seg seg-ghost" style="--h:11%"><span class="ctx-lab">SQLite로 간다 (예전)</span></div>
+              <div class="ctx-seg seg-tool" style="--h:14%"></div>
+              <div class="ctx-seg seg-conv" style="--h:9%"><span class="ctx-lab">SQLite 폐기 · DuckDB 확정</span></div>
+            </figure>
+            <p class="ctx-caption">옛 문장은 <span class="danger">그대로 남습니다</span></p>
+          </div>
+          <div class="stack" style="gap:.8rem; flex:1;">
+            <p class="autoshow fade-up" style="font-size:1.26rem;">"이전 접근은 폐기해"라고 말해도 <strong>그 옛 문장이 컨텍스트에서 지워지지는 않습니다.</strong> 대화 히스토리는 덧붙기만(append-only) 합니다.</p>
+            <pre class="code good fragment" data-ctx-target="#dropBox" data-ctx='{"conv":"9%"}'><span class="cm"># ✅ 그래도 선언하는 이유 — 최신·명시적 신호가 이깁니다</span>
+"<span class="st">이전의 SQLite 기반 접근은 폐기</span>하고,
+이제부터는 <span class="nm">DuckDB + Parquet</span> 기준으로 진행해줘."
+<span class="cm"># 옛 결정보다 더 최근 위치에, 더 명시적인 상위 지시가
+# 추가되어 모델이 이를 따르게 됩니다</span></pre>
+            <div class="card fragment" style="padding:1rem 1.3rem;">
+              <h3 style="font-size:1.22rem;">진짜로 상자에서 치우려면</h3>
+              <p style="font-size:1.08rem;">① <span class="mono">/clear</span> · 새 세션 — 유효한 결정은 파일에 남기고<br/>② <span class="mono">/compact "SQLite 논의는 버려줘"</span> — 요약에 반영<br/>③ API의 <strong>context editing</strong> — 오래된 도구 결과를 자동 삭제</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://platform.claude.com/docs/en/build-with-claude/context-editing" target="_blank" rel="noopener">Claude Platform Docs · Context editing</a>
+          <a href="https://claude.com/blog/context-management" target="_blank" rel="noopener">Anthropic · Managing context</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 18. 패턴 7 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · 실전 패턴 ⑦</div>
         <h2>서브에이전트 = <span class="grad">컨텍스트 격리</span></h2>
         <div class="iso-wrap" style="margin-top:.6rem;">
           <div class="iso-side">
@@ -1236,6 +1454,11 @@ footer, header, hgroup, main, menu, nav, section {
           <p class="autoshow fade-up" style="font-size:1.28rem;">서브에이전트는 <strong class="accent2">자기만의 상자</strong>를 새로 받습니다. 대량 탐색·파일 읽기 같은 지저분한 소비는 그 안에서 끝나고, 본진 상자에는 <strong>결론 몇 K만</strong> 착륙합니다.</p>
           <p class="autoshow fade-up muted" style="font-size:1.18rem;">코드에서 함수를 분리하는 것과 같은 원리입니다.</p>
         </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Claude Code Docs · Subagents</a>
+          <a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener">Anthropic · Multi-agent research system</a>
+        </div>
       </div>
     </section>
 
@@ -1249,8 +1472,9 @@ footer, header, hgroup, main, menu, nav, section {
             <div class="orbit-node autoshow fade-left"><span class="on-name">🧠 Memory</span><span class="on-desc">사용자·프로젝트에 대한 장기 기억</span></div>
             <div class="orbit-node autoshow fade-left"><span class="on-name">🔎 RAG</span><span class="on-desc">외부 문서에서 필요한 부분만 검색</span></div>
             <div class="orbit-node autoshow fade-left"><span class="on-name">🧰 Skill</span><span class="on-desc">반복 절차·도구 사용법을 패키징</span></div>
+            <div class="orbit-node autoshow fade-left"><span class="on-name">🔌 MCP</span><span class="on-desc">외부 도구·데이터를 표준으로 연결</span></div>
           </div>
-          <div class="orbit-arrows"><span>→</span><span>→</span><span>→</span></div>
+          <div class="orbit-arrows"><span>→</span><span>→</span><span>→</span><span>→</span></div>
           <figure class="ctx-box slim" style="flex:0 0 auto;" aria-label="필요한 것만 들어온 컨텍스트">
             <div class="ctx-freelabel"><span class="mono">context window</span><span class="sub">지금 모델이 직접 보는 것</span></div>
             <div class="ctx-seg seg-sys" style="--h:14%"></div>
@@ -1265,8 +1489,76 @@ footer, header, hgroup, main, menu, nav, section {
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.1rem; font-size:1.3rem;">
-          Memory·RAG·Skill·Tool은 상자 <strong>밖</strong>에 있다가, <strong class="accent2">필요할 때 상자 안으로 들어와야</strong> 실제 판단에 쓰입니다.<br/>
+          Memory·RAG·Skill·MCP는 상자 <strong>밖</strong>에 있다가, <strong class="accent2">필요할 때 상자 안으로 들어와야</strong> 실제 판단에 쓰입니다.<br/>
           <span class="small muted">문서가 아무리 많아도, 검색되어 들어오지 않으면 없는 것과 같습니다.</span>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Effective context engineering</a>
+          <a href="https://code.claude.com/docs/en/features-overview" target="_blank" rel="noopener">Claude Code Docs · 확장 기능 한눈에 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 19b. MCP ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 5 · 더 큰 그림</div>
+        <h2>MCP — 도구를 꽂는 <span class="grad">표준 포트</span> <span class="tiny mono muted">— 방향키로 서버를 꽂아보세요 ▸</span></h2>
+        <p class="small muted" style="margin:.1rem 0 .7rem;"><strong>Model Context Protocol</strong> — 하네스에 외부 도구·데이터 소스(GitHub·Slack·사내 DB…)를 연결하는 공개 표준. "AI 도구의 USB-C 포트"라고 불립니다.</p>
+        <div class="row" style="align-items:center; gap:2.4rem;">
+          <ul class="sim-list" style="flex:1;">
+            <li class="sim-line"><span>🔧 기본 도구만 — 파일 · 터미널 · 검색</span><span class="tok mono accent">24K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"21%"}' data-ctx-tokens="42"><span>🔀 + GitHub 서버 — 도구 35개의 이름·설명·파라미터</span><span class="tok mono accent3">+18K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"27%"}' data-ctx-tokens="54"><span>💬 + Slack 서버 — 도구 11개</span><span class="tok mono accent3">+12K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"36%"}' data-ctx-tokens="72"><span>📋 + Jira · 사내 DB 서버 …</span><span class="tok mono accent3">+18K</span></li>
+            <li class="fragment" style="list-style:none;"><div class="quote" style="font-size:1.18rem;">첫 인사도 전에 <strong class="danger">36%</strong> — 도구의 <em>정의</em>도 전부 컨텍스트입니다.<br/><span class="small">그래서 최신 하네스는 도구 <strong>이름만</strong> 올려두고 상세 스키마는 필요할 때 검색해 로드합니다(Tool Search). 안 쓰는 서버는 빼는 게 기본입니다.</span></div></li>
+          </ul>
+          <figure class="ctx-box slim" id="mcpBox" data-ctx-start='{"sys":"12%"}' data-tokens-start="24" aria-label="MCP 서버를 붙일수록 커지는 System 영역">
+            <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="72">72</span><span class="mono">K / 200K</span><span class="sub">대화 시작 전</span></div>
+            <div class="ctx-seg seg-sys" style="--h:36%"><span class="ctx-lab">System · 도구 정의</span></div>
+          </figure>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a>
+          <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic · MCP 발표</a>
+          <a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">Claude Code Docs · MCP</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 19c. Agent Skill ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 5 · 더 큰 그림</div>
+        <h2>Agent Skill — 절차를 <span class="grad">파일로 패키징</span></h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <div class="stack" style="gap:.8rem;">
+            <p class="autoshow fade-up" style="font-size:1.24rem;">"보고서 양식 채우기" · "배포 절차" 같은 <strong>반복 노하우</strong>를 폴더 하나에 담습니다.</p>
+            <pre class="code autoshow fade-up"><span class="nm">report-skill/</span>
+├─ <span class="st">SKILL.md</span>        <span class="cm">← name + 한 줄 설명 + 절차</span>
+├─ reference.md   <span class="cm">← 상세 규칙 (필요할 때만)</span>
+└─ scripts/build_report.py</pre>
+            <p class="autoshow fade-up" style="font-size:1.2rem;">CLAUDE.md가 <strong>매 세션 상주하는 비용</strong>이라면, 스킬은 <strong class="accent2">쓸 때만 상자에 들어옵니다.</strong></p>
+          </div>
+          <div class="stack" style="gap:.7rem;">
+            <p class="tiny mono muted" style="margin:0;">PROGRESSIVE DISCLOSURE — 단계적 공개 ▸</p>
+            <div class="ladder">
+              <div class="rung fragment"><span class="no">1</span>평소: 모든 스킬의 이름+설명 한 줄만 상주<span class="w">~50 tok/스킬</span></div>
+              <div class="rung fragment"><span class="no">2</span>관련 작업 감지 → 그 SKILL.md 본문만 로드<span class="w">~2K</span></div>
+              <div class="rung fragment"><span class="no">3</span>필요할 때만 부속 파일 읽기 · 스크립트 실행<span class="w">+α</span></div>
+            </div>
+            <div class="quote fragment" style="font-size:1.18rem;">
+              매뉴얼을 통째로 외우게 하지 않고,<br/><strong class="accent2">목차만 들고 있다가 필요한 장을 펴게 한다.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener">Anthropic · Agent Skills</a>
+          <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Claude Code Docs · Skills</a>
+          <a href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a>
         </div>
       </div>
     </section>
@@ -1298,6 +1590,43 @@ wafer Y 수율이 <span class="nm">72.3%</span>로 떨어졌고..."</pre>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:.9rem; font-size:1.28rem;">
           사외 Agent에는 "원본 context"가 아니라 <strong class="accent2">민감 정보를 제거한 재구성 context</strong>를 주세요.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 21. 참고 자료 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">REFERENCES</div>
+        <h2>더 깊이 보기</h2>
+        <div class="grid-3" style="align-items:stretch; margin-top:.4rem;">
+          <div class="card ref-col autoshow fade-up">
+            <h3>📚 공식 문서</h3>
+            <ul>
+              <li><a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Explore the context window</a><span class="rd">Claude Code Docs — 상자가 차는 과정 인터랙티브 시뮬레이션</span></li>
+              <li><a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">How Claude remembers your project</a><span class="rd">CLAUDE.md · auto memory</span></li>
+              <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a><span class="rd">MCP 공식 사이트 · 스펙과 튜토리얼</span></li>
+              <li><a href="https://platform.claude.com/docs/en/build-with-claude/context-editing" target="_blank" rel="noopener">Context editing · Memory tool</a><span class="rd">Claude Platform Docs — API 레벨 컨텍스트 관리</span></li>
+            </ul>
+          </div>
+          <div class="card ref-col autoshow fade-up">
+            <h3>🛠 엔지니어링 블로그</h3>
+            <ul>
+              <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering for AI agents</a><span class="rd">Anthropic — 이 발표의 뼈대</span></li>
+              <li><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener">Equipping agents with Agent Skills</a><span class="rd">Anthropic — progressive disclosure</span></li>
+              <li><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener">How we built our multi-agent research system</a><span class="rd">Anthropic — 서브에이전트 컨텍스트 격리</span></li>
+              <li><a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener">Context Engineering: Lessons from Manus</a><span class="rd">Manus — "파일 시스템이 궁극의 컨텍스트"</span></li>
+            </ul>
+          </div>
+          <div class="card ref-col autoshow fade-up">
+            <h3>🔬 연구 · 규약</h3>
+            <ul>
+              <li><a href="https://research.trychroma.com/context-rot" target="_blank" rel="noopener">Context Rot</a><span class="rd">Chroma, 2025 — 입력이 길수록 성능이 흔들린다</span></li>
+              <li><a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Lost in the Middle</a><span class="rd">Liu et al., TACL 2024 — 중간 정보를 놓친다</span></li>
+              <li><a href="https://agents.md" target="_blank" rel="noopener">AGENTS.md</a><span class="rd">에이전트 지침 파일의 공통 규약</span></li>
+              <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Claude Code best practices</a><span class="rd">Anthropic — 에이전틱 코딩 실전 팁</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
