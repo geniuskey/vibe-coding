@@ -468,6 +468,112 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   white-space: nowrap;
 }
 
+/* ===== 목차(TOC) ===== */
+.toc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.toc-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px 14px;
+  position: relative;
+  overflow: hidden;
+  min-height: 172px;
+}
+.toc-card .t-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  margin-bottom: 8px;
+}
+.toc-card .t-name { font-weight: 800; font-size: 22px; display: block; margin-bottom: 5px; }
+.toc-card .t-desc { font-size: 15.5px; color: var(--muted); line-height: 1.4; display: block; }
+.toc-card .t-time {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--teal);
+}
+.toc-card.lunch { background: rgba(255, 194, 75, 0.05); border-color: rgba(255, 194, 75, 0.3); }
+
+/* ===== 제공 데이터 바 ===== */
+.databar { display: flex; gap: 8px; align-items: center; margin: -4px 0 12px; flex-wrap: wrap; }
+.databar .chip { font-size: 16px; padding: 4px 12px; }
+.databar a.chip { text-decoration: none; }
+.databar a.chip:hover { background: rgba(43, 234, 208, 0.15); }
+
+/* ===== 예상 결과 패널 ===== */
+.panel.expected { border-color: rgba(155, 130, 255, 0.35); padding: 11px 14px 12px; }
+.panel.expected .panel-title { color: var(--violet); }
+.panel.expected canvas.mock { width: 100%; height: auto; display: block; border-radius: 8px; }
+.panel.expected .mock-cap { font-size: 14px; color: var(--muted); margin-top: 6px; }
+
+/* HTML 목업 공통 — 실제 결과물의 미니어처 느낌 */
+.mockup {
+  background: #0A0E1A;
+  border: 1px solid rgba(147, 160, 190, 0.22);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #C3CDE6;
+}
+.mockup .mk-title { font-weight: 800; color: var(--ink); font-size: 16px; }
+.mockup .mk-sub { color: var(--muted); font-size: 13.5px; }
+.mockup table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 6px; }
+.mockup th, .mockup td { padding: 3px 8px; border-bottom: 1px solid rgba(147,160,190,0.15); text-align: left; }
+.mockup th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.mockup .ok { color: var(--teal); }
+.mockup .bad { color: var(--pink); }
+.mockup .warn-t { color: var(--amber); }
+.mockup .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+/* 미니 명함 목업 */
+.mk-card { display: flex; align-items: center; gap: 12px; }
+.mk-card .mk-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--grad); flex: none;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+/* 미니 룰렛 목업 */
+.mk-wheel-row { display: flex; align-items: center; gap: 14px; }
+.mk-wheel {
+  width: 92px; height: 92px; border-radius: 50%; flex: none;
+  background: conic-gradient(#9B82FF 0 45deg, #2BEAD0 45deg 90deg, #FF7AA8 90deg 135deg, #FFC24B 135deg 180deg,
+    #9B82FF 180deg 225deg, #2BEAD0 225deg 270deg, #FF7AA8 270deg 315deg, #FFC24B 315deg 360deg);
+  border: 3px solid #1a2138;
+  position: relative;
+}
+.mk-wheel::after { content: '▼'; position: absolute; top: -16px; left: 50%; transform: translateX(-50%); color: var(--ink); font-size: 14px; }
+/* 미니 타이머 목업 */
+.mk-timer {
+  font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 44px;
+  color: var(--amber); text-align: center; letter-spacing: 0.04em;
+}
+/* 미니 메일 목업 */
+.mk-mail .mk-row { display: flex; gap: 8px; padding: 3px 0; border-bottom: 1px solid rgba(147,160,190,0.12); font-size: 13.5px; }
+.mk-mail .mk-row b { color: var(--muted); font-weight: 700; flex: none; width: 58px; }
+/* 미니 슬라이드 썸네일 */
+.mk-thumbs { display: flex; gap: 8px; }
+.mk-thumbs .mk-thumb {
+  flex: 1; aspect-ratio: 16/10; background: #10162a; border: 1px solid rgba(147,160,190,0.25);
+  border-radius: 6px; padding: 6px; font-size: 9px; color: var(--muted); overflow: hidden;
+}
+.mk-thumbs .mk-thumb .bar { height: 5px; border-radius: 3px; background: var(--grad); margin-bottom: 4px; width: 70%; }
+.mk-thumbs .mk-thumb .ln { height: 3px; border-radius: 2px; background: rgba(147,160,190,0.3); margin: 3px 0; }
+/* 채팅 버블 목업 */
+.mk-chat .bub { border-radius: 10px; padding: 7px 11px; margin: 5px 0; font-size: 14px; max-width: 92%; }
+.mk-chat .me { background: rgba(155, 130, 255, 0.16); margin-left: auto; }
+.mk-chat .ai { background: rgba(43, 234, 208, 0.10); }
+.mk-chat .src { color: var(--teal); font-size: 12px; font-family: 'JetBrains Mono', monospace; }
+/* 파일 개명 목업 */
+.mk-files { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.7; }
+.mk-files .arr { color: var(--violet); padding: 0 6px; }
+
 /* fragment 시 살짝 위로 */
 .reveal .fragment.rise { transform: translateY(14px); transition: all 0.35s ease; }
 .reveal .fragment.rise.visible { transform: translateY(0); }
@@ -512,20 +618,51 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 </section>
 
 <section>
-  <span class="kicker">SCHEDULE</span>
-  <h2>오늘의 일정 <span class="muted small">— 진도는 유동적으로</span></h2>
-  <table class="agenda">
-    <tr><th>시간</th><th>파트</th><th>내용</th></tr>
-    <tr><td class="t">09:00–09:30</td><td class="part">0. 시작하기</td><td>환경 점검 · 규칙 · 워밍업</td></tr>
-    <tr><td class="t">09:30–10:30</td><td class="part">1. 첫 결과물</td><td>명함 페이지 · 룰렛 · 변환기 · 타이머</td></tr>
-    <tr><td class="t">10:40–12:00</td><td class="part">2. 비개발 업무</td><td>회의록 · 보고서 · 메일 · 표 정리</td></tr>
-    <tr class="break"><td class="t">12:00–13:00</td><td class="part">🍚 점심</td><td>점심 메뉴는 오전에 만든 룰렛으로 결정</td></tr>
-    <tr><td class="t">13:00–14:30</td><td class="part">3. 데이터 만나기</td><td>측정 CSV · 웨이퍼 맵 · 장비 로그</td></tr>
-    <tr><td class="t">14:40–16:00</td><td class="part">4. 도메인 도구</td><td>SPC 관리도 · 수율 대시보드 · 공정 계산기</td></tr>
-    <tr><td class="t">16:10–17:00</td><td class="part">5. 업무 자동화</td><td>파일 일괄 처리 · 리포트 생성 · 문서 Q&amp;A</td></tr>
-    <tr><td class="t">17:00–18:00</td><td class="part">6. 미니 프로젝트</td><td>내 업무 하나 자동화 + 공유</td></tr>
-  </table>
-  <aside class="notes">시간표는 가이드일 뿐. 파트마다 필수 실습과 보너스 실습이 나뉘어 있어서 참여자 속도에 맞춰 조절한다. 빠른 사람은 🚀 더 해보기를 계속 파면 된다.</aside>
+  <span class="kicker">CONTENTS</span>
+  <h2>목차 <span class="muted small">— 쉬운 것에서 내 업무로</span></h2>
+  <div class="toc-grid">
+    <div class="toc-card">
+      <span class="t-time">09:00</span><span class="t-num">0</span>
+      <span class="t-name">시작하기</span>
+      <span class="t-desc">환경 점검 · 실습 규칙 · 보안 약속 · 워밍업</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">09:30</span><span class="t-num">1</span>
+      <span class="t-name">첫 결과물</span>
+      <span class="t-desc">명함 페이지 · 점심 룰렛 · 단위 변환기 · 타이머</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">10:40</span><span class="t-num">2</span>
+      <span class="t-name">비개발 업무</span>
+      <span class="t-desc">회의록 · 주간보고 · 영문 메일 · 표 정리 · 발표자료</span>
+    </div>
+    <div class="toc-card lunch">
+      <span class="t-time">12:00</span><span class="t-num">🍚</span>
+      <span class="t-name">점심</span>
+      <span class="t-desc">메뉴는 오전에 만든 룰렛으로 결정</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">13:00</span><span class="t-num">3</span>
+      <span class="t-name">데이터 만나기</span>
+      <span class="t-desc">측정 CSV · 웨이퍼 맵 · 장비 로그 · 랏 트렌드</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">14:40</span><span class="t-num">4</span>
+      <span class="t-name">도메인 도구</span>
+      <span class="t-desc">SPC 관리도 · 수율 대시보드 · 공정 계산기</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">16:10</span><span class="t-num">5</span>
+      <span class="t-name">업무 자동화</span>
+      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A</span>
+    </div>
+    <div class="toc-card">
+      <span class="t-time">17:00</span><span class="t-num">6</span>
+      <span class="t-name">미니 프로젝트</span>
+      <span class="t-desc">내 업무 하나 자동화 + 공유 + 치트시트</span>
+    </div>
+  </div>
+  <aside class="notes">목차이자 시간표. 시간은 가이드일 뿐, 파트마다 필수/보너스 실습이 나뉘어 있어 참여자 속도에 맞춰 조절한다. 빠른 사람은 🚀 더 해보기를 계속 파면 된다.</aside>
 </section>
 
 <section>
@@ -661,23 +798,24 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-chat">
+          <div class="bub me">응원 문구 3개만 만들어줘…</div>
+          <div class="bub ai">"오늘도 무결점, <b>수율 100%</b>의 하루 되세요!" ✨</div>
+          <div class="bub me">두 번째가 마음에 들어. 4행시로 5개 더!</div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>답변을 받았다</li>
           <li>이어서 <strong>수정 요청</strong>을 한 번 해봤다</li>
-          <li>마음에 드는 문구를 옆 사람에게 자랑했다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>①→②처럼 <strong>대화가 이어지는 것</strong>, 이게 오늘 하루 종일 할 일의 전부입니다</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">가볍게 웃고 시작하는 실습. 여기서 '이어서 수정 요청하기'를 반드시 해보게 한다 — 단발 질문이 아니라 대화라는 감각이 core.</aside>
+  <aside class="notes">가볍게 웃고 시작하는 실습. 여기서 '이어서 수정 요청하기'를 반드시 해보게 한다 — 단발 질문이 아니라 대화라는 감각이 core. ①→②처럼 대화가 이어지는 것이 오늘 하루 종일 할 일의 전부라는 점을 짚는다.</aside>
 </section>
 
 <!-- ═══════════════ PART 1 · 첫 결과물 ═══════════════ -->
@@ -689,7 +827,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <h2>첫 결과물 만들기</h2>
     <p class="subtitle muted">쉽고, 일반적이고, 눈에 바로 보이는 것부터.<br />여기서 만드는 건 장난감이지만, 익히는 근육은 진짜입니다.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 목표: 시키기→확인→고치기 루프 체화</span>
+      <span class="chip teal">🎯 시키기→확인→고치기 루프 체화</span>
       <span class="chip violet">🧪 실습 4개 + 보너스 1개</span>
     </div>
   </div>
@@ -703,7 +841,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">생애 첫 웹페이지. <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열리는 경험.</p>
+  <p class="lab-goal">생애 첫 웹페이지 — <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열립니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -711,31 +849,40 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
         <div class="p-text">내 온라인 명함 웹페이지를 card.html 파일 하나로 만들어줘. 이름, 소속, 한 줄 소개, 이메일이 들어가고, 세련된 다크 테마로. 내용은 일단 아무거나 채워놔 — 내가 나중에 알려줄게.</div>
       </div>
       <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 내 정보로 바꾸기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 이어서 — 내 정보로</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">이름은 ○○○, 소속은 ○○팀으로 바꿔줘. 한 줄 소개는 "웨이퍼와 씨름하는 엔지니어" 느낌으로 네가 몇 개 제안해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-card">
+          <div class="mk-avatar">🧑‍🔬</div>
+          <div>
+            <div class="mk-title">김공정 <span class="mk-sub">· 식각기술팀</span></div>
+            <div class="mk-sub">"웨이퍼와 씨름하는 엔지니어"</div>
+            <div class="mk-sub mono">engineer@fab.example</div>
+          </div>
+        </div>
+        <div class="mock-cap">브라우저에 뜨는 다크 테마 카드 한 장</div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li><code>card.html</code>이 브라우저에서 열린다</li>
-          <li>내 이름이 보인다</li>
           <li>수정 요청을 2번 이상 해봤다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">🚑 막혔다면</div>
         <ul>
-          <li>파일이 어디 있는지 모르겠다 → <strong>"방금 만든 파일 경로 알려줘"</strong></li>
-          <li>안 열린다 → 에러/상황을 그대로 복붙</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
-          <li>"내 취미 아이콘 3개 추가해줘"</li>
+          <li>"방금 만든 파일 경로 알려줘" / 에러는 그대로 복붙</li>
         </ul>
       </div>
     </div>
@@ -750,7 +897,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>을 만듭니다. 오늘 점심 메뉴는 이걸로 정합니다. 진짜로.</p>
+  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>. 오늘 점심은 이걸로 정합니다. 진짜로.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -759,24 +906,32 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       </div>
       <div class="prompt">
         <div class="p-label"><span>📋 이어서 — 감질나게</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 그리고 메뉴를 내가 직접 추가/삭제할 수 있는 입력칸도 만들어줘.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>돌림판이 돌고 결과가 나온다</li>
-          <li>메뉴를 하나 바꿔봤다</li>
-          <li>오늘 점심이 정해졌다 🍜</li>
-        </ul>
+        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 메뉴를 직접 추가/삭제할 수 있는 입력칸도.</div>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
-          <li>"결과 히스토리를 아래에 쌓아줘"</li>
           <li>"같은 메뉴가 3번 연속 나오면 안 되게 해줘"</li>
-          <li>당첨 메뉴에 효과음 넣기</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-wheel-row">
+          <div class="mk-wheel"></div>
+          <div>
+            <div class="mk-title">🎉 돈까스!</div>
+            <div class="mk-sub">폭죽 + 두구두구 효과</div>
+            <div class="mk-sub">메뉴 추가/삭제 입력칸</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>돌림판이 돌고 결과가 나온다</li>
+          <li>오늘 점심이 정해졌다 🍜</li>
         </ul>
       </div>
     </div>
@@ -792,7 +947,6 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       <h3>👀 눈에 보이는 대로</h3>
       <ul class="small">
         <li>"버튼이 너무 작아, 두 배로"</li>
-        <li>"글씨가 안 읽혀, 배경이랑 대비 키워줘"</li>
         <li>"전체적으로 촌스러워, 더 고급스럽게"</li>
         <li>"모바일에서 보면 깨져, 고쳐줘"</li>
       </ul>
@@ -801,13 +955,12 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       <h3>🎬 동작을 바꾸고 싶을 때</h3>
       <ul class="small">
         <li>"누르면 소리도 나게 해줘"</li>
-        <li>"결과가 너무 빨리 나와, 3초는 돌다가 멈추게"</li>
-        <li>"새로고침해도 설정이 유지되게 해줘"</li>
+        <li>"3초는 돌다가 멈추게"</li>
         <li>"이 기능은 빼줘, 복잡해"</li>
       </ul>
     </div>
   </div>
-  <p class="fragment rise" style="margin-top: 14px;"><strong>"더 예쁘게"도 훌륭한 지시입니다.</strong> <span class="muted">디자이너에게 말하듯, 신입사원에게 말하듯 — 사람에게 하듯 하면 됩니다.</span></p>
+  <p class="fragment rise" style="margin-top: 14px;"><strong>"더 예쁘게"도 훌륭한 지시입니다.</strong> <span class="muted">디자이너에게, 신입사원에게 말하듯 하면 됩니다.</span></p>
   <aside class="notes">비개발자가 '이렇게 대충 말해도 되나?' 하는 심리 장벽을 깨는 슬라이드. 실제로 몇 개를 라이브로 시연하면 효과적.</aside>
 </section>
 
@@ -818,37 +971,41 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">처음으로 <strong>업무 냄새</strong>가 나는 도구. 매번 검색하던 단위 변환을 내 도구로.</p>
+  <p class="lab-goal">처음으로 <strong>업무 냄새</strong>가 나는 도구 — 매번 검색하던 단위 변환을 내 것으로.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">반도체 엔지니어용 단위 변환기를 unit.html 파일 하나로 만들어줘. nm ↔ Å ↔ µm ↔ mil 길이 변환이랑, Torr ↔ Pa ↔ mbar 압력 변환, °C ↔ K 온도 변환 세 가지 탭으로. 숫자를 입력하면 실시간으로 전부 같이 변환돼서 보이게.</div>
+        <div class="p-text">반도체 엔지니어용 단위 변환기를 unit.html 파일 하나로 만들어줘. nm ↔ Å ↔ µm ↔ mil 길이, Torr ↔ Pa ↔ mbar 압력, °C ↔ K 온도 세 가지 탭으로. 숫자를 입력하면 실시간으로 전부 같이 변환돼서 보이게.</div>
       </div>
       <div class="prompt">
         <div class="p-label"><span>📋 이어서 — 검증까지 시키기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">1 Å = 0.1 nm, 760 Torr = 101325 Pa 같은 알려진 값 몇 개로 변환이 정확한지 표로 검증해서 보여줘.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>세 종류 변환이 모두 동작</li>
-          <li><strong>아는 값을 넣어 검산</strong>해봤다 (예: 760 Torr)</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>두 번째 프롬프트가 핵심 — <strong>AI에게 검증까지 시키는 습관</strong></li>
-        </ul>
+        <div class="p-text">1 Å = 0.1 nm, 760 Torr = 101325 Pa 같은 알려진 값으로 변환이 정확한지 표로 검증해서 보여줘.</div>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
-          <li>sccm ↔ slm 유량 탭 추가</li>
-          <li>eV ↔ nm (광자 에너지) 변환 추가</li>
+          <li>sccm ↔ slm 유량, eV ↔ nm 광자 에너지 탭 추가</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">길이 · <span class="warn-t">압력</span> · 온도</div>
+          <table>
+            <tr><td class="mono">1 Torr</td><td class="mono ok">= 133.322 Pa</td><td class="mono">= 1.333 mbar</td></tr>
+            <tr><td class="mono">760 Torr</td><td class="mono ok">= 101325 Pa</td><td class="mono">= 1013.25 mbar</td></tr>
+          </table>
+        </div>
+        <div class="mock-cap">입력하면 모든 단위가 동시에 갱신</div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>세 종류 변환이 모두 동작</li>
+          <li><strong>아는 값으로 검산</strong>해봤다 (760 Torr)</li>
         </ul>
       </div>
     </div>
@@ -863,7 +1020,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">요구사항이 <strong>여러 개</strong>인 것을 처음부터 정리해서 시켜봅니다.</p>
+  <p class="lab-goal">요구사항 <strong>여러 개</strong>를 처음부터 번호로 정리해서 시켜봅니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -871,31 +1028,36 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
         <div class="p-text">회의 타이머를 timer.html 파일 하나로 만들어줘. 요구사항:
 1. 발표 시간을 분 단위로 설정 (기본 5분)
 2. 남은 시간이 화면 가득 크게 보이게
-3. 1분 남으면 노란색, 시간이 다 되면 빨간색 + 깜빡임
+3. 1분 남으면 노란색, 다 되면 빨간색 + 깜빡임
 4. 시작/일시정지/리셋 버튼
 회의실 프로젝터에 띄워놓고 쓸 거야.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>타이머가 동작하고 색이 바뀐다</li>
-          <li>요구사항 4개가 다 들어갔는지 <strong>하나씩 체크</strong>해봤다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>번호 매긴 요구사항 목록 = 그대로 <strong>체크리스트</strong>가 됨</li>
-          <li>빠진 게 있으면? "3번이 안 됐어. 고쳐줘"</li>
-        </ul>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
           <li>"발표자 명단을 넣으면 순서대로 돌아가게"</li>
-          <li>"종료 시 알람 소리"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-timer">00:58</div>
+          <div class="mk-sub" style="text-align:center;">⬜ 5분+ → 🟨 1분 미만 → 🟥 깜빡임</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>타이머가 돌고 색이 바뀐다</li>
+          <li>요구사항 4개를 <strong>하나씩 체크</strong>했다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>번호 요구사항 = 그대로 <strong>검수 체크리스트</strong>. 빠지면 "3번이 안 됐어"</li>
         </ul>
       </div>
     </div>
@@ -911,27 +1073,33 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip"><span class="stars">★★</span>☆</span>
     <span class="chip pink">BONUS</span>
   </div>
-  <p class="lab-goal">빨리 끝난 사람용. 옆 사람과 <strong>대결</strong>할 수 있는 걸 만듭니다.</p>
+  <p class="lab-goal">빨리 끝난 사람용 — 옆 사람과 <strong>대결</strong>할 수 있는 것.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">반응속도 측정 게임을 reaction.html로 만들어줘. 화면이 빨간색이었다가 랜덤한 순간 초록색으로 바뀌면 최대한 빨리 클릭하는 게임. 반응 시간을 ms로 보여주고, 5회 평균과 최고 기록을 기록해줘. 너무 일찍 누르면 "성급했습니다!" 하고 놀려줘.</div>
       </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"등급을 매겨줘 — 200ms 미만은 'FAB 알람 대응 S급'"</li>
+        </ul>
+      </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-title" style="font-size:26px;">⚡ 236 <span class="mk-sub">ms</span></div>
+          <div class="mk-sub">5회 평균 251 ms · 최고 <span class="ok">198 ms</span> — <span class="warn-t">FAB 알람 대응 A급</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>내 평균 반응속도를 알아냈다</li>
           <li>옆 사람과 대결해봤다</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"등급을 매겨줘 — 200ms 미만은 'FAB 알람 대응 S급'"</li>
-          <li>순발력 대신 기억력 게임으로 바꿔보기</li>
         </ul>
       </div>
     </div>
@@ -948,9 +1116,8 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <div class="stat"><div class="n grad-text">∞</div><div class="l">수정 요청 가능 횟수</div></div>
   </div>
   <ul>
-    <li class="fragment rise">만들기의 병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
-    <li class="fragment rise">요구사항을 번호로 정리하면 → 그대로 <strong>검수 체크리스트</strong>가 됩니다.</li>
-    <li class="fragment rise">다음 파트: 코딩이 아닌 <em>글 쓰는 업무</em>에도 똑같이 통하는지 봅니다.</li>
+    <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
+    <li class="fragment rise">다음: 코딩이 아닌 <em>글 쓰는 업무</em>에도 똑같이 통하는지 봅니다.</li>
   </ul>
   <aside class="notes">'0줄' 스탯이 포인트. 잠깐 쉬는 시간을 갖고 Part 2로.</aside>
 </section>
@@ -964,7 +1131,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <h2>코딩 말고, 그냥 업무</h2>
     <p class="subtitle muted">바이브 코딩의 절반은 코딩이 아닙니다.<br />회의록, 보고서, 메일, 표 정리 — 매일 하는 그 일부터 맡겨봅니다.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 목표: 문서 업무를 AI에게 시키는 감각</span>
+      <span class="chip teal">🎯 문서 업무를 AI에게 시키는 감각</span>
       <span class="chip violet">🧪 실습 6개 (필수 4 + 보너스 2)</span>
     </div>
   </div>
@@ -978,7 +1145,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">중구난방 회의 메모를 던지면 <strong>정리된 회의록</strong>이 나옵니다.</p>
+  <p class="lab-goal">중구난방 회의 메모 → <strong>정리된 회의록</strong>.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -991,21 +1158,30 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 품질팀 이프로: 월간 감사 준비, 각 팀 문서 목록 금요일까지 제출 요청
 팀장: 파티클 이슈는 설비팀+공정팀 합동으로 이번주 목요일까지 1차 원인 분석. 레시피 평가는 우선순위 상향</div>
       </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"팀 공지용 3줄 버전도 따로" / 우리 팀 회의록 양식 틀에 맞추기</li>
+        </ul>
+      </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">📄 minutes.md — 요약 3줄 + 결정 2건 +</div>
+          <table>
+            <tr><th>액션</th><th>담당</th><th>기한</th></tr>
+            <tr><td>파티클 1차 원인 분석</td><td>설비+공정</td><td class="warn-t">목요일</td></tr>
+            <tr><td>감사 문서 목록 제출</td><td>각 팀</td><td class="warn-t">금요일</td></tr>
+          </table>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>요약/결정/액션이 구분돼 나온다</li>
-          <li>액션 아이템에 <strong>담당자·기한</strong>이 표로 정리됐다</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"팀 공지용 3줄 버전도 따로 만들어줘"</li>
-          <li>"액션 아이템만 뽑아서 체크박스 목록으로"</li>
-          <li>내 실제 회의 <strong>양식</strong>(기밀 아닌 틀만)에 맞춰달라기</li>
+          <li>액션에 <strong>담당자·기한</strong>이 표로 정리됐다</li>
         </ul>
       </div>
     </div>
@@ -1020,12 +1196,12 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">일주일치 낙서 같은 메모가 <strong>보고서 문체</strong>로 변신합니다.</p>
+  <p class="lab-goal">일주일치 낙서 같은 메모 → <strong>보고서 문체</strong>.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">아래 이번 주 업무 메모로 주간보고 초안을 작성해줘. 형식: [금주 실적 / 이슈 및 리스크 / 차주 계획] 3개 섹션, 각 항목은 개조식 문어체("~함", "~완료")로.
+        <div class="p-text">아래 이번 주 업무 메모로 주간보고 초안을 작성해줘. 형식: [금주 실적 / 이슈 및 리스크 / 차주 계획] 3개 섹션, 개조식 문어체("~함", "~완료")로.
 
 - 화: 신규 장비 셋업 지원, 캘리브레이션까지 완료
 - 수: 파티클 이슈 미팅. 원인 후보 2개로 좁힘 (밸브 실링 or 배기 라인)
@@ -1038,6 +1214,17 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub ok">■ 금주 실적</div>
+          <div class="mk-sub">· 신규 장비 셋업 및 캘리브레이션 완료</div>
+          <div class="mk-sub warn-t">■ 이슈 및 리스크</div>
+          <div class="mk-sub">· 계측 리소스 경합으로 분석 일정 지연 → 예약 선점으로 대응</div>
+          <div class="mk-sub" style="color:#9B82FF;">■ 차주 계획</div>
+          <div class="mk-sub">· 파티클 재현 실험 수행 예정</div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
@@ -1045,16 +1232,9 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
           <li>톤 조절 요청까지 해봤다</li>
         </ul>
       </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>내용은 내가, <strong>문체·형식은 AI가</strong> — 역할 분담</li>
-          <li>우리 팀 보고 양식을 한 번 알려주면 계속 그 틀로 받을 수 있음</li>
-        </ul>
-      </div>
     </div>
   </div>
-  <aside class="notes">매주 반복되는 보고서 작성이 '메모만 던지면 되는 일'로 바뀌는 경험. 실제 업무 임팩트가 가장 빨리 나오는 실습 중 하나.</aside>
+  <aside class="notes">매주 반복되는 보고서 작성이 '메모만 던지면 되는 일'로 바뀌는 경험. 내용은 내가, 문체·형식은 AI가 — 역할 분담. 팀 보고 양식을 한 번 알려주면 계속 그 틀로 받을 수 있다.</aside>
 </section>
 
 <section>
@@ -1073,22 +1253,29 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       </div>
       <div class="prompt">
         <div class="p-label"><span>📋 이어서 — 뉘앙스 조절</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">너무 공격적으로 들리지 않는지 검토하고, 더 부드러운 버전과 더 단호한 버전 두 가지로 만들어줘. 어떤 상황에 어떤 걸 쓰면 좋을지도 알려줘.</div>
+        <div class="p-text">더 부드러운 버전과 더 단호한 버전 두 가지로 만들고, 어떤 상황에 어떤 걸 쓰면 좋을지도 알려줘.</div>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-mail">
+          <div class="mk-row"><b>Subject</b> <span>Follow-up: Intermittent pressure sensor readings — response needed before PM (July 20)</span></div>
+          <div class="mk-row"><b>Body</b> <span>Dear Mr. Tanaka, I'm following up on my inquiry from last week…</span></div>
+          <div class="mk-row"><b>버전</b> <span><span class="ok">🕊 부드럽게</span> / <span class="bad">⚡ 단호하게</span> + 사용 시점 가이드</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>제목 + 본문 + 한국어 번역이 나왔다</li>
+          <li>제목 + 본문 + 한국어 번역</li>
           <li>두 가지 톤 버전을 비교해봤다</li>
         </ul>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
-          <li>"받은 영문 메일에 대한 회신"도 시켜보기</li>
-          <li>일본어/중국어 버전 요청</li>
+          <li>받은 영문 메일에 대한 회신 / 일본어 버전</li>
         </ul>
       </div>
     </div>
@@ -1103,7 +1290,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
   </div>
-  <p class="lab-goal">복붙하다 깨진 데이터, 형식 제각각인 목록을 <strong>정돈된 표/CSV</strong>로.</p>
+  <p class="lab-goal">표기가 제각각인 목록 → <strong>정돈된 표 + CSV</strong>.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -1119,19 +1306,29 @@ photo8 노광 가동중</div>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <table>
+            <tr><th>장비ID</th><th>공정</th><th>상태</th><th>비고</th></tr>
+            <tr><td class="mono">ETCH-01</td><td>식각</td><td class="ok">가동</td><td></td></tr>
+            <tr><td class="mono">ETCH-02</td><td>식각</td><td class="warn-t">PM 예정</td><td>금요일</td></tr>
+            <tr><td class="mono">PHOTO-07</td><td>노광</td><td class="bad">다운</td><td>파츠 대기</td></tr>
+          </table>
+          <div class="mock-cap">+ "etch02→ETCH-02로 통일" 변경 내역 보고</div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>표기가 통일된 표가 나왔다 (ETCH-01, ETCH-02…)</li>
-          <li><code>equipment.csv</code> 파일이 생겼고 엑셀에서 열린다</li>
-          <li>"뭘 통일했는지" 설명을 읽고 <strong>검증</strong>했다</li>
+          <li><code>equipment.csv</code>가 엑셀에서 열린다</li>
+          <li>"뭘 통일했는지" 설명을 <strong>검증</strong>했다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>정리 규칙을 AI가 <strong>스스로 보고하게</strong> 하면 검증이 쉬워짐</li>
-          <li>행이 수백 개여도 방법은 똑같음</li>
+          <li>정리 규칙을 <strong>스스로 보고하게</strong> 하면 검증이 쉬움 — 행이 수백 개여도 동일</li>
         </ul>
       </div>
     </div>
@@ -1146,38 +1343,41 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">주제만 주면 <strong>목차 → 슬라이드</strong>까지. 지금 보고 있는 이 자료도 이렇게 만들었습니다.</p>
+  <p class="lab-goal">주제만 주면 <strong>목차 → 슬라이드</strong>까지. 지금 이 자료도 이렇게 만들었습니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트 ① — 목차 먼저</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 프롬프트 ① — 목차 먼저</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">"신입 엔지니어를 위한 클린룸 기본 수칙" 5분 발표 자료를 만들려고 해. 먼저 슬라이드 6장 분량의 목차와 각 장의 핵심 메시지를 제안해줘. 아직 만들지는 마.</div>
       </div>
       <div class="prompt">
         <div class="p-label"><span>📋 프롬프트 ② — 확인 후 제작</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">좋아. 3번 슬라이드는 복장 착용 순서를 그림처럼 단계별로 보여주는 걸로 바꿔줘. 그 목차대로 슬라이드를 slides.html 파일 하나로 만들어줘. 화살표 키로 넘길 수 있게, 깔끔한 다크 테마로.</div>
+        <div class="p-text">좋아. 3번 슬라이드는 복장 착용 순서를 단계별 그림처럼 바꿔줘. 그 목차대로 slides.html 파일 하나로 만들어줘. 화살표 키로 넘길 수 있게, 깔끔한 다크 테마로.</div>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-thumbs">
+            <div class="mk-thumb"><div class="bar"></div><div class="ln"></div><div class="ln" style="width:80%"></div></div>
+            <div class="mk-thumb"><div class="bar" style="width:50%"></div><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div></div>
+            <div class="mk-thumb"><div class="bar" style="width:60%"></div><div class="ln" style="width:40%"></div><div class="ln" style="width:70%"></div></div>
+          </div>
+          <div class="mock-cap">화살표로 넘기는 6장짜리 미니 발표자료</div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>목차를 보고 <strong>한 군데 이상 수정 지시</strong>를 했다</li>
-          <li>화살표로 넘어가는 슬라이드가 열린다</li>
+          <li>목차 단계에서 <strong>수정 지시</strong>를 했다</li>
+          <li>슬라이드가 브라우저에서 넘어간다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li><strong>"아직 만들지는 마"</strong> — 큰 작업은 계획부터 합의</li>
-          <li>목차 단계에서 고치는 게 완성 후 고치기보다 10배 쌈</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>발표 대본까지 요청</li>
-          <li>회사 색깔(브랜드 컬러)로 테마 변경</li>
+          <li><strong>"아직 만들지는 마"</strong> — 목차에서 고치는 게 10배 쌉니다</li>
         </ul>
       </div>
     </div>
@@ -1193,36 +1393,48 @@ photo8 노광 가동중</div>
     <span class="chip"><span class="stars">★★</span>☆</span>
     <span class="chip pink">BONUS</span>
   </div>
-  <p class="lab-goal">긴 문서를 읽는 대신 <strong>문서에게 질문</strong>합니다. 오후 '지식 기반' 실습의 예고편.</p>
+  <p class="lab-goal">긴 문서를 읽는 대신 <strong>문서에게 질문</strong>합니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/manual.txt" download>📁 제공 데이터 manual.txt 받기</a>
+    <span class="chip">가상 장비 유지보수 매뉴얼 (실습 폴더에 저장)</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">연습용으로 "가상의 장비 유지보수 매뉴얼" 텍스트를 manual.txt로 만들어줘. 챕터 5개, 경고 문구와 점검 주기 표가 섞여 있는 3~4페이지 분량으로. 내용은 그럴듯하게 지어내도 돼.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 문서 기반 질문</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">manual.txt를 읽고 답해줘: ①월간 점검 항목만 표로 정리 ②"경고"가 붙은 항목 전부 나열 ③신입에게 알려줄 핵심 3가지. 반드시 문서에 있는 내용만 근거로 하고, 문서에 없으면 없다고 말해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"PG-2가 무응답이면 어떻게 해?" 같은 고장 대응 질문 던지기</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-chat">
+          <div class="bub me">"경고" 붙은 항목 전부 나열해줘</div>
+          <div class="bub ai">경고는 총 4건입니다: ①뷰포트 개방 전 대기압 확인 ②그리스 작업 전 LOTO … <span class="src">— manual.txt 2·4·5장</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>문서를 근거로 한 답변을 받았다</li>
-          <li>답이 진짜 문서에 있는지 <strong>한 개는 직접 확인</strong>했다</li>
+          <li>문서 근거 답변을 받았다</li>
+          <li>답이 진짜 문서에 있는지 <strong>한 개는 직접 확인</strong></li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
           <li><strong>"문서에 없으면 없다고 해"</strong> — 아는 척 방지 장치</li>
-          <li>회사에선 사내 허용 환경에서, 기밀 아닌 문서부터</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">합성 문서를 먼저 만들게 해서 보안 원칙을 지키면서 지식 기반 Q&A를 체험. Part 5의 스펙 문서 Q&A로 이어진다.</aside>
+  <aside class="notes">제공된 합성 매뉴얼로 보안 원칙을 지키며 지식 기반 Q&amp;A를 체험. 매뉴얼의 경고는 4건(2장 1개, 4장 2개, 5장 1개). Part 5의 스펙 문서 Q&amp;A로 이어진다. 회사에선 사내 허용 환경에서, 기밀 아닌 문서부터.</aside>
 </section>
 
 <section>
@@ -1234,7 +1446,7 @@ photo8 노광 가동중</div>
     <div class="card"><span class="icon">🛑</span><h3>계획 먼저</h3><p class="tiny muted">"아직 만들지는 마" — 목차·계획 확인 후 제작</p></div>
     <div class="card"><span class="icon">🔍</span><h3>스스로 검증</h3><p class="tiny muted">"뭘 바꿨는지 보고해줘", "알려진 값으로 검산해줘"</p></div>
   </div>
-  <p class="fragment rise" style="margin-top: 18px;">오후에는 이 4장의 카드를 들고 <strong>진짜 데이터(모양의 합성 데이터)</strong>를 만나러 갑니다. 🍚 맛점!</p>
+  <p class="fragment rise" style="margin-top: 18px;">오후에는 이 4장의 카드를 들고 <strong>진짜 업무 모양의 데이터</strong>를 만나러 갑니다. 🍚 맛점!</p>
   <aside class="notes">오전 마무리. 4개 패턴 이름을 붙여서 기억에 남긴다. 점심은 LAB 1-2의 룰렛으로 정하자고 하면 웃으며 마무리된다.</aside>
 </section>
 
@@ -1245,9 +1457,9 @@ photo8 노광 가동중</div>
   <div class="part-body">
     <span class="kicker">PART 3 · 13:00–14:30</span>
     <h2>데이터 만나기</h2>
-    <p class="subtitle muted">이제 우리 업무 데이터 <strong>모양</strong>의 것들을 다룹니다.<br />측정 CSV, 웨이퍼 맵, 장비 로그 — 전부 합성 데이터로.</p>
+    <p class="subtitle muted">이제 우리 업무 데이터 <strong>모양</strong>의 것들을 다룹니다.<br />측정 CSV, 웨이퍼 맵, 장비 로그 — 전부 준비된 합성 데이터로.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 목표: 파일 입력 → 분석/시각화 출력</span>
+      <span class="chip teal">🎯 파일 입력 → 분석/시각화 출력</span>
       <span class="chip violet">🧪 실습 4개</span>
       <span class="chip pink">🔒 합성 데이터만 사용</span>
     </div>
@@ -1256,68 +1468,89 @@ photo8 노광 가동중</div>
 </section>
 
 <section>
+  <span class="kicker">DATA PACK</span>
+  <h2>오후 실습 데이터 팩 <a class="chip teal" href="data.zip" download style="vertical-align: 6px; margin-left: 8px;">📦 data.zip 한 번에 받기</a></h2>
+  <p class="muted small" style="margin-bottom: 14px;">전부 합성 데이터이고, 실습마다 <strong>찾아내야 할 "정답"이 심어져</strong> 있습니다. 압축을 풀어 실습 폴더에 두세요.</p>
+  <table class="agenda">
+    <tr><th>파일</th><th>내용</th><th>실습</th></tr>
+    <tr><td class="t">thickness.csv</td><td>막 두께 측정 (5랏 × 5매 × 9포인트)</td><td class="part">LAB 3-1</td></tr>
+    <tr><td class="t">wafermap.csv</td><td>다이별 테스트 bin (1,257 다이)</td><td class="part">LAB 3-2</td></tr>
+    <tr><td class="t">tool.log</td><td>장비 로그 24시간 1,000줄</td><td class="part">LAB 3-3 · 5-3</td></tr>
+    <tr><td class="t">trend.csv</td><td>4주치 랏 CD 계측</td><td class="part">LAB 3-4</td></tr>
+    <tr><td class="t">spc.csv</td><td>60랏 SPC 측정값</td><td class="part">LAB 4-1</td></tr>
+    <tr><td class="t">yield.csv</td><td>8주치 수율 + bin 카운트</td><td class="part">LAB 4-2</td></tr>
+    <tr><td class="t">weekly/ · specs/ · manual.txt</td><td>주간 가동 CSV 5개 · 스펙 문서 3개 · 매뉴얼</td><td class="part">LAB 5-2 · 5-4 · 2-6</td></tr>
+  </table>
+  <aside class="notes">정답 스포일러(강사용): thickness=LOT-1003 평균 103nm / wafermap=edge ring, 수율 ~91% / tool.log=ERROR 8건, 02~04시 PRESSURE_SENSOR_TIMEOUT 3회 / trend=마지막 주 +0.8nm drift / spc=#24 상한 이탈·#36~44 9연속·#51~56 상승추세 / yield=B제품 6주차부터 bin4 급증 / weekly=수요일 ETCH-02 uptime 78% / specs=식각 120 mTorr 중단 vs 안전 100 mTorr 인터락 모순.</aside>
+</section>
+
+<section>
   <span class="kicker">KEY IDEA</span>
   <h2>데이터가 없으면, 만들어달라고 하면 됩니다</h2>
   <div class="flow">
-    <div class="step"><span class="s-emoji">🎲</span><span class="s-name">① 합성 데이터 생성</span><div class="s-desc">"실제와 비슷한 가짜 데이터를 만들어줘"</div></div>
+    <div class="step"><span class="s-emoji">🎲</span><span class="s-name">① 합성 데이터</span><div class="s-desc">제공 파일 사용, 또는 "비슷한 가짜 데이터 만들어줘"</div></div>
     <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">🔧</span><span class="s-name">② 도구 개발</span><div class="s-desc">가짜 데이터로 분석기·뷰어를 만들고 다듬기</div></div>
+    <div class="step"><span class="s-emoji">🔧</span><span class="s-name">② 도구 개발</span><div class="s-desc">가짜 데이터로 만들고 다듬기</div></div>
     <div class="arrow">→</div>
     <div class="step"><span class="s-emoji">🏭</span><span class="s-name">③ 실전 투입</span><div class="s-desc">회사에서, 허용된 환경에서, 진짜 데이터로</div></div>
   </div>
   <ul>
-    <li class="fragment rise">합성 데이터로 만든 도구는 <strong>컬럼 구조만 같으면</strong> 진짜 데이터에도 그대로 동작합니다.</li>
-    <li class="fragment rise">보안 걱정 없이 마음껏 실험할 수 있는 <strong>연습용 웨이퍼</strong>인 셈입니다.</li>
-    <li class="fragment rise">덤: 일부러 <em>결측치·이상치</em>를 섞어달라고 하면 도구의 맷집도 시험할 수 있습니다.</li>
+    <li class="fragment rise">합성 데이터로 만든 도구는 <strong>컬럼 구조만 같으면</strong> 진짜 데이터에도 그대로 동작 — 연습용 test wafer인 셈.</li>
+    <li class="fragment rise">직접 생성할 땐 <em>정답(이상치·drift)을 심어달라고</em> 하면 도구를 채점할 수 있습니다.</li>
   </ul>
-  <aside class="notes">이 3단계가 오늘 오후 전체의 프레임이자, 회사에서 실전 적용하는 안전한 경로. 'test wafer' 비유가 반도체 청중에게 잘 통한다.</aside>
+  <aside class="notes">이 3단계가 오늘 오후 전체의 프레임이자, 회사에서 실전 적용하는 안전한 경로. 'test wafer' 비유가 반도체 청중에게 잘 통한다. 제공 데이터를 쓰면 시간이 절약되고, 직접 생성은 정답 심기 연습이 된다 — 둘 다 OK.</aside>
 </section>
 
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB 3-1</span>
-    <h2>측정 데이터 CSV → 통계 리포트</h2>
+    <h2>측정 CSV → 통계 리포트</h2>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">CSV를 읽어 <strong>요약 통계와 분포 차트</strong>를 뽑습니다. 데이터 분석의 "Hello World".</p>
+  <p class="lab-goal">CSV를 읽어 <strong>요약 통계와 분포 차트</strong>를 뽑습니다. 숨어 있는 이상 랏 하나를 찾아내세요.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/thickness.csv" download>📁 thickness.csv 받기</a>
+    <span class="chip">또는: "비슷한 가짜 측정 CSV를 만들어줘 (이상 랏 하나 심어서)"</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 데이터 생성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">웨이퍼 막 두께 측정 데이터를 thickness.csv로 만들어줘. 컬럼: lot_id, wafer_id, site(1~9), thickness_nm. 25장 × 9포인트, 목표값 100nm, 표준편차 1.5nm 정도의 정규분포로. 한 랏(lot)만 살짝 평균이 높게(103nm) 섞어줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 분석 리포트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">thickness.csv를 분석해서 report.html로 만들어줘. ①전체 평균/표준편차/최소/최대 ②랏별 평균 비교 막대 차트 ③전체 분포 히스토그램(목표 100nm 라인 표시) ④평균이 튀는 랏이 있으면 눈에 띄게 경고 표시.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>리포트에 차트가 보인다</li>
-          <li>일부러 심어둔 <strong>103nm 랏이 잡혔다</strong></li>
-          <li>평균값이 상식적인지 눈으로 확인했다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>①에서 <strong>정답(이상 랏)을 심어놨기 때문에</strong> ②가 맞는지 검증 가능</li>
-          <li>이게 엔지니어식 AI 검증법 — 답을 아는 문제로 테스트</li>
-        </ul>
+        <div class="p-label"><span>📋 분석 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">thickness.csv를 분석해서 report.html로 만들어줘. 목표값은 100nm야.
+1. 전체 평균/표준편차/최소/최대
+2. 랏별 평균 비교 막대 차트
+3. 전체 분포 히스토그램 (목표 100nm 라인 표시)
+4. 평균이 튀는 랏이 있으면 눈에 띄게 경고 표시</div>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
           <li>사이트별(중심↔가장자리) 균일도 분석 추가</li>
-          <li>"CSV를 새로 주면 리포트가 갱신되게 해줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="hist" width="440" height="170"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>리포트에 차트가 보인다</li>
+          <li>숨어 있던 <strong>이상 랏 하나</strong>가 잡혔다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>정답이 심어진 데이터 = <strong>도구를 채점할 수 있는 데이터</strong></li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">'정답을 심은 합성 데이터로 검증한다'가 이 실습의 진짜 교훈. 분석 도구를 못 믿겠다는 질문이 나오면 이 방법으로 답한다.</aside>
+  <aside class="notes">정답: LOT-1003 평균 ~103nm. '정답을 심은 합성 데이터로 검증한다'가 이 실습의 진짜 교훈. 분석 도구를 못 믿겠다는 질문이 나오면 이 방법으로 답한다.</aside>
 </section>
 
 <section>
@@ -1327,48 +1560,50 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 20분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">다이(die)별 bin 데이터를 <strong>웨이퍼 모양 그대로</strong> 색칠해서 봅니다. 오늘의 하이라이트 중 하나.</p>
+  <p class="lab-goal">다이별 bin 데이터를 <strong>웨이퍼 모양 그대로</strong> 색칠해서 봅니다. 오늘의 하이라이트.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/wafermap.csv" download>📁 wafermap.csv 받기</a>
+    <span class="chip">컬럼: die_x, die_y, bin (1=양품)</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 데이터 생성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">웨이퍼 테스트 결과 데이터를 wafermap.csv로 만들어줘. 컬럼: die_x, die_y, bin. 지름 40다이 정도의 원형 웨이퍼 배치로, bin1(양품) 92%쯤, 나머지는 bin2~5 불량. 불량이 웨이퍼 가장자리에 몰리는 edge ring 패턴을 섞어줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 뷰어 제작</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 뷰어 제작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">wafermap.csv를 읽어서 웨이퍼 맵으로 보여주는 wafermap.html을 만들어줘. 요구사항:
-1. 다이를 격자로 그리고 bin별로 색 구분 (bin1은 차분한 색, 불량은 눈에 띄게)
+1. 다이를 격자로 그리고 bin별 색 구분 (bin1은 차분하게, 불량은 눈에 띄게)
 2. 마우스를 올리면 좌표와 bin 표시
 3. 우측에 bin별 개수와 수율(%) 요약
-4. bin 번호를 클릭하면 해당 bin만 하이라이트</div>
+4. bin 번호를 클릭하면 해당 bin만 하이라이트
+불량이 어디에 몰려 있는지 패턴도 한 줄로 말해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>여러 웨이퍼 썸네일 갤러리 모드 / notch 방향 표시</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="wafer" width="440" height="180"></canvas>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>원형 웨이퍼 맵이 그려진다</li>
-          <li><strong>edge ring 패턴이 눈에 보인다</strong></li>
-          <li>수율 숫자가 ①에서 시킨 92%와 비슷하다</li>
+          <li>불량 <strong>패턴이 눈에 보인다</strong> — 무슨 패턴?</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">🚑 막혔다면</div>
         <ul>
-          <li>맵이 안 보임 → "브라우저 콘솔 에러를 확인하고 고쳐줘"</li>
-          <li>모양이 이상함 → 스크린샷 찍어 보여주거나 말로 묘사</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>여러 웨이퍼를 썸네일로 나란히 (갤러리 모드)</li>
-          <li>notch 방향 표시, 확대/축소</li>
+          <li>"브라우저 콘솔 에러를 확인하고 고쳐줘"</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">비주얼 임팩트가 가장 큰 실습. 타이틀 슬라이드의 웨이퍼 애니메이션이 바로 이것의 확장판이라고 알려주면 동기부여가 된다.</aside>
+  <aside class="notes">정답: edge ring 패턴, 수율 ~91%. 비주얼 임팩트가 가장 큰 실습. 타이틀 슬라이드의 웨이퍼 애니메이션이 바로 이것의 확장판이라고 알려주면 동기부여가 된다.</aside>
 </section>
 
 <section>
@@ -1378,43 +1613,49 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">사람이 읽기 힘든 <strong>기계 로그</strong>에서 필요한 것만 뽑아냅니다.</p>
+  <p class="lab-goal">1,000줄 기계 로그에서 필요한 것만 뽑습니다. <strong>사람이 훑으면 20분, 시키면 3초.</strong></p>
+  <div class="databar">
+    <a class="chip teal" href="data/tool.log" download>📁 tool.log 받기</a>
+    <span class="chip">24시간 · 1,000줄 · [시각] [레벨] [모듈] 메시지</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 로그 생성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">가상의 장비 로그 파일 tool.log를 만들어줘. 24시간 분량, 1000줄 정도. 형식: [타임스탬프] [레벨] [모듈] 메시지. 대부분 INFO고 WARN 30개, ERROR 8개쯤 섞어줘. ERROR 중 3개는 같은 원인(PRESSURE_SENSOR_TIMEOUT)이 새벽 시간대에 반복되게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 파서 제작</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">tool.log를 분석해줘. ①ERROR/WARN만 추출해 시간순 표로 ②메시지 유형별 발생 횟수 집계 ③시간대별 발생 분포 ④"반복되는 패턴이 있으면 짚어줘". 결과는 log_report.html로.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>ERROR 8개가 정확히 잡혔다 (개수 검증!)</li>
-          <li><strong>새벽 반복 패턴을 AI가 짚어냈다</strong></li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>1000줄을 사람이 훑기 vs 3초 만에 집계 — <strong>이게 자동화의 몸값</strong></li>
-          <li>실제 로그 형식이 다르면? 형식 샘플 몇 줄만 보여주면 됨</li>
-        </ul>
+        <div class="p-label"><span>📋 분석 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">tool.log를 분석해서 log_report.html로 만들어줘.
+1. ERROR/WARN만 추출해 시간순 표로
+2. 메시지 유형별 발생 횟수 집계
+3. 시간대별 발생 분포 차트
+4. 반복되는 패턴이 있으면 짚어줘</div>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
           <li>"ERROR 전후 5줄씩 문맥도 같이 보여줘"</li>
-          <li>로그 파일 여러 개를 한 번에 처리</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="logbars" width="440" height="160"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>ERROR 개수가 정확하다 — <strong>몇 건이었나요?</strong></li>
+          <li>새벽 반복 패턴을 AI가 짚어냈다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>내 장비 로그 형식이 달라도 <strong>샘플 몇 줄만 보여주면</strong> 됨</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">로그 파싱은 스크립트 자동화의 관문. '개수를 아는 데이터로 검증' 패턴이 여기서도 반복된다.</aside>
+  <aside class="notes">정답: ERROR 8건, 그중 PRESSURE_SENSOR_TIMEOUT 3건이 02:14/03:02/03:47 새벽 반복. '개수를 아는 데이터로 검증' 패턴이 여기서도 반복된다.</aside>
 </section>
 
 <section>
@@ -1424,48 +1665,54 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">시간에 따른 <strong>공정 파라미터 추이</strong>를 그립니다. Part 4 SPC의 준비 운동.</p>
+  <p class="lab-goal">시간에 따른 <strong>공정 파라미터 추이</strong>. 어딘가에서 drift가 시작됩니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/trend.csv" download>📁 trend.csv 받기</a>
+    <span class="chip">4주치 · 하루 6랏 · CD 목표 45nm</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 데이터 생성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">4주치 랏 계측 데이터를 trend.csv로 만들어줘. 컬럼: date, lot_id, cd_nm (선폭). 하루 6랏, 목표 45nm, 자연스러운 산포. 마지막 주에 평균이 서서히 0.8nm쯤 올라가는 drift를 넣어줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 트렌드 차트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">trend.csv로 trend.html 트렌드 차트를 만들어줘. ①랏별 CD 값 점 + 일별 평균 선 ②목표 45nm과 관리선(±1.5nm) 표시 ③구간을 드래그하면 그 구간 평균/표준편차가 계산돼 보이게 ④drift가 시작된 지점을 네가 찾아서 표시해줘.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>트렌드에 <strong>drift가 눈에 보인다</strong></li>
-          <li>AI가 찾은 drift 시점이 심어둔 정답(마지막 주)과 맞다</li>
-        </ul>
+        <div class="p-label"><span>📋 차트 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">trend.csv로 trend.html 트렌드 차트를 만들어줘.
+1. 랏별 CD 값 점 + 일별 평균 선
+2. 목표 45nm과 관리선(±1.5nm) 표시
+3. 구간을 드래그하면 그 구간 평균/표준편차 표시
+4. drift가 시작된 지점을 네가 찾아서 표시해줘</div>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
-          <li>이동평균선 추가</li>
-          <li>"drift 감지를 자동 알림 문구로 요약해줘"</li>
+          <li>이동평균선 / "drift 감지를 알림 문구로 요약"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="trend" width="440" height="160"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>트렌드에 <strong>drift가 눈에 보인다</strong></li>
+          <li>AI가 찾은 시점이 그럴듯한지 눈으로 검증</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">drift를 심고 찾게 하는 구조. 다음 파트 SPC 관리도가 이것의 정식 버전임을 예고.</aside>
+  <aside class="notes">정답: 마지막 주(7/6~)에 +0.8nm drift. 다음 파트 SPC 관리도가 이것의 정식 버전임을 예고.</aside>
 </section>
 
 <section>
   <span class="kicker">PART 3 · WRAP-UP</span>
   <h2>오후의 검증 습관 — 믿지 말고 확인한다</h2>
   <div class="grid3">
-    <div class="card accent"><span class="icon">🎯</span><h3>정답 심기</h3><p class="small">합성 데이터에 이상치·drift를 심고, 도구가 그걸 찾는지 본다</p></div>
-    <div class="card accent"><span class="icon">🔢</span><h3>개수 세기</h3><p class="small">"ERROR 8개 넣어줘" → 리포트에 8개가 나오는지 센다</p></div>
+    <div class="card accent"><span class="icon">🎯</span><h3>정답 심기</h3><p class="small">이상치·drift가 심어진 데이터로 도구를 채점한다</p></div>
+    <div class="card accent"><span class="icon">🔢</span><h3>개수 세기</h3><p class="small">"ERROR 8건" — 리포트 숫자를 직접 세본다</p></div>
     <div class="card accent"><span class="icon">📏</span><h3>아는 값 넣기</h3><p class="small">760 Torr = 101325 Pa처럼 답을 아는 입력으로 검산</p></div>
   </div>
-  <p class="fragment rise" style="margin-top: 16px;">AI의 결과는 <strong>측정 장비의 데이터처럼</strong> 다루세요 — 캘리브레이션 없이 믿지 않기.<br />
-  <span class="muted">여러분은 이미 이 사고방식의 전문가입니다.</span></p>
+  <p class="fragment rise" style="margin-top: 16px;">AI의 결과는 <strong>계측 장비의 데이터처럼</strong> 다루세요 — 캘리브레이션 없이 믿지 않기.</p>
   <aside class="notes">계측기 캘리브레이션 비유가 이 청중에게 가장 잘 박힌다. 짧게 쉬고 Part 4로.</aside>
 </section>
 
@@ -1476,9 +1723,9 @@ photo8 노광 가동중</div>
   <div class="part-body">
     <span class="kicker">PART 4 · 14:40–16:00</span>
     <h2>반도체 도메인 도구</h2>
-    <p class="subtitle muted">여러분의 <strong>도메인 지식</strong>이 프롬프트가 되는 시간.<br />SPC 관리도, 수율 대시보드, 공정 계산기 — AI는 물리를 알고, 여러분은 현장을 압니다.</p>
+    <p class="subtitle muted">여러분의 <strong>도메인 지식</strong>이 프롬프트가 되는 시간.<br />AI는 물리를 알고, 여러분은 현장을 압니다.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 목표: 지식 + AI = 전문 도구</span>
+      <span class="chip teal">🎯 지식 + AI = 전문 도구</span>
       <span class="chip violet">🧪 실습 4개 (난이도 ★★★ 등장)</span>
     </div>
   </div>
@@ -1488,9 +1735,8 @@ photo8 노광 가동중</div>
 <section>
   <span class="kicker">KEY IDEA</span>
   <h2>큰 것은 쪼개서 시킨다</h2>
-  <p>대시보드처럼 큰 것을 한 번에 시키면 산으로 갑니다. <strong>단계별로 쌓으세요.</strong></p>
   <div class="flow">
-    <div class="step"><span class="s-emoji">🧱</span><span class="s-name">데이터 먼저</span><div class="s-desc">CSV 생성·확인</div></div>
+    <div class="step"><span class="s-emoji">🧱</span><span class="s-name">데이터 먼저</span><div class="s-desc">CSV 확인</div></div>
     <div class="arrow">→</div>
     <div class="step"><span class="s-emoji">📈</span><span class="s-name">차트 하나</span><div class="s-desc">동작 확인 후</div></div>
     <div class="arrow">→</div>
@@ -1499,10 +1745,10 @@ photo8 노광 가동중</div>
     <div class="step"><span class="s-emoji">🎛️</span><span class="s-name">조립·꾸미기</span><div class="s-desc">배치와 인터랙션</div></div>
   </div>
   <div class="vs" style="margin-top: 14px;">
-    <div class="bad"><span class="tag">😵 한 방에</span>"수율 분석 대시보드 만들어줘" <span class="tiny muted">→ 뭐가 나올지 복불복, 고치기도 어려움</span></div>
-    <div class="good"><span class="tag">😎 단계별</span>"일단 랏별 수율 트렌드 차트부터. 확인하고 다음 거 시킬게" <span class="tiny muted">→ 매 단계 검증 가능</span></div>
+    <div class="bad"><span class="tag">😵 한 방에</span>"수율 분석 대시보드 만들어줘" <span class="tiny muted">→ 복불복, 고치기도 어려움</span></div>
+    <div class="good"><span class="tag">😎 단계별</span>"일단 트렌드 차트부터. 확인하고 다음 거 시킬게" <span class="tiny muted">→ 매 단계 검증 가능</span></div>
   </div>
-  <aside class="notes">Part 4 실습들이 모두 ①데이터 ②도구 2단 프롬프트로 설계된 이유를 설명하는 슬라이드. 공정을 단위 공정으로 나누는 것과 같은 사고방식.</aside>
+  <aside class="notes">Part 4 실습들이 단계별 프롬프트로 설계된 이유를 설명하는 슬라이드. 공정을 단위 공정으로 나누는 것과 같은 사고방식.</aside>
 </section>
 
 <section>
@@ -1512,43 +1758,49 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 20분</span>
     <span class="chip"><span class="stars">★★★</span></span>
   </div>
-  <p class="lab-goal">X̄-R 관리도를 그리고 <strong>Western Electric 룰 위반</strong>을 자동 표시합니다. 도메인 지식이 곧 스펙이 되는 실습.</p>
+  <p class="lab-goal">X̄ 관리도에 <strong>Western Electric 룰 위반</strong>을 자동 표시 — 도메인 지식이 곧 스펙이 됩니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/spc.csv" download>📁 spc.csv 받기</a>
+    <span class="chip">60랏 · 위반 3종이 심어져 있음 (어디인지는 비밀)</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 데이터 생성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">SPC 실습용 데이터를 spc.csv로 만들어줘. 컬럼: date, lot_id, value. 60랏, 목표 50.0, 표준편차 0.5. 중간에 ①관리한계(3σ)를 벗어나는 점 1개 ②한쪽으로 연속 9점이 치우치는 구간 ③서서히 올라가는 추세 6점 구간을 몰래 심어줘. 어디에 심었는지는 answer.txt에 따로 저장해.</div>
+        <div class="p-label"><span>📋 관리도 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">spc.csv로 X-bar 관리도를 spc.html로 만들어줘.
+1. CL/UCL/LCL(±3σ)과 1σ, 2σ 구역 표시
+2. Western Electric rules 1~4 검사, 위반 점은 빨갛게
+3. 아래에 위반 목록 표 (룰 번호 / 위치 / 설명)
+목표값은 50.0이야.</div>
       </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 관리도 제작</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">spc.csv로 X-bar 관리도를 spc.html로 만들어줘. CL/UCL/LCL(±3σ)과 1σ, 2σ 구역 표시. Western Electric rules 1~4를 검사해서 위반한 점을 빨갛게 표시하고, 아래에 위반 목록(룰 번호, 위치, 설명)을 표로 정리해줘. answer.txt는 절대 읽지 마.</div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>R 관리도 추가 / Cpk 계산과 판정 코멘트</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="spc" width="440" height="170"></canvas>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>관리도에 σ 구역과 위반 점이 표시된다</li>
-          <li><strong>answer.txt를 열어 심은 3개가 다 잡혔는지 채점</strong>했다</li>
+          <li>σ 구역과 위반 점이 표시된다</li>
+          <li>심어진 위반 <strong>3종을 모두 찾았는지</strong> 강사와 채점</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>"answer.txt는 읽지 마" — <strong>블라인드 테스트</strong> 설계</li>
-          <li>WE rules를 아는 건 여러분, 구현은 AI — 완벽한 분업</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>R 관리도 추가 (X̄-R 세트로)</li>
-          <li>Cpk 계산과 판정 코멘트 추가</li>
+          <li>룰 정의가 애매하면 <strong>룰을 프롬프트에 직접 써주기</strong></li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">블라인드 테스트(answer.txt 격리)가 백미. 참가자들이 스스로 채점하며 AI 신뢰도를 정량 체감한다. WE rule 정의가 미묘하게 다를 수 있음을 언급 — 룰 정의를 프롬프트에 직접 써주면 더 확실.</aside>
+  <aside class="notes">정답(강사용): #24 상한(3σ) 이탈, #36~44 한쪽 9연속(rule 4), #51~56 상승 추세. 참가자들이 스스로 채점하며 AI 신뢰도를 정량 체감한다. WE rule 정의가 문헌마다 미묘하게 달라서, 룰 정의를 프롬프트에 직접 쓰는 게 더 확실하다는 팁으로 연결.</aside>
 </section>
 
 <section>
@@ -1558,45 +1810,47 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 25분</span>
     <span class="chip"><span class="stars">★★★</span></span>
   </div>
-  <p class="lab-goal">"쪼개서 시킨다"를 실전으로. <strong>차트 3개짜리 대시보드</strong>를 단계별로 쌓습니다.</p>
+  <p class="lab-goal">"쪼개서 시킨다"를 실전으로 — <strong>차트 3개짜리 대시보드</strong>를 단계별로 쌓습니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/yield.csv" download>📁 yield.csv 받기</a>
+    <span class="chip">8주 · 제품 A/B · bin2~8 카운트</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 데이터</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">8주치 수율 데이터를 yield.csv로 만들어줘. 컬럼: date, lot_id, product(A/B 2종), yield_pct, bin2~bin8 (불량 bin별 칩 수). 평균 수율 91%, product B가 6주차부터 bin4 불량이 늘면서 수율이 3%p 떨어지게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② → ③ → ④ — 하나씩</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 프롬프트 ② → ③ → ④ — 반드시 하나씩!</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">② yield.csv로 dashboard.html을 시작하자. 먼저 주차별 수율 트렌드 차트만 (product별 색 구분). 다른 건 아직 만들지 마.
 ③ 좋아. 이제 그 아래에 불량 bin 파레토 차트를 추가해줘. 기간을 선택하면 그 기간 기준으로 갱신되게.
-④ 마지막으로 상단에 KPI 카드(이번주 수율, 전주 대비, 최다 불량 bin)를 얹고 전체 배치를 정리해줘.</div>
+④ 마지막으로 상단에 KPI 카드(이번주 수율, 전주 대비, 최다 불량 bin)를 얹고 배치를 정리해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"경영진 요약 한 문단을 자동 생성해서 맨 위에"</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="dash" width="440" height="180"></canvas>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>②→③→④ <strong>단계마다 열어서 확인</strong>했다</li>
-          <li>대시보드에서 <strong>B제품 6주차 bin4 문제</strong>가 읽힌다</li>
+          <li>어떤 제품/bin이 문제인지 대시보드에서 읽힌다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">🚑 막혔다면</div>
         <ul>
           <li>③에서 ②가 망가짐 → "트렌드 차트가 깨졌어, 둘 다 되게 고쳐줘"</li>
-          <li>차트가 겹침/못생김 → 화면을 말로 묘사하며 조정</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"경영진 요약 한 문단을 자동 생성해서 맨 위에"</li>
-          <li>제품 필터 버튼 추가</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">가장 긴 실습. 단계별 프롬프트 ②③④를 한 번에 복사해주되 반드시 하나씩 실행·확인하게 안내. 완성물은 미니 프로젝트의 좋은 재료가 된다.</aside>
+  <aside class="notes">정답: product B가 6주차부터 bin4 급증, 수율 -3%p. 가장 긴 실습. 프롬프트 ②③④를 한 번에 복사해주되 반드시 하나씩 실행·확인하게 안내. 완성물은 미니 프로젝트의 좋은 재료.</aside>
 </section>
 
 <section>
@@ -1606,47 +1860,52 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">엑셀 구석이나 머릿속에 있던 계산식을 <strong>팀이 같이 쓰는 도구</strong>로.</p>
+  <p class="lab-goal">엑셀 구석에 있던 계산식을 <strong>팀이 같이 쓰는 도구</strong>로. 식은 여러분이 제공합니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">공정 계산기 모음을 calc.html 파일 하나로 만들어줘. 탭 3개:
 1. 포토 해상도: Rayleigh 식 (R = k1·λ/NA, DOF = k2·λ/NA²). λ는 193/248/365nm 선택, k1·NA는 입력
-2. 면저항: 4-point probe 측정값 → 면저항(Rs = 4.532×V/I)과 두께 입력 시 비저항
-3. 식각 시간: 목표 깊이, 식각 속도, 오버에치(%) 입력 → 필요 시간
-각 탭에 식과 변수 설명도 같이 보여줘.</div>
+2. 면저항: 4-point probe (Rs = 4.532×V/I), 두께 입력 시 비저항까지
+3. 식각 시간: 목표 깊이, 식각 속도, 오버에치(%) → 필요 시간
+각 탭에 식과 변수 설명도 같이.</div>
       </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 검산</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">각 계산기에 대해 교과서적인 예시 값을 하나씩 넣어서 결과가 맞는지 손계산과 비교해 검증해줘. 검증 과정을 표로 보여줘.</div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>내 업무의 계산식을 4번째 탭으로 (증착·임플란트·CMP…)</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub"><span class="warn-t">해상도</span> · 면저항 · 식각 시간</div>
+          <table>
+            <tr><td class="mono">λ = 193 nm</td><td class="mono">NA = 1.35</td><td class="mono">k1 = 0.30</td></tr>
+            <tr><td class="mono ok" colspan="3">→ R = 42.9 nm · DOF = k2·λ/NA² </td></tr>
+          </table>
+          <div class="mock-cap">값을 바꾸면 결과 즉시 갱신 + 식 표시</div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>세 계산기가 모두 동작</li>
-          <li><strong>내가 아는 값</strong>으로 최소 1개 검산했다</li>
+          <li>세 계산기 동작</li>
+          <li><strong>아는 값으로 검산</strong> — "교과서 예시로 검증해서 표로 보여줘"</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>식을 <strong>프롬프트에 직접 써주면</strong> 정확도가 급상승</li>
-          <li>여러분 분야의 식으로 바꿔도 됨 — 증착, 임플란트, CMP…</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>자기 업무의 계산 하나를 4번째 탭으로 추가</li>
-          <li>계산 이력 저장 기능</li>
+          <li>도메인 공식은 <strong>프롬프트에 직접</strong> — 정확도 급상승</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">'식을 프롬프트에 명시하기'가 핵심 — 도메인 공식은 스스로 제공하는 게 halluciation을 막는 최선. 참가자별로 자기 분야 계산기로 변형하게 유도하면 몰입도가 오른다.</aside>
+  <aside class="notes">'식을 프롬프트에 명시하기'가 핵심 — 도메인 공식을 스스로 제공하는 게 할루시네이션을 막는 최선. 참가자별로 자기 분야 계산기로 변형하게 유도하면 몰입도가 오른다.</aside>
 </section>
 
 <section>
@@ -1657,30 +1916,34 @@ photo8 노광 가동중</div>
     <span class="chip"><span class="stars">★★★</span></span>
     <span class="chip pink">BONUS</span>
   </div>
-  <p class="lab-goal">웨이퍼 결함 패턴(scratch, edge ring, center cluster)을 <strong>만들고, 구분하는 로직</strong>까지.</p>
+  <p class="lab-goal">결함 패턴을 <strong>만들고, 구분하는 로직</strong>까지 — 퀴즈 게임으로.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 프롬프트 ① — 시뮬레이터</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">웨이퍼 결함 패턴 시뮬레이터를 defect.html로 만들어줘. 버튼을 누르면 random / scratch(직선형) / edge ring / center cluster 4가지 패턴 중 하나로 결함 맵을 생성해서 웨이퍼 맵으로 보여주는 것. 패턴 이름은 숨겨놔.</div>
+        <div class="p-text">웨이퍼 결함 패턴 시뮬레이터를 defect.html로 만들어줘. 버튼을 누르면 random / scratch(직선형) / edge ring / center cluster 4가지 중 하나로 결함 맵을 생성해서 보여주는 것. 패턴 이름은 숨겨놔.</div>
       </div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 자동 분류</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">이제 "판별" 버튼을 추가해줘. 현재 맵의 결함 분포를 분석해서 4가지 패턴 중 뭔지 추정하고 근거(가장자리 비율, 직선성, 중심 밀집도 같은 지표)와 함께 보여주는 것. 내가 먼저 눈으로 맞히고 나서 답을 확인하는 퀴즈 모드로.</div>
+        <div class="p-label"><span>📋 프롬프트 ② — 자동 분류 퀴즈</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">"판별" 버튼을 추가해줘. 결함 분포를 분석해 4가지 중 뭔지 추정하고 근거 지표(가장자리 비율, 직선성, 중심 밀집도)와 함께 표시. 내가 먼저 눈으로 맞히고 답을 확인하는 퀴즈 모드로.</div>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="defects" width="440" height="150"></canvas>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>4가지 패턴이 그럴듯하게 생성된다</li>
-          <li>판별 정확도를 10회 테스트해봤다 (몇 승 몇 패?)</li>
+          <li>판별 10회 테스트 — <strong>몇 승 몇 패?</strong></li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>판별이 자꾸 틀리면? <strong>틀린 사례를 보여주며</strong> 지표를 고치게 하기 — 이게 알고리즘 튜닝</li>
+          <li>판별이 틀리면 <strong>틀린 사례를 보여주며</strong> 지표를 고치게 — 이게 알고리즘 튜닝</li>
         </ul>
       </div>
     </div>
@@ -1696,20 +1959,18 @@ photo8 노광 가동중</div>
       <h3>🧠 여러분이 낸 것</h3>
       <ul class="small">
         <li>WE rules라는 개념, Rayleigh라는 식</li>
-        <li>"edge ring 패턴"이라는 용어</li>
         <li>뭐가 정상이고 뭐가 이상한지의 감각</li>
       </ul>
     </div>
     <div class="card">
       <h3>🤖 AI가 낸 것</h3>
       <ul class="small">
-        <li>구현 코드 전부</li>
-        <li>차트·UI·인터랙션</li>
+        <li>구현 코드, 차트·UI 전부</li>
         <li>지치지 않는 반복 수정</li>
       </ul>
     </div>
   </div>
-  <p class="fragment rise" style="margin-top: 16px;"><strong>같은 AI를 써도 도메인 전문가가 시키면 결과가 다릅니다.</strong><br />
+  <p class="fragment rise" style="margin-top: 16px;"><strong>같은 AI라도 도메인 전문가가 시키면 결과가 다릅니다.</strong><br />
   <span class="muted">개발자가 되는 게 아니라, 더 강한 엔지니어가 되는 겁니다.</span></p>
   <aside class="notes">이 워크숍의 핵심 메시지. '개발자로 전직'이 아니라 '엔지니어 역량의 확장'이라는 프레임을 확실히 박는다.</aside>
 </section>
@@ -1723,7 +1984,7 @@ photo8 노광 가동중</div>
     <h2>매주 반복하는 그 일</h2>
     <p class="subtitle muted">한 번 만들어두면 계속 일하는 것들.<br />파일 정리, 리포트 생성, 요약 메일 — <strong>수동 업무를 은퇴시키는</strong> 시간.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 목표: 반복 업무 → 스크립트</span>
+      <span class="chip teal">🎯 반복 업무 → 스크립트</span>
       <span class="chip violet">🧪 실습 4개 (필수 2 + 선택 2)</span>
     </div>
   </div>
@@ -1738,18 +1999,17 @@ photo8 노광 가동중</div>
       <h3>이 중 하나라도 "예"라면 후보</h3>
       <ul class="small">
         <li>매주/매일 <strong>같은 순서로 클릭</strong>하는 일이 있다</li>
-        <li>파일을 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
-        <li>"이건 인턴 시키면 되는데"라고 생각한 적 있다</li>
-        <li>실수하면 티 나는데, 하기는 지루한 일이 있다</li>
+        <li>파일 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
+        <li>"이건 인턴 시키면 되는데" 싶은 일이 있다</li>
       </ul>
     </div>
     <div class="card">
       <h3>자동화 설계 공식 — 한 문장</h3>
       <p class="small" style="line-height: 1.7;"><em>"__(입력)__을 받아서<br />__(규칙)__대로 처리하고<br />__(출력)__을 만들어줘"</em></p>
-      <p class="tiny muted">이 문장을 채울 수 있으면 자동화할 수 있습니다. 못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
+      <p class="tiny muted">못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
     </div>
   </div>
-  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 떠올려 두세요 — 마지막 파트에서 그걸 만듭니다.</p>
+  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 적어두세요 — 마지막 파트에서 그걸 만듭니다.</p>
   <aside class="notes">여기서 각자 후보를 하나씩 적게 하는 게 중요 — Part 6 미니 프로젝트의 씨앗이 된다. 1분 정도 생각할 시간을 준다.</aside>
 </section>
 
@@ -1760,39 +2020,38 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">이름 규칙이 엉망인 파일 무더기를 <strong>규칙대로 정리</strong>합니다. 손으로 하면 1시간, 시키면 1분.</p>
+  <p class="lab-goal">이름 규칙이 엉망인 파일 무더기를 규칙대로 정리 — <strong>손으로 1시간, 시키면 1분.</strong></p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 프롬프트 ① — 난장판 만들기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">연습용 폴더 messy_data를 만들고 그 안에 가짜 측정 파일 100개를 만들어줘. 파일명 규칙이 제각각이게: "LOT123_20260701.csv", "20260702-lot124.csv", "측정결과_lot125 (final).csv" 같은 식으로 뒤죽박죽. 내용은 아무 숫자 몇 줄이면 돼.</div>
+        <div class="p-text">연습용 폴더 messy_data를 만들고 가짜 측정 파일 100개를 만들어줘. 파일명 규칙이 제각각이게: "LOT123_20260701.csv", "20260702-lot124.csv", "측정결과_lot125 (final).csv" 같은 식으로 뒤죽박죽. 내용은 아무 숫자 몇 줄이면 돼.</div>
       </div>
       <div class="prompt">
         <div class="p-label"><span>📋 프롬프트 ② — 정리 (계획 먼저!)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">messy_data 폴더의 파일들을 "LOT번호_날짜.csv" (예: LOT123_2026-07-01.csv) 형식으로 통일해서 clean_data 폴더로 정리하려고 해. 먼저 어떤 파일을 뭘로 바꿀지 변경 계획표만 보여줘. 아직 실행하지 마. 원본은 건드리지 말고 복사본으로만 작업해.</div>
+        <div class="p-text">messy_data의 파일들을 "LOT번호_날짜.csv" (예: LOT123_2026-07-01.csv) 형식으로 통일해서 clean_data 폴더로 정리하려고 해. 먼저 변경 계획표만 보여줘. 아직 실행하지 마. 원본은 건드리지 말고 복사본으로만 작업해.</div>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-files">
+          <div>측정결과_lot125 (final).csv <span class="arr">→</span> <span class="ok">LOT125_2026-07-03.csv</span></div>
+          <div>20260702-lot124.csv <span class="arr">→</span> <span class="ok">LOT124_2026-07-02.csv</span></div>
+          <div class="mk-sub" style="margin-top:6px;">변경 계획표 100건 → 승인 → 실행 보고: <span class="ok">98 처리</span> · <span class="warn-t">2 규칙 불일치 격리</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>변경 계획표를 <strong>검토한 후</strong> 실행시켰다</li>
-          <li>clean_data에 100개가 통일된 이름으로 있다</li>
+          <li>계획표를 <strong>검토한 후</strong> 실행시켰다</li>
           <li>원본 messy_data는 무사하다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 안전 수칙</div>
         <ul>
-          <li>파일을 건드리는 자동화는 <strong>①계획 보기 ②사본으로 ③검증 후 원본</strong></li>
-          <li>"몇 개 처리했고 몇 개 실패했는지 보고해줘"</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>날짜별 하위 폴더로 자동 분류</li>
-          <li>규칙에 안 맞는 파일은 review 폴더로 격리</li>
+          <li>파일 자동화는 <strong>①계획 보기 ②사본 작업 ③결과 보고</strong> 3종 세트로</li>
         </ul>
       </div>
     </div>
@@ -1803,48 +2062,53 @@ photo8 노광 가동중</div>
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB 5-2</span>
-    <h2>CSV 여러 개 → 요약 리포트 자동 생성</h2>
+    <h2>CSV 여러 개 → 주간 리포트 자동 생성</h2>
     <span class="chip amber">⏱ 15분</span>
     <span class="chip"><span class="stars">★★★</span></span>
   </div>
   <p class="lab-goal">"매주 월요일마다 하던 그 취합"을 <strong>스크립트 한 방</strong>으로.</p>
+  <div class="databar">
+    <a class="chip teal" href="data.zip" download>📁 weekly/ 폴더 (data.zip에 포함)</a>
+    <span class="chip">mon~fri.csv · 장비 6대 가동 데이터</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 주간 데이터 5개</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">weekly 폴더에 하루치 장비 가동 데이터 5개(mon.csv~fri.csv)를 만들어줘. 컬럼: equipment_id(6대), run_count, error_count, uptime_pct. 값은 그럴듯하게, 수요일에 ETCH-02가 유난히 나쁘게.</div>
+        <div class="p-label"><span>📋 리포트 생성기 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">weekly 폴더의 CSV(mon~fri)를 전부 읽어 주간 리포트를 만드는 스크립트를 작성해줘. 실행하면 weekly_report.html이 생성되는 것.
+1. 장비별 주간 가동률 표 (최악 장비 강조)
+2. 일별 에러 추이 차트
+3. "특이사항" 자동 요약 문단
+다음 주에 파일만 갈아끼우면 재사용되게. 실행 방법도 알려줘.</div>
       </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 리포트 생성기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">weekly 폴더의 CSV를 전부 읽어 주간 리포트를 만드는 스크립트를 작성해줘. 실행하면 weekly_report.html이 생성되는 것. 내용: ①장비별 주간 가동률 표(최악 장비 강조) ②일별 에러 추이 차트 ③"특이사항" 자동 요약 문단. 다음 주에 파일만 갈아끼우면 재사용할 수 있게 만들어줘. 실행 방법도 알려줘.</div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>엑셀(.xlsx) 출력 / 지난주 대비 변화율 컬럼</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="weekly" width="440" height="160"></canvas>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>스크립트 실행 → 리포트가 생성된다</li>
-          <li><strong>ETCH-02 수요일 문제</strong>가 특이사항에 잡혔다</li>
-          <li>"재사용 방법"을 이해했다</li>
+          <li>스크립트 실행 → 리포트 생성</li>
+          <li>숨어 있는 <strong>문제 장비·요일</strong>이 특이사항에 잡혔다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>1회용 분석과 다른 점: <strong>"다음에도 쓸 수 있게"</strong>라는 요구</li>
-          <li>실행이 어려우면 "더블클릭으로 실행되게 해줘"</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>엑셀(.xlsx)로도 출력하게 하기</li>
-          <li>지난주 대비 변화율 컬럼 추가</li>
+          <li>도구와 자동화의 차이 = <strong>"다음에도 쓸 수 있게"</strong>라는 요구</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">'도구'와 '자동화'의 차이(재사용성)를 명시적으로 다루는 실습. 실행 방법이 참가자마다 걸림돌이 될 수 있으니 조교가 돌며 지원.</aside>
+  <aside class="notes">정답: 수요일 ETCH-02 uptime 78%, error 9건. 실행이 어려우면 "더블클릭으로 실행되게 해줘". 조교가 돌며 지원.</aside>
 </section>
 
 <section>
@@ -1854,39 +2118,48 @@ photo8 노광 가동중</div>
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
   </div>
-  <p class="lab-goal">Part 3의 로그 파싱 + Part 2의 글쓰기 = <strong>매일 아침 10분 은퇴</strong>.</p>
+  <p class="lab-goal">로그 파싱(3-3) + 보고서 문체(2-2) = <strong>매일 아침 10분 은퇴</strong>.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/tool.log" download>📁 tool.log (LAB 3-3과 동일)</a>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
         <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">아까 만든 tool.log를 읽어서 "야간 장비 현황 아침 브리핑" 메일 초안을 만드는 스크립트를 작성해줘. 실행하면 briefing.txt가 생성되는 것. 내용: 제목 한 줄 / 밤사이 ERROR 요약(시각·모듈·횟수) / 반복 발생 패턴 경고 / 조치 필요 항목 체크리스트. 팀장님께 보내는 톤으로, 5줄 이내로 간결하게.</div>
+        <div class="p-text">tool.log를 읽어서 "야간 장비 현황 아침 브리핑" 메일 초안을 만드는 스크립트를 작성해줘. 실행하면 briefing.txt가 생성되는 것. 내용: 제목 한 줄 / 밤사이 ERROR 요약(시각·모듈·횟수) / 반복 패턴 경고 / 조치 필요 체크리스트. 팀장님께 보내는 톤으로 5줄 이내.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"ERROR 0건인 날은 축하 멘트로" / HTML 메일 버전</li>
+        </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-mail">
+          <div class="mk-row"><b>제목</b> <span>[야간 브리핑] ERROR 8건 — VACUUM 반복 이슈 확인 필요</span></div>
+          <div class="mk-row"><b>요약</b> <span>02~04시 PG-2 게이지 타임아웃 <span class="bad">3회 반복</span> 발생</span></div>
+          <div class="mk-row"><b>조치</b> <span>☐ PG-2 커넥터 점검 ☐ 재발 시 게이지 교체</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>briefing.txt가 그대로 보내도 될 수준이다</li>
-          <li>로그를 바꿔 다시 실행해도 동작한다</li>
+          <li>briefing.txt가 그대로 보내도 될 수준</li>
+          <li>로그를 바꿔 재실행해도 동작</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>오늘 배운 것들이 <strong>레고처럼 조립</strong>됨: 파싱+요약+문체</li>
-          <li>매일 아침 자동 실행(스케줄러)은 다음 슬라이드에서</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"ERROR가 0건인 날은 축하 멘트로"</li>
-          <li>HTML 메일 버전으로 업그레이드</li>
+          <li>오늘 배운 것들이 <strong>레고처럼 조립</strong>됨 — 파싱+요약+문체</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">기존 실습 산출물을 재조합하는 구성 — 도구가 쌓이면 조립 속도가 빨라진다는 것을 체감시킨다.</aside>
+  <aside class="notes">기존 실습 산출물을 재조합하는 구성 — 도구가 쌓이면 조립 속도가 빨라진다는 것을 체감시킨다. 매일 아침 자동 실행(스케줄러)까지 원하는 사람에겐 OS 스케줄러 등록도 AI에게 시키면 된다고 안내.</aside>
 </section>
 
 <section>
@@ -1897,39 +2170,51 @@ photo8 노광 가동중</div>
     <span class="chip"><span class="stars">★★★</span></span>
     <span class="chip pink">BONUS</span>
   </div>
-  <p class="lab-goal">문서 여러 개를 <strong>지식 기반</strong> 삼아 답하는 도우미. LAB 2-6의 완성형.</p>
+  <p class="lab-goal">문서 여러 개를 <strong>지식 기반</strong> 삼아 답하기 — 문서 사이 <strong>모순</strong>도 하나 숨어 있습니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data.zip" download>📁 specs/ 폴더 (data.zip에 포함)</a>
+    <span class="chip">식각·증착·안전 스펙 3종 (가상)</span>
+  </div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 가짜 스펙 문서 3종</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">specs 폴더에 가상의 공정 스펙 문서 3개를 만들어줘: etch_spec.md(식각 조건·한계값), cvd_spec.md(증착 레시피 파라미터), safety_spec.md(인터락·비상 절차). 서로 참조하는 부분도 몇 개 넣고, 일부러 두 문서 간에 미묘하게 모순되는 항목 하나를 심어줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 질문 공세</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 질문 공세 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">specs 폴더 문서들만 근거로 답해줘. 근거 문서명과 해당 구절을 반드시 인용하고, 문서에 없으면 "문서에 없음"이라고 답해.
-Q1. 챔버 압력 상한과 그 근거는?
+Q1. 식각 공정 압력 상한과 그 근거는?
 Q2. 인터락이 걸리는 조건을 전부 나열해줘.
 Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
       </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"신입용 요약 카드 한 장으로 만들어줘"</li>
+        </ul>
+      </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-chat">
+          <div class="bub me">Q3. 모순되는 내용 있어?</div>
+          <div class="bub ai">있습니다. 공정 중단 압력이 <b class="bad">120 mTorr</b>인데 안전 인터락은 <b class="bad">100 mTorr</b>에서 이미 작동합니다. <span class="src">— etch_spec.md §3 vs safety_spec.md §3</span></div>
+        </div>
+      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>답변마다 <strong>출처 인용</strong>이 붙어 나온다</li>
-          <li>Q3에서 심어둔 모순을 찾아냈다</li>
+          <li>답변마다 <strong>출처 인용</strong>이 붙는다</li>
+          <li>숨어 있는 모순을 찾아냈다</li>
         </ul>
       </div>
       <div class="panel hint">
         <div class="panel-title">💡 포인트</div>
         <ul>
-          <li>"근거 인용 + 없으면 없다고" = 지식 기반 Q&amp;A의 안전벨트</li>
-          <li>문서 간 <strong>모순 찾기</strong>는 사람이 제일 못하고 AI가 제일 잘하는 일</li>
+          <li>문서 간 <strong>모순 찾기</strong> — 사람이 제일 못하고 AI가 제일 잘하는 일</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">문서 모순 찾기가 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
+  <aside class="notes">정답: etch_spec은 120 mTorr 초과 시 공정 중단이라 하고, safety_spec은 100 mTorr에서 인터락 작동 — 중단 기준이 인터락보다 높아서 실질적으로 도달 불가능한 모순. 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
 </section>
 
 <!-- ═══════════════ PART 6 · 미니 프로젝트 & 마무리 ═══════════════ -->
@@ -2070,6 +2355,7 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     <li>📖 <strong>개념 다시 보기:</strong> <a href="../">바이브 코딩이란 무엇인가? (본 세미나 슬라이드)</a></li>
     <li>🧠 <strong>한 단계 깊게:</strong> <a href="../context/">컨텍스트 — AI 에이전트의 작업 책상</a> <span class="muted small">(긴 작업이 산으로 갈 때 읽어보세요)</span></li>
     <li>📋 <strong>이 슬라이드:</strong> 모든 실습 프롬프트에 복사 버튼이 있습니다 — 두고두고 참고서로 쓰세요</li>
+    <li>📦 <strong>실습 데이터 팩:</strong> <a href="data.zip" download>data.zip</a> — 정답이 심어진 합성 데이터 8종, 집에서 복습용</li>
   </ul>
   <div class="stat-row" style="margin-top: 20px;">
     <div class="stat"><div class="n grad-text">20+</div><div class="l">오늘 실행한 프롬프트</div></div>
@@ -2163,6 +2449,244 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
       }, 1600);
     });
   });
+
+  // ===== '예상 결과' 캔버스 목업 =====
+  // 실습 결과물이 어떤 모습일지 감을 주는 정적 미니 차트들. seed 고정 의사난수로
+  // 매 로드마다 같은 그림이 나온다 (스크린샷·인쇄 일관성).
+  (function () {
+    function mulberry(seed) {
+      let a = seed;
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const INK = '#93A0BE', TEAL = '#2BEAD0', VIOLET = '#9B82FF', PINK = '#FF7AA8', AMBER = '#FFC24B';
+    const GRID = 'rgba(147,160,190,0.18)';
+
+    function frame(ctx, W, H) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#0A0E1A';
+      ctx.fillRect(0, 0, W, H);
+    }
+    function axis(ctx, W, H, pad) {
+      ctx.strokeStyle = GRID;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad, 8); ctx.lineTo(pad, H - pad); ctx.lineTo(W - 8, H - pad);
+      ctx.stroke();
+    }
+    function label(ctx, text, x, y, color, size, align) {
+      ctx.fillStyle = color || INK;
+      ctx.font = `${size || 11}px 'JetBrains Mono', monospace`;
+      ctx.textAlign = align || 'left';
+      ctx.fillText(text, x, y);
+    }
+    function miniWafer(ctx, cx, cy, R, rnd, pattern) {
+      const cell = Math.max(3, R / 9);
+      ctx.strokeStyle = GRID;
+      ctx.beginPath(); ctx.arc(cx, cy, R + 3, 0, Math.PI * 2); ctx.stroke();
+      for (let x = -R; x <= R; x += cell) {
+        for (let y = -R; y <= R; y += cell) {
+          const r = Math.hypot(x, y);
+          if (r > R - cell * 0.6) continue;
+          let failP = 0.04;
+          if (pattern === 'ring') failP = r > R * 0.72 ? 0.55 : 0.03;
+          else if (pattern === 'center') failP = r < R * 0.35 ? 0.5 : 0.03;
+          else if (pattern === 'scratch') failP = Math.abs(x - y * 0.6) < cell ? 0.75 : 0.03;
+          else if (pattern === 'random') failP = 0.12;
+          ctx.fillStyle = rnd() < failP ? PINK : 'rgba(43,234,208,0.35)';
+          ctx.fillRect(cx + x - cell / 2 + 0.5, cy + y - cell / 2 + 0.5, cell - 1, cell - 1);
+        }
+      }
+    }
+
+    const RENDER = {
+      hist(ctx, W, H) {
+        const rnd = mulberry(7);
+        axis(ctx, W, H, 30);
+        // 정규분포 히스토그램 + 오른쪽에 떨어진 이상 랏 봉우리
+        const bars = 22;
+        for (let i = 0; i < bars; i++) {
+          const x = 34 + i * ((W - 60) / bars);
+          const center = Math.exp(-Math.pow((i - 8) / 3.2, 2));
+          const outlier = Math.exp(-Math.pow((i - 17) / 1.1, 2)) * 0.45;
+          const h = (center + outlier) * (H - 52) + rnd() * 4;
+          ctx.fillStyle = i >= 15 && outlier > 0.08 ? PINK : TEAL;
+          ctx.globalAlpha = 0.85;
+          ctx.fillRect(x, H - 30 - h, (W - 60) / bars - 3, h);
+          ctx.globalAlpha = 1;
+        }
+        const tx = 34 + 8 * ((W - 60) / bars);
+        ctx.strokeStyle = VIOLET; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.moveTo(tx, 10); ctx.lineTo(tx, H - 30); ctx.stroke();
+        ctx.setLineDash([]);
+        label(ctx, '목표 100nm', tx + 4, 18, VIOLET);
+        label(ctx, 'LOT-1003 ⚠', W - 36, 26, PINK, 11, 'right');
+        label(ctx, 'thickness_nm', W - 8, H - 8, INK, 10, 'right');
+      },
+      wafer(ctx, W, H) {
+        const rnd = mulberry(11);
+        miniWafer(ctx, H / 2 + 6, H / 2, H / 2 - 12, rnd, 'ring');
+        const lx = H + 26;
+        label(ctx, '수율 91.8%', lx, 34, '#E8ECF8', 15);
+        const bins = [['bin1', 1156, TEAL], ['bin2', 38, PINK], ['bin3', 27, AMBER], ['bin4', 19, VIOLET]];
+        bins.forEach((b, i) => {
+          ctx.fillStyle = b[2];
+          ctx.fillRect(lx, 48 + i * 20, 9, 9);
+          label(ctx, `${b[0]}  ${b[1]}`, lx + 16, 57 + i * 20, INK, 11);
+        });
+        label(ctx, 'edge ring 패턴', lx, H - 12, PINK, 11);
+      },
+      logbars(ctx, W, H) {
+        const rnd = mulberry(3);
+        axis(ctx, W, H, 30);
+        for (let h24 = 0; h24 < 24; h24++) {
+          const x = 34 + h24 * ((W - 60) / 24);
+          const night = h24 >= 2 && h24 <= 3;
+          const n = night ? 2 + Math.round(rnd()) : (rnd() < 0.18 ? 1 : 0);
+          const wn = rnd() * 2;
+          ctx.fillStyle = 'rgba(255,194,75,0.5)';
+          ctx.fillRect(x, H - 30 - wn * 16, (W - 60) / 24 - 3, wn * 16);
+          if (n) {
+            ctx.fillStyle = PINK;
+            ctx.fillRect(x, H - 30 - wn * 16 - n * 22, (W - 60) / 24 - 3, n * 22);
+          }
+        }
+        label(ctx, 'ERROR 8건 · WARN 30건', 34, 18, '#E8ECF8', 12);
+        label(ctx, '02~04시 PRESSURE_SENSOR_TIMEOUT ×3 ⚠', 34, 34, PINK, 11);
+        label(ctx, '시간대', W - 8, H - 8, INK, 10, 'right');
+      },
+      trend(ctx, W, H) {
+        const rnd = mulberry(5);
+        axis(ctx, W, H, 30);
+        const n = 40, x0 = 36, dx = (W - 66) / n;
+        const yv = (v) => H - 30 - ((v - 43.5) / 3.5) * (H - 48);
+        [[45, VIOLET, '목표'], [46.5, GRID, ''], [43.5, GRID, '']].forEach(([v, c]) => {
+          ctx.strokeStyle = c; ctx.setLineDash([4, 3]);
+          ctx.beginPath(); ctx.moveTo(x0, yv(v)); ctx.lineTo(W - 24, yv(v)); ctx.stroke();
+          ctx.setLineDash([]);
+        });
+        for (let i = 0; i < n; i++) {
+          const drift = i > n - 10 ? (i - (n - 10)) * 0.09 : 0;
+          const v = 45 + (rnd() - 0.5) * 0.9 + drift;
+          ctx.fillStyle = drift > 0 ? PINK : TEAL;
+          ctx.beginPath(); ctx.arc(x0 + i * dx, yv(v), 2.4, 0, Math.PI * 2); ctx.fill();
+        }
+        const dxp = x0 + (n - 10) * dx;
+        ctx.strokeStyle = PINK;
+        ctx.beginPath(); ctx.moveTo(dxp, 12); ctx.lineTo(dxp, H - 30); ctx.stroke();
+        label(ctx, 'drift 시작 ⚠', dxp + 5, 20, PINK);
+        label(ctx, 'CD 45nm 목표', x0 + 2, yv(45) - 5, VIOLET, 10);
+      },
+      spc(ctx, W, H) {
+        const rnd = mulberry(9);
+        const x0 = 34, n = 40, dx = (W - 62) / n;
+        const yv = (v) => H / 2 - v * (H - 44) / 7; // v in σ units
+        // σ 존 배경
+        [[3, 'rgba(255,122,168,0.07)'], [2, 'rgba(255,194,75,0.07)'], [1, 'rgba(43,234,208,0.05)']].forEach(([s, c]) => {
+          ctx.fillStyle = c;
+          ctx.fillRect(x0, yv(s), W - 62, yv(-s) - yv(s));
+        });
+        [[0, VIOLET], [3, PINK], [-3, PINK], [2, GRID], [-2, GRID]].forEach(([s, c]) => {
+          ctx.strokeStyle = c; ctx.setLineDash(s === 0 ? [] : [4, 3]);
+          ctx.beginPath(); ctx.moveTo(x0, yv(s)); ctx.lineTo(W - 28, yv(s)); ctx.stroke();
+          ctx.setLineDash([]);
+        });
+        let px = null, py = null;
+        for (let i = 0; i < n; i++) {
+          let v = (rnd() - 0.5) * 2;
+          let bad = false;
+          if (i === 14) { v = 3.5; bad = true; }          // rule 1
+          if (i >= 24 && i <= 32) { v = 0.5 + rnd() * 0.9; bad = i === 32; } // run of 9
+          const x = x0 + i * dx, y = yv(v);
+          if (px !== null) {
+            ctx.strokeStyle = 'rgba(147,160,190,0.4)';
+            ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(x, y); ctx.stroke();
+          }
+          ctx.fillStyle = bad ? PINK : TEAL;
+          ctx.beginPath(); ctx.arc(x, y, bad ? 4 : 2.4, 0, Math.PI * 2); ctx.fill();
+          px = x; py = y;
+        }
+        label(ctx, 'UCL', W - 26, yv(3) + 4, PINK, 10);
+        label(ctx, 'CL', W - 26, yv(0) + 4, VIOLET, 10);
+        label(ctx, 'rule 1 ⚠', x0 + 14 * dx - 10, yv(3.5) - 8, PINK, 11);
+        label(ctx, '9연속 한쪽 ⚠', x0 + 26 * dx, yv(1.8), PINK, 11);
+      },
+      dash(ctx, W, H) {
+        frame(ctx, W, H);
+        // KPI 카드 3개
+        const kw = (W - 44) / 3;
+        [['이번주 수율', '89.1%', PINK], ['전주 대비', '-1.8%p', PINK], ['최다 불량', 'bin4', AMBER]].forEach((k, i) => {
+          const x = 12 + i * (kw + 10);
+          ctx.strokeStyle = GRID; ctx.strokeRect(x, 10, kw, 34);
+          label(ctx, k[0], x + 8, 24, INK, 10);
+          label(ctx, k[1], x + 8, 39, k[2], 14);
+        });
+        // 트렌드 미니
+        const rnd = mulberry(13);
+        const gy = 56, gh = H - 66;
+        ctx.strokeStyle = GRID; ctx.strokeRect(12, gy, W / 2 - 20, gh);
+        for (const [prod, color, drop] of [['A', TEAL, 0], ['B', PINK, 1]]) {
+          ctx.strokeStyle = color; ctx.beginPath();
+          for (let i = 0; i < 8; i++) {
+            const v = 91 + (rnd() - 0.5) * 1.2 - (drop && i >= 5 ? (i - 4) * 1.1 : 0);
+            const x = 18 + i * ((W / 2 - 34) / 7);
+            const y = gy + gh - ((v - 85) / 8) * (gh - 10) - 5;
+            i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+          }
+          ctx.stroke();
+        }
+        label(ctx, '수율 트렌드 (B ⚠)', 18, gy + 13, INK, 10);
+        // 파레토 미니
+        const px0 = W / 2 + 4;
+        ctx.strokeStyle = GRID; ctx.strokeRect(px0, gy, W - px0 - 12, gh);
+        const pare = [1, 0.55, 0.4, 0.28, 0.18];
+        pare.forEach((p, i) => {
+          const bw = (W - px0 - 30) / pare.length;
+          ctx.fillStyle = i === 0 ? AMBER : 'rgba(155,130,255,0.6)';
+          ctx.fillRect(px0 + 8 + i * bw, gy + gh - 8 - p * (gh - 26), bw - 5, p * (gh - 26));
+        });
+        label(ctx, '불량 bin 파레토', px0 + 6, gy + 13, INK, 10);
+        label(ctx, 'bin4', px0 + 8, gy + gh + 2, AMBER, 9);
+      },
+      defects(ctx, W, H) {
+        frame(ctx, W, H);
+        const names = [['random', 'random'], ['scratch', 'scratch'], ['edge ring', 'ring'], ['center', 'center']];
+        names.forEach((nm, i) => {
+          const cx = (W / 4) * i + W / 8;
+          miniWafer(ctx, cx, H / 2 - 8, Math.min(W / 9.5, (H - 40) / 2), mulberry(20 + i), nm[1]);
+          label(ctx, nm[0], cx, H - 10, INK, 11, 'center');
+        });
+      },
+      weekly(ctx, W, H) {
+        const rnd = mulberry(17);
+        axis(ctx, W, H, 30);
+        const eqs = ['E-01', 'E-02', 'C-01', 'C-02', 'P-01', 'P-02'];
+        eqs.forEach((eq, i) => {
+          const bw = (W - 70) / eqs.length;
+          const x = 38 + i * bw;
+          const up = i === 1 ? 0.55 : 0.9 + rnd() * 0.08;
+          ctx.fillStyle = i === 1 ? PINK : TEAL;
+          ctx.globalAlpha = 0.85;
+          ctx.fillRect(x, H - 30 - up * (H - 58), bw - 8, up * (H - 58));
+          ctx.globalAlpha = 1;
+          label(ctx, eq, x + (bw - 8) / 2, H - 16, INK, 10, 'center');
+        });
+        label(ctx, '주간 가동률 — ETCH-02 78% ⚠ (수요일)', 34, 18, '#E8ECF8', 12);
+      },
+    };
+
+    document.querySelectorAll('canvas.mock[data-mock]').forEach((c) => {
+      const fn = RENDER[c.dataset.mock];
+      if (!fn) return;
+      const ctx = c.getContext('2d');
+      frame(ctx, c.width, c.height);
+      fn(ctx, c.width, c.height);
+    });
+  })();
 
   // ===== 타이틀 슬라이드 웨이퍼 맵 애니메이션 =====
   // 원형 웨이퍼 다이 그리드가 순차적으로 '테스트'되며 양품/불량으로 칠해진다.

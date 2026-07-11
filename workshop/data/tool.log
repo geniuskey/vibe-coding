@@ -1,0 +1,1000 @@
+[2026-07-10 00:00:03] [INFO] [VACUUM] MFC-4 flow 84.1 sccm
+[2026-07-10 00:02:53] [INFO] [CHAMBER_B] recipe R-279 started
+[2026-07-10 00:04:07] [INFO] [GAS_PANEL] RF forward power 753 W
+[2026-07-10 00:06:41] [INFO] [CHAMBER_B] recipe R-124 started
+[2026-07-10 00:07:33] [INFO] [VACUUM] pressure stabilized at 132.3 mTorr
+[2026-07-10 00:07:40] [INFO] [VACUUM] recipe R-257 started
+[2026-07-10 00:08:54] [INFO] [GAS_PANEL] pressure stabilized at 193.2 mTorr
+[2026-07-10 00:09:17] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 00:13:28] [INFO] [TRANSFER] recipe R-334 started
+[2026-07-10 00:15:46] [INFO] [RF_GEN] recipe R-216 completed
+[2026-07-10 00:16:52] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 00:20:21] [INFO] [TRANSFER] wafer 23 loaded to CH-A
+[2026-07-10 00:23:30] [INFO] [TRANSFER] slot valve open
+[2026-07-10 00:24:28] [INFO] [TRANSFER] recipe R-194 completed
+[2026-07-10 00:24:29] [INFO] [VACUUM] recipe R-188 completed
+[2026-07-10 00:24:42] [INFO] [CHAMBER_B] RF forward power 772 W
+[2026-07-10 00:25:33] [INFO] [GAS_PANEL] recipe R-020 completed
+[2026-07-10 00:26:05] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 00:27:43] [INFO] [CHAMBER_A] MFC-4 flow 23.1 sccm
+[2026-07-10 00:28:37] [INFO] [TRANSFER] recipe R-235 started
+[2026-07-10 00:29:41] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 00:31:04] [INFO] [VACUUM] chamber clean cycle 6 finished
+[2026-07-10 00:32:50] [INFO] [CHAMBER_A] recipe R-150 started
+[2026-07-10 00:33:13] [INFO] [RF_GEN] pressure stabilized at 248.0 mTorr
+[2026-07-10 00:36:21] [INFO] [TRANSFER] MFC-3 flow 129.6 sccm
+[2026-07-10 00:36:53] [INFO] [CHAMBER_B] recipe R-057 started
+[2026-07-10 00:39:00] [INFO] [CHAMBER_A] wafer 11 loaded to CH-A
+[2026-07-10 00:40:16] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 00:41:59] [INFO] [VACUUM] pressure stabilized at 136.1 mTorr
+[2026-07-10 00:41:59] [INFO] [VACUUM] slot valve open
+[2026-07-10 00:44:13] [INFO] [RF_GEN] slot valve open
+[2026-07-10 00:45:15] [INFO] [RF_GEN] RF forward power 721 W
+[2026-07-10 00:45:50] [INFO] [GAS_PANEL] MFC-2 flow 126.0 sccm
+[2026-07-10 00:46:39] [INFO] [TRANSFER] recipe R-007 started
+[2026-07-10 00:47:18] [INFO] [CHAMBER_B] pressure stabilized at 187.0 mTorr
+[2026-07-10 00:48:37] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 00:50:35] [INFO] [GAS_PANEL] MFC-3 flow 51.1 sccm
+[2026-07-10 00:54:25] [INFO] [VACUUM] chamber clean cycle 4 finished
+[2026-07-10 01:00:00] [INFO] [CHAMBER_B] wafer 18 loaded to CH-B
+[2026-07-10 01:01:19] [INFO] [CHAMBER_B] chamber clean cycle 8 finished
+[2026-07-10 01:06:21] [INFO] [VACUUM] MFC-3 flow 26.1 sccm
+[2026-07-10 01:07:06] [INFO] [CHAMBER_B] chamber clean cycle 7 finished
+[2026-07-10 01:10:26] [INFO] [CHAMBER_A] heater setpoint reached 81.4 C
+[2026-07-10 01:11:35] [WARN] [RF_GEN] MFC-2 flow deviation 2.1%
+[2026-07-10 01:12:09] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 01:13:32] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 01:14:02] [INFO] [VACUUM] robot arm homed
+[2026-07-10 01:14:19] [INFO] [TRANSFER] recipe R-318 started
+[2026-07-10 01:14:36] [INFO] [RF_GEN] heater setpoint reached 184.3 C
+[2026-07-10 01:17:16] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 01:20:55] [INFO] [RF_GEN] slot valve open
+[2026-07-10 01:22:27] [INFO] [TRANSFER] pressure stabilized at 257.7 mTorr
+[2026-07-10 01:23:19] [INFO] [RF_GEN] wafer 24 loaded to CH-B
+[2026-07-10 01:25:44] [INFO] [TRANSFER] pressure stabilized at 224.4 mTorr
+[2026-07-10 01:27:16] [INFO] [VACUUM] purge cycle done
+[2026-07-10 01:27:53] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 01:29:45] [INFO] [CHAMBER_A] heater setpoint reached 196.6 C
+[2026-07-10 01:31:12] [INFO] [RF_GEN] wafer 17 loaded to CH-A
+[2026-07-10 01:31:38] [INFO] [CHAMBER_B] wafer 3 loaded to CH-A
+[2026-07-10 01:31:56] [INFO] [VACUUM] robot arm homed
+[2026-07-10 01:36:07] [INFO] [RF_GEN] MFC-1 flow 61.0 sccm
+[2026-07-10 01:37:35] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 01:37:47] [INFO] [VACUUM] MFC-1 flow 119.8 sccm
+[2026-07-10 01:37:50] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 01:39:27] [WARN] [CHAMBER_B] MFC-1 flow deviation 2.1%
+[2026-07-10 01:40:45] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 01:42:42] [INFO] [VACUUM] wafer 11 loaded to CH-A
+[2026-07-10 01:43:58] [INFO] [TRANSFER] slot valve close
+[2026-07-10 01:46:27] [INFO] [VACUUM] recipe R-027 started
+[2026-07-10 01:46:34] [INFO] [GAS_PANEL] RF forward power 750 W
+[2026-07-10 01:47:19] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 01:47:49] [INFO] [RF_GEN] pressure stabilized at 127.9 mTorr
+[2026-07-10 01:48:00] [INFO] [CHAMBER_A] chamber clean cycle 3 finished
+[2026-07-10 01:49:06] [WARN] [VACUUM] endpoint signal weak, using time mode
+[2026-07-10 01:50:07] [INFO] [TRANSFER] chamber clean cycle 4 finished
+[2026-07-10 01:51:29] [INFO] [TRANSFER] recipe R-226 started
+[2026-07-10 01:52:37] [INFO] [VACUUM] slot valve open
+[2026-07-10 01:53:20] [INFO] [VACUUM] robot arm homed
+[2026-07-10 01:53:48] [INFO] [VACUUM] slot valve close
+[2026-07-10 01:53:56] [INFO] [VACUUM] heater setpoint reached 640.1 C
+[2026-07-10 02:03:41] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 02:05:25] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 02:07:00] [INFO] [CHAMBER_A] heater setpoint reached 604.5 C
+[2026-07-10 02:10:52] [INFO] [RF_GEN] recipe R-038 started
+[2026-07-10 02:14:33] [ERROR] [VACUUM] PRESSURE_SENSOR_TIMEOUT: gauge PG-2 no response (retry 3/3)
+[2026-07-10 02:15:54] [WARN] [GAS_PANEL] heater ramp slower than expected
+[2026-07-10 02:18:35] [INFO] [RF_GEN] heater setpoint reached 445.2 C
+[2026-07-10 02:19:42] [INFO] [CHAMBER_B] pressure stabilized at 123.2 mTorr
+[2026-07-10 02:19:49] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 02:23:26] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 02:23:51] [INFO] [TRANSFER] heater setpoint reached 298.1 C
+[2026-07-10 02:23:56] [INFO] [CHAMBER_A] chamber clean cycle 7 finished
+[2026-07-10 02:24:47] [INFO] [CHAMBER_A] recipe R-224 started
+[2026-07-10 02:24:54] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 02:27:14] [INFO] [CHAMBER_B] wafer 6 loaded to CH-B
+[2026-07-10 02:29:42] [INFO] [VACUUM] recipe R-312 completed
+[2026-07-10 02:30:45] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 02:31:19] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 02:31:30] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 02:32:00] [INFO] [TRANSFER] recipe R-374 completed
+[2026-07-10 02:35:06] [INFO] [CHAMBER_A] recipe R-052 completed
+[2026-07-10 02:38:25] [INFO] [RF_GEN] chamber clean cycle 1 finished
+[2026-07-10 02:38:30] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 02:39:37] [INFO] [VACUUM] RF forward power 858 W
+[2026-07-10 02:42:41] [INFO] [TRANSFER] wafer 23 loaded to CH-A
+[2026-07-10 02:42:44] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 02:43:05] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 02:44:05] [INFO] [CHAMBER_B] recipe R-012 started
+[2026-07-10 02:47:13] [INFO] [TRANSFER] RF forward power 856 W
+[2026-07-10 02:48:29] [INFO] [RF_GEN] heater setpoint reached 191.1 C
+[2026-07-10 02:51:53] [INFO] [VACUUM] recipe R-188 started
+[2026-07-10 02:53:18] [INFO] [TRANSFER] recipe R-273 started
+[2026-07-10 02:53:23] [INFO] [TRANSFER] RF forward power 817 W
+[2026-07-10 02:54:01] [INFO] [VACUUM] chamber clean cycle 2 finished
+[2026-07-10 02:54:05] [INFO] [RF_GEN] RF forward power 757 W
+[2026-07-10 02:55:35] [INFO] [RF_GEN] pressure stabilized at 221.4 mTorr
+[2026-07-10 02:56:35] [INFO] [VACUUM] MFC-1 flow 11.1 sccm
+[2026-07-10 02:57:01] [INFO] [TRANSFER] RF forward power 746 W
+[2026-07-10 02:57:26] [INFO] [VACUUM] recipe R-096 completed
+[2026-07-10 03:01:24] [INFO] [RF_GEN] chamber clean cycle 7 finished
+[2026-07-10 03:02:51] [ERROR] [VACUUM] PRESSURE_SENSOR_TIMEOUT: gauge PG-2 no response (retry 3/3)
+[2026-07-10 03:03:56] [INFO] [VACUUM] RF forward power 710 W
+[2026-07-10 03:05:13] [INFO] [RF_GEN] RF forward power 790 W
+[2026-07-10 03:10:18] [INFO] [RF_GEN] wafer 4 loaded to CH-B
+[2026-07-10 03:12:10] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 03:13:15] [INFO] [CHAMBER_B] RF forward power 844 W
+[2026-07-10 03:15:49] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 03:17:04] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 03:17:45] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 03:17:46] [INFO] [VACUUM] slot valve close
+[2026-07-10 03:19:38] [INFO] [VACUUM] pressure stabilized at 135.0 mTorr
+[2026-07-10 03:22:01] [INFO] [RF_GEN] chamber clean cycle 4 finished
+[2026-07-10 03:23:43] [INFO] [TRANSFER] RF forward power 799 W
+[2026-07-10 03:25:30] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 03:26:33] [INFO] [VACUUM] slot valve open
+[2026-07-10 03:27:31] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 03:28:31] [INFO] [CHAMBER_A] recipe R-191 completed
+[2026-07-10 03:28:58] [INFO] [GAS_PANEL] chamber clean cycle 9 finished
+[2026-07-10 03:30:03] [INFO] [CHAMBER_A] chamber clean cycle 1 finished
+[2026-07-10 03:30:58] [INFO] [TRANSFER] pressure stabilized at 242.4 mTorr
+[2026-07-10 03:31:55] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 03:32:50] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 03:34:16] [WARN] [RF_GEN] RF reflected power 34 W above nominal
+[2026-07-10 03:36:58] [INFO] [TRANSFER] MFC-1 flow 103.9 sccm
+[2026-07-10 03:39:47] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 03:40:50] [INFO] [VACUUM] chamber clean cycle 1 finished
+[2026-07-10 03:43:18] [INFO] [TRANSFER] wafer 12 loaded to CH-A
+[2026-07-10 03:46:33] [INFO] [GAS_PANEL] MFC-2 flow 104.3 sccm
+[2026-07-10 03:47:12] [ERROR] [VACUUM] PRESSURE_SENSOR_TIMEOUT: gauge PG-2 no response (retry 3/3)
+[2026-07-10 03:47:14] [INFO] [VACUUM] slot valve open
+[2026-07-10 03:49:46] [INFO] [TRANSFER] MFC-1 flow 120.4 sccm
+[2026-07-10 03:53:16] [INFO] [TRANSFER] recipe R-270 completed
+[2026-07-10 03:53:51] [INFO] [VACUUM] MFC-1 flow 69.9 sccm
+[2026-07-10 03:56:34] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 03:58:35] [INFO] [RF_GEN] chamber clean cycle 5 finished
+[2026-07-10 03:58:56] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 03:59:08] [INFO] [VACUUM] recipe R-173 completed
+[2026-07-10 04:00:15] [INFO] [VACUUM] heater setpoint reached 409.1 C
+[2026-07-10 04:02:08] [INFO] [GAS_PANEL] RF forward power 873 W
+[2026-07-10 04:03:23] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 04:08:49] [INFO] [RF_GEN] chamber clean cycle 9 finished
+[2026-07-10 04:09:38] [INFO] [CHAMBER_A] heater setpoint reached 257.9 C
+[2026-07-10 04:09:46] [INFO] [CHAMBER_A] recipe R-119 started
+[2026-07-10 04:11:15] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 04:12:08] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 04:12:17] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 04:12:43] [INFO] [CHAMBER_B] pressure stabilized at 233.4 mTorr
+[2026-07-10 04:13:20] [INFO] [CHAMBER_B] recipe R-227 completed
+[2026-07-10 04:14:25] [WARN] [TRANSFER] MFC-1 flow deviation 2.1%
+[2026-07-10 04:16:26] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 04:18:49] [INFO] [TRANSFER] slot valve close
+[2026-07-10 04:20:09] [INFO] [CHAMBER_A] recipe R-204 started
+[2026-07-10 04:22:00] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 04:23:37] [INFO] [GAS_PANEL] chamber clean cycle 5 finished
+[2026-07-10 04:24:46] [WARN] [CHAMBER_A] endpoint signal weak, using time mode
+[2026-07-10 04:27:11] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 04:28:11] [INFO] [RF_GEN] wafer 10 loaded to CH-A
+[2026-07-10 04:28:17] [INFO] [TRANSFER] slot valve close
+[2026-07-10 04:33:33] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 04:34:19] [INFO] [RF_GEN] recipe R-194 completed
+[2026-07-10 04:35:22] [INFO] [GAS_PANEL] pressure stabilized at 148.6 mTorr
+[2026-07-10 04:38:40] [INFO] [GAS_PANEL] recipe R-009 completed
+[2026-07-10 04:40:21] [INFO] [CHAMBER_A] wafer 3 loaded to CH-B
+[2026-07-10 04:41:17] [INFO] [TRANSFER] recipe R-365 completed
+[2026-07-10 04:42:18] [INFO] [TRANSFER] slot valve open
+[2026-07-10 04:42:40] [INFO] [RF_GEN] recipe R-372 started
+[2026-07-10 04:43:42] [INFO] [VACUUM] chamber clean cycle 9 finished
+[2026-07-10 04:45:16] [INFO] [GAS_PANEL] recipe R-196 completed
+[2026-07-10 04:45:20] [INFO] [TRANSFER] recipe R-318 started
+[2026-07-10 04:47:22] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 04:47:56] [INFO] [CHAMBER_B] heater setpoint reached 105.9 C
+[2026-07-10 04:48:45] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 04:52:25] [INFO] [CHAMBER_A] chamber clean cycle 5 finished
+[2026-07-10 04:53:04] [INFO] [GAS_PANEL] heater setpoint reached 51.9 C
+[2026-07-10 04:53:10] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 04:54:26] [INFO] [CHAMBER_B] heater setpoint reached 412.8 C
+[2026-07-10 04:58:25] [INFO] [TRANSFER] heater setpoint reached 520.9 C
+[2026-07-10 04:58:38] [INFO] [GAS_PANEL] chamber clean cycle 3 finished
+[2026-07-10 05:00:35] [INFO] [TRANSFER] recipe R-167 completed
+[2026-07-10 05:01:44] [INFO] [GAS_PANEL] chamber clean cycle 5 finished
+[2026-07-10 05:04:15] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 05:05:03] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 05:06:37] [INFO] [VACUUM] heater setpoint reached 63.1 C
+[2026-07-10 05:06:40] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 05:08:01] [INFO] [RF_GEN] RF forward power 751 W
+[2026-07-10 05:08:27] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 05:10:03] [WARN] [TRANSFER] pressure fluctuation 10.6 mTorr (soft limit)
+[2026-07-10 05:11:51] [INFO] [TRANSFER] slot valve open
+[2026-07-10 05:12:00] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 05:14:49] [INFO] [VACUUM] recipe R-081 started
+[2026-07-10 05:17:17] [INFO] [VACUUM] MFC-3 flow 37.8 sccm
+[2026-07-10 05:19:09] [INFO] [GAS_PANEL] MFC-4 flow 111.5 sccm
+[2026-07-10 05:22:53] [INFO] [VACUUM] RF forward power 721 W
+[2026-07-10 05:24:59] [INFO] [CHAMBER_A] recipe R-221 started
+[2026-07-10 05:25:00] [INFO] [RF_GEN] heater setpoint reached 354.7 C
+[2026-07-10 05:26:05] [WARN] [CHAMBER_B] heater ramp slower than expected
+[2026-07-10 05:26:18] [INFO] [CHAMBER_B] chamber clean cycle 9 finished
+[2026-07-10 05:27:10] [INFO] [CHAMBER_B] pressure stabilized at 256.3 mTorr
+[2026-07-10 05:28:32] [INFO] [RF_GEN] chamber clean cycle 2 finished
+[2026-07-10 05:30:51] [INFO] [RF_GEN] wafer 9 loaded to CH-B
+[2026-07-10 05:32:06] [INFO] [RF_GEN] recipe R-347 completed
+[2026-07-10 05:32:46] [INFO] [TRANSFER] slot valve open
+[2026-07-10 05:33:02] [INFO] [CHAMBER_A] recipe R-108 completed
+[2026-07-10 05:33:40] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 05:34:15] [INFO] [VACUUM] recipe R-356 started
+[2026-07-10 05:35:59] [INFO] [TRANSFER] MFC-3 flow 42.8 sccm
+[2026-07-10 05:36:03] [INFO] [RF_GEN] heater setpoint reached 54.9 C
+[2026-07-10 05:36:32] [INFO] [GAS_PANEL] pressure stabilized at 168.9 mTorr
+[2026-07-10 05:39:26] [INFO] [RF_GEN] chamber clean cycle 1 finished
+[2026-07-10 05:40:48] [INFO] [VACUUM] slot valve open
+[2026-07-10 05:41:44] [INFO] [VACUUM] RF forward power 864 W
+[2026-07-10 05:42:04] [INFO] [CHAMBER_B] MFC-4 flow 84.8 sccm
+[2026-07-10 05:43:00] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 05:44:35] [INFO] [TRANSFER] heater setpoint reached 246.9 C
+[2026-07-10 05:47:21] [INFO] [CHAMBER_B] recipe R-265 completed
+[2026-07-10 05:47:27] [WARN] [RF_GEN] heater ramp slower than expected
+[2026-07-10 05:47:35] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 05:49:13] [WARN] [RF_GEN] heater ramp slower than expected
+[2026-07-10 05:49:55] [INFO] [GAS_PANEL] recipe R-189 completed
+[2026-07-10 05:50:17] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 05:50:59] [INFO] [CHAMBER_A] chamber clean cycle 4 finished
+[2026-07-10 05:52:59] [INFO] [TRANSFER] recipe R-173 completed
+[2026-07-10 05:54:58] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 05:56:31] [INFO] [RF_GEN] slot valve open
+[2026-07-10 05:57:03] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 05:57:22] [INFO] [RF_GEN] slot valve open
+[2026-07-10 05:57:42] [INFO] [CHAMBER_A] recipe R-175 started
+[2026-07-10 06:05:54] [INFO] [TRANSFER] RF forward power 753 W
+[2026-07-10 06:07:12] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 06:10:02] [INFO] [VACUUM] slot valve open
+[2026-07-10 06:11:08] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 06:12:06] [INFO] [VACUUM] pressure stabilized at 41.7 mTorr
+[2026-07-10 06:14:46] [INFO] [VACUUM] recipe R-156 started
+[2026-07-10 06:14:51] [INFO] [CHAMBER_A] wafer 12 loaded to CH-B
+[2026-07-10 06:18:20] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 06:19:03] [WARN] [VACUUM] particle counter reading elevated
+[2026-07-10 06:22:17] [INFO] [CHAMBER_B] wafer 5 loaded to CH-B
+[2026-07-10 06:22:49] [INFO] [TRANSFER] MFC-2 flow 117.5 sccm
+[2026-07-10 06:25:22] [INFO] [TRANSFER] recipe R-202 completed
+[2026-07-10 06:29:02] [INFO] [CHAMBER_A] recipe R-388 started
+[2026-07-10 06:29:59] [INFO] [VACUUM] RF forward power 714 W
+[2026-07-10 06:32:07] [INFO] [TRANSFER] heater setpoint reached 493.7 C
+[2026-07-10 06:32:13] [INFO] [CHAMBER_B] RF forward power 760 W
+[2026-07-10 06:33:11] [INFO] [VACUUM] slot valve open
+[2026-07-10 06:36:27] [INFO] [TRANSFER] heater setpoint reached 236.3 C
+[2026-07-10 06:37:35] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 06:37:35] [INFO] [RF_GEN] wafer 15 loaded to CH-B
+[2026-07-10 06:40:53] [INFO] [CHAMBER_B] recipe R-366 completed
+[2026-07-10 06:41:39] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 06:42:40] [INFO] [RF_GEN] pressure stabilized at 49.1 mTorr
+[2026-07-10 06:43:36] [INFO] [CHAMBER_A] pressure stabilized at 72.2 mTorr
+[2026-07-10 06:45:59] [INFO] [CHAMBER_A] pressure stabilized at 110.2 mTorr
+[2026-07-10 06:46:51] [INFO] [TRANSFER] wafer 22 loaded to CH-A
+[2026-07-10 06:48:44] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 06:48:47] [INFO] [TRANSFER] MFC-1 flow 54.3 sccm
+[2026-07-10 06:50:45] [INFO] [CHAMBER_B] pressure stabilized at 40.6 mTorr
+[2026-07-10 06:55:54] [INFO] [RF_GEN] wafer 4 loaded to CH-B
+[2026-07-10 06:56:47] [INFO] [TRANSFER] wafer 12 loaded to CH-A
+[2026-07-10 06:57:03] [INFO] [RF_GEN] recipe R-305 completed
+[2026-07-10 06:57:42] [INFO] [GAS_PANEL] recipe R-382 completed
+[2026-07-10 06:58:05] [INFO] [VACUUM] robot arm homed
+[2026-07-10 07:04:13] [INFO] [CHAMBER_B] recipe R-171 started
+[2026-07-10 07:06:30] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 07:06:48] [INFO] [CHAMBER_B] pressure stabilized at 87.0 mTorr
+[2026-07-10 07:07:46] [INFO] [RF_GEN] recipe R-001 started
+[2026-07-10 07:07:58] [INFO] [CHAMBER_A] MFC-3 flow 34.2 sccm
+[2026-07-10 07:07:59] [INFO] [TRANSFER] slot valve close
+[2026-07-10 07:08:15] [INFO] [VACUUM] RF forward power 836 W
+[2026-07-10 07:08:22] [INFO] [TRANSFER] recipe R-053 started
+[2026-07-10 07:08:25] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 07:08:53] [INFO] [RF_GEN] RF forward power 737 W
+[2026-07-10 07:13:27] [INFO] [RF_GEN] heater setpoint reached 259.1 C
+[2026-07-10 07:15:52] [INFO] [CHAMBER_B] heater setpoint reached 614.4 C
+[2026-07-10 07:17:44] [INFO] [TRANSFER] slot valve close
+[2026-07-10 07:19:33] [INFO] [TRANSFER] heater setpoint reached 642.8 C
+[2026-07-10 07:19:57] [INFO] [VACUUM] heater setpoint reached 544.4 C
+[2026-07-10 07:21:59] [INFO] [RF_GEN] RF forward power 786 W
+[2026-07-10 07:22:33] [INFO] [CHAMBER_A] chamber clean cycle 5 finished
+[2026-07-10 07:23:29] [INFO] [CHAMBER_A] chamber clean cycle 7 finished
+[2026-07-10 07:23:44] [INFO] [TRANSFER] recipe R-051 started
+[2026-07-10 07:28:46] [INFO] [CHAMBER_B] MFC-1 flow 18.0 sccm
+[2026-07-10 07:33:45] [INFO] [GAS_PANEL] pressure stabilized at 46.4 mTorr
+[2026-07-10 07:35:12] [INFO] [CHAMBER_A] wafer 23 loaded to CH-B
+[2026-07-10 07:38:05] [INFO] [VACUUM] robot arm homed
+[2026-07-10 07:41:52] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 07:42:41] [INFO] [CHAMBER_A] recipe R-047 started
+[2026-07-10 07:43:24] [INFO] [VACUUM] purge cycle done
+[2026-07-10 07:46:05] [INFO] [RF_GEN] MFC-1 flow 10.5 sccm
+[2026-07-10 07:48:27] [INFO] [TRANSFER] recipe R-278 started
+[2026-07-10 07:49:26] [INFO] [RF_GEN] chamber clean cycle 3 finished
+[2026-07-10 07:50:24] [INFO] [TRANSFER] slot valve open
+[2026-07-10 07:51:24] [INFO] [CHAMBER_A] recipe R-276 completed
+[2026-07-10 07:51:48] [INFO] [GAS_PANEL] chamber clean cycle 7 finished
+[2026-07-10 07:52:19] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 07:56:35] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 07:57:13] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 07:57:52] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 07:58:09] [INFO] [TRANSFER] heater setpoint reached 126.6 C
+[2026-07-10 07:58:55] [INFO] [VACUUM] MFC-2 flow 78.0 sccm
+[2026-07-10 07:58:55] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 07:59:37] [INFO] [RF_GEN] chamber clean cycle 6 finished
+[2026-07-10 08:02:40] [INFO] [VACUUM] wafer 5 loaded to CH-A
+[2026-07-10 08:05:27] [INFO] [TRANSFER] wafer 15 loaded to CH-B
+[2026-07-10 08:05:58] [INFO] [GAS_PANEL] recipe R-103 completed
+[2026-07-10 08:06:32] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 08:10:09] [INFO] [CHAMBER_A] pressure stabilized at 204.6 mTorr
+[2026-07-10 08:10:17] [INFO] [RF_GEN] recipe R-265 started
+[2026-07-10 08:11:44] [INFO] [RF_GEN] chamber clean cycle 4 finished
+[2026-07-10 08:12:47] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 08:12:57] [INFO] [VACUUM] robot arm homed
+[2026-07-10 08:17:56] [INFO] [CHAMBER_A] MFC-1 flow 26.7 sccm
+[2026-07-10 08:18:17] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 08:18:51] [INFO] [RF_GEN] slot valve close
+[2026-07-10 08:19:29] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 08:19:59] [INFO] [GAS_PANEL] recipe R-146 completed
+[2026-07-10 08:21:11] [INFO] [RF_GEN] slot valve open
+[2026-07-10 08:22:29] [INFO] [RF_GEN] slot valve close
+[2026-07-10 08:22:31] [INFO] [VACUUM] purge cycle done
+[2026-07-10 08:24:07] [INFO] [VACUUM] RF forward power 749 W
+[2026-07-10 08:24:40] [WARN] [RF_GEN] particle counter reading elevated
+[2026-07-10 08:24:49] [INFO] [VACUUM] heater setpoint reached 80.1 C
+[2026-07-10 08:28:57] [INFO] [GAS_PANEL] pressure stabilized at 103.7 mTorr
+[2026-07-10 08:29:07] [INFO] [RF_GEN] wafer 16 loaded to CH-A
+[2026-07-10 08:29:27] [INFO] [VACUUM] recipe R-390 completed
+[2026-07-10 08:29:30] [INFO] [RF_GEN] recipe R-081 started
+[2026-07-10 08:30:05] [INFO] [VACUUM] chamber clean cycle 4 finished
+[2026-07-10 08:36:23] [INFO] [GAS_PANEL] MFC-2 flow 116.7 sccm
+[2026-07-10 08:36:28] [INFO] [TRANSFER] recipe R-229 completed
+[2026-07-10 08:36:42] [INFO] [VACUUM] heater setpoint reached 168.2 C
+[2026-07-10 08:40:36] [INFO] [RF_GEN] wafer 4 loaded to CH-A
+[2026-07-10 08:42:19] [INFO] [GAS_PANEL] MFC-3 flow 44.8 sccm
+[2026-07-10 08:42:37] [INFO] [TRANSFER] pressure stabilized at 144.9 mTorr
+[2026-07-10 08:43:04] [INFO] [GAS_PANEL] RF forward power 850 W
+[2026-07-10 08:45:04] [INFO] [RF_GEN] MFC-2 flow 119.4 sccm
+[2026-07-10 08:47:23] [INFO] [GAS_PANEL] RF forward power 801 W
+[2026-07-10 08:47:42] [INFO] [GAS_PANEL] recipe R-304 started
+[2026-07-10 08:48:15] [INFO] [CHAMBER_B] wafer 25 loaded to CH-B
+[2026-07-10 08:49:11] [INFO] [CHAMBER_B] recipe R-088 started
+[2026-07-10 08:51:01] [INFO] [VACUUM] wafer 21 loaded to CH-A
+[2026-07-10 08:51:37] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 08:53:02] [INFO] [RF_GEN] recipe R-131 started
+[2026-07-10 08:53:58] [INFO] [RF_GEN] pressure stabilized at 122.1 mTorr
+[2026-07-10 08:56:29] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 08:58:39] [INFO] [RF_GEN] recipe R-188 started
+[2026-07-10 09:01:50] [INFO] [CHAMBER_B] MFC-2 flow 113.3 sccm
+[2026-07-10 09:03:43] [INFO] [CHAMBER_B] wafer 1 loaded to CH-B
+[2026-07-10 09:04:25] [INFO] [VACUUM] chamber clean cycle 6 finished
+[2026-07-10 09:04:31] [INFO] [TRANSFER] heater setpoint reached 143.4 C
+[2026-07-10 09:04:59] [INFO] [RF_GEN] RF forward power 794 W
+[2026-07-10 09:06:04] [WARN] [CHAMBER_A] MFC-4 flow deviation 2.1%
+[2026-07-10 09:06:13] [INFO] [TRANSFER] slot valve open
+[2026-07-10 09:07:57] [INFO] [VACUUM] slot valve close
+[2026-07-10 09:08:07] [INFO] [CHAMBER_A] recipe R-328 started
+[2026-07-10 09:10:16] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 09:11:39] [INFO] [TRANSFER] heater setpoint reached 469.1 C
+[2026-07-10 09:11:43] [INFO] [RF_GEN] MFC-1 flow 56.2 sccm
+[2026-07-10 09:12:53] [INFO] [RF_GEN] chamber clean cycle 6 finished
+[2026-07-10 09:13:26] [ERROR] [GAS_PANEL] MFC_FLOW_ERROR: MFC-3 deviation 11% for 5 s
+[2026-07-10 09:20:41] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 09:21:01] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 09:21:23] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 09:21:45] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 09:25:15] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 09:26:40] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 09:27:15] [INFO] [RF_GEN] MFC-1 flow 109.6 sccm
+[2026-07-10 09:30:05] [INFO] [TRANSFER] slot valve close
+[2026-07-10 09:31:11] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 09:32:22] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 09:35:33] [INFO] [VACUUM] pressure stabilized at 239.8 mTorr
+[2026-07-10 09:35:37] [INFO] [CHAMBER_B] recipe R-399 completed
+[2026-07-10 09:35:38] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 09:36:44] [INFO] [RF_GEN] chamber clean cycle 1 finished
+[2026-07-10 09:38:23] [INFO] [CHAMBER_B] RF forward power 705 W
+[2026-07-10 09:39:10] [INFO] [VACUUM] recipe R-278 started
+[2026-07-10 09:39:46] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 09:42:12] [INFO] [TRANSFER] RF forward power 837 W
+[2026-07-10 09:46:31] [INFO] [RF_GEN] recipe R-293 completed
+[2026-07-10 09:46:52] [INFO] [GAS_PANEL] pressure stabilized at 236.3 mTorr
+[2026-07-10 09:47:56] [INFO] [GAS_PANEL] chamber clean cycle 5 finished
+[2026-07-10 09:50:06] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 09:52:55] [INFO] [CHAMBER_B] RF forward power 769 W
+[2026-07-10 09:53:08] [INFO] [CHAMBER_A] recipe R-379 started
+[2026-07-10 09:54:08] [INFO] [GAS_PANEL] wafer 9 loaded to CH-B
+[2026-07-10 09:55:07] [INFO] [CHAMBER_A] recipe R-088 completed
+[2026-07-10 09:59:27] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 10:03:04] [INFO] [TRANSFER] recipe R-089 started
+[2026-07-10 10:03:17] [INFO] [VACUUM] wafer 22 loaded to CH-A
+[2026-07-10 10:03:26] [INFO] [RF_GEN] wafer 10 loaded to CH-A
+[2026-07-10 10:04:57] [INFO] [TRANSFER] recipe R-375 completed
+[2026-07-10 10:06:53] [INFO] [TRANSFER] heater setpoint reached 219.8 C
+[2026-07-10 10:08:10] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 10:09:18] [INFO] [VACUUM] recipe R-284 completed
+[2026-07-10 10:12:37] [INFO] [VACUUM] recipe R-108 started
+[2026-07-10 10:12:43] [INFO] [CHAMBER_B] heater setpoint reached 628.2 C
+[2026-07-10 10:12:45] [INFO] [CHAMBER_B] wafer 2 loaded to CH-B
+[2026-07-10 10:14:12] [INFO] [VACUUM] pressure stabilized at 58.0 mTorr
+[2026-07-10 10:16:22] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 10:17:09] [INFO] [CHAMBER_A] wafer 3 loaded to CH-A
+[2026-07-10 10:17:27] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 10:19:11] [INFO] [GAS_PANEL] chamber clean cycle 6 finished
+[2026-07-10 10:21:21] [INFO] [GAS_PANEL] RF forward power 878 W
+[2026-07-10 10:21:48] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 10:27:05] [ERROR] [TRANSFER] WAFER_HANDOFF_TIMEOUT: slot 14 not detected
+[2026-07-10 10:27:26] [INFO] [CHAMBER_B] RF forward power 742 W
+[2026-07-10 10:29:35] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 10:30:41] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 10:31:48] [INFO] [CHAMBER_B] wafer 11 loaded to CH-B
+[2026-07-10 10:35:01] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 10:35:17] [INFO] [RF_GEN] slot valve open
+[2026-07-10 10:38:12] [INFO] [RF_GEN] recipe R-166 started
+[2026-07-10 10:38:35] [INFO] [TRANSFER] MFC-2 flow 115.4 sccm
+[2026-07-10 10:39:25] [INFO] [TRANSFER] slot valve open
+[2026-07-10 10:40:09] [INFO] [RF_GEN] slot valve open
+[2026-07-10 10:42:48] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 10:44:10] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 10:46:25] [INFO] [GAS_PANEL] wafer 18 loaded to CH-B
+[2026-07-10 10:46:28] [INFO] [CHAMBER_A] wafer 20 loaded to CH-A
+[2026-07-10 10:46:51] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 10:47:27] [INFO] [TRANSFER] heater setpoint reached 306.8 C
+[2026-07-10 10:47:28] [INFO] [CHAMBER_B] MFC-3 flow 69.0 sccm
+[2026-07-10 10:47:47] [INFO] [GAS_PANEL] wafer 10 loaded to CH-A
+[2026-07-10 10:49:16] [INFO] [TRANSFER] RF forward power 756 W
+[2026-07-10 10:49:30] [INFO] [TRANSFER] recipe R-238 started
+[2026-07-10 10:53:11] [INFO] [CHAMBER_B] heater setpoint reached 70.5 C
+[2026-07-10 10:53:37] [INFO] [TRANSFER] slot valve open
+[2026-07-10 10:54:45] [INFO] [TRANSFER] slot valve close
+[2026-07-10 10:58:03] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 10:59:05] [INFO] [CHAMBER_B] wafer 23 loaded to CH-A
+[2026-07-10 10:59:06] [INFO] [TRANSFER] pressure stabilized at 196.5 mTorr
+[2026-07-10 11:02:28] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 11:08:15] [INFO] [GAS_PANEL] heater setpoint reached 266.7 C
+[2026-07-10 11:08:49] [INFO] [GAS_PANEL] chamber clean cycle 7 finished
+[2026-07-10 11:12:53] [INFO] [CHAMBER_A] recipe R-045 started
+[2026-07-10 11:15:48] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 11:16:43] [INFO] [CHAMBER_B] heater setpoint reached 100.2 C
+[2026-07-10 11:17:41] [INFO] [TRANSFER] slot valve open
+[2026-07-10 11:22:08] [ERROR] [CHAMBER_B] CHUCK_TEMP_OUT_OF_RANGE: 71.2 C (limit 70.0 C)
+[2026-07-10 11:22:40] [INFO] [GAS_PANEL] chamber clean cycle 7 finished
+[2026-07-10 11:24:27] [INFO] [VACUUM] MFC-4 flow 102.0 sccm
+[2026-07-10 11:25:03] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 11:27:21] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 11:27:46] [INFO] [RF_GEN] recipe R-068 started
+[2026-07-10 11:32:27] [INFO] [TRANSFER] recipe R-282 started
+[2026-07-10 11:34:16] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 11:35:39] [INFO] [RF_GEN] recipe R-358 started
+[2026-07-10 11:37:17] [INFO] [TRANSFER] heater setpoint reached 99.3 C
+[2026-07-10 11:38:44] [INFO] [TRANSFER] slot valve open
+[2026-07-10 11:39:58] [WARN] [RF_GEN] pressure fluctuation 9.3 mTorr (soft limit)
+[2026-07-10 11:40:56] [INFO] [GAS_PANEL] pressure stabilized at 44.3 mTorr
+[2026-07-10 11:43:16] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 11:47:25] [WARN] [CHAMBER_A] endpoint signal weak, using time mode
+[2026-07-10 11:51:00] [INFO] [RF_GEN] slot valve open
+[2026-07-10 11:52:10] [INFO] [TRANSFER] RF forward power 811 W
+[2026-07-10 11:53:41] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 11:53:49] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 11:54:30] [INFO] [RF_GEN] slot valve close
+[2026-07-10 11:57:59] [INFO] [CHAMBER_A] recipe R-196 started
+[2026-07-10 11:58:23] [INFO] [RF_GEN] pressure stabilized at 83.5 mTorr
+[2026-07-10 11:59:40] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 12:01:17] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 12:02:13] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 12:02:55] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 12:03:19] [INFO] [VACUUM] heater setpoint reached 123.1 C
+[2026-07-10 12:04:49] [INFO] [TRANSFER] pressure stabilized at 250.4 mTorr
+[2026-07-10 12:06:27] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 12:08:49] [INFO] [VACUUM] purge cycle done
+[2026-07-10 12:11:28] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 12:13:27] [INFO] [RF_GEN] chamber clean cycle 1 finished
+[2026-07-10 12:16:30] [INFO] [CHAMBER_B] RF forward power 761 W
+[2026-07-10 12:18:46] [INFO] [VACUUM] recipe R-089 completed
+[2026-07-10 12:21:33] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 12:21:52] [INFO] [RF_GEN] pressure stabilized at 214.1 mTorr
+[2026-07-10 12:22:59] [INFO] [GAS_PANEL] wafer 24 loaded to CH-B
+[2026-07-10 12:23:53] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 12:24:51] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 12:25:46] [INFO] [VACUUM] recipe R-211 started
+[2026-07-10 12:25:48] [INFO] [TRANSFER] wafer 18 loaded to CH-A
+[2026-07-10 12:27:20] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 12:27:35] [INFO] [VACUUM] purge cycle done
+[2026-07-10 12:33:12] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 12:34:17] [INFO] [RF_GEN] pressure stabilized at 172.7 mTorr
+[2026-07-10 12:34:54] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 12:35:39] [INFO] [RF_GEN] slot valve open
+[2026-07-10 12:35:43] [INFO] [VACUUM] pressure stabilized at 101.3 mTorr
+[2026-07-10 12:38:00] [INFO] [CHAMBER_B] pressure stabilized at 48.5 mTorr
+[2026-07-10 12:38:24] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 12:39:07] [INFO] [TRANSFER] slot valve open
+[2026-07-10 12:40:54] [INFO] [RF_GEN] recipe R-142 completed
+[2026-07-10 12:43:15] [INFO] [CHAMBER_A] recipe R-230 completed
+[2026-07-10 12:43:59] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 12:45:18] [WARN] [CHAMBER_A] RF reflected power 47 W above nominal
+[2026-07-10 12:45:33] [INFO] [CHAMBER_B] wafer 21 loaded to CH-B
+[2026-07-10 12:45:38] [INFO] [CHAMBER_B] RF forward power 858 W
+[2026-07-10 12:47:03] [INFO] [TRANSFER] slot valve close
+[2026-07-10 12:48:36] [INFO] [CHAMBER_B] MFC-3 flow 66.5 sccm
+[2026-07-10 12:50:12] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 12:52:17] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 12:54:18] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 12:56:44] [INFO] [VACUUM] chamber clean cycle 5 finished
+[2026-07-10 12:57:38] [INFO] [GAS_PANEL] pressure stabilized at 73.8 mTorr
+[2026-07-10 12:58:32] [INFO] [VACUUM] recipe R-280 started
+[2026-07-10 12:59:24] [INFO] [GAS_PANEL] recipe R-194 completed
+[2026-07-10 13:00:36] [INFO] [VACUUM] slot valve open
+[2026-07-10 13:03:47] [INFO] [GAS_PANEL] recipe R-267 completed
+[2026-07-10 13:04:31] [INFO] [CHAMBER_B] heater setpoint reached 660.0 C
+[2026-07-10 13:05:07] [INFO] [TRANSFER] recipe R-348 completed
+[2026-07-10 13:05:24] [INFO] [RF_GEN] recipe R-367 completed
+[2026-07-10 13:08:06] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 13:08:34] [INFO] [CHAMBER_A] RF forward power 889 W
+[2026-07-10 13:10:06] [INFO] [RF_GEN] recipe R-370 completed
+[2026-07-10 13:10:27] [INFO] [VACUUM] MFC-4 flow 23.3 sccm
+[2026-07-10 13:12:11] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 13:12:41] [INFO] [TRANSFER] pressure stabilized at 67.2 mTorr
+[2026-07-10 13:13:06] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 13:13:56] [WARN] [VACUUM] MFC-1 flow deviation 2.1%
+[2026-07-10 13:14:19] [INFO] [CHAMBER_A] MFC-4 flow 23.8 sccm
+[2026-07-10 13:14:23] [INFO] [CHAMBER_A] RF forward power 882 W
+[2026-07-10 13:15:35] [INFO] [TRANSFER] pressure stabilized at 191.0 mTorr
+[2026-07-10 13:16:09] [INFO] [VACUUM] wafer 20 loaded to CH-A
+[2026-07-10 13:18:47] [INFO] [RF_GEN] slot valve open
+[2026-07-10 13:19:38] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 13:19:54] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 13:21:32] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 13:25:27] [INFO] [RF_GEN] recipe R-145 started
+[2026-07-10 13:26:16] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 13:28:13] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 13:28:43] [INFO] [CHAMBER_A] heater setpoint reached 350.5 C
+[2026-07-10 13:29:12] [INFO] [VACUUM] MFC-4 flow 56.8 sccm
+[2026-07-10 13:30:50] [INFO] [CHAMBER_B] pressure stabilized at 144.2 mTorr
+[2026-07-10 13:32:17] [INFO] [GAS_PANEL] wafer 8 loaded to CH-A
+[2026-07-10 13:34:07] [INFO] [RF_GEN] slot valve open
+[2026-07-10 13:34:36] [INFO] [TRANSFER] wafer 11 loaded to CH-A
+[2026-07-10 13:37:24] [INFO] [CHAMBER_B] pressure stabilized at 100.6 mTorr
+[2026-07-10 13:38:02] [INFO] [CHAMBER_B] wafer 14 loaded to CH-A
+[2026-07-10 13:38:38] [INFO] [CHAMBER_B] wafer 7 loaded to CH-A
+[2026-07-10 13:39:59] [INFO] [TRANSFER] slot valve close
+[2026-07-10 13:41:27] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 13:44:27] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 13:45:19] [INFO] [TRANSFER] MFC-1 flow 121.3 sccm
+[2026-07-10 13:47:04] [INFO] [VACUUM] wafer 11 loaded to CH-A
+[2026-07-10 13:47:14] [INFO] [VACUUM] slot valve open
+[2026-07-10 13:50:40] [INFO] [RF_GEN] wafer 1 loaded to CH-B
+[2026-07-10 13:50:51] [INFO] [GAS_PANEL] recipe R-139 started
+[2026-07-10 13:55:59] [INFO] [GAS_PANEL] recipe R-285 completed
+[2026-07-10 13:56:51] [INFO] [VACUUM] robot arm homed
+[2026-07-10 13:58:08] [INFO] [RF_GEN] heater setpoint reached 304.2 C
+[2026-07-10 13:58:24] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 13:59:51] [INFO] [VACUUM] purge cycle done
+[2026-07-10 14:01:00] [INFO] [CHAMBER_B] recipe R-064 completed
+[2026-07-10 14:01:13] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 14:02:54] [INFO] [TRANSFER] pressure stabilized at 150.0 mTorr
+[2026-07-10 14:04:15] [INFO] [TRANSFER] recipe R-209 completed
+[2026-07-10 14:04:28] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 14:05:29] [INFO] [CHAMBER_A] recipe R-234 completed
+[2026-07-10 14:05:44] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 14:05:57] [INFO] [GAS_PANEL] RF forward power 826 W
+[2026-07-10 14:10:34] [INFO] [RF_GEN] chamber clean cycle 2 finished
+[2026-07-10 14:11:46] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 14:15:21] [INFO] [VACUUM] slot valve open
+[2026-07-10 14:18:09] [INFO] [RF_GEN] slot valve close
+[2026-07-10 14:19:22] [INFO] [GAS_PANEL] RF forward power 771 W
+[2026-07-10 14:19:59] [INFO] [TRANSFER] recipe R-283 completed
+[2026-07-10 14:23:57] [INFO] [GAS_PANEL] MFC-4 flow 106.4 sccm
+[2026-07-10 14:24:35] [INFO] [TRANSFER] chamber clean cycle 6 finished
+[2026-07-10 14:24:46] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 14:25:48] [INFO] [CHAMBER_B] wafer 1 loaded to CH-B
+[2026-07-10 14:26:37] [INFO] [VACUUM] recipe R-127 started
+[2026-07-10 14:30:36] [INFO] [RF_GEN] MFC-1 flow 113.4 sccm
+[2026-07-10 14:33:58] [INFO] [TRANSFER] pressure stabilized at 105.1 mTorr
+[2026-07-10 14:34:35] [INFO] [GAS_PANEL] pressure stabilized at 164.1 mTorr
+[2026-07-10 14:36:29] [INFO] [VACUUM] slot valve open
+[2026-07-10 14:36:52] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 14:38:44] [INFO] [RF_GEN] chamber clean cycle 7 finished
+[2026-07-10 14:40:03] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 14:40:16] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 14:44:46] [INFO] [GAS_PANEL] recipe R-055 started
+[2026-07-10 14:46:33] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 14:48:13] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 14:50:14] [INFO] [VACUUM] heater setpoint reached 91.4 C
+[2026-07-10 14:51:37] [INFO] [VACUUM] RF forward power 866 W
+[2026-07-10 14:52:42] [INFO] [GAS_PANEL] RF forward power 833 W
+[2026-07-10 14:56:38] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 14:57:23] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 14:58:06] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 15:00:53] [INFO] [TRANSFER] recipe R-390 started
+[2026-07-10 15:03:53] [INFO] [RF_GEN] slot valve open
+[2026-07-10 15:04:20] [INFO] [CHAMBER_A] wafer 19 loaded to CH-B
+[2026-07-10 15:07:16] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 15:12:53] [INFO] [TRANSFER] wafer 10 loaded to CH-A
+[2026-07-10 15:12:58] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 15:14:15] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 15:15:01] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 15:18:46] [INFO] [VACUUM] recipe R-049 completed
+[2026-07-10 15:19:07] [INFO] [VACUUM] slot valve close
+[2026-07-10 15:20:57] [INFO] [CHAMBER_A] chamber clean cycle 2 finished
+[2026-07-10 15:21:39] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 15:21:41] [INFO] [CHAMBER_B] heater setpoint reached 119.8 C
+[2026-07-10 15:22:43] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 15:23:21] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 15:25:26] [INFO] [RF_GEN] MFC-1 flow 97.0 sccm
+[2026-07-10 15:25:53] [INFO] [RF_GEN] pressure stabilized at 189.4 mTorr
+[2026-07-10 15:29:18] [INFO] [VACUUM] chamber clean cycle 6 finished
+[2026-07-10 15:31:18] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 15:33:37] [INFO] [CHAMBER_A] chamber clean cycle 2 finished
+[2026-07-10 15:35:02] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 15:35:22] [INFO] [GAS_PANEL] MFC-2 flow 78.9 sccm
+[2026-07-10 15:41:04] [INFO] [RF_GEN] pressure stabilized at 75.9 mTorr
+[2026-07-10 15:41:46] [INFO] [VACUUM] heater setpoint reached 231.0 C
+[2026-07-10 15:42:43] [INFO] [RF_GEN] pressure stabilized at 151.1 mTorr
+[2026-07-10 15:47:53] [INFO] [RF_GEN] recipe R-257 completed
+[2026-07-10 15:52:57] [INFO] [RF_GEN] chamber clean cycle 4 finished
+[2026-07-10 15:56:00] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 15:57:36] [WARN] [CHAMBER_A] endpoint signal weak, using time mode
+[2026-07-10 15:57:45] [INFO] [VACUUM] recipe R-263 started
+[2026-07-10 15:59:06] [INFO] [RF_GEN] recipe R-320 completed
+[2026-07-10 15:59:49] [INFO] [RF_GEN] slot valve close
+[2026-07-10 16:00:43] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 16:01:22] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 16:02:43] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 16:04:26] [INFO] [GAS_PANEL] MFC-4 flow 79.9 sccm
+[2026-07-10 16:05:07] [INFO] [RF_GEN] MFC-3 flow 97.4 sccm
+[2026-07-10 16:06:17] [INFO] [GAS_PANEL] heater setpoint reached 476.4 C
+[2026-07-10 16:07:08] [INFO] [CHAMBER_B] wafer 22 loaded to CH-A
+[2026-07-10 16:09:17] [INFO] [GAS_PANEL] pressure stabilized at 70.1 mTorr
+[2026-07-10 16:09:21] [INFO] [GAS_PANEL] heater setpoint reached 135.6 C
+[2026-07-10 16:11:37] [WARN] [VACUUM] heater ramp slower than expected
+[2026-07-10 16:13:10] [INFO] [CHAMBER_B] chamber clean cycle 6 finished
+[2026-07-10 16:13:36] [INFO] [CHAMBER_B] pressure stabilized at 98.0 mTorr
+[2026-07-10 16:16:49] [INFO] [VACUUM] recipe R-278 started
+[2026-07-10 16:20:25] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 16:21:24] [INFO] [VACUUM] robot arm homed
+[2026-07-10 16:23:00] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 16:27:31] [INFO] [VACUUM] recipe R-089 completed
+[2026-07-10 16:27:47] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 16:29:03] [INFO] [CHAMBER_A] recipe R-378 completed
+[2026-07-10 16:29:19] [INFO] [VACUUM] slot valve open
+[2026-07-10 16:29:46] [INFO] [TRANSFER] slot valve open
+[2026-07-10 16:30:36] [INFO] [RF_GEN] recipe R-176 started
+[2026-07-10 16:32:57] [INFO] [GAS_PANEL] chamber clean cycle 1 finished
+[2026-07-10 16:33:05] [INFO] [TRANSFER] slot valve open
+[2026-07-10 16:34:43] [INFO] [CHAMBER_A] pressure stabilized at 253.3 mTorr
+[2026-07-10 16:36:34] [INFO] [TRANSFER] wafer 11 loaded to CH-B
+[2026-07-10 16:37:46] [INFO] [CHAMBER_B] recipe R-089 completed
+[2026-07-10 16:40:51] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 16:41:51] [INFO] [RF_GEN] pressure stabilized at 112.8 mTorr
+[2026-07-10 16:43:53] [INFO] [VACUUM] recipe R-317 started
+[2026-07-10 16:44:14] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 16:44:19] [WARN] [RF_GEN] MFC-3 flow deviation 2.1%
+[2026-07-10 16:45:13] [INFO] [TRANSFER] recipe R-332 completed
+[2026-07-10 16:46:55] [INFO] [CHAMBER_A] MFC-4 flow 90.4 sccm
+[2026-07-10 16:49:33] [WARN] [GAS_PANEL] MFC-3 flow deviation 2.1%
+[2026-07-10 16:50:10] [INFO] [CHAMBER_A] wafer 25 loaded to CH-B
+[2026-07-10 16:50:40] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 16:50:57] [INFO] [GAS_PANEL] RF forward power 795 W
+[2026-07-10 16:52:33] [INFO] [RF_GEN] slot valve close
+[2026-07-10 16:53:02] [INFO] [GAS_PANEL] chamber clean cycle 4 finished
+[2026-07-10 16:54:17] [INFO] [TRANSFER] pressure stabilized at 57.7 mTorr
+[2026-07-10 16:55:10] [INFO] [CHAMBER_B] RF forward power 842 W
+[2026-07-10 16:56:52] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 16:58:29] [INFO] [VACUUM] purge cycle done
+[2026-07-10 17:01:50] [INFO] [CHAMBER_B] heater setpoint reached 568.4 C
+[2026-07-10 17:05:53] [INFO] [VACUUM] heater setpoint reached 573.2 C
+[2026-07-10 17:06:48] [INFO] [TRANSFER] recipe R-208 completed
+[2026-07-10 17:07:01] [INFO] [CHAMBER_A] pressure stabilized at 227.5 mTorr
+[2026-07-10 17:08:01] [INFO] [VACUUM] slot valve close
+[2026-07-10 17:09:13] [INFO] [TRANSFER] RF forward power 829 W
+[2026-07-10 17:11:48] [INFO] [CHAMBER_A] recipe R-299 completed
+[2026-07-10 17:13:36] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 17:14:26] [INFO] [TRANSFER] RF forward power 788 W
+[2026-07-10 17:17:03] [INFO] [CHAMBER_B] recipe R-301 completed
+[2026-07-10 17:17:58] [INFO] [TRANSFER] recipe R-012 completed
+[2026-07-10 17:18:36] [INFO] [VACUUM] pressure stabilized at 66.7 mTorr
+[2026-07-10 17:19:28] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 17:23:43] [INFO] [VACUUM] wafer 7 loaded to CH-B
+[2026-07-10 17:25:17] [INFO] [GAS_PANEL] recipe R-210 started
+[2026-07-10 17:25:47] [INFO] [CHAMBER_A] wafer 1 loaded to CH-A
+[2026-07-10 17:25:52] [INFO] [TRANSFER] recipe R-307 started
+[2026-07-10 17:25:58] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 17:27:44] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 17:27:52] [INFO] [VACUUM] wafer 8 loaded to CH-B
+[2026-07-10 17:28:46] [INFO] [VACUUM] pressure stabilized at 258.3 mTorr
+[2026-07-10 17:30:07] [INFO] [VACUUM] wafer 12 loaded to CH-A
+[2026-07-10 17:31:00] [INFO] [RF_GEN] wafer 5 loaded to CH-B
+[2026-07-10 17:32:14] [INFO] [GAS_PANEL] recipe R-183 started
+[2026-07-10 17:32:36] [INFO] [VACUUM] recipe R-017 completed
+[2026-07-10 17:34:23] [INFO] [RF_GEN] heater setpoint reached 83.8 C
+[2026-07-10 17:35:22] [INFO] [CHAMBER_B] chamber clean cycle 5 finished
+[2026-07-10 17:35:51] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 17:38:05] [INFO] [VACUUM] chamber clean cycle 2 finished
+[2026-07-10 17:38:14] [INFO] [TRANSFER] chamber clean cycle 8 finished
+[2026-07-10 17:40:08] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 17:41:14] [INFO] [CHAMBER_B] recipe R-125 started
+[2026-07-10 17:42:42] [INFO] [VACUUM] MFC-1 flow 45.5 sccm
+[2026-07-10 17:43:12] [INFO] [RF_GEN] slot valve close
+[2026-07-10 17:45:59] [INFO] [RF_GEN] recipe R-102 completed
+[2026-07-10 17:46:12] [INFO] [VACUUM] RF forward power 889 W
+[2026-07-10 17:46:24] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 17:46:56] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 17:47:26] [INFO] [RF_GEN] RF forward power 831 W
+[2026-07-10 17:47:40] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 17:48:24] [INFO] [RF_GEN] MFC-1 flow 114.7 sccm
+[2026-07-10 17:48:49] [INFO] [RF_GEN] heater setpoint reached 249.0 C
+[2026-07-10 17:52:43] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 17:52:43] [INFO] [CHAMBER_B] pressure stabilized at 255.0 mTorr
+[2026-07-10 17:53:44] [INFO] [VACUUM] recipe R-228 completed
+[2026-07-10 17:55:04] [INFO] [VACUUM] robot arm homed
+[2026-07-10 17:55:08] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 17:55:14] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 17:55:52] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 17:56:09] [INFO] [RF_GEN] gate valve position OK
+[2026-07-10 17:57:02] [INFO] [VACUUM] MFC-1 flow 67.1 sccm
+[2026-07-10 18:00:11] [INFO] [CHAMBER_B] slot valve close
+[2026-07-10 18:00:39] [INFO] [VACUUM] slot valve close
+[2026-07-10 18:00:47] [INFO] [GAS_PANEL] chamber clean cycle 6 finished
+[2026-07-10 18:02:47] [INFO] [RF_GEN] pressure stabilized at 137.6 mTorr
+[2026-07-10 18:04:35] [WARN] [TRANSFER] pressure fluctuation 6.6 mTorr (soft limit)
+[2026-07-10 18:04:38] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 18:04:50] [INFO] [VACUUM] purge cycle done
+[2026-07-10 18:10:40] [INFO] [TRANSFER] RF forward power 717 W
+[2026-07-10 18:15:36] [INFO] [CHAMBER_A] chamber clean cycle 3 finished
+[2026-07-10 18:16:42] [INFO] [VACUUM] recipe R-385 completed
+[2026-07-10 18:17:35] [INFO] [VACUUM] pressure stabilized at 196.1 mTorr
+[2026-07-10 18:18:49] [INFO] [CHAMBER_B] recipe R-399 started
+[2026-07-10 18:21:11] [INFO] [CHAMBER_A] recipe R-082 started
+[2026-07-10 18:21:15] [INFO] [CHAMBER_A] pressure stabilized at 96.4 mTorr
+[2026-07-10 18:21:54] [INFO] [VACUUM] MFC-3 flow 79.8 sccm
+[2026-07-10 18:21:57] [INFO] [VACUUM] wafer 17 loaded to CH-B
+[2026-07-10 18:24:19] [INFO] [CHAMBER_A] chamber clean cycle 2 finished
+[2026-07-10 18:24:26] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 18:25:02] [INFO] [RF_GEN] recipe R-259 completed
+[2026-07-10 18:26:09] [INFO] [RF_GEN] chamber clean cycle 9 finished
+[2026-07-10 18:27:02] [INFO] [GAS_PANEL] wafer 3 loaded to CH-A
+[2026-07-10 18:27:10] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 18:27:31] [INFO] [VACUUM] MFC-1 flow 125.1 sccm
+[2026-07-10 18:30:20] [INFO] [CHAMBER_B] recipe R-309 completed
+[2026-07-10 18:31:47] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 18:32:15] [INFO] [TRANSFER] wafer 17 loaded to CH-A
+[2026-07-10 18:35:40] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 18:35:56] [INFO] [VACUUM] wafer 13 loaded to CH-B
+[2026-07-10 18:36:19] [INFO] [TRANSFER] slot valve close
+[2026-07-10 18:38:43] [INFO] [GAS_PANEL] pressure stabilized at 253.6 mTorr
+[2026-07-10 18:40:08] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 18:41:19] [INFO] [CHAMBER_B] MFC-3 flow 42.0 sccm
+[2026-07-10 18:41:39] [INFO] [VACUUM] wafer 17 loaded to CH-A
+[2026-07-10 18:42:41] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 18:43:46] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 18:44:50] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 18:45:47] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 18:46:24] [INFO] [CHAMBER_B] MFC-4 flow 114.5 sccm
+[2026-07-10 18:47:26] [INFO] [TRANSFER] MFC-3 flow 68.1 sccm
+[2026-07-10 18:47:29] [INFO] [TRANSFER] slot valve open
+[2026-07-10 18:48:01] [WARN] [CHAMBER_B] MFC-1 flow deviation 2.1%
+[2026-07-10 18:48:18] [INFO] [TRANSFER] wafer 10 loaded to CH-A
+[2026-07-10 18:49:05] [INFO] [CHAMBER_B] heater setpoint reached 559.5 C
+[2026-07-10 18:50:55] [INFO] [CHAMBER_A] recipe R-320 started
+[2026-07-10 18:53:11] [INFO] [CHAMBER_B] recipe R-344 started
+[2026-07-10 18:55:15] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 19:00:06] [INFO] [TRANSFER] pressure stabilized at 220.7 mTorr
+[2026-07-10 19:00:32] [INFO] [TRANSFER] pressure stabilized at 101.6 mTorr
+[2026-07-10 19:00:43] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 19:01:01] [INFO] [TRANSFER] wafer 13 loaded to CH-A
+[2026-07-10 19:01:09] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 19:03:06] [INFO] [GAS_PANEL] RF forward power 839 W
+[2026-07-10 19:03:23] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 19:08:12] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 19:10:14] [WARN] [RF_GEN] endpoint signal weak, using time mode
+[2026-07-10 19:12:27] [INFO] [CHAMBER_B] MFC-1 flow 71.1 sccm
+[2026-07-10 19:13:23] [INFO] [GAS_PANEL] recipe R-363 started
+[2026-07-10 19:15:01] [INFO] [VACUUM] robot arm homed
+[2026-07-10 19:15:43] [INFO] [TRANSFER] chamber clean cycle 6 finished
+[2026-07-10 19:18:53] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 19:22:54] [INFO] [CHAMBER_A] pressure stabilized at 196.5 mTorr
+[2026-07-10 19:23:55] [INFO] [VACUUM] slot valve close
+[2026-07-10 19:24:16] [INFO] [RF_GEN] pressure stabilized at 109.1 mTorr
+[2026-07-10 19:25:07] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 19:25:12] [INFO] [TRANSFER] recipe R-248 started
+[2026-07-10 19:32:01] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 19:32:21] [INFO] [CHAMBER_A] heater setpoint reached 391.0 C
+[2026-07-10 19:32:48] [INFO] [CHAMBER_A] recipe R-113 completed
+[2026-07-10 19:34:49] [INFO] [CHAMBER_B] heater setpoint reached 466.9 C
+[2026-07-10 19:37:28] [INFO] [VACUUM] RF forward power 900 W
+[2026-07-10 19:39:11] [INFO] [VACUUM] slot valve close
+[2026-07-10 19:42:05] [INFO] [GAS_PANEL] RF forward power 854 W
+[2026-07-10 19:42:08] [INFO] [CHAMBER_B] recipe R-282 started
+[2026-07-10 19:42:11] [INFO] [GAS_PANEL] recipe R-030 started
+[2026-07-10 19:43:39] [INFO] [RF_GEN] heater setpoint reached 158.5 C
+[2026-07-10 19:46:22] [INFO] [CHAMBER_A] recipe R-001 started
+[2026-07-10 19:47:40] [INFO] [VACUUM] purge cycle done
+[2026-07-10 19:47:41] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 19:48:37] [INFO] [TRANSFER] slot valve close
+[2026-07-10 19:48:55] [INFO] [CHAMBER_B] recipe R-112 started
+[2026-07-10 19:52:16] [INFO] [CHAMBER_A] heater setpoint reached 617.7 C
+[2026-07-10 19:52:39] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 19:55:07] [INFO] [TRANSFER] slot valve close
+[2026-07-10 19:55:09] [INFO] [VACUUM] recipe R-021 started
+[2026-07-10 19:57:28] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 19:58:32] [INFO] [GAS_PANEL] pressure stabilized at 187.6 mTorr
+[2026-07-10 19:59:48] [INFO] [TRANSFER] pressure stabilized at 197.7 mTorr
+[2026-07-10 20:00:08] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 20:00:34] [INFO] [VACUUM] recipe R-056 started
+[2026-07-10 20:00:59] [INFO] [CHAMBER_A] recipe R-343 completed
+[2026-07-10 20:01:18] [INFO] [TRANSFER] slot valve open
+[2026-07-10 20:02:30] [INFO] [TRANSFER] MFC-3 flow 65.0 sccm
+[2026-07-10 20:02:57] [INFO] [CHAMBER_A] robot arm homed
+[2026-07-10 20:03:27] [INFO] [RF_GEN] slot valve open
+[2026-07-10 20:05:57] [INFO] [CHAMBER_A] recipe R-176 started
+[2026-07-10 20:07:01] [INFO] [RF_GEN] purge cycle done
+[2026-07-10 20:09:03] [INFO] [GAS_PANEL] chamber clean cycle 8 finished
+[2026-07-10 20:15:06] [INFO] [CHAMBER_A] RF forward power 882 W
+[2026-07-10 20:15:17] [INFO] [CHAMBER_B] chamber clean cycle 6 finished
+[2026-07-10 20:15:59] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 20:16:05] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 20:17:39] [INFO] [CHAMBER_A] recipe R-221 started
+[2026-07-10 20:19:52] [INFO] [RF_GEN] heater setpoint reached 167.7 C
+[2026-07-10 20:21:17] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 20:22:18] [INFO] [VACUUM] slot valve open
+[2026-07-10 20:23:38] [INFO] [CHAMBER_A] recipe R-053 started
+[2026-07-10 20:24:22] [INFO] [VACUUM] pressure stabilized at 97.8 mTorr
+[2026-07-10 20:24:47] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 20:27:04] [INFO] [RF_GEN] slot valve close
+[2026-07-10 20:28:11] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 20:31:40] [INFO] [TRANSFER] chamber clean cycle 1 finished
+[2026-07-10 20:31:58] [INFO] [CHAMBER_B] pressure stabilized at 157.0 mTorr
+[2026-07-10 20:32:58] [INFO] [CHAMBER_B] recipe R-148 started
+[2026-07-10 20:33:51] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 20:37:24] [INFO] [CHAMBER_B] RF forward power 893 W
+[2026-07-10 20:37:39] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 20:38:58] [INFO] [CHAMBER_B] recipe R-288 started
+[2026-07-10 20:39:39] [INFO] [GAS_PANEL] MFC-3 flow 36.0 sccm
+[2026-07-10 20:40:17] [INFO] [VACUUM] robot arm homed
+[2026-07-10 20:40:33] [INFO] [VACUUM] RF forward power 761 W
+[2026-07-10 20:48:14] [INFO] [TRANSFER] wafer 6 loaded to CH-B
+[2026-07-10 20:50:39] [INFO] [RF_GEN] slot valve close
+[2026-07-10 20:51:08] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 20:51:12] [WARN] [CHAMBER_B] pressure fluctuation 9.5 mTorr (soft limit)
+[2026-07-10 20:51:42] [INFO] [CHAMBER_B] wafer 10 loaded to CH-B
+[2026-07-10 20:52:09] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 20:54:16] [INFO] [TRANSFER] pressure stabilized at 51.9 mTorr
+[2026-07-10 20:56:09] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 20:57:04] [INFO] [CHAMBER_A] recipe R-225 completed
+[2026-07-10 20:59:50] [INFO] [CHAMBER_A] wafer 7 loaded to CH-A
+[2026-07-10 21:00:19] [INFO] [GAS_PANEL] pressure stabilized at 100.7 mTorr
+[2026-07-10 21:00:42] [INFO] [RF_GEN] robot arm homed
+[2026-07-10 21:01:00] [INFO] [VACUUM] slot valve close
+[2026-07-10 21:01:27] [INFO] [RF_GEN] heater setpoint reached 211.4 C
+[2026-07-10 21:01:42] [INFO] [TRANSFER] heater setpoint reached 340.1 C
+[2026-07-10 21:02:28] [INFO] [CHAMBER_A] pressure stabilized at 53.6 mTorr
+[2026-07-10 21:03:11] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 21:04:32] [INFO] [TRANSFER] pressure stabilized at 127.3 mTorr
+[2026-07-10 21:07:42] [INFO] [VACUUM] chamber clean cycle 5 finished
+[2026-07-10 21:09:11] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 21:09:29] [INFO] [RF_GEN] slot valve open
+[2026-07-10 21:10:44] [INFO] [GAS_PANEL] recipe R-290 started
+[2026-07-10 21:11:09] [INFO] [VACUUM] purge cycle done
+[2026-07-10 21:11:41] [INFO] [TRANSFER] recipe R-115 started
+[2026-07-10 21:13:15] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 21:19:09] [INFO] [CHAMBER_A] recipe R-375 started
+[2026-07-10 21:23:26] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 21:23:33] [INFO] [CHAMBER_B] pressure stabilized at 166.2 mTorr
+[2026-07-10 21:25:56] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 21:26:52] [INFO] [RF_GEN] recipe R-173 completed
+[2026-07-10 21:27:06] [INFO] [CHAMBER_A] chamber clean cycle 4 finished
+[2026-07-10 21:28:09] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 21:29:42] [INFO] [CHAMBER_B] pressure stabilized at 250.9 mTorr
+[2026-07-10 21:32:02] [INFO] [CHAMBER_A] heater setpoint reached 588.9 C
+[2026-07-10 21:32:09] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 21:33:18] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 21:34:37] [INFO] [TRANSFER] slot valve open
+[2026-07-10 21:36:59] [ERROR] [RF_GEN] RF_REFLECTED_POWER_HIGH: 87 W, auto-match failed
+[2026-07-10 21:37:09] [INFO] [RF_GEN] heater setpoint reached 126.5 C
+[2026-07-10 21:37:39] [INFO] [TRANSFER] slot valve close
+[2026-07-10 21:39:48] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 21:42:01] [INFO] [GAS_PANEL] MFC-4 flow 78.5 sccm
+[2026-07-10 21:42:35] [INFO] [TRANSFER] recipe R-037 started
+[2026-07-10 21:42:45] [WARN] [GAS_PANEL] MFC-3 flow deviation 2.1%
+[2026-07-10 21:43:46] [INFO] [VACUUM] recipe R-209 completed
+[2026-07-10 21:44:35] [INFO] [CHAMBER_B] RF forward power 845 W
+[2026-07-10 21:46:22] [INFO] [CHAMBER_B] heater setpoint reached 458.2 C
+[2026-07-10 21:48:18] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 21:48:34] [INFO] [VACUUM] purge cycle done
+[2026-07-10 21:48:47] [INFO] [TRANSFER] pressure stabilized at 104.6 mTorr
+[2026-07-10 21:49:32] [INFO] [VACUUM] robot arm homed
+[2026-07-10 21:50:18] [INFO] [VACUUM] purge cycle done
+[2026-07-10 21:51:20] [INFO] [TRANSFER] robot arm homed
+[2026-07-10 21:51:51] [INFO] [VACUUM] RF forward power 723 W
+[2026-07-10 21:53:06] [INFO] [TRANSFER] MFC-1 flow 94.4 sccm
+[2026-07-10 21:54:26] [INFO] [CHAMBER_A] gate valve position OK
+[2026-07-10 21:54:55] [INFO] [CHAMBER_B] pressure stabilized at 60.1 mTorr
+[2026-07-10 21:58:52] [INFO] [CHAMBER_B] chamber clean cycle 1 finished
+[2026-07-10 22:01:38] [INFO] [VACUUM] RF forward power 740 W
+[2026-07-10 22:02:45] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 22:04:34] [INFO] [TRANSFER] wafer 7 loaded to CH-A
+[2026-07-10 22:07:05] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 22:08:52] [ERROR] [TRANSFER] SLOT_VALVE_RESPONSE_TIMEOUT: SV-2 no close signal
+[2026-07-10 22:08:54] [INFO] [GAS_PANEL] purge cycle done
+[2026-07-10 22:11:04] [INFO] [CHAMBER_B] RF forward power 744 W
+[2026-07-10 22:11:18] [INFO] [RF_GEN] slot valve close
+[2026-07-10 22:11:44] [INFO] [RF_GEN] chamber clean cycle 9 finished
+[2026-07-10 22:13:19] [INFO] [CHAMBER_B] wafer 1 loaded to CH-B
+[2026-07-10 22:13:39] [INFO] [TRANSFER] recipe R-264 started
+[2026-07-10 22:16:22] [INFO] [RF_GEN] slot valve close
+[2026-07-10 22:17:32] [INFO] [CHAMBER_B] recipe R-270 started
+[2026-07-10 22:18:07] [INFO] [VACUUM] gate valve position OK
+[2026-07-10 22:21:30] [INFO] [RF_GEN] chamber clean cycle 2 finished
+[2026-07-10 22:21:31] [INFO] [TRANSFER] slot valve close
+[2026-07-10 22:21:45] [WARN] [GAS_PANEL] heater ramp slower than expected
+[2026-07-10 22:22:00] [INFO] [CHAMBER_A] recipe R-365 completed
+[2026-07-10 22:22:04] [INFO] [RF_GEN] heater setpoint reached 658.9 C
+[2026-07-10 22:25:40] [INFO] [CHAMBER_A] recipe R-042 started
+[2026-07-10 22:26:07] [INFO] [RF_GEN] chamber clean cycle 3 finished
+[2026-07-10 22:26:25] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 22:27:48] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 22:28:11] [INFO] [RF_GEN] RF forward power 765 W
+[2026-07-10 22:28:35] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 22:29:42] [INFO] [CHAMBER_A] pressure stabilized at 80.0 mTorr
+[2026-07-10 22:30:53] [INFO] [CHAMBER_B] slot valve open
+[2026-07-10 22:32:12] [INFO] [VACUUM] chamber clean cycle 1 finished
+[2026-07-10 22:32:36] [INFO] [VACUUM] robot arm homed
+[2026-07-10 22:32:57] [INFO] [CHAMBER_A] slot valve close
+[2026-07-10 22:33:43] [INFO] [RF_GEN] slot valve open
+[2026-07-10 22:38:37] [INFO] [CHAMBER_A] pressure stabilized at 159.9 mTorr
+[2026-07-10 22:38:48] [INFO] [CHAMBER_A] heater setpoint reached 100.4 C
+[2026-07-10 22:39:06] [INFO] [RF_GEN] chamber clean cycle 7 finished
+[2026-07-10 22:42:48] [INFO] [CHAMBER_A] MFC-4 flow 25.9 sccm
+[2026-07-10 22:44:39] [INFO] [TRANSFER] wafer 10 loaded to CH-A
+[2026-07-10 22:46:39] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 22:46:47] [INFO] [CHAMBER_A] recipe R-050 started
+[2026-07-10 22:47:40] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 22:49:21] [WARN] [CHAMBER_B] pressure fluctuation 9.6 mTorr (soft limit)
+[2026-07-10 22:52:13] [INFO] [GAS_PANEL] wafer 18 loaded to CH-A
+[2026-07-10 22:52:56] [INFO] [VACUUM] pressure stabilized at 143.7 mTorr
+[2026-07-10 22:54:29] [INFO] [CHAMBER_A] pressure stabilized at 96.9 mTorr
+[2026-07-10 22:55:26] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 22:56:34] [WARN] [CHAMBER_A] MFC-1 flow deviation 2.1%
+[2026-07-10 22:59:03] [INFO] [TRANSFER] RF forward power 722 W
+[2026-07-10 23:01:19] [INFO] [GAS_PANEL] RF forward power 853 W
+[2026-07-10 23:01:29] [INFO] [VACUUM] recipe R-033 completed
+[2026-07-10 23:02:48] [INFO] [TRANSFER] recipe R-247 started
+[2026-07-10 23:04:34] [INFO] [CHAMBER_B] gate valve position OK
+[2026-07-10 23:05:19] [INFO] [CHAMBER_A] pressure stabilized at 214.6 mTorr
+[2026-07-10 23:06:02] [INFO] [TRANSFER] purge cycle done
+[2026-07-10 23:06:25] [INFO] [VACUUM] wafer 13 loaded to CH-B
+[2026-07-10 23:09:05] [INFO] [CHAMBER_A] MFC-2 flow 121.0 sccm
+[2026-07-10 23:10:50] [INFO] [TRANSFER] MFC-2 flow 103.7 sccm
+[2026-07-10 23:12:05] [INFO] [VACUUM] purge cycle done
+[2026-07-10 23:12:13] [INFO] [CHAMBER_B] chamber clean cycle 5 finished
+[2026-07-10 23:12:13] [INFO] [RF_GEN] slot valve close
+[2026-07-10 23:12:25] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 23:12:33] [INFO] [CHAMBER_A] slot valve open
+[2026-07-10 23:12:57] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 23:14:15] [INFO] [TRANSFER] slot valve open
+[2026-07-10 23:17:24] [INFO] [GAS_PANEL] slot valve open
+[2026-07-10 23:19:34] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 23:24:04] [INFO] [TRANSFER] RF forward power 744 W
+[2026-07-10 23:24:37] [INFO] [TRANSFER] slot valve open
+[2026-07-10 23:29:36] [INFO] [VACUUM] RF forward power 823 W
+[2026-07-10 23:32:27] [INFO] [TRANSFER] recipe R-188 completed
+[2026-07-10 23:34:08] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 23:34:11] [INFO] [TRANSFER] gate valve position OK
+[2026-07-10 23:35:22] [INFO] [VACUUM] robot arm homed
+[2026-07-10 23:37:22] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 23:40:31] [INFO] [CHAMBER_B] MFC-4 flow 23.4 sccm
+[2026-07-10 23:40:50] [INFO] [VACUUM] heater setpoint reached 38.6 C
+[2026-07-10 23:41:45] [INFO] [CHAMBER_B] pressure stabilized at 69.0 mTorr
+[2026-07-10 23:42:28] [INFO] [TRANSFER] recipe R-066 completed
+[2026-07-10 23:45:18] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 23:47:49] [INFO] [CHAMBER_B] robot arm homed
+[2026-07-10 23:48:38] [INFO] [GAS_PANEL] gate valve position OK
+[2026-07-10 23:50:05] [INFO] [GAS_PANEL] slot valve close
+[2026-07-10 23:50:59] [INFO] [CHAMBER_B] purge cycle done
+[2026-07-10 23:52:47] [INFO] [TRANSFER] wafer 3 loaded to CH-B
+[2026-07-10 23:54:19] [INFO] [VACUUM] slot valve open
+[2026-07-10 23:54:38] [INFO] [CHAMBER_A] purge cycle done
+[2026-07-10 23:54:52] [INFO] [VACUUM] recipe R-091 started
+[2026-07-10 23:55:36] [INFO] [TRANSFER] MFC-2 flow 26.3 sccm
+[2026-07-10 23:57:37] [INFO] [CHAMBER_B] recipe R-383 started
+[2026-07-10 23:58:24] [INFO] [GAS_PANEL] pressure stabilized at 163.8 mTorr
+[2026-07-10 23:58:57] [INFO] [GAS_PANEL] robot arm homed
+[2026-07-10 23:59:03] [INFO] [CHAMBER_A] pressure stabilized at 151.4 mTorr
+[2026-07-10 23:59:32] [INFO] [TRANSFER] recipe R-111 started
