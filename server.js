@@ -4,9 +4,9 @@ const path = require('path');
 const os = require('os');
 
 const PORT = process.env.PORT || 8080;
-const PRESENT_KEY = process.env.PRESENT_KEY || 'change-me';
 const INDEX_PATH = path.join(__dirname, 'index.html');
 const WORKSHOP_INDEX_PATH = path.join(__dirname, 'workshop', 'index.html');
+const CONTEXT_INDEX_PATH = path.join(__dirname, 'context', 'index.html');
 
 // 각 발표(덱)는 서로 다른 슬라이드를 가지므로, 질문·투표·반응·슬라이드 위치를
 // "방(room)" 단위로 분리해 섞이지 않게 한다. 파라미터가 없으면 기본 방('main').
@@ -56,11 +56,6 @@ function readBody(req) {
   });
 }
 
-function isPresenter(req) {
-  const q = new URL(req.url, 'http://x').searchParams.get('key');
-  return q === PRESENT_KEY || req.headers['x-present-key'] === PRESENT_KEY;
-}
-
 function sendJson(res, code, obj) {
   const body = JSON.stringify(obj);
   res.writeHead(code, {
@@ -93,6 +88,7 @@ const server = http.createServer(async (req, res) => {
 
   if (url === '/' && req.method === 'GET') return serveFile(res, INDEX_PATH);
   if ((url === '/workshop' || url === '/workshop/') && req.method === 'GET') return serveFile(res, WORKSHOP_INDEX_PATH);
+  if ((url === '/context' || url === '/context/') && req.method === 'GET') return serveFile(res, CONTEXT_INDEX_PATH);
   if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
 
   if (url === '/qa/questions' && req.method === 'POST') {
@@ -127,7 +123,6 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (url === '/qa/slide' && req.method === 'POST') {
-    if (!isPresenter(req)) return sendJson(res, 403, { error: 'forbidden' });
     const room = getRoom(roomIdOf(req));
     const body = await readBody(req);
     room.slide = Math.max(0, Number(body.h) || 0);
@@ -136,7 +131,6 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (url === '/qa/clear' && req.method === 'POST') {
-    if (!isPresenter(req)) return sendJson(res, 403, { error: 'forbidden' });
     const room = getRoom(roomIdOf(req));
     room.questions = [];
     broadcast(room, 'clear', {});
@@ -169,10 +163,12 @@ if (require.main === module) {
   server.listen(PORT, () => {
     const lan = lanAddress();
     console.log('Live Q&A running:');
-    console.log(`  발표자(메인):   http://localhost:${PORT}/?present=${PRESENT_KEY}`);
+    console.log(`  발표자(메인):   http://localhost:${PORT}/?present`);
     console.log(`  청중(메인):     http://localhost:${PORT}/`);
-    console.log(`  발표자(워크숍): http://localhost:${PORT}/workshop/?present=${PRESENT_KEY}`);
+    console.log(`  발표자(워크숍): http://localhost:${PORT}/workshop/?present`);
     console.log(`  청중(워크숍):   http://localhost:${PORT}/workshop/`);
+    console.log(`  발표자(컨텍스트): http://localhost:${PORT}/context/?present`);
+    console.log(`  청중(컨텍스트):   http://localhost:${PORT}/context/`);
     if (lan) console.log(`  (같은 Wi-Fi에서는 http://${lan}:${PORT}/ 로 접속)`);
   });
 }

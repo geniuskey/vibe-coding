@@ -3438,8 +3438,7 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
   const QA_ROOM = 'workshop'; // 루트 발표와 질문·슬라이드가 섞이지 않도록 workshop 전용 방 사용
   const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
   const params = new URLSearchParams(location.search);
-  const PRESENT_KEY = params.get('present');
-  const IS_PRESENTER = !!PRESENT_KEY;
+  const IS_PRESENTER = params.has('present');
 
   let following = true;
   let liveSlide = 0;
@@ -3467,7 +3466,6 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
   function api(path, body) {
     const headers = { 'Content-Type': 'application/json' };
     const query = new URLSearchParams({ room: QA_ROOM });
-    if (IS_PRESENTER) { headers['x-present-key'] = PRESENT_KEY; query.set('key', PRESENT_KEY); }
     return fetch(path + '?' + query.toString(), { method: 'POST', headers, body: JSON.stringify(body || {}) });
   }
 

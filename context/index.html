@@ -2428,5 +2428,396 @@ wafer Y 수율이 <span class="nm">72.3%</span>로 떨어졌고…"</pre>
   })();
 </script>
 
+<!-- 실시간 Q&A (루트 index.html과 동일 위젯, context 전용 방) -->
+<style>
+  #qa-root.qa-hidden { display: none; }
+  #qa-root { position: fixed; inset: 0; z-index: 9000; pointer-events: none; font-family: 'Pretendard', system-ui, sans-serif; }
+  .qa-hidden { display: none !important; }
+
+  #qa-note-layer, #qa-float-layer { position: fixed; inset: 0; pointer-events: none; }
+
+  .qa-note {
+    position: absolute;
+    max-width: 240px;
+    padding: 16px 34px 14px 16px;
+    border-radius: 4px;
+    color: #14181f;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    transform: rotate(var(--rot, 0deg));
+    pointer-events: auto;
+    animation: qaNoteIn .35s ease both;
+  }
+  .qa-note.qa-leaving { animation: qaNoteOut .5s ease both; }
+  .qa-note.qa-draggable { cursor: grab; }
+  .qa-note.qa-dragging { cursor: grabbing; animation: none !important; box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 10; user-select: none; }
+  @keyframes qaNoteIn { from { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(12px) scale(.9); } to { opacity: 1; transform: rotate(var(--rot,0deg)) translateY(0) scale(1); } }
+  @keyframes qaNoteOut { to { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(-12px) scale(.92); } }
+  .qa-note-name { font-weight: 800; font-size: 11px; opacity: .65; margin-bottom: 4px; }
+  .qa-note-text { font-weight: 600; word-break: break-word; }
+  .qa-vote { margin-top: 8px; border: 0; background: rgba(0,0,0,0.12); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .qa-note-close {
+    position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%; background: rgba(0,0,0,0.12); color: #14181f;
+    font-size: 17px; font-weight: 900; line-height: 1; cursor: pointer;
+  }
+  .qa-note-close:hover { background: rgba(0,0,0,0.22); }
+
+  .qa-dock {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center;
+    background: rgba(14,18,32,0.85); border: 1px solid rgba(155,130,255,0.35);
+    border-radius: 999px; padding: 8px 10px; pointer-events: auto; backdrop-filter: blur(8px);
+  }
+  .qa-dock input { border: 0; outline: none; background: rgba(255,255,255,0.08); color: #fff; border-radius: 999px; padding: 8px 14px; width: 200px; font-size: 13px; }
+  .qa-dock button { border: 0; border-radius: 999px; padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; background: rgba(255,255,255,0.08); color: #fff; }
+  .qa-follow.on { background: var(--accent); color: #06080F; }
+
+  .qa-modal { position: fixed; inset: 0; background: rgba(6,8,15,0.75); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+  .qa-modal-box { background: #0E1220; border: 1px solid rgba(155,130,255,0.4); border-radius: 16px; padding: 28px; width: min(320px, 86vw); text-align: center; }
+  .qa-modal-box h3 { color: #fff; margin: 0 0 14px; }
+  .qa-modal-box input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #fff; margin-bottom: 12px; }
+  .qa-modal-box button { width: 100%; padding: 10px; border-radius: 10px; border: 0; background: var(--accent); color: #06080F; font-weight: 800; cursor: pointer; }
+
+  #qa-presenter-bar { position: fixed; top: 14px; left: 14px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+  .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
+  .qa-dot.on { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+  #qa-history-toggle { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; }
+  .qa-presenter-tally { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 800; color: #fff; background: rgba(255,255,255,0.1); }
+
+  .qa-panel { position: fixed; top: 0; left: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-right: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
+  .qa-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 800; }
+  .qa-panel-head button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; margin-left: 6px; }
+  #qa-history-list { overflow-y: auto; padding: 10px 16px; }
+  .qa-history-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .qa-history-meta { display: flex; justify-content: space-between; font-size: 12px; color: #B8BFD0; margin-bottom: 4px; }
+  .qa-history-text { color: #fff; font-size: 13px; }
+  .qa-history-empty { color: #B8BFD0; font-size: 13px; padding: 20px 0; text-align: center; }
+
+  .qa-float { position: fixed; bottom: 70px; font-size: 28px; animation: qaFloatUp 2.6s ease forwards; }
+  @keyframes qaFloatUp { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60vh); } }
+</style>
+
+<div id="qa-root" class="qa-hidden">
+  <div id="qa-note-layer"></div>
+  <div id="qa-float-layer"></div>
+
+  <div id="qa-nick-modal" class="qa-modal qa-hidden">
+    <div class="qa-modal-box">
+      <h3>닉네임을 정해주세요</h3>
+      <input id="qa-nick-input" maxlength="24" placeholder="익명" />
+      <button id="qa-nick-go">입장하기 →</button>
+    </div>
+  </div>
+
+  <div id="qa-audience-dock" class="qa-dock qa-hidden">
+    <button id="qa-follow-toggle" class="qa-follow on">🔗 발표자 따라가기 ON</button>
+    <input id="qa-question-input" maxlength="280" placeholder="질문을 입력하세요" />
+    <button id="qa-question-send">보내기</button>
+    <button id="qa-react-up">👍 <span id="qa-tally-up">0</span></button>
+    <button id="qa-react-confused">🤔 <span id="qa-tally-confused">0</span></button>
+  </div>
+
+  <div id="qa-presenter-bar" class="qa-hidden">
+    <span id="qa-conn-dot" class="qa-dot"></span>
+    <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+    <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
+      👍 <span id="qa-presenter-tally-up">0</span>
+      🤔 <span id="qa-presenter-tally-confused">0</span>
+    </span>
+  </div>
+
+  <div id="qa-history-panel" class="qa-panel qa-hidden">
+    <div class="qa-panel-head">
+      <span>질문 기록</span>
+      <div>
+        <button id="qa-history-clear">전체 삭제</button>
+        <button id="qa-history-close">닫기</button>
+      </div>
+    </div>
+    <div id="qa-history-list"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const QA_ROOM = 'context'; // 다른 발표와 질문·슬라이드가 섞이지 않도록 context 전용 방 사용
+  const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
+  const params = new URLSearchParams(location.search);
+  const IS_PRESENTER = params.has('present');
+
+  let following = true;
+  let liveSlide = 0;
+  const shownIds = new Set();
+  let history = [];
+
+  fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.ok) initLiveQa(); })
+    .catch(() => {});
+
+  function initLiveQa() {
+    document.getElementById('qa-root').classList.remove('qa-hidden');
+    if (IS_PRESENTER) {
+      document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
+    } else {
+      document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
+    }
+    connectSse();
+    setupSlideSync();
+    setupAudienceUI();
+    setupPresenterUI();
+  }
+
+  function api(path, body) {
+    const headers = { 'Content-Type': 'application/json' };
+    const query = new URLSearchParams({ room: QA_ROOM });
+    return fetch(path + '?' + query.toString(), { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function goToSlide(h) {
+    if (!window.Reveal) return;
+    if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
+    else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  function getNickname() {
+    try { return JSON.parse(localStorage.getItem('qa_nickname') || 'null'); } catch { return null; }
+  }
+  function setNickname(name) {
+    localStorage.setItem('qa_nickname', JSON.stringify(name));
+  }
+
+  let es;
+  function connectSse() {
+    es = new EventSource('/qa/events?room=' + encodeURIComponent(QA_ROOM));
+    const dot = document.getElementById('qa-conn-dot');
+    es.onopen = () => dot && dot.classList.add('on');
+    es.onerror = () => dot && dot.classList.remove('on');
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      liveSlide = st.slide || 0;
+      if (!IS_PRESENTER && following) goToSlide(liveSlide);
+      setTally(st.reactions);
+      history = (st.questions || []).slice();
+      renderHistory();
+    });
+
+    es.addEventListener('slide', (e) => {
+      const { h } = JSON.parse(e.data);
+      liveSlide = h;
+      if (IS_PRESENTER) return;
+      if (following) goToSlide(h);
+      updateFollowUI();
+    });
+
+    es.addEventListener('question', (e) => {
+      const q = JSON.parse(e.data);
+      history.push(q);
+      renderHistory();
+      showNote(q);
+    });
+
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
+      if (el) el.textContent = votes;
+      const hq = history.find((q) => q.id === id);
+      if (hq) { hq.votes = votes; renderHistory(); }
+    });
+
+    es.addEventListener('react', (e) => {
+      const d = JSON.parse(e.data);
+      setTally(d.total);
+      spawnFloat(d.kind);
+    });
+
+    es.addEventListener('clear', () => {
+      document.getElementById('qa-note-layer').innerHTML = '';
+      shownIds.clear();
+      history = [];
+      renderHistory();
+    });
+  }
+
+  function setupSlideSync() {
+    if (!window.Reveal) return;
+    if (IS_PRESENTER) {
+      Reveal.on('slidechanged', (e) => { api('/qa/slide', { h: e.indexh }); });
+    } else {
+      Reveal.on('slidechanged', (e) => {
+        if (following && e.indexh !== liveSlide) { following = false; updateFollowUI(); }
+      });
+      const btn = document.getElementById('qa-follow-toggle');
+      btn.onclick = () => {
+        following = !following;
+        if (following) goToSlide(liveSlide);
+        updateFollowUI();
+      };
+    }
+  }
+
+  function updateFollowUI() {
+    const btn = document.getElementById('qa-follow-toggle');
+    if (!btn) return;
+    btn.classList.toggle('on', following);
+    btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
+  }
+  function showNote(q) {
+    if (shownIds.has(q.id)) return;
+    shownIds.add(q.id);
+    const layer = document.getElementById('qa-note-layer');
+    const note = document.createElement('div');
+    note.className = 'qa-note';
+    note.dataset.id = q.id;
+    note.style.background = QA_COLORS[q.id % QA_COLORS.length];
+    const pos = edgePosition();
+    note.style.left = pos.left + 'vw';
+    note.style.top = pos.top + 'vh';
+    note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    note.innerHTML =
+      (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
+      '<div class="qa-note-name">' + esc(q.name) + '</div>' +
+      '<div class="qa-note-text">' + esc(q.text) + '</div>' +
+      '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
+    note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
+    const dismiss = () => {
+      if (note.dataset.dismissed === '1') return;
+      note.dataset.dismissed = '1';
+      note.classList.add('qa-leaving');
+      setTimeout(() => note.remove(), 500);
+    };
+    const close = note.querySelector('.qa-note-close');
+    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    layer.appendChild(note);
+    const autoDismiss = setTimeout(dismiss, 14000);
+    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+  }
+  // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
+  function edgePosition() {
+    const edge = Math.floor(Math.random() * 4);
+    if (edge === 0) return { left: 3 + Math.random() * 70, top: 3 + Math.random() * 9 };   // 위쪽
+    if (edge === 1) return { left: 60 + Math.random() * 18, top: 6 + Math.random() * 58 };  // 오른쪽
+    if (edge === 2) return { left: 3 + Math.random() * 70, top: 60 + Math.random() * 20 };  // 아래쪽
+    return { left: 2 + Math.random() * 7, top: 6 + Math.random() * 58 };                    // 왼쪽
+  }
+  // 발표자가 포스트잇을 드래그해서 위치를 옮길 수 있게 한다
+  function makeDraggable(note, onDragStart) {
+    note.classList.add('qa-draggable');
+    note.addEventListener('pointerdown', (e) => {
+      // 닫기/추천 버튼 클릭은 드래그로 취급하지 않음
+      if (e.target.closest('.qa-note-close, .qa-vote')) return;
+      if (note.dataset.dismissed === '1') return;
+      e.preventDefault();
+      if (onDragStart) onDragStart(); // 옮기는 중에는 자동으로 사라지지 않도록
+      const rect = note.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      note.classList.add('qa-dragging');
+      note.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        const maxLeft = window.innerWidth - rect.width;
+        const maxTop = window.innerHeight - rect.height;
+        const left = Math.max(0, Math.min(ev.clientX - offsetX, maxLeft));
+        const top = Math.max(0, Math.min(ev.clientY - offsetY, maxTop));
+        note.style.left = left + 'px';
+        note.style.top = top + 'px';
+      };
+      const onUp = (ev) => {
+        note.classList.remove('qa-dragging');
+        note.removeEventListener('pointermove', onMove);
+        note.removeEventListener('pointerup', onUp);
+        try { note.releasePointerCapture(ev.pointerId); } catch (_) {}
+      };
+      note.addEventListener('pointermove', onMove);
+      note.addEventListener('pointerup', onUp);
+    });
+  }
+  function renderHistory() {
+    const countEl = document.getElementById('qa-history-count');
+    if (countEl) countEl.textContent = history.length;
+    const list = document.getElementById('qa-history-list');
+    if (!list) return;
+    const sorted = history.slice().sort((a, b) => b.votes - a.votes || a.ts - b.ts);
+    list.innerHTML = sorted.map((q) =>
+      '<div class="qa-history-item">' +
+        '<div class="qa-history-meta"><span>' + esc(q.name) + '</span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="qa-history-text">' + esc(q.text) + '</div>' +
+      '</div>'
+    ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
+  }
+  function setTally(r) {
+    if (!r) return;
+    const up = document.getElementById('qa-tally-up');
+    const conf = document.getElementById('qa-tally-confused');
+    const presenterUp = document.getElementById('qa-presenter-tally-up');
+    const presenterConf = document.getElementById('qa-presenter-tally-confused');
+    if (up) up.textContent = r.up || 0;
+    if (conf) conf.textContent = r.confused || 0;
+    if (presenterUp) presenterUp.textContent = r.up || 0;
+    if (presenterConf) presenterConf.textContent = r.confused || 0;
+  }
+  function spawnFloat(kind) {
+    const layer = document.getElementById('qa-float-layer');
+    const el = document.createElement('div');
+    el.className = 'qa-float';
+    el.textContent = kind === 'confused' ? '🤔' : '👍';
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function setupAudienceUI() {
+    if (IS_PRESENTER) return;
+
+    const nick = getNickname();
+    if (!nick) {
+      document.getElementById('qa-nick-modal').classList.remove('qa-hidden');
+      document.getElementById('qa-nick-go').onclick = () => {
+        const v = document.getElementById('qa-nick-input').value.trim().slice(0, 24) || '익명';
+        setNickname(v);
+        document.getElementById('qa-nick-modal').classList.add('qa-hidden');
+      };
+    }
+
+    const input = document.getElementById('qa-question-input');
+    const send = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      api('/qa/questions', { text, name: getNickname() || '익명' });
+      input.value = '';
+    };
+    document.getElementById('qa-question-send').onclick = send;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+      send();
+    });
+
+    document.getElementById('qa-react-up').onclick = () => api('/qa/react', { kind: 'up' });
+    document.getElementById('qa-react-confused').onclick = () => api('/qa/react', { kind: 'confused' });
+
+    updateFollowUI();
+  }
+  function setupPresenterUI() {
+    if (!IS_PRESENTER) return;
+    document.getElementById('qa-history-toggle').onclick = () => {
+      document.getElementById('qa-history-panel').classList.toggle('qa-hidden');
+    };
+    document.getElementById('qa-history-close').onclick = () => {
+      document.getElementById('qa-history-panel').classList.add('qa-hidden');
+    };
+    document.getElementById('qa-history-clear').onclick = () => {
+      if (confirm('화면의 질문과 질문 기록을 모두 정리할까요?')) api('/qa/clear');
+    };
+  }
+})();
+</script>
+
 </body>
 </html>

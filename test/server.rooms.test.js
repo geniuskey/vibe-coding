@@ -40,6 +40,15 @@ test('GET /workshop/ serves the workshop deck', async () => {
   assert.match(text, /워크숍/); // workshop deck, not the root deck
 });
 
+test('GET /context/ serves the context deck', async () => {
+  const res = await fetch(`http://localhost:${port}/context/`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type'), /text\/html/);
+  const text = await res.text();
+  assert.match(text, /<!DOCTYPE html>/i);
+  assert.match(text, /QA_ROOM = 'context'/); // context deck wired to its own room
+});
+
 test('a question posted to one room is not visible in another room', async () => {
   await fetch(`http://localhost:${port}/qa/questions?room=workshop`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },

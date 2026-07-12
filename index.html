@@ -4890,8 +4890,7 @@ footer, header, hgroup, main, menu, nav, section {
 (function () {
   const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
   const params = new URLSearchParams(location.search);
-  const PRESENT_KEY = params.get('present');
-  const IS_PRESENTER = !!PRESENT_KEY;
+  const IS_PRESENTER = params.has('present');
 
   let following = true;
   let liveSlide = 0;
@@ -4918,9 +4917,7 @@ footer, header, hgroup, main, menu, nav, section {
 
   function api(path, body) {
     const headers = { 'Content-Type': 'application/json' };
-    let url = path;
-    if (IS_PRESENTER) { headers['x-present-key'] = PRESENT_KEY; url += '?key=' + encodeURIComponent(PRESENT_KEY); }
-    return fetch(url, { method: 'POST', headers, body: JSON.stringify(body || {}) });
+    return fetch(path, { method: 'POST', headers, body: JSON.stringify(body || {}) });
   }
 
   function esc(s) {
