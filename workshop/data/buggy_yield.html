@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>웨이퍼 두께 모니터</title>
+<style>
+  body { background:#0f1320; color:#e8ecf8; font-family:sans-serif; padding:24px; }
+  h1 { font-size:20px; }
+  canvas { background:#0a0e1a; border-radius:10px; margin-top:12px; }
+  .legend { margin-top:10px; font-size:13px; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; }
+</style>
+</head>
+<body>
+  <h1>웨이퍼 두께 모니터</h1>
+  <canvas id="chart" width="640" height="300"></canvas>
+  <div class="legend">
+    <span class="dot" style="background:#ff5d73"></span>정상(90%+)
+    <span class="dot" style="background:#3ddc97"></span>저수율(90% 미만)
+  </div>
+<script>
+  // 랏별 수율(%) 데이터
+  const data = [
+    { lot: 'LOT-01', yield: 93.2 },
+    { lot: 'LOT-02', yield: 91.8 },
+    { lot: 'LOT-03', yield: 87.4 },
+    { lot: 'LOT-04', yield: 94.1 },
+    { lot: 'LOT-05', yield: 88.9 },
+    { lot: 'LOT-06', yield: 92.6 },
+    { lot: 'LOT-07', yield: 90.3 },
+    { lot: 'LOT-08', yield: 85.7 }
+  ];
+
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, pad = 36;
+  const barW = (W - pad * 2) / data.length;
+
+  data.forEach((d, i) => {
+    const h = (d.yield / 100) * (H - pad * 2);
+    const x = pad + i * barW;
+    const y = H - pad - h;
+    // 색: 90% 이상이면 초록, 미만이면 빨강 ... 이어야 하는데 뒤집혀 있음
+    ctx.fillStyle = d.yield >= 90 ? '#ff5d73' : '#3ddc97';
+    ctx.fillRects(x + 4, y, barW - 10, h);   // <- 여기서 멈춘다
+    ctx.fillStyle = '#93a0be';
+    ctx.font = '11px sans-serif';
+    ctx.fillText(d.lot, x + 6, H - pad + 14);
+  });
+</script>
+</body>
+</html>

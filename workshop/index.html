@@ -1127,9 +1127,108 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   </div>
   <ul>
     <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
-    <li class="fragment rise">다음: 코딩이 아닌 <em>글 쓰는 업무</em>에도 똑같이 통하는지 봅니다.</li>
+    <li class="fragment rise">다음: 만들다 보면 반드시 <em>막힙니다</em> — 빠져나오는 법부터 익힙니다.</li>
   </ul>
   <aside class="notes">'0줄' 스탯이 포인트. 잠깐 쉬는 시간을 갖고 Part 2로.</aside>
+</section>
+
+<!-- ═══════════════ SKILL · 트러블슈팅 ═══════════════ -->
+
+<section>
+  <span class="kicker amber">SKILL · 막혔을 때</span>
+  <h2>AI가 틀렸을 때 — 복구 3단계</h2>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">📋</span><span class="s-name">① 에러 복붙</span><div class="s-desc">빨간 글씨는 통째로 복사해서 "이 에러 고쳐줘"</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">📸</span><span class="s-name">② 보여주기·묘사</span><div class="s-desc">화면이 이상하면 스크린샷 or "버튼이 겹쳐"처럼 말로</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">↩️</span><span class="s-name">③ 국소·되돌리기</span><div class="s-desc">"딱 그것만" 고치고, 더 나빠지면 "방금 거 취소"</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">막히는 건 <strong>실패가 아니라 정상</strong>입니다 — 프로 개발자도 하루 종일 에러를 봅니다.</li>
+    <li class="fragment rise">여러분이 할 일은 <em>진단이 아니라 전달</em>입니다. 증상만 넘기면 원인은 AI가 찾습니다.</li>
+  </ul>
+  <aside class="notes">트러블슈팅은 워크숍 당일 참가자가 가장 많이 막히는 지점이자 이탈 지점. '막힘=정상'이라는 심리적 안전감을 먼저 준다. 3단계는 순서대로: 에러 텍스트 → 시각적 증상 → 국소 수정/되돌리기.</aside>
+</section>
+
+<section>
+  <span class="kicker amber">SKILL · 막혔을 때</span>
+  <h2>복구 문장 사전 <span class="muted small">— 그대로 복붙</span></h2>
+  <div class="vs">
+    <div class="bad">
+      <span class="tag">😵 이러면 겉돕니다</span>
+      "안 돼요"<br />"에러 나요"<br />"이상해요"<br /><span class="tiny muted">→ AI가 뭘 고쳐야 할지 모름</span>
+    </div>
+    <div class="good">
+      <span class="tag">😎 이렇게 전달하세요</span>
+      "이 에러 메시지 그대로야: [붙여넣기]. 고쳐줘"<br />
+      "화면이 하얗게만 나와. 콘솔 에러를 확인하고 고쳐줘"<br />
+      "차트는 나오는데 색이 반대야. 90% 이상이 초록이어야 해"<br />
+      "방금 수정하고 더 깨졌어. 직전 버전으로 되돌려줘"
+    </div>
+  </div>
+  <div class="panel hint" style="margin-top:14px;">
+    <div class="panel-title">💡 브라우저 콘솔 여는 법</div>
+    <ul>
+      <li><code>F12</code> (또는 우클릭 → 검사) → <strong>Console</strong> 탭 → 빨간 줄을 복사</li>
+    </ul>
+  </div>
+  <aside class="notes">왼쪽/오른쪽 비교가 핵심. 특히 "콘솔 에러 확인하고 고쳐줘"는 화면이 백지일 때(JS 크래시) 만능 키다. F12 콘솔 여는 법은 비개발자에게 처음이라 실제로 한 번 시연해준다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB 1-6</span>
+    <h2>고장난 앱 고치기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">일부러 <strong>3군데 고장 낸</strong> 수율 차트입니다. 복구 3단계로 하나씩 살려보세요.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/buggy_yield.html" download>📁 buggy_yield.html 받기</a>
+    <span class="chip">열어보면 화면이 백지 — 콘솔부터 보세요</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 ① 백지 화면 살리기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">buggy_yield.html을 열었더니 화면이 하얗게만 나와. 이 파일을 읽고 브라우저 콘솔 에러를 확인해서 고쳐줘. 차트가 뜨게만 먼저.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 ② 색·라벨 바로잡기 (묘사로)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이제 차트는 나와. 그런데 ①수율이 90% 이상인 랏이 빨강, 미만이 초록으로 색이 반대야. ②제목이 "두께"인데 사실 수율 데이터야. ③y축에 값 눈금이 없어. 이 세 가지를 고쳐줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"90% 기준선을 점선으로" / "고장 나기 전후를 비교 설명해줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-row" style="display:flex;gap:8px;align-items:center;font-size:13px;border:none;">
+            <span class="bad mono">✖ 백지 + Console</span>
+            <span class="arr" style="color:#9B82FF;">→ 고침 →</span>
+            <span class="ok mono">✔ 차트 정상</span>
+          </div>
+          <canvas class="mock" data-mock="fixbars" width="410" height="120"></canvas>
+          <div class="mock-cap">저수율(빨강) LOT-03·05·08이 제대로 보임</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>백지 → 차트가 뜬다 (①)</li>
+          <li>색·제목·눈금이 맞다 (②)</li>
+          <li><strong>에러 복붙 / 묘사</strong> 두 방법을 다 써봤다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">고장 3종: (1) ctx.fillRects 오타 → TypeError로 백지(콘솔 에러 복붙으로 해결), (2) 색 조건 반전(묘사로 해결), (3) 제목 오기·y축 눈금 없음(국소 수정). 앞의 SKILL 3단계를 그대로 실습하는 구조. 완료 후 '고장은 무섭지 않다'는 자신감이 핵심 수확.</aside>
 </section>
 
 <!-- ═══════════════ PART 2 · 비개발 업무 ═══════════════ -->
@@ -1491,6 +1590,7 @@ photo8 노광 가동중</div>
     <tr><td class="t">yield.csv</td><td>8주치 수율 + bin 카운트</td><td class="part">LAB 4-2</td></tr>
     <tr><td class="t">weekly/ · specs/ · manual.txt</td><td>주간 가동 CSV 5개 · 스펙 문서 3개 · 매뉴얼</td><td class="part">LAB 5-2 · 5-4 · 2-6</td></tr>
     <tr><td class="t">fab_runs.csv · pm_assets.csv · wafermap_A/B.csv</td><td>Fab 런 로그 824건 · 설비 자산 시드 · 웨이퍼 A/B</td><td class="part">심화 A-1·A-2·A-3</td></tr>
+    <tr><td class="t">buggy_yield.html · lot_summary.xlsx</td><td>일부러 고장 낸 차트 · 엑셀 원자료(2시트)</td><td class="part">LAB 1-6 · 5-4</td></tr>
   </table>
   <aside class="notes">정답 스포일러(강사용): thickness=LOT-1003 평균 103nm / wafermap=edge ring, 수율 ~91% / tool.log=ERROR 8건, 02~04시 PRESSURE_SENSOR_TIMEOUT 3회 / trend=마지막 주 +0.8nm drift / spc=#24 상한 이탈·#36~44 9연속·#51~56 상승추세 / yield=B제품 6주차부터 bin4 급증 / weekly=수요일 ETCH-02 uptime 78% / specs=식각 120 mTorr 중단 vs 안전 100 mTorr 인터락 모순.</aside>
 </section>
@@ -2176,6 +2276,68 @@ photo8 노광 가동중</div>
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB 5-4</span>
+    <h2>엑셀 요약 자동화 <span class="chip teal" style="vertical-align:5px;">.xlsx</span></h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">엔지니어가 하루 종일 사는 곳 — <strong>엑셀 파일을 읽고, 집계하고, 서식까지</strong> 갖춰 다시 저장.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/lot_summary.xlsx" download>📁 lot_summary.xlsx 받기</a>
+    <span class="chip">raw 시트 60행 + 빈 summary 시트</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">lot_summary.xlsx의 raw 시트를 읽어서 summary 시트를 채워줘. 제품(product)별로 ①랏 수 ②평균 수율 ③평균 CD ④총 결함 수를 집계한 표로. 수율이 가장 낮은 제품은 셀을 빨갛게 강조하고, 헤더는 굵게. 결과를 lot_summary_done.xlsx로 저장해줘.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 재사용 가능하게</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">다음 달 파일도 같은 형식이면 그대로 돌아가게 스크립트로 만들어줘. 실행 방법이랑, raw 시트 컬럼이 바뀌면 어디를 고치면 되는지도 알려줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>제품별 수율 막대 차트를 엑셀 안에 삽입 / 피벗 테이블로</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">📊 summary 시트</div>
+          <table>
+            <tr><th>제품</th><th>랏</th><th>평균수율</th><th>결함계</th></tr>
+            <tr><td class="mono">A7</td><td>16</td><td class="ok">92.0</td><td>78</td></tr>
+            <tr><td class="mono">B3</td><td>19</td><td class="ok">91.9</td><td>96</td></tr>
+            <tr><td class="mono">C1</td><td>25</td><td class="bad">90.0 ⚠</td><td>171</td></tr>
+          </table>
+          <div class="mock-cap">최저 수율 C1 셀 빨강 강조 · 헤더 굵게</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>summary 시트가 채워진 <code>.xlsx</code>가 생성됐다</li>
+          <li>엑셀에서 열어 <strong>서식(색·굵게)</strong>이 살아있다</li>
+          <li>최저 수율 <strong>C1</strong>이 잡혔다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>AI는 <strong>.xlsx를 직접</strong> 읽고 씁니다 — CSV로 바꿀 필요 없음</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: C1 제품 평균 수율 90.0%로 A7/B3(92%)보다 낮게 심어둠. 엔지니어에게 실무 파급력이 가장 큰 실습 — 매달 하던 엑셀 취합·서식 작업을 통째로 위임. openpyxl 같은 라이브러리를 AI가 알아서 쓴다. 서식(색/굵게)이 살아 있는지 꼭 확인시킨다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB 5-5</span>
     <h2>보너스 — 스펙 문서 Q&amp;A 도우미</h2>
     <span class="chip amber">⏱ 여유 있으면</span>
     <span class="chip"><span class="stars">★★★</span></span>
@@ -2528,7 +2690,46 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     <div class="card"><span class="icon">3️⃣</span><h3>어디서 막혔나</h3><p class="small">막힌 얘기가 남에게 제일 유용합니다</p></div>
   </div>
   <p class="fragment rise" style="margin-top: 16px;">🏆 투표: <strong>내일 당장 훔쳐 쓰고 싶은 도구</strong> 한 표씩 — 우승자는 커피 쿠폰.</p>
-  <aside class="notes">발표 부담을 낮추기 위해 '자랑'이라는 단어를 쓴다. 미완성도 공유 대상 — 어디서 막혔는지가 최고의 콘텐츠임을 강조.</aside>
+  <aside class="notes">발표 부담을 낮추기 위해 '자랑'이라는 단어를 쓴다. 미완성도 공유 대상 — 어디서 막혔는지가 최고의 콘텐츠임을 강조. 다음 슬라이드에서 '어떻게 팀에 넘기나'로 자연스럽게 연결.</aside>
+</section>
+
+<section>
+  <span class="kicker">SHIP IT</span>
+  <h2>만든 걸 팀에 넘기는 4가지 방법</h2>
+  <div class="grid4">
+    <div class="card"><span class="icon">📎</span><h3>파일 그대로</h3><p class="small">HTML 파일 하나면 끝. 메일·메신저로 보내면 받는 사람은 <strong>더블클릭</strong>만.</p></div>
+    <div class="card"><span class="icon">🗂️</span><h3>공유 드라이브</h3><p class="small">사내 공유폴더/그룹웨어에 올려두고 링크 공유. 버전은 파일명에 날짜.</p></div>
+    <div class="card"><span class="icon">🌐</span><h3>사내 웹 호스팅</h3><p class="small">GitHub Pages·사내 정적 호스팅에 올리면 <strong>URL 하나</strong>로 상시 접속.</p></div>
+    <div class="card"><span class="icon">📱</span><h3>QR·바로가기</h3><p class="small">회의실에서 QR로 띄우기, 바탕화면 바로가기로 매일 쓰기.</p></div>
+  </div>
+  <div class="prompt" style="margin-top:14px;">
+    <div class="p-label"><span>📋 배포도 시키면 됩니다</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">이 도구를 팀원들이 쓰기 쉽게 배포하려고 해. 파일 하나로 합치고(외부 라이브러리도 안에 포함), 열었을 때 사용법 안내가 뜨게 해줘. 그리고 이 페이지로 가는 QR 코드도 하나 만들어줘.</div>
+  </div>
+  <aside class="notes">일회성 결과물을 '팀이 쓰는 도구'로 정착시키는 마지막 관문. 단일 HTML의 최대 장점(무설치·무배포)을 강조. 사내 정책상 GitHub Pages가 막혀 있으면 공유드라이브/사내 호스팅으로 대체. '자기 완결형 파일 하나로 합쳐줘'가 배포의 핵심 프롬프트.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">BEFORE REAL DATA</span>
+  <h2>실데이터로 넘어가기 전 — 체크리스트</h2>
+  <p class="muted small" style="margin-bottom:14px;">오늘은 전부 합성 데이터였습니다. 회사에서 <strong>진짜 데이터</strong>에 쓰기 전에 이것만은.</p>
+  <div class="grid2">
+    <div class="panel check">
+      <div class="panel-title">✅ 도입 전 확인</div>
+      <ul>
+        <li>사내 보안 정책이 <strong>허용한 도구·환경</strong>인가</li>
+        <li>합성 데이터로 <strong>먼저 검증</strong>했는가 (정답 심어 채점)</li>
+        <li>데이터가 어디로 나가는지 아는가 (로컬 처리 우선)</li>
+        <li>중요한 판단에 쓴다면 <strong>검산 루틴</strong>이 있는가</li>
+      </ul>
+    </div>
+    <div class="card danger">
+      <span class="icon">🚫</span>
+      <h3>그래도 넣지 말 것</h3>
+      <p class="small">공정 레시피·실측정치·고객정보·미공개 제품명. 애매하면 <strong>보안 담당자에게 먼저</strong>. 도구는 합성 데이터로 만들고, 실데이터는 허용된 환경에서만 흘려보냅니다.</p>
+    </div>
+  </div>
+  <aside class="notes">아침의 보안 약속을 실전 도입 체크리스트로 회수하는 슬라이드. 반도체 청중에게 가장 중요한 마무리 메시지 — '도구는 합성으로 만들고, 실데이터는 허용 환경에서만'이라는 오늘의 안전 모델을 한 번 더 못박는다.</aside>
 </section>
 
 <section>
@@ -2944,6 +3145,24 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
           ctx.restore();
         });
         label(ctx, '장비별 fail율 — PHOTO-02 급등 ⚠', x0, gy + 2, PINK, 11);
+      },
+      fixbars(ctx, W, H) {
+        frame(ctx, W, H);
+        const vals = [93.2, 91.8, 87.4, 94.1, 88.9, 92.6, 90.3, 85.7];
+        const x0 = 30, pad = 22;
+        const bw = (W - x0 - 10) / vals.length;
+        const yv = (v) => H - pad - ((v - 82) / 14) * (H - pad - 12);
+        // 90% 기준선
+        ctx.strokeStyle = 'rgba(147,160,190,0.4)'; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.moveTo(x0, yv(90)); ctx.lineTo(W - 8, yv(90)); ctx.stroke();
+        ctx.setLineDash([]);
+        vals.forEach((v, i) => {
+          const x = x0 + i * bw, y = yv(v);
+          ctx.fillStyle = v >= 90 ? TEAL : PINK;   // 올바른 색: 고수율 초록, 저수율 빨강
+          ctx.fillRect(x + 3, y, bw - 6, H - pad - y);
+        });
+        label(ctx, '90%', x0 - 4, yv(90) + 3, INK, 9, 'right');
+        label(ctx, '수율(%) — 저수율 3랏 빨강', x0, 12, '#E8ECF8', 11);
       },
       wdiff(ctx, W, H) {
         frame(ctx, W, H);
