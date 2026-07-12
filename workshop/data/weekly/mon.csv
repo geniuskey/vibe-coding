@@ -1,0 +1,7 @@
+equipment_id,run_count,error_count,uptime_pct
+ETCH-01,89,1,93.8
+ETCH-02,107,1,99.0
+CVD-01,109,0,98.4
+CVD-02,119,1,93.0
+PHOTO-01,108,2,97.9
+PHOTO-02,101,1,95.6
