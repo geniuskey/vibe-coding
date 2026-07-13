@@ -111,6 +111,9 @@ footer, header, hgroup, main, menu, nav, section {
   --pink: #FF7AA8;
   --amber: #FFC24B;
   --grad: linear-gradient(120deg, #9B82FF, #2BEAD0);
+  /* 실시간 Q&A 위젯이 참조하는 accent 별칭 (루트 index.html과 동일 값) */
+  --accent: #9B82FF;
+  --accent-2: #2BEAD0;
 }
 
 html, body { background: var(--bg); }
@@ -659,12 +662,12 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <div class="toc-card">
       <span class="t-time">16:10</span><span class="t-num">5</span>
       <span class="t-name">업무 자동화</span>
-      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A</span>
+      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A · 나만의 스킬</span>
     </div>
     <div class="toc-card adv">
       <span class="t-time">★ 심화</span><span class="t-num">★</span>
       <span class="t-name">진짜 앱 만들기</span>
-      <span class="t-desc">업로드 대시보드 · SQLite CRUD 앱 · 웨이퍼 diff</span>
+      <span class="t-desc">업로드 대시보드 · SQLite CRUD 앱 · 웨이퍼 diff · GitHub Pages 배포</span>
     </div>
     <div class="toc-card">
       <span class="t-time">17:00</span><span class="t-num">6</span>
@@ -2095,8 +2098,8 @@ photo8 노광 가동중</div>
     <h2>매주 반복하는 그 일</h2>
     <p class="subtitle muted">한 번 만들어두면 계속 일하는 것들.<br />파일 정리, 리포트 생성, 요약 메일 — <strong>수동 업무를 은퇴시키는</strong> 시간.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 반복 업무 → 스크립트</span>
-      <span class="chip violet">🧪 실습 4개 (필수 2 + 선택 2)</span>
+      <span class="chip teal">🎯 반복 업무 → 스크립트 → 나만의 스킬</span>
+      <span class="chip violet">🧪 실습 4개 (+보너스) · 스킬 만들기</span>
     </div>
   </div>
   <aside class="notes">지금까지는 '만들면 끝'인 도구였다면, 이 파트는 '만들어두면 매번 일해주는' 자동화. ROI 관점이 달라진다.</aside>
@@ -2390,6 +2393,86 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
   <aside class="notes">정답: etch_spec은 120 mTorr 초과 시 공정 중단이라 하고, safety_spec은 100 mTorr에서 인터락 작동 — 중단 기준이 인터락보다 높아서 실질적으로 도달 불가능한 모순. 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
 </section>
 
+<section>
+  <span class="kicker">LEVEL UP · Claude Code</span>
+  <h2>잘 먹힌 프롬프트, <span class="grad-text">나만의 스킬</span>로 저장</h2>
+  <p class="lab-goal" style="margin-bottom:18px;">오늘 여러 번 재사용한 그 프롬프트, 매번 다시 설명하지 마세요. <strong>스킬(Skill)</strong>로 저장하면 다음부턴 <code>/이름</code> 한 줄. 팀 공유도 <strong>파일 하나</strong>. 프롬프트 자동화의 끝판입니다.</p>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">✨</span><span class="s-name">잘 되는 프롬프트</span><div class="s-desc">오늘 반복해서 쓴 그것</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">📄</span><span class="s-name">SKILL.md로 저장</span><div class="s-desc">.claude/skills/이름/</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⌨️</span><span class="s-name">/이름 호출</span><div class="s-desc">상황 맞으면 자동으로도</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">👥</span><span class="s-name">팀 공유</span><div class="s-desc">git에 커밋하면 끝</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">스킬은 <code>SKILL.md</code> 파일 하나입니다 — 맨 위에 <code>description</code>(언제 쓰는지), 그 아래에 <strong>지시문</strong>.</li>
+    <li class="fragment rise"><strong>description이 방아쇠</strong>: 그 상황이 오면 Claude가 알아서 이 스킬을 꺼내 씁니다. <code>/이름</code>으로 직접 부를 수도 있고요.</li>
+    <li class="fragment rise">위치가 범위를 정합니다 — <code>.claude/skills/</code>(이 프로젝트만) vs <code>~/.claude/skills/</code>(내 모든 프로젝트). 다른 도구 필요 없이 파일만 만들면 됩니다.</li>
+  </ul>
+  <aside class="notes">Part 5의 마무리이자 메타 단계 — 지금까지는 '업무'를 자동화했다면, 여기선 '프롬프트 자체'를 자동화한다. 스킬은 거창한 게 아니라 SKILL.md 텍스트 파일 하나라는 점을 강조. description이 자동 호출의 트리거라는 것만 확실히 심어주면 된다. 파일 위치(.claude/skills vs ~/.claude/skills)로 '이 프로젝트만/전부'가 갈린다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB 5-6</span>
+    <h2>나만의 스킬 만들기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="chip violet">재사용</span>
+  </div>
+  <p class="lab-goal">매주 쓰는 <strong>주간 보고서 프롬프트</strong>를 <code>/weekly-report</code> 스킬로. 파일은 Claude Code에게 만들어달라고 하면 됩니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 ① Claude Code에게 스킬로 만들어달라 하기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">오늘 내가 여러 번 쓴 이 프롬프트를 재사용할 수 있게 스킬로 만들어줘. .claude/skills/weekly-report/SKILL.md 로 저장하고, description에는 "주간 보고 요청 시 자동으로 불려야 한다"는 걸 구체적으로 써줘.
+프롬프트: 이번 주 한 일 목록을 주면 ①3줄 요약 ②주요 성과 ③다음 주 계획 형식의 한국어 주간 보고서로 정리해줘.</div>
+      </div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📄 ② 만들어질 SKILL.md (예시)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">---
+name: weekly-report
+description: 주간 보고서 초안 생성. 이번 주 한 일 목록을 주면 3줄 요약·성과·다음 주 계획으로 정리. "주간 보고", "이번 주 리포트" 요청 시 사용.
+---
+
+## 하는 일
+아래 형식으로 한국어 주간 보고서를 작성한다.
+1. 3줄 요약
+2. 주요 성과 (불릿)
+3. 다음 주 계획 (불릿)
+정보가 부족하면 먼저 되묻는다.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ③ 확인하고 호출</div>
+        <ul>
+          <li><code>/skills</code> 로 목록에 떴는지 확인</li>
+          <li>새 대화에서 <code>/weekly-report</code> 입력 — 또는 "주간보고 써줘"라고만 해도 <strong>자동 호출</strong></li>
+          <li><code>.claude/skills/</code>를 <strong>git에 커밋</strong>하면 팀 전체가 같은 스킬 사용</li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>SKILL.md가 생겼고 <code>/skills</code>에 뜬다</li>
+          <li><code>/weekly-report</code>가 실제로 동작한다</li>
+        </ul>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 한 단계 더 — skill-creator</div>
+        <ul>
+          <li>스킬을 <strong>평가·튜닝</strong>해주는 플러그인. <code>/plugin install skill-creator@claude-plugins-official</code> → <code>/reload-plugins</code></li>
+          <li>"skill-creator로 내 weekly-report 스킬 평가해줘" — 테스트·벤치마크로 description을 다듬어 줍니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">파일을 손으로 만들 필요 없이 Claude Code에게 시키는 게 이 실습의 핵심 — 비개발자도 스킬을 만들 수 있다는 자신감. skill-creator는 '스킬을 만드는' 도구가 아니라 이미 만든 스킬을 테스트·벤치마크·A/B로 평가하고 description(자동 호출 트리거)을 튜닝해주는 플러그인이라는 점을 정확히 짚는다(빠른 그룹/데모용, 초보 필수는 아님). 예시는 주간 보고서지만, 각자 오늘 잘 먹힌 프롬프트(웨이퍼 리포트, 스펙 Q&A 등)로 바꿔 만들게 하면 좋다.</aside>
+</section>
+
 <!-- ═══════════════ 심화 트랙 · ADVANCED ═══════════════ -->
 
 <section class="part-cover">
@@ -2397,10 +2480,10 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
   <div class="part-body">
     <span class="kicker pink">ADVANCED TRACK · 심화</span>
     <h2>진짜 앱을 만들어 봅니다</h2>
-    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기까지.</p>
+    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기, 그리고 GitHub Pages 배포까지.</p>
     <div class="part-meta">
-      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱</span>
-      <span class="chip violet">🧪 심화 실습 3개 (★★★)</span>
+      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱 → 공개 URL</span>
+      <span class="chip violet">🧪 심화 실습 3개 (★★★) + 배포</span>
       <span class="chip amber">⏱ 빠른 그룹 / 데모용</span>
     </div>
   </div>
@@ -2604,6 +2687,107 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
 </section>
 
 <section>
+  <span class="kicker pink">DEPLOY · GitHub Pages</span>
+  <h2>만든 앱, 링크 하나로 — 무료로 웹에 올리기</h2>
+  <p class="lab-goal" style="margin-bottom:16px;">방금 만든 <code>index.html</code>을 내 GitHub 계정 레포에 올리면, <strong>서버도 비용도 없이</strong> <code>https://아이디.github.io/레포이름/</code> 주소가 생깁니다. 팀에게는 링크만 보내면 끝.</p>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">📦</span><span class="s-name">① 레포 생성</span><div class="s-desc">내 계정에 새 저장소 (Public)</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⬆️</span><span class="s-name">② 파일 push</span><div class="s-desc">index.html을 main 브랜치로</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">③ Pages 켜기</span><div class="s-desc">Settings ▸ Pages ▸ main · /root</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">🌐</span><span class="s-name">④ 공개 URL</span><div class="s-desc">1~2분 뒤 접속 가능</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">배포 방식은 <strong>"Deploy from a branch"</strong> — <em>main 브랜치의 루트(<code>/</code>)를 그대로 정적 서빙</em>합니다. 빌드 서버도, 파이프라인도 없이 파일 그대로.</li>
+    <li class="fragment rise">한 번 켜두면 이후로는 <strong>push만 하면 자동 반영</strong>. HTTPS도 자동입니다.</li>
+    <li class="fragment rise">🔒 단, Public 레포는 <strong>전 세계에 공개</strong>됩니다 — 오늘처럼 <em>합성/더미 데이터</em>만. 사내 데이터는 절대 올리지 않기.</li>
+  </ul>
+  <aside class="notes">심화 트랙에서 만든 단일 HTML 앱을 실제 URL로 올려보는 파트. 핵심은 "빌드 없이 main/root를 그대로 정적 서빙"이라는 점 — 반도체 엔지니어에게 CI/CD 개념 없이도 배포가 된다는 게 놀라움 포인트다. Public 공개라 데이터 보안을 반드시 짚는다. 사내에서 github.com이 막혀 있으면 Part 6의 '팀에 넘기는 4가지 방법'(공유드라이브·사내 호스팅)으로 대체.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB A-4</span>
+    <h2>GitHub Pages로 배포하기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">A-1에서 만든 <code>fab.html</code> 대시보드를 <strong>진짜 URL</strong>로. main 브랜치 루트를 그대로 서빙합니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📋 ① 파일 준비 + 올리기 (터미널)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text"># Pages는 루트의 index.html을 먼저 엶 → 진입 파일 이름을 맞춰준다
+cp fab.html index.html
+
+git init
+git add index.html
+git commit -m "Add fab dashboard"
+git branch -M main
+
+# 아래 주소는 방금 GitHub에서 만든 레포로 바꾸기
+git remote add origin https://github.com/&lt;아이디&gt;/fab-dashboard.git
+git push -u origin main</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 또는 Claude Code에게 통째로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이 폴더를 GitHub Pages로 배포하고 싶어. fab.html을 index.html로 복사하고, git 저장소로 초기화해서 커밋해줘. 그다음 GitHub 웹에서 새 레포(Public)를 만들고 Settings에서 Pages를 켜는 방법을 단계별로 알려줘.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ② 레포 만들고 Pages 켜기 (웹)</div>
+        <ul>
+          <li>github.com ▸ <strong>New repository</strong> ▸ 이름 <code>fab-dashboard</code> ▸ <strong>Public</strong> ▸ Create (README 없이)</li>
+          <li>레포 ▸ <strong>Settings ▸ Pages</strong></li>
+          <li>Source: <strong>Deploy from a branch</strong></li>
+          <li>Branch: <strong>main</strong> · 폴더: <strong>/ (root)</strong> ▸ <strong>Save</strong></li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li><code>https://아이디.github.io/fab-dashboard/</code> 접속 시 대시보드가 뜬다</li>
+          <li>파일을 고쳐 <strong>다시 push</strong>하면 URL에 반영된다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">실습의 새 요소는 git push와 Pages 설정 두 가지뿐. gh CLI가 없어도 되도록 웹 UI 단계를 명시했다. 흔한 막힘: (1) 진입 파일이 index.html이 아님, (2) 첫 배포 전파에 1~2분, (3) 회사 계정 정책. cp 대신 처음부터 index.html로 만들게 해도 된다. A-2(assets.html)·A-3(wdiff.html)도 같은 방식으로 각자 레포에 올려볼 수 있다.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">DEPLOY · 함정 피하기</span>
+  <h2>SPA를 올릴 때 자주 걸리는 것들</h2>
+  <p class="muted small" style="margin-bottom:14px;">화면이 깨지거나 새로고침에서 404가 뜬다면 십중팔구 아래 셋 중 하나입니다.</p>
+  <div class="grid2">
+    <div class="panel hint">
+      <div class="panel-title">🧭 3대 함정</div>
+      <ul>
+        <li><strong>진입 파일</strong> — 루트에 <code>index.html</code>이 없으면 빈 화면/404. 진입 파일은 반드시 이 이름.</li>
+        <li><strong>절대경로</strong> — 앱이 <code>/레포이름/</code> 하위에서 열립니다. <code>/style.css</code>(❌) → <code>./style.css</code>(✅). Vite·React 빌드면 <code>base:&nbsp;'/레포이름/'</code>.</li>
+        <li><strong>새로고침 404</strong> — 클라이언트 라우터(<code>/page</code> 직접 접속)는 404. <code>index.html</code>을 <code>404.html</code>로 복사하거나 HashRouter 사용.</li>
+      </ul>
+    </div>
+    <div class="panel check">
+      <div class="panel-title">✅ 배포 체크리스트</div>
+      <ul>
+        <li>루트에 빈 <code>.nojekyll</code> 파일 (<code>_</code>로 시작하는 폴더 무시 방지)</li>
+        <li>안 바뀌어 보이면 강력 새로고침 <code>Ctrl+Shift+R</code> · 첫 배포는 1~2분</li>
+        <li>🔒 Public = 전 세계 공개 → 합성/더미 데이터만</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prompt" style="margin-top:14px;">
+    <div class="p-label"><span>🚑 막히면 이 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">GitHub Pages(https://아이디.github.io/레포이름/)에 올렸는데 화면이 깨지거나 새로고침하면 404가 떠. 원인을 찾아서 진입 파일(index.html)·자원 상대경로·base 경로·404.html 문제를 점검하고 고쳐줘.</div>
+  </div>
+  <aside class="notes">단일 HTML 앱(A-1~A-3)은 라우팅이 없어 대부분 index.html 이름만 맞추면 바로 된다. 절대경로/base·404 함정은 나중에 Vite·React로 진짜 SPA를 빌드해 올릴 때를 위한 예방 접종. .nojekyll은 파일명이 _로 시작할 때 등 은근한 버그를 막아준다. 데이터 공개 경고를 한 번 더 반복.</aside>
+</section>
+
+<section>
   <span class="kicker pink">ADVANCED · WRAP-UP</span>
   <h2>방금 만든 것들, 사실 대단한 겁니다</h2>
   <div class="grid3">
@@ -2611,9 +2795,9 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     <div class="card accent"><span class="icon">🗄️</span><h3>SQLite CRUD 앱</h3><p class="small">엑셀 대장을 대체하는 진짜 DB 앱. 서버·설치 0.</p></div>
     <div class="card accent"><span class="icon">🔬</span><h3>비교 뷰어</h3><p class="small">before/after 패턴 — 계측·수율·불량에 두루 재사용.</p></div>
   </div>
-  <p class="fragment rise" style="margin-top: 16px;">몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들입니다.<br />
-  <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
-  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작'으로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
+  <p class="fragment rise" style="margin-top: 16px;">…게다가 방금 <strong>GitHub Pages 링크 하나</strong>로 팀에 배포까지 해봤습니다.<br />
+  몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들 — <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
+  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작 + 링크 배포'로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
 </section>
 
 <!-- ═══════════════ PART 6 · 미니 프로젝트 & 마무리 ═══════════════ -->
@@ -3315,6 +3499,397 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     Reveal.on('slidechanged', checkSlide);
   })();
 
+</script>
+
+<!-- 실시간 Q&A (루트 index.html과 동일 위젯, workshop 전용 방) -->
+<style>
+  #qa-root.qa-hidden { display: none; }
+  #qa-root { position: fixed; inset: 0; z-index: 9000; pointer-events: none; font-family: 'Pretendard', system-ui, sans-serif; }
+  .qa-hidden { display: none !important; }
+
+  #qa-note-layer, #qa-float-layer { position: fixed; inset: 0; pointer-events: none; }
+
+  .qa-note {
+    position: absolute;
+    max-width: 240px;
+    padding: 16px 34px 14px 16px;
+    border-radius: 4px;
+    color: #14181f;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    transform: rotate(var(--rot, 0deg));
+    pointer-events: auto;
+    animation: qaNoteIn .35s ease both;
+  }
+  .qa-note.qa-leaving { animation: qaNoteOut .5s ease both; }
+  .qa-note.qa-draggable { cursor: grab; }
+  .qa-note.qa-dragging { cursor: grabbing; animation: none !important; box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 10; user-select: none; }
+  @keyframes qaNoteIn { from { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(12px) scale(.9); } to { opacity: 1; transform: rotate(var(--rot,0deg)) translateY(0) scale(1); } }
+  @keyframes qaNoteOut { to { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(-12px) scale(.92); } }
+  .qa-note-name { font-weight: 800; font-size: 11px; opacity: .65; margin-bottom: 4px; }
+  .qa-note-text { font-weight: 600; word-break: break-word; }
+  .qa-vote { margin-top: 8px; border: 0; background: rgba(0,0,0,0.12); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .qa-note-close {
+    position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%; background: rgba(0,0,0,0.12); color: #14181f;
+    font-size: 17px; font-weight: 900; line-height: 1; cursor: pointer;
+  }
+  .qa-note-close:hover { background: rgba(0,0,0,0.22); }
+
+  .qa-dock {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center;
+    background: rgba(14,18,32,0.85); border: 1px solid rgba(155,130,255,0.35);
+    border-radius: 999px; padding: 8px 10px; pointer-events: auto; backdrop-filter: blur(8px);
+  }
+  .qa-dock input { border: 0; outline: none; background: rgba(255,255,255,0.08); color: #fff; border-radius: 999px; padding: 8px 14px; width: 200px; font-size: 13px; }
+  .qa-dock button { border: 0; border-radius: 999px; padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; background: rgba(255,255,255,0.08); color: #fff; }
+  .qa-follow.on { background: var(--accent); color: #06080F; }
+
+  .qa-modal { position: fixed; inset: 0; background: rgba(6,8,15,0.75); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+  .qa-modal-box { background: #0E1220; border: 1px solid rgba(155,130,255,0.4); border-radius: 16px; padding: 28px; width: min(320px, 86vw); text-align: center; }
+  .qa-modal-box h3 { color: #fff; margin: 0 0 14px; }
+  .qa-modal-box input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #fff; margin-bottom: 12px; }
+  .qa-modal-box button { width: 100%; padding: 10px; border-radius: 10px; border: 0; background: var(--accent); color: #06080F; font-weight: 800; cursor: pointer; }
+
+  #qa-presenter-bar { position: fixed; top: 14px; left: 14px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+  .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
+  .qa-dot.on { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+  #qa-history-toggle { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; }
+  .qa-presenter-tally { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 800; color: #fff; background: rgba(255,255,255,0.1); }
+
+  .qa-panel { position: fixed; top: 0; left: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-right: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
+  .qa-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 800; }
+  .qa-panel-head button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; margin-left: 6px; }
+  #qa-history-list { overflow-y: auto; padding: 10px 16px; }
+  .qa-history-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .qa-history-meta { display: flex; justify-content: space-between; font-size: 12px; color: #B8BFD0; margin-bottom: 4px; }
+  .qa-history-text { color: #fff; font-size: 13px; }
+  .qa-history-empty { color: #B8BFD0; font-size: 13px; padding: 20px 0; text-align: center; }
+
+  .qa-float { position: fixed; bottom: 70px; font-size: 28px; animation: qaFloatUp 2.6s ease forwards; }
+  @keyframes qaFloatUp { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60vh); } }
+</style>
+
+<div id="qa-root" class="qa-hidden">
+  <div id="qa-note-layer"></div>
+  <div id="qa-float-layer"></div>
+
+  <div id="qa-nick-modal" class="qa-modal qa-hidden">
+    <div class="qa-modal-box">
+      <h3>닉네임을 정해주세요</h3>
+      <input id="qa-nick-input" maxlength="24" placeholder="익명" />
+      <button id="qa-nick-go">입장하기 →</button>
+    </div>
+  </div>
+
+  <div id="qa-audience-dock" class="qa-dock qa-hidden">
+    <button id="qa-follow-toggle" class="qa-follow on">🔗 발표자 따라가기 ON</button>
+    <input id="qa-question-input" maxlength="280" placeholder="질문을 입력하세요" />
+    <button id="qa-question-send">보내기</button>
+    <button id="qa-react-up">👍 <span id="qa-tally-up">0</span></button>
+    <button id="qa-react-confused">🤔 <span id="qa-tally-confused">0</span></button>
+  </div>
+
+  <div id="qa-presenter-bar" class="qa-hidden">
+    <span id="qa-conn-dot" class="qa-dot"></span>
+    <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+    <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
+      👍 <span id="qa-presenter-tally-up">0</span>
+      🤔 <span id="qa-presenter-tally-confused">0</span>
+    </span>
+  </div>
+
+  <div id="qa-history-panel" class="qa-panel qa-hidden">
+    <div class="qa-panel-head">
+      <span>질문 기록</span>
+      <div>
+        <button id="qa-history-clear">전체 삭제</button>
+        <button id="qa-history-close">닫기</button>
+      </div>
+    </div>
+    <div id="qa-history-list"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const QA_ROOM = 'workshop'; // 루트 발표와 질문·슬라이드가 섞이지 않도록 workshop 전용 방 사용
+  const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
+  const params = new URLSearchParams(location.search);
+  const IS_PRESENTER = params.has('present');
+
+  let following = true;
+  let liveSlide = 0;
+  const shownIds = new Set();
+  let history = [];
+
+  fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.ok) initLiveQa(); })
+    .catch(() => {});
+
+  function initLiveQa() {
+    document.getElementById('qa-root').classList.remove('qa-hidden');
+    if (IS_PRESENTER) {
+      document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
+    } else {
+      document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
+    }
+    connectSse();
+    setupSlideSync();
+    setupAudienceUI();
+    setupPresenterUI();
+  }
+
+  function api(path, body) {
+    const headers = { 'Content-Type': 'application/json' };
+    const query = new URLSearchParams({ room: QA_ROOM });
+    return fetch(path + '?' + query.toString(), { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function goToSlide(h) {
+    if (!window.Reveal) return;
+    if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
+    else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  function getNickname() {
+    try { return JSON.parse(localStorage.getItem('qa_nickname') || 'null'); } catch { return null; }
+  }
+  function setNickname(name) {
+    localStorage.setItem('qa_nickname', JSON.stringify(name));
+  }
+
+  let es;
+  function connectSse() {
+    es = new EventSource('/qa/events?room=' + encodeURIComponent(QA_ROOM));
+    const dot = document.getElementById('qa-conn-dot');
+    es.onopen = () => dot && dot.classList.add('on');
+    es.onerror = () => dot && dot.classList.remove('on');
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      liveSlide = st.slide || 0;
+      if (!IS_PRESENTER && following) goToSlide(liveSlide);
+      setTally(st.reactions);
+      history = (st.questions || []).slice();
+      renderHistory();
+    });
+
+    es.addEventListener('slide', (e) => {
+      const { h } = JSON.parse(e.data);
+      liveSlide = h;
+      if (IS_PRESENTER) return;
+      if (following) goToSlide(h);
+      updateFollowUI();
+    });
+
+    es.addEventListener('question', (e) => {
+      const q = JSON.parse(e.data);
+      history.push(q);
+      renderHistory();
+      showNote(q);
+    });
+
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
+      if (el) el.textContent = votes;
+      const hq = history.find((q) => q.id === id);
+      if (hq) { hq.votes = votes; renderHistory(); }
+    });
+
+    es.addEventListener('react', (e) => {
+      const d = JSON.parse(e.data);
+      setTally(d.total);
+      spawnFloat(d.kind);
+    });
+
+    es.addEventListener('clear', () => {
+      document.getElementById('qa-note-layer').innerHTML = '';
+      shownIds.clear();
+      history = [];
+      renderHistory();
+    });
+  }
+
+  function setupSlideSync() {
+    if (!window.Reveal) return;
+    if (IS_PRESENTER) {
+      Reveal.on('slidechanged', (e) => { api('/qa/slide', { h: e.indexh }); });
+    } else {
+      Reveal.on('slidechanged', (e) => {
+        if (following && e.indexh !== liveSlide) { following = false; updateFollowUI(); }
+      });
+      const btn = document.getElementById('qa-follow-toggle');
+      btn.onclick = () => {
+        following = !following;
+        if (following) goToSlide(liveSlide);
+        updateFollowUI();
+      };
+    }
+  }
+
+  function updateFollowUI() {
+    const btn = document.getElementById('qa-follow-toggle');
+    if (!btn) return;
+    btn.classList.toggle('on', following);
+    btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
+  }
+  function showNote(q) {
+    if (shownIds.has(q.id)) return;
+    shownIds.add(q.id);
+    const layer = document.getElementById('qa-note-layer');
+    const note = document.createElement('div');
+    note.className = 'qa-note';
+    note.dataset.id = q.id;
+    note.style.background = QA_COLORS[q.id % QA_COLORS.length];
+    const pos = edgePosition();
+    note.style.left = pos.left + 'vw';
+    note.style.top = pos.top + 'vh';
+    note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    note.innerHTML =
+      (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
+      '<div class="qa-note-name">' + esc(q.name) + '</div>' +
+      '<div class="qa-note-text">' + esc(q.text) + '</div>' +
+      '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
+    note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
+    const dismiss = () => {
+      if (note.dataset.dismissed === '1') return;
+      note.dataset.dismissed = '1';
+      note.classList.add('qa-leaving');
+      setTimeout(() => note.remove(), 500);
+    };
+    const close = note.querySelector('.qa-note-close');
+    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    layer.appendChild(note);
+    const autoDismiss = setTimeout(dismiss, 14000);
+    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+  }
+  // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
+  function edgePosition() {
+    const edge = Math.floor(Math.random() * 4);
+    if (edge === 0) return { left: 3 + Math.random() * 70, top: 3 + Math.random() * 9 };   // 위쪽
+    if (edge === 1) return { left: 60 + Math.random() * 18, top: 6 + Math.random() * 58 };  // 오른쪽
+    if (edge === 2) return { left: 3 + Math.random() * 70, top: 60 + Math.random() * 20 };  // 아래쪽
+    return { left: 2 + Math.random() * 7, top: 6 + Math.random() * 58 };                    // 왼쪽
+  }
+  // 발표자가 포스트잇을 드래그해서 위치를 옮길 수 있게 한다
+  function makeDraggable(note, onDragStart) {
+    note.classList.add('qa-draggable');
+    note.addEventListener('pointerdown', (e) => {
+      // 닫기/추천 버튼 클릭은 드래그로 취급하지 않음
+      if (e.target.closest('.qa-note-close, .qa-vote')) return;
+      if (note.dataset.dismissed === '1') return;
+      e.preventDefault();
+      if (onDragStart) onDragStart(); // 옮기는 중에는 자동으로 사라지지 않도록
+      const rect = note.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      note.classList.add('qa-dragging');
+      note.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        const maxLeft = window.innerWidth - rect.width;
+        const maxTop = window.innerHeight - rect.height;
+        const left = Math.max(0, Math.min(ev.clientX - offsetX, maxLeft));
+        const top = Math.max(0, Math.min(ev.clientY - offsetY, maxTop));
+        note.style.left = left + 'px';
+        note.style.top = top + 'px';
+      };
+      const onUp = (ev) => {
+        note.classList.remove('qa-dragging');
+        note.removeEventListener('pointermove', onMove);
+        note.removeEventListener('pointerup', onUp);
+        try { note.releasePointerCapture(ev.pointerId); } catch (_) {}
+      };
+      note.addEventListener('pointermove', onMove);
+      note.addEventListener('pointerup', onUp);
+    });
+  }
+  function renderHistory() {
+    const countEl = document.getElementById('qa-history-count');
+    if (countEl) countEl.textContent = history.length;
+    const list = document.getElementById('qa-history-list');
+    if (!list) return;
+    const sorted = history.slice().sort((a, b) => b.votes - a.votes || a.ts - b.ts);
+    list.innerHTML = sorted.map((q) =>
+      '<div class="qa-history-item">' +
+        '<div class="qa-history-meta"><span>' + esc(q.name) + '</span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="qa-history-text">' + esc(q.text) + '</div>' +
+      '</div>'
+    ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
+  }
+  function setTally(r) {
+    if (!r) return;
+    const up = document.getElementById('qa-tally-up');
+    const conf = document.getElementById('qa-tally-confused');
+    const presenterUp = document.getElementById('qa-presenter-tally-up');
+    const presenterConf = document.getElementById('qa-presenter-tally-confused');
+    if (up) up.textContent = r.up || 0;
+    if (conf) conf.textContent = r.confused || 0;
+    if (presenterUp) presenterUp.textContent = r.up || 0;
+    if (presenterConf) presenterConf.textContent = r.confused || 0;
+  }
+  function spawnFloat(kind) {
+    const layer = document.getElementById('qa-float-layer');
+    const el = document.createElement('div');
+    el.className = 'qa-float';
+    el.textContent = kind === 'confused' ? '🤔' : '👍';
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function setupAudienceUI() {
+    if (IS_PRESENTER) return;
+
+    const nick = getNickname();
+    if (!nick) {
+      document.getElementById('qa-nick-modal').classList.remove('qa-hidden');
+      document.getElementById('qa-nick-go').onclick = () => {
+        const v = document.getElementById('qa-nick-input').value.trim().slice(0, 24) || '익명';
+        setNickname(v);
+        document.getElementById('qa-nick-modal').classList.add('qa-hidden');
+      };
+    }
+
+    const input = document.getElementById('qa-question-input');
+    const send = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      api('/qa/questions', { text, name: getNickname() || '익명' });
+      input.value = '';
+    };
+    document.getElementById('qa-question-send').onclick = send;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+      send();
+    });
+
+    document.getElementById('qa-react-up').onclick = () => api('/qa/react', { kind: 'up' });
+    document.getElementById('qa-react-confused').onclick = () => api('/qa/react', { kind: 'confused' });
+
+    updateFollowUI();
+  }
+  function setupPresenterUI() {
+    if (!IS_PRESENTER) return;
+    document.getElementById('qa-history-toggle').onclick = () => {
+      document.getElementById('qa-history-panel').classList.toggle('qa-hidden');
+    };
+    document.getElementById('qa-history-close').onclick = () => {
+      document.getElementById('qa-history-panel').classList.add('qa-hidden');
+    };
+    document.getElementById('qa-history-clear').onclick = () => {
+      if (confirm('화면의 질문과 질문 기록을 모두 정리할까요?')) api('/qa/clear');
+    };
+  }
+})();
 </script>
 
 </body>
