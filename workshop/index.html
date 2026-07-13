@@ -662,7 +662,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <div class="toc-card">
       <span class="t-time">16:10</span><span class="t-num">5</span>
       <span class="t-name">업무 자동화</span>
-      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A</span>
+      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A · 나만의 스킬</span>
     </div>
     <div class="toc-card adv">
       <span class="t-time">★ 심화</span><span class="t-num">★</span>
@@ -2098,8 +2098,8 @@ photo8 노광 가동중</div>
     <h2>매주 반복하는 그 일</h2>
     <p class="subtitle muted">한 번 만들어두면 계속 일하는 것들.<br />파일 정리, 리포트 생성, 요약 메일 — <strong>수동 업무를 은퇴시키는</strong> 시간.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 반복 업무 → 스크립트</span>
-      <span class="chip violet">🧪 실습 4개 (필수 2 + 선택 2)</span>
+      <span class="chip teal">🎯 반복 업무 → 스크립트 → 나만의 스킬</span>
+      <span class="chip violet">🧪 실습 4개 (+보너스) · 스킬 만들기</span>
     </div>
   </div>
   <aside class="notes">지금까지는 '만들면 끝'인 도구였다면, 이 파트는 '만들어두면 매번 일해주는' 자동화. ROI 관점이 달라진다.</aside>
@@ -2391,6 +2391,86 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     </div>
   </div>
   <aside class="notes">정답: etch_spec은 120 mTorr 초과 시 공정 중단이라 하고, safety_spec은 100 mTorr에서 인터락 작동 — 중단 기준이 인터락보다 높아서 실질적으로 도달 불가능한 모순. 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
+</section>
+
+<section>
+  <span class="kicker">LEVEL UP · Claude Code</span>
+  <h2>잘 먹힌 프롬프트, <span class="grad-text">나만의 스킬</span>로 저장</h2>
+  <p class="lab-goal" style="margin-bottom:18px;">오늘 여러 번 재사용한 그 프롬프트, 매번 다시 설명하지 마세요. <strong>스킬(Skill)</strong>로 저장하면 다음부턴 <code>/이름</code> 한 줄. 팀 공유도 <strong>파일 하나</strong>. 프롬프트 자동화의 끝판입니다.</p>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">✨</span><span class="s-name">잘 되는 프롬프트</span><div class="s-desc">오늘 반복해서 쓴 그것</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">📄</span><span class="s-name">SKILL.md로 저장</span><div class="s-desc">.claude/skills/이름/</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⌨️</span><span class="s-name">/이름 호출</span><div class="s-desc">상황 맞으면 자동으로도</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">👥</span><span class="s-name">팀 공유</span><div class="s-desc">git에 커밋하면 끝</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">스킬은 <code>SKILL.md</code> 파일 하나입니다 — 맨 위에 <code>description</code>(언제 쓰는지), 그 아래에 <strong>지시문</strong>.</li>
+    <li class="fragment rise"><strong>description이 방아쇠</strong>: 그 상황이 오면 Claude가 알아서 이 스킬을 꺼내 씁니다. <code>/이름</code>으로 직접 부를 수도 있고요.</li>
+    <li class="fragment rise">위치가 범위를 정합니다 — <code>.claude/skills/</code>(이 프로젝트만) vs <code>~/.claude/skills/</code>(내 모든 프로젝트). 다른 도구 필요 없이 파일만 만들면 됩니다.</li>
+  </ul>
+  <aside class="notes">Part 5의 마무리이자 메타 단계 — 지금까지는 '업무'를 자동화했다면, 여기선 '프롬프트 자체'를 자동화한다. 스킬은 거창한 게 아니라 SKILL.md 텍스트 파일 하나라는 점을 강조. description이 자동 호출의 트리거라는 것만 확실히 심어주면 된다. 파일 위치(.claude/skills vs ~/.claude/skills)로 '이 프로젝트만/전부'가 갈린다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB 5-6</span>
+    <h2>나만의 스킬 만들기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="chip violet">재사용</span>
+  </div>
+  <p class="lab-goal">매주 쓰는 <strong>주간 보고서 프롬프트</strong>를 <code>/weekly-report</code> 스킬로. 파일은 Claude Code에게 만들어달라고 하면 됩니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 ① Claude Code에게 스킬로 만들어달라 하기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">오늘 내가 여러 번 쓴 이 프롬프트를 재사용할 수 있게 스킬로 만들어줘. .claude/skills/weekly-report/SKILL.md 로 저장하고, description에는 "주간 보고 요청 시 자동으로 불려야 한다"는 걸 구체적으로 써줘.
+프롬프트: 이번 주 한 일 목록을 주면 ①3줄 요약 ②주요 성과 ③다음 주 계획 형식의 한국어 주간 보고서로 정리해줘.</div>
+      </div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📄 ② 만들어질 SKILL.md (예시)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">---
+name: weekly-report
+description: 주간 보고서 초안 생성. 이번 주 한 일 목록을 주면 3줄 요약·성과·다음 주 계획으로 정리. "주간 보고", "이번 주 리포트" 요청 시 사용.
+---
+
+## 하는 일
+아래 형식으로 한국어 주간 보고서를 작성한다.
+1. 3줄 요약
+2. 주요 성과 (불릿)
+3. 다음 주 계획 (불릿)
+정보가 부족하면 먼저 되묻는다.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ③ 확인하고 호출</div>
+        <ul>
+          <li><code>/skills</code> 로 목록에 떴는지 확인</li>
+          <li>새 대화에서 <code>/weekly-report</code> 입력 — 또는 "주간보고 써줘"라고만 해도 <strong>자동 호출</strong></li>
+          <li><code>.claude/skills/</code>를 <strong>git에 커밋</strong>하면 팀 전체가 같은 스킬 사용</li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>SKILL.md가 생겼고 <code>/skills</code>에 뜬다</li>
+          <li><code>/weekly-report</code>가 실제로 동작한다</li>
+        </ul>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 한 단계 더 — skill-creator</div>
+        <ul>
+          <li>스킬을 <strong>평가·튜닝</strong>해주는 플러그인. <code>/plugin install skill-creator@claude-plugins-official</code> → <code>/reload-plugins</code></li>
+          <li>"skill-creator로 내 weekly-report 스킬 평가해줘" — 테스트·벤치마크로 description을 다듬어 줍니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">파일을 손으로 만들 필요 없이 Claude Code에게 시키는 게 이 실습의 핵심 — 비개발자도 스킬을 만들 수 있다는 자신감. skill-creator는 '스킬을 만드는' 도구가 아니라 이미 만든 스킬을 테스트·벤치마크·A/B로 평가하고 description(자동 호출 트리거)을 튜닝해주는 플러그인이라는 점을 정확히 짚는다(빠른 그룹/데모용, 초보 필수는 아님). 예시는 주간 보고서지만, 각자 오늘 잘 먹힌 프롬프트(웨이퍼 리포트, 스펙 Q&A 등)로 바꿔 만들게 하면 좋다.</aside>
 </section>
 
 <!-- ═══════════════ 심화 트랙 · ADVANCED ═══════════════ -->
