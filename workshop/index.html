@@ -667,7 +667,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
     <div class="toc-card adv">
       <span class="t-time">★ 심화</span><span class="t-num">★</span>
       <span class="t-name">진짜 앱 만들기</span>
-      <span class="t-desc">업로드 대시보드 · SQLite CRUD 앱 · 웨이퍼 diff</span>
+      <span class="t-desc">업로드 대시보드 · SQLite CRUD 앱 · 웨이퍼 diff · GitHub Pages 배포</span>
     </div>
     <div class="toc-card">
       <span class="t-time">17:00</span><span class="t-num">6</span>
@@ -2400,10 +2400,10 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
   <div class="part-body">
     <span class="kicker pink">ADVANCED TRACK · 심화</span>
     <h2>진짜 앱을 만들어 봅니다</h2>
-    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기까지.</p>
+    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기, 그리고 GitHub Pages 배포까지.</p>
     <div class="part-meta">
-      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱</span>
-      <span class="chip violet">🧪 심화 실습 3개 (★★★)</span>
+      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱 → 공개 URL</span>
+      <span class="chip violet">🧪 심화 실습 3개 (★★★) + 배포</span>
       <span class="chip amber">⏱ 빠른 그룹 / 데모용</span>
     </div>
   </div>
@@ -2607,6 +2607,107 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
 </section>
 
 <section>
+  <span class="kicker pink">DEPLOY · GitHub Pages</span>
+  <h2>만든 앱, 링크 하나로 — 무료로 웹에 올리기</h2>
+  <p class="lab-goal" style="margin-bottom:16px;">방금 만든 <code>index.html</code>을 내 GitHub 계정 레포에 올리면, <strong>서버도 비용도 없이</strong> <code>https://아이디.github.io/레포이름/</code> 주소가 생깁니다. 팀에게는 링크만 보내면 끝.</p>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">📦</span><span class="s-name">① 레포 생성</span><div class="s-desc">내 계정에 새 저장소 (Public)</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⬆️</span><span class="s-name">② 파일 push</span><div class="s-desc">index.html을 main 브랜치로</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">③ Pages 켜기</span><div class="s-desc">Settings ▸ Pages ▸ main · /root</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">🌐</span><span class="s-name">④ 공개 URL</span><div class="s-desc">1~2분 뒤 접속 가능</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">배포 방식은 <strong>"Deploy from a branch"</strong> — <em>main 브랜치의 루트(<code>/</code>)를 그대로 정적 서빙</em>합니다. 빌드 서버도, 파이프라인도 없이 파일 그대로.</li>
+    <li class="fragment rise">한 번 켜두면 이후로는 <strong>push만 하면 자동 반영</strong>. HTTPS도 자동입니다.</li>
+    <li class="fragment rise">🔒 단, Public 레포는 <strong>전 세계에 공개</strong>됩니다 — 오늘처럼 <em>합성/더미 데이터</em>만. 사내 데이터는 절대 올리지 않기.</li>
+  </ul>
+  <aside class="notes">심화 트랙에서 만든 단일 HTML 앱을 실제 URL로 올려보는 파트. 핵심은 "빌드 없이 main/root를 그대로 정적 서빙"이라는 점 — 반도체 엔지니어에게 CI/CD 개념 없이도 배포가 된다는 게 놀라움 포인트다. Public 공개라 데이터 보안을 반드시 짚는다. 사내에서 github.com이 막혀 있으면 Part 6의 '팀에 넘기는 4가지 방법'(공유드라이브·사내 호스팅)으로 대체.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB A-4</span>
+    <h2>GitHub Pages로 배포하기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">A-1에서 만든 <code>fab.html</code> 대시보드를 <strong>진짜 URL</strong>로. main 브랜치 루트를 그대로 서빙합니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📋 ① 파일 준비 + 올리기 (터미널)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text"># Pages는 루트의 index.html을 먼저 엶 → 진입 파일 이름을 맞춰준다
+cp fab.html index.html
+
+git init
+git add index.html
+git commit -m "Add fab dashboard"
+git branch -M main
+
+# 아래 주소는 방금 GitHub에서 만든 레포로 바꾸기
+git remote add origin https://github.com/&lt;아이디&gt;/fab-dashboard.git
+git push -u origin main</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 또는 Claude Code에게 통째로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이 폴더를 GitHub Pages로 배포하고 싶어. fab.html을 index.html로 복사하고, git 저장소로 초기화해서 커밋해줘. 그다음 GitHub 웹에서 새 레포(Public)를 만들고 Settings에서 Pages를 켜는 방법을 단계별로 알려줘.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ② 레포 만들고 Pages 켜기 (웹)</div>
+        <ul>
+          <li>github.com ▸ <strong>New repository</strong> ▸ 이름 <code>fab-dashboard</code> ▸ <strong>Public</strong> ▸ Create (README 없이)</li>
+          <li>레포 ▸ <strong>Settings ▸ Pages</strong></li>
+          <li>Source: <strong>Deploy from a branch</strong></li>
+          <li>Branch: <strong>main</strong> · 폴더: <strong>/ (root)</strong> ▸ <strong>Save</strong></li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li><code>https://아이디.github.io/fab-dashboard/</code> 접속 시 대시보드가 뜬다</li>
+          <li>파일을 고쳐 <strong>다시 push</strong>하면 URL에 반영된다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">실습의 새 요소는 git push와 Pages 설정 두 가지뿐. gh CLI가 없어도 되도록 웹 UI 단계를 명시했다. 흔한 막힘: (1) 진입 파일이 index.html이 아님, (2) 첫 배포 전파에 1~2분, (3) 회사 계정 정책. cp 대신 처음부터 index.html로 만들게 해도 된다. A-2(assets.html)·A-3(wdiff.html)도 같은 방식으로 각자 레포에 올려볼 수 있다.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">DEPLOY · 함정 피하기</span>
+  <h2>SPA를 올릴 때 자주 걸리는 것들</h2>
+  <p class="muted small" style="margin-bottom:14px;">화면이 깨지거나 새로고침에서 404가 뜬다면 십중팔구 아래 셋 중 하나입니다.</p>
+  <div class="grid2">
+    <div class="panel hint">
+      <div class="panel-title">🧭 3대 함정</div>
+      <ul>
+        <li><strong>진입 파일</strong> — 루트에 <code>index.html</code>이 없으면 빈 화면/404. 진입 파일은 반드시 이 이름.</li>
+        <li><strong>절대경로</strong> — 앱이 <code>/레포이름/</code> 하위에서 열립니다. <code>/style.css</code>(❌) → <code>./style.css</code>(✅). Vite·React 빌드면 <code>base:&nbsp;'/레포이름/'</code>.</li>
+        <li><strong>새로고침 404</strong> — 클라이언트 라우터(<code>/page</code> 직접 접속)는 404. <code>index.html</code>을 <code>404.html</code>로 복사하거나 HashRouter 사용.</li>
+      </ul>
+    </div>
+    <div class="panel check">
+      <div class="panel-title">✅ 배포 체크리스트</div>
+      <ul>
+        <li>루트에 빈 <code>.nojekyll</code> 파일 (<code>_</code>로 시작하는 폴더 무시 방지)</li>
+        <li>안 바뀌어 보이면 강력 새로고침 <code>Ctrl+Shift+R</code> · 첫 배포는 1~2분</li>
+        <li>🔒 Public = 전 세계 공개 → 합성/더미 데이터만</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prompt" style="margin-top:14px;">
+    <div class="p-label"><span>🚑 막히면 이 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">GitHub Pages(https://아이디.github.io/레포이름/)에 올렸는데 화면이 깨지거나 새로고침하면 404가 떠. 원인을 찾아서 진입 파일(index.html)·자원 상대경로·base 경로·404.html 문제를 점검하고 고쳐줘.</div>
+  </div>
+  <aside class="notes">단일 HTML 앱(A-1~A-3)은 라우팅이 없어 대부분 index.html 이름만 맞추면 바로 된다. 절대경로/base·404 함정은 나중에 Vite·React로 진짜 SPA를 빌드해 올릴 때를 위한 예방 접종. .nojekyll은 파일명이 _로 시작할 때 등 은근한 버그를 막아준다. 데이터 공개 경고를 한 번 더 반복.</aside>
+</section>
+
+<section>
   <span class="kicker pink">ADVANCED · WRAP-UP</span>
   <h2>방금 만든 것들, 사실 대단한 겁니다</h2>
   <div class="grid3">
@@ -2614,9 +2715,9 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
     <div class="card accent"><span class="icon">🗄️</span><h3>SQLite CRUD 앱</h3><p class="small">엑셀 대장을 대체하는 진짜 DB 앱. 서버·설치 0.</p></div>
     <div class="card accent"><span class="icon">🔬</span><h3>비교 뷰어</h3><p class="small">before/after 패턴 — 계측·수율·불량에 두루 재사용.</p></div>
   </div>
-  <p class="fragment rise" style="margin-top: 16px;">몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들입니다.<br />
-  <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
-  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작'으로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
+  <p class="fragment rise" style="margin-top: 16px;">…게다가 방금 <strong>GitHub Pages 링크 하나</strong>로 팀에 배포까지 해봤습니다.<br />
+  몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들 — <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
+  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작 + 링크 배포'로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
 </section>
 
 <!-- ═══════════════ PART 6 · 미니 프로젝트 & 마무리 ═══════════════ -->
