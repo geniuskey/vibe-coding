@@ -1,4 +1,4 @@
-# vibe-coding-202607
+# vibe-coding
 
 바이브 코딩 세미나 슬라이드 모음 (reveal.js, 폴더별 단일 `index.html`, 빌드 없음).
 
