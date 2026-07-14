@@ -17,12 +17,21 @@ test('GET /qa/health returns ok', async () => {
   assert.deepEqual(await res.json(), { ok: true });
 });
 
-test('GET / serves index.html', async () => {
+test('GET / serves the landing page', async () => {
   const res = await fetch(`http://localhost:${port}/`);
   assert.equal(res.status, 200);
   assert.match(res.headers.get('content-type'), /text\/html/);
   const text = await res.text();
   assert.match(text, /<!DOCTYPE html>/i);
+  assert.match(text, /intro\//);
+});
+
+test('GET /intro/ serves the intro deck', async () => {
+  const res = await fetch(`http://localhost:${port}/intro/`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type'), /text\/html/);
+  const text = await res.text();
+  assert.match(text, /바이브 코딩이란 무엇인가/);
 });
 
 test('unknown route returns 404', async () => {

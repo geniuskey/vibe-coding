@@ -5,10 +5,12 @@ const os = require('os');
 
 const PORT = process.env.PORT || 8080;
 const INDEX_PATH = path.join(__dirname, 'index.html');
+const INTRO_INDEX_PATH = path.join(__dirname, 'intro', 'index.html');
 const WORKSHOP_INDEX_PATH = path.join(__dirname, 'workshop', 'index.html');
 const CONTEXT_INDEX_PATH = path.join(__dirname, 'context', 'index.html');
 const GITHUB_INDEX_PATH = path.join(__dirname, 'github', 'index.html');
 const KNOWLEDGE_INDEX_PATH = path.join(__dirname, 'knowledge', 'index.html');
+const FORCHILDREN_INDEX_PATH = path.join(__dirname, 'forChildren', 'index.html');
 
 // 각 발표(덱)는 서로 다른 슬라이드를 가지므로, 질문·투표·반응·슬라이드 위치를
 // "방(room)" 단위로 분리해 섞이지 않게 한다. 파라미터가 없으면 기본 방('main').
@@ -89,10 +91,12 @@ const server = http.createServer(async (req, res) => {
   const url = req.url.split('?')[0];
 
   if (url === '/' && req.method === 'GET') return serveFile(res, INDEX_PATH);
+  if ((url === '/intro' || url === '/intro/') && req.method === 'GET') return serveFile(res, INTRO_INDEX_PATH);
   if ((url === '/workshop' || url === '/workshop/') && req.method === 'GET') return serveFile(res, WORKSHOP_INDEX_PATH);
   if ((url === '/context' || url === '/context/') && req.method === 'GET') return serveFile(res, CONTEXT_INDEX_PATH);
   if ((url === '/github' || url === '/github/') && req.method === 'GET') return serveFile(res, GITHUB_INDEX_PATH);
   if ((url === '/knowledge' || url === '/knowledge/') && req.method === 'GET') return serveFile(res, KNOWLEDGE_INDEX_PATH);
+  if ((url === '/forChildren' || url === '/forChildren/') && req.method === 'GET') return serveFile(res, FORCHILDREN_INDEX_PATH);
   if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
 
   if (url === '/qa/questions' && req.method === 'POST') {
@@ -167,8 +171,9 @@ if (require.main === module) {
   server.listen(PORT, () => {
     const lan = lanAddress();
     console.log('Live Q&A running:');
-    console.log(`  발표자(메인):   http://localhost:${PORT}/?present`);
-    console.log(`  청중(메인):     http://localhost:${PORT}/`);
+    console.log(`  대표 페이지:      http://localhost:${PORT}/`);
+    console.log(`  발표자(입문):   http://localhost:${PORT}/intro/?present`);
+    console.log(`  청중(입문):     http://localhost:${PORT}/intro/`);
     console.log(`  발표자(워크숍): http://localhost:${PORT}/workshop/?present`);
     console.log(`  청중(워크숍):   http://localhost:${PORT}/workshop/`);
     console.log(`  발표자(컨텍스트): http://localhost:${PORT}/context/?present`);
