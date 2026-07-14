@@ -8,6 +8,7 @@ const INDEX_PATH = path.join(__dirname, 'index.html');
 const WORKSHOP_INDEX_PATH = path.join(__dirname, 'workshop', 'index.html');
 const CONTEXT_INDEX_PATH = path.join(__dirname, 'context', 'index.html');
 const GITHUB_INDEX_PATH = path.join(__dirname, 'github', 'index.html');
+const KNOWLEDGE_INDEX_PATH = path.join(__dirname, 'knowledge', 'index.html');
 
 // 각 발표(덱)는 서로 다른 슬라이드를 가지므로, 질문·투표·반응·슬라이드 위치를
 // "방(room)" 단위로 분리해 섞이지 않게 한다. 파라미터가 없으면 기본 방('main').
@@ -91,6 +92,7 @@ const server = http.createServer(async (req, res) => {
   if ((url === '/workshop' || url === '/workshop/') && req.method === 'GET') return serveFile(res, WORKSHOP_INDEX_PATH);
   if ((url === '/context' || url === '/context/') && req.method === 'GET') return serveFile(res, CONTEXT_INDEX_PATH);
   if ((url === '/github' || url === '/github/') && req.method === 'GET') return serveFile(res, GITHUB_INDEX_PATH);
+  if ((url === '/knowledge' || url === '/knowledge/') && req.method === 'GET') return serveFile(res, KNOWLEDGE_INDEX_PATH);
   if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
 
   if (url === '/qa/questions' && req.method === 'POST') {
@@ -173,6 +175,8 @@ if (require.main === module) {
     console.log(`  청중(컨텍스트):   http://localhost:${PORT}/context/`);
     console.log(`  발표자(깃허브):   http://localhost:${PORT}/github/?present`);
     console.log(`  청중(깃허브):     http://localhost:${PORT}/github/`);
+    console.log(`  발표자(지식):     http://localhost:${PORT}/knowledge/?present`);
+    console.log(`  청중(지식):       http://localhost:${PORT}/knowledge/`);
     if (lan) console.log(`  (같은 Wi-Fi에서는 http://${lan}:${PORT}/ 로 접속)`);
   });
 }
