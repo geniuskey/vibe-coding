@@ -1,10 +1,21 @@
 # vibe-coding-202607
 
-바이브 코딩 세미나 슬라이드 (reveal.js, 단일 `index.html`, 빌드 없음).
+바이브 코딩 세미나 슬라이드 모음 (reveal.js, 폴더별 단일 `index.html`, 빌드 없음).
+
+루트 `index.html`은 전체 세미나를 안내하는 대표(허브) 페이지이고, 각 세미나는 주제별 폴더에 있다:
+
+| 폴더 | 내용 |
+| --- | --- |
+| `intro/` | 바이브 코딩이란 무엇인가? (원본 입문 세미나) |
+| `context/` | 컨텍스트 — AI 에이전트의 작업 책상 |
+| `knowledge/` | LLM에게 지식을 가르치는 법 (LLM 위키 · RAG · 지식 그래프 · 온톨로지) |
+| `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub |
+| `workshop/` | 바이브 코딩 실습 워크숍 (8시간 핸즈온) |
+| `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
 
 ## 실행
 
-- **정적 열람 (GitHub Pages)**: `index.html`을 그대로 정적 호스팅. 질문/반응 기능 없이 슬라이드만 동작한다.
+- **정적 열람 (GitHub Pages)**: 저장소를 그대로 정적 호스팅. 질문/반응 기능 없이 슬라이드만 동작한다.
 - **실제 발표 (로컬 실시간 Q&A)**:
 
   ```bash
@@ -17,7 +28,7 @@
 
   | 슬라이드 | 발표자 | 청중 |
   | --- | --- | --- |
-  | 메인 | `http://localhost:8080/?present` | `http://localhost:8080/` |
+  | 입문(원본) | `http://localhost:8080/intro/?present` | `http://localhost:8080/intro/` |
   | 워크숍 | `http://localhost:8080/workshop/?present` | `http://localhost:8080/workshop/` |
   | 컨텍스트 | `http://localhost:8080/context/?present` | `http://localhost:8080/context/` |
   | 깃허브 | `http://localhost:8080/github/?present` | `http://localhost:8080/github/` |
