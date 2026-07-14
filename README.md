@@ -21,6 +21,7 @@
   | 워크숍 | `http://localhost:8080/workshop/?present` | `http://localhost:8080/workshop/` |
   | 컨텍스트 | `http://localhost:8080/context/?present` | `http://localhost:8080/context/` |
   | 깃허브 | `http://localhost:8080/github/?present` | `http://localhost:8080/github/` |
+  | 지식 정리 | `http://localhost:8080/knowledge/?present` | `http://localhost:8080/knowledge/` |
 
   같은 Wi-Fi에서는 `http://<발표자-IP>:8080/` 로 접속한다 (서버 시작 시 콘솔에 출력됨).
 
