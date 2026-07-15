@@ -3636,10 +3636,22 @@ git push -u origin main</div>
   const shownIds = new Set();
   let history = [];
 
-  fetch('/qa/health', { signal: AbortSignal.timeout(800) })
-    .then((r) => (r.ok ? r.json() : null))
-    .then((d) => { if (d && d.ok) initLiveQa(); })
-    .catch(() => {});
+  // 실시간 Q&A 서버는 로컬 발표 환경(localhost 또는 같은 Wi-Fi의 LAN IP)에만 존재한다.
+  // GitHub Pages 등 정적 호스팅에서는 /qa/health 가 404가 되어 콘솔에
+  // "Failed to load resource" 에러를 남기므로(.catch 로도 지워지지 않는다),
+  // 서버가 있을 법한 호스트에서만 프로브한다. 정적 호스팅에서는 조용히 슬라이드만 동작.
+  const qaHost = location.hostname;
+  const qaMaybeLive =
+    location.protocol !== 'file:' &&
+    (qaHost === 'localhost' || qaHost === '127.0.0.1' || qaHost === '::1' ||
+      /^10\./.test(qaHost) || /^192\.168\./.test(qaHost) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(qaHost));
+  if (qaMaybeLive) {
+    fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && d.ok) initLiveQa(); })
+      .catch(() => {});
+  }
 
   function initLiveQa() {
     document.getElementById('qa-root').classList.remove('qa-hidden');
