@@ -13,18 +13,18 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나만의 게임 만들기 — AI 에이전트와 바이브 코딩 (어린이 × 부모)</title>
+  <title>나만의 게임 만들기 — AI와 바이브 코딩 (어린이 × 부모)</title>
 
   <!-- SEO -->
-  <meta name="description" content="AI 에이전트(Claude Code / Codex)에게 한 줄씩 요청하며 나만의 게임을 만드는 어린이 바이브 코딩 세미나. 요청할 때마다 게임이 진화하는 라이브 데모와 부모 가이드 포함." />
-  <meta name="keywords" content="어린이 코딩, 바이브 코딩, AI 에이전트, 게임 만들기, Claude Code, Codex, 프롬프트, 부모 가이드" />
+  <meta name="description" content="브라우저에서 claude.ai / ChatGPT에게 한 줄씩 직접 타이핑해 요청하며 나만의 게임을 만드는 어린이 바이브 코딩 세미나. 요청할 때마다 게임이 진화하는 라이브 데모와 부모 가이드 포함." />
+  <meta name="keywords" content="어린이 코딩, 바이브 코딩, AI, 게임 만들기, claude.ai, ChatGPT, 프롬프트, 부모 가이드" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="어린이 바이브 코딩" />
-  <meta property="og:title" content="나만의 게임 만들기 — AI 에이전트와 바이브 코딩" />
+  <meta property="og:title" content="나만의 게임 만들기 — AI와 바이브 코딩" />
   <meta property="og:description" content="한 줄씩 요청할 때마다 게임이 진화한다. 아이와 부모가 함께하는 바이브 코딩 세미나." />
   <meta property="og:locale" content="ko_KR" />
 
@@ -130,23 +130,9 @@ footer, header, hgroup, main, menu, nav, section {
     @keyframes bouncy  { 0%,100% { transform: translateY(0); }  40% { transform: translateY(-16px); } 62% { transform: translateY(-6px); } }
     @keyframes wiggle  { 0%,100% { transform: rotate(-4deg); }  50% { transform: rotate(4deg); } }
     @keyframes pulseHint { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.06); opacity: 1; } }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(.7) translateY(24px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
     .floaty { animation: floaty 5s ease-in-out infinite; display: inline-block; }
     .bouncy { animation: bouncy 2.6s ease-in-out infinite; display: inline-block; }
     .wiggly { animation: wiggle 2.2s ease-in-out infinite; display: inline-block; }
-
-    .pop { opacity: 0; }
-    section.present .pop { animation: popIn .55s cubic-bezier(.34, 1.56, .64, 1) forwards; }
-    .d1 { animation-delay: .12s !important; }
-    .d2 { animation-delay: .3s !important; }
-    .d3 { animation-delay: .48s !important; }
-    .d4 { animation-delay: .66s !important; }
-    .d5 { animation-delay: .84s !important; }
-    .d6 { animation-delay: 1.02s !important; }
-    .reveal.overview .pop, .reveal.print-pdf .pop { opacity: 1; animation: none; }
 
     /* ===== 타이포 ===== */
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; }
@@ -218,20 +204,6 @@ footer, header, hgroup, main, menu, nav, section {
     }
     .scard .em { font-size: 3.4rem; display: block; line-height: 1.15; margin-bottom: .4rem; }
     .scard p { font-size: 1.25rem; line-height: 1.5; }
-
-    /* ===== 눌러서 확인하는 빈칸 퀴즈 ===== */
-    .tap-blank {
-      display: inline-block; min-width: 3em; text-align: center;
-      border-bottom: 5px dotted var(--coral);
-      background: #FFEDE0; border-radius: 12px; padding: 0 .35em;
-      cursor: pointer; color: #D6572F !important; font-weight: 900;
-      transition: transform .15s ease;
-    }
-    .tap-blank:hover { transform: scale(1.08); }
-    .tap-blank.open {
-      background: #E4FFF4; border-bottom-color: var(--mint); color: #0E8F63 !important;
-      animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1);
-    }
 
     /* ===== 프롬프트 카드 ===== */
     .spell {
@@ -411,7 +383,6 @@ footer, header, hgroup, main, menu, nav, section {
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .pop { opacity: 1; }
     }
   </style>
 
@@ -441,180 +412,66 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="bouncy" style="animation-delay: .3s;">🧑‍💻</span>
           <span class="floaty">🤖</span>
         </div>
-        <h1 class="pop" style="font-size: 4.1rem; margin-top: 1rem;">
+        <h1 style="font-size: 4.1rem; margin-top: 1rem;">
           나만의 게임, <span style="color: #FFD86B;">오늘 만든다</span>
         </h1>
-        <p class="pop d2" style="font-size: 1.5rem; margin-top: .9rem;">
-          AI <b style="color:#B5F5E3;">에이전트</b>에게 말로 요청하는 <b style="color:#B5F5E3;">바이브 코딩</b>
+        <p style="font-size: 1.5rem; margin-top: .9rem;">
+          AI에게 말로 요청해서 만드는 <b style="color:#B5F5E3;">바이브 코딩</b>
         </p>
-        <p class="pop d3" style="font-size: 1.1rem; margin-top: .5rem; color: #C9BFF0 !important;">
-          어린이 × 부모 세미나 · 코딩을 몰라도, 8살이어도 OK
+        <p style="font-size: 1.1rem; margin-top: .5rem; color: #C9BFF0 !important;">
+          어린이 × 부모 세미나 · 코딩은 몰라도 OK — 타이핑은 네가 직접!
         </p>
-        <p class="hint pop d4">✨ 이 화면을 눌러 보세요 — 이 슬라이드도 코드로 만들었거든요 ✨</p>
-        <p class="pop d5" style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
+        <p class="hint">✨ 이 화면을 눌러 보세요 — 이 슬라이드도 코드로 만들었거든요 ✨</p>
+        <p style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
           → 화살표 키로 다음 페이지
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 2. 부모님 가이드 ⓪ ═══════════ -->
+    <!-- ═══════════ 2. 부모님 가이드 — 준비는 1분 ═══════════ -->
     <section>
       <div class="note-page">
-        <span class="note-tag">📌 부모님 가이드 ⓪ — 진행 방법</span>
-        <h2>이 자료, 이렇게 진행하세요</h2>
-        <ul style="margin-top: .9rem;">
-          <li class="pop d1"><b>종이색 페이지</b>는 아이와 함께 — 아이가 읽고, 반짝이는 요소를 직접 눌러 보게 해주세요.</li>
-          <li class="pop d2"><b>노란 노트 페이지</b>(이 페이지)는 부모님 담당 — 설치, 실행, 모델 선택을 대신 해주세요.</li>
-          <li class="pop d3">중반의 <b>라이브 데모 페이지</b>가 핵심입니다. "한 줄 요청 → 게임이 바뀐다"를 눈으로 보여준 뒤, 실제 도구에서 그대로 재현하면 됩니다.</li>
-          <li class="pop d4">사용 도구: <b>Claude Code</b> 또는 <b>Codex</b> — 터미널에서 실행되는 <b>코딩 에이전트</b>입니다.</li>
-          <li class="pop d5">오늘의 목표: 완성도보다 <b>"내가 요청해서 내가 만들었다"</b>는 경험 한 번.</li>
+        <span class="note-tag">📌 부모님 가이드 — 준비는 1분이면 끝</span>
+        <h2>부모님이 할 일은 딱 하나, 새 채팅 열어주기</h2>
+        <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .55rem; margin-top: .5rem;">
+          <li>브라우저에서 <span class="cmd">claude.ai</span> 또는 <span class="cmd">chatgpt.com</span>에 로그인하고 <b>새 채팅</b>을 열어 주세요. 설치할 것도, 터미널도 없습니다.</li>
+          <li>그다음 <b>키보드를 아이에게</b> 넘겨 주세요 — 요청(프롬프트)은 아이가 직접 타이핑합니다.</li>
+          <li>만든 게임은 채팅 화면 옆 <b>미리보기(Preview)</b>에서 바로 플레이할 수 있어요. 미리보기가 안 뜨면 <b>"화면에서 바로 플레이되게 해줘"</b>라고 한 줄 요청하면 됩니다.</li>
+          <li>채팅은 지우지 말고 남겨 두세요 — 다음에 같은 채팅을 열면 이어서 만들 수 있습니다.</li>
         </ul>
-        <p class="pop d6" style="margin-top: auto; font-size: 1.08rem !important;">
-          ⏱️ 준비(설치) 약 15분 + 실습 30~40분 · 권장: 초등 저학년 이상 + 비개발자 부모
+        <p style="margin-top: auto; font-size: 1.08rem !important;">
+          ⏱️ 전체 30~40분 · 오늘의 목표: 완성도보다 <b>"내가 요청해서 내가 만들었다"</b>는 경험 한 번.
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 3. AI는 뭘 잘할까 (퀴즈) ═══════════ -->
+    <!-- ═══════════ 3. 바이브 코딩이란 ═══════════ -->
     <section>
       <div class="page">
-        <span class="tag">STEP 1 · AI 이해하기</span>
-        <h2 class="pop">퀴즈 — 다음에 올 말은? <span class="c-coral">빈칸을 눌러 확인!</span></h2>
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;">
-          <p class="pop d1 center" style="font-size: 1.9rem;">
-            “옛날 옛날 아주 먼 <span class="tap-blank" data-answer="옛날">❓</span>에…”
-          </p>
-          <p class="pop d2 center" style="font-size: 1.9rem;">
-            “아이스크림은 차갑고, 불은 <span class="tap-blank" data-answer="뜨겁다">❓</span>!”
-          </p>
-        </div>
-        <div class="say robot pop d3" style="align-self: center; max-width: 920px;">
-          <span class="who">🤖 AI</span>
-          쉽죠? 저는 이 <b>"다음에 올 말 맞히기"</b>를 수십억 번 연습한 프로그램이에요.
-          그래서 글도 쓰고, 그림도 그리고, <b class="c-mint">코드</b>도 쓸 수 있어요.
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════ 4. 예측 → 코드 ═══════════ -->
-    <section>
-      <div class="page">
-        <span class="tag">STEP 1 · AI 이해하기</span>
-        <h2 class="pop">"다음 말"을 계속 이으면 — <b class="c-lav">코드</b>까지 쓸 수 있다</h2>
-        <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; align-items: center; margin-top: .6rem;">
-          <div class="scard pop d1">
-            <span class="em">📖</span>
-            <p>말을 이으면<br/><b class="c-coral">글·이야기</b></p>
-          </div>
-          <div class="scard pop d2">
-            <span class="em">🎨</span>
-            <p>선과 색을 이으면<br/><b class="c-sky">그림</b></p>
-          </div>
-          <div class="scard pop d3">
-            <span class="em">💻</span>
-            <p>명령어를 이으면<br/><b class="c-mint">코드</b></p>
-          </div>
-        </div>
-        <div class="pop d4" style="align-self: center; max-width: 940px; text-align: center;">
-          <p><b>코드</b>란? 컴퓨터에게 내리는 <b class="c-lav">명령을 적어 놓은 글</b>이에요.</p>
-          <p class="soft" style="font-size: 1.2rem; margin-top: .3rem;">
-            게임도, 유튜브도, 이 슬라이드도 전부 코드로 만들어져 있어요. 그리고 AI는 그 코드를 아주 잘 씁니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════ 5. 에이전트란? ═══════════ -->
-    <section>
-      <div class="page">
-        <span class="tag">STEP 2 · 에이전트</span>
-        <h2 class="pop">우리가 쓸 도구는 <b class="c-sky">AI 에이전트</b></h2>
-        <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; margin-top: .6rem;">
-          <div class="scard pop d1" style="text-align: left; padding: 1.3rem 1.5rem; display: flex; flex-direction: column;">
-            <p style="font-size: 1.1rem; font-weight: 800;" class="soft">그냥 챗봇은</p>
-            <p style="margin-top: .4rem;"><span style="font-size: 2.2rem;">💬</span><br/>물어보면 <b>말로 대답</b>까지만 해요.</p>
-            <div style="margin-top: auto; background: #F7F2E6; border-radius: 12px; padding: .7rem .9rem;">
-              <p style="font-size: 1.08rem;" class="soft">"사과 게임 만들어줘"<br/>→ 코드를 <b>글로 보여주고 끝.</b><br/>옮겨 붙이는 건 내 몫… 😅</p>
-            </div>
-          </div>
-          <div class="scard pop d2" style="text-align: left; padding: 1.3rem 1.5rem; border-color: #B9D7FF; display: flex; flex-direction: column;">
-            <p style="font-size: 1.1rem; font-weight: 800;" class="c-sky">에이전트는</p>
-            <p style="margin-top: .4rem;"><span style="font-size: 2.2rem;">🤖⚙️</span><br/>요청을 받으면 <b>직접 파일을 만들고, 코드를 쓰고, 실행까지</b> 해요.</p>
-            <div style="margin-top: auto; background: #EFF6FF; border-radius: 12px; padding: .7rem .9rem;">
-              <p style="font-size: 1.08rem;">"사과 게임 만들어줘"<br/>→ 파일 생성 ✅ 코드 작성 ✅ 실행 ✅<br/><b class="c-mint">나는 확인하고 다음 요청만!</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="say robot pop d3" style="align-self: center; max-width: 940px; margin-top: 1rem;">
-          <span class="who">🤖 에이전트</span>
-          제 이름은 <b>Claude Code</b> (친구 이름은 <b>Codex</b>예요).
-          까만 창(<b>터미널</b>)에서 저와 대화하면 돼요 — 채팅하듯 요청을 적고 Enter!
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════ 6. 바이브 코딩 루프 ═══════════ -->
-    <section>
-      <div class="page">
-        <span class="tag">STEP 2 · 에이전트</span>
-        <h2 class="pop"><b class="c-lav">바이브 코딩</b> = 이 4단계를 계속 도는 것</h2>
+        <span class="tag">바이브 코딩</span>
+        <h2>코드는 <b class="c-sky">AI</b>가 쓰고, 나는 <b class="c-lav">요청</b>한다</h2>
+        <p style="margin-top: .2rem;">
+          AI는 글·그림뿐 아니라 <b>코드</b>(컴퓨터에게 내리는 명령 글)도 아주 잘 써요.
+          원하는 걸 채팅으로 요청하면 게임을 통째로 만들어 줍니다. 아래 4단계를 계속 도는 것 — 그게 <b class="c-lav">바이브 코딩</b>이에요.
+        </p>
         <div style="flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; align-items: center; margin-top: .8rem;">
-          <div class="scard pop d1"><span class="em">🗣️</span><p><b>1. 요청</b><br/>원하는 걸<br/>한 줄로 말한다</p></div>
-          <div class="scard pop d2"><span class="em">⚙️</span><p><b>2. 생성</b><br/>에이전트가<br/>코드를 만든다</p></div>
-          <div class="scard pop d3"><span class="em">▶️</span><p><b>3. 실행</b><br/>게임을 열어<br/>직접 해본다</p></div>
-          <div class="scard pop d4"><span class="em">🔁</span><p><b>4. 다음 요청</b><br/>"이것도 넣어줘!"<br/>다시 1번으로</p></div>
+          <div class="scard"><span class="em">⌨️</span><p><b>1. 요청</b><br/>원하는 걸 한 줄로<br/>직접 타이핑</p></div>
+          <div class="scard"><span class="em">⚙️</span><p><b>2. 생성</b><br/>AI가 코드를<br/>만든다</p></div>
+          <div class="scard"><span class="em">▶️</span><p><b>3. 플레이</b><br/>미리보기에서<br/>바로 해본다</p></div>
+          <div class="scard"><span class="em">🔁</span><p><b>4. 다음 요청</b><br/>"이것도 넣어줘!"<br/>다시 1번으로</p></div>
         </div>
-        <p class="pop d5 center" style="font-size: 1.4rem;">
+        <p class="center" style="font-size: 1.4rem;">
           한 바퀴 돌 때마다 게임이 <b class="c-mint">한 단계씩 진화</b>해요. 다음 페이지에서 직접 확인!
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 7. 부모님 가이드 ① — 설치 ═══════════ -->
-    <section>
-      <div class="note-page">
-        <span class="note-tag">📌 부모님 가이드 ① — 준비물 & 설치 (약 15분)</span>
-        <h2>에이전트 설치하기</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.6rem; margin-top: .9rem; flex: 1;">
-          <div>
-            <p class="pop d1" style="font-weight: 800;">🧰 준비물</p>
-            <ul class="pop d2">
-              <li>컴퓨터(맥/윈도우) + 인터넷</li>
-              <li>계정 <b>둘 중 하나</b>:<br/>· <b>Claude Code</b> — Anthropic 계정<br/>· <b>Codex</b> — OpenAI(ChatGPT) 계정</li>
-              <li>웹 브라우저 (완성된 게임 실행용)</li>
-            </ul>
-          </div>
-          <div>
-            <p class="pop d3" style="font-weight: 800;">💻 설치 (Node.js 설치 후, 둘 중 하나만)</p>
-            <p class="pop d4" style="margin-top: .3rem;">Claude Code:<br/><span class="cmd">npm install -g @anthropic-ai/claude-code</span></p>
-            <p class="pop d5" style="margin-top: .6rem;">Codex:<br/><span class="cmd">npm install -g @openai/codex</span></p>
-            <p class="pop d6" style="margin-top: .6rem; font-size: 1.05rem !important;">첫 실행(<span class="cmd">claude</span> / <span class="cmd">codex</span>) 시 로그인 안내를 따라 주세요. 설치 방법이 바뀌었을 수 있으니 막히면 공식 문서 참고.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════ 8. 부모님 가이드 ② — 시작 세팅 ═══════════ -->
-    <section>
-      <div class="note-page">
-        <span class="note-tag">📌 부모님 가이드 ② — 시작 직전 세팅 (약 3분)</span>
-        <h2>폴더 · 실행 · 모델 선택</h2>
-        <ul style="margin-top: .8rem;">
-          <li class="pop d1"><b>작업 폴더</b> 만들기 (예: <span class="cmd">my-game</span>) → 터미널에서 <span class="cmd">cd my-game</span></li>
-          <li class="pop d2"><b>에이전트 실행</b>: <span class="cmd">claude</span> (또는 <span class="cmd">codex</span>) + Enter → 입력창이 나오면 준비 완료</li>
-          <li class="pop d3"><b>모델(두뇌) 선택</b>: Claude Code에서 <span class="cmd">/model</span> → <b>Sonnet</b> 권장(속도·성능 균형). 복잡한 문제로 막힐 때만 Opus. Codex는 기본값으로 충분.</li>
-          <li class="pop d4"><b>안전</b>: 생성 파일은 이 폴더 안에만 만들어집니다. 에이전트가 실행 권한을 물으면 부모님이 내용 확인 후 승인해 주세요.</li>
-          <li class="pop d5">여기까지 마치면 <b>키보드를 아이에게</b> 넘겨 주세요. 요청은 아이가 직접!</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ═══════════ 9. ★ 라이브 데모: 한 줄씩 요청 → 게임 진화 ═══════════ -->
+    <!-- ═══════════ 4. ★ 라이브 데모: 한 줄씩 요청 → 게임 진화 ═══════════ -->
     <section id="demo">
       <div class="page" style="padding-bottom: 1.4rem;">
         <span class="tag coral">핵심 · 라이브 데모 — 직접 눌러 보세요</span>
-        <h2 class="pop" style="font-size: 2.05rem;">요청 <b class="c-coral">한 줄</b>마다, 오른쪽 게임이 <b class="c-mint">진화</b>합니다</h2>
-        <div class="demo-wrap pop d1">
+        <h2 style="font-size: 2.05rem;">요청 <b class="c-coral">한 줄</b>마다, 오른쪽 게임이 <b class="c-mint">진화</b>합니다</h2>
+        <div class="demo-wrap">
           <div class="chat-col">
             <div class="chat-log"></div>
             <button class="send-btn">요청 보내기 ▶ (1/5)</button>
@@ -627,153 +484,124 @@ footer, header, hgroup, main, menu, nav, section {
             <div class="go-overlay">GAME OVER! 다시 도전 💪</div>
           </div>
         </div>
-        <p class="pop d2" style="font-size: 1.02rem; margin-top: .5rem;" >
+        <p style="font-size: 1.02rem; margin-top: .5rem;" >
           <span class="soft">떨어지는 사과는 <b>클릭해서</b> 받아요 · 실제 바이브 코딩도 이 순서 그대로입니다 — 요청하고, 만들어지면, 바로 플레이!</span>
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 10. 직접 해보기: 첫 프롬프트 ═══════════ -->
+    <!-- ═══════════ 5. 직접 해보기: 첫 프롬프트 ═══════════ -->
     <section>
       <div class="page">
-        <span class="tag mint">STEP 3 · 직접 해보기</span>
-        <h2 class="pop">이제 진짜로 — <b class="c-sunny">첫 번째 프롬프트</b></h2>
-        <p class="pop d1" style="margin-top: .2rem;"><b>프롬프트</b> = 에이전트에게 보내는 요청 문장. 아래를 그대로 입력해도 좋고, 바꿔도 좋아요.</p>
-        <div class="spell pop d2" style="margin-top: .7rem;">
-          <span class="lbl">📋 첫 프롬프트 — 입력하고 Enter</span>
-          고양이가 바구니를 들고 위에서 떨어지는 사과를 받는 게임을 HTML 파일 하나로 만들어줘.
-          왼쪽·오른쪽 화살표 키로 고양이를 움직이고, 사과를 받으면 점수가 1씩 올라가.
-          색깔은 알록달록하게 해줘. 다 만들면 여는 방법도 알려줘.
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-          <div class="say robot pop d3">
-            <span class="who">🤖 에이전트</span>
-            좋은 프롬프트의 비밀: <b>누가(고양이) · 무엇을(사과 받기) · 어떻게(화살표 키)</b>가 다 들어 있어요.
+        <span class="tag mint">직접 해보기</span>
+        <h2>이제 진짜로 — <b class="c-sunny">첫 번째 프롬프트</b>는 네가 직접 타이핑</h2>
+        <p style="margin-top: .2rem;"><b>프롬프트</b> = AI에게 보내는 요청 문장. 아래를 직접 타이핑해서 보내 보세요. 조금 바꿔도 좋아요.</p>
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;">
+          <div class="spell">
+            <span class="lbl">📋 첫 프롬프트 — 타이핑하고 Enter</span>
+            고양이가 바구니를 들고 위에서 떨어지는 사과를 받는 게임을 만들어줘.
+            왼쪽·오른쪽 화살표 키로 고양이를 움직이고, 사과를 받으면 점수가 1씩 올라가.
+            화면에서 바로 플레이할 수 있게 해줘.
           </div>
-          <div class="mini-note pop d4">
-            <p>📌 <b>부모님:</b> 완성되면 폴더 안의 <span class="cmd">index.html</span>을 브라우저로 열어 주세요.
-            "방금 만든 파일을 브라우저로 열어줘"라고 에이전트에게 요청해도 됩니다.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="say robot">
+              <span class="who">🤖 AI</span>
+              좋은 프롬프트의 비밀: <b>누가(고양이) · 무엇을(사과 받기) · 어떻게(화살표 키)</b>가 다 들어 있어요.
+            </div>
+            <div class="mini-note">
+              <p>📌 <b>부모님:</b> 잠시 후 채팅 옆에 <b>미리보기</b>가 열리고 게임이 바로 실행됩니다.
+              안 열리면 "화면에서 바로 플레이되게 해줘"라고 한 줄 더 요청하세요.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════ 11. 한 줄 요청 아이디어 ═══════════ -->
+    <!-- ═══════════ 6. 한 줄 요청 아이디어 ═══════════ -->
     <section>
       <div class="page">
-        <span class="tag mint">STEP 3 · 직접 해보기</span>
-        <h2 class="pop">업그레이드는 <b class="c-coral">한 번에 한 줄씩</b></h2>
-        <p class="pop d1" style="margin-top: .2rem;">데모에서 봤던 것처럼, 요청을 하나 보내고 → 실행해 보고 → 다음 요청. 이 리듬이 중요해요.</p>
+        <span class="tag mint">직접 해보기</span>
+        <h2>업그레이드는 <b class="c-coral">한 번에 한 줄씩</b></h2>
+        <p style="margin-top: .2rem;">데모에서 봤던 것처럼, 요청을 하나 보내고 → 플레이해 보고 → 다음 요청. 이 리듬이 중요해요.</p>
         <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; align-content: center; margin-top: .5rem;">
-          <div class="spell sm pop d1">💖 "사과를 놓치면 생명이 줄게 해줘. 생명은 3개"</div>
-          <div class="spell sm pop d2">⚡ "점수가 오를수록 점점 빨라지게 해줘"</div>
-          <div class="spell sm pop d3">🔊 "사과를 받을 때 효과음이 나게 해줘"</div>
-          <div class="spell sm pop d4">🌌 "배경을 밤하늘로 바꾸고 별이 반짝이게 해줘"</div>
-          <div class="spell sm pop d5">🏆 "최고 점수를 기억해서 화면에 보여줘"</div>
-          <div class="spell sm pop d6">🌟 "가끔 황금사과가 나오고, 받으면 5점을 주게 해줘"</div>
+          <div class="spell sm">💖 "사과를 놓치면 생명이 줄게 해줘. 생명은 3개"</div>
+          <div class="spell sm">⚡ "점수가 오를수록 점점 빨라지게 해줘"</div>
+          <div class="spell sm">🔊 "사과를 받을 때 효과음이 나게 해줘"</div>
+          <div class="spell sm">🌌 "배경을 밤하늘로 바꾸고 별이 반짝이게 해줘"</div>
+          <div class="spell sm">🏆 "최고 점수를 기억해서 화면에 보여줘"</div>
+          <div class="spell sm">🌟 "가끔 황금사과가 나오고, 받으면 5점을 주게 해줘"</div>
         </div>
-        <p class="pop d6 center" style="font-size: 1.3rem; margin-top: .5rem;">
+        <p class="center" style="font-size: 1.3rem; margin-top: .5rem;">
           네가 생각해 낸 요청이 <b class="c-lav">제일 좋은 요청</b>이에요. 마음껏 실험해 봐요!
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 12. 버그가 나면 ═══════════ -->
+    <!-- ═══════════ 7. 버그가 나면 ═══════════ -->
     <section>
       <div class="page">
-        <span class="tag sky">STEP 4 · 버그 잡기</span>
-        <h2 class="pop">뭔가 이상해요? — 그게 <b class="c-mint">버그</b>, 고치면 됩니다</h2>
+        <span class="tag sky">버그 잡기</span>
+        <h2>뭔가 이상해요? — 그게 <b class="c-mint">버그</b>, 고치면 됩니다</h2>
         <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .9rem;">
-          <div class="say me pop d1" style="max-width: 940px; align-self: flex-end;">
+          <div class="say me" style="max-width: 940px; align-self: flex-end;">
             <span class="who">🧑 나</span>
             고양이가 안 움직여. 화살표 키를 눌러도 그대로야. 고쳐줘.
           </div>
-          <div class="say robot pop d2" style="max-width: 940px;">
-            <span class="who">🤖 에이전트</span>
-            확인했어요 — 키 입력 처리에 문제가 있네요. 수정했으니 새로고침해 보세요!
+          <div class="say robot" style="max-width: 940px;">
+            <span class="who">🤖 AI</span>
+            확인했어요 — 키 입력 처리에 문제가 있네요. 수정했으니 미리보기에서 다시 해보세요!
           </div>
-          <div class="scard pop d3" style="align-self: center; max-width: 940px; text-align: left; padding: 1.1rem 1.5rem;">
+          <div class="scard" style="align-self: center; max-width: 940px; text-align: left; padding: 1.1rem 1.5rem;">
             <p style="font-size: 1.3rem;"><b>버그 신고 잘하는 법</b> 🔍</p>
             <p style="font-size: 1.2rem; margin-top: .4rem;">
               ① <b>뭐가 이상한지 그대로</b> 말하기 ("점수가 안 올라가")<br/>
               ② 빨간 <b>에러 메시지가 보이면 복사해서</b> 붙여넣기 — 최고의 힌트!<br/>
-              ③ 고쳐지면 다시 실행해서 확인 — 이것도 바이브 코딩 루프의 일부예요.
+              ③ 고쳐지면 다시 플레이해서 확인 — 이것도 바이브 코딩 루프의 일부예요.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════ 13. 부모님 가이드 ③ ═══════════ -->
-    <section>
-      <div class="note-page">
-        <span class="note-tag">📌 부모님 가이드 ③ — 마무리</span>
-        <h2>작품 보관과 다음 세션</h2>
-        <ul style="margin-top: .9rem;">
-          <li class="pop d1">게임 파일이 든 <b>폴더째 보관</b>하면 언제든 다시 열고, 이어서 만들 수 있습니다.</li>
-          <li class="pop d2">플레이 장면 <b>스크린샷·영상</b>을 남겨 주세요 — 아이의 첫 소프트웨어입니다. 📸</li>
-          <li class="pop d3">이어서 만들기: 같은 폴더에서 <span class="cmd">claude</span>(또는 <span class="cmd">codex</span>)를 다시 실행하면 됩니다.</li>
-          <li class="pop d4">아이가 원리를 물으면 에이전트에게 <b>"방금 코드를 초등학생에게 설명해줘"</b>라고 요청해 보세요 — 눈높이 설명이 나옵니다.</li>
-          <li class="pop d5">부모님도 더 깊이: 왼쪽 위 <b>"↗ 어른용"</b> 세미나에서 AI·에이전트·모델 선택을 자세히 다룹니다.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ═══════════ 14. 핵심 정리 ═══════════ -->
+    <!-- ═══════════ 8. 핵심 정리 & 다음 프로젝트 ═══════════ -->
     <section>
       <div class="page">
         <span class="tag">정리</span>
-        <h2 class="pop">오늘의 핵심, <b class="c-sunny">딱 세 가지</b></h2>
+        <h2>오늘의 핵심, <b class="c-sunny">딱 세 가지</b></h2>
         <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; align-items: center; margin-top: .8rem;">
-          <div class="scard pop d1">
+          <div class="scard">
             <span class="em">🎯</span>
             <p><b>구체적으로 요청</b><br/>누가 · 무엇을 · 어떻게</p>
           </div>
-          <div class="scard pop d2">
+          <div class="scard">
             <span class="em">🔁</span>
-            <p><b>한 번에 한 줄씩</b><br/>요청 → 실행 → 다음 요청</p>
+            <p><b>한 번에 한 줄씩</b><br/>요청 → 플레이 → 다음 요청</p>
           </div>
-          <div class="scard pop d3">
+          <div class="scard">
             <span class="em">👀</span>
-            <p><b>꼭 실행해서 확인</b><br/>버그는 고치면 그만</p>
+            <p><b>꼭 플레이해서 확인</b><br/>버그는 고치면 그만</p>
           </div>
         </div>
-        <p class="pop d4 center" style="font-size: 1.35rem;">
-          이 세 가지는 어른들이 회사에서 쓰는 바이브 코딩과 <b class="c-lav">완전히 똑같은</b> 방법이에요.
+        <p class="center" style="font-size: 1.28rem;">
+          다음엔? 🐶 강아지 달리기 · 🚀 우주선 피하기 · ❓ 가족 퀴즈 · 🎨 그림판 —<br/>
+          상상할 수 있으면 <b class="c-coral">요청할 수 있고</b>, 요청할 수 있으면 <b class="c-mint">만들 수 있다.</b>
         </p>
       </div>
     </section>
 
-    <!-- ═══════════ 15. 다음 프로젝트 ═══════════ -->
-    <section>
-      <div class="page">
-        <span class="tag mint">다음 프로젝트</span>
-        <h2 class="pop">다음엔 뭘 만들어 볼까?</h2>
-        <div style="flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: center; margin-top: .8rem;">
-          <div class="scard pop d1"><span class="em">🐶</span><p>내 강아지가<br/>주인공인 달리기 게임</p></div>
-          <div class="scard pop d2"><span class="em">🚀</span><p>운석을 피하는<br/>우주선 게임</p></div>
-          <div class="scard pop d3"><span class="em">❓</span><p>가족 퀴즈<br/>맞히기 게임</p></div>
-          <div class="scard pop d4"><span class="em">🎨</span><p>내 마음대로<br/>그림판 만들기</p></div>
-        </div>
-        <p class="pop d5 center" style="font-size: 1.45rem;">
-          상상할 수 있으면 → <b class="c-coral">요청할 수 있고</b> → 요청할 수 있으면 <b class="c-mint">만들 수 있다.</b>
-        </p>
-      </div>
-    </section>
-
-    <!-- ═══════════ 16. 끝 ═══════════ -->
+    <!-- ═══════════ 9. 끝 ═══════════ -->
     <section id="finale">
       <div class="sky-page">
         <span class="bouncy" style="font-size: 5.8rem;">🎉</span>
-        <h1 class="pop" style="font-size: 3.9rem; margin-top: .6rem;">
+        <h1 style="font-size: 3.9rem; margin-top: .6rem;">
           오늘부터 너도 <span style="color: #FFD86B;">만드는 사람</span>
         </h1>
-        <p class="pop d2" style="font-size: 1.5rem; margin-top: 1rem; max-width: 900px;">
+        <p style="font-size: 1.5rem; margin-top: 1rem; max-width: 900px;">
           코딩을 다 외울 필요는 없어요.<br/>
           <b style="color: #B5F5E3;">좋은 요청을 만드는 사람</b>이 다음 시대의 개발자니까요.
         </p>
-        <p class="hint pop d3">✨ 화면을 눌러서 축하 폭죽! ✨</p>
-        <p class="pop d4" style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
+        <p class="hint">✨ 화면을 눌러서 축하 폭죽! ✨</p>
+        <p style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
           부모님께 — 어른용 세미나: <a href="../intro/index.html" style="color: #B5F5E3 !important;">바이브 코딩이란 무엇인가?</a>
         </p>
       </div>
@@ -800,8 +628,8 @@ footer, header, hgroup, main, menu, nav, section {
     controlsLayout: 'edges',
     progress: true,
     slideNumber: 'c/t',
-    transition: 'slide',
-    backgroundTransition: 'fade',
+    transition: 'none',
+    backgroundTransition: 'none',
     width: 1280,
     height: 800,
     margin: 0.03,
@@ -873,18 +701,6 @@ footer, header, hgroup, main, menu, nav, section {
     });
   });
 
-  // ===== 빈칸 퀴즈 =====
-  document.querySelectorAll('.tap-blank').forEach((b) => {
-    b.addEventListener('click', () => {
-      if (b.classList.contains('open')) return;
-      b.classList.add('open');
-      b.textContent = b.dataset.answer;
-      const r = b.getBoundingClientRect();
-      sparkleBurst(r.left + r.width / 2, r.top + r.height / 2, 10);
-      ding(1046);
-    });
-  });
-
   // ===== 라이브 데모: 요청 한 줄 → 게임 진화 =====
   (function () {
     const sec = document.getElementById('demo');
@@ -914,7 +730,7 @@ footer, header, hgroup, main, menu, nav, section {
     const STEPS = [
       {
         ask: '떨어지는 사과를 바구니로 받는 게임을 만들어줘',
-        reply: '게임 파일을 만들고 실행했어요. 떨어지는 사과를 클릭해서 받아 보세요! 🍎',
+        reply: '게임을 만들어서 미리보기에 띄웠어요. 떨어지는 사과를 클릭해서 받아 보세요! 🍎',
         apply() { st.on = true; stage.classList.remove('off'); },
       },
       {
@@ -960,7 +776,7 @@ footer, header, hgroup, main, menu, nav, section {
       ding(760);
       btn.disabled = true;
       setTimeout(() => {
-        bubble('robot', '🤖 에이전트', s.reply);
+        bubble('robot', '🤖 AI', s.reply);
         s.apply();
         ding(1046);
         ensureSpawner();
@@ -979,7 +795,7 @@ footer, header, hgroup, main, menu, nav, section {
       scoreChip.classList.remove('on');
       heartsChip.classList.remove('on');
       log.innerHTML = '';
-      bubble('robot', '🤖 에이전트', '안녕하세요! 어떤 게임을 만들까요? 아래 버튼으로 요청을 한 줄씩 보내 보세요.');
+      bubble('robot', '🤖 AI', '안녕하세요! 어떤 게임을 만들까요? 아래 버튼으로 요청을 한 줄씩 보내 보세요.');
       btn.textContent = '요청 보내기 ▶ (1/5)';
     }
 
