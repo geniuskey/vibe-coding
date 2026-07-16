@@ -168,7 +168,7 @@
     /* ── 히어로 ───────────────────────────────────── */
     header.hero {
       position: relative;
-      padding: 4.5rem 0 3.2rem;
+      padding: 2.8rem 0 2.4rem;
       overflow: hidden;
       background:
         radial-gradient(60rem 30rem at 80% -10%, rgba(155,130,255,.14), transparent 60%),
@@ -194,7 +194,7 @@
       border: 1px solid rgba(43,234,208,.35);
       border-radius: 999px;
       padding: .25rem .9rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: .9rem;
       font-family: var(--mono);
     }
     .eyebrow .dot {
@@ -213,7 +213,7 @@
       font-weight: 800;
       color: var(--fg);
       line-height: 1.22;
-      margin-bottom: 1rem;
+      margin-bottom: .8rem;
       letter-spacing: -.01em;
     }
     .hero h1 .grad {
@@ -248,7 +248,7 @@
       color: var(--fg-soft);
       font-size: 1.02rem;
     }
-    .hero .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.8rem; }
+    .hero .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.2rem; }
     .hero .cta {
       display: inline-block;
       padding: .7rem 1.5rem;
@@ -321,7 +321,7 @@
       font-size: .76rem;
       line-height: 1.75;
       padding: .9rem 1rem 1rem;
-      height: 21.5rem;
+      height: 15.5rem;
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: rgba(155,130,255,.4) transparent;
@@ -361,7 +361,7 @@
     .term-foot .tok { color: var(--accent-4); }
 
     /* ── 본문 섹션 ────────────────────────────────── */
-    main { padding: 3rem 0 4rem; }
+    main { padding: 2.3rem 0 3.4rem; }
     section + section { margin-top: 3rem; }
     h2.sec {
       font-size: 1.15rem;
@@ -388,11 +388,32 @@
     }
     @media (max-width: 700px) { h2.sec .hint { display: none; } }
 
-    .grid {
+    /* ── 세미나 보드: 트랙 3열, 한 화면에 전부 ───── */
+    .tracks {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.1rem 1.2rem;
+      align-items: start;
     }
+    .track { display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+    .track-head {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .1em;
+      color: var(--fg-soft);
+      padding: 0 .15rem .1rem;
+    }
+    .track-head .tno { font-weight: 700; }
+    .track-head .tline { flex: 1; height: 1px; }
+    .th-start .tno { color: var(--accent-2); }
+    .th-start .tline { background: linear-gradient(90deg, rgba(43,234,208,.45), transparent); }
+    .th-deep .tno { color: var(--accent); }
+    .th-deep .tline { background: linear-gradient(90deg, rgba(155,130,255,.5), transparent); }
+    .th-hands .tno { color: var(--accent-4); }
+    .th-hands .tline { background: linear-gradient(90deg, rgba(255,212,107,.45), transparent); }
     a.card {
       --mx: 50%;
       --my: 50%;
@@ -456,6 +477,57 @@
       padding: .05rem .45rem;
     }
     @media (hover: none) { .card .key { display: none; } }
+
+    /* 컴팩트 카드 — 트랙 보드용 한 줄 카드 */
+    a.card.mini {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: .4rem .75rem;
+      padding: .85rem 1rem;
+      border-radius: 13px;
+    }
+    .mini .emoji { font-size: 1.35rem; }
+    .mini h3 { font-size: .96rem; line-height: 1.35; }
+    .mini .mini-main { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+    .mini .badge { margin-left: 0; align-self: flex-start; font-size: .66rem; padding: .12rem .5rem; }
+    .mini .key { margin-left: 0; }
+    .mini .mdesc { grid-column: 1 / -1; font-size: .84rem; color: var(--fg-soft); margin: 0; }
+    /* 데스크톱(호버 가능)에서는 설명을 시각적으로만 숨기고(스크린리더 유지)
+       아래 미리보기 바에 호버로 보여준다 */
+    @media (min-width: 720px) and (hover: hover) {
+      .mini .mdesc {
+        position: absolute;
+        width: 1px; height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+    }
+
+    /* 호버 미리보기 바 — 터미널 출력처럼 */
+    #detail-bar {
+      margin-top: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: .6rem;
+      min-height: 2.9rem;
+      padding: .7rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(8,10,20,.78);
+      font-family: var(--mono);
+      font-size: .8rem;
+      line-height: 1.55;
+      color: var(--fg-soft);
+    }
+    #detail-bar .t-prompt { flex: none; }
+    #detail-text { animation: detailin .28s ease; }
+    #detail-bar .t-cursor { flex: none; align-self: center; }
+    @keyframes detailin { from { opacity: .15; transform: translateX(5px); } }
+    @media (max-width: 719px), (hover: none) {
+      #detail-bar { display: none; }
+    }
 
     /* 스크롤 리빌 */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
@@ -682,63 +754,91 @@
 
 <main class="wrap">
 
-  <section class="reveal">
-    <h2 class="sec">시작하기 <span class="hint">숫자 키 1–6 으로 바로 이동</span></h2>
-    <div class="grid">
-      <a class="card" href="intro/" data-key="1">
-        <div class="top"><span class="emoji">🚀</span><span class="badge start">입문</span></div>
-        <h3>바이브 코딩이란 무엇인가?</h3>
-        <p>알파고부터 LLM, 에이전트, Claude Code까지 — 바이브 코딩의 개념과 실전 활용법을 다루는 원본 세미나. 시리즈의 출발점입니다.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">1</span></div>
-      </a>
-      <a class="card" href="github/" data-key="2">
-        <div class="top"><span class="emoji">🌿</span><span class="badge start">기초 도구</span></div>
-        <h3>바이브 코딩을 위한 최소한의 Git &amp; GitHub</h3>
-        <p>AI 에이전트와 협업하려면 버전 관리가 안전망입니다. 바이브 코딩에 꼭 필요한 만큼만 추린 Git &amp; GitHub 안내.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">2</span></div>
-      </a>
-    </div>
-  </section>
+  <section class="reveal" id="board">
+    <h2 class="sec">모든 세미나 한눈에 <span class="hint">숫자 키 1–7 바로 이동 · 카드에 호버하면 아래에 소개</span></h2>
 
-  <section class="reveal">
-    <h2 class="sec">더 깊이</h2>
-    <div class="grid">
-      <a class="card" href="context/" data-key="3">
-        <div class="top"><span class="emoji">🧠</span><span class="badge deep">심화</span></div>
-        <h3>컨텍스트 — AI 에이전트의 작업 책상</h3>
-        <p>긴 작업이 산으로 가는 이유는 대부분 컨텍스트 때문. 컨텍스트 창의 원리와 컨텍스트 엔지니어링 기법을 다룹니다.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">3</span></div>
-      </a>
-      <a class="card" href="knowledge/" data-key="4">
-        <div class="top"><span class="emoji">📚</span><span class="badge deep">심화</span></div>
-        <h3>LLM에게 지식을 가르치는 법</h3>
-        <p>LLM 위키 · RAG · 지식 그래프 · 온톨로지 — 조직의 지식을 LLM이 쓸 수 있게 만드는 방법들을 비교합니다.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">4</span></div>
-      </a>
-    </div>
-  </section>
+    <div class="tracks">
+      <div class="track">
+        <div class="track-head th-start"><span class="tno">01</span>시작하기<span class="tline"></span></div>
+        <a class="card mini" href="intro/" data-key="1">
+          <span class="emoji">🚀</span>
+          <span class="mini-main">
+            <h3>바이브 코딩이란 무엇인가?</h3>
+            <span class="badge start">입문</span>
+          </span>
+          <span class="key">1</span>
+          <p class="mdesc">알파고부터 LLM, 에이전트, Claude Code까지 — 바이브 코딩의 개념과 실전 활용법을 다루는 원본 세미나. 시리즈의 출발점입니다.</p>
+        </a>
+        <a class="card mini" href="github/" data-key="2">
+          <span class="emoji">🌿</span>
+          <span class="mini-main">
+            <h3>바이브 코딩을 위한 최소한의 Git &amp; GitHub</h3>
+            <span class="badge start">기초 도구</span>
+          </span>
+          <span class="key">2</span>
+          <p class="mdesc">AI 에이전트와 협업하려면 버전 관리가 안전망입니다. 바이브 코딩에 꼭 필요한 만큼만 추린 Git &amp; GitHub 안내.</p>
+        </a>
+      </div>
 
-  <section class="reveal">
-    <h2 class="sec">직접 해보기</h2>
-    <div class="grid">
-      <a class="card" href="workshop/" data-key="5">
-        <div class="top"><span class="emoji">🛠️</span><span class="badge hands">실습</span></div>
-        <h3>바이브 코딩 실습 워크숍</h3>
-        <p>반도체 엔지니어를 위한 8시간 핸즈온. 실제 데이터로 스펙 작성부터 에이전트 협업까지 직접 겪어봅니다.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">5</span></div>
-      </a>
-      <a class="card" href="agent-skills/" data-key="7">
-        <div class="top"><span class="emoji">🧬</span><span class="badge hands">실습</span></div>
-        <h3>반도체 현업을 위한 Agent Skills</h3>
-        <p>내 업무 노하우를 SKILL.md로 — DRM 엑셀(xlwings)·주간보고 PPT(win32com)·GDS(KLayout)·RTL·TCAD 실무 예제 7종과 실습.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">7</span></div>
-      </a>
-      <a class="card" href="forChildren/" data-key="6">
-        <div class="top"><span class="emoji">🎮</span><span class="badge family">어린이 × 부모</span></div>
-        <h3>나만의 게임 만들기</h3>
-        <p>AI 에이전트와 함께 나만의 게임을 만들어보는 어린이용 세미나. 부모님과 함께 보세요.</p>
-        <div class="foot"><span class="go">슬라이드 보기 →</span><span class="key">6</span></div>
-      </a>
+      <div class="track">
+        <div class="track-head th-deep"><span class="tno">02</span>더 깊이<span class="tline"></span></div>
+        <a class="card mini" href="context/" data-key="3">
+          <span class="emoji">🧠</span>
+          <span class="mini-main">
+            <h3>컨텍스트 — AI 에이전트의 작업 책상</h3>
+            <span class="badge deep">심화</span>
+          </span>
+          <span class="key">3</span>
+          <p class="mdesc">긴 작업이 산으로 가는 이유는 대부분 컨텍스트 때문. 컨텍스트 창의 원리와 컨텍스트 엔지니어링 기법을 다룹니다.</p>
+        </a>
+        <a class="card mini" href="knowledge/" data-key="4">
+          <span class="emoji">📚</span>
+          <span class="mini-main">
+            <h3>LLM에게 지식을 가르치는 법</h3>
+            <span class="badge deep">심화</span>
+          </span>
+          <span class="key">4</span>
+          <p class="mdesc">LLM 위키 · RAG · 지식 그래프 · 온톨로지 — 조직의 지식을 LLM이 쓸 수 있게 만드는 방법들을 비교합니다.</p>
+        </a>
+      </div>
+
+      <div class="track">
+        <div class="track-head th-hands"><span class="tno">03</span>직접 해보기<span class="tline"></span></div>
+        <a class="card mini" href="workshop/" data-key="5">
+          <span class="emoji">🛠️</span>
+          <span class="mini-main">
+            <h3>바이브 코딩 실습 워크숍</h3>
+            <span class="badge hands">실습</span>
+          </span>
+          <span class="key">5</span>
+          <p class="mdesc">반도체 엔지니어를 위한 8시간 핸즈온. 실제 데이터로 스펙 작성부터 에이전트 협업까지 직접 겪어봅니다.</p>
+        </a>
+        <a class="card mini" href="agent-skills/" data-key="6">
+          <span class="emoji">🧬</span>
+          <span class="mini-main">
+            <h3>반도체 현업을 위한 Agent Skills</h3>
+            <span class="badge hands">실습</span>
+          </span>
+          <span class="key">6</span>
+          <p class="mdesc">내 업무 노하우를 SKILL.md로 — DRM 엑셀(xlwings)·주간보고 PPT(win32com)·GDS(KLayout)·RTL·TCAD 실무 예제 7종과 실습.</p>
+        </a>
+        <a class="card mini" href="forChildren/" data-key="7">
+          <span class="emoji">🎮</span>
+          <span class="mini-main">
+            <h3>나만의 게임 만들기</h3>
+            <span class="badge family">어린이 × 부모</span>
+          </span>
+          <span class="key">7</span>
+          <p class="mdesc">AI 에이전트와 함께 나만의 게임을 만들어보는 어린이용 세미나. 부모님과 함께 보세요.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- 호버 미리보기 — 카드 위에 올리면 소개가 여기 출력된다 (모바일은 카드 안에 표시) -->
+    <div id="detail-bar" aria-hidden="true">
+      <span class="t-prompt">❯</span>
+      <span id="detail-text">카드 위에 마우스를 올리면 세미나 소개가 여기 표시됩니다 — 클릭하면 슬라이드로 이동</span>
+      <span class="t-cursor"></span>
     </div>
   </section>
 
@@ -1304,7 +1404,7 @@
     if (e.key === "/") { e.preventDefault(); openPalette(); return; }
 
     // 숫자 바로가기
-    if (!e.ctrlKey && !e.metaKey && !e.altKey && /^[1-6]$/.test(e.key)) {
+    if (!e.ctrlKey && !e.metaKey && !e.altKey && /^[1-7]$/.test(e.key)) {
       var card = document.querySelector('a.card[data-key="' + e.key + '"]');
       if (card) location.href = card.getAttribute("href");
       return;
@@ -1320,6 +1420,32 @@
       konamiPos = got === KONAMI[0] ? 1 : 0;
     }
   });
+
+  /* ═══════════════════════════════════════════════════
+     6.5 세미나 보드 미리보기 바
+        — 카드에 호버/포커스하면 소개 문구를 터미널 출력처럼 표시
+  ═══════════════════════════════════════════════════ */
+  (function () {
+    var detailText = $("#detail-text");
+    if (!detailText) return;
+    function show(card) {
+      var title = card.querySelector("h3");
+      var desc = card.querySelector(".mdesc");
+      var emoji = card.querySelector(".emoji");
+      if (!title || !desc) return;
+      var next = (emoji ? emoji.textContent + " " : "") + title.textContent + " — " + desc.textContent;
+      if (detailText.textContent === next) return;
+      detailText.textContent = next;
+      // 애니메이션 재시작 트릭
+      detailText.style.animation = "none";
+      void detailText.offsetWidth;
+      detailText.style.animation = "";
+    }
+    document.querySelectorAll("a.card.mini").forEach(function (card) {
+      card.addEventListener("mouseenter", function () { show(card); });
+      card.addEventListener("focus", function () { show(card); });
+    });
+  })();
 
   /* ═══════════════════════════════════════════════════
      7. 카드 3D 틸트 + 글로우 추적
