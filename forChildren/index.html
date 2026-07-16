@@ -13,7 +13,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나만의 게임 작동시키기 — 어린이 AI 바이브 코딩</title>
+  <title>나만의 게임 2개 만들기 — 어린이 AI 바이브 코딩</title>
 
   <!-- SEO -->
   <meta name="description" content="초등학생이 복사 가능한 단계별 프롬프트로 바구니 고양이 액션 게임과 우주 퀴즈 게임을 직접 만들고 테스트하는 어린이 AI 바이브 코딩 워크숍." />
@@ -27,7 +27,7 @@
   <meta property="og:title" content="나만의 게임 만들기 — AI와 바이브 코딩" />
   <meta property="og:description" content="8개의 단계별 프롬프트를 복사하고 붙여넣으며 액션 게임과 퀴즈 게임을 끝까지 완성하는 어린이 바이브 코딩 워크숍." />
   <meta property="og:locale" content="ko_KR" />
-  <meta property="og:image" content="assets/hero-ai-game.png" />
+  <meta property="og:image" content="assets/hero-ai-game.webp" />
   <meta name="theme-color" content="#17113A" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
@@ -368,7 +368,7 @@ footer, header, hgroup, main, menu, nav, section {
     }
 
     /* ===== 툴바 · 진행 표시 ===== */
-    .book-toolbar { position: fixed; top: 14px; left: 18px; z-index: 60; display: flex; gap: 8px; }
+    .book-toolbar { position: fixed; top: max(2px, env(safe-area-inset-top)); left: 18px; z-index: 60; display: flex; gap: 8px; }
     .book-toolbar select, .book-toolbar button, .book-toolbar a {
       font-family: 'Pretendard', system-ui, sans-serif; font-weight: 700; font-size: .85rem;
       background: rgba(255, 249, 237, 0.92); color: #4B3A28; border: 2px solid #E8D7B8;
@@ -388,6 +388,7 @@ footer, header, hgroup, main, menu, nav, section {
     * { box-sizing: border-box; }
     button, select, a { touch-action: manipulation; }
     button, select { -webkit-tap-highlight-color: rgba(142, 123, 255, .2); }
+    section[id] { scroll-margin-top: 64px; }
     h1, h2, h3 { text-wrap: balance; }
     p, li { text-wrap: pretty; }
 
@@ -729,6 +730,93 @@ footer, header, hgroup, main, menu, nav, section {
     .compare-card b { font-size: 1.35rem; }
     .compare-card small { color: var(--ink-soft); font-size: .98rem; font-weight: 700; }
 
+    /* ===== 초등 저학년 가독성·실습 흐름 개선 ===== */
+    .book-toolbar select, .book-toolbar button, .book-toolbar a {
+      min-height: 44px; font-size: 1rem; padding: .5em 1em;
+    }
+    .mission-definition {
+      display: flex; align-items: center; gap: .8rem; margin-top: .75rem; padding: .72rem 1rem;
+      border: 2px solid #CFC2FF; border-radius: 15px; background: #F3EFFF; color: #51418E;
+      font-size: 1.08rem; line-height: 1.4; font-weight: 750;
+    }
+    .mission-definition b { flex: 0 0 auto; color: #FFF; background: #6C57E8; border-radius: 999px; padding: .35rem .65rem; }
+    .safety-mini-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .6rem; margin-top: .75rem; }
+    .safety-mini {
+      display: flex; align-items: center; gap: .55rem; min-height: 60px; padding: .55rem .68rem;
+      border: 2px solid #F1C6BF; border-radius: 14px; background: #FFF0ED; color: #8F3E35;
+      font-size: .98rem; line-height: 1.3; font-weight: 800;
+    }
+    .safety-mini span { font-size: 1.4rem; }
+
+    .build-slide .page { padding: 1rem 1.7rem .9rem; }
+    .build-slide h2 { font-size: 2.05rem; }
+    .build-slide .page-kicker { font-size: 1.13rem !important; line-height: 1.4 !important; }
+    .build-progress { min-height: 48px; margin-top: .35rem; padding: .3rem .5rem; }
+    .build-dot { min-height: 38px; font-size: 1.1rem; }
+    .build-dot::before { width: 1.7rem; height: 1.7rem; font-size: .9rem; }
+    .build-layout { grid-template-columns: minmax(0,1fr) 300px; gap: .85rem; margin-top: .4rem; }
+    .build-prompt-card { padding: .9rem 1rem; }
+    .build-prompt-label { font-size: .95rem; }
+    .prompt-summary {
+      flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; padding: .7rem; text-align: center;
+    }
+    .prompt-summary .prompt-icon { font-size: 3.7rem; line-height: 1; }
+    .prompt-summary strong { margin-top: .55rem; color: #FFF; font-size: 1.42rem; line-height: 1.25; }
+    .prompt-summary p { margin-top: .35rem; max-width: 620px; color: #DAD3F7; font-size: 1.12rem; line-height: 1.45; }
+    .prompt-details, .rescue-details {
+      margin: .4rem 0 .55rem; border: 1px solid #5A507D; border-radius: 12px;
+      background: rgba(255,255,255,.06); overflow: hidden;
+    }
+    .prompt-details summary, .rescue-details summary {
+      display: flex; align-items: center; min-height: 46px; padding: .5rem .72rem;
+      color: #E6E0FF; font-size: 1rem; font-weight: 850; cursor: pointer; list-style: none;
+    }
+    .prompt-details summary::-webkit-details-marker, .rescue-details summary::-webkit-details-marker { display: none; }
+    .prompt-details summary::before, .rescue-details summary::before { content: "＋"; margin-right: .45rem; color: #FFD86B; font-size: 1.25rem; }
+    .prompt-details[open] summary::before, .rescue-details[open] summary::before { content: "−"; }
+    .prompt-details[open] { display: flex; flex-direction: column; min-height: 0; }
+    .build-prompt-text {
+      flex: none; max-height: 230px; margin: 0; padding: .72rem; border-top: 1px solid #5A507D;
+      font-size: 1.15rem; line-height: 1.5; overflow: auto; overscroll-behavior: contain;
+    }
+    .build-copy-btn { min-height: 52px; font-size: 1.1rem; }
+    .step-callout { font-size: 1.05rem; padding: .7rem .75rem; }
+    .step-callout b { font-size: 1.12rem; }
+    .maker-choices { padding: .62rem; border: 2px solid #D9CEF9; border-radius: 14px; background: #F7F4FF; }
+    .maker-choices strong { display: block; color: #4B399A; font-size: 1rem; }
+    .maker-choice-row { display: flex; gap: .35rem; margin-top: .4rem; }
+    .maker-choice {
+      flex: 1; min-height: 44px; padding: .35rem .42rem; border: 2px solid #D7CDF7;
+      border-radius: 10px; background: #FFF; color: #55448F; font: 850 .94rem 'Pretendard',sans-serif;
+      cursor: pointer;
+    }
+    .maker-choice:hover { border-color: #8E7BFF; }
+    .maker-choice[aria-pressed="true"] { border-color: #6C57E8; background: #6C57E8; color: #FFF; }
+    .step-checks { gap: .38rem; }
+    .step-check {
+      width: 100%; min-height: 50px; padding: .5rem .58rem; color: var(--ink-soft);
+      font: 800 1.1rem/1.3 'Pretendard',sans-serif; text-align: left; cursor: pointer;
+    }
+    .step-check:hover { border-color: #9D89EB; transform: translateX(3px); }
+    .step-check[aria-pressed="true"] { border-color: #2EC59B; background: #E7FAF4; color: #176C54; }
+    .step-check::before { content: "□"; flex: 0 0 auto; font-size: 1.25rem; }
+    .step-check[aria-pressed="true"]::before { content: "✓"; }
+    .build-side .copy-status { min-height: 56px; font-size: .98rem; }
+
+    .rescue-card { padding: .85rem; }
+    .rescue-card h3 { font-size: 1.15rem; }
+    .rescue-card > p { margin-top: .4rem; color: var(--ink-soft); font-size: 1.02rem; line-height: 1.4; }
+    .rescue-details { margin-top: auto; border-color: #D9CEF9; background: #F6F2FF; }
+    .rescue-details summary { color: #55448F; }
+    .rescue-card pre { max-height: 210px; margin: 0; font-size: 1.03rem; line-height: 1.5; }
+    .rescue-card .copy-btn { min-height: 50px; font-size: 1.05rem; }
+
+    .maker-choice:focus-visible, .step-check:focus-visible,
+    .prompt-details summary:focus-visible, .rescue-details summary:focus-visible {
+      outline: 4px solid #FFD86B; outline-offset: 2px;
+    }
+
     .parent-grid { flex: 1; display: grid; grid-template-columns: repeat(2,1fr); gap: .75rem; align-content: center; margin-top: .75rem; }
     .parent-tip { padding: .9rem 1rem; border-radius: 16px; background: rgba(255,255,255,.56); border: 1px solid #E4CF72; }
     .parent-tip h3 { color: #604B0D; font-size: 1.08rem; }
@@ -806,7 +894,7 @@ footer, header, hgroup, main, menu, nav, section {
     .final-actions a:hover { background: rgba(255,255,255,.2); }
 
     @media (max-width: 720px) {
-      .book-toolbar { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; }
+      .book-toolbar { top: max(2px, env(safe-area-inset-top)); left: 8px; right: 8px; }
       .book-toolbar select { max-width: 150px; }
       .book-toolbar a { display: none; }
     }
@@ -831,7 +919,7 @@ footer, header, hgroup, main, menu, nav, section {
 <nav class="book-toolbar" aria-label="발표 도구">
   <select id="tocSelect" aria-label="목차에서 페이지 선택" title="목차 — 원하는 페이지로 이동"></select>
   <button id="fullscreenBtn" type="button" aria-label="전체 화면으로 보기" aria-keyshortcuts="F" title="전체 화면 (F)">⛶ 크게 보기</button>
-  <a href="../intro/index.html" title="어른용 세미나로 이동">↗ 어른용</a>
+  <a href="#/parentSlide" title="부모님 진행 가이드로 이동">↗ 부모님 가이드</a>
 </nav>
 
 <main class="reveal" id="presentation" tabindex="-1" aria-label="어린이 바이브 코딩 발표 자료">
@@ -841,12 +929,12 @@ footer, header, hgroup, main, menu, nav, section {
     <section id="cover" aria-labelledby="cover-title">
       <div class="hero-page">
         <figure class="hero-art">
-          <img src="assets/hero-ai-game.png" width="1568" height="1003" fetchpriority="high" alt="노트북으로 게임을 만들며 AI 로봇과 협력하는 어린이 삽화" />
+          <img src="assets/hero-ai-game.webp" width="1568" height="1003" fetchpriority="high" alt="노트북으로 게임을 만들며 AI 로봇과 협력하는 어린이 삽화" />
         </figure>
         <div class="hero-copy">
           <span class="eyebrow">AI × GAME × MY IDEA</span>
-          <h1 id="cover-title">나만의 게임 <b style="color:#FFD86B;">2개</b>,<br><span style="color:#AEEEDC;">오늘 작동시킨다</span></h1>
-          <p class="lead">프롬프트를 순서대로 복사하고 직접 플레이해요.<br><b style="color:#FFD86B;">액션 게임 + 퀴즈 게임</b>을 끝까지 완성합니다.</p>
+          <h1 id="cover-title">나만의 게임 <b style="color:#FFD86B;">2개</b>,<br><span style="color:#AEEEDC;">차근차근 완성!</span></h1>
+          <p class="lead">한 번에 게임 하나만 만들어도 성공이에요.<br><b style="color:#FFD86B;">액션 게임 + 퀴즈 게임</b>을 직접 플레이하고 고쳐 봐요.</p>
           <button class="start-cue" id="missionStartBtn" type="button"><span class="key">→</span> 눌러서 미션 시작</button>
         </div>
       </div>
@@ -856,86 +944,39 @@ footer, header, hgroup, main, menu, nav, section {
     <section id="missionSlide" aria-labelledby="mission-title">
       <div class="page">
         <span class="tag">오늘의 미션</span>
-        <h2 id="mission-title">게임 2개를 <b class="c-coral">진짜로 작동</b>시킨다</h2>
-        <p class="page-kicker">각 게임은 4단계예요. 프롬프트 복사 → AI 채팅에 붙여넣기 → 미리보기 플레이 → 다음 단계로 갑니다.</p>
+        <h2 id="mission-title">AI와 함께 만들고, <b class="c-coral">내가 직접 확인</b>한다</h2>
+        <p class="page-kicker">AI는 코드를 쓰는 파트너, 나는 재미와 규칙을 결정하는 게임 감독이에요.</p>
+        <div class="mission-definition"><b>프롬프트</b><span>AI에게 보내는 <strong>부탁 글</strong>이에요. 긴 글은 읽지 않아도 괜찮아요. 노란 복사 버튼만 누르면 됩니다.</span></div>
         <div class="mission-grid">
-          <button class="mission-card" type="button" aria-pressed="false"><span class="num">1</span><span class="icon" aria-hidden="true">🐱</span><span class="mission-title">바구니 고양이</span><span class="mission-copy">화살표 키로 움직이고 사과를 받는 액션 게임을 만들어요.</span></button>
-          <button class="mission-card" type="button" aria-pressed="false"><span class="num">2</span><span class="icon" aria-hidden="true">🚀</span><span class="mission-title">우주 퀴즈 탐험대</span><span class="mission-copy">답을 클릭하고 힌트와 콤보를 쓰는 퀴즈 게임을 만들어요.</span></button>
-          <button class="mission-card" type="button" aria-pressed="false"><span class="num">3</span><span class="icon" aria-hidden="true">🧪</span><span class="mission-title">플레이하고 고치기</span><span class="mission-copy">매 단계 직접 시험하고, 이상하면 구조 요청을 복사해요.</span></button>
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">1</span><span class="icon" aria-hidden="true">📋</span><span class="mission-title">복사하고 붙여넣기</span><span class="mission-copy">프롬프트를 복사해 AI 채팅에 붙여넣어요.</span></button>
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">2</span><span class="icon" aria-hidden="true">🎮</span><span class="mission-title">직접 플레이하기</span><span class="mission-copy">AI가 “됐어요”라고 해도 내가 게임을 해봐요.</span></button>
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">3</span><span class="icon" aria-hidden="true">✅</span><span class="mission-title">3가지 테스트하기</span><span class="mission-copy">잘 작동한 것을 확인해야 한 단계가 끝나요.</span></button>
         </div>
-        <div class="ready-strip"><span>준비물: 브라우저 + AI 채팅 + 키보드</span><output class="mission-progress" aria-live="polite">0/3 미션 확인</output></div>
+        <div class="ready-strip"><span>한 번에 게임 1개만 만들어도 멋진 성공!</span><output class="mission-progress" aria-live="polite">0/3 만드는 방법 확인</output></div>
       </div>
     </section>
 
-    <!-- 3. 역할과 루프 -->
-    <section id="rolesSlide" aria-labelledby="role-title">
-      <div class="page">
-        <span class="tag mint">바이브 코딩</span>
-        <h2 id="role-title">AI는 <b class="c-mint">코딩 파트너</b>, 나는 <b class="c-lav">게임 감독</b></h2>
-        <p class="page-kicker">AI가 코드를 빨리 써도, 재미있는 규칙을 정하고 “됐는지” 판단하는 일은 사람이 합니다.</p>
-        <div class="role-grid">
-          <article class="role-card you"><h3><span aria-hidden="true">🧑‍💻</span> 내가 맡는 일</h3><ul><li>게임의 목표와 규칙 정하기</li><li>요청을 구체적으로 쓰기</li><li>직접 플레이하고 문제 찾기</li></ul><button class="role-reveal-btn" type="button" aria-expanded="false">감독의 비밀 보기</button><p class="role-secret" hidden>AI가 만든 결과에 “좋아” 또는 “다시”를 결정하는 사람이 진짜 감독이에요.</p></article>
-          <article class="role-card ai"><h3><span aria-hidden="true">🤖</span> AI가 돕는 일</h3><ul><li>필요한 코드를 빠르게 쓰기</li><li>색·소리·점수판 추가하기</li><li>설명한 버그를 찾아 고치기</li></ul><button class="role-reveal-btn" type="button" aria-expanded="false">파트너의 한계 보기</button><p class="role-secret" hidden>AI는 빠르지만 내 머릿속을 읽지는 못해요. 그래서 구체적인 설명이 필요해요.</p></article>
-        </div>
-        <div class="loop-line" aria-label="바이브 코딩의 네 단계"><div class="loop-step">1. 요청하기</div><div class="loop-step">2. 만들어짐</div><div class="loop-step">3. 플레이하기</div><div class="loop-step">4. 고쳐 달라고 하기</div></div>
-      </div>
-    </section>
-
-    <!-- 4. 안전 규칙 -->
-    <section id="safetySlide" aria-labelledby="safety-title">
-      <div class="page">
-        <span class="tag coral">시작 전 약속</span>
-        <h2 id="safety-title">똑똑한 메이커의 <b class="c-coral">3가지 안전 규칙</b></h2>
-        <p class="page-kicker">AI는 무엇이든 아는 마법사가 아니에요. 중요한 순간에는 멈추고 확인합니다.</p>
-        <div class="safety-grid">
-          <article class="safety-card"><span class="shield" aria-hidden="true">🔐</span><h3>개인정보는 입력하지 않기</h3><p>이름, 학교, 주소, 전화번호, 비밀번호는 채팅에 쓰지 않아요.</p><button class="safety-reveal" type="button" data-safety-message="AI가 학교 이름을 물어봐도 게임에는 필요 없어요. 쓰지 않고 어른에게 보여 주세요.">상황 예시 보기</button></article>
-          <article class="safety-card"><span class="shield" aria-hidden="true">🛑</span><h3>설치·로그인은 먼저 묻기</h3><p>파일 다운로드, 결제, 새 로그인 화면이 나오면 어른에게 보여 줘요.</p><button class="safety-reveal" type="button" data-safety-message="‘이 파일을 설치하세요’가 나오면 바로 누르지 말고 멈춘 뒤 어른과 확인해요.">상황 예시 보기</button></article>
-          <article class="safety-card"><span class="shield" aria-hidden="true">🔎</span><h3>AI의 말도 테스트하기</h3><p>AI도 틀릴 수 있어요. 게임을 직접 해보고 내가 확인해요.</p><button class="safety-reveal" type="button" data-safety-message="AI가 ‘고쳤어요’라고 말해도 끝이 아니에요. 내가 다시 플레이해야 진짜 확인 완료!">상황 예시 보기</button></article>
-        </div>
-        <output class="stop-line" aria-live="polite"><span aria-hidden="true">✋</span> 카드를 눌러 안전 상황을 확인해 보세요.</output>
-      </div>
-    </section>
-
-    <!-- 5. 작업 준비 -->
+    <!-- 3. 작업 준비와 안전 -->
     <section id="setupSlide" aria-labelledby="setup-title">
       <div class="page">
         <span class="tag mint">출발 전 1분</span>
-        <h2 id="setup-title">이 3가지만 준비하면 <b class="c-mint">바로 만들 수 있어요</b></h2>
-        <p class="page-kicker">카드를 눌러 준비를 확인하세요. 게임마다 <b>새 채팅 하나</b>를 열고, 그 안에서 4단계를 이어갑니다.</p>
+        <h2 id="setup-title">두 창을 준비하고 <b class="c-mint">바로 시작해요</b></h2>
+        <p class="page-kicker">이 자료와 AI 채팅을 나란히 띄우거나 <span class="key">Ctrl</span> + <span class="key">Tab</span>으로 오가세요.</p>
         <div class="setup-grid">
-          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">💬</span><b>AI 채팅 열기</b><small>HTML 미리보기를 실행할 수 있는 ChatGPT, Claude 같은 AI 채팅을 열어요.</small></button>
-          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">📋</span><b>복사·붙여넣기 알기</b><small>복사 버튼을 누른 뒤 채팅 입력창에서 <span class="key">Ctrl</span> + <span class="key">V</span></small></button>
-          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">🧪</span><b>미리보기 찾기</b><small>AI가 만든 결과의 미리보기·실행 버튼을 찾아 직접 플레이해요.</small></button>
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">💬</span><b>AI 채팅 열기</b><small>HTML 게임 미리보기를 보여주는 AI 채팅을 열어요. 안 보이면 어른에게 물어요.</small></button>
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">🪟</span><b>두 창 준비하기</b><small>한쪽에는 이 자료, 다른 쪽에는 AI 채팅을 열어 두면 편해요.</small></button>
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">📋</span><b>붙여넣기 연습</b><small>복사 버튼을 누른 뒤 입력창에서 <span class="key">Ctrl/⌘</span> + <span class="key">V</span></small></button>
         </div>
-        <div class="ready-strip"><span>설치·결제·로그인이 나오면 어른과 함께 확인!</span><output class="setup-progress" aria-live="polite">0/3 준비 완료</output></div>
+        <div class="safety-mini-grid" aria-label="안전 규칙">
+          <div class="safety-mini"><span aria-hidden="true">🔐</span>이름·학교·주소는 쓰지 않기</div>
+          <div class="safety-mini"><span aria-hidden="true">🛑</span>설치·결제는 어른에게 묻기</div>
+          <div class="safety-mini"><span aria-hidden="true">🔎</span>AI의 말도 직접 테스트하기</div>
+        </div>
+        <div class="ready-strip"><span>다음 장부터 바로 게임을 만들어요!</span><output class="setup-progress" aria-live="polite">0/3 준비 완료</output></div>
       </div>
     </section>
 
-    <!-- 6. 게임 1 라이브 데모 -->
-    <section id="demo">
-      <div class="page" style="padding-bottom: 1.4rem;">
-        <span class="tag sky">게임 1 미리보기 · 바구니 고양이</span>
-        <h2 style="font-size: 2.05rem;">먼저 맛보기! 요청마다 게임이 <b class="c-mint">한 단계씩 진화</b>해요</h2>
-        <div class="demo-wrap">
-          <div class="chat-col">
-            <div class="chat-log" aria-live="polite" aria-label="AI와 나눈 요청 대화"></div>
-            <button class="send-btn" type="button">첫 요청 보내기 <span aria-hidden="true">▶</span> (1/5)</button>
-          </div>
-          <div class="demo-stage off" tabindex="0" role="application" aria-label="사과 받기 게임. 왼쪽과 오른쪽 화살표 키로 고양이를 움직입니다.">
-            <span class="hud-chip chip-score"><span aria-hidden="true">🍎</span> <b>0</b>점</span>
-            <span class="hud-chip right chip-hearts">생명 <b>❤️❤️❤️</b></span>
-            <div class="ground"></div>
-            <span class="demo-cat" aria-hidden="true">🐱🧺</span>
-            <span class="demo-help"><span class="key">←</span> <span class="key">→</span> 고양이 움직이기 · 사과 클릭도 가능</span>
-            <div class="go-overlay">게임 끝! 다시 도전 <span aria-hidden="true">💪</span></div>
-            <output class="game-status" aria-live="polite"></output>
-          </div>
-        </div>
-        <p style="font-size: 1.02rem; margin-top: .5rem;"><span class="soft">먼저 왼쪽 버튼으로 게임을 만들고, 오른쪽 게임 영역을 누른 뒤 <b>← → 키</b>로 플레이하세요.</span></p>
-      </div>
-    </section>
-
-    <!-- 7. 게임 1 · Step 1 -->
+    <!-- 4. 게임 1 · Step 1 -->
     <section id="catStep1" class="build-slide" aria-labelledby="cat-step1-title">
       <div class="page">
         <span class="tag coral">게임 1 · 바구니 고양이</span>
@@ -945,9 +986,10 @@ footer, header, hgroup, main, menu, nav, section {
           <span class="build-dot is-current" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt1" class="build-prompt-text">브라우저에서 바로 실행되는 한 파일짜리 HTML 게임을 만들어줘.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🐱🧺</span><strong>움직이고 점수가 오르는 첫 게임</strong><p>긴 글은 읽지 않아도 괜찮아요. 아래 노란 버튼으로 한 번에 복사하세요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="catPrompt1" class="build-prompt-text" tabindex="0">브라우저에서 바로 실행되는 한 파일짜리 HTML 게임을 만들어줘.
 
 게임 이름: 바구니 고양이
+- 고양이 이름은 ‘토리’야.
 - 고양이는 화면 아래에서 바구니를 들고 있어.
 - ← → 화살표 키로 움직여.
 - 위에서 사과가 계속 떨어져.
@@ -955,13 +997,13 @@ footer, header, hgroup, main, menu, nav, section {
 - 점수판을 화면 위에 보여줘.
 - 시작 버튼과 다시 시작 버튼을 넣어줘.
 
-HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이할 수 있게 해줘. 설명보다 실행 가능한 게임을 먼저 완성해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="1" data-copy-target="catPrompt1">Step 1 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout new-chat"><b>① 새 채팅에서 시작</b>게임 1 전용 새 대화를 열어요.</div><div class="step-checks"><span class="step-check">시작 버튼이 보이나?</span><span class="step-check">화살표 키로 움직이나?</span><span class="step-check">사과를 받으면 점수가 오르나?</span></div><output class="copy-status" aria-live="polite">복사한 뒤 AI 채팅에 붙여넣으세요.</output></aside>
+HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이할 수 있게 해줘. 설명보다 실행 가능한 게임을 먼저 완성해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="catStatus1" data-project="cat" data-step="1" data-copy-target="catPrompt1">Step 1 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="maker-choices"><strong>내 고양이 이름 고르기</strong><div class="maker-choice-row" data-choice-group="catName"><button class="maker-choice" type="button" aria-pressed="true" data-choice-value="토리" data-prompt-target="catPrompt1">토리</button><button class="maker-choice" type="button" aria-pressed="false" data-choice-value="보리" data-prompt-target="catPrompt1">보리</button><button class="maker-choice" type="button" aria-pressed="false" data-choice-value="별이" data-prompt-target="catPrompt1">별이</button></div></div><div class="step-callout new-chat"><b>① 새 채팅에서 시작</b>복사 → 붙여넣기 → AI가 만들 때까지 기다리기</div><div class="step-checks" aria-label="Step 1 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="1" data-test-index="0">시작 버튼이 보여요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="1" data-test-index="1">화살표 키로 움직여요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="1" data-test-index="2">사과를 받으면 점수가 올라요</button></div><output id="catStatus1" class="copy-status" aria-live="polite">먼저 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 8. 게임 1 · Step 2 -->
+    <!-- 5. 게임 1 · Step 2 -->
     <section id="catStep2" class="build-slide" aria-labelledby="cat-step2-title">
       <div class="page">
         <span class="tag coral">게임 1 · 바구니 고양이</span>
@@ -971,7 +1013,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot is-current" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt2" class="build-prompt-text">방금 만든 ‘바구니 고양이’ 게임을 이어서 수정해줘. 기존 기능은 그대로 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">❤️❤️❤️</span><strong>놓치면 생명이 줄어드는 규칙</strong><p>이번에는 새 채팅을 열지 않고, 방금 사용한 채팅에 이어서 붙여넣어요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="catPrompt2" class="build-prompt-text" tabindex="0">방금 만든 ‘바구니 고양이’ 게임을 이어서 수정해줘. 기존 기능은 그대로 유지해.
 
 - 생명은 3개로 시작해.
 - 사과를 놓치면 생명이 1개 줄어.
@@ -979,13 +1021,13 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
 - 게임 끝 화면에 최종 점수와 다시 시작 버튼을 넣어줘.
 - 다시 시작하면 점수, 생명, 사과 속도가 처음 상태로 돌아가게 해줘.
 
-수정한 전체 결과를 미리보기에 바로 반영해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="2" data-copy-target="catPrompt2">Step 2 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>그래야 AI가 방금 만든 게임을 기억해요.</div><div class="step-checks"><span class="step-check">놓치면 생명이 줄어드나?</span><span class="step-check">0이면 게임 끝이 나오나?</span><span class="step-check">다시 시작하면 모두 초기화되나?</span></div><output class="copy-status" aria-live="polite">먼저 Step 1 게임이 잘되는지 확인하세요.</output></aside>
+수정한 전체 결과를 미리보기에 바로 반영해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="catStatus2" data-project="cat" data-step="2" data-copy-target="catPrompt2">Step 2 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>사과를 일부러 3번 놓쳐 규칙을 확인해요.</div><div class="step-checks" aria-label="Step 2 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="2" data-test-index="0">놓치면 생명이 줄어요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="2" data-test-index="1">생명 0이면 게임이 끝나요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="2" data-test-index="2">다시 시작하면 처음 상태예요</button></div><output id="catStatus2" class="copy-status" aria-live="polite">먼저 Step 2 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 9. 게임 1 · Step 3 -->
+    <!-- 6. 게임 1 · Step 3 -->
     <section id="catStep3" class="build-slide" aria-labelledby="cat-step3-title">
       <div class="page">
         <span class="tag coral">게임 1 · 바구니 고양이</span>
@@ -995,7 +1037,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot is-current" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt3" class="build-prompt-text">방금 게임에 난이도와 특별 아이템을 추가해줘. 지금까지 만든 기능은 모두 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🍎✨</span><strong>5점짜리 황금사과와 조금씩 빨라지는 난이도</strong><p>서로 관련된 특별 아이템과 속도 규칙만 추가해요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="catPrompt3" class="build-prompt-text" tabindex="0">방금 게임에 난이도와 특별 아이템을 추가해줘. 지금까지 만든 기능은 모두 유지해.
 
 - 점수가 5점 오를 때마다 사과가 조금씩 빨라지게 해줘.
 - 너무 빨라져서 불가능해지지 않도록 최대 속도를 정해줘.
@@ -1003,13 +1045,13 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
 - 황금사과를 받으면 5점을 주고, 일반 사과와 다른 반짝임을 보여줘.
 - 황금사과를 놓쳐도 생명은 줄지 않게 해줘.
 
-수정 뒤 직접 플레이할 수 있게 미리보기를 갱신해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="3" data-copy-target="catPrompt3">Step 3 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>③ 바뀐 점을 찾아보기</b>점수 5점 전후의 속도를 비교해요.</div><div class="step-checks"><span class="step-check">5점마다 조금 빨라지나?</span><span class="step-check">황금사과는 5점을 주나?</span><span class="step-check">황금사과를 놓쳐도 안전한가?</span></div><output class="copy-status" aria-live="polite">테스트하다 이상하면 구조 요청 페이지를 쓰세요.</output></aside>
+수정 뒤 직접 플레이할 수 있게 미리보기를 갱신해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="catStatus3" data-project="cat" data-step="3" data-copy-target="catPrompt3">Step 3 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>③ 달라진 규칙 찾기</b>일반 사과와 황금사과를 비교해요.</div><div class="step-checks" aria-label="Step 3 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="3" data-test-index="0">5점마다 조금 빨라져요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="3" data-test-index="1">황금사과는 5점을 줘요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="3" data-test-index="2">황금사과를 놓쳐도 안전해요</button></div><output id="catStatus3" class="copy-status" aria-live="polite">먼저 Step 3 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 10. 게임 1 · Step 4 -->
+    <!-- 7. 게임 1 · Step 4 -->
     <section id="catStep4" class="build-slide" aria-labelledby="cat-step4-title">
       <div class="page">
         <span class="tag coral">게임 1 · 바구니 고양이</span>
@@ -1019,61 +1061,75 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot is-current" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt4" class="build-prompt-text">‘바구니 고양이’ 게임을 완성작처럼 다듬어줘. 기존 기능은 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🌙🏆</span><strong>밤하늘 화면과 최고 점수로 마무리</strong><p>꾸미기와 기록, 다시 시작 검사에만 집중해요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="catPrompt4" class="build-prompt-text" tabindex="0">‘바구니 고양이’ 게임을 완성작처럼 다듬어줘. 기존 기능은 유지해.
 
 - 시작 화면에 게임 제목과 ← → 조작법을 보여줘.
 - 배경을 별이 반짝이는 밤하늘로 꾸며줘.
-- 사과를 받을 때 짧은 효과음과 시각 효과를 넣어줘. 소리는 시작 버튼을 누른 뒤에만 나게 해줘.
 - 최고 점수를 브라우저에 기억하고 화면에 보여줘.
 - 창 크기가 달라져도 게임 화면이 잘리지 않게 해줘.
 - 시작, 게임 끝, 다시 시작을 여러 번 테스트해서 오류가 있으면 고쳐줘.
 
-완성된 전체 게임을 미리보기에 보여줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="4" data-copy-target="catPrompt4">Step 4 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>④ 첫 게임 완성!</b>한 번 끝낸 뒤 다시 시작해 또 플레이해요.</div><div class="step-checks"><span class="step-check">조작법이 시작 화면에 있나?</span><span class="step-check">최고 점수가 기억되나?</span><span class="step-check">두 번 다시 시작해도 괜찮나?</span></div><output class="copy-status" aria-live="polite">복사하면 게임 1 진행표가 완성됩니다.</output></aside>
+완성된 전체 게임을 미리보기에 보여줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="catStatus4" data-project="cat" data-step="4" data-copy-target="catPrompt4">Step 4 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>④ 첫 게임 완성!</b>끝까지 한 번 플레이하고 다시 시작해요.</div><div class="step-checks" aria-label="Step 4 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="4" data-test-index="0">시작 화면에 조작법이 보여요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="4" data-test-index="1">최고 점수가 기억돼요</button><button class="step-check" type="button" aria-pressed="false" data-project="cat" data-step="4" data-test-index="2">2번 다시 시작해도 잘돼요</button></div><output id="catStatus4" class="copy-status" aria-live="polite">먼저 Step 4 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 11. 게임 2 소개 -->
+    <!-- 8. 게임 2 소개 -->
     <section id="game2Intro" aria-labelledby="game2-intro-title">
       <div class="page">
         <span class="tag sky">게임 2 · 새 프로젝트</span>
         <h2 id="game2-intro-title">이번에는 클릭으로 푸는 <b class="c-sky">우주 퀴즈 탐험대</b></h2>
-        <p class="page-kicker">첫 게임과 다른 규칙을 만들며 문제·선택지·힌트·시간 제한을 경험해요.</p>
+        <p class="page-kicker">잠깐 쉬었다가 시작해도 좋아요. 이번에는 문제·선택지·힌트를 만들어요.</p>
         <div class="project-cover">
           <div class="project-visual" aria-hidden="true"><span class="project-emoji">🚀🪐</span></div>
-          <div class="project-info"><h3>5문제를 풀고 행성을 탐험하자!</h3><p>큰 보기 버튼을 눌러 정답을 맞히고, 하트와 콤보를 지키는 게임이에요. <b>게임 2는 반드시 새 채팅</b>에서 시작합니다.</p><div class="project-skills"><span>클릭 조작</span><span>무작위 문제</span><span>50:50 힌트</span><span>15초 도전</span></div><button class="project-start-btn" type="button">게임 2 만들러 가기 →</button></div>
+          <div class="project-info"><h3>5문제를 풀고 행성을 탐험하자!</h3><p>큰 보기 버튼을 눌러 정답을 맞히고, 하트와 콤보를 지키는 게임이에요. <b>게임 2는 반드시 새 채팅</b>에서 시작합니다.</p><div class="project-skills"><span>클릭 조작</span><span>검증된 문제</span><span>50:50 힌트</span><span>콤보 보너스</span></div><button class="project-start-btn" type="button">새 채팅 열고 게임 2 시작 →</button></div>
         </div>
       </div>
     </section>
 
-    <!-- 12. 게임 2 · Step 1 -->
+    <!-- 9. 게임 2 · Step 1 -->
     <section id="quizStep1" class="build-slide" aria-labelledby="quiz-step1-title">
       <div class="page">
         <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
         <h2 id="quiz-step1-title">Step 1. <b class="c-sky">5문제 퀴즈</b> 만들기</h2>
-        <p class="page-kicker">새 채팅을 열고, 문제와 정답까지 AI가 다시 확인하도록 요청해요.</p>
+        <p class="page-kicker">새 채팅을 열고, 아래에 넣어 둔 <b>검증된 12문제</b>로 시작해요.</p>
         <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
           <span class="build-dot is-current" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt1" class="build-prompt-text">새 채팅에서 브라우저로 바로 플레이하는 한 파일짜리 퀴즈 게임을 만들어줘.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🚀❓</span><strong>정답이 확인된 문제로 만드는 첫 퀴즈</strong><p>문제 12개가 프롬프트 안에 들어 있어요. 게임에는 그중 5개가 나옵니다.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="quizPrompt1" class="build-prompt-text" tabindex="0">새 채팅에서 브라우저로 바로 플레이하는 한 파일짜리 퀴즈 게임을 만들어줘.
 
 게임 이름: 우주 퀴즈 탐험대
-- 초등 저학년이 풀 수 있는 동물과 우주 상식 문제를 12개 준비해.
+- 우주선 이름은 ‘별빛호’야.
+- 아래 문제 은행 12개를 그대로 사용하고 질문·보기·정답·해설을 바꾸지 마.
 - 한 게임에서는 그중 5문제를 겹치지 않게 골라서 보여줘.
 - 문제마다 보기 3개를 큰 버튼으로 보여줘.
 - 답을 고르면 정답인지 바로 알려주고 점수를 1점 올려줘.
 - 현재 문제 번호와 점수를 화면 위에 보여줘.
 - 시작 버튼과 다시 하기 버튼을 넣어줘.
 
-HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이하게 해줘. 문제와 정답이 맞는지도 다시 확인해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="1" data-copy-target="quizPrompt1">Step 1 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout new-chat"><b>① 게임 2 새 채팅 열기</b>게임 1 대화와 섞이지 않게 분리해요.</div><div class="step-checks"><span class="step-check">보기 버튼이 3개인가?</span><span class="step-check">한 게임에 5문제인가?</span><span class="step-check">같은 문제가 겹치지 않나?</span></div><output class="copy-status" aria-live="polite">새 채팅을 확인한 뒤 복사하세요.</output></aside>
+문제 은행:
+1. 우리가 사는 행성은? / 보기: 지구, 화성, 금성 / 정답: 지구 / 해설: 우리는 지구에서 살아요.
+2. ‘붉은 행성’이라고 불리는 행성은? / 보기: 화성, 목성, 수성 / 정답: 화성 / 해설: 화성의 표면은 붉게 보여요.
+3. 지구 주위를 도는 자연 위성은? / 보기: 달, 태양, 토성 / 정답: 달 / 해설: 달은 지구 주위를 돌아요.
+4. 태양과 가장 가까운 행성은? / 보기: 수성, 금성, 지구 / 정답: 수성 / 해설: 수성은 태양에서 가장 가까운 행성이에요.
+5. 태양은 무엇일까? / 보기: 별, 행성, 위성 / 정답: 별 / 해설: 태양은 스스로 빛을 내는 별이에요.
+6. 크고 뚜렷한 고리로 유명한 행성은? / 보기: 토성, 지구, 화성 / 정답: 토성 / 해설: 토성은 눈에 잘 보이는 커다란 고리가 있어요.
+7. 거미의 다리는 몇 개일까? / 보기: 8개, 6개, 4개 / 정답: 8개 / 해설: 거미는 다리가 8개예요.
+8. 개구리의 아기를 무엇이라고 할까? / 보기: 올챙이, 애벌레, 송아지 / 정답: 올챙이 / 해설: 올챙이가 자라서 개구리가 돼요.
+9. 하늘을 날 수 있는 포유류는? / 보기: 박쥐, 펭귄, 타조 / 정답: 박쥐 / 해설: 박쥐는 날개로 나는 포유류예요.
+10. 지구에서 몸집이 가장 큰 동물은? / 보기: 대왕고래, 코끼리, 기린 / 정답: 대왕고래 / 해설: 대왕고래는 지구에서 가장 큰 동물이에요.
+11. 문어의 팔은 몇 개일까? / 보기: 8개, 6개, 10개 / 정답: 8개 / 해설: 문어는 팔이 8개예요.
+12. 펭귄은 어떤 동물일까? / 보기: 새, 물고기, 포유류 / 정답: 새 / 해설: 펭귄은 날지는 못하지만 새예요.
+
+HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이하게 해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="quizStatus1" data-project="quiz" data-step="1" data-copy-target="quizPrompt1">Step 1 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="maker-choices"><strong>내 우주선 이름 고르기</strong><div class="maker-choice-row" data-choice-group="quizShip"><button class="maker-choice" type="button" aria-pressed="true" data-choice-value="별빛호" data-prompt-target="quizPrompt1">별빛호</button><button class="maker-choice" type="button" aria-pressed="false" data-choice-value="달토끼호" data-prompt-target="quizPrompt1">달토끼호</button><button class="maker-choice" type="button" aria-pressed="false" data-choice-value="무지개호" data-prompt-target="quizPrompt1">무지개호</button></div></div><div class="step-callout new-chat"><b>① 게임 2 새 채팅 열기</b>게임 1 대화와 섞이지 않게 분리해요.</div><div class="step-checks" aria-label="퀴즈 Step 1 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="1" data-test-index="0">보기 버튼이 3개예요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="1" data-test-index="1">한 게임에 5문제가 나와요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="1" data-test-index="2">같은 문제가 겹치지 않아요</button></div><output id="quizStatus1" class="copy-status" aria-live="polite">먼저 Step 1 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 13. 게임 2 · Step 2 -->
+    <!-- 10. 게임 2 · Step 2 -->
     <section id="quizStep2" class="build-slide" aria-labelledby="quiz-step2-title">
       <div class="page">
         <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
@@ -1083,7 +1139,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot is-current" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt2" class="build-prompt-text">방금 만든 ‘우주 퀴즈 탐험대’를 이어서 수정해줘. 기존 기능은 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">💗💡</span><strong>틀려도 이유를 알려주는 퀴즈</strong><p>하트와 한 문장 해설을 추가해 학습 게임으로 바꿔요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="quizPrompt2" class="build-prompt-text" tabindex="0">방금 만든 ‘우주 퀴즈 탐험대’를 이어서 수정해줘. 기존 기능은 유지해.
 
 - 하트 3개로 시작하게 해줘.
 - 오답을 고르면 하트가 1개 줄게 해줘.
@@ -1092,83 +1148,82 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
 - 하트가 0이 되거나 5문제를 모두 풀면 결과 화면을 보여줘.
 - 결과 화면에 맞힌 개수, 점수, 다시 하기 버튼을 넣어줘.
 
-수정 결과를 미리보기에 반영해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="2" data-copy-target="quizPrompt2">Step 2 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>일부러 오답도 눌러 하트를 시험해요.</div><div class="step-checks"><span class="step-check">오답이면 하트가 줄어드나?</span><span class="step-check">한 문장 해설이 보이나?</span><span class="step-check">다음 문제 버튼이 기다리나?</span></div><output class="copy-status" aria-live="polite">정답과 오답을 모두 테스트하세요.</output></aside>
+수정 결과를 미리보기에 반영해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="quizStatus2" data-project="quiz" data-step="2" data-copy-target="quizPrompt2">Step 2 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>정답과 오답을 각각 한 번씩 눌러 봐요.</div><div class="step-checks" aria-label="퀴즈 Step 2 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="2" data-test-index="0">오답이면 하트가 줄어요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="2" data-test-index="1">한 문장 해설이 보여요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="2" data-test-index="2">다음 문제 버튼이 기다려요</button></div><output id="quizStatus2" class="copy-status" aria-live="polite">먼저 Step 2 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 14. 게임 2 · Step 3 -->
+    <!-- 11. 게임 2 · Step 3 -->
     <section id="quizStep3" class="build-slide" aria-labelledby="quiz-step3-title">
       <div class="page">
         <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
-        <h2 id="quiz-step3-title">Step 3. <b class="c-sky">콤보·힌트·타이머</b> 넣기</h2>
-        <p class="page-kicker">잘하면 보너스, 막히면 힌트, 원하면 시간 도전! 선택지가 생겨요.</p>
+        <h2 id="quiz-step3-title">Step 3. <b class="c-sky">콤보와 힌트</b> 넣기</h2>
+        <p class="page-kicker">잘하면 보너스, 막히면 한 번의 힌트! 두 기능에만 집중해요.</p>
         <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
           <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot is-current" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt3" class="build-prompt-text">방금 퀴즈 게임에 도전 기능을 추가해줘. 지금까지 기능은 모두 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🔥➕2</span><strong>3연속 콤보와 50:50 힌트</strong><p>보너스와 도움 기능을 하나씩 시험해요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="quizPrompt3" class="build-prompt-text" tabindex="0">방금 퀴즈 게임에 도전 기능을 추가해줘. 지금까지 기능은 모두 유지해.
 
 - 3문제를 연속으로 맞히면 콤보 보너스 2점을 줘.
 - 연속 정답 수를 화면에 보여줘.
 - 한 게임에 한 번만 쓸 수 있는 ‘50:50 힌트’ 버튼을 넣어줘.
 - 힌트를 누르면 오답 보기 1개를 숨겨줘.
-- ‘도전 모드’ 스위치를 켜면 문제마다 15초 제한 시간이 생기게 해줘.
-- 일반 모드에서는 시간 제한이 없게 해줘.
-- 다시 시작하면 콤보, 힌트, 타이머도 초기화해줘.
+- 다시 시작하면 콤보와 힌트 사용 여부도 초기화해줘.
 
-수정한 게임을 미리보기에서 테스트할 수 있게 해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="3" data-copy-target="quizPrompt3">Step 3 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>③ 세 가지 도전 시험</b>일반 모드와 도전 모드를 모두 해봐요.</div><div class="step-checks"><span class="step-check">3연속 정답에 +2점인가?</span><span class="step-check">힌트는 딱 한 번인가?</span><span class="step-check">도전 모드만 15초인가?</span></div><output class="copy-status" aria-live="polite">기능을 하나씩 따로 확인하면 쉬워요.</output></aside>
+수정한 게임을 미리보기에서 테스트할 수 있게 해줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="quizStatus3" data-project="quiz" data-step="3" data-copy-target="quizPrompt3">Step 3 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>③ 두 기능만 시험</b>콤보를 먼저 확인한 뒤 다시 시작해 힌트를 써요.</div><div class="step-checks" aria-label="퀴즈 Step 3 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="3" data-test-index="0">3연속 정답에 2점이 더 생겨요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="3" data-test-index="1">힌트가 오답 1개를 숨겨요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="3" data-test-index="2">힌트는 한 게임에 1번이에요</button></div><output id="quizStatus3" class="copy-status" aria-live="polite">먼저 Step 3 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 15. 게임 2 · Step 4 -->
+    <!-- 12. 게임 2 · Step 4 -->
     <section id="quizStep4" class="build-slide" aria-labelledby="quiz-step4-title">
       <div class="page">
         <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
         <h2 id="quiz-step4-title">Step 4. <b class="c-sky">누구나 즐기는 완성작</b> 만들기</h2>
-        <p class="page-kicker">꾸미기, 소리 끄기, 키보드 조작, 문제 검토까지 모두 마무리해요.</p>
+        <p class="page-kicker">꾸미기, 최고 점수, 키보드 조작과 다시 시작을 마무리해요.</p>
         <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
           <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot is-current" data-progress-step="4">완성</span>
         </div>
         <div class="build-layout">
-          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt4" class="build-prompt-text">‘우주 퀴즈 탐험대’를 완성작처럼 다듬어줘. 기존 기능은 유지해.
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 부탁 글</span><div class="prompt-summary"><span class="prompt-icon" aria-hidden="true">🪐🏆</span><strong>우주 여행 화면과 키보드 조작으로 마무리</strong><p>누구나 조작할 수 있는지 마지막으로 확인해요.</p></div><details class="prompt-details"><summary>프롬프트 내용 보기</summary><pre id="quizPrompt4" class="build-prompt-text" tabindex="0">‘우주 퀴즈 탐험대’를 완성작처럼 다듬어줘. 기존 기능은 유지해.
 
 - 우주선이 행성을 여행하는 느낌으로 화면을 꾸며줘.
 - 정답일 때 별이 터지고, 오답일 때 부드럽게 흔들리는 효과를 넣어줘.
-- 버튼을 누른 뒤에만 짧은 효과음이 나게 하고, 소리 끄기 버튼도 넣어줘.
 - 최고 점수를 브라우저에 기억해서 보여줘.
 - 키보드 Tab과 Enter로도 모든 보기와 버튼을 조작할 수 있게 해줘.
-- 12개 문제의 내용과 정답을 다시 검토해서 틀린 것이 있으면 고쳐줘.
+- Step 1에서 준 12개 문제 은행은 바꾸지 마.
 - 게임을 두 번 연속 다시 시작해도 오류가 없는지 확인해줘.
 
-완성된 전체 게임을 미리보기에 보여줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="4" data-copy-target="quizPrompt4">Step 4 프롬프트 복사</button></article>
-          <aside class="build-side"><div class="step-callout"><b>④ 두 번째 게임 완성!</b>마우스 없이 Tab과 Enter로도 해봐요.</div><div class="step-checks"><span class="step-check">소리를 끌 수 있나?</span><span class="step-check">Tab·Enter로 조작되나?</span><span class="step-check">두 번 다시 시작해도 괜찮나?</span></div><output class="copy-status" aria-live="polite">복사하면 게임 2 진행표가 완성됩니다.</output></aside>
+완성된 전체 게임을 미리보기에 보여줘.</pre></details><button class="build-copy-btn" type="button" aria-describedby="quizStatus4" data-project="quiz" data-step="4" data-copy-target="quizPrompt4">Step 4 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>④ 두 번째 게임 완성!</b>이번에는 마우스 없이도 조작해 봐요.</div><div class="step-checks" aria-label="퀴즈 Step 4 플레이 테스트"><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="4" data-test-index="0">Tab·Enter로 조작할 수 있어요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="4" data-test-index="1">최고 점수가 기억돼요</button><button class="step-check" type="button" aria-pressed="false" data-project="quiz" data-step="4" data-test-index="2">2번 다시 시작해도 잘돼요</button></div><output id="quizStatus4" class="copy-status" aria-live="polite">먼저 Step 4 프롬프트를 복사하세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- 16. 막혔을 때 구조 요청 -->
+    <!-- 13. 막혔을 때 구조 요청 -->
     <section id="rescueSlide" aria-labelledby="rescue-title">
       <div class="page">
         <span class="tag coral">막혔을 때 구조 요청</span>
         <h2 id="rescue-title">문제가 생겨도 <b class="c-coral">이 프롬프트</b>면 다시 출발!</h2>
         <p class="page-kicker">상황에 맞는 카드의 복사 버튼을 누르고, 문제가 생긴 게임의 같은 채팅에 붙여넣으세요.</p>
         <div class="rescue-grid">
-          <article class="rescue-card"><h3>🖥️ 미리보기가 안 보여요</h3><pre id="rescuePrompt1">지금 만든 게임을 코드 설명으로만 보여주지 말고, 이 채팅 화면에서 바로 플레이할 수 있는 미리보기로 실행해줘. HTML, CSS, JavaScript가 한 파일에서 동작하게 정리해줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt1">구조 프롬프트 복사</button><output class="copy-status" aria-live="polite"></output></article>
-          <article class="rescue-card"><h3>🧩 수정 뒤 게임이 멈췄어요</h3><pre id="rescuePrompt2">방금 수정한 뒤 게임이 작동하지 않아. 수정 전까지 되던 기능은 유지하면서 오류 원인을 찾아 고쳐줘. 시작 버튼, 조작, 점수, 다시 시작을 직접 확인하고 정상 동작하는 전체 결과를 미리보기에 반영해줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt2">구조 프롬프트 복사</button><output class="copy-status" aria-live="polite"></output></article>
-          <article class="rescue-card"><h3>🔎 이상한 점을 정확히 알려요</h3><pre id="rescuePrompt3">내가 한 행동: [누른 키나 버튼].
-기대한 결과: [원래 되어야 하는 일].
-실제 결과: [화면에서 일어난 일].
+          <article class="rescue-card"><h3>🖥️ 미리보기가 안 보여요</h3><p>코드 글자만 나오고 플레이 화면이 없을 때 사용해요.</p><details class="rescue-details"><summary>보낼 내용 보기</summary><pre id="rescuePrompt1" tabindex="0">지금 만든 게임을 코드 설명으로만 보여주지 말고, 이 채팅 화면에서 바로 플레이할 수 있는 미리보기로 실행해줘. HTML, CSS, JavaScript가 한 파일에서 동작하게 정리해줘.</pre></details><button class="copy-btn" type="button" aria-describedby="rescueStatus1" data-copy-target="rescuePrompt1">미리보기 구조 요청 복사</button><output id="rescueStatus1" class="copy-status" aria-live="polite"></output></article>
+          <article class="rescue-card"><h3>🧩 수정 뒤 게임이 멈췄어요</h3><p>전에는 됐는데 새 기능을 넣은 뒤 멈췄을 때 사용해요.</p><details class="rescue-details"><summary>보낼 내용 보기</summary><pre id="rescuePrompt2" tabindex="0">방금 수정한 뒤 게임이 작동하지 않아. 수정 전까지 되던 기능은 유지하면서 오류 원인을 찾아 고쳐줘. 시작 버튼, 조작, 점수, 다시 시작을 직접 확인하고 정상 동작하는 전체 결과를 미리보기에 반영해줘.</pre></details><button class="copy-btn" type="button" aria-describedby="rescueStatus2" data-copy-target="rescuePrompt2">게임 복구 요청 복사</button><output id="rescueStatus2" class="copy-status" aria-live="polite"></output></article>
+          <article class="rescue-card"><h3>🔎 무엇이 이상한지 모르겠어요</h3><p>AI가 짧은 질문을 하나씩 하며 문제 설명을 도와줘요.</p><details class="rescue-details"><summary>보낼 내용 보기</summary><pre id="rescuePrompt3" tabindex="0">내 게임에 이상한 점이 있는데 어떻게 설명할지 모르겠어. 원인을 찾기 전에 아래 3가지를 나에게 한 번에 하나씩 짧게 물어봐줘.
 
-이 차이가 생기는 원인을 찾아 고쳐줘. 고친 뒤 무엇을 바꿨는지 한 문장으로 알려줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt3">버그 템플릿 복사</button><output class="copy-status" aria-live="polite"></output></article>
+1. 어떤 키나 버튼을 눌렀는지
+2. 원래 어떤 일이 일어나길 바랐는지
+3. 실제 화면에서는 무슨 일이 일어났는지
+
+내가 세 질문에 답하면 차이가 생긴 원인을 찾아 고쳐줘. 고친 뒤 무엇을 바꿨는지 한 문장으로 알려줘.</pre></details><button class="copy-btn" type="button" aria-describedby="rescueStatus3" data-copy-target="rescuePrompt3">AI 탐정에게 도움 요청 복사</button><output id="rescueStatus3" class="copy-status" aria-live="polite"></output></article>
         </div>
       </div>
     </section>
 
-    <!-- 17. 두 게임 완성 확인 -->
+    <!-- 14. 두 게임 완성 확인 -->
     <section id="compareSlide" aria-labelledby="compare-title">
       <div class="page">
         <span class="tag mint">두 게임 완성 확인</span>
@@ -1176,13 +1231,13 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
         <p class="page-kicker">각 게임을 처음부터 끝까지 플레이한 뒤 카드를 누르세요. 두 장이 켜지면 오늘의 제작 완료!</p>
         <div class="compare-grid">
           <button class="compare-card" type="button" aria-pressed="false"><span class="compare-icon" aria-hidden="true">🐱🧺</span><b>바구니 고양이</b><small>화살표 키 · 생명 · 황금사과 · 최고 점수</small></button>
-          <button class="compare-card" type="button" aria-pressed="false"><span class="compare-icon" aria-hidden="true">🚀🪐</span><b>우주 퀴즈 탐험대</b><small>보기 클릭 · 하트 · 힌트 · 콤보 · 타이머</small></button>
+          <button class="compare-card" type="button" aria-pressed="false"><span class="compare-icon" aria-hidden="true">🚀🪐</span><b>우주 퀴즈 탐험대</b><small>보기 클릭 · 하트 · 힌트 · 콤보</small></button>
         </div>
         <output class="summary-status compare-status" aria-live="polite">0/2 게임 플레이 확인</output>
       </div>
     </section>
 
-    <!-- 18. 부모님 가이드 -->
+    <!-- 15. 부모님 가이드 -->
     <section id="parentSlide" aria-labelledby="parent-title">
       <div class="note-page">
         <span class="note-tag">진행자 메모 · 부모님은 이 페이지만 읽어 주세요</span>
@@ -1191,32 +1246,32 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           <article class="parent-tip"><h3>준비</h3><p>게임마다 새 채팅을 하나씩 열고 미리보기 기능을 찾아 주세요. 계정·결제·다운로드는 어른이 담당합니다.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 말해 보세요: ‘게임 1 채팅과 게임 2 채팅을 따로 열어 둘게. 복사 버튼은 네가 눌러 볼래?’">대화 예시</button></article>
           <article class="parent-tip"><h3>마우스와 키보드는 아이에게</h3><p>아이가 프롬프트 복사·붙여넣기와 플레이 테스트를 맡도록 기다려 주세요. 긴 문장을 직접 타이핑할 필요는 없습니다.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 말해 보세요: ‘복사했으면 입력창에 붙여넣어 보자. 미리보기에서는 무엇부터 눌러 볼까?’">대화 예시</button></article>
           <article class="parent-tip"><h3>막혔을 때 질문</h3><p>“어떤 일이 일어났어?”, “원래는 어떻게 되길 바랐어?”라고 물어 문제 설명을 도와주세요.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 물어보세요: ‘어떤 키를 눌렀고, 화면에서는 무슨 일이 생겼어?’">대화 예시</button></article>
-          <article class="parent-tip"><h3>끝내는 기준</h3><p>한 번에 60~90분 정도로 잡거나 게임 1·게임 2를 다른 날에 나눠도 좋아요. 마지막은 가족 시연으로 마무리하세요.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 마무리하세요: ‘두 게임 중 어떤 게임을 먼저 보여 주고 싶어?’">대화 예시</button></article>
+          <article class="parent-tip"><h3>끝내는 기준</h3><p>게임 하나당 35~45분을 권합니다. 저학년은 게임 1과 게임 2를 다른 날에 나누고 가족 시연으로 마무리하세요.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 마무리하세요: ‘오늘은 게임 하나를 완성했네! 어떤 기능을 보여 주고 싶어?’">대화 예시</button></article>
         </div>
         <output class="parent-coach" aria-live="polite">카드의 ‘대화 예시’를 누르면 바로 쓸 수 있는 문장이 나옵니다.</output>
       </div>
     </section>
 
-    <!-- 19. 핵심 정리 -->
+    <!-- 16. 핵심 정리 -->
     <section id="summarySlide" aria-labelledby="summary-title">
       <div class="page">
         <span class="tag">미션 정리</span>
         <h2 id="summary-title">좋은 메이커가 기억할 <b class="c-sunny">3가지</b></h2>
         <div class="summary-grid">
           <button class="scard summary-card" type="button" aria-pressed="false" data-summary="게임마다 새 채팅: 서로 다른 프로젝트가 섞이지 않도록 대화를 나눠요."><span class="em" aria-hidden="true">💬</span><span class="summary-copy"><b>게임마다 새 채팅</b><small>프로젝트 1개 = 채팅 1개</small></span></button>
-          <button class="scard summary-card" type="button" aria-pressed="false" data-summary="같은 게임은 이어서: 4개 프롬프트를 같은 채팅에 순서대로 붙여넣어요."><span class="em" aria-hidden="true">🔁</span><span class="summary-copy"><b>4단계를 순서대로</b><small>복사 → 붙여넣기 → 플레이</small></span></button>
+          <button class="scard summary-card" type="button" aria-pressed="false" data-summary="같은 게임은 이어서: 4개 프롬프트를 같은 채팅에 순서대로 붙여넣어요."><span class="em" aria-hidden="true">🔁</span><span class="summary-copy"><b>4단계를 순서대로</b><small>복사 → 붙여넣기 → 플레이 → 테스트</small></span></button>
           <button class="scard summary-card" type="button" aria-pressed="false" data-summary="매번 직접 확인: AI가 됐다고 말해도 내가 플레이해서 기능을 확인해요."><span class="em" aria-hidden="true">🧪</span><span class="summary-copy"><b>매 단계 직접 테스트</b><small>AI도 틀릴 수 있으니까</small></span></button>
         </div>
         <output class="summary-status" aria-live="polite">카드 3장을 눌러 오늘의 규칙을 완성하세요.</output>
       </div>
     </section>
 
-    <!-- 20. 끝 -->
-    <section id="finale">
+    <!-- 17. 끝 -->
+    <section id="finale" aria-labelledby="finale-title">
       <div class="sky-page">
         <span class="bouncy" style="font-size:5.3rem;" aria-hidden="true">🚀</span>
-        <h1 style="font-size:3.9rem; margin-top:.6rem;">게임 2개 완성!<br><span style="color:#FFD86B;">나는 플레이어이자 메이커</span></h1>
-        <p style="font-size:1.4rem; margin-top:1rem; max-width:820px;">복사·붙여넣기로 시작했지만, 재미있는지 판단하고 오류를 찾은 사람은 바로 나예요.<br><b style="color:#B5F5E3;">다음에는 내 규칙 한 가지를 더 요청해 보세요.</b></p>
+        <h2 id="finale-title" style="font-size:3.9rem; margin-top:.6rem;">게임을 직접 완성했어요!<br><span style="color:#FFD86B;">나는 플레이어이자 메이커</span></h2>
+        <p style="font-size:1.4rem; margin-top:1rem; max-width:820px;">게임 하나만 끝냈어도 멋진 성공이에요. 재미있는지 판단하고 오류를 찾은 사람은 바로 나예요.<br><b style="color:#B5F5E3;">다음에는 내 규칙 한 가지를 더 부탁해 보세요.</b></p>
         <button class="hint" id="celebrateBtn" type="button">눌러서 완료 축하하기 <span aria-hidden="true">✨</span></button>
         <div class="final-actions"><a href="#/1">처음부터 다시 보기</a><a href="../intro/index.html">어른용 세미나 보기</a></div>
       </div>
@@ -1246,12 +1301,23 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
     transition: 'none',
     backgroundTransition: 'none',
     width: 1280,
-    height: 800,
+    height: 720,
     margin: 0.03,
     minScale: 0.4,
     maxScale: 2.0,
     center: false,
   });
+
+  // 다른 장으로 넘어갈 때 숨겨질 슬라이드 안에 키보드 초점이 남지 않게 합니다.
+  function releaseSlideFocus() {
+    const active = document.activeElement;
+    if (active && active.closest('.reveal .slides') && typeof active.blur === 'function') active.blur();
+  }
+  Reveal.on('beforeslidechange', releaseSlideFocus);
+  document.addEventListener('keydown', (event) => {
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', 'n', 'N', 'p', 'P'];
+    if (navigationKeys.includes(event.key)) releaseSlideFocus();
+  }, true);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1378,7 +1444,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           card.setAttribute('aria-pressed', String(done));
           card.classList.toggle('is-done', done);
           const count = cards.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
-          progress.textContent = count === cards.length ? '3/3 출발 준비 완료!' : count + '/3 미션 확인';
+          progress.textContent = count === cards.length ? '3/3 만드는 방법 확인 완료!' : count + '/3 만드는 방법 확인';
           ding(done ? 820 + count * 90 : 520);
           if (count === cards.length) sparkElement(progress, 9);
         });
@@ -1535,7 +1601,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
         card.addEventListener('click', () => {
           card.setAttribute('aria-pressed', 'true');
           const count = cards.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
-          status.textContent = count === cards.length ? '3가지 규칙 완성! 이제 다음 게임을 만들 준비가 됐어요.' : card.dataset.summary + ' (' + count + '/3)';
+          status.textContent = count === cards.length ? '3가지 규칙 완성! 나는 게임 메이커예요.' : card.dataset.summary + ' (' + count + '/3)';
           ding(860 + count * 90);
           if (count === cards.length) sparkElement(status, 10);
         });
@@ -1744,22 +1810,30 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
     resetAll();
   })();
 
-  // ===== 프롬프트 만들기 · 복사하기 =====
+  // ===== 프롬프트 복사 · 실제 플레이 테스트 · 진행 저장 =====
   (function () {
-    async function copyText(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return;
+    const STORAGE_KEY = 'children-game-workshop-progress-v2';
+    const state = { copied: {}, tests: {}, choices: { catName: '토리', quizShip: '별빛호' } };
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (saved && typeof saved === 'object') {
+        Object.assign(state.copied, saved.copied || {});
+        Object.assign(state.tests, saved.tests || {});
+        Object.assign(state.choices, saved.choices || {});
       }
-      const helper = document.createElement('textarea');
-      helper.value = text;
-      helper.setAttribute('readonly', '');
-      helper.style.position = 'fixed';
-      helper.style.opacity = '0';
-      document.body.appendChild(helper);
-      helper.select();
-      document.execCommand('copy');
-      helper.remove();
+    } catch (e) { /* 저장을 사용할 수 없어도 실습은 계속됩니다. */ }
+
+    function persist() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+      catch (e) { /* 저장 없이 현재 화면에서 계속 진행 */ }
+    }
+
+    function stepKey(project, step) { return project + '-' + step; }
+    function testValues(project, step) {
+      const key = stepKey(project, step);
+      if (!Array.isArray(state.tests[key])) state.tests[key] = [false, false, false];
+      return state.tests[key];
     }
 
     function report(button, message) {
@@ -1768,28 +1842,105 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
       if (status) status.textContent = message;
     }
 
-    const lab = document.getElementById('promptLab');
-    if (lab) {
-      const output = lab.querySelector('#promptText');
-      const values = {
-        hero: '고양이가',
-        goal: '떨어지는 사과를 받는',
-        control: '왼쪽·오른쪽 화살표 키로 움직이는',
-      };
-      lab.querySelectorAll('.choice-btn').forEach((button) => {
+    function syncStep(project, step) {
+      const key = stepKey(project, step);
+      const copied = Boolean(state.copied[key]);
+      const tests = testValues(project, step);
+      const count = tests.filter(Boolean).length;
+      const complete = count === tests.length;
+      const copyButton = document.querySelector('.build-copy-btn[data-project="' + project + '"][data-step="' + step + '"]');
+      const slide = copyButton && copyButton.closest('.build-slide');
+      if (copyButton) {
+        copyButton.classList.toggle('is-copied', copied);
+        copyButton.textContent = copied ? 'Step ' + step + ' 다시 복사' : 'Step ' + step + ' 프롬프트 복사';
+        const card = copyButton.closest('.build-prompt-card');
+        if (card) card.classList.toggle('is-copied', copied);
+      }
+      if (slide) {
+        slide.querySelectorAll('.step-check').forEach((button) => {
+          const checked = Boolean(tests[Number(button.dataset.testIndex)]);
+          button.setAttribute('aria-pressed', String(checked));
+        });
+        const status = slide.querySelector('.copy-status');
+        if (status) {
+          if (complete) status.textContent = '3/3 테스트 완료 — Step ' + step + ' 완성!';
+          else if (copied) status.textContent = count + '/3 테스트 완료 — 게임에서 직접 확인하세요.';
+          else status.textContent = '먼저 Step ' + step + ' 프롬프트를 복사하세요.';
+        }
+      }
+      document.querySelectorAll('.build-progress[data-project="' + project + '"] .build-dot[data-progress-step="' + step + '"]').forEach((dot) => {
+        dot.classList.toggle('is-complete', complete);
+      });
+    }
+
+    function syncAllSteps() {
+      ['cat', 'quiz'].forEach((project) => {
+        ['1', '2', '3', '4'].forEach((step) => syncStep(project, step));
+      });
+    }
+
+    function updateChoice(groupName, value, target, resetProgress) {
+      if (!target) return;
+      if (groupName === 'catName') target.textContent = target.textContent.replace(/- 고양이 이름은 ‘[^’]+’야\./, '- 고양이 이름은 ‘' + value + '’야.');
+      if (groupName === 'quizShip') target.textContent = target.textContent.replace(/- 우주선 이름은 ‘[^’]+’야\./, '- 우주선 이름은 ‘' + value + '’야.');
+      state.choices[groupName] = value;
+      if (resetProgress) {
+        const project = groupName === 'catName' ? 'cat' : 'quiz';
+        state.copied[stepKey(project, '1')] = false;
+        state.tests[stepKey(project, '1')] = [false, false, false];
+        syncStep(project, '1');
+      }
+      persist();
+    }
+
+    document.querySelectorAll('[data-choice-group]').forEach((group) => {
+      const groupName = group.dataset.choiceGroup;
+      const savedValue = state.choices[groupName];
+      const buttons = Array.from(group.querySelectorAll('.maker-choice'));
+      const selected = buttons.find((button) => button.dataset.choiceValue === savedValue) || buttons[0];
+      buttons.forEach((button) => button.setAttribute('aria-pressed', String(button === selected)));
+      if (selected) updateChoice(groupName, selected.dataset.choiceValue, document.getElementById(selected.dataset.promptTarget), false);
+      buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          const group = button.closest('[data-choice-group]');
-          group.querySelectorAll('.choice-btn').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-          values[group.dataset.choiceGroup] = button.dataset.value;
-          output.textContent = values.hero + ' ' + values.goal + ', ' + values.control + ' 게임을 만들어줘. 점수와 시작 버튼을 넣고 화면에서 바로 플레이할 수 있게 해줘.';
-          const panel = output.closest('.prompt-output');
-          panel.classList.remove('is-refreshing');
-          requestAnimationFrame(() => panel.classList.add('is-refreshing'));
-          const rect = button.getBoundingClientRect();
-          sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 3);
+          buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          const target = document.getElementById(button.dataset.promptTarget);
+          updateChoice(groupName, button.dataset.choiceValue, target, true);
+          const project = groupName === 'catName' ? 'cat' : 'quiz';
+          const copyButton = document.querySelector('.build-copy-btn[data-project="' + project + '"][data-step="1"]');
+          report(copyButton, '이름을 “' + button.dataset.choiceValue + '”로 바꿨어요. 새 프롬프트를 복사하세요.');
           ding(840);
         });
       });
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      const helper = document.createElement('textarea');
+      helper.value = text;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.left = '-9999px';
+      document.body.appendChild(helper);
+      helper.select();
+      let copied = false;
+      try { copied = document.execCommand('copy'); }
+      finally { helper.remove(); }
+      if (!copied) throw new Error('copy command failed');
+      return true;
+    }
+
+    function selectPrompt(target) {
+      const details = target.closest('details');
+      if (details) details.open = true;
+      target.focus();
+      const range = document.createRange();
+      range.selectNodeContents(target);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
     }
 
     document.querySelectorAll('[data-copy-target]').forEach((button) => {
@@ -1801,49 +1952,57 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
           if (button.classList.contains('build-copy-btn')) {
             const project = button.dataset.project;
             const step = button.dataset.step;
-            button.setAttribute('aria-pressed', 'true');
-            button.classList.add('is-copied');
-            button.textContent = 'Step ' + step + ' 프롬프트 복사 완료 ✓';
-            const promptCard = button.closest('.build-prompt-card');
-            if (promptCard) promptCard.classList.add('is-copied');
-            document.querySelectorAll('.build-progress[data-project="' + project + '"] .build-dot[data-progress-step="' + step + '"]').forEach((dot) => dot.classList.add('is-complete'));
+            state.copied[stepKey(project, step)] = true;
+            persist();
+            syncStep(project, step);
+            const alreadyComplete = testValues(project, step).every(Boolean);
+            report(button, alreadyComplete
+              ? '프롬프트를 다시 복사했어요. 3/3 테스트 완료 — Step ' + step + ' 완성!'
+              : '복사 완료! AI 채팅에 붙여넣고 아래 3가지 테스트를 확인하세요.');
             const rect = button.getBoundingClientRect();
-            sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, step === '4' ? 9 : 4);
+            sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 4);
             ding(780 + Number(step) * 60);
-            report(button, 'Step ' + step + ' 복사 완료! AI 채팅에 붙여넣고 미리보기에서 테스트하세요.');
           } else {
-            report(button, '복사했어요. 문제가 생긴 게임의 같은 채팅에 붙여넣으세요.');
+            report(button, '복사 완료! 문제가 생긴 게임의 같은 채팅에 붙여넣으세요.');
             const rect = button.getBoundingClientRect();
             sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 4);
             ding(820);
           }
         } catch (e) {
-          report(button, '복사하지 못했어요. 문장을 드래그해서 직접 복사해 주세요.');
+          selectPrompt(target);
+          report(button, '자동 복사가 안 됐어요. 내용을 선택했으니 Ctrl/⌘ + C를 누르세요.');
         }
       });
     });
 
-    document.querySelectorAll('[data-copy]').forEach((button) => {
-      button.addEventListener('click', async () => {
-        let selectionMessage = '';
-        if (button.classList.contains('upgrade-card')) {
-          button.setAttribute('aria-pressed', 'true');
-          button.classList.add('is-selected');
-          const slide = button.closest('#upgradeSlide');
-          const selected = slide.querySelectorAll('.upgrade-card[aria-pressed="true"]').length;
-          selectionMessage = selected >= 2 ? '2개 이상 선택 완료!' : selected + '/2 업그레이드 선택';
-          const rect = button.getBoundingClientRect();
-          sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, selected >= 2 ? 6 : 3);
-          ding(780 + Math.min(selected, 3) * 70);
+    document.querySelectorAll('.step-check').forEach((button) => {
+      button.addEventListener('click', () => {
+        const project = button.dataset.project;
+        const step = button.dataset.step;
+        const key = stepKey(project, step);
+        const copyButton = document.querySelector('.build-copy-btn[data-project="' + project + '"][data-step="' + step + '"]');
+        if (!state.copied[key]) {
+          report(copyButton, '먼저 노란 복사 버튼을 누르고 게임을 만든 뒤 테스트하세요.');
+          copyButton.focus();
+          ding(420);
+          return;
         }
-        try {
-          await copyText(button.dataset.copy);
-          report(button, (selectionMessage ? selectionMessage + ' · ' : '') + '요청을 복사했어요.');
-        } catch (e) {
-          report(button, (selectionMessage ? selectionMessage + ' · ' : '') + '복사하지 못했어요. 카드의 문장을 직접 입력해 주세요.');
+        const tests = testValues(project, step);
+        const index = Number(button.dataset.testIndex);
+        tests[index] = !tests[index];
+        persist();
+        syncStep(project, step);
+        const complete = tests.every(Boolean);
+        ding(tests[index] ? 760 + (index * 70) : 500);
+        if (complete) {
+          const status = button.closest('.build-side').querySelector('.copy-status');
+          const rect = status.getBoundingClientRect();
+          sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
         }
       });
     });
+
+    syncAllSteps();
   })();
 
   // ===== 목차 드롭다운 =====

@@ -1,1 +1,57 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Environment files (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Build output and framework caches
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+.turbo/
+
+# Tests and coverage
+coverage/
+.nyc_output/
+
+# Runtime and package-manager diagnostics
+*.pid
+*.pid.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Local editor and OS metadata
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local tool state
+.superpowers/
+.claude/settings.local.json
+.wrangler/
+.vercel/
+.netlify/
