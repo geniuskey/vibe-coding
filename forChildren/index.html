@@ -13,10 +13,10 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나만의 게임 만들기 — AI와 바이브 코딩 (어린이 × 부모)</title>
+  <title>나만의 게임 작동시키기 — 어린이 AI 바이브 코딩</title>
 
   <!-- SEO -->
-  <meta name="description" content="브라우저에서 claude.ai / ChatGPT에게 한 줄씩 직접 타이핑해 요청하며 나만의 게임을 만드는 어린이 바이브 코딩 세미나. 요청할 때마다 게임이 진화하는 라이브 데모와 부모 가이드 포함." />
+  <meta name="description" content="초등학생이 복사 가능한 단계별 프롬프트로 바구니 고양이 액션 게임과 우주 퀴즈 게임을 직접 만들고 테스트하는 어린이 AI 바이브 코딩 워크숍." />
   <meta name="keywords" content="어린이 코딩, 바이브 코딩, AI, 게임 만들기, claude.ai, ChatGPT, 프롬프트, 부모 가이드" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
@@ -25,8 +25,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="어린이 바이브 코딩" />
   <meta property="og:title" content="나만의 게임 만들기 — AI와 바이브 코딩" />
-  <meta property="og:description" content="한 줄씩 요청할 때마다 게임이 진화한다. 아이와 부모가 함께하는 바이브 코딩 세미나." />
+  <meta property="og:description" content="8개의 단계별 프롬프트를 복사하고 붙여넣으며 액션 게임과 퀴즈 게임을 끝까지 완성하는 어린이 바이브 코딩 워크숍." />
   <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="assets/hero-ai-game.png" />
+  <meta name="theme-color" content="#17113A" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
 
@@ -264,8 +266,10 @@ footer, header, hgroup, main, menu, nav, section {
     .hint {
       display: inline-block; margin-top: 1.4rem; font-size: 1.15rem !important;
       color: #FFE79A !important; font-weight: 800;
+      border: 0; background: transparent; cursor: pointer; font-family: inherit;
       animation: pulseHint 1.8s ease-in-out infinite;
     }
+    .hint:focus-visible { outline: 4px solid #FFD86B; outline-offset: 4px; border-radius: 8px; }
 
     /* ===== 라이브 데모: 요청 → 게임 진화 ===== */
     .demo-wrap {
@@ -287,7 +291,7 @@ footer, header, hgroup, main, menu, nav, section {
       background: linear-gradient(135deg, var(--lav), var(--skyb));
       border: none; border-radius: 999px; padding: .6em 1.1em; cursor: pointer;
       box-shadow: 0 6px 0 rgba(60, 40, 140, 0.35);
-      transition: transform .1s ease, box-shadow .1s ease;
+      transition: transform .1s ease;
     }
     .send-btn:hover { filter: brightness(1.07); }
     .send-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(60, 40, 140, 0.35); }
@@ -296,13 +300,12 @@ footer, header, hgroup, main, menu, nav, section {
       position: relative; border-radius: 20px; overflow: hidden;
       border: 4px solid #7FBE63;
       background: linear-gradient(180deg, #BFE7FF 0%, #E8F9E3 100%);
-      transition: background 1s ease, border-color 1s ease;
       cursor: crosshair;
     }
     .demo-stage .ground {
       position: absolute; left: 0; right: 0; bottom: 0; height: 22%;
       background: linear-gradient(180deg, #A5DE8C, #8FCF74);
-      transition: background 1s ease; z-index: 1;
+      z-index: 1;
     }
     .demo-stage.night { background: linear-gradient(180deg, #141130 0%, #2E2160 100%); border-color: #4A3E8C; }
     .demo-stage.night .ground { background: linear-gradient(180deg, #2E4B2A, #223B20); }
@@ -381,6 +384,433 @@ footer, header, hgroup, main, menu, nav, section {
     }
     .reveal .controls { color: var(--sunny); }
 
+    /* ===== 2026 어린이 워크숍 리디자인 ===== */
+    * { box-sizing: border-box; }
+    button, select, a { touch-action: manipulation; }
+    button, select { -webkit-tap-highlight-color: rgba(142, 123, 255, .2); }
+    h1, h2, h3 { text-wrap: balance; }
+    p, li { text-wrap: pretty; }
+
+    .skip-link {
+      position: fixed; top: 10px; left: 50%; z-index: 200;
+      transform: translate(-50%, -160%); padding: .65rem 1rem;
+      border-radius: 12px; background: #FFF; color: #201947;
+      font-weight: 900; box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+    .skip-link:focus { transform: translate(-50%, 0); }
+
+    .reveal h2 { letter-spacing: -.025em; }
+    .reveal h3 { color: var(--ink); font-size: 1.22rem; font-weight: 900; line-height: 1.35; }
+    .page-kicker {
+      margin-top: .3rem; max-width: 980px; color: var(--ink-soft) !important;
+      font-size: 1.2rem !important; line-height: 1.5 !important;
+    }
+    .key {
+      display: inline-grid; place-items: center; min-width: 1.8em;
+      padding: .08em .38em; border: 2px solid #D6C7AA; border-bottom-width: 4px;
+      border-radius: 8px; background: #FFF; color: #4B3A28;
+      font-family: 'JetBrains Mono', monospace; font-size: .88em; font-weight: 800;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem; width: fit-content;
+      padding: .38rem .78rem; border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px; color: #DCD5FF; background: rgba(20,14,55,.55);
+      backdrop-filter: blur(10px); font-size: .95rem; font-weight: 800;
+    }
+
+    .hero-page {
+      position: relative; height: 100%; overflow: hidden; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px; background: #100C31; box-shadow: 0 30px 80px rgba(5,3,24,.5);
+    }
+    .hero-art { position: absolute; inset: 0; margin: 0; transition: transform .35s ease; will-change: transform; }
+    .hero-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-art::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(13,10,48,.98) 0%, rgba(13,10,48,.9) 31%, rgba(13,10,48,.22) 63%, rgba(13,10,48,.08) 100%);
+    }
+    .hero-copy {
+      position: relative; z-index: 2; width: 56%; height: 100%; padding: 3.8rem 2.6rem 2.6rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    }
+    .hero-copy h1 { margin-top: 1rem; color: #FFF; font-size: 4.2rem; line-height: 1.08; letter-spacing: -.045em; }
+    .hero-copy .lead { margin-top: 1.1rem; color: #E6E0FF !important; font-size: 1.38rem; line-height: 1.55; }
+    .start-cue {
+      display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.5rem;
+      color: #FFF; font-size: 1rem; font-weight: 800;
+      border: 0; padding: 0; background: transparent; cursor: pointer; font-family: inherit;
+    }
+    .start-cue .key { background: #FFD86B; border-color: #B98215; }
+    .start-cue:hover .key { transform: translateX(4px); }
+    .start-cue .key { transition: transform .16s ease; }
+
+    .mission-grid, .role-grid, .safety-grid, .finish-grid {
+      flex: 1; display: grid; gap: 1rem; align-items: stretch; margin-top: 1rem;
+    }
+    .mission-grid { grid-template-columns: repeat(3, 1fr); }
+    .mission-card {
+      position: relative; overflow: hidden; padding: 1.25rem; border: 3px solid #EADFC8;
+      border-radius: 22px; background: #FFF; box-shadow: 0 12px 28px -18px rgba(70,45,10,.45);
+      color: var(--ink); cursor: pointer; font-family: inherit; text-align: left;
+      transition: transform .16s ease;
+    }
+    .mission-card:hover { transform: translateY(-5px); }
+    .mission-card::after {
+      content: "✓"; position: absolute; top: 1rem; right: 1rem; display: grid; place-items: center;
+      width: 2rem; height: 2rem; border-radius: 50%; background: var(--mint); color: #FFF;
+      font-size: 1rem; font-weight: 900; opacity: 0; transform: scale(.5);
+    }
+    .mission-card.is-done { border-color: #69D7B8; background: #F0FCF8; }
+    .mission-card.is-done::after { opacity: 1; transform: scale(1); }
+    .mission-card.is-done .icon { animation: cardPop .35s ease both; }
+    .mission-card .num {
+      display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; margin-bottom: .85rem;
+      border-radius: 50%; color: #FFF; background: var(--lav); font-size: 1rem; font-weight: 900;
+    }
+    .mission-card:nth-child(2) .num { background: var(--coral); }
+    .mission-card:nth-child(3) .num { background: var(--mint); }
+    .mission-card .icon { display: block; margin-bottom: .55rem; font-size: 2.3rem; }
+    .mission-card .mission-title { display: block; color: var(--ink); font-size: 1.22rem; font-weight: 900; line-height: 1.35; }
+    .mission-card .mission-copy { display: block; margin-top: .45rem; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.5; font-weight: 500; }
+    .ready-strip {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin-top: .85rem; padding: .75rem 1rem; border-radius: 16px; background: #F1ECFF;
+      color: #55448F; font-size: 1.02rem; font-weight: 750;
+    }
+    .mission-progress { color: #6C57E8; font-variant-numeric: tabular-nums; }
+
+    .role-grid { grid-template-columns: 1fr 1fr; }
+    .role-card { padding: 1.3rem 1.5rem; border-radius: 22px; border: 3px solid; background: #FFF; transition: transform .16s ease; }
+    .role-card.is-active { transform: translateY(-4px); }
+    .role-card.you { border-color: #CFC2FF; background: #F6F3FF; }
+    .role-card.ai { border-color: #B6EBDD; background: #F0FCF8; }
+    .role-card h3 { display: flex; align-items: center; gap: .65rem; font-size: 1.45rem; }
+    .role-card ul { margin: .7rem 0 0 1.2rem; }
+    .role-card li { margin: .38rem 0; font-size: 1.08rem; line-height: 1.45; }
+    .role-reveal-btn, .safety-reveal, .parent-tip-btn {
+      margin-top: .6rem; border: 0; border-radius: 10px; padding: .45rem .68rem;
+      background: #2F2650; color: #FFF; font: 800 .88rem 'Pretendard', sans-serif; cursor: pointer;
+    }
+    .role-reveal-btn:hover, .safety-reveal:hover, .parent-tip-btn:hover { transform: translateY(-2px); }
+    .role-secret {
+      margin-top: .55rem !important; padding: .5rem .65rem; border-radius: 10px; background: rgba(255,255,255,.72);
+      color: #5C4A8D !important; font-size: .92rem !important; line-height: 1.45 !important;
+    }
+    .role-secret:not([hidden]) { animation: slideRise .28s ease both; }
+    .loop-line {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .65rem; margin-top: .9rem;
+    }
+    .loop-step { padding: .62rem .75rem; border-radius: 14px; background: #FFF4D7; color: #72551B; text-align: center; font-weight: 850; font-size: 1rem; }
+
+    .safety-grid { grid-template-columns: repeat(3, 1fr); }
+    .safety-card { padding: 1.2rem; border-radius: 20px; border: 3px solid #EADFC8; background: #FFF; }
+    .safety-card .shield { display: block; margin-bottom: .55rem; font-size: 2.5rem; }
+    .safety-card p { margin-top: .5rem; font-size: 1.05rem; line-height: 1.5; color: var(--ink-soft); }
+    .safety-card.is-active { border-color: var(--coral); transform: translateY(-4px); }
+    .safety-card { transition: transform .16s ease; }
+    .safety-reveal { background: #A64035; }
+    .stop-line {
+      display: flex; align-items: center; justify-content: center; gap: .6rem; margin-top: .85rem;
+      padding: .7rem 1rem; border-radius: 14px; background: #FFE9E5; color: #A64035; font-size: 1.08rem; font-weight: 900;
+    }
+    .stop-line.is-speaking { animation: cardPop .32s ease both; }
+
+    .demo-wrap { grid-template-columns: 420px 1fr; }
+    .chat-log { scrollbar-color: #C8BDF3 transparent; scrollbar-width: thin; }
+    .send-btn:disabled { cursor: wait; opacity: .68; box-shadow: 0 3px 0 rgba(60,40,140,.22); }
+    .send-btn:focus-visible, .book-toolbar button:focus-visible, .book-toolbar a:focus-visible,
+    .book-toolbar select:focus-visible, .choice-btn:focus-visible, .copy-btn:focus-visible,
+    .upgrade-card:focus-visible, .demo-stage:focus-visible, .demo-apple:focus-visible,
+    .reveal .controls button:focus-visible {
+      outline: 4px solid #FFD86B; outline-offset: 3px;
+    }
+    .demo-stage { cursor: default; }
+    .demo-stage:focus-visible { border-color: #FFD052; }
+    .demo-apple { appearance: none; padding: 0; border: 0; background: transparent; }
+    .demo-help {
+      position: absolute; left: 50%; bottom: 12px; z-index: 4; transform: translateX(-50%);
+      width: max-content; max-width: 90%; padding: .35rem .7rem; border-radius: 999px;
+      background: rgba(22,16,56,.78); color: #FFF; font-size: .82rem; font-weight: 800;
+      opacity: 0; transition: opacity .25s ease;
+    }
+    .demo-stage:not(.off) .demo-help { opacity: 1; }
+    .game-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+    .prompt-lab {
+      flex: 1; min-height: 0; display: grid; grid-template-columns: .88fr 1.12fr; gap: 1rem; margin-top: .9rem;
+    }
+    .choice-panel { display: flex; flex-direction: column; gap: .75rem; padding: 1rem; border-radius: 20px; background: #F2EEFF; }
+    .choice-group h3 { margin-bottom: .42rem; color: #5F4EB0; font-size: .98rem; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .choice-btn {
+      border: 2px solid #D8CEFA; border-radius: 999px; padding: .45rem .75rem;
+      background: #FFF; color: #4B3A70; font: 800 .92rem 'Pretendard', sans-serif; cursor: pointer;
+      transition: transform .14s ease;
+    }
+    .choice-btn:hover { transform: translateY(-2px); border-color: #9D89EB; }
+    .choice-btn[aria-pressed="true"] { border-color: #6C57E8; background: #6C57E8; color: #FFF; }
+    .prompt-output {
+      display: flex; flex-direction: column; justify-content: center; gap: .8rem;
+      padding: 1.2rem 1.35rem; border: 3px dashed #D9A94E; border-radius: 20px; background: #FFF7E1;
+    }
+    .prompt-output .lab-label { color: #9C6816; font-size: .92rem; font-weight: 900; }
+    .prompt-output blockquote { color: #5B430F; font-size: 1.2rem; line-height: 1.55; font-weight: 750; }
+    .prompt-output.is-refreshing { animation: cardPop .28s ease both; }
+    .copy-btn {
+      align-self: flex-start; border: 0; border-radius: 12px; padding: .62rem .95rem;
+      background: #2F2650; color: #FFF; font: 850 .98rem 'Pretendard', sans-serif; cursor: pointer;
+    }
+    .copy-btn:hover { background: #4A3D79; }
+    .copy-status { min-height: 1.2em; color: #0E805D; font-size: .9rem; font-weight: 800; }
+
+    .upgrade-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; align-content: center; margin-top: .8rem; }
+    .upgrade-card {
+      min-height: 112px; padding: .85rem; border: 3px solid #EADFC8; border-radius: 18px;
+      background: #FFF; color: var(--ink); text-align: left; font: 750 1rem/1.45 'Pretendard', sans-serif;
+      cursor: pointer; transition: transform .14s ease;
+    }
+    .upgrade-card:hover { transform: translateY(-3px); border-color: #B7A6F5; box-shadow: 0 10px 22px -14px rgba(70,45,130,.6); }
+    .upgrade-card b { display: block; margin-bottom: .25rem; color: #6C57E8; }
+    .upgrade-card.is-selected { border-color: #6C57E8; background: #F3EFFF; }
+    .upgrade-card.is-selected::after { content: "✓ 선택"; float: right; color: #0E8F63; font-size: .82rem; font-weight: 900; }
+
+    .debug-flow { flex: 1; display: grid; grid-template-columns: .8fr 1.2fr; gap: 1rem; align-items: center; margin-top: 1rem; }
+    .debug-steps { display: grid; gap: .65rem; }
+    .debug-step { display: grid; grid-template-columns: 2.1rem 1fr; gap: .7rem; align-items: start; padding: .78rem; border-radius: 16px; background: #FFF; border: 2px solid #EADFC8; color: var(--ink); font-family: inherit; text-align: left; cursor: pointer; transition: transform .16s ease; }
+    .debug-step:hover { transform: translateX(5px); }
+    .debug-step.is-checked { border-color: #2EC59B; background: #F0FCF8; }
+    .debug-step.is-checked .num { animation: cardPop .3s ease both; }
+    .debug-step .num { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: #2EC59B; color: #FFF; font-weight: 900; }
+    .debug-step .debug-copy { display: block; font-size: 1rem; line-height: 1.45; }
+    .debug-step .debug-copy b { display: block; }
+    .debug-template { padding: 1.1rem; border-radius: 20px; background: #22203C; color: #F4F0FF; }
+    .debug-template .lab-label { display: block; margin-bottom: .65rem; color: #B8ADF4; font-size: .9rem; font-weight: 850; }
+    .debug-template blockquote { font-size: 1.12rem; line-height: 1.6; font-weight: 700; }
+    .debug-template .copy-btn { margin-top: .9rem; background: #FFD86B; color: #3A2B08; }
+
+    .finish-grid { grid-template-columns: 1.15fr .85fr; align-items: center; }
+    .test-list { display: grid; gap: .55rem; }
+    .test-item { display: flex; align-items: center; gap: .7rem; padding: .7rem .9rem; border-radius: 15px; background: #FFF; border: 2px solid #EADFC8; color: var(--ink); font: 750 1.04rem 'Pretendard', sans-serif; text-align: left; cursor: pointer; transition: transform .16s ease; }
+    .test-item:hover { transform: translateX(5px); }
+    .test-item[aria-pressed="false"] .check { opacity: .28; }
+    .test-item[aria-pressed="true"] { border-color: #2EC59B; background: #F0FCF8; }
+    .test-item[aria-pressed="true"] .check { animation: cardPop .3s ease both; }
+    .test-item .check { color: #0E8F63; font-size: 1.35rem; }
+    .badge-card { padding: 1.35rem; border-radius: 24px; background: linear-gradient(145deg,#3B2E78,#6C57E8); color: #FFF; text-align: center; box-shadow: 0 16px 35px -20px #2D1E70; }
+    .badge-card .badge-icon { display: block; font-size: 4.2rem; }
+    .badge-card h3 { margin-top: .5rem; color: #FFF; font-size: 1.45rem; }
+    .badge-card p { margin-top: .45rem; color: #E9E4FF; font-size: .98rem; line-height: 1.5; }
+    .badge-card.is-earned { animation: badgeEarned .65s cubic-bezier(.2,.8,.2,1) both; }
+    .finish-progress { display: block; margin-top: .65rem; color: #D9D1FF; font-size: .9rem; font-weight: 850; font-variant-numeric: tabular-nums; }
+
+    /* ===== 두 게임 · 단계별 제작 워크숍 ===== */
+    .setup-grid {
+      flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      align-items: stretch; margin-top: 1rem;
+    }
+    .setup-check {
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+      gap: .55rem; padding: 1.25rem; border: 3px solid #EADFC8; border-radius: 22px;
+      background: #FFF; color: var(--ink); font-family: inherit; text-align: left; cursor: pointer;
+      transition: transform .16s ease;
+    }
+    .setup-check:hover { transform: translateY(-4px); }
+    .setup-check[aria-pressed="true"] { border-color: #2EC59B; background: #F0FCF8; }
+    .setup-check .setup-icon { font-size: 2.7rem; line-height: 1; }
+    .setup-check b { font-size: 1.2rem; }
+    .setup-check small { color: var(--ink-soft); font-size: .98rem; line-height: 1.45; font-weight: 650; }
+
+    .build-slide .page { padding: 1.25rem 2rem 1.55rem; }
+    .build-slide .tag { margin-bottom: .42rem; }
+    .build-slide h2 { font-size: 2rem; line-height: 1.15; }
+    .build-slide .page-kicker { margin-top: .32rem; font-size: 1.02rem !important; line-height: 1.35 !important; }
+    .build-progress {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .45rem;
+      margin-top: .65rem; padding: .5rem .65rem; border-radius: 15px; background: #EEE9FF;
+    }
+    .build-dot {
+      display: flex; align-items: center; justify-content: center; gap: .36rem;
+      min-height: 36px; border-radius: 10px; color: #68579C; background: rgba(255,255,255,.6);
+      font-size: .84rem; line-height: 1.15; font-weight: 850;
+    }
+    .build-dot::before {
+      content: attr(data-progress-step); display: grid; place-items: center; width: 1.45rem; height: 1.45rem;
+      flex: 0 0 auto; border-radius: 50%; color: #FFF; background: #9988DA; font-size: .76rem;
+    }
+    .build-dot.is-current { color: #4F3DA7; background: #FFF; box-shadow: inset 0 0 0 2px #8E7BFF; }
+    .build-dot.is-complete { color: #176C54; background: #E0F8F0; }
+    .build-dot.is-complete::before { content: "✓"; background: #20AD82; }
+    .build-layout {
+      flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 250px;
+      gap: .8rem; margin-top: .65rem;
+    }
+    .build-prompt-card {
+      min-height: 0; display: flex; flex-direction: column; padding: .8rem .9rem;
+      border: 3px solid #3D3560; border-radius: 18px; background: #22203C; color: #F7F3FF;
+      box-shadow: 0 14px 30px -20px rgba(20,10,55,.85);
+    }
+    .build-prompt-card.is-copied { border-color: #54D8B2; }
+    .build-prompt-label { color: #BEB4F7; font-size: .84rem; font-weight: 900; letter-spacing: .03em; }
+    .build-prompt-text {
+      flex: 1; min-height: 0; overflow: auto; margin: .42rem 0 .55rem; padding: 0 .3rem 0 0;
+      white-space: pre-wrap; color: #FFF; font: 650 .95rem/1.42 'Pretendard', sans-serif;
+      text-align: left; scrollbar-color: #7569A6 transparent; scrollbar-width: thin;
+    }
+    .build-copy-btn {
+      width: 100%; border: 0; border-radius: 12px; padding: .62rem .8rem;
+      background: #FFD86B; color: #3B2B07; font: 900 .92rem 'Pretendard', sans-serif;
+      cursor: pointer; transition: transform .14s ease;
+    }
+    .build-copy-btn:hover { transform: translateY(-2px); }
+    .build-copy-btn.is-copied { background: #54D8B2; color: #173C32; }
+    .build-side { display: flex; flex-direction: column; gap: .58rem; min-height: 0; }
+    .step-callout {
+      padding: .8rem; border: 2px solid #D9CEF9; border-radius: 16px; background: #F5F1FF;
+      color: #584991; font-size: .98rem; line-height: 1.42; font-weight: 750;
+    }
+    .step-callout b { display: block; margin-bottom: .22rem; color: #4B399A; font-size: 1.02rem; }
+    .step-callout.new-chat { border-color: #F2B7AE; background: #FFF0ED; color: #9B4238; }
+    .step-callout.new-chat b { color: #9B4238; }
+    .step-checks { display: grid; gap: .42rem; }
+    .step-check {
+      display: flex; gap: .45rem; align-items: flex-start; padding: .55rem .62rem;
+      border-radius: 12px; background: #FFF; border: 2px solid #EADFC8; color: var(--ink-soft);
+      font-size: .9rem; line-height: 1.35; font-weight: 750;
+    }
+    .step-check::before { content: "□"; color: #6C57E8; font-size: 1.05rem; line-height: 1; }
+    .build-side .copy-status { margin-top: auto; padding: .5rem; border-radius: 11px; background: #EAF8F3; line-height: 1.35; }
+
+    .project-cover {
+      flex: 1; display: grid; grid-template-columns: .8fr 1.2fr; gap: 1.2rem;
+      align-items: center; margin-top: .9rem;
+    }
+    .project-visual {
+      display: grid; place-items: center; min-height: 360px; border-radius: 28px;
+      background: radial-gradient(circle at 50% 45%, #5A4DB1, #20194C 68%); color: #FFF;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.12);
+    }
+    .project-visual .project-emoji { font-size: 7.6rem; filter: drop-shadow(0 12px 20px rgba(0,0,0,.35)); }
+    .project-info { text-align: left; }
+    .project-info h3 { color: var(--ink); font-size: 2rem; }
+    .project-info p { margin-top: .6rem; color: var(--ink-soft); font-size: 1.12rem; line-height: 1.55; }
+    .project-skills { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .project-skills span { padding: .38rem .68rem; border-radius: 999px; background: #EEE9FF; color: #59479E; font-size: .9rem; font-weight: 850; }
+    .project-start-btn {
+      margin-top: 1rem; border: 0; border-radius: 14px; padding: .72rem 1rem;
+      background: #6C57E8; color: #FFF; font: 900 1rem 'Pretendard', sans-serif; cursor: pointer;
+    }
+
+    .rescue-grid {
+      flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem;
+      min-height: 0; margin-top: .75rem;
+    }
+    .rescue-card {
+      min-height: 0; display: flex; flex-direction: column; padding: .8rem;
+      border: 3px solid #EADFC8; border-radius: 18px; background: #FFF;
+    }
+    .rescue-card h3 { font-size: 1.03rem; }
+    .rescue-card pre {
+      flex: 1; min-height: 0; overflow: auto; margin: .48rem 0; padding: .65rem;
+      border-radius: 12px; background: #292544; color: #F7F3FF;
+      white-space: pre-wrap; text-align: left; font: 650 .84rem/1.42 'Pretendard', sans-serif;
+      scrollbar-width: thin;
+    }
+    .rescue-card .copy-btn { width: 100%; align-self: stretch; }
+    .rescue-card .copy-status { margin-top: .35rem; text-align: center; }
+
+    .compare-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: stretch; margin-top: 1rem; }
+    .compare-card {
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .45rem;
+      border: 3px solid #EADFC8; border-radius: 24px; background: #FFF; color: var(--ink);
+      font-family: inherit; cursor: pointer; transition: transform .16s ease;
+    }
+    .compare-card:hover { transform: translateY(-5px); }
+    .compare-card[aria-pressed="true"] { border-color: #2EC59B; background: #F0FCF8; }
+    .compare-card .compare-icon { font-size: 4rem; }
+    .compare-card b { font-size: 1.35rem; }
+    .compare-card small { color: var(--ink-soft); font-size: .98rem; font-weight: 700; }
+
+    .parent-grid { flex: 1; display: grid; grid-template-columns: repeat(2,1fr); gap: .75rem; align-content: center; margin-top: .75rem; }
+    .parent-tip { padding: .9rem 1rem; border-radius: 16px; background: rgba(255,255,255,.56); border: 1px solid #E4CF72; }
+    .parent-tip h3 { color: #604B0D; font-size: 1.08rem; }
+    .parent-tip p { margin-top: .35rem; color: #5F4C13 !important; font-size: .98rem !important; line-height: 1.5 !important; }
+    .parent-tip.is-active { border-color: #9E7A09; background: rgba(255,255,255,.82); }
+    .parent-tip-btn { background: #6E5310; }
+    .parent-coach {
+      display: block; min-height: 2.6rem; margin-top: .65rem; padding: .55rem .75rem;
+      border-radius: 12px; background: rgba(255,255,255,.46); color: #5B4200;
+      font-size: .94rem; line-height: 1.45; font-weight: 800;
+    }
+    .parent-coach.is-speaking { animation: cardPop .32s ease both; }
+
+    .summary-grid { flex: 1; display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: center; margin-top: 1rem; }
+    .summary-card { color: var(--ink); font-family: inherit; cursor: pointer; transition: transform .16s ease; }
+    .summary-card:hover { transform: translateY(-5px); }
+    .summary-card[aria-pressed="true"] { border-color: #8E7BFF; background: #F3EFFF; }
+    .summary-copy { display: block; font-size: 1.25rem; line-height: 1.5; }
+    .summary-copy small { display: block; margin-top: .15rem; color: var(--ink-soft); font-size: 1rem; font-weight: 650; }
+    .summary-status { min-height: 1.5em; margin-top: .55rem; color: #6C57E8; font-size: 1.05rem; font-weight: 850; text-align: center; }
+
+    .activity-status { min-height: 1.4em; font-size: .92rem; font-weight: 850; }
+
+    /* 슬라이드를 다시 방문할 때마다 재생되는 공통 진입 애니메이션 */
+    @keyframes slideRise {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slidePop {
+      0% { opacity: .7; transform: scale(.95); }
+      70% { opacity: 1; transform: scale(1.025); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes badgeEarned {
+      0% { opacity: .8; transform: scale(.92) rotate(-2deg); }
+      65% { opacity: 1; transform: scale(1.05) rotate(1deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    .reveal .slides section.present .page > .tag,
+    .reveal .slides section.present .note-page > .note-tag,
+    .reveal .slides section.present .hero-copy > .eyebrow { animation: slideRise .42s ease both; }
+    .reveal .slides section.present .page > h2,
+    .reveal .slides section.present .note-page > h2,
+    .reveal .slides section.present .hero-copy > h1,
+    .reveal .slides section.present .sky-page > h1 { animation: slideRise .5s .08s ease both; }
+    .reveal .slides section.present .page > .page-kicker,
+    .reveal .slides section.present .hero-copy > .lead,
+    .reveal .slides section.present .sky-page > p { animation: slideRise .5s .16s ease both; }
+    .reveal .slides section.present .page > :is(.role-grid,.demo-wrap,.prompt-lab,.upgrade-grid,.debug-flow,.finish-grid,.setup-grid,.project-cover,.build-layout,.rescue-grid,.compare-grid),
+    .reveal .slides section.present .note-page > .parent-grid { animation: slideRise .55s .24s ease both; }
+    .reveal .slides section.present .page > :is(.ready-strip,.loop-line,.stop-line,.copy-status,.summary-status),
+    .reveal .slides section.present .note-page > :is(.parent-coach,p),
+    .reveal .slides section.present .hero-copy > .start-cue,
+    .reveal .slides section.present .sky-page > :is(.hint,.final-actions) { animation: slideRise .5s .34s ease both; }
+    .reveal .slides section.present .mission-card:nth-child(1),
+    .reveal .slides section.present .safety-card:nth-child(1),
+    .reveal .slides section.present .summary-card:nth-child(1) { animation-delay: .24s; }
+    .reveal .slides section.present .mission-card:nth-child(2),
+    .reveal .slides section.present .safety-card:nth-child(2),
+    .reveal .slides section.present .summary-card:nth-child(2) { animation-delay: .34s; }
+    .reveal .slides section.present .mission-card:nth-child(3),
+    .reveal .slides section.present .safety-card:nth-child(3),
+    .reveal .slides section.present .summary-card:nth-child(3) { animation-delay: .44s; }
+    .reveal .slides section.present :is(.mission-card,.safety-card,.summary-card) { animation-name: slideRise; animation-duration: .5s; animation-timing-function: ease; animation-fill-mode: both; }
+
+    .start-cue:focus-visible, .mission-card:focus-visible, .role-reveal-btn:focus-visible,
+    .safety-reveal:focus-visible, .debug-step:focus-visible, .test-item:focus-visible,
+    .parent-tip-btn:focus-visible, .summary-card:focus-visible, .setup-check:focus-visible,
+    .build-copy-btn:focus-visible, .project-start-btn:focus-visible, .compare-card:focus-visible {
+      outline: 4px solid #FFD86B; outline-offset: 3px;
+    }
+
+    .final-actions { display: flex; gap: .65rem; margin-top: 1.3rem; }
+    .final-actions a { padding: .62rem .9rem; border-radius: 12px; background: rgba(255,255,255,.12); color: #FFF !important; border: 1px solid rgba(255,255,255,.24); font-size: .92rem; font-weight: 800; text-decoration: none; }
+    .final-actions a:hover { background: rgba(255,255,255,.2); }
+
+    @media (max-width: 720px) {
+      .book-toolbar { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; }
+      .book-toolbar select { max-width: 150px; }
+      .book-toolbar a { display: none; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -396,219 +826,404 @@ footer, header, hgroup, main, menu, nav, section {
   <div class="cloud" style="top: 64%; font-size: 44px; animation-duration: 105s; animation-delay: -40s;">☁️</div>
 </div>
 
-<div class="book-toolbar">
-  <select id="tocSelect" title="목차 — 원하는 페이지로 이동"></select>
-  <button id="fullscreenBtn" title="전체화면 (F)">⛶ 크게 보기</button>
-  <a href="../intro/index.html" title="어른용 원본 세미나">↗ 어른용</a>
-</div>
+<a class="skip-link" href="#presentation">발표 자료로 바로 가기</a>
 
-<div class="reveal">
+<nav class="book-toolbar" aria-label="발표 도구">
+  <select id="tocSelect" aria-label="목차에서 페이지 선택" title="목차 — 원하는 페이지로 이동"></select>
+  <button id="fullscreenBtn" type="button" aria-label="전체 화면으로 보기" aria-keyshortcuts="F" title="전체 화면 (F)">⛶ 크게 보기</button>
+  <a href="../intro/index.html" title="어른용 세미나로 이동">↗ 어른용</a>
+</nav>
+
+<main class="reveal" id="presentation" tabindex="-1" aria-label="어린이 바이브 코딩 발표 자료">
   <div class="slides">
 
-    <!-- ═══════════ 1. 표지 ═══════════ -->
-    <section id="cover">
-      <div class="sky-page">
-        <div style="font-size: 5.6rem; display: flex; gap: 1.8rem; align-items: flex-end;">
-          <span class="bouncy" style="animation-delay: .3s;">🧑‍💻</span>
-          <span class="floaty">🤖</span>
+    <!-- 1. 표지 -->
+    <section id="cover" aria-labelledby="cover-title">
+      <div class="hero-page">
+        <figure class="hero-art">
+          <img src="assets/hero-ai-game.png" width="1568" height="1003" fetchpriority="high" alt="노트북으로 게임을 만들며 AI 로봇과 협력하는 어린이 삽화" />
+        </figure>
+        <div class="hero-copy">
+          <span class="eyebrow">AI × GAME × MY IDEA</span>
+          <h1 id="cover-title">나만의 게임 <b style="color:#FFD86B;">2개</b>,<br><span style="color:#AEEEDC;">오늘 작동시킨다</span></h1>
+          <p class="lead">프롬프트를 순서대로 복사하고 직접 플레이해요.<br><b style="color:#FFD86B;">액션 게임 + 퀴즈 게임</b>을 끝까지 완성합니다.</p>
+          <button class="start-cue" id="missionStartBtn" type="button"><span class="key">→</span> 눌러서 미션 시작</button>
         </div>
-        <h1 style="font-size: 4.1rem; margin-top: 1rem;">
-          나만의 게임, <span style="color: #FFD86B;">오늘 만든다</span>
-        </h1>
-        <p style="font-size: 1.5rem; margin-top: .9rem;">
-          AI에게 말로 요청해서 만드는 <b style="color:#B5F5E3;">바이브 코딩</b>
-        </p>
-        <p style="font-size: 1.1rem; margin-top: .5rem; color: #C9BFF0 !important;">
-          어린이 × 부모 세미나 · 코딩은 몰라도 OK — 타이핑은 네가 직접!
-        </p>
-        <p class="hint">✨ 이 화면을 눌러 보세요 — 이 슬라이드도 코드로 만들었거든요 ✨</p>
-        <p style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
-          → 화살표 키로 다음 페이지
-        </p>
       </div>
     </section>
 
-    <!-- ═══════════ 2. 부모님 가이드 — 준비는 1분 ═══════════ -->
-    <section>
-      <div class="note-page">
-        <span class="note-tag">📌 부모님 가이드 — 준비는 1분이면 끝</span>
-        <h2>부모님이 할 일은 딱 하나, 새 채팅 열어주기</h2>
-        <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .55rem; margin-top: .5rem;">
-          <li>브라우저에서 <span class="cmd">claude.ai</span> 또는 <span class="cmd">chatgpt.com</span>에 로그인하고 <b>새 채팅</b>을 열어 주세요. 설치할 것도, 터미널도 없습니다.</li>
-          <li>그다음 <b>키보드를 아이에게</b> 넘겨 주세요 — 요청(프롬프트)은 아이가 직접 타이핑합니다.</li>
-          <li>만든 게임은 채팅 화면 옆 <b>미리보기(Preview)</b>에서 바로 플레이할 수 있어요. 미리보기가 안 뜨면 <b>"화면에서 바로 플레이되게 해줘"</b>라고 한 줄 요청하면 됩니다.</li>
-          <li>채팅은 지우지 말고 남겨 두세요 — 다음에 같은 채팅을 열면 이어서 만들 수 있습니다.</li>
-        </ul>
-        <p style="margin-top: auto; font-size: 1.08rem !important;">
-          ⏱️ 전체 30~40분 · 오늘의 목표: 완성도보다 <b>"내가 요청해서 내가 만들었다"</b>는 경험 한 번.
-        </p>
-      </div>
-    </section>
-
-    <!-- ═══════════ 3. 바이브 코딩이란 ═══════════ -->
-    <section>
+    <!-- 2. 오늘의 미션 -->
+    <section id="missionSlide" aria-labelledby="mission-title">
       <div class="page">
-        <span class="tag">바이브 코딩</span>
-        <h2>코드는 <b class="c-sky">AI</b>가 쓰고, 나는 <b class="c-lav">요청</b>한다</h2>
-        <p style="margin-top: .2rem;">
-          AI는 글·그림뿐 아니라 <b>코드</b>(컴퓨터에게 내리는 명령 글)도 아주 잘 써요.
-          원하는 걸 채팅으로 요청하면 게임을 통째로 만들어 줍니다. 아래 4단계를 계속 도는 것 — 그게 <b class="c-lav">바이브 코딩</b>이에요.
-        </p>
-        <div style="flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; align-items: center; margin-top: .8rem;">
-          <div class="scard"><span class="em">⌨️</span><p><b>1. 요청</b><br/>원하는 걸 한 줄로<br/>직접 타이핑</p></div>
-          <div class="scard"><span class="em">⚙️</span><p><b>2. 생성</b><br/>AI가 코드를<br/>만든다</p></div>
-          <div class="scard"><span class="em">▶️</span><p><b>3. 플레이</b><br/>미리보기에서<br/>바로 해본다</p></div>
-          <div class="scard"><span class="em">🔁</span><p><b>4. 다음 요청</b><br/>"이것도 넣어줘!"<br/>다시 1번으로</p></div>
+        <span class="tag">오늘의 미션</span>
+        <h2 id="mission-title">게임 2개를 <b class="c-coral">진짜로 작동</b>시킨다</h2>
+        <p class="page-kicker">각 게임은 4단계예요. 프롬프트 복사 → AI 채팅에 붙여넣기 → 미리보기 플레이 → 다음 단계로 갑니다.</p>
+        <div class="mission-grid">
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">1</span><span class="icon" aria-hidden="true">🐱</span><span class="mission-title">바구니 고양이</span><span class="mission-copy">화살표 키로 움직이고 사과를 받는 액션 게임을 만들어요.</span></button>
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">2</span><span class="icon" aria-hidden="true">🚀</span><span class="mission-title">우주 퀴즈 탐험대</span><span class="mission-copy">답을 클릭하고 힌트와 콤보를 쓰는 퀴즈 게임을 만들어요.</span></button>
+          <button class="mission-card" type="button" aria-pressed="false"><span class="num">3</span><span class="icon" aria-hidden="true">🧪</span><span class="mission-title">플레이하고 고치기</span><span class="mission-copy">매 단계 직접 시험하고, 이상하면 구조 요청을 복사해요.</span></button>
         </div>
-        <p class="center" style="font-size: 1.4rem;">
-          한 바퀴 돌 때마다 게임이 <b class="c-mint">한 단계씩 진화</b>해요. 다음 페이지에서 직접 확인!
-        </p>
+        <div class="ready-strip"><span>준비물: 브라우저 + AI 채팅 + 키보드</span><output class="mission-progress" aria-live="polite">0/3 미션 확인</output></div>
       </div>
     </section>
 
-    <!-- ═══════════ 4. ★ 라이브 데모: 한 줄씩 요청 → 게임 진화 ═══════════ -->
+    <!-- 3. 역할과 루프 -->
+    <section id="rolesSlide" aria-labelledby="role-title">
+      <div class="page">
+        <span class="tag mint">바이브 코딩</span>
+        <h2 id="role-title">AI는 <b class="c-mint">코딩 파트너</b>, 나는 <b class="c-lav">게임 감독</b></h2>
+        <p class="page-kicker">AI가 코드를 빨리 써도, 재미있는 규칙을 정하고 “됐는지” 판단하는 일은 사람이 합니다.</p>
+        <div class="role-grid">
+          <article class="role-card you"><h3><span aria-hidden="true">🧑‍💻</span> 내가 맡는 일</h3><ul><li>게임의 목표와 규칙 정하기</li><li>요청을 구체적으로 쓰기</li><li>직접 플레이하고 문제 찾기</li></ul><button class="role-reveal-btn" type="button" aria-expanded="false">감독의 비밀 보기</button><p class="role-secret" hidden>AI가 만든 결과에 “좋아” 또는 “다시”를 결정하는 사람이 진짜 감독이에요.</p></article>
+          <article class="role-card ai"><h3><span aria-hidden="true">🤖</span> AI가 돕는 일</h3><ul><li>필요한 코드를 빠르게 쓰기</li><li>색·소리·점수판 추가하기</li><li>설명한 버그를 찾아 고치기</li></ul><button class="role-reveal-btn" type="button" aria-expanded="false">파트너의 한계 보기</button><p class="role-secret" hidden>AI는 빠르지만 내 머릿속을 읽지는 못해요. 그래서 구체적인 설명이 필요해요.</p></article>
+        </div>
+        <div class="loop-line" aria-label="바이브 코딩의 네 단계"><div class="loop-step">1. 요청하기</div><div class="loop-step">2. 만들어짐</div><div class="loop-step">3. 플레이하기</div><div class="loop-step">4. 고쳐 달라고 하기</div></div>
+      </div>
+    </section>
+
+    <!-- 4. 안전 규칙 -->
+    <section id="safetySlide" aria-labelledby="safety-title">
+      <div class="page">
+        <span class="tag coral">시작 전 약속</span>
+        <h2 id="safety-title">똑똑한 메이커의 <b class="c-coral">3가지 안전 규칙</b></h2>
+        <p class="page-kicker">AI는 무엇이든 아는 마법사가 아니에요. 중요한 순간에는 멈추고 확인합니다.</p>
+        <div class="safety-grid">
+          <article class="safety-card"><span class="shield" aria-hidden="true">🔐</span><h3>개인정보는 입력하지 않기</h3><p>이름, 학교, 주소, 전화번호, 비밀번호는 채팅에 쓰지 않아요.</p><button class="safety-reveal" type="button" data-safety-message="AI가 학교 이름을 물어봐도 게임에는 필요 없어요. 쓰지 않고 어른에게 보여 주세요.">상황 예시 보기</button></article>
+          <article class="safety-card"><span class="shield" aria-hidden="true">🛑</span><h3>설치·로그인은 먼저 묻기</h3><p>파일 다운로드, 결제, 새 로그인 화면이 나오면 어른에게 보여 줘요.</p><button class="safety-reveal" type="button" data-safety-message="‘이 파일을 설치하세요’가 나오면 바로 누르지 말고 멈춘 뒤 어른과 확인해요.">상황 예시 보기</button></article>
+          <article class="safety-card"><span class="shield" aria-hidden="true">🔎</span><h3>AI의 말도 테스트하기</h3><p>AI도 틀릴 수 있어요. 게임을 직접 해보고 내가 확인해요.</p><button class="safety-reveal" type="button" data-safety-message="AI가 ‘고쳤어요’라고 말해도 끝이 아니에요. 내가 다시 플레이해야 진짜 확인 완료!">상황 예시 보기</button></article>
+        </div>
+        <output class="stop-line" aria-live="polite"><span aria-hidden="true">✋</span> 카드를 눌러 안전 상황을 확인해 보세요.</output>
+      </div>
+    </section>
+
+    <!-- 5. 작업 준비 -->
+    <section id="setupSlide" aria-labelledby="setup-title">
+      <div class="page">
+        <span class="tag mint">출발 전 1분</span>
+        <h2 id="setup-title">이 3가지만 준비하면 <b class="c-mint">바로 만들 수 있어요</b></h2>
+        <p class="page-kicker">카드를 눌러 준비를 확인하세요. 게임마다 <b>새 채팅 하나</b>를 열고, 그 안에서 4단계를 이어갑니다.</p>
+        <div class="setup-grid">
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">💬</span><b>AI 채팅 열기</b><small>HTML 미리보기를 실행할 수 있는 ChatGPT, Claude 같은 AI 채팅을 열어요.</small></button>
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">📋</span><b>복사·붙여넣기 알기</b><small>복사 버튼을 누른 뒤 채팅 입력창에서 <span class="key">Ctrl</span> + <span class="key">V</span></small></button>
+          <button class="setup-check" type="button" aria-pressed="false"><span class="setup-icon" aria-hidden="true">🧪</span><b>미리보기 찾기</b><small>AI가 만든 결과의 미리보기·실행 버튼을 찾아 직접 플레이해요.</small></button>
+        </div>
+        <div class="ready-strip"><span>설치·결제·로그인이 나오면 어른과 함께 확인!</span><output class="setup-progress" aria-live="polite">0/3 준비 완료</output></div>
+      </div>
+    </section>
+
+    <!-- 6. 게임 1 라이브 데모 -->
     <section id="demo">
       <div class="page" style="padding-bottom: 1.4rem;">
-        <span class="tag coral">핵심 · 라이브 데모 — 직접 눌러 보세요</span>
-        <h2 style="font-size: 2.05rem;">요청 <b class="c-coral">한 줄</b>마다, 오른쪽 게임이 <b class="c-mint">진화</b>합니다</h2>
+        <span class="tag sky">게임 1 미리보기 · 바구니 고양이</span>
+        <h2 style="font-size: 2.05rem;">먼저 맛보기! 요청마다 게임이 <b class="c-mint">한 단계씩 진화</b>해요</h2>
         <div class="demo-wrap">
           <div class="chat-col">
-            <div class="chat-log"></div>
-            <button class="send-btn">요청 보내기 ▶ (1/5)</button>
+            <div class="chat-log" aria-live="polite" aria-label="AI와 나눈 요청 대화"></div>
+            <button class="send-btn" type="button">첫 요청 보내기 <span aria-hidden="true">▶</span> (1/5)</button>
           </div>
-          <div class="demo-stage off">
-            <span class="hud-chip chip-score">🍎 <b>0</b>점</span>
+          <div class="demo-stage off" tabindex="0" role="application" aria-label="사과 받기 게임. 왼쪽과 오른쪽 화살표 키로 고양이를 움직입니다.">
+            <span class="hud-chip chip-score"><span aria-hidden="true">🍎</span> <b>0</b>점</span>
             <span class="hud-chip right chip-hearts">생명 <b>❤️❤️❤️</b></span>
             <div class="ground"></div>
-            <span class="demo-cat">🐱🧺</span>
-            <div class="go-overlay">GAME OVER! 다시 도전 💪</div>
+            <span class="demo-cat" aria-hidden="true">🐱🧺</span>
+            <span class="demo-help"><span class="key">←</span> <span class="key">→</span> 고양이 움직이기 · 사과 클릭도 가능</span>
+            <div class="go-overlay">게임 끝! 다시 도전 <span aria-hidden="true">💪</span></div>
+            <output class="game-status" aria-live="polite"></output>
           </div>
         </div>
-        <p style="font-size: 1.02rem; margin-top: .5rem;" >
-          <span class="soft">떨어지는 사과는 <b>클릭해서</b> 받아요 · 실제 바이브 코딩도 이 순서 그대로입니다 — 요청하고, 만들어지면, 바로 플레이!</span>
-        </p>
+        <p style="font-size: 1.02rem; margin-top: .5rem;"><span class="soft">먼저 왼쪽 버튼으로 게임을 만들고, 오른쪽 게임 영역을 누른 뒤 <b>← → 키</b>로 플레이하세요.</span></p>
       </div>
     </section>
 
-    <!-- ═══════════ 5. 직접 해보기: 첫 프롬프트 ═══════════ -->
-    <section>
+    <!-- 7. 게임 1 · Step 1 -->
+    <section id="catStep1" class="build-slide" aria-labelledby="cat-step1-title">
       <div class="page">
-        <span class="tag mint">직접 해보기</span>
-        <h2>이제 진짜로 — <b class="c-sunny">첫 번째 프롬프트</b>는 네가 직접 타이핑</h2>
-        <p style="margin-top: .2rem;"><b>프롬프트</b> = AI에게 보내는 요청 문장. 아래를 직접 타이핑해서 보내 보세요. 조금 바꿔도 좋아요.</p>
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;">
-          <div class="spell">
-            <span class="lbl">📋 첫 프롬프트 — 타이핑하고 Enter</span>
-            고양이가 바구니를 들고 위에서 떨어지는 사과를 받는 게임을 만들어줘.
-            왼쪽·오른쪽 화살표 키로 고양이를 움직이고, 사과를 받으면 점수가 1씩 올라가.
-            화면에서 바로 플레이할 수 있게 해줘.
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="say robot">
-              <span class="who">🤖 AI</span>
-              좋은 프롬프트의 비밀: <b>누가(고양이) · 무엇을(사과 받기) · 어떻게(화살표 키)</b>가 다 들어 있어요.
-            </div>
-            <div class="mini-note">
-              <p>📌 <b>부모님:</b> 잠시 후 채팅 옆에 <b>미리보기</b>가 열리고 게임이 바로 실행됩니다.
-              안 열리면 "화면에서 바로 플레이되게 해줘"라고 한 줄 더 요청하세요.</p>
-            </div>
-          </div>
+        <span class="tag coral">게임 1 · 바구니 고양이</span>
+        <h2 id="cat-step1-title">Step 1. <b class="c-coral">움직이는 기본 게임</b> 만들기</h2>
+        <p class="page-kicker">새 채팅을 열고 아래 프롬프트를 그대로 붙여넣으세요.</p>
+        <div class="build-progress" data-project="cat" aria-label="바구니 고양이 제작 진행">
+          <span class="build-dot is-current" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt1" class="build-prompt-text">브라우저에서 바로 실행되는 한 파일짜리 HTML 게임을 만들어줘.
+
+게임 이름: 바구니 고양이
+- 고양이는 화면 아래에서 바구니를 들고 있어.
+- ← → 화살표 키로 움직여.
+- 위에서 사과가 계속 떨어져.
+- 사과를 받으면 1점이 올라가.
+- 점수판을 화면 위에 보여줘.
+- 시작 버튼과 다시 시작 버튼을 넣어줘.
+
+HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이할 수 있게 해줘. 설명보다 실행 가능한 게임을 먼저 완성해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="1" data-copy-target="catPrompt1">Step 1 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout new-chat"><b>① 새 채팅에서 시작</b>게임 1 전용 새 대화를 열어요.</div><div class="step-checks"><span class="step-check">시작 버튼이 보이나?</span><span class="step-check">화살표 키로 움직이나?</span><span class="step-check">사과를 받으면 점수가 오르나?</span></div><output class="copy-status" aria-live="polite">복사한 뒤 AI 채팅에 붙여넣으세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════ 6. 한 줄 요청 아이디어 ═══════════ -->
-    <section>
+    <!-- 8. 게임 1 · Step 2 -->
+    <section id="catStep2" class="build-slide" aria-labelledby="cat-step2-title">
       <div class="page">
-        <span class="tag mint">직접 해보기</span>
-        <h2>업그레이드는 <b class="c-coral">한 번에 한 줄씩</b></h2>
-        <p style="margin-top: .2rem;">데모에서 봤던 것처럼, 요청을 하나 보내고 → 플레이해 보고 → 다음 요청. 이 리듬이 중요해요.</p>
-        <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; align-content: center; margin-top: .5rem;">
-          <div class="spell sm">💖 "사과를 놓치면 생명이 줄게 해줘. 생명은 3개"</div>
-          <div class="spell sm">⚡ "점수가 오를수록 점점 빨라지게 해줘"</div>
-          <div class="spell sm">🔊 "사과를 받을 때 효과음이 나게 해줘"</div>
-          <div class="spell sm">🌌 "배경을 밤하늘로 바꾸고 별이 반짝이게 해줘"</div>
-          <div class="spell sm">🏆 "최고 점수를 기억해서 화면에 보여줘"</div>
-          <div class="spell sm">🌟 "가끔 황금사과가 나오고, 받으면 5점을 주게 해줘"</div>
+        <span class="tag coral">게임 1 · 바구니 고양이</span>
+        <h2 id="cat-step2-title">Step 2. <b class="c-coral">생명과 게임 끝</b> 추가하기</h2>
+        <p class="page-kicker">Step 1에서 사용한 <b>같은 채팅</b>에 이어서 붙여넣으세요.</p>
+        <div class="build-progress" data-project="cat" aria-label="바구니 고양이 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot is-current" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
         </div>
-        <p class="center" style="font-size: 1.3rem; margin-top: .5rem;">
-          네가 생각해 낸 요청이 <b class="c-lav">제일 좋은 요청</b>이에요. 마음껏 실험해 봐요!
-        </p>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt2" class="build-prompt-text">방금 만든 ‘바구니 고양이’ 게임을 이어서 수정해줘. 기존 기능은 그대로 유지해.
+
+- 생명은 3개로 시작해.
+- 사과를 놓치면 생명이 1개 줄어.
+- 생명이 0이 되면 ‘게임 끝’ 화면을 보여줘.
+- 게임 끝 화면에 최종 점수와 다시 시작 버튼을 넣어줘.
+- 다시 시작하면 점수, 생명, 사과 속도가 처음 상태로 돌아가게 해줘.
+
+수정한 전체 결과를 미리보기에 바로 반영해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="2" data-copy-target="catPrompt2">Step 2 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>그래야 AI가 방금 만든 게임을 기억해요.</div><div class="step-checks"><span class="step-check">놓치면 생명이 줄어드나?</span><span class="step-check">0이면 게임 끝이 나오나?</span><span class="step-check">다시 시작하면 모두 초기화되나?</span></div><output class="copy-status" aria-live="polite">먼저 Step 1 게임이 잘되는지 확인하세요.</output></aside>
+        </div>
       </div>
     </section>
 
-    <!-- ═══════════ 7. 버그가 나면 ═══════════ -->
-    <section>
+    <!-- 9. 게임 1 · Step 3 -->
+    <section id="catStep3" class="build-slide" aria-labelledby="cat-step3-title">
       <div class="page">
-        <span class="tag sky">버그 잡기</span>
-        <h2>뭔가 이상해요? — 그게 <b class="c-mint">버그</b>, 고치면 됩니다</h2>
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .9rem;">
-          <div class="say me" style="max-width: 940px; align-self: flex-end;">
-            <span class="who">🧑 나</span>
-            고양이가 안 움직여. 화살표 키를 눌러도 그대로야. 고쳐줘.
-          </div>
-          <div class="say robot" style="max-width: 940px;">
-            <span class="who">🤖 AI</span>
-            확인했어요 — 키 입력 처리에 문제가 있네요. 수정했으니 미리보기에서 다시 해보세요!
-          </div>
-          <div class="scard" style="align-self: center; max-width: 940px; text-align: left; padding: 1.1rem 1.5rem;">
-            <p style="font-size: 1.3rem;"><b>버그 신고 잘하는 법</b> 🔍</p>
-            <p style="font-size: 1.2rem; margin-top: .4rem;">
-              ① <b>뭐가 이상한지 그대로</b> 말하기 ("점수가 안 올라가")<br/>
-              ② 빨간 <b>에러 메시지가 보이면 복사해서</b> 붙여넣기 — 최고의 힌트!<br/>
-              ③ 고쳐지면 다시 플레이해서 확인 — 이것도 바이브 코딩 루프의 일부예요.
-            </p>
-          </div>
+        <span class="tag coral">게임 1 · 바구니 고양이</span>
+        <h2 id="cat-step3-title">Step 3. <b class="c-coral">난이도와 황금사과</b> 넣기</h2>
+        <p class="page-kicker">조금씩 어려워지고, 가끔 큰 보상을 주면 더 재미있어져요.</p>
+        <div class="build-progress" data-project="cat" aria-label="바구니 고양이 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot is-current" data-progress-step="3">난이도</span><span class="build-dot" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt3" class="build-prompt-text">방금 게임에 난이도와 특별 아이템을 추가해줘. 지금까지 만든 기능은 모두 유지해.
+
+- 점수가 5점 오를 때마다 사과가 조금씩 빨라지게 해줘.
+- 너무 빨라져서 불가능해지지 않도록 최대 속도를 정해줘.
+- 가끔 황금사과가 나오게 해줘.
+- 황금사과를 받으면 5점을 주고, 일반 사과와 다른 반짝임을 보여줘.
+- 황금사과를 놓쳐도 생명은 줄지 않게 해줘.
+
+수정 뒤 직접 플레이할 수 있게 미리보기를 갱신해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="3" data-copy-target="catPrompt3">Step 3 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>③ 바뀐 점을 찾아보기</b>점수 5점 전후의 속도를 비교해요.</div><div class="step-checks"><span class="step-check">5점마다 조금 빨라지나?</span><span class="step-check">황금사과는 5점을 주나?</span><span class="step-check">황금사과를 놓쳐도 안전한가?</span></div><output class="copy-status" aria-live="polite">테스트하다 이상하면 구조 요청 페이지를 쓰세요.</output></aside>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════ 8. 핵심 정리 & 다음 프로젝트 ═══════════ -->
-    <section>
+    <!-- 10. 게임 1 · Step 4 -->
+    <section id="catStep4" class="build-slide" aria-labelledby="cat-step4-title">
       <div class="page">
-        <span class="tag">정리</span>
-        <h2>오늘의 핵심, <b class="c-sunny">딱 세 가지</b></h2>
-        <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; align-items: center; margin-top: .8rem;">
-          <div class="scard">
-            <span class="em">🎯</span>
-            <p><b>구체적으로 요청</b><br/>누가 · 무엇을 · 어떻게</p>
-          </div>
-          <div class="scard">
-            <span class="em">🔁</span>
-            <p><b>한 번에 한 줄씩</b><br/>요청 → 플레이 → 다음 요청</p>
-          </div>
-          <div class="scard">
-            <span class="em">👀</span>
-            <p><b>꼭 플레이해서 확인</b><br/>버그는 고치면 그만</p>
-          </div>
+        <span class="tag coral">게임 1 · 바구니 고양이</span>
+        <h2 id="cat-step4-title">Step 4. <b class="c-coral">완성작처럼</b> 다듬기</h2>
+        <p class="page-kicker">꾸미기만 하지 않고 조작·기록·다시 시작까지 마지막으로 검사해요.</p>
+        <div class="build-progress" data-project="cat" aria-label="바구니 고양이 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 게임</span><span class="build-dot" data-progress-step="2">생명·끝</span><span class="build-dot" data-progress-step="3">난이도</span><span class="build-dot is-current" data-progress-step="4">완성</span>
         </div>
-        <p class="center" style="font-size: 1.28rem;">
-          다음엔? 🐶 강아지 달리기 · 🚀 우주선 피하기 · ❓ 가족 퀴즈 · 🎨 그림판 —<br/>
-          상상할 수 있으면 <b class="c-coral">요청할 수 있고</b>, 요청할 수 있으면 <b class="c-mint">만들 수 있다.</b>
-        </p>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="catPrompt4" class="build-prompt-text">‘바구니 고양이’ 게임을 완성작처럼 다듬어줘. 기존 기능은 유지해.
+
+- 시작 화면에 게임 제목과 ← → 조작법을 보여줘.
+- 배경을 별이 반짝이는 밤하늘로 꾸며줘.
+- 사과를 받을 때 짧은 효과음과 시각 효과를 넣어줘. 소리는 시작 버튼을 누른 뒤에만 나게 해줘.
+- 최고 점수를 브라우저에 기억하고 화면에 보여줘.
+- 창 크기가 달라져도 게임 화면이 잘리지 않게 해줘.
+- 시작, 게임 끝, 다시 시작을 여러 번 테스트해서 오류가 있으면 고쳐줘.
+
+완성된 전체 게임을 미리보기에 보여줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="cat" data-step="4" data-copy-target="catPrompt4">Step 4 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>④ 첫 게임 완성!</b>한 번 끝낸 뒤 다시 시작해 또 플레이해요.</div><div class="step-checks"><span class="step-check">조작법이 시작 화면에 있나?</span><span class="step-check">최고 점수가 기억되나?</span><span class="step-check">두 번 다시 시작해도 괜찮나?</span></div><output class="copy-status" aria-live="polite">복사하면 게임 1 진행표가 완성됩니다.</output></aside>
+        </div>
       </div>
     </section>
 
-    <!-- ═══════════ 9. 끝 ═══════════ -->
+    <!-- 11. 게임 2 소개 -->
+    <section id="game2Intro" aria-labelledby="game2-intro-title">
+      <div class="page">
+        <span class="tag sky">게임 2 · 새 프로젝트</span>
+        <h2 id="game2-intro-title">이번에는 클릭으로 푸는 <b class="c-sky">우주 퀴즈 탐험대</b></h2>
+        <p class="page-kicker">첫 게임과 다른 규칙을 만들며 문제·선택지·힌트·시간 제한을 경험해요.</p>
+        <div class="project-cover">
+          <div class="project-visual" aria-hidden="true"><span class="project-emoji">🚀🪐</span></div>
+          <div class="project-info"><h3>5문제를 풀고 행성을 탐험하자!</h3><p>큰 보기 버튼을 눌러 정답을 맞히고, 하트와 콤보를 지키는 게임이에요. <b>게임 2는 반드시 새 채팅</b>에서 시작합니다.</p><div class="project-skills"><span>클릭 조작</span><span>무작위 문제</span><span>50:50 힌트</span><span>15초 도전</span></div><button class="project-start-btn" type="button">게임 2 만들러 가기 →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. 게임 2 · Step 1 -->
+    <section id="quizStep1" class="build-slide" aria-labelledby="quiz-step1-title">
+      <div class="page">
+        <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
+        <h2 id="quiz-step1-title">Step 1. <b class="c-sky">5문제 퀴즈</b> 만들기</h2>
+        <p class="page-kicker">새 채팅을 열고, 문제와 정답까지 AI가 다시 확인하도록 요청해요.</p>
+        <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
+          <span class="build-dot is-current" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt1" class="build-prompt-text">새 채팅에서 브라우저로 바로 플레이하는 한 파일짜리 퀴즈 게임을 만들어줘.
+
+게임 이름: 우주 퀴즈 탐험대
+- 초등 저학년이 풀 수 있는 동물과 우주 상식 문제를 12개 준비해.
+- 한 게임에서는 그중 5문제를 겹치지 않게 골라서 보여줘.
+- 문제마다 보기 3개를 큰 버튼으로 보여줘.
+- 답을 고르면 정답인지 바로 알려주고 점수를 1점 올려줘.
+- 현재 문제 번호와 점수를 화면 위에 보여줘.
+- 시작 버튼과 다시 하기 버튼을 넣어줘.
+
+HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 바로 플레이하게 해줘. 문제와 정답이 맞는지도 다시 확인해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="1" data-copy-target="quizPrompt1">Step 1 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout new-chat"><b>① 게임 2 새 채팅 열기</b>게임 1 대화와 섞이지 않게 분리해요.</div><div class="step-checks"><span class="step-check">보기 버튼이 3개인가?</span><span class="step-check">한 게임에 5문제인가?</span><span class="step-check">같은 문제가 겹치지 않나?</span></div><output class="copy-status" aria-live="polite">새 채팅을 확인한 뒤 복사하세요.</output></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. 게임 2 · Step 2 -->
+    <section id="quizStep2" class="build-slide" aria-labelledby="quiz-step2-title">
+      <div class="page">
+        <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
+        <h2 id="quiz-step2-title">Step 2. <b class="c-sky">하트와 해설</b> 추가하기</h2>
+        <p class="page-kicker">정답만 알려주는 게임에서, 왜 그런지 알려주는 학습 게임으로 바꿔요.</p>
+        <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot is-current" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt2" class="build-prompt-text">방금 만든 ‘우주 퀴즈 탐험대’를 이어서 수정해줘. 기존 기능은 유지해.
+
+- 하트 3개로 시작하게 해줘.
+- 오답을 고르면 하트가 1개 줄게 해줘.
+- 정답과 오답 뒤에 왜 그런지 한 문장으로 설명해줘.
+- 설명을 읽은 뒤 ‘다음 문제’ 버튼을 눌러야 넘어가게 해줘.
+- 하트가 0이 되거나 5문제를 모두 풀면 결과 화면을 보여줘.
+- 결과 화면에 맞힌 개수, 점수, 다시 하기 버튼을 넣어줘.
+
+수정 결과를 미리보기에 반영해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="2" data-copy-target="quizPrompt2">Step 2 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>② 같은 채팅에 이어서</b>일부러 오답도 눌러 하트를 시험해요.</div><div class="step-checks"><span class="step-check">오답이면 하트가 줄어드나?</span><span class="step-check">한 문장 해설이 보이나?</span><span class="step-check">다음 문제 버튼이 기다리나?</span></div><output class="copy-status" aria-live="polite">정답과 오답을 모두 테스트하세요.</output></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. 게임 2 · Step 3 -->
+    <section id="quizStep3" class="build-slide" aria-labelledby="quiz-step3-title">
+      <div class="page">
+        <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
+        <h2 id="quiz-step3-title">Step 3. <b class="c-sky">콤보·힌트·타이머</b> 넣기</h2>
+        <p class="page-kicker">잘하면 보너스, 막히면 힌트, 원하면 시간 도전! 선택지가 생겨요.</p>
+        <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot is-current" data-progress-step="3">도전 기능</span><span class="build-dot" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt3" class="build-prompt-text">방금 퀴즈 게임에 도전 기능을 추가해줘. 지금까지 기능은 모두 유지해.
+
+- 3문제를 연속으로 맞히면 콤보 보너스 2점을 줘.
+- 연속 정답 수를 화면에 보여줘.
+- 한 게임에 한 번만 쓸 수 있는 ‘50:50 힌트’ 버튼을 넣어줘.
+- 힌트를 누르면 오답 보기 1개를 숨겨줘.
+- ‘도전 모드’ 스위치를 켜면 문제마다 15초 제한 시간이 생기게 해줘.
+- 일반 모드에서는 시간 제한이 없게 해줘.
+- 다시 시작하면 콤보, 힌트, 타이머도 초기화해줘.
+
+수정한 게임을 미리보기에서 테스트할 수 있게 해줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="3" data-copy-target="quizPrompt3">Step 3 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>③ 세 가지 도전 시험</b>일반 모드와 도전 모드를 모두 해봐요.</div><div class="step-checks"><span class="step-check">3연속 정답에 +2점인가?</span><span class="step-check">힌트는 딱 한 번인가?</span><span class="step-check">도전 모드만 15초인가?</span></div><output class="copy-status" aria-live="polite">기능을 하나씩 따로 확인하면 쉬워요.</output></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. 게임 2 · Step 4 -->
+    <section id="quizStep4" class="build-slide" aria-labelledby="quiz-step4-title">
+      <div class="page">
+        <span class="tag sky">게임 2 · 우주 퀴즈 탐험대</span>
+        <h2 id="quiz-step4-title">Step 4. <b class="c-sky">누구나 즐기는 완성작</b> 만들기</h2>
+        <p class="page-kicker">꾸미기, 소리 끄기, 키보드 조작, 문제 검토까지 모두 마무리해요.</p>
+        <div class="build-progress" data-project="quiz" aria-label="우주 퀴즈 탐험대 제작 진행">
+          <span class="build-dot" data-progress-step="1">기본 퀴즈</span><span class="build-dot" data-progress-step="2">하트·설명</span><span class="build-dot" data-progress-step="3">도전 기능</span><span class="build-dot is-current" data-progress-step="4">완성</span>
+        </div>
+        <div class="build-layout">
+          <article class="build-prompt-card"><span class="build-prompt-label">AI에게 보낼 정확한 프롬프트</span><pre id="quizPrompt4" class="build-prompt-text">‘우주 퀴즈 탐험대’를 완성작처럼 다듬어줘. 기존 기능은 유지해.
+
+- 우주선이 행성을 여행하는 느낌으로 화면을 꾸며줘.
+- 정답일 때 별이 터지고, 오답일 때 부드럽게 흔들리는 효과를 넣어줘.
+- 버튼을 누른 뒤에만 짧은 효과음이 나게 하고, 소리 끄기 버튼도 넣어줘.
+- 최고 점수를 브라우저에 기억해서 보여줘.
+- 키보드 Tab과 Enter로도 모든 보기와 버튼을 조작할 수 있게 해줘.
+- 12개 문제의 내용과 정답을 다시 검토해서 틀린 것이 있으면 고쳐줘.
+- 게임을 두 번 연속 다시 시작해도 오류가 없는지 확인해줘.
+
+완성된 전체 게임을 미리보기에 보여줘.</pre><button class="build-copy-btn" type="button" aria-pressed="false" data-project="quiz" data-step="4" data-copy-target="quizPrompt4">Step 4 프롬프트 복사</button></article>
+          <aside class="build-side"><div class="step-callout"><b>④ 두 번째 게임 완성!</b>마우스 없이 Tab과 Enter로도 해봐요.</div><div class="step-checks"><span class="step-check">소리를 끌 수 있나?</span><span class="step-check">Tab·Enter로 조작되나?</span><span class="step-check">두 번 다시 시작해도 괜찮나?</span></div><output class="copy-status" aria-live="polite">복사하면 게임 2 진행표가 완성됩니다.</output></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. 막혔을 때 구조 요청 -->
+    <section id="rescueSlide" aria-labelledby="rescue-title">
+      <div class="page">
+        <span class="tag coral">막혔을 때 구조 요청</span>
+        <h2 id="rescue-title">문제가 생겨도 <b class="c-coral">이 프롬프트</b>면 다시 출발!</h2>
+        <p class="page-kicker">상황에 맞는 카드의 복사 버튼을 누르고, 문제가 생긴 게임의 같은 채팅에 붙여넣으세요.</p>
+        <div class="rescue-grid">
+          <article class="rescue-card"><h3>🖥️ 미리보기가 안 보여요</h3><pre id="rescuePrompt1">지금 만든 게임을 코드 설명으로만 보여주지 말고, 이 채팅 화면에서 바로 플레이할 수 있는 미리보기로 실행해줘. HTML, CSS, JavaScript가 한 파일에서 동작하게 정리해줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt1">구조 프롬프트 복사</button><output class="copy-status" aria-live="polite"></output></article>
+          <article class="rescue-card"><h3>🧩 수정 뒤 게임이 멈췄어요</h3><pre id="rescuePrompt2">방금 수정한 뒤 게임이 작동하지 않아. 수정 전까지 되던 기능은 유지하면서 오류 원인을 찾아 고쳐줘. 시작 버튼, 조작, 점수, 다시 시작을 직접 확인하고 정상 동작하는 전체 결과를 미리보기에 반영해줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt2">구조 프롬프트 복사</button><output class="copy-status" aria-live="polite"></output></article>
+          <article class="rescue-card"><h3>🔎 이상한 점을 정확히 알려요</h3><pre id="rescuePrompt3">내가 한 행동: [누른 키나 버튼].
+기대한 결과: [원래 되어야 하는 일].
+실제 결과: [화면에서 일어난 일].
+
+이 차이가 생기는 원인을 찾아 고쳐줘. 고친 뒤 무엇을 바꿨는지 한 문장으로 알려줘.</pre><button class="copy-btn" type="button" data-copy-target="rescuePrompt3">버그 템플릿 복사</button><output class="copy-status" aria-live="polite"></output></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. 두 게임 완성 확인 -->
+    <section id="compareSlide" aria-labelledby="compare-title">
+      <div class="page">
+        <span class="tag mint">두 게임 완성 확인</span>
+        <h2 id="compare-title">내가 만든 게임을 <b class="c-mint">직접 플레이</b>했나요?</h2>
+        <p class="page-kicker">각 게임을 처음부터 끝까지 플레이한 뒤 카드를 누르세요. 두 장이 켜지면 오늘의 제작 완료!</p>
+        <div class="compare-grid">
+          <button class="compare-card" type="button" aria-pressed="false"><span class="compare-icon" aria-hidden="true">🐱🧺</span><b>바구니 고양이</b><small>화살표 키 · 생명 · 황금사과 · 최고 점수</small></button>
+          <button class="compare-card" type="button" aria-pressed="false"><span class="compare-icon" aria-hidden="true">🚀🪐</span><b>우주 퀴즈 탐험대</b><small>보기 클릭 · 하트 · 힌트 · 콤보 · 타이머</small></button>
+        </div>
+        <output class="summary-status compare-status" aria-live="polite">0/2 게임 플레이 확인</output>
+      </div>
+    </section>
+
+    <!-- 18. 부모님 가이드 -->
+    <section id="parentSlide" aria-labelledby="parent-title">
+      <div class="note-page">
+        <span class="note-tag">진행자 메모 · 부모님은 이 페이지만 읽어 주세요</span>
+        <h2 id="parent-title">정답을 알려주기보다 <b>아이의 다음 질문</b>을 기다려 주세요</h2>
+        <div class="parent-grid">
+          <article class="parent-tip"><h3>준비</h3><p>게임마다 새 채팅을 하나씩 열고 미리보기 기능을 찾아 주세요. 계정·결제·다운로드는 어른이 담당합니다.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 말해 보세요: ‘게임 1 채팅과 게임 2 채팅을 따로 열어 둘게. 복사 버튼은 네가 눌러 볼래?’">대화 예시</button></article>
+          <article class="parent-tip"><h3>마우스와 키보드는 아이에게</h3><p>아이가 프롬프트 복사·붙여넣기와 플레이 테스트를 맡도록 기다려 주세요. 긴 문장을 직접 타이핑할 필요는 없습니다.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 말해 보세요: ‘복사했으면 입력창에 붙여넣어 보자. 미리보기에서는 무엇부터 눌러 볼까?’">대화 예시</button></article>
+          <article class="parent-tip"><h3>막혔을 때 질문</h3><p>“어떤 일이 일어났어?”, “원래는 어떻게 되길 바랐어?”라고 물어 문제 설명을 도와주세요.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 물어보세요: ‘어떤 키를 눌렀고, 화면에서는 무슨 일이 생겼어?’">대화 예시</button></article>
+          <article class="parent-tip"><h3>끝내는 기준</h3><p>한 번에 60~90분 정도로 잡거나 게임 1·게임 2를 다른 날에 나눠도 좋아요. 마지막은 가족 시연으로 마무리하세요.</p><button class="parent-tip-btn" type="button" data-parent-message="이렇게 마무리하세요: ‘두 게임 중 어떤 게임을 먼저 보여 주고 싶어?’">대화 예시</button></article>
+        </div>
+        <output class="parent-coach" aria-live="polite">카드의 ‘대화 예시’를 누르면 바로 쓸 수 있는 문장이 나옵니다.</output>
+      </div>
+    </section>
+
+    <!-- 19. 핵심 정리 -->
+    <section id="summarySlide" aria-labelledby="summary-title">
+      <div class="page">
+        <span class="tag">미션 정리</span>
+        <h2 id="summary-title">좋은 메이커가 기억할 <b class="c-sunny">3가지</b></h2>
+        <div class="summary-grid">
+          <button class="scard summary-card" type="button" aria-pressed="false" data-summary="게임마다 새 채팅: 서로 다른 프로젝트가 섞이지 않도록 대화를 나눠요."><span class="em" aria-hidden="true">💬</span><span class="summary-copy"><b>게임마다 새 채팅</b><small>프로젝트 1개 = 채팅 1개</small></span></button>
+          <button class="scard summary-card" type="button" aria-pressed="false" data-summary="같은 게임은 이어서: 4개 프롬프트를 같은 채팅에 순서대로 붙여넣어요."><span class="em" aria-hidden="true">🔁</span><span class="summary-copy"><b>4단계를 순서대로</b><small>복사 → 붙여넣기 → 플레이</small></span></button>
+          <button class="scard summary-card" type="button" aria-pressed="false" data-summary="매번 직접 확인: AI가 됐다고 말해도 내가 플레이해서 기능을 확인해요."><span class="em" aria-hidden="true">🧪</span><span class="summary-copy"><b>매 단계 직접 테스트</b><small>AI도 틀릴 수 있으니까</small></span></button>
+        </div>
+        <output class="summary-status" aria-live="polite">카드 3장을 눌러 오늘의 규칙을 완성하세요.</output>
+      </div>
+    </section>
+
+    <!-- 20. 끝 -->
     <section id="finale">
       <div class="sky-page">
-        <span class="bouncy" style="font-size: 5.8rem;">🎉</span>
-        <h1 style="font-size: 3.9rem; margin-top: .6rem;">
-          오늘부터 너도 <span style="color: #FFD86B;">만드는 사람</span>
-        </h1>
-        <p style="font-size: 1.5rem; margin-top: 1rem; max-width: 900px;">
-          코딩을 다 외울 필요는 없어요.<br/>
-          <b style="color: #B5F5E3;">좋은 요청을 만드는 사람</b>이 다음 시대의 개발자니까요.
-        </p>
-        <p class="hint">✨ 화면을 눌러서 축하 폭죽! ✨</p>
-        <p style="font-size: 1rem; margin-top: 1.6rem; color: #B9AEE8 !important;">
-          부모님께 — 어른용 세미나: <a href="../intro/index.html" style="color: #B5F5E3 !important;">바이브 코딩이란 무엇인가?</a>
-        </p>
+        <span class="bouncy" style="font-size:5.3rem;" aria-hidden="true">🚀</span>
+        <h1 style="font-size:3.9rem; margin-top:.6rem;">게임 2개 완성!<br><span style="color:#FFD86B;">나는 플레이어이자 메이커</span></h1>
+        <p style="font-size:1.4rem; margin-top:1rem; max-width:820px;">복사·붙여넣기로 시작했지만, 재미있는지 판단하고 오류를 찾은 사람은 바로 나예요.<br><b style="color:#B5F5E3;">다음에는 내 규칙 한 가지를 더 요청해 보세요.</b></p>
+        <button class="hint" id="celebrateBtn" type="button">눌러서 완료 축하하기 <span aria-hidden="true">✨</span></button>
+        <div class="final-actions"><a href="#/1">처음부터 다시 보기</a><a href="../intro/index.html">어른용 세미나 보기</a></div>
       </div>
     </section>
 
   </div>
-</div>
+</main>
 <script>
 /*!
 * reveal.js 5.1.0
@@ -692,14 +1307,241 @@ footer, header, hgroup, main, menu, nav, section {
       setTimeout(() => sp.remove(), 950);
     }
   }
-  ['cover', 'finale'].forEach((id) => {
-    const sec = document.getElementById(id);
-    if (!sec) return;
-    sec.addEventListener('click', (e) => {
-      sparkleBurst(e.clientX, e.clientY, 10);
+  const celebrateBtn = document.getElementById('celebrateBtn');
+  if (celebrateBtn) {
+    celebrateBtn.addEventListener('click', (e) => {
+      const rect = celebrateBtn.getBoundingClientRect();
+      const x = e.clientX || (rect.left + rect.width / 2);
+      const y = e.clientY || (rect.top + rect.height / 2);
+      sparkleBurst(x, y, 10);
       ding(700 + Math.random() * 500);
     });
-  });
+  }
+
+  // ===== 페이지별 마이크로 인터랙션 =====
+  (function () {
+    // 버튼 조작용 Space/Enter가 Reveal 페이지 이동으로 전파되지 않게 합니다.
+    ['keydown', 'keyup'].forEach((eventName) => {
+      [document.querySelector('.reveal'), document.querySelector('.book-toolbar')].forEach((container) => {
+        if (!container) return;
+        container.addEventListener(eventName, (event) => {
+          if ((event.key === ' ' || event.key === 'Enter') && event.target.closest('button, select')) {
+            event.stopPropagation();
+          }
+        });
+      });
+    });
+
+    function sparkElement(element, count) {
+      const rect = element.getBoundingClientRect();
+      sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, count || 5);
+    }
+
+    function replayClass(element, className) {
+      element.classList.remove(className);
+      requestAnimationFrame(() => element.classList.add(className));
+    }
+
+    // 1. 표지: 포인터에 반응하는 삽화 + 시작 버튼
+    const cover = document.getElementById('cover');
+    const heroPage = cover && cover.querySelector('.hero-page');
+    const heroArt = cover && cover.querySelector('.hero-art');
+    const startButton = document.getElementById('missionStartBtn');
+    let heroFrame = null;
+    if (heroPage && heroArt && !reducedMotion) {
+      heroPage.addEventListener('pointermove', (event) => {
+        const rect = heroPage.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - .5) * -12;
+        const y = ((event.clientY - rect.top) / rect.height - .5) * -8;
+        cancelAnimationFrame(heroFrame);
+        heroFrame = requestAnimationFrame(() => {
+          heroArt.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(1.018)';
+        });
+      });
+      heroPage.addEventListener('pointerleave', () => { heroArt.style.transform = ''; });
+    }
+    if (startButton) {
+      startButton.addEventListener('click', () => {
+        ding(880);
+        Reveal.next();
+      });
+    }
+
+    // 2. 오늘의 미션: 카드 3장 확인
+    const missionSlide = document.getElementById('missionSlide');
+    if (missionSlide) {
+      const cards = Array.from(missionSlide.querySelectorAll('.mission-card'));
+      const progress = missionSlide.querySelector('.mission-progress');
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const done = card.getAttribute('aria-pressed') !== 'true';
+          card.setAttribute('aria-pressed', String(done));
+          card.classList.toggle('is-done', done);
+          const count = cards.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
+          progress.textContent = count === cards.length ? '3/3 출발 준비 완료!' : count + '/3 미션 확인';
+          ding(done ? 820 + count * 90 : 520);
+          if (count === cards.length) sparkElement(progress, 9);
+        });
+      });
+    }
+
+    // 3. 역할: 두 카드의 보충 설명 펼치기
+    const rolesSlide = document.getElementById('rolesSlide');
+    if (rolesSlide) {
+      const revealButtons = Array.from(rolesSlide.querySelectorAll('.role-reveal-btn'));
+      revealButtons.forEach((button) => {
+        button.dataset.closedLabel = button.textContent;
+        button.addEventListener('click', () => {
+          const card = button.closest('.role-card');
+          const secret = card.querySelector('.role-secret');
+          const opening = button.getAttribute('aria-expanded') !== 'true';
+          revealButtons.forEach((other) => {
+            if (other === button) return;
+            other.setAttribute('aria-expanded', 'false');
+            other.textContent = other.dataset.closedLabel;
+            other.closest('.role-card').classList.remove('is-active');
+            other.closest('.role-card').querySelector('.role-secret').hidden = true;
+          });
+          button.setAttribute('aria-expanded', String(opening));
+          button.textContent = opening ? '설명 닫기' : button.dataset.closedLabel;
+          card.classList.toggle('is-active', opening);
+          secret.hidden = !opening;
+          if (opening) { ding(920); sparkElement(button, 4); }
+        });
+      });
+    }
+
+    // 4. 안전 규칙: 카드별 상황 예시
+    const safetySlide = document.getElementById('safetySlide');
+    if (safetySlide) {
+      const status = safetySlide.querySelector('.stop-line');
+      safetySlide.querySelectorAll('.safety-reveal').forEach((button) => {
+        button.addEventListener('click', () => {
+          safetySlide.querySelectorAll('.safety-card').forEach((card) => card.classList.remove('is-active'));
+          button.closest('.safety-card').classList.add('is-active');
+          status.textContent = button.dataset.safetyMessage;
+          replayClass(status, 'is-speaking');
+          ding(640);
+        });
+      });
+    }
+
+    // 5. 작업 준비: 세 가지 준비물 확인
+    const setupSlide = document.getElementById('setupSlide');
+    if (setupSlide) {
+      const checks = Array.from(setupSlide.querySelectorAll('.setup-check'));
+      const progress = setupSlide.querySelector('.setup-progress');
+      checks.forEach((check) => {
+        check.addEventListener('click', () => {
+          const ready = check.getAttribute('aria-pressed') !== 'true';
+          check.setAttribute('aria-pressed', String(ready));
+          const count = checks.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
+          progress.textContent = count === checks.length ? '3/3 준비 완료 — 게임을 만들자!' : count + '/3 준비 완료';
+          ding(ready ? 760 + count * 70 : 480);
+          if (count === checks.length) sparkElement(progress, 9);
+        });
+      });
+    }
+
+    // 11. 게임 2 소개: 다음 제작 단계 바로 가기
+    const game2Intro = document.getElementById('game2Intro');
+    const game2Start = game2Intro && game2Intro.querySelector('.project-start-btn');
+    if (game2Start) {
+      game2Start.addEventListener('click', () => {
+        ding(900);
+        Reveal.next();
+      });
+    }
+
+    // 17. 두 게임을 실제로 플레이했는지 확인
+    const compareSlide = document.getElementById('compareSlide');
+    if (compareSlide) {
+      const cards = Array.from(compareSlide.querySelectorAll('.compare-card'));
+      const status = compareSlide.querySelector('.compare-status');
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const checked = card.getAttribute('aria-pressed') !== 'true';
+          card.setAttribute('aria-pressed', String(checked));
+          const count = cards.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
+          status.textContent = count === cards.length ? '2/2 게임 완성 — 오늘은 진짜 게임 메이커!' : count + '/2 게임 플레이 확인';
+          ding(checked ? 820 + count * 100 : 500);
+          if (count === cards.length) sparkElement(status, 12);
+        });
+      });
+    }
+
+    // 8. 디버깅: 버그 신고에 필요한 단서 체크
+    const debugSlide = document.getElementById('debugSlide');
+    if (debugSlide) {
+      const steps = Array.from(debugSlide.querySelectorAll('.debug-step'));
+      const status = debugSlide.querySelector('.debug-status');
+      steps.forEach((step) => {
+        step.addEventListener('click', () => {
+          const checked = step.getAttribute('aria-pressed') !== 'true';
+          step.setAttribute('aria-pressed', String(checked));
+          step.classList.toggle('is-checked', checked);
+          const count = steps.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
+          status.textContent = count === steps.length ? '3/3 단서 완성 — 이제 신고할 수 있어요!' : count + '/3 단서 확인';
+          ding(checked ? 760 + count * 70 : 500);
+          if (count === steps.length) sparkElement(debugSlide.querySelector('.debug-template'), 8);
+        });
+      });
+    }
+
+    // 9. 출시 전 검사: 실제 체크리스트 + 배지
+    const finishSlide = document.getElementById('finishSlide');
+    if (finishSlide) {
+      const items = Array.from(finishSlide.querySelectorAll('.test-item'));
+      const badge = finishSlide.querySelector('.badge-card');
+      const title = badge.querySelector('h3');
+      const copy = badge.querySelector('p');
+      const progress = badge.querySelector('.finish-progress');
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          const checked = item.getAttribute('aria-pressed') !== 'true';
+          item.setAttribute('aria-pressed', String(checked));
+          const count = items.filter((button) => button.getAttribute('aria-pressed') === 'true').length;
+          progress.textContent = count + '/4 검사 완료';
+          title.textContent = count === items.length ? '메이커 배지 획득!' : '출시 준비 중';
+          copy.textContent = count === items.length ? '모든 검사를 통과했어요. 게임 이름을 붙이고 가족에게 시연해 보세요.' : '남은 검사 ' + (items.length - count) + '개를 확인해 보세요.';
+          badge.classList.toggle('is-earned', count === items.length);
+          ding(checked ? 800 + count * 80 : 500);
+          if (count === items.length) sparkElement(badge, 12);
+        });
+      });
+    }
+
+    // 10. 부모 가이드: 바로 말할 수 있는 대화 예시
+    const parentSlide = document.getElementById('parentSlide');
+    if (parentSlide) {
+      const coach = parentSlide.querySelector('.parent-coach');
+      parentSlide.querySelectorAll('.parent-tip-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          parentSlide.querySelectorAll('.parent-tip').forEach((tip) => tip.classList.remove('is-active'));
+          button.closest('.parent-tip').classList.add('is-active');
+          coach.textContent = button.dataset.parentMessage;
+          replayClass(coach, 'is-speaking');
+          ding(720);
+        });
+      });
+    }
+
+    // 11. 핵심 정리: 카드 3장으로 기억 점검
+    const summarySlide = document.getElementById('summarySlide');
+    if (summarySlide) {
+      const cards = Array.from(summarySlide.querySelectorAll('.summary-card'));
+      const status = summarySlide.querySelector('.summary-status');
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          card.setAttribute('aria-pressed', 'true');
+          const count = cards.filter((item) => item.getAttribute('aria-pressed') === 'true').length;
+          status.textContent = count === cards.length ? '3가지 규칙 완성! 이제 다음 게임을 만들 준비가 됐어요.' : card.dataset.summary + ' (' + count + '/3)';
+          ding(860 + count * 90);
+          if (count === cards.length) sparkElement(status, 10);
+        });
+      });
+    }
+  })();
 
   // ===== 라이브 데모: 요청 한 줄 → 게임 진화 =====
   (function () {
@@ -714,6 +1556,7 @@ footer, header, hgroup, main, menu, nav, section {
     const heartsChip = sec.querySelector('.chip-hearts');
     const heartsEl = heartsChip.querySelector('b');
     const overlay = sec.querySelector('.go-overlay');
+    const gameStatus = sec.querySelector('.game-status');
 
     // 밤 모드용 별 미리 심어두기 (평소엔 투명)
     for (let i = 0; i < 14; i++) {
@@ -725,13 +1568,13 @@ footer, header, hgroup, main, menu, nav, section {
       stage.appendChild(st_);
     }
 
-    const st = { step: 0, on: false, score: 0, hearts: null, speedup: false, night: false, timer: null };
+    const st = { step: 0, on: false, score: 0, hearts: null, speedup: false, night: false, timer: null, catX: 45 };
 
     const STEPS = [
       {
         ask: '떨어지는 사과를 바구니로 받는 게임을 만들어줘',
-        reply: '게임을 만들어서 미리보기에 띄웠어요. 떨어지는 사과를 클릭해서 받아 보세요! 🍎',
-        apply() { st.on = true; stage.classList.remove('off'); },
+        reply: '게임을 만들었어요. 게임 화면을 누르고 ← → 키로 고양이를 움직여 보세요! 🍎',
+        apply() { st.on = true; stage.classList.remove('off'); gameStatus.textContent = '게임이 시작됐습니다.'; },
       },
       {
         ask: '받은 사과 개수를 점수로 보여줘',
@@ -758,7 +1601,10 @@ footer, header, hgroup, main, menu, nav, section {
     function bubble(cls, who, text) {
       const d = document.createElement('div');
       d.className = 'say ' + cls;
-      d.innerHTML = '<span class="who">' + who + '</span>' + text;
+      const label = document.createElement('span');
+      label.className = 'who';
+      label.textContent = who;
+      d.append(label, document.createTextNode(text));
       log.appendChild(d);
       log.scrollTop = log.scrollHeight;
       return d;
@@ -768,6 +1614,19 @@ footer, header, hgroup, main, menu, nav, section {
       const h = Math.max(0, st.hearts);
       heartsEl.textContent = '❤️'.repeat(h) + '🖤'.repeat(3 - h);
     }
+
+    function moveCat(delta) {
+      if (!st.on) return;
+      st.catX = Math.max(4, Math.min(88, st.catX + delta));
+      cat.style.left = st.catX + '%';
+    }
+
+    stage.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      e.stopPropagation();
+      moveCat(e.key === 'ArrowLeft' ? -7 : 7);
+    });
 
     btn.addEventListener('click', () => {
       if (st.step >= STEPS.length) { resetAll(); return; }
@@ -782,46 +1641,58 @@ footer, header, hgroup, main, menu, nav, section {
         ensureSpawner();
         btn.disabled = false;
         btn.textContent = st.step >= STEPS.length
-          ? '🔄 처음부터 다시 해보기'
-          : '요청 보내기 ▶ (' + (st.step + 1) + '/' + STEPS.length + ')';
+          ? '처음부터 다시 해보기'
+          : '다음 요청 보내기 (' + (st.step + 1) + '/' + STEPS.length + ')';
       }, 550);
     });
 
     function resetAll() {
-      st.step = 0; st.on = false; st.score = 0; st.hearts = null; st.speedup = false; st.night = false;
+      st.step = 0; st.on = false; st.score = 0; st.hearts = null; st.speedup = false; st.night = false; st.catX = 45;
       stopSpawner();
       stage.classList.add('off');
       stage.classList.remove('night');
       scoreChip.classList.remove('on');
       heartsChip.classList.remove('on');
+      cat.style.left = st.catX + '%';
+      gameStatus.textContent = '';
       log.innerHTML = '';
-      bubble('robot', '🤖 AI', '안녕하세요! 어떤 게임을 만들까요? 아래 버튼으로 요청을 한 줄씩 보내 보세요.');
-      btn.textContent = '요청 보내기 ▶ (1/5)';
+      bubble('robot', '🤖 AI', '어떤 게임을 만들까요? 아래 버튼을 눌러 요청을 한 줄씩 보내 보세요.');
+      btn.textContent = '첫 요청 보내기 (1/5)';
     }
 
     function spawn() {
       const golden = st.night && Math.random() < 0.18;
-      const a = document.createElement('span');
+      const a = document.createElement('button');
+      a.type = 'button';
       a.className = 'demo-apple';
       a.textContent = golden ? '🌟' : '🍎';
-      a.style.left = (4 + Math.random() * 86) + '%';
+      a.setAttribute('aria-label', golden ? '떨어지는 황금사과 받기' : '떨어지는 사과 받기');
+      const appleX = 4 + Math.random() * 86;
+      a.style.left = appleX + '%';
       const base = 4300;
       const dur = st.speedup ? Math.max(1500, base - st.score * 130) : base;
       a.style.animationDuration = dur + 'ms';
-      a.addEventListener('pointerdown', (e) => {
+      const collect = (e) => {
         e.stopPropagation();
         st.score += golden ? 5 : 1;
         if (scoreChip.classList.contains('on')) renderScore();
-        cat.style.left = 'calc(' + a.style.left + ' - 16px)';
         fx(a, golden ? '+5' : '+1');
         ding(golden ? 1318 : 988);
+        gameStatus.textContent = (golden ? '황금사과를 받았습니다. ' : '사과를 받았습니다. ') + st.score + '점';
         a.remove();
-      });
+      };
+      a.addEventListener('click', collect);
       a.addEventListener('animationend', () => {
+        if (!a.isConnected) return;
+        if (Math.abs(appleX - st.catX) <= 10) {
+          collect(new Event('catch'));
+          return;
+        }
         a.remove();
         if (st.hearts !== null) {
           st.hearts--;
           renderHearts();
+          gameStatus.textContent = '사과를 놓쳤습니다. 생명 ' + Math.max(0, st.hearts) + '개';
           if (st.hearts <= 0) gameOver();
         }
       });
@@ -840,12 +1711,15 @@ footer, header, hgroup, main, menu, nav, section {
     }
     function gameOver() {
       overlay.classList.add('show');
+      gameStatus.textContent = '게임이 끝났습니다. 잠시 뒤 다시 시작합니다.';
       ding(220);
-      stage.querySelectorAll('.demo-apple').forEach((a) => a.remove());
+      stopSpawner();
       setTimeout(() => {
         overlay.classList.remove('show');
         st.hearts = 3; st.score = 0;
         renderScore(); renderHearts();
+        gameStatus.textContent = '새 게임이 시작됐습니다.';
+        ensureSpawner();
       }, 1400);
     }
 
@@ -868,6 +1742,108 @@ footer, header, hgroup, main, menu, nav, section {
     Reveal.on('slidechanged', () => { if (isActive()) ensureSpawner(); else stopSpawner(); });
     Reveal.on('ready', () => { if (isActive()) ensureSpawner(); });
     resetAll();
+  })();
+
+  // ===== 프롬프트 만들기 · 복사하기 =====
+  (function () {
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const helper = document.createElement('textarea');
+      helper.value = text;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand('copy');
+      helper.remove();
+    }
+
+    function report(button, message) {
+      const scope = button.closest('.rescue-card, .build-layout, section');
+      const status = scope && scope.querySelector('.copy-status');
+      if (status) status.textContent = message;
+    }
+
+    const lab = document.getElementById('promptLab');
+    if (lab) {
+      const output = lab.querySelector('#promptText');
+      const values = {
+        hero: '고양이가',
+        goal: '떨어지는 사과를 받는',
+        control: '왼쪽·오른쪽 화살표 키로 움직이는',
+      };
+      lab.querySelectorAll('.choice-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          const group = button.closest('[data-choice-group]');
+          group.querySelectorAll('.choice-btn').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          values[group.dataset.choiceGroup] = button.dataset.value;
+          output.textContent = values.hero + ' ' + values.goal + ', ' + values.control + ' 게임을 만들어줘. 점수와 시작 버튼을 넣고 화면에서 바로 플레이할 수 있게 해줘.';
+          const panel = output.closest('.prompt-output');
+          panel.classList.remove('is-refreshing');
+          requestAnimationFrame(() => panel.classList.add('is-refreshing'));
+          const rect = button.getBoundingClientRect();
+          sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 3);
+          ding(840);
+        });
+      });
+    }
+
+    document.querySelectorAll('[data-copy-target]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+        try {
+          await copyText(target.textContent.trim());
+          if (button.classList.contains('build-copy-btn')) {
+            const project = button.dataset.project;
+            const step = button.dataset.step;
+            button.setAttribute('aria-pressed', 'true');
+            button.classList.add('is-copied');
+            button.textContent = 'Step ' + step + ' 프롬프트 복사 완료 ✓';
+            const promptCard = button.closest('.build-prompt-card');
+            if (promptCard) promptCard.classList.add('is-copied');
+            document.querySelectorAll('.build-progress[data-project="' + project + '"] .build-dot[data-progress-step="' + step + '"]').forEach((dot) => dot.classList.add('is-complete'));
+            const rect = button.getBoundingClientRect();
+            sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, step === '4' ? 9 : 4);
+            ding(780 + Number(step) * 60);
+            report(button, 'Step ' + step + ' 복사 완료! AI 채팅에 붙여넣고 미리보기에서 테스트하세요.');
+          } else {
+            report(button, '복사했어요. 문제가 생긴 게임의 같은 채팅에 붙여넣으세요.');
+            const rect = button.getBoundingClientRect();
+            sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 4);
+            ding(820);
+          }
+        } catch (e) {
+          report(button, '복사하지 못했어요. 문장을 드래그해서 직접 복사해 주세요.');
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        let selectionMessage = '';
+        if (button.classList.contains('upgrade-card')) {
+          button.setAttribute('aria-pressed', 'true');
+          button.classList.add('is-selected');
+          const slide = button.closest('#upgradeSlide');
+          const selected = slide.querySelectorAll('.upgrade-card[aria-pressed="true"]').length;
+          selectionMessage = selected >= 2 ? '2개 이상 선택 완료!' : selected + '/2 업그레이드 선택';
+          const rect = button.getBoundingClientRect();
+          sparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, selected >= 2 ? 6 : 3);
+          ding(780 + Math.min(selected, 3) * 70);
+        }
+        try {
+          await copyText(button.dataset.copy);
+          report(button, (selectionMessage ? selectionMessage + ' · ' : '') + '요청을 복사했어요.');
+        } catch (e) {
+          report(button, (selectionMessage ? selectionMessage + ' · ' : '') + '복사하지 못했어요. 카드의 문장을 직접 입력해 주세요.');
+        }
+      });
+    });
   })();
 
   // ===== 목차 드롭다운 =====
@@ -896,10 +1872,17 @@ footer, header, hgroup, main, menu, nav, section {
   (function () {
     const fsBtn = document.getElementById('fullscreenBtn');
     if (!fsBtn) return;
-    fsBtn.addEventListener('click', () => {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
-      else document.exitFullscreen?.();
+    function updateFullscreenButton() {
+      const active = Boolean(document.fullscreenElement);
+      fsBtn.textContent = active ? '⛶ 작게 보기' : '⛶ 크게 보기';
+      fsBtn.setAttribute('aria-label', active ? '전체 화면 끝내기' : '전체 화면으로 보기');
+    }
+    fsBtn.addEventListener('click', async () => {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+      else await document.exitFullscreen?.();
     });
+    document.addEventListener('fullscreenchange', updateFullscreenButton);
+    updateFullscreenButton();
   })();
 </script>
 
