@@ -3051,36 +3051,95 @@ git push -u origin main</div>
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ===== 프롬프트 복사 버튼 =====
-  document.querySelectorAll('.copy-btn').forEach((btn) => {
-    btn.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const box = btn.closest('.prompt');
-      const text = box ? (box.querySelector('.p-text')?.innerText || '') : '';
-      if (!text) return;
-      let ok = false;
-      try {
-        await navigator.clipboard.writeText(text);
-        ok = true;
-      } catch (_) {
-        // 클립보드 API 실패 시 (http/권한) — 임시 textarea 폴백
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
-        ta.remove();
-      }
-      const prev = btn.textContent;
-      btn.textContent = ok ? '복사됨 ✓' : '복사 실패';
-      btn.classList.toggle('done', ok);
-      setTimeout(() => {
-        btn.textContent = prev;
-        btn.classList.remove('done');
-      }, 1600);
-    });
-  });
+  // 사내 보안 인트라넷은 http/파일 접속(비보안 컨텍스트)이거나 clipboard-write
+  // 권한을 정책으로 막는 경우가 많아 navigator.clipboard 가 없거나 writeText 가
+  // reject/hang 한다. 그럴 때도 항상 복사되거나(폴백) 최소한 텍스트가 선택돼
+  // 수동 복사가 가능하도록 견고하게 처리한다.
+
+  // 버튼 피드백 표시 (성공 / 실패 / 수동복사 안내)
+  function flashBtn(btn, state) {
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    const map = { ok: '복사됨 ✓', fail: '복사 실패', manual: 'Ctrl+C 로 복사' };
+    btn.textContent = map[state] || btn.dataset.label;
+    btn.classList.toggle('done', state === 'ok');
+    clearTimeout(btn._resetT);
+    btn._resetT = setTimeout(() => {
+      btn.textContent = btn.dataset.label;
+      btn.classList.remove('done');
+    }, state === 'manual' ? 3200 : 1600);
+  }
+
+  // execCommand 폴백 — 반드시 사용자 제스처(클릭) 흐름 안에서 동기로 호출해야 한다.
+  function legacyCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;padding:0;border:0;opacity:0;';
+    document.body.appendChild(ta);
+    let ok = false;
+    try {
+      const sel = document.getSelection();
+      const saved = sel && sel.rangeCount ? sel.getRangeAt(0) : null;
+      ta.focus();
+      ta.select();
+      if (ta.setSelectionRange) ta.setSelectionRange(0, text.length); // iOS 대응
+      ok = document.execCommand('copy');
+      if (sel && saved) { sel.removeAllRanges(); sel.addRange(saved); } // 사용자 선택 복원
+    } catch (_) { ok = false; }
+    ta.remove();
+    return ok;
+  }
+
+  // 최후 수단: 프롬프트 텍스트를 화면에서 선택해 사용자가 직접 복사하게 한다.
+  function selectPromptText(el) {
+    try {
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      const sel = document.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+      return true;
+    } catch (_) { return false; }
+  }
+
+  // 이벤트 위임 + 캡처 단계: 나중에 추가되는 버튼까지 항상 동작하고,
+  // 슬라이드/QA 등 상위 클릭 핸들러보다 먼저 실행돼 전파를 안전히 끊는다.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest && e.target.closest('.copy-btn');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const box = btn.closest('.prompt');
+    const el = box && box.querySelector('.p-text');
+    // textContent 사용: .p-text 는 white-space:pre-wrap 이라 원본 줄바꿈이 그대로
+    // 보존되고, 슬라이드가 숨김(display:none) 상태여도 값이 비지 않는다(innerText 와 다름).
+    const text = el ? el.textContent.trim() : '';
+    if (!text) { flashBtn(btn, 'fail'); return; }
+
+    let settled = false;
+    const done = (state) => { if (settled) return; settled = true; flashBtn(btn, state); };
+
+    const canAsync = window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText;
+    if (canAsync) {
+      // writeText 가 응답 없이 멈추는(hang) 정책 환경 대비: 일정 시간 뒤 수동 복사로 전환
+      const t = setTimeout(() => { if (settled) return; selectPromptText(el); done('manual'); }, 1500);
+      navigator.clipboard.writeText(text).then(
+        () => { clearTimeout(t); done('ok'); },
+        () => {
+          clearTimeout(t);
+          if (settled) return;
+          // 권한 거부 등 — 동기 폴백 시도(제스처 창이 남아있으면 성공)
+          if (legacyCopy(text)) done('ok');
+          else { selectPromptText(el); done('manual'); }
+        }
+      );
+    } else {
+      // 비보안 컨텍스트(http/file) — 제스처 안에서 바로 동기 폴백
+      if (legacyCopy(text)) done('ok');
+      else { selectPromptText(el); done('manual'); }
+    }
+  }, true);
 
   // ===== '예상 결과' 캔버스 목업 =====
   // 실습 결과물이 어떤 모습일지 감을 주는 정적 미니 차트들. seed 고정 의사난수로
