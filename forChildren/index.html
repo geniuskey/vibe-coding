@@ -893,10 +893,85 @@ footer, header, hgroup, main, menu, nav, section {
     .final-actions a { padding: .62rem .9rem; border-radius: 12px; background: rgba(255,255,255,.12); color: #FFF !important; border: 1px solid rgba(255,255,255,.24); font-size: .92rem; font-weight: 800; text-decoration: none; }
     .final-actions a:hover { background: rgba(255,255,255,.2); }
 
+    /* ===== 별 스티커 수집 ===== */
+    .star-chip {
+      display: inline-flex; align-items: center; gap: .3em;
+      font-family: 'Pretendard', system-ui, sans-serif; font-weight: 800; font-size: .95rem;
+      background: linear-gradient(135deg, #FFF3CC, #FFE49A); color: #7A5A00;
+      border: 2px solid #E8C86B; border-radius: 999px; padding: .38em 1em;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes starPop {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.28) rotate(-4deg); }
+      100% { transform: scale(1); }
+    }
+    .star-chip.star-pop { animation: starPop .55s cubic-bezier(.2,.8,.2,1) both; }
+
+    /* ===== 이모지 색종이 ===== */
+    .confetti {
+      position: fixed; top: -6vh; z-index: 98; pointer-events: none;
+      font-size: 1.5rem; animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      from { opacity: 1; transform: translateY(0) rotate(0deg); }
+      85%  { opacity: 1; }
+      to   { opacity: 0; transform: translateY(110vh) rotate(var(--spin, 360deg)); }
+    }
+
+    /* ===== 밤하늘 별똥별 ===== */
+    .shooting-star {
+      position: absolute; width: 130px; height: 2px; border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,0));
+      transform: rotate(28deg); opacity: 0;
+      animation: shoot 1.25s ease-out forwards;
+    }
+    @keyframes shoot {
+      0%   { opacity: 0; transform: rotate(28deg) translateX(0); }
+      12%  { opacity: .95; }
+      100% { opacity: 0; transform: rotate(28deg) translateX(46vw); }
+    }
+
+    /* ===== 응원 친구 (마스코트) ===== */
+    #buddy {
+      position: fixed; left: 14px; bottom: 14px; z-index: 70;
+      display: flex; align-items: flex-end; gap: .5rem; pointer-events: none;
+    }
+    #buddyChar {
+      pointer-events: auto; border: 0; background: transparent; cursor: pointer;
+      font-size: 2.6rem; line-height: 1; padding: .1em; font-family: inherit;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+      animation: floaty 4.5s ease-in-out infinite;
+    }
+    #buddyChar:focus-visible { outline: 4px solid #FFD86B; outline-offset: 3px; border-radius: 12px; }
+    @keyframes buddyJump {
+      0% { transform: translateY(0) rotate(0deg); }
+      35% { transform: translateY(-20px) rotate(-8deg); }
+      60% { transform: translateY(0) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    #buddyChar.jump { animation: buddyJump .55s ease both; }
+    .buddy-bubble {
+      position: relative; max-width: 300px; margin-bottom: .9rem;
+      background: #FFF; border: 3px solid #D9CDFF; border-radius: 16px;
+      padding: .5rem .8rem; font-size: .98rem; line-height: 1.45; font-weight: 750; color: #4B3A70;
+      box-shadow: 0 10px 24px -10px rgba(20, 10, 60, 0.55);
+      opacity: 0; transform: translateY(8px) scale(.94); transform-origin: left bottom;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+    .buddy-bubble::after {
+      content: ""; position: absolute; left: -12px; bottom: 10px;
+      border: 7px solid transparent; border-right-color: #D9CDFF;
+    }
+    .buddy-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+
     @media (max-width: 720px) {
       .book-toolbar { top: max(2px, env(safe-area-inset-top)); left: 8px; right: 8px; }
       .book-toolbar select { max-width: 150px; }
       .book-toolbar a { display: none; }
+      .star-chip { display: none; }
+      .buddy-bubble { max-width: 190px; font-size: .84rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -920,7 +995,14 @@ footer, header, hgroup, main, menu, nav, section {
   <select id="tocSelect" aria-label="목차에서 페이지 선택" title="목차 — 원하는 페이지로 이동"></select>
   <button id="fullscreenBtn" type="button" aria-label="전체 화면으로 보기" aria-keyshortcuts="F" title="전체 화면 (F)">⛶ 크게 보기</button>
   <a href="#/parentSlide" title="부모님 진행 가이드로 이동">↗ 부모님 가이드</a>
+  <output id="starChip" class="star-chip" title="완성한 단계마다 별을 모아요" aria-label="완성한 단계 별 개수">⭐ 0/8</output>
 </nav>
+
+<!-- 응원 친구: 슬라이드마다 한마디씩 응원해 줍니다 -->
+<div id="buddy">
+  <button id="buddyChar" type="button" aria-label="응원 친구 토리 (누르면 반가워해요)">🐱</button>
+  <p id="buddyBubble" class="buddy-bubble" aria-live="polite"></p>
+</div>
 
 <main class="reveal" id="presentation" tabindex="-1" aria-label="어린이 바이브 코딩 발표 자료">
   <div class="slides">
@@ -1373,6 +1455,25 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
       setTimeout(() => sp.remove(), 950);
     }
   }
+  // ===== 이모지 색종이 비 =====
+  const CONFETTI = ['🎉', '⭐', '🍎', '🌟', '💜', '🚀', '✨', '🎈'];
+  function confettiRain(count) {
+    if (reducedMotion) return;
+    for (let i = 0; i < (count || 30); i++) {
+      const c = document.createElement('span');
+      c.className = 'confetti';
+      c.textContent = CONFETTI[Math.floor(Math.random() * CONFETTI.length)];
+      c.style.left = (Math.random() * 100) + 'vw';
+      c.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+      c.style.setProperty('--spin', (Math.random() < .5 ? -1 : 1) * (240 + Math.random() * 420) + 'deg');
+      const dur = 1900 + Math.random() * 1700;
+      c.style.animationDuration = dur + 'ms';
+      c.style.animationDelay = (Math.random() * 500) + 'ms';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), dur + 600);
+    }
+  }
+
   const celebrateBtn = document.getElementById('celebrateBtn');
   if (celebrateBtn) {
     celebrateBtn.addEventListener('click', (e) => {
@@ -1380,6 +1481,7 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
       const x = e.clientX || (rect.left + rect.width / 2);
       const y = e.clientY || (rect.top + rect.height / 2);
       sparkleBurst(x, y, 10);
+      confettiRain(70);
       ding(700 + Math.random() * 500);
     });
   }
@@ -1871,6 +1973,38 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
       document.querySelectorAll('.build-progress[data-project="' + project + '"] .build-dot[data-progress-step="' + step + '"]').forEach((dot) => {
         dot.classList.toggle('is-complete', complete);
       });
+      refreshStars();
+    }
+
+    // 완성한 단계(3/3 테스트)마다 툴바의 별이 하나씩 늘어납니다.
+    const starChip = document.getElementById('starChip');
+    const TOTAL_STARS = 8;
+    let starCount = -1;
+    function countCompletedSteps() {
+      let done = 0;
+      ['cat', 'quiz'].forEach((project) => {
+        ['1', '2', '3', '4'].forEach((step) => {
+          const tests = state.tests[stepKey(project, step)];
+          if (Array.isArray(tests) && tests.length && tests.every(Boolean)) done++;
+        });
+      });
+      return done;
+    }
+    function refreshStars() {
+      if (!starChip) return;
+      const count = countCompletedSteps();
+      const previous = starCount;
+      starCount = count;
+      starChip.textContent = '⭐ ' + count + '/' + TOTAL_STARS;
+      if (previous >= 0 && count > previous) {
+        starChip.classList.remove('star-pop');
+        requestAnimationFrame(() => starChip.classList.add('star-pop'));
+        confettiRain(count >= TOTAL_STARS ? 80 : 24);
+        if (count >= TOTAL_STARS) {
+          starChip.textContent = '⭐ 8/8 별 마스터!';
+          ding(1318);
+        }
+      }
     }
 
     function syncAllSteps() {
@@ -2003,6 +2137,82 @@ HTML, CSS, JavaScript를 한 파일에 넣고 이 채팅의 미리보기에서 �
     });
 
     syncAllSteps();
+  })();
+
+  // ===== 응원 친구 토리: 슬라이드마다 한마디 =====
+  (function () {
+    const buddy = document.getElementById('buddyChar');
+    const bubble = document.getElementById('buddyBubble');
+    if (!buddy || !bubble) return;
+
+    const CHEERS = {
+      cover: '안녕! 난 토리야 🐾 오늘 나만의 게임을 같이 만들자!',
+      missionSlide: '카드 3장을 눌러서 오늘의 방법을 먼저 확인해 봐!',
+      setupSlide: '준비 3가지가 끝나면 진짜 게임 만들기 출발~! 🏁',
+      catStep1: '첫 게임이야! 노란 복사 버튼을 눌러 봐 🍎',
+      catStep2: '사과를 일부러 놓쳐 보는 것도 훌륭한 테스트야!',
+      catStep3: '황금사과 🌟 는 5점! 놓쳐도 생명은 안전해.',
+      catStep4: '거의 다 왔어! 최고 점수에 도전해 보자 🏆',
+      game2Intro: '이번엔 우주로 출발 🚀 새 채팅 여는 거 잊지 마!',
+      quizStep1: '우주선 이름을 골라 봐. 난 별빛호가 좋아! ✨',
+      quizStep2: '틀려도 괜찮아. 이유를 알면 더 똑똑해지는 거야!',
+      quizStep3: '3연속 정답 콤보에 도전! 🔥',
+      quizStep4: '이번엔 마우스 없이 Tab과 Enter로 해 보자!',
+      rescueSlide: '막혀도 걱정 마! 구조 프롬프트가 도와줄 거야 🛟',
+      compareSlide: '두 게임 다 플레이했어? 카드를 눌러서 확인!',
+      parentSlide: '부모님, 아이의 다음 질문을 기다려 주세요 😊',
+      summarySlide: '오늘의 규칙 3가지, 전부 기억나지?',
+      finale: '축하해!! 🎉 너는 오늘부터 진짜 게임 메이커야!',
+    };
+    const CLICK_LINES = ['야옹! 반가워 🐾', '너 정말 잘하고 있어!', '야옹야옹~ 힘내!', '별을 모아 보자 ⭐', '나도 게임 만들고 싶다냥!'];
+
+    let hideTimer = null;
+    function speak(text, holdMs) {
+      if (!text) { bubble.classList.remove('show'); return; }
+      bubble.textContent = text;
+      bubble.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => bubble.classList.remove('show'), holdMs || 7000);
+    }
+
+    function cheerFor(slide) {
+      speak(slide && CHEERS[slide.id]);
+    }
+    Reveal.on('slidechanged', (event) => cheerFor(event.currentSlide));
+    Reveal.on('ready', (event) => cheerFor(event.currentSlide));
+
+    let clicks = 0;
+    buddy.addEventListener('click', () => {
+      clicks++;
+      buddy.classList.remove('jump');
+      requestAnimationFrame(() => buddy.classList.add('jump'));
+      const rect = buddy.getBoundingClientRect();
+      sparkleBurst(rect.left + rect.width / 2, rect.top, 5);
+      if (clicks % 7 === 0) {
+        speak('와아! 나를 7번이나 쓰다듬어 줬어! 고마워 💜', 5000);
+        confettiRain(40);
+        ding(1175);
+      } else {
+        speak(CLICK_LINES[clicks % CLICK_LINES.length], 3500);
+        ding(880 + Math.random() * 300);
+      }
+    });
+  })();
+
+  // ===== 밤하늘 별똥별 =====
+  (function () {
+    const sky = document.getElementById('sky');
+    if (!sky || reducedMotion) return;
+    function shoot() {
+      const s = document.createElement('span');
+      s.className = 'shooting-star';
+      s.style.left = (5 + Math.random() * 55) + 'vw';
+      s.style.top = (4 + Math.random() * 38) + 'vh';
+      sky.appendChild(s);
+      setTimeout(() => s.remove(), 1500);
+      setTimeout(shoot, 6500 + Math.random() * 8000);
+    }
+    setTimeout(shoot, 3500);
   })();
 
   // ===== 목차 드롭다운 =====
