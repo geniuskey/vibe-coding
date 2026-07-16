@@ -34,15 +34,16 @@
     })();
   </script>
 
-  <!-- 모션 최소화 여부를 렌더 전에 결정 (시스템 설정 + 사용자 선택 종합) -->
+  <!-- 모션 켜짐 여부를 렌더 전에 결정 (기본 켜짐 + 사용자 선택 존중) -->
   <script>
     (function () {
       try {
-        var sys = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var choice = null;
         try { choice = localStorage.getItem("vibe-motion"); } catch (_) {}
-        // choice: "on" = 강제 켜기, "off" = 강제 끄기, null = 시스템 설정을 따름
-        var on = choice === "on" ? true : choice === "off" ? false : !sys;
+        // 기본값은 "켜짐" — 보안 인트라넷/VDI 가 prefers-reduced-motion 을
+        // 강제해도 애니메이션이 보이게 한다. 사용자가 토글로 직접 끈 경우
+        // ("off") 에만 끄고, 그 선택은 계속 존중한다.
+        var on = choice !== "off";
         document.documentElement.classList.toggle("reduce-motion", !on);
       } catch (_) {}
     })();
@@ -783,15 +784,12 @@
 (function () {
   "use strict";
 
-  // 시스템의 reduced-motion 설정 + 사용자의 명시적 선택(localStorage)을 종합한다.
-  // 보안 인트라넷/VDI 는 종종 reduced-motion 을 강제하는데, 그럴 때도 사용자가
-  // 모션 토글로 직접 켤 수 있게 한다. (head 의 사전 스크립트와 동일한 로직)
-  var systemReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // 모션은 기본 켜짐. 보안 인트라넷/VDI 가 prefers-reduced-motion 을 강제해도
+  // 애니메이션이 보이게 하고, 사용자가 토글로 직접 끈 경우("off")에만 끈다.
+  // (head 의 사전 스크립트와 동일한 로직)
   var motionChoice = null;
   try { motionChoice = localStorage.getItem("vibe-motion"); } catch (_) {}
-  var motionOn = motionChoice === "on" ? true
-               : motionChoice === "off" ? false
-               : !systemReduce;
+  var motionOn = motionChoice !== "off";
   var reduceMotion = !motionOn;
   var $ = function (s) { return document.querySelector(s); };
 
