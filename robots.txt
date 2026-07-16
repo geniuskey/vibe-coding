@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://geniuskey.github.io/vibe-coding-202607/sitemap.xml
+Sitemap: https://geniuskey.github.io/vibe-coding/sitemap.xml
