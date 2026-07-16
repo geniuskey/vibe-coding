@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <!-- Google tag (gtag.js) — 사내 보안 프록시로 차단되는 환경에서도 콘솔을 더럽히지 않도록 방어적으로 로드 -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    // 보안 인트라넷의 프록시가 애널리틱스 요청을 가로채 사내 인터스티셜(예: warmup.html)로
+    // 응답하면, 그 스크립트가 처리되지 못한 Promise rejection을 던져 콘솔에
+    // "uncaught (in promise)" 가 남는다. 페이지 기능과 무관하므로, 애널리틱스/구글
+    // 도메인에서 비롯된 rejection만 골라 조용히 삼킨다. (다른 오류는 그대로 노출)
+    window.addEventListener("unhandledrejection", function (e) {
+      try {
+        var reason = e && e.reason;
+        var s = String((reason && (reason.stack || reason.message)) || reason || "");
+        if (/googletagmanager|google-analytics|gtag|\banalytics\b|warmup/i.test(s)) {
+          e.preventDefault();
+        }
+      } catch (_) {}
+    });
 
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
     gtag('config', 'G-DXE9T8VSVP');
+
+    // gtag.js 를 동적으로 붙이되, 로드 실패(차단)는 조용히 무시한다.
+    (function () {
+      try {
+        var g = document.createElement("script");
+        g.async = true;
+        g.src = "https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP";
+        g.onerror = function () { /* 차단된 환경 — 무시 */ };
+        (document.head || document.documentElement).appendChild(g);
+      } catch (_) {}
+    })();
+  </script>
+
+  <!-- 모션 최소화 여부를 렌더 전에 결정 (시스템 설정 + 사용자 선택 종합) -->
+  <script>
+    (function () {
+      try {
+        var sys = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var choice = null;
+        try { choice = localStorage.getItem("vibe-motion"); } catch (_) {}
+        // choice: "on" = 강제 켜기, "off" = 강제 끄기, null = 시스템 설정을 따름
+        var on = choice === "on" ? true : choice === "off" ? false : !sys;
+        document.documentElement.classList.toggle("reduce-motion", !on);
+      } catch (_) {}
+    })();
   </script>
 
   <meta charset="UTF-8" />
@@ -563,12 +600,39 @@
       80% { transform: translate(1px, 1px); }
     }
 
-    /* ── 모션 최소화 존중 ─────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
-      #fx { display: none; }
+    /* ── 모션 최소화 존중 ───────────────────────────
+       시스템의 prefers-reduced-motion + 사용자의 모션 토글 선택을 종합해
+       <html> 에 .reduce-motion 클래스를 (렌더 전에) 붙인다. 미디어쿼리 대신
+       클래스로 게이팅해야 토글로 강제 ON 했을 때 CSS 애니메이션까지 되살아난다.
+       #fx(파티클 배경)는 숨기지 않는다 — 대신 JS가 움직임 없는 정적 프레임을 그린다. */
+    :root.reduce-motion *, :root.reduce-motion *::before, :root.reduce-motion *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important;
     }
+    :root.reduce-motion .reveal { opacity: 1; transform: none; }
+
+    /* ── 모션 토글 버튼 ─────────────────────────────
+       보안 인트라넷/VDI 처럼 시스템이 애니메이션을 꺼둔 환경에서도
+       사용자가 배경·터미널 애니메이션을 직접 켜고 끌 수 있게 한다. */
+    #motion-toggle {
+      position: fixed; top: 14px; right: 14px; z-index: 60;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 12px; border-radius: 999px; cursor: pointer;
+      font: inherit; font-size: 12.5px; line-height: 1; color: var(--fg-soft);
+      background: rgba(14, 18, 32, .72); border: 1px solid var(--line);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      transition: border-color .15s ease, color .15s ease, transform .15s ease;
+    }
+    #motion-toggle:hover { color: var(--fg); border-color: var(--accent); transform: translateY(-1px); }
+    #motion-toggle:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+    #motion-toggle .mt-ico {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #4A5170; box-shadow: none; transition: background .15s ease, box-shadow .15s ease;
+    }
+    #motion-toggle.on .mt-ico {
+      background: var(--accent-2);
+      box-shadow: 0 0 8px 1px rgba(43, 234, 208, .55);
+    }
+    @media (max-width: 640px) { #motion-toggle { top: 10px; right: 10px; padding: 6px 10px; font-size: 12px; } }
   </style>
 </head>
 <body>
@@ -683,6 +747,12 @@
 
 </div><!-- /.page -->
 
+<!-- 모션 토글 — 시스템이 애니메이션을 꺼둔 환경에서도 직접 켤 수 있다 -->
+<button id="motion-toggle" type="button" aria-pressed="false" title="배경·터미널 애니메이션 켜기/끄기">
+  <span class="mt-ico" aria-hidden="true"></span>
+  <span class="mt-label">모션</span>
+</button>
+
 <!-- 진단 상태바: 아무 쓸모 없지만 없으면 허전한 것 -->
 <div id="statusbar" aria-hidden="true">
   <span>⏻ <b>vibe-os</b> v2.6.7</span>
@@ -713,7 +783,16 @@
 (function () {
   "use strict";
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // 시스템의 reduced-motion 설정 + 사용자의 명시적 선택(localStorage)을 종합한다.
+  // 보안 인트라넷/VDI 는 종종 reduced-motion 을 강제하는데, 그럴 때도 사용자가
+  // 모션 토글로 직접 켤 수 있게 한다. (head 의 사전 스크립트와 동일한 로직)
+  var systemReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var motionChoice = null;
+  try { motionChoice = localStorage.getItem("vibe-motion"); } catch (_) {}
+  var motionOn = motionChoice === "on" ? true
+               : motionChoice === "off" ? false
+               : !systemReduce;
+  var reduceMotion = !motionOn;
   var $ = function (s) { return document.querySelector(s); };
 
   /* ═══════════════════════════════════════════════════
@@ -847,7 +926,28 @@
     requestAnimationFrame(loop);
   }
   resize();
+  if (reduceMotion) {
+    // 모션 최소화: 움직이지 않는 정적 별자리 한 프레임만 그린다.
+    // (빈 캔버스로 배경이 통째로 사라지던 문제 해결 — 정지 이미지는 접근성 준수)
+    stepParticles();
+    window.addEventListener("resize", function () { if (reduceMotion) stepParticles(); });
+  }
   requestAnimationFrame(loop);
+
+  // 모션 토글 버튼 — 클릭하면 선택을 저장하고 새로고침해 전 애니메이션에 일관 적용
+  (function () {
+    var btn = $("#motion-toggle");
+    if (!btn) return;
+    var labelEl = btn.querySelector(".mt-label");
+    btn.classList.toggle("on", motionOn);
+    btn.setAttribute("aria-pressed", motionOn ? "true" : "false");
+    if (labelEl) labelEl.textContent = motionOn ? "모션 켜짐" : "모션 꺼짐";
+    btn.title = motionOn ? "애니메이션 끄기" : "애니메이션 켜기";
+    btn.addEventListener("click", function () {
+      try { localStorage.setItem("vibe-motion", motionOn ? "off" : "on"); } catch (_) {}
+      location.reload();
+    });
+  })();
 
   // 업타임 — 아무도 안 물어봤지만 계속 셉니다
   var bootAt = Date.now();
