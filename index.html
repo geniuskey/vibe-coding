@@ -490,21 +490,37 @@
     .mini .badge { margin-left: 0; align-self: flex-start; font-size: .66rem; padding: .12rem .5rem; }
     .mini .key { margin-left: 0; }
     .mini .mdesc { grid-column: 1 / -1; font-size: .84rem; color: var(--fg-soft); margin: 0; }
-    /* 데스크톱(호버 가능)에서는 설명을 접어뒀다가, 카드에 호버/포커스하면
-       카드가 살짝 확대되며 설명이 카드 안에서 펼쳐진다 */
+    /* 데스크톱(호버 가능)에서는 설명을 카드 내부가 아니라 카드 아래에
+       오버레이로 펼친다. 카드 자체의 높이(그리드 행 높이)는 절대 바뀌지
+       않으므로, 카드에 호버할 때마다 트랙/보드 전체 높이가 출렁여
+       페이지가 오르내리던 문제가 생기지 않는다. */
     @media (min-width: 720px) and (hover: hover) {
+      a.card.mini { overflow: visible; }
       .mini .mdesc {
+        position: absolute;
+        grid-row: 1; /* 카드 본문 행에 겹쳐서, 그 행의 바닥을 기준으로 위치 계산 */
+        left: 0;
+        right: 0;
+        top: 100%;
+        margin: 0;
+        padding: .6rem .9rem .7rem;
+        border-radius: 0 0 13px 13px;
+        background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+        border: 1px solid rgba(155,130,255,.35);
+        border-top: none;
+        box-shadow: 0 16px 32px rgba(0,0,0,.45);
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        margin-top: -.4rem; /* 접힌 동안 그리드 행 간격 상쇄 */
-        transition: max-height .32s ease, opacity .22s ease, margin-top .32s ease;
+        pointer-events: none;
+        transition: max-height .32s ease, opacity .22s ease;
+        z-index: 5;
       }
       a.card.mini:hover .mdesc,
       a.card.mini:focus-visible .mdesc {
-        max-height: 7em;
+        max-height: 9em;
         opacity: 1;
-        margin-top: 0;
+        pointer-events: auto;
       }
       a.card.mini { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
       a.card.mini:hover,
