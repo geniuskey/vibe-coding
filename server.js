@@ -77,6 +77,40 @@ function serveFile(res, filePath) {
   });
 }
 
+const STATIC_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.webp': 'image/webp',
+  '.gif': 'image/gif',
+  '.ico': 'image/x-icon',
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+};
+
+// 정적 사이트(GitHub Pages)는 저장소 전체를 그대로 서빙하므로, 로컬 개발 서버도
+// 동일하게 동작하도록 위 라우트에 없는 GET 요청은 저장소 파일로 폴백한다.
+// 숨김 파일/폴더(.git, .claude 등)와 경로 탈출은 차단한다.
+function serveStatic(req, res, url) {
+  if (req.method !== 'GET') return false;
+  const decoded = decodeURIComponent(url);
+  if (decoded.split('/').some((seg) => seg.startsWith('.'))) return false;
+  const filePath = path.join(__dirname, decoded);
+  if (!filePath.startsWith(__dirname + path.sep)) return false;
+  const ext = path.extname(filePath).toLowerCase();
+  const type = STATIC_TYPES[ext];
+  if (!type) return false;
+  fs.readFile(filePath, (err, content) => {
+    if (err) { res.writeHead(404); return res.end('Not found'); }
+    res.writeHead(200, { 'Content-Type': type });
+    res.end(content);
+  });
+  return true;
+}
+
 function lanAddress() {
   const nets = os.networkInterfaces();
   for (const name of Object.keys(nets)) {
@@ -162,6 +196,8 @@ const server = http.createServer(async (req, res) => {
     req.on('close', drop);
     return;
   }
+
+  if (serveStatic(req, res, url)) return;
 
   res.writeHead(404);
   res.end('Not found');
