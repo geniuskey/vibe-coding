@@ -225,14 +225,11 @@
       animation: gradslide 8s linear infinite;
     }
     @keyframes gradslide { to { background-position: -300% 0; } }
-    /* 타자기 줄: 높이 고정해서 문구가 바뀌어도 레이아웃이 안 튐 */
+    /* 타자기 줄: 처음부터 두 줄 공간을 확보해 긴 문구가 감겨도
+       상단부 높이가 늘었다 줄었다 하지 않는다 (line-height 1.22 × 2줄) */
     .typeline {
       display: block;
-      min-height: 1.3em;
-    }
-    @media (max-width: 520px) {
-      /* 긴 문구가 두 줄로 감겨도 아래 내용이 안 튀도록 여유 확보 */
-      .typeline { min-height: 2.6em; }
+      min-height: 2.44em;
     }
     .typeline .caret {
       display: inline-block;
@@ -318,10 +315,10 @@
     }
     .term-body {
       font-family: var(--mono);
-      font-size: .76rem;
+      font-size: .8rem;
       line-height: 1.75;
       padding: .9rem 1rem 1rem;
-      height: 15.5rem;
+      height: 19.5rem;
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: rgba(155,130,255,.4) transparent;
@@ -493,40 +490,25 @@
     .mini .badge { margin-left: 0; align-self: flex-start; font-size: .66rem; padding: .12rem .5rem; }
     .mini .key { margin-left: 0; }
     .mini .mdesc { grid-column: 1 / -1; font-size: .84rem; color: var(--fg-soft); margin: 0; }
-    /* 데스크톱(호버 가능)에서는 설명을 시각적으로만 숨기고(스크린리더 유지)
-       아래 미리보기 바에 호버로 보여준다 */
+    /* 데스크톱(호버 가능)에서는 설명을 접어뒀다가, 카드에 호버/포커스하면
+       카드가 살짝 확대되며 설명이 카드 안에서 펼쳐진다 */
     @media (min-width: 720px) and (hover: hover) {
       .mini .mdesc {
-        position: absolute;
-        width: 1px; height: 1px;
+        max-height: 0;
+        opacity: 0;
         overflow: hidden;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
+        margin-top: -.4rem; /* 접힌 동안 그리드 행 간격 상쇄 */
+        transition: max-height .32s ease, opacity .22s ease, margin-top .32s ease;
       }
-    }
-
-    /* 호버 미리보기 바 — 터미널 출력처럼 */
-    #detail-bar {
-      margin-top: 1rem;
-      display: flex;
-      align-items: baseline;
-      gap: .6rem;
-      min-height: 2.9rem;
-      padding: .7rem 1rem;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(8,10,20,.78);
-      font-family: var(--mono);
-      font-size: .8rem;
-      line-height: 1.55;
-      color: var(--fg-soft);
-    }
-    #detail-bar .t-prompt { flex: none; }
-    #detail-text { animation: detailin .28s ease; }
-    #detail-bar .t-cursor { flex: none; align-self: center; }
-    @keyframes detailin { from { opacity: .15; transform: translateX(5px); } }
-    @media (max-width: 719px), (hover: none) {
-      #detail-bar { display: none; }
+      a.card.mini:hover .mdesc,
+      a.card.mini:focus-visible .mdesc {
+        max-height: 7em;
+        opacity: 1;
+        margin-top: 0;
+      }
+      a.card.mini { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+      a.card.mini:hover,
+      a.card.mini:focus-visible { transform: scale(1.03); z-index: 2; }
     }
 
     /* 스크롤 리빌 */
@@ -755,7 +737,7 @@
 <main class="wrap">
 
   <section class="reveal" id="board">
-    <h2 class="sec">모든 세미나 한눈에 <span class="hint">숫자 키 1–7 바로 이동 · 카드에 호버하면 아래에 소개</span></h2>
+    <h2 class="sec">모든 세미나 한눈에 <span class="hint">숫자 키 1–7 바로 이동 · 카드에 호버하면 소개가 펼쳐짐</span></h2>
 
     <div class="tracks">
       <div class="track">
@@ -834,12 +816,6 @@
       </div>
     </div>
 
-    <!-- 호버 미리보기 — 카드 위에 올리면 소개가 여기 출력된다 (모바일은 카드 안에 표시) -->
-    <div id="detail-bar" aria-hidden="true">
-      <span class="t-prompt">❯</span>
-      <span id="detail-text">카드 위에 마우스를 올리면 세미나 소개가 여기 표시됩니다 — 클릭하면 슬라이드로 이동</span>
-      <span class="t-cursor"></span>
-    </div>
   </section>
 
 </main>
@@ -1422,32 +1398,6 @@
   });
 
   /* ═══════════════════════════════════════════════════
-     6.5 세미나 보드 미리보기 바
-        — 카드에 호버/포커스하면 소개 문구를 터미널 출력처럼 표시
-  ═══════════════════════════════════════════════════ */
-  (function () {
-    var detailText = $("#detail-text");
-    if (!detailText) return;
-    function show(card) {
-      var title = card.querySelector("h3");
-      var desc = card.querySelector(".mdesc");
-      var emoji = card.querySelector(".emoji");
-      if (!title || !desc) return;
-      var next = (emoji ? emoji.textContent + " " : "") + title.textContent + " — " + desc.textContent;
-      if (detailText.textContent === next) return;
-      detailText.textContent = next;
-      // 애니메이션 재시작 트릭
-      detailText.style.animation = "none";
-      void detailText.offsetWidth;
-      detailText.style.animation = "";
-    }
-    document.querySelectorAll("a.card.mini").forEach(function (card) {
-      card.addEventListener("mouseenter", function () { show(card); });
-      card.addEventListener("focus", function () { show(card); });
-    });
-  })();
-
-  /* ═══════════════════════════════════════════════════
      7. 카드 3D 틸트 + 글로우 추적
   ═══════════════════════════════════════════════════ */
   if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
@@ -1459,7 +1409,8 @@
         card.style.setProperty("--mx", (px * 100) + "%");
         card.style.setProperty("--my", (py * 100) + "%");
         var rx = (py - .5) * -7, ry = (px - .5) * 9;
-        card.style.transform = "perspective(700px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-3px)";
+        // scale 을 함께 줘야 CSS 의 :hover 확대가 인라인 transform 에 덮이지 않는다
+        card.style.transform = "perspective(700px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-3px) scale(1.03)";
       });
       card.addEventListener("mouseleave", function () {
         card.style.transform = "";
