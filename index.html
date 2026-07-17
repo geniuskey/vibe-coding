@@ -97,6 +97,7 @@
       { "@type": "PresentationDigitalDocument", "name": "바이브 코딩을 위한 최소한의 Git & GitHub", "url": "https://geniuskey.github.io/vibe-coding/github/" },
       { "@type": "PresentationDigitalDocument", "name": "바이브 코딩 실습 워크숍", "url": "https://geniuskey.github.io/vibe-coding/workshop/" },
       { "@type": "PresentationDigitalDocument", "name": "반도체 현업을 위한 Agent Skills", "url": "https://geniuskey.github.io/vibe-coding/agent-skills/" },
+      { "@type": "PresentationDigitalDocument", "name": "바이브 코딩으로 슬라이드 자료 만들기", "url": "https://geniuskey.github.io/vibe-coding/making-slides/" },
       { "@type": "PresentationDigitalDocument", "name": "나만의 게임 만들기 (어린이 × 부모)", "url": "https://geniuskey.github.io/vibe-coding/forChildren/" }
     ]
   }
@@ -744,7 +745,7 @@
 <main class="wrap">
 
   <section class="reveal" id="board">
-    <h2 class="sec">모든 세미나 한눈에 <span class="hint">숫자 키 1–7 바로 이동 · 카드에 호버하면 소개가 펼쳐짐</span></h2>
+    <h2 class="sec">모든 세미나 한눈에 <span class="hint">숫자 키 1–8 바로 이동 · 카드에 호버하면 소개가 펼쳐짐</span></h2>
 
     <div class="tracks">
       <div class="track">
@@ -811,13 +812,22 @@
           <span class="key">6</span>
           <p class="mdesc">내 업무 노하우를 SKILL.md로 — DRM 엑셀(xlwings)·주간보고 PPT(win32com)·GDS(KLayout)·RTL·TCAD 실무 예제 7종과 실습.</p>
         </a>
-        <a class="card mini" href="forChildren/" data-key="7">
+        <a class="card mini" href="making-slides/" data-key="7">
+          <span class="emoji">🎬</span>
+          <span class="mini-main">
+            <h3>바이브 코딩으로 슬라이드 자료 만들기</h3>
+            <span class="badge hands">실습</span>
+          </span>
+          <span class="key">7</span>
+          <p class="mdesc">레퍼런스 HTML로 품질 앵커링 → 피드백 루프 → CLAUDE.md → Agent Skill — 발표자료가 "요청 한 줄"이 되기까지의 5레벨. 이 사이트가 그 증거물.</p>
+        </a>
+        <a class="card mini" href="forChildren/" data-key="8">
           <span class="emoji">🎮</span>
           <span class="mini-main">
             <h3>나만의 게임 만들기</h3>
             <span class="badge family">어린이 × 부모</span>
           </span>
-          <span class="key">7</span>
+          <span class="key">8</span>
           <p class="mdesc">AI 에이전트와 함께 나만의 게임을 만들어보는 어린이용 세미나. 부모님과 함께 보세요.</p>
         </a>
       </div>
@@ -1271,6 +1281,7 @@
     { ico: "📚", label: "LLM에게 지식을 가르치는 법", meta: "knowledge/", run: function () { location.href = "knowledge/"; } },
     { ico: "🛠️", label: "바이브 코딩 실습 워크숍", meta: "workshop/", run: function () { location.href = "workshop/"; } },
     { ico: "🧬", label: "반도체 현업을 위한 Agent Skills", meta: "agent-skills/", run: function () { location.href = "agent-skills/"; } },
+    { ico: "🎬", label: "바이브 코딩으로 슬라이드 자료 만들기", meta: "making-slides/", run: function () { location.href = "making-slides/"; } },
     { ico: "🎮", label: "나만의 게임 만들기 (어린이 × 부모)", meta: "forChildren/", run: function () { location.href = "forChildren/"; } },
     { ico: "⭐", label: "GitHub 저장소 열기", meta: "external", run: function () { window.open("https://github.com/geniuskey/vibe-coding", "_blank", "noopener"); } },
     { ico: "🌈", label: "vibe --overload", meta: "easter egg", run: function () { enterVibemode(); } },
@@ -1389,7 +1400,7 @@
     if (e.key === "/") { e.preventDefault(); openPalette(); return; }
 
     // 숫자 바로가기
-    if (!e.ctrlKey && !e.metaKey && !e.altKey && /^[1-7]$/.test(e.key)) {
+    if (!e.ctrlKey && !e.metaKey && !e.altKey && /^[1-8]$/.test(e.key)) {
       var card = document.querySelector('a.card[data-key="' + e.key + '"]');
       if (card) location.href = card.getAttribute("href");
       return;

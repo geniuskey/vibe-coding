@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>발표 제목 — 부제 | 시리즈명</title>
+
+  <!--
+    slide-deck 스킬의 레퍼런스 템플릿.
+    · 이 파일을 <발표폴더>/index.html 로 복사한 뒤 내용만 교체해서 쓴다.
+    · 디자인 토큰/컴포넌트/애니메이션은 그대로 두고, <section> 안쪽만 바꾼다.
+    · reveal.js: 아래는 편의상 CDN. 오프라인 발표 확정본은 로컬 vendor/ 로
+      내려받아 두 링크와 <script src>를 교체할 것.
+  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+
+  <style>
+    /* ===== 디자인 토큰 — 바꾸려면 여기서만 (회사 CI 적용 지점) ===== */
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;   /* 보라 — 주 강조 */
+      --accent-2: #2BEAD0; /* 청록 — 긍정/코드 */
+      --accent-3: #FF7A95; /* 분홍 — 경고/문제 */
+      --accent-4: #FFD46B; /* 노랑 — 주의/보조 */
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    /* 은은한 배경 글로우 + 모눈 */
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat { 100% { transform: translate(-2%, 2%) scale(1.05); } }
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+
+    .reveal { background: transparent; position: relative; z-index: 1; }
+    .reveal { font-family: 'Pretendard', system-ui, -apple-system, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: var(--fg); }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+    .reveal section, .reveal section :is(p, li, span, em, strong, h1, h2, h3, h4) { color: var(--fg); }
+
+    .reveal :is(h1, h2, h3, h4) {
+      font-weight: 800; letter-spacing: -0.02em; text-transform: none;
+      margin: 0 0 .4em 0; line-height: 1.15; color: var(--fg) !important;
+      text-shadow: 0 1px 0 rgba(0,0,0,.85), 0 2px 4px rgba(0,0,0,.55);
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,.75); }
+    .reveal a { color: #5BFFE0 !important; }
+    .reveal em { color: #FFE08A !important; font-style: italic; }
+
+    .reveal .slide-number {
+      color: #E6D9FF; right: auto; left: 50%; bottom: 14px; transform: translateX(-50%);
+      background: rgba(20,22,44,.6); padding: 4px 14px; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* ===== 유틸리티 ===== */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* 그라데이션 강조 — 제목의 핵심 키워드에만 */
+    .reveal .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important; background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    @keyframes gradMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    /* 슬라이드 상단 라벨 */
+    .chip {
+      display: inline-block; padding: .35em 1em; border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 700;
+      letter-spacing: .05em; color: var(--fg) !important;
+      background: #2A2150; border: 1px solid rgba(155,130,255,.8); margin-bottom: 1.5rem;
+    }
+    .pill {
+      display: inline-block; padding: .35em .9em; border-radius: 999px;
+      background: #2A2150; border: 1px solid rgba(155,130,255,.8);
+      color: #E1D9FF !important; font-size: 1.02rem; font-weight: 700;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,.85); color: #FFEFC2 !important; }
+
+    /* 내용 카드 — good/bad 변형 포함 */
+    .card {
+      background: linear-gradient(160deg, rgba(40,30,80,.55), rgba(20,50,60,.45));
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,.45); border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 .8rem 0; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card.bad  { border-color: rgba(255,122,149,.55); background: linear-gradient(160deg, rgba(80,25,45,.5), rgba(45,18,35,.45)); }
+    .card.good { border-color: rgba(43,234,208,.6); background: linear-gradient(160deg, rgba(15,60,55,.55), rgba(12,42,48,.45)); }
+
+    .quote {
+      font-size: 1.7rem; line-height: 1.5; padding: 1.4rem 1.8rem;
+      border-left: 4px solid var(--accent-2); background: #131829;
+      border-radius: 0 12px 12px 0; color: var(--fg) !important; font-style: italic;
+    }
+    .quote * { color: var(--fg) !important; }
+    .quote .grad { color: transparent !important; }
+
+    pre.code {
+      background: #131829; border: 1px solid rgba(255,255,255,.16); border-radius: 14px;
+      padding: 1.1rem 1.3rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem; line-height: 1.6; overflow-x: auto; color: var(--fg);
+      margin: 0; white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+
+    /* 프롬프트 카드 (복사 버튼은 하단 스크립트가 자동으로 붙인다) */
+    .prompt-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(38,30,82,.72), rgba(16,22,44,.72));
+      border: 1.5px solid rgba(155,130,255,.65); border-radius: 16px;
+      padding: 1rem 1.25rem 1.1rem; margin: .7rem 0;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,.6);
+    }
+    .prompt-card .pc-label {
+      display: flex; align-items: center; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800;
+      letter-spacing: .06em; color: #CBBDFF !important; margin-bottom: .5rem;
+    }
+    .prompt-card pre.code {
+      border: 0; background: rgba(6,8,15,.55);
+      font-family: inherit; font-size: 1.32rem; font-weight: 600;
+      line-height: 1.6; word-break: keep-all;
+    }
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px;
+      border: 1px solid rgba(155,130,255,.55); background: rgba(20,22,44,.85);
+      color: #E1D9FF; border-radius: 999px; font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; font-weight: 700; padding: 4px 12px; cursor: pointer;
+      opacity: .7; transition: opacity .25s ease;
+    }
+    .copy-btn:hover { opacity: 1; }
+
+    /* 단계 흐름 (프로세스 표현) */
+    .flow { display: flex; align-items: stretch; gap: .6rem; }
+    .flow .fstep {
+      flex: 1; border: 1.5px solid rgba(155,130,255,.5); border-radius: 14px;
+      background: rgba(42,33,80,.35); padding: .8rem .9rem; text-align: center;
+      display: flex; flex-direction: column; gap: .25rem; align-items: center; justify-content: center;
+    }
+    .flow .fstep .ic { font-size: 1.7rem; }
+    .flow .fstep b { font-size: 1.08rem; }
+    .flow .fstep small { font-size: .88rem; color: var(--fg-soft) !important; }
+    .flow .farr { align-self: center; font-size: 1.5rem; color: #7DFFDF !important; flex: 0 0 auto; }
+
+    /* ===== 자동 순차 등장 — 요소에 .autoshow + 방향 클래스만 붙이면 됨 ===== */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none; }
+      .reveal .grad { animation: none; }
+      .autoshow { opacity: 1 !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">SERIES · 카테고리</div>
+        <h1 style="font-size:3.4rem;">발표 제목,<br/><span class="grad">핵심 키워드</span>는 여기에</h1>
+        <p class="small" style="color:#D5DAE8 !important; margin-top:.6rem;">
+          부제 한 줄 — 이 발표가 청중에게 약속하는 것.
+        </p>
+        <p class="tiny" style="color:#9BA6C0 !important; margin-top:1.2rem;">발표자 · 날짜</p>
+      </div>
+      <aside class="notes">인사 + 오늘의 약속 한 문장.</aside>
+    </section>
+
+    <!-- ============= 2. 훅 (공감/문제 제기) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WHY</div>
+        <h2>청중이 <span class="accent3">공감할 문제</span>로 시작</h2>
+        <div class="grid-3" style="margin-top:.8rem;">
+          <div class="card autoshow fade-up"><h3>😀 항목 1</h3><p>본문은 짧게 — 카드당 2문장 이내.</p></div>
+          <div class="card bad autoshow fade-up"><h3>😫 항목 2</h3><p>문제/고통은 <b class="accent3">bad 카드</b>로.</p></div>
+          <div class="card good autoshow fade-up"><h3>✅ 항목 3</h3><p>해결/희망은 <b class="accent2">good 카드</b>로.</p></div>
+        </div>
+        <p class="autoshow fade-up" style="margin-top:1.4rem;">이 슬라이드의 <em>한 줄 결론</em>을 여기에.</p>
+      </div>
+      <aside class="notes">발표자 노트 — 청중에게 물어볼 질문 등.</aside>
+    </section>
+
+    <!-- ============= 3. 본론: 코드/프롬프트가 있는 장 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">HOW</div>
+        <h2>코드·프롬프트는 <span class="mono accent2">전용 블록</span>으로</h2>
+        <div class="grid-2" style="gap:2rem; align-items:start; margin-top:.4rem;">
+          <div class="prompt-card">
+            <div class="pc-label">PROMPT</div>
+            <pre class="code">복사해 갈 수 있는 프롬프트는
+prompt-card에 — 복사 버튼이 자동으로 붙는다.</pre>
+          </div>
+          <pre class="code"><span class="cm"># 코드는 pre.code + 수동 하이라이트</span>
+<span class="kw">def</span> <span class="nm">hello</span>():
+    <span class="kw">return</span> <span class="st">"세미나"</span></pre>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          본문 6줄 이하 — 넘치면 장을 나눈다.
+        </p>
+      </div>
+      <aside class="notes">코드는 읽어주지 말고 형광펜 친 부분만 짚기.</aside>
+    </section>
+
+    <!-- ============= 4. 프로세스/요약 장 ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">TAKEAWAY</div>
+        <h2 style="font-size:3rem;">정리는 <span class="grad">세 개</span>가 좋다</h2>
+        <div class="flow" style="max-width:1000px; margin:1.4rem auto 0; text-align:left;">
+          <div class="fstep autoshow zoom-in"><span class="ic">1️⃣</span><b>첫 번째</b><small>부연 한 줄</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">2️⃣</span><b>두 번째</b><small>부연 한 줄</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">3️⃣</span><b>세 번째</b><small>부연 한 줄</small></div>
+        </div>
+        <p class="quote autoshow fade-up" style="margin-top:1.6rem; text-align:left;">
+          기억에 남길 한 문장은 <b class="accent2">quote 블록</b>으로.
+        </p>
+      </div>
+      <aside class="notes">3줄 요약 + 클로징 멘트.</aside>
+    </section>
+
+    <!-- ============= 5. Q&A ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">WRAP-UP</div>
+        <h2 style="font-size:3.1rem;">감사합니다 — Q&amp;A 🙋</h2>
+        <p class="tiny autoshow fade-up" style="color:#9BA6C0 !important; margin-top:1rem;">
+          연락처 · 자료 링크
+        </p>
+      </div>
+      <aside class="notes">마무리.</aside>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  // 프롬프트 카드 복사 버튼 자동 부착
+  (function () {
+    document.querySelectorAll('.prompt-card').forEach((card) => {
+      const pre = card.querySelector('pre');
+      if (!pre) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = '복사';
+      btn.setAttribute('aria-label', '프롬프트 복사');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText.trim());
+          btn.textContent = '복사됨 ✓';
+        } catch {
+          btn.textContent = 'Ctrl+C로 복사';
+        }
+        setTimeout(() => { btn.textContent = '복사'; }, 1600);
+      });
+      card.appendChild(btn);
+    });
+  })();
+</script>
+
+</body>
+</html>
