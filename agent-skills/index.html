@@ -659,6 +659,7 @@
     #gds-canvas {
       width: 100%; border-radius: 14px; border: 1px solid rgba(155,130,255,0.5);
       background: #05070D; cursor: crosshair; display: block;
+      touch-action: none; /* 터치 드래그로 좌표를 읽을 수 있게 스와이프 제스처에 양보하지 않는다 */
     }
     .gds-side { display: flex; flex-direction: column; gap: .6rem; }
     .gds-layer {
@@ -1682,7 +1683,7 @@ csv-report 스킬을 실행해서 리포트를 만들어줘.</pre>
     width: 1280,
     height: 800,
     margin: 0.04,
-    minScale: 0.4,
+    minScale: 0.2,
     maxScale: 2.0,
     center: false,
   });
@@ -2066,7 +2067,7 @@ csv-report 스킬을 실행해서 리포트를 만들어줘.</pre>
         draw();
       });
     });
-    cv.addEventListener('mousemove', (ev) => {
+    cv.addEventListener('pointermove', (ev) => {
       const r = cv.getBoundingClientRect();
       const mx = (ev.clientX - r.left) * (cv.width / r.width);
       const my = (ev.clientY - r.top) * (cv.height / r.height);

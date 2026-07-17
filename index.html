@@ -390,7 +390,7 @@
     /* ── 세미나 보드: 트랙 3열, 한 화면에 전부 ───── */
     .tracks {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 1.1rem 1.2rem;
       align-items: start;
     }
@@ -695,6 +695,7 @@
       box-shadow: 0 0 8px 1px rgba(43, 234, 208, .55);
     }
     @media (max-width: 640px) { #motion-toggle { top: 10px; right: 10px; padding: 6px 10px; font-size: 12px; } }
+    @media (pointer: coarse) { #motion-toggle { min-height: 44px; padding: 10px 14px; } }
   </style>
 </head>
 <body>

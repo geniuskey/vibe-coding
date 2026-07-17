@@ -7,7 +7,7 @@
 
   .qa-note {
     position: absolute;
-    max-width: 240px;
+    max-width: min(240px, 70vw);
     padding: 16px 34px 14px 16px;
     border-radius: 4px;
     color: #14181f;
@@ -35,14 +35,29 @@
   .qa-note-close:hover { background: rgba(0,0,0,0.22); }
 
   .qa-dock {
-    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+    position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
     display: flex; gap: 8px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+    max-width: calc(100vw - 16px); box-sizing: border-box;
     background: rgba(14,18,32,0.85); border: 1px solid rgba(155,130,255,0.35);
     border-radius: 999px; padding: 8px 10px; pointer-events: auto; backdrop-filter: blur(8px);
   }
   .qa-dock input { border: 0; outline: none; background: rgba(255,255,255,0.08); color: #fff; border-radius: 999px; padding: 8px 14px; width: 200px; font-size: 13px; }
   .qa-dock button { border: 0; border-radius: 999px; padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; background: rgba(255,255,255,0.08); color: #fff; }
   .qa-follow.on { background: var(--accent); color: #06080F; }
+  /* 좁은 화면: 도크가 줄바꿈되도록 하고 입력창이 남는 폭을 채우게 한다 */
+  @media (max-width: 480px) {
+    .qa-dock { border-radius: 20px; row-gap: 6px; }
+    .qa-dock input { flex: 1 1 110px; width: auto; min-width: 0; }
+  }
+  /* 터치 기기: 탭 타깃을 44px 가이드라인에 가깝게 키운다 */
+  @media (pointer: coarse) {
+    .qa-dock input { padding: 11px 14px; font-size: 14px; }
+    .qa-dock button { padding: 11px 14px; font-size: 14px; }
+    .qa-vote { padding: 8px 16px; font-size: 13px; }
+    .qa-note-close { width: 32px; height: 32px; }
+    #qa-history-toggle { padding: 10px 16px; }
+  }
 
   .qa-modal { position: fixed; inset: 0; background: rgba(6,8,15,0.75); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
   .qa-modal-box { background: #0E1220; border: 1px solid rgba(155,130,255,0.4); border-radius: 16px; padding: 28px; width: min(320px, 86vw); text-align: center; }

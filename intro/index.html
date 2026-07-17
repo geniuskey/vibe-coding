@@ -334,6 +334,10 @@
     }
     button.dl-btn { cursor: pointer; }
     #tocSelect { width: 375px; max-width: 375px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
+      #tocSelect { width: auto; max-width: 42vw; }
+    }
     .dl-more-group { display: none; gap: 8px; }
     .dl-more-group.open { display: flex; }
     #moreBtn { min-width: 42px; justify-content: center; }
@@ -939,7 +943,7 @@
         animation: none !important;
         transform: none !important;
       }
-      .grad, .glitch, .particles span, .caret, .tline::before {
+      .grad, .glitch, .particles span, .caret, .tline::before, .hb-nebula {
         animation: none !important;
       }
     }
@@ -3630,7 +3634,7 @@
     width: 1280,
     height: 800,
     margin: 0.04,
-    minScale: 0.4,
+    minScale: 0.2,
     maxScale: 2.0,
   });
 
@@ -3719,6 +3723,22 @@
       render(m);
     }
 
+    // Touch devices have no wheel events — drag scrolls the overview grid instead.
+    let touchY = null;
+    function onTouchStart(e) {
+      if (R.isOverview()) touchY = e.touches[0].clientY;
+    }
+    function onTouchMove(e) {
+      if (!R.isOverview() || touchY === null) return;
+      e.preventDefault();
+      const y = e.touches[0].clientY;
+      const m = metrics();
+      scrollPx = Math.max(0, Math.min(m.maxScroll, scrollPx + (touchY - y)));
+      touchY = y;
+      render(m);
+    }
+    function onTouchEnd() { touchY = null; }
+
     const observer = new MutationObserver(() => {
       if (R.isOverview() && slidesEl().style.transform !== gridTransform) render();
     });
@@ -3729,10 +3749,16 @@
       revealCurrent();
       observer.observe(slidesEl(), { attributes: true, attributeFilter: ['style'] });
       window.addEventListener('wheel', onWheel, { passive: false });
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onTouchEnd, { passive: true });
     });
     R.on('overviewhidden', () => {
       observer.disconnect();
       window.removeEventListener('wheel', onWheel, { passive: false });
+      window.removeEventListener('touchstart', onTouchStart, { passive: true });
+      window.removeEventListener('touchmove', onTouchMove, { passive: false });
+      window.removeEventListener('touchend', onTouchEnd, { passive: true });
     });
     R.on('slidechanged', () => { if (R.isOverview()) requestAnimationFrame(revealCurrent); });
     window.addEventListener('resize', () => { if (R.isOverview()) requestAnimationFrame(apply); });
