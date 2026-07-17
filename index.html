@@ -358,7 +358,9 @@
     .term-foot .tok { color: var(--accent-4); }
 
     /* ── 본문 섹션 ────────────────────────────────── */
-    main { padding: 2.3rem 0 3.4rem; }
+    /* .wrap(클래스)이 main(요소)보다 특이도가 높아 상하 패딩이 0으로
+       덮이던 문제 — main.wrap 으로 좌우 패딩까지 함께 지정한다. */
+    main.wrap { padding: 2.3rem 1.5rem 3.4rem; }
     section + section { margin-top: 3rem; }
     h2.sec {
       font-size: 1.15rem;
@@ -490,41 +492,23 @@
     .mini .badge { margin-left: 0; align-self: flex-start; font-size: .66rem; padding: .12rem .5rem; }
     .mini .key { margin-left: 0; }
     .mini .mdesc { grid-column: 1 / -1; font-size: .84rem; color: var(--fg-soft); margin: 0; }
-    /* 데스크톱(호버 가능)에서는 설명을 카드 내부가 아니라 카드 아래에
-       오버레이로 펼친다. 카드 자체의 높이(그리드 행 높이)는 절대 바뀌지
-       않으므로, 카드에 호버할 때마다 트랙/보드 전체 높이가 출렁여
-       페이지가 오르내리던 문제가 생기지 않는다. */
+    /* 데스크톱(호버 가능)에서는 설명을 접어뒀다가, 호버하면 카드가
+       아래로 늘어나며 펼친다. 카드 높이가 커지는 만큼 아래 카드들이
+       자연스럽게 밀려 내려간다. */
     @media (min-width: 720px) and (hover: hover) {
-      a.card.mini { overflow: visible; }
       .mini .mdesc {
-        position: absolute;
-        grid-row: 1; /* 카드 본문 행에 겹쳐서, 그 행의 바닥을 기준으로 위치 계산 */
-        left: 0;
-        right: 0;
-        top: 100%;
-        margin: 0;
-        padding: .6rem .9rem .7rem;
-        border-radius: 0 0 13px 13px;
-        background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
-        border: 1px solid rgba(155,130,255,.35);
-        border-top: none;
-        box-shadow: 0 16px 32px rgba(0,0,0,.45);
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        pointer-events: none;
-        transition: max-height .32s ease, opacity .22s ease;
-        z-index: 5;
+        margin-top: -.4rem; /* 접힌 상태에서 그리드 행 간격(.4rem)까지 상쇄 */
+        transition: max-height .32s ease, opacity .22s ease, margin-top .32s ease;
       }
       a.card.mini:hover .mdesc,
       a.card.mini:focus-visible .mdesc {
         max-height: 9em;
         opacity: 1;
-        pointer-events: auto;
+        margin-top: 0;
       }
-      a.card.mini { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
-      a.card.mini:hover,
-      a.card.mini:focus-visible { transform: scale(1.03); z-index: 2; }
     }
 
     /* 스크롤 리빌 */
@@ -562,10 +546,16 @@
     #statusbar b { color: var(--fg-soft); font-weight: 600; }
     #statusbar .ok { color: var(--accent-2); }
     #statusbar .spacer { margin-left: auto; }
+    #statusbar a { color: var(--accent); text-decoration: none; }
+    #statusbar a:hover { text-decoration: underline; }
     #statusbar .konami-hint { opacity: .55; }
+    @media (max-width: 1080px) { #statusbar .konami-hint { display: none; } }
+    /* 크레딧은 상태바에 — 상태바가 숨는 모바일에서만 footer 에 표시 */
+    .foot-credit { display: none; }
     @media (max-width: 720px) {
       #statusbar { display: none; }
       body { padding-bottom: 0; }
+      .foot-credit { display: inline; }
     }
 
     /* ── 커맨드 팔레트 ────────────────────────────── */
@@ -838,10 +828,10 @@
 
 <footer>
   <div class="wrap">
-    만든 사람: <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a>
-    · 소스: <a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a>
-    · reveal.js 기반, 빌드 없는 단일 HTML 슬라이드
-    · 이 페이지도 물론 바이브 코딩으로 만들었습니다
+    reveal.js 기반, 빌드 없는 단일 HTML 슬라이드
+    · 이 페이지도 물론 바이브 코딩으로 만들었습니다<span class="foot-credit">
+    · 만든 사람: <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a>
+    · <a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a></span>
   </div>
 </footer>
 
@@ -853,15 +843,17 @@
   <span class="mt-label">모션</span>
 </button>
 
-<!-- 진단 상태바: 아무 쓸모 없지만 없으면 허전한 것 -->
-<div id="statusbar" aria-hidden="true">
-  <span>⏻ <b>vibe-os</b> v2.6.7</span>
-  <span>FPS <b id="sb-fps">--</b></span>
-  <span>UPTIME <b id="sb-uptime">00:00</b></span>
-  <span>PARTICLES <b id="sb-particles">0</b></span>
-  <span>AGENT <b class="ok" id="sb-agent">idle</b></span>
+<!-- 진단 상태바: 크레딧 겸용 -->
+<div id="statusbar">
+  <span aria-hidden="true">⏻ <b>vibe-os</b> v2.6.7</span>
+  <span aria-hidden="true">FPS <b id="sb-fps">--</b></span>
+  <span aria-hidden="true">UPTIME <b id="sb-uptime">00:00</b></span>
+  <span aria-hidden="true">PARTICLES <b id="sb-particles">0</b></span>
+  <span aria-hidden="true">AGENT <b class="ok" id="sb-agent">idle</b></span>
   <span class="spacer"></span>
-  <span class="konami-hint">↑↑↓↓←→←→BA</span>
+  <span>만든 사람 <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a></span>
+  <span><a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a></span>
+  <span class="konami-hint" aria-hidden="true">↑↑↓↓←→←→BA</span>
 </div>
 
 <!-- 커맨드 팔레트 -->
@@ -1425,7 +1417,6 @@
         card.style.setProperty("--mx", (px * 100) + "%");
         card.style.setProperty("--my", (py * 100) + "%");
         var rx = (py - .5) * -7, ry = (px - .5) * 9;
-        // scale 을 함께 줘야 CSS 의 :hover 확대가 인라인 transform 에 덮이지 않는다
         card.style.transform = "perspective(700px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-3px) scale(1.03)";
       });
       card.addEventListener("mouseleave", function () {
