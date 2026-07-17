@@ -1,0 +1,2284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>바이브 코딩으로 슬라이드 자료 만들기 — 레퍼런스 · CLAUDE.md · Agent Skill | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="바이브 코딩으로 발표 슬라이드(HTML/reveal.js)를 만드는 법. 레퍼런스 HTML로 품질을 앵커링하고, 스크린샷 피드백 루프로 다듬고, CLAUDE.md 스타일 가이드와 Agent Skill로 매번 같은 수준이 자동으로 나오게 만드는 실전 기법." />
+  <meta name="keywords" content="바이브 코딩, vibe coding, 슬라이드, 발표자료, reveal.js, HTML 슬라이드, CLAUDE.md, Agent Skills, 레퍼런스, 프롬프트, Claude Code, 프레젠테이션" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://geniuskey.github.io/vibe-coding/making-slides/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="바이브 코딩으로 슬라이드 자료 만들기" />
+  <meta property="og:description" content="레퍼런스 HTML로 품질 앵커링 → 피드백 루프 → CLAUDE.md → Agent Skill. 발표자료가 '요청 한 줄'이 되기까지의 5레벨." />
+  <meta property="og:url" content="https://geniuskey.github.io/vibe-coding/making-slides/" />
+  <meta property="og:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="바이브 코딩으로 슬라이드 자료 만들기" />
+  <meta name="twitter:description" content="레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — 발표자료 품질을 고정하는 5레벨." />
+  <meta name="twitter:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "바이브 코딩으로 슬라이드 자료 만들기 — 레퍼런스 · CLAUDE.md · Agent Skill",
+    "description": "바이브 코딩으로 발표 슬라이드(HTML/reveal.js)를 만드는 실전 기법 세미나. 레퍼런스 HTML 앵커링, 스크린샷 피드백 루프, CLAUDE.md 스타일 가이드, Agent Skill 자동 적용까지 5레벨 로드맵.",
+    "inLanguage": "ko",
+    "author": { "@type": "Person", "name": "geniuskey" },
+    "url": "https://geniuskey.github.io/vibe-coding/making-slides/"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 공통 디자인 시스템은 agent-skills/index.html 의 것을 그대로 상속 -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
+      #tocSelect { width: auto; max-width: 42vw; }
+    }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+    .autoshow:nth-child(7) { animation-delay: .95s; }
+    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+
+    /* ========= 프롬프트 카드 ========= */
+    .prompt-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(38,30,82,0.72), rgba(16,22,44,0.72));
+      border: 1.5px solid rgba(155,130,255,0.65);
+      border-radius: 16px;
+      padding: 1.0rem 1.25rem 1.1rem;
+      margin: .7rem 0;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6);
+    }
+    .prompt-card .pc-label {
+      display: flex; align-items: center; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .92rem; font-weight: 800; letter-spacing: .06em;
+      color: #CBBDFF !important;
+      margin-bottom: .5rem;
+    }
+    .prompt-card pre.code {
+      margin: 0;
+      border: 0;
+      background: rgba(6,8,15,0.55);
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-size: 1.32rem;
+      font-weight: 600;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: keep-all;
+    }
+    .prompt-card.mini pre.code { font-size: 1.1rem; padding: .8rem 1rem; }
+    .prompt-card.mini { padding: .75rem 1rem .85rem; margin: .45rem 0; }
+    .prompt-card.bad { border-color: rgba(255,122,149,0.6); }
+    .prompt-card.bad .pc-label { color: #FFB3C2 !important; }
+    .prompt-card.good { border-color: rgba(43,234,208,0.65); }
+    .prompt-card.good .pc-label { color: #A8FFEE !important; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px;
+      border: 1px solid rgba(155,130,255,0.55);
+      background: rgba(20,22,44,0.85);
+      color: #E1D9FF; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; font-weight: 700;
+      padding: 4px 12px; cursor: pointer;
+      opacity: .7; transition: opacity .25s ease, transform .25s ease;
+    }
+    .copy-btn:hover { opacity: 1; transform: translateY(-1px); }
+
+    .list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+
+    /* ---- 규칙 표 ---- */
+    table.rules { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 1.18rem; }
+    table.rules th, table.rules td { padding: .62rem 1rem; text-align: left; }
+    table.rules thead th {
+      font-family: 'JetBrains Mono', monospace; font-size: .95rem; letter-spacing: .05em;
+      color: #CBBDFF !important; border-bottom: 2px solid rgba(155,130,255,0.6);
+      background: rgba(42,33,80,0.5);
+    }
+    table.rules thead th:first-child { border-top-left-radius: 12px; }
+    table.rules thead th:last-child { border-top-right-radius: 12px; }
+    table.rules tbody td { border-bottom: 1px solid rgba(190,200,224,0.18); background: rgba(230,236,249,0.03); }
+    table.rules tbody tr:hover td { background: rgba(124,92,255,0.12); }
+    table.rules .mono { font-size: 1.02rem; }
+
+    /* ---- 폴더 트리 ---- */
+    .ftree {
+      font-family: 'JetBrains Mono', monospace; font-size: 1.12rem; line-height: 1.85;
+      background: #0A0D18; border: 1px solid rgba(155,130,255,0.5); border-radius: 14px;
+      padding: 1.1rem 1.5rem; margin: 0;
+    }
+    .ftree .dir { color: #B5A1FF !important; font-weight: 800; }
+    .ftree .fl { color: #E8ECF5 !important; }
+    .ftree .hl { color: #7DFFDF !important; font-weight: 800; }
+    .ftree .note { color: #9BA6C0 !important; font-size: .92rem; }
+
+    /* ---- 워크플로 화살표 행 ---- */
+    .flow { display: flex; align-items: stretch; gap: .6rem; }
+    .flow .fstep {
+      flex: 1; border: 1.5px solid rgba(155,130,255,0.5); border-radius: 14px;
+      background: rgba(42,33,80,0.35); padding: .8rem .9rem; text-align: center;
+      display: flex; flex-direction: column; gap: .25rem; align-items: center; justify-content: center;
+    }
+    .flow .fstep .ic { font-size: 1.7rem; }
+    .flow .fstep b { font-size: 1.08rem; }
+    .flow .fstep small { font-size: .88rem; color: #B8BFD0 !important; }
+    .flow .farr { align-self: center; font-size: 1.5rem; color: #7DFFDF !important; flex: 0 0 auto; }
+
+    /* ---- 데모 터미널 (재생형 대화) ---- */
+    .demo-term {
+      position: relative;
+      background: #0A0D18;
+      border: 1px solid rgba(155,130,255,0.5);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7);
+      display: flex; flex-direction: column;
+    }
+    .dt-bar {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(30,26,60,0.9);
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(155,130,255,0.35);
+    }
+    .dt-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dt-bar .dot.r { background: #FF5F57; } .dt-bar .dot.y { background: #FEBC2E; } .dt-bar .dot.g { background: #28C840; }
+    .dt-bar .dt-title { margin-left: 6px; font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: #B8BFD0 !important; }
+    .dt-replay {
+      margin-left: auto; border: 1px solid rgba(155,130,255,0.55); background: rgba(20,22,44,0.9);
+      color: #E1D9FF; border-radius: 999px; font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem; font-weight: 700; padding: 3px 12px; cursor: pointer;
+      transition: background .25s ease;
+    }
+    .dt-replay:hover { background: rgba(124,92,255,0.45); }
+    .dt-body {
+      padding: .9rem 1.15rem; display: flex; flex-direction: column; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .98rem; line-height: 1.5;
+      min-height: 0; flex: 1; overflow-y: auto;
+    }
+    .dt-line { display: flex; gap: .6rem; align-items: flex-start; opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+    .dt-line.on { opacity: 1; transform: none; }
+    .dt-line .dt-who { flex: 0 0 auto; font-weight: 800; border-radius: 6px; padding: 1px 8px; font-size: .78rem; margin-top: 2px; white-space: nowrap; }
+    .dt-line.u .dt-who { background: rgba(155,130,255,.25); color: #D9CDFF !important; border: 1px solid rgba(155,130,255,.6); }
+    .dt-line.a .dt-who { background: rgba(43,234,208,.16); color: #A8FFEE !important; border: 1px solid rgba(43,234,208,.55); }
+    .dt-line.s .dt-who { background: rgba(255,212,107,.16); color: #FFE9AE !important; border: 1px solid rgba(255,212,107,.55); }
+    .dt-line.o .dt-who { background: rgba(230,236,249,.08); color: #B8BFD0 !important; border: 1px solid rgba(190,200,224,.35); }
+    .dt-line .dt-msg { color: #E8ECF5 !important; word-break: break-all; white-space: pre-wrap; }
+    .dt-line.u .dt-msg { color: #FFFFFF !important; font-weight: 600; word-break: keep-all; }
+    .dt-line.s .dt-msg { color: #FFE9AE !important; }
+    .dt-line.ok .dt-msg { color: #7DFFDF !important; font-weight: 700; }
+    .dt-caret { display: inline-block; width: .55em; height: 1.05em; background: #7DFFDF; vertical-align: -0.15em; animation: dtBlink .8s steps(1) infinite; }
+    @keyframes dtBlink { 50% { opacity: 0; } }
+
+    /* ==================================================================
+       이하 이 세미나 전용 컴포넌트
+       ================================================================== */
+
+    /* ---- 타이틀: 슬라이드가 지어지는 브라우저 목업 ---- */
+    .build-frame {
+      background: #0A0D18;
+      border: 1px solid rgba(155,130,255,0.55);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 34px 70px -26px rgba(0,0,0,0.75), 0 0 44px rgba(155,130,255,0.12);
+    }
+    .bf-bar {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(30,26,60,0.9); padding: 9px 14px;
+      border-bottom: 1px solid rgba(155,130,255,0.35);
+    }
+    .bf-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .bf-bar .dot.r { background: #FF5F57; } .bf-bar .dot.y { background: #FEBC2E; } .bf-bar .dot.g { background: #28C840; }
+    .bf-url {
+      flex: 1; margin-left: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem;
+      background: rgba(6,8,15,0.7); border: 1px solid rgba(190,200,224,0.25);
+      border-radius: 999px; padding: 3px 14px; color: #9BA6C0 !important;
+      white-space: nowrap; overflow: hidden;
+    }
+    .bf-stage {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      padding: 1.6rem 1.9rem;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(124,92,255,0.16), transparent 50%),
+        radial-gradient(circle at 85% 90%, rgba(0,224,199,0.12), transparent 50%),
+        #0B0F1E;
+      display: flex; flex-direction: column; gap: .8rem;
+    }
+    .bf-el { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+    .bf-el.on { opacity: 1; transform: none; }
+    .bf-chip {
+      align-self: flex-start;
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+      background: #2A2150; border: 1px solid rgba(155,130,255,0.8); border-radius: 5px;
+      padding: .25em .8em; color: #E1D9FF !important;
+    }
+    .bf-title {
+      font-size: 1.75rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em;
+      color: #FFFFFF !important; min-height: 2.4em;
+    }
+    .bf-title .bt-grad {
+      background: linear-gradient(120deg, #B5A1FF, #5BFFE0);
+      -webkit-background-clip: text; background-clip: text; color: transparent !important;
+    }
+    .bf-title .bf-caret { display: inline-block; width: .5em; border-bottom: 3px solid #5BFFE0; margin-left: 2px; animation: dtBlink .9s steps(1) infinite; }
+    .bf-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .bf-card {
+      border: 1px solid rgba(155,130,255,0.45); border-radius: 11px;
+      background: linear-gradient(160deg, rgba(40,30,80,0.55), rgba(20,50,60,0.4));
+      padding: .65rem .75rem; display: flex; flex-direction: column; gap: .25rem;
+    }
+    .bf-card .ic { font-size: 1.15rem; }
+    .bf-card b { font-size: .82rem; color: #FFFFFF !important; }
+    .bf-card small { font-size: .68rem; line-height: 1.4; color: #B8BFD0 !important; }
+    .bf-stamp {
+      position: absolute; right: 1.2rem; bottom: 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800;
+      color: #7DFFDF !important; background: rgba(13,61,56,0.85);
+      border: 1px solid rgba(43,234,208,0.75); border-radius: 999px; padding: 5px 14px;
+      transform: rotate(-3deg) scale(1.3); opacity: 0;
+      transition: opacity .4s ease, transform .4s cubic-bezier(.2,2,.4,1);
+    }
+    .bf-stamp.on { opacity: 1; transform: rotate(-3deg) scale(1); }
+    .bf-cap {
+      text-align: center; margin-top: .7rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: #9BA6C0 !important;
+    }
+
+    /* ---- 5레벨 사다리 ---- */
+    .lv-wrap { display: grid; grid-template-columns: 380px 1fr; gap: 2rem; align-items: stretch; }
+    .lv-steps { display: flex; flex-direction: column-reverse; gap: .55rem; }
+    .lv-step {
+      text-align: left; cursor: pointer;
+      display: flex; align-items: center; gap: .9rem;
+      border: 1.5px solid rgba(190,200,224,0.35); border-radius: 14px;
+      background: rgba(230,236,249,0.04); color: #FFF;
+      padding: .68rem 1.1rem; font-size: 1.12rem; font-weight: 700;
+      font-family: 'Pretendard', system-ui, sans-serif;
+      transition: border-color .3s ease, background .3s ease, transform .3s ease;
+    }
+    .lv-step .n {
+      font-family: 'JetBrains Mono', monospace; font-weight: 900; font-size: .92rem;
+      color: #B5A1FF; flex: 0 0 3.2em;
+    }
+    .lv-step small { display: block; font-weight: 500; font-size: .92rem; color: #B8BFD0; margin-top: .1rem; }
+    .lv-step.active { border-color: var(--accent-2); background: rgba(15,60,55,0.4); transform: translateX(8px); }
+    .lv-step.active .n { color: #7DFFDF; }
+    .lv-stage {
+      border: 1.5px solid rgba(155,130,255,0.5); border-radius: 16px;
+      background: rgba(14,18,32,0.7); padding: 1.4rem 1.6rem;
+      display: flex; flex-direction: column; gap: .9rem; justify-content: center;
+    }
+    .lv-stage h3 { margin: 0; }
+    .lv-stage .lv-desc { font-size: 1.28rem !important; line-height: 1.6; color: #E8ECF5 !important; margin: 0; }
+    .lv-meter { display: flex; align-items: center; gap: 1rem; }
+    .lv-meter .lm-label { font-family: 'JetBrains Mono', monospace; font-size: .9rem; font-weight: 700; color: #CBBDFF !important; flex: 0 0 7.5em; }
+    .lv-meter .bar { flex: 1; height: 14px; border-radius: 999px; background: rgba(255,255,255,0.1); overflow: hidden; }
+    .lv-meter .fill { height: 100%; border-radius: 999px; width: 0; transition: width .8s cubic-bezier(.2,.7,.3,1); }
+    .lv-meter.q .fill { background: linear-gradient(90deg, var(--accent-2), #7DFFDF); }
+    .lv-meter.r .fill { background: linear-gradient(90deg, var(--accent), #CBBDFF); }
+    .lv-meter b { font-family: 'JetBrains Mono', monospace; white-space: nowrap; flex: 0 0 3em; text-align: right; }
+
+    /* ---- 미니 슬라이드 목업 (before/after) ---- */
+    .mock {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
+      overflow: hidden;
+      padding: 1.2rem 1.4rem;
+      box-sizing: border-box;
+      display: flex; flex-direction: column;
+      box-shadow: 0 26px 55px -24px rgba(0,0,0,0.7);
+    }
+    .mock * { text-shadow: none !important; }
+    .mock .mk-page {
+      position: absolute; right: .9rem; bottom: .7rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+    }
+    .mock.plain {
+      background: #FFFFFF;
+      border: 1px solid #C9CDD6;
+      font-family: system-ui, 'Malgun Gothic', sans-serif;
+    }
+    .mock.plain .mk-t {
+      font-size: 1.5rem; font-weight: 700; color: #1A1A1A !important;
+      border-bottom: 3px solid #4472C4; padding-bottom: .35rem; margin-bottom: .8rem;
+    }
+    .mock.plain ul { margin: 0; padding-left: 1.3em; }
+    .mock.plain li {
+      font-size: .95rem !important; line-height: 1.85; color: #333333 !important;
+      list-style: disc;
+    }
+    .mock.plain .mk-page { color: #8A8F99 !important; }
+    .mock.vibe {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(124,92,255,0.20), transparent 50%),
+        radial-gradient(circle at 88% 92%, rgba(0,224,199,0.14), transparent 50%),
+        #0B0F1E;
+      border: 1px solid rgba(155,130,255,0.55);
+    }
+    .mock.vibe .mk-chip {
+      align-self: flex-start;
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem; font-weight: 700; letter-spacing: .06em;
+      background: #2A2150; border: 1px solid rgba(155,130,255,0.8); border-radius: 5px;
+      padding: .25em .7em; color: #E1D9FF !important; margin-bottom: .55rem;
+    }
+    .mock.vibe .mk-t {
+      font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: .8rem;
+      color: #FFFFFF !important;
+    }
+    .mock.vibe .mk-t .g {
+      background: linear-gradient(120deg, #B5A1FF, #5BFFE0);
+      -webkit-background-clip: text; background-clip: text; color: transparent !important;
+    }
+    .mock.vibe .mk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; }
+    .mock.vibe .mk-card {
+      border: 1px solid rgba(155,130,255,0.45); border-radius: 10px;
+      background: linear-gradient(160deg, rgba(40,30,80,0.55), rgba(20,50,60,0.4));
+      padding: .55rem .6rem; display: flex; flex-direction: column; gap: .2rem;
+    }
+    .mock.vibe .mk-card .ic { font-size: 1rem; }
+    .mock.vibe .mk-card b { font-size: .72rem; color: #FFFFFF !important; }
+    .mock.vibe .mk-card small { font-size: .6rem; line-height: 1.45; color: #B8BFD0 !important; }
+    .mock.vibe .mk-page { color: #9BA6C0 !important; background: rgba(20,22,44,0.7); border-radius: 999px; padding: 2px 8px; }
+    .mock-cap {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      margin-top: .7rem; font-size: 1.05rem; font-weight: 700;
+    }
+
+    /* ---- 레벨 배지 헤더 ---- */
+    .ex-head { display: flex; align-items: center; gap: 1rem; margin-bottom: .8rem; }
+    .ex-num {
+      font-family: 'JetBrains Mono', monospace; font-weight: 900; font-size: 1.05rem;
+      background: var(--accent); color: #0A0620 !important; border-radius: 10px; padding: .3rem .8rem;
+      flex: 0 0 auto;
+    }
+    .ex-head h2 { margin: 0; font-size: 2.35rem; }
+    .ex-head .pill { margin-left: auto; flex: 0 0 auto; }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none; }
+      .reveal .grad { animation: none; }
+      .autoshow { opacity: 1 !important; animation: none !important; }
+      .dt-line { opacity: 1; transform: none; }
+      .bf-el { opacity: 1; transform: none; }
+      .bf-stamp { opacity: 1; transform: rotate(-3deg); }
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
+    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="grid-2" style="align-items:center; gap:3rem;">
+          <div>
+            <div class="chip">SEMINAR · 바이브 코딩 × 발표자료</div>
+            <h1 style="font-size:3.3rem;">바이브 코딩으로<br/><span class="grad">슬라이드 자료</span> 만들기</h1>
+            <p class="small" style="color:#D5DAE8 !important; margin-top:.6rem;">
+              "장표 꾸미기"에 쓰던 시간을 내용에 돌려주는 법 —<br/>
+              레퍼런스 앵커링부터 <span class="mono accent2">CLAUDE.md</span>, <span class="mono accent">Agent Skill</span>까지.
+            </p>
+            <p class="tiny" style="color:#9BA6C0 !important; margin-top:1.2rem;">
+              바이브 코딩 세미나 시리즈 · geniuskey
+            </p>
+          </div>
+          <div>
+            <div class="build-frame" aria-label="슬라이드가 자동으로 지어지는 데모">
+              <div class="bf-bar">
+                <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="bf-url" id="bf-url">localhost:8080/my-talk/</span>
+              </div>
+              <div class="bf-stage" id="bf-stage">
+                <span class="bf-el bf-chip" data-step="1">SEMINAR · MY TALK</span>
+                <div class="bf-el bf-title" data-step="2"><span id="bf-typed"></span><span class="bf-caret" id="bf-caret"></span></div>
+                <div class="bf-el bf-cards" data-step="3">
+                  <div class="bf-card"><span class="ic">🧭</span><b>문제 정의</b><small>왜 지금 이 얘기인가</small></div>
+                  <div class="bf-card"><span class="ic">🛠️</span><b>해결책</b><small>이렇게 접근했다</small></div>
+                  <div class="bf-card"><span class="ic">📈</span><b>결과</b><small>숫자로 증명</small></div>
+                </div>
+                <span class="bf-stamp" id="bf-stamp">✓ git push — 링크로 공유 완료</span>
+              </div>
+            </div>
+            <div class="bf-cap">프롬프트 몇 줄 → 이런 게 나오게 하는 것이 오늘의 목표</div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        인사 + 오늘 주제 소개. 오른쪽 목업은 자동 재생 — "발표자료를 만드는 일 자체를 바이브 코딩의
+        대상으로 삼자"가 핵심 메시지. 이 슬라이드 덱 자체도 오늘 소개할 방법으로 만들어졌음을 예고.
+      </aside>
+    </section>
+
+    <!-- ============= 2. 훅: 시간이 어디로 새나 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WHY</div>
+        <h2>발표 준비, 시간이 <span class="accent3">어디로</span> 새나</h2>
+        <div class="grid-3" style="margin-top:.8rem;">
+          <div class="card autoshow fade-up">
+            <h3>💡 내용 정리</h3>
+            <p>말할 거리를 고르고 순서를 잡는 일. <b class="accent2">진짜 내 일</b>이고, 제일 재미있는 부분.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <h3>🎨 장표 꾸미기</h3>
+            <p>정렬 맞추고, 색 고르고, 아이콘 찾고, 폰트 바꾸고… 밤 11시의 <b class="accent3">픽셀 노가다</b>.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <h3>🔁 마감 전 수정</h3>
+            <p>"5장이랑 12장 순서 바꿔줘" 한 마디에 목차·번호·디자인이 <b class="accent3">와르르</b>.</p>
+          </div>
+        </div>
+        <p class="autoshow fade-up" style="margin-top:1.4rem; font-size:1.6rem;">
+          꾸미기와 수정은 <em>AI가 가장 잘하는 종류의 일</em>입니다 — 사람은 내용만 붙들면 됩니다.
+        </p>
+      </div>
+      <aside class="notes">
+        청중 공감 유도: 장표 꾸미기에 시간을 얼마나 쓰는지 물어보기.
+        오늘의 약속 — 꾸미기·수정 시간을 AI에게 넘기는 구체적인 방법 5단계.
+      </aside>
+    </section>
+
+    <!-- ============= 3. 왜 HTML 슬라이드인가 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WHY HTML</div>
+        <h2>왜 PPT가 아니라 <span class="grad">HTML 슬라이드</span>인가</h2>
+        <div class="grid-2" style="gap:1.2rem; margin-top:.6rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>📝 텍스트 = AI의 모국어</h3>
+            <p>PPT는 바이너리라 AI가 더듬더듬 다루지만, HTML은 <b class="accent2">통째로 읽고 통째로 고칩니다</b>. "전부 다크 테마로" 한 마디면 끝.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🌿 git으로 버전 관리</h3>
+            <p>모든 수정이 diff로 남고, 언제든 롤백. <span class="mono tiny">발표자료_최종_진짜최종_v3.pptx</span>와 작별합니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🔗 링크 하나로 공유</h3>
+            <p>GitHub Pages에 올리면 주소 하나로 배포 끝. 발표장 PC에 뷰어가 있는지 걱정할 필요 없이 <b class="accent2">브라우저만 있으면</b> 됩니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>✨ 살아있는 슬라이드</h3>
+            <p>코드 하이라이트, 움직이는 차트, 클릭되는 데모를 슬라이드 안에 심을 수 있습니다. 지금 이 덱의 애니메이션처럼.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        핵심은 첫 카드 — "AI가 결과물을 직접 만들고 직접 고칠 수 있는 포맷"이라는 점.
+        나머지 셋은 따라오는 보너스.
+      </aside>
+    </section>
+
+    <!-- ============= 4. reveal.js ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">TOOL</div>
+        <h2><span class="mono accent2">reveal.js</span> — 파일 하나면 발표자료</h2>
+        <div class="grid-2" style="gap:2rem; margin-top:.4rem; align-items:start;">
+          <div>
+            <p class="small" style="margin-bottom:.8rem;">
+              HTML 슬라이드의 사실상 표준 라이브러리.
+              <b class="accent2">&lt;section&gt; 하나 = 슬라이드 한 장</b>, 그게 문법의 전부입니다.
+            </p>
+            <pre class="code"><span class="cm">&lt;!-- index.html --&gt;</span>
+<span class="kw">&lt;div</span> <span class="nm">class</span>=<span class="st">"reveal"</span><span class="kw">&gt;&lt;div</span> <span class="nm">class</span>=<span class="st">"slides"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;section&gt;</span>첫 번째 슬라이드<span class="kw">&lt;/section&gt;</span>
+  <span class="kw">&lt;section&gt;</span>두 번째 슬라이드<span class="kw">&lt;/section&gt;</span>
+<span class="kw">&lt;/div&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;script&gt;</span>Reveal.initialize()<span class="kw">&lt;/script&gt;</span></pre>
+          </div>
+          <div>
+            <pre class="ftree"><span class="dir">my-talk/</span>
+└─ <span class="hl">index.html</span>   <span class="note">← 스타일·내용·스크립트 전부 이 안에</span>
+
+<span class="note">빌드 없음 · 서버 없음 · 더블클릭으로 열림</span>
+<span class="note">이 세미나 시리즈 8개 덱이 전부 이 구조</span></pre>
+            <p class="small" style="margin-top:.9rem; color:#B8BFD0 !important;">
+              문법을 <em>외울 필요는 없습니다</em> — 어차피 쓰는 건 AI니까요.
+              "reveal.js로 만들어줘"라는 단어만 기억하면 됩니다.
+            </p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        reveal.js는 도구 이름 하나만 기억시키면 충분. 문법 설명에 시간 쓰지 말 것 —
+        "AI가 다 안다"가 바이브 코딩의 전제.
+      </aside>
+    </section>
+
+    <!-- ============= 5. 정직한 비교: PPT가 답일 때 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">HONESTY</div>
+        <h2>정직하게 — <span class="accent4">PPT가 답</span>일 때도 있습니다</h2>
+        <table class="rules" style="margin-top:.6rem;">
+          <thead>
+            <tr><th>상황</th><th>추천</th><th>이유</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>회사 표준 서식 · 결재/보고용</td>
+              <td><span class="pill amber">PPT 유지</span></td>
+              <td>서식이 곧 규칙 — 대신 <a href="../agent-skills/">win32com 스킬로 자동화</a></td>
+            </tr>
+            <tr>
+              <td>받는 사람이 직접 편집해야 함</td>
+              <td><span class="pill amber">PPT 유지</span></td>
+              <td>상대의 도구를 존중 — 파일로 주고받는 문화</td>
+            </tr>
+            <tr>
+              <td>기술 세미나 · 스터디 · 데모 발표</td>
+              <td><span class="pill green">HTML 슬라이드 ✓</span></td>
+              <td>내가 형식의 주인 — 오늘 이야기의 무대</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small autoshow fade-up" style="margin-top:1.2rem; color:#B8BFD0 !important;">
+          도구 종교전쟁이 아닙니다. <b class="accent2">형식을 내가 정할 수 있는 발표</b>라면
+          HTML 쪽이 AI와의 궁합이 압도적으로 좋다는 이야기입니다.
+        </p>
+      </div>
+      <aside class="notes">
+        PPT 전면 부정으로 들리지 않게 선을 그어주기. 사내 표준 PPT 자동화는
+        agent-skills 세미나(weekly-ppt 스킬)에서 다뤘음을 링크.
+      </aside>
+    </section>
+
+    <!-- ============= 6. 로드맵: 5레벨 사다리 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ROADMAP</div>
+        <h2>오늘의 로드맵 — <span class="grad">5레벨</span> 올라가기</h2>
+        <div class="lv-wrap" style="margin-top:.5rem;">
+          <div class="lv-steps">
+            <button class="lv-step" data-lv="0"><span class="n">LV.0</span><span>그냥 시켜보기<small>"슬라이드 만들어줘" 한 줄</small></span></button>
+            <button class="lv-step" data-lv="1"><span class="n">LV.1</span><span>레퍼런스 앵커링<small>실물 HTML로 기준 제시</small></span></button>
+            <button class="lv-step" data-lv="2"><span class="n">LV.2</span><span>다듬기 루프<small>보고 · 꼬집고 · 스스로 고치게</small></span></button>
+            <button class="lv-step" data-lv="3"><span class="n">LV.3</span><span>CLAUDE.md<small>규칙을 프로젝트에 고정</small></span></button>
+            <button class="lv-step" data-lv="4"><span class="n">LV.4</span><span>Agent Skill<small>말 안 해도 자동 적용</small></span></button>
+          </div>
+          <div class="lv-stage">
+            <h3 id="lv-title">LV.0 — 그냥 시켜보기</h3>
+            <p class="lv-desc" id="lv-desc">…</p>
+            <div class="lv-meter q"><span class="lm-label">품질 하한선</span><div class="bar"><div class="fill" id="lv-q"></div></div><b id="lv-qv">–</b></div>
+            <div class="lv-meter r"><span class="lm-label">재사용성</span><div class="bar"><div class="fill" id="lv-r"></div></div><b id="lv-rv">–</b></div>
+          </div>
+        </div>
+        <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">레벨을 클릭해 보세요 — 위로 갈수록 "요청 한 줄"의 결과가 좋아집니다</p>
+      </div>
+      <aside class="notes">
+        오늘의 지도. 포인트: 레벨이 오를수록 "품질 하한선"이 올라간다 — 상한이 아니라 하한.
+        AI 결과물의 문제는 최악의 날이 너무 못하다는 것. 그 바닥을 끌어올리는 게 기법의 목적.
+      </aside>
+    </section>
+
+    <!-- ============= 7. LV0: 그냥 시켜보기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num">LV.0</span>
+          <h2>일단 그냥 시켜봅니다</h2>
+          <span class="pill">난이도 없음</span>
+        </div>
+        <div class="grid-2" style="gap:2rem; align-items:start;">
+          <div>
+            <div class="prompt-card">
+              <div class="pc-label">PROMPT</div>
+              <pre class="code">다음 주 팀 세미나에서 쓸 "바이브 코딩 입문"
+슬라이드를 reveal.js로 만들어줘. 10장 정도.</pre>
+            </div>
+            <p class="small" style="color:#B8BFD0 !important; margin-top:.7rem;">
+              이게 전부입니다. 1~2분이면 열리는 HTML 파일이 나옵니다.
+              <b class="accent2">시작은 무조건 이렇게</b> — 완벽한 프롬프트를 고민하며 미루는 것보다 백배 낫습니다.
+            </p>
+          </div>
+          <div class="demo-term" data-demo="naive" style="height:340px;">
+            <div class="dt-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="dt-title">claude — my-talk</span>
+              <button class="dt-replay" type="button">▶ 다시 재생</button>
+            </div>
+            <div class="dt-body"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        데모 터미널 자동 재생. LV0을 무시하지 말 것 — 백지 공포를 없애주는 건 이 단계.
+        다만 결과물의 "모양"은 다음 슬라이드에서 정직하게 보여준다.
+      </aside>
+    </section>
+
+    <!-- ============= 8. LV0 결과의 한계 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num">LV.0</span>
+          <h2>결과물: 나쁘지 않은데… <span class="accent3">밋밋합니다</span></h2>
+        </div>
+        <div class="grid-2" style="gap:2.2rem; align-items:start;">
+          <div>
+            <div class="mock plain" aria-label="LV0 결과물 목업 — 기본 템플릿 느낌의 흰 슬라이드">
+              <div class="mk-t">바이브 코딩 입문</div>
+              <ul>
+                <li>바이브 코딩이란 무엇인가?</li>
+                <li>장점: 생산성 향상</li>
+                <li>단점: 검증 필요</li>
+                <li>결론 및 제언</li>
+              </ul>
+              <span class="mk-page">3 / 10</span>
+            </div>
+            <div class="mock-cap"><span class="pill pink">LV.0 결과</span> 어디서 본 듯한 "기본값의 맛"</div>
+          </div>
+          <div class="stack" style="gap:.8rem;">
+            <div class="card bad autoshow fade-right">
+              <h3>😐 평균으로의 회귀</h3>
+              <p>기준을 안 주면 AI는 인터넷의 <b>평균적인 슬라이드</b>를 그립니다. 무난하지만 아무 인상도 없는.</p>
+            </div>
+            <div class="card bad autoshow fade-right">
+              <h3>🎲 복불복 스타일</h3>
+              <p>오늘은 파란 테마, 내일은 흰 배경 — 시킬 때마다 다른 모양. <b>재현이 안 됩니다</b>.</p>
+            </div>
+            <div class="card good autoshow fade-right">
+              <h3>🙂 그래도 인정할 것</h3>
+              <p>백지에서 초안까지 <b class="accent2">2분</b>. 구조와 문구의 출발점으로는 이미 충분히 유용합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        왼쪽 목업이 웃음 포인트 — "다들 이거 본 적 있으시죠". 문제를 정확히 정의:
+        못 만드는 게 아니라 '기준이 없다'는 것. 그 기준을 주는 게 LV1.
+      </aside>
+    </section>
+
+    <!-- ============= 9. LV1: 아이디어 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-2);">LV.1</span>
+          <h2>레퍼런스 앵커링</h2>
+          <span class="pill green">오늘의 핵심 기법</span>
+        </div>
+        <p class="quote autoshow fade-up" style="font-size:2rem; margin:.6rem 0 1.2rem;">
+          디자인을 열 마디 말로 설명하지 말고,<br/><b class="accent2">만족했던 실물 하나</b>를 보여주세요.
+        </p>
+        <div class="grid-2" style="gap:1.5rem; align-items:start;">
+          <div class="prompt-card mini bad autoshow fade-up">
+            <div class="pc-label">✗ 말로 설명</div>
+            <pre class="code">세련되고 모던하고 미니멀한 다크 테마로,
+전문적이면서 트렌디한 느낌으로 만들어줘</pre>
+          </div>
+          <div class="prompt-card mini good autoshow fade-up">
+            <div class="pc-label">✓ 실물로 설명</div>
+            <pre class="code">reference.html 이랑 같은 수준·같은
+스타일로 만들어줘</pre>
+          </div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          내가 말한 "모던함"과 AI가 상상한 "모던함"은 <em>다른 그림</em>입니다.
+          형용사는 해석의 여지를 남기지만, <b class="accent2">파일은 남기지 않습니다</b>.
+        </p>
+      </div>
+      <aside class="notes">
+        오늘 단 하나만 가져간다면 이 슬라이드. 프로그래밍의 "예제 기반 명세"와 같은 원리 —
+        few-shot 예시가 장문의 지시보다 강하다.
+      </aside>
+    </section>
+
+    <!-- ============= 10. LV1: 실전 프롬프트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-2);">LV.1</span>
+          <h2>실전 프롬프트</h2>
+          <span class="pill">복사해서 쓰세요</span>
+        </div>
+        <div class="prompt-card">
+          <div class="pc-label">PROMPT — 레퍼런스 앵커링</div>
+          <pre class="code">reference.html은 내가 가장 만족했던 발표자료야.
+새 주제 "◯◯◯"로 발표 슬라이드를 만들어줘. 15장 내외.
+
+- reference.html의 디자인 시스템을 그대로 따를 것
+  (배경·색상 팔레트·폰트·카드/코드블록 컴포넌트·등장 애니메이션)
+- 슬라이드 구성 문법도 참고할 것 (타이틀 → 훅 → 본론 → 정리 → Q&amp;A)
+- 내용만 새로 쓰고, 완성도는 레퍼런스 이상을 목표로</pre>
+        </div>
+        <div class="grid-2" style="gap:1.5rem; margin-top:.7rem;">
+          <p class="small" style="color:#B8BFD0 !important; margin:0;">
+            <b class="accent2">주는 방법</b> — 대화에 파일 첨부, 또는 작업 폴더에
+            <span class="mono tiny">reference.html</span>을 두고 경로만 알려주기. 에이전트라면 후자가 편합니다.
+          </p>
+          <p class="small" style="color:#B8BFD0 !important; margin:0;">
+            <b class="accent2">왜 "이상"인가</b> — 목표를 레퍼런스 "동일"로 잡으면 축소 복사가 나오기 쉽습니다.
+            상향 목표가 디테일을 지켜줍니다.
+          </p>
+        </div>
+      </div>
+      <aside class="notes">
+        복사 버튼 시연. 요점 3개: ①그대로 따를 것 ②구성 문법도 ③이상을 목표로.
+        특히 "디자인 시스템"이라는 단어가 색·폰트·컴포넌트를 묶어서 전달해준다.
+      </aside>
+    </section>
+
+    <!-- ============= 11. LV1: AI가 뽑아가는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-2);">LV.1</span>
+          <h2>AI가 레퍼런스에서 <span class="grad">뽑아가는 것</span></h2>
+        </div>
+        <div class="grid-3" style="margin-top:.4rem; gap:1.1rem;">
+          <div class="card autoshow zoom-in">
+            <h3>🎨 색 토큰</h3>
+            <p class="small"><span class="mono tiny">--bg-0 · --accent…</span> CSS 변수로 정의된 팔레트를 그대로 이식합니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🔤 타이포 스케일</h3>
+            <p class="small">제목/본문 크기 비율, 자간, 굵기 체계 — "글자가 주는 인상"의 정체.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🧩 컴포넌트</h3>
+            <p class="small">카드, 칩, 코드블록, 인용구… 재사용 부품을 통째로 배웁니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🎬 연출</h3>
+            <p class="small">등장 애니메이션, 전환 효과, 강조 타이밍 — 발표의 리듬감.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>📐 슬라이드 문법</h3>
+            <p class="small">칩 → 제목 → 본문 밀도, 한 장당 정보량 같은 <b>구성 습관</b>까지.</p>
+          </div>
+          <div class="card good autoshow zoom-in">
+            <h3>= 디자인 시스템</h3>
+            <p class="small">이 다섯 개가 함께 복제되면 결과물이 <b class="accent2">"같은 시리즈"</b>로 보입니다.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        "레퍼런스를 주면 뭐가 좋아지는데?"에 대한 해부. 지금 보고 있는 이 덱도
+        시리즈의 앞선 덱에서 이 다섯 가지를 상속받았다.
+      </aside>
+    </section>
+
+    <!-- ============= 12. LV1: Before / After ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-2);">LV.1</span>
+          <h2>같은 요청, <span class="accent2">레퍼런스 유무</span>의 차이</h2>
+        </div>
+        <div class="grid-2" style="gap:2.2rem; margin-top:.4rem; align-items:start;">
+          <div class="autoshow fade-left">
+            <div class="mock plain" aria-label="레퍼런스 없이 만든 슬라이드 목업">
+              <div class="mk-t">바이브 코딩 입문</div>
+              <ul>
+                <li>바이브 코딩이란 무엇인가?</li>
+                <li>장점: 생산성 향상</li>
+                <li>단점: 검증 필요</li>
+                <li>결론 및 제언</li>
+              </ul>
+              <span class="mk-page">3 / 10</span>
+            </div>
+            <div class="mock-cap"><span class="pill pink">BEFORE</span> 레퍼런스 없음</div>
+          </div>
+          <div class="autoshow fade-right">
+            <div class="mock vibe" aria-label="레퍼런스를 주고 만든 슬라이드 목업">
+              <span class="mk-chip">INTRO · VIBE CODING</span>
+              <div class="mk-t">바이브 코딩, <span class="g">왜 지금인가</span></div>
+              <div class="mk-cards">
+                <div class="mk-card"><span class="ic">⚡</span><b>속도</b><small>초안 2분, 수정은 말 한마디</small></div>
+                <div class="mk-card"><span class="ic">🧭</span><b>방향은 내가</b><small>코드는 AI, 판단은 사람</small></div>
+                <div class="mk-card"><span class="ic">🛡️</span><b>안전망</b><small>git + 검증 루프</small></div>
+              </div>
+              <span class="mk-page">3 / 15</span>
+            </div>
+            <div class="mock-cap"><span class="pill green">AFTER</span> reference.html 첨부</div>
+          </div>
+        </div>
+        <p class="small center autoshow fade-up" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          프롬프트에 늘어난 것은 <b class="accent2">단 한 줄</b> — "reference.html처럼".
+        </p>
+      </div>
+      <aside class="notes">
+        비교 목업. 실제 발표에선 진짜 생성 결과 스크린샷으로 교체해도 좋다.
+        메시지: 노력의 증가분(한 줄) 대비 품질의 증가분이 비대칭적으로 크다.
+      </aside>
+    </section>
+
+    <!-- ============= 13. LV1: 레퍼런스 구하기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-2);">LV.1</span>
+          <h2>레퍼런스, 어디서 구하나</h2>
+        </div>
+        <div class="stack" style="gap:.8rem; margin-top:.4rem;">
+          <div class="card autoshow fade-up">
+            <h3>1️⃣ 마음에 든 덱 "한 개"면 충분합니다</h3>
+            <p>여러 개를 주면 스타일이 섞여 죽도 밥도 안 됩니다. 제일 만족했던 <b class="accent2">하나만</b> 고르세요.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>2️⃣ 통째로 주세요 — 스타일은 <span class="mono">&lt;head&gt;</span>에 삽니다</h3>
+            <p>"예쁜 부분만" 발췌하면 색 토큰과 컴포넌트 정의가 잘려나갑니다. 파일 전체가 곧 명세입니다.</p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>3️⃣ 없으면 이 시리즈를 가져가세요</h3>
+            <p><a href="https://github.com/geniuskey/vibe-coding">github.com/geniuskey/vibe-coding</a> —
+            아무 폴더의 <span class="mono tiny">index.html</span>이나 레퍼런스로 쓰셔도 됩니다.
+            "회사 CI 색으로 팔레트만 바꿔줘"라고 덧붙이면 끝.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        실용 팁 3개. 마지막 카드에서 저장소 주소 공유 — 오늘 당장 써볼 수 있는 출발점을 손에 쥐여준다.
+      </aside>
+    </section>
+
+    <!-- ============= 14. LV2: 루프 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-3);">LV.2</span>
+          <h2>다듬기 루프 — <span class="accent3">한 방은 없습니다</span></h2>
+        </div>
+        <div class="flow" style="margin-top:1rem;">
+          <div class="fstep autoshow zoom-in"><span class="ic">🤖</span><b>만든다</b><small>AI가 초안 생성</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">👀</span><b>열어본다</b><small>브라우저에서 전 장 훑기</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🗣️</span><b>꼬집어 말한다</b><small>장 번호 + 구체적 증상</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🔁</span><b>다시 만든다</b><small>2~4바퀴면 충분</small></div>
+        </div>
+        <p class="quote autoshow fade-up" style="margin-top:1.6rem;">
+          원샷(한 방)을 기대하지 않는 순간, 품질이 오르기 시작합니다.<br/>
+          <b class="accent2">피드백 한 바퀴 = 몇 분</b> — PPT에서 손으로 고치던 시간과 비교해 보세요.
+        </p>
+      </div>
+      <aside class="notes">
+        루프가 부끄러운 게 아니라 정상 프로세스임을 강조. 사람 디자이너와 일할 때도
+        시안→피드백→수정을 돌지 않나 — 다만 한 바퀴가 몇 분으로 줄었을 뿐.
+      </aside>
+    </section>
+
+    <!-- ============= 15. LV2: 피드백 잘하기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-3);">LV.2</span>
+          <h2>피드백은 <span class="accent2">좌표 + 증상</span>으로</h2>
+        </div>
+        <div class="grid-2" style="gap:1.5rem; margin-top:.4rem; align-items:start;">
+          <div class="prompt-card mini bad autoshow fade-up">
+            <div class="pc-label">✗ 형용사 피드백</div>
+            <pre class="code">전체적으로 좀 더 예쁘게, 있어 보이게 해줘</pre>
+          </div>
+          <div class="prompt-card mini good autoshow fade-up">
+            <div class="pc-label">✓ 좌표 + 증상 피드백</div>
+            <pre class="code">3번 슬라이드 제목이 두 줄로 넘쳐. 한 줄로 줄이고,
+7번 슬라이드 카드 3개는 높이를 맞춰줘</pre>
+          </div>
+        </div>
+        <div class="card autoshow fade-up" style="margin-top:1rem;">
+          <h3>📸 최강의 피드백: 스크린샷 붙여넣기</h3>
+          <p>요즘 AI는 이미지를 봅니다. 이상한 슬라이드를 캡처해서 <b class="accent2">"이 부분이 이렇게 깨졌어"</b>라고
+          붙여넣으면, 백 마디 설명보다 정확하게 전달됩니다. 디자인 피드백이야말로 멀티모달의 최적 용도.</p>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          말투 요령은 하나 — <em>디자이너 옆에 앉아 모니터를 가리키듯</em> 말하기.
+        </p>
+      </div>
+      <aside class="notes">
+        "예쁘게"는 명세가 아니다. 장 번호로 좌표를 찍고 증상을 말하는 습관.
+        스크린샷 피드백은 실제로 시연해 보이면 반응이 좋다.
+      </aside>
+    </section>
+
+    <!-- ============= 16. LV2: 스스로 보게 하라 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-3);">LV.2</span>
+          <h2>한 단계 더: <span class="grad">스스로 보게</span> 하라</h2>
+        </div>
+        <div class="grid-2" style="gap:2rem; align-items:start;">
+          <div>
+            <p class="small" style="margin-bottom:.8rem;">
+              내가 매번 확인하는 것도 일입니다. 에이전트에게
+              <b class="accent2">브라우저를 쥐여주고 자기 결과물을 자기가 검사</b>하게 시키세요.
+            </p>
+            <div class="prompt-card mini">
+              <div class="pc-label">PROMPT</div>
+              <pre class="code">덱을 브라우저로 열어서 슬라이드마다 스크린샷을
+찍어봐. 글자 넘침·겹침·대비 문제를 찾아서
+스스로 고친 다음, 다시 찍어서 확인해줘</pre>
+            </div>
+            <p class="small" style="color:#B8BFD0 !important; margin-top:.7rem;">
+              이 저장소에도 같은 용도의 <span class="mono tiny">verify</span> 스킬이 있습니다 —
+              에이전트가 Playwright로 덱을 실제 구동하며 검증합니다.
+            </p>
+          </div>
+          <div class="demo-term" data-demo="selfcheck" style="height:360px;">
+            <div class="dt-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="dt-title">claude — self-check loop</span>
+              <button class="dt-replay" type="button">▶ 다시 재생</button>
+            </div>
+            <div class="dt-body"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        LV2의 정점 — 검증 루프의 주체를 사람에서 에이전트로 옮기기.
+        Claude Code 등 에이전트 환경이면 Playwright/스크린샷으로 실제 가능함을 데모로.
+      </aside>
+    </section>
+
+    <!-- ============= 17. LV3: 문제 제기 ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">LV.3 으로 가는 이유</div>
+        <h2 style="font-size:3.2rem;">그 대화가 끝나면,<br/>AI는 <span class="accent3">전부 잊습니다</span></h2>
+        <p class="big autoshow zoom-in" style="font-size:5rem; margin:1.2rem 0;">🧠 → 🌫️</p>
+        <p class="small autoshow fade-up" style="max-width:44rem; margin:0 auto; color:#D5DAE8 !important;">
+          다음 발표 때 새 세션을 열면 — 레퍼런스도, 어렵게 합의한 규칙도, "제목은 한 줄"이라는 교훈도 리셋.
+          <br/><b class="accent2">매번 처음부터 설명할 건가요?</b>
+        </p>
+      </div>
+      <aside class="notes">
+        전환 슬라이드. LLM의 무상태성(세션이 끝나면 컨텍스트 소멸)을 일상 언어로.
+        해결책이 다음 장의 CLAUDE.md.
+      </aside>
+    </section>
+
+    <!-- ============= 18. LV3: CLAUDE.md 소개 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-4); color:#241C05 !important;">LV.3</span>
+          <h2><span class="mono accent4">CLAUDE.md</span> — 프로젝트의 헌법</h2>
+        </div>
+        <div class="grid-2" style="gap:2rem; align-items:start; margin-top:.4rem;">
+          <div>
+            <p class="small" style="margin-bottom:.9rem;">
+              프로젝트 폴더에 <span class="mono tiny">CLAUDE.md</span>를 두면, Claude Code가
+              <b class="accent2">매 세션 시작 때 자동으로 읽습니다</b>.
+              신입에게 주는 온보딩 문서를 AI에게 써주는 셈입니다.
+            </p>
+            <ul class="list-clean small">
+              <li class="autoshow fade-up">✍️ 한 번 적으면 → 모든 세션에 적용</li>
+              <li class="autoshow fade-up">🧭 스타일 가이드 + 작업 규칙 + 금지사항</li>
+              <li class="autoshow fade-up">🌱 발표를 거듭할수록 교훈이 축적되는 곳</li>
+            </ul>
+          </div>
+          <pre class="ftree"><span class="dir">my-talks/</span>            <span class="note">← 내 발표자료 작업 폴더</span>
+├─ <span class="hl">CLAUDE.md</span>         <span class="note">← 스타일 가이드 (자동 로드)</span>
+├─ <span class="fl">reference.html</span>    <span class="note">← 품질 기준 실물</span>
+├─ <span class="dir">2026-07-vibe/</span>
+│  └─ <span class="fl">index.html</span>
+└─ <span class="dir">2026-08-plan/</span>
+   └─ <span class="fl">index.html</span>     <span class="note">← 새 덱도 같은 규칙으로</span></pre>
+        </div>
+      </div>
+      <aside class="notes">
+        CLAUDE.md의 위치와 자동 로드 메커니즘. 폴더 트리로 "발표자료 공장"의 모습을 보여준다 —
+        reference.html과 CLAUDE.md가 상주하는 구조.
+      </aside>
+    </section>
+
+    <!-- ============= 19. LV3: CLAUDE.md 예문 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-4); color:#241C05 !important;">LV.3</span>
+          <h2>슬라이드용 CLAUDE.md 예문</h2>
+          <span class="pill amber">축약판</span>
+        </div>
+        <pre class="code" style="font-size:.98rem; line-height:1.55;"><span class="cm"># CLAUDE.md — 발표자료 작업 규칙</span>
+
+<span class="kw">## 슬라이드 스타일</span>
+- 모든 덱은 <span class="st">reference.html</span>의 디자인 시스템을 따른다 (reveal.js 단일 HTML)
+- 팔레트: 배경 <span class="st">#06080F</span>, 액센트 <span class="st">#9B82FF</span>(보라) · <span class="st">#2BEAD0</span>(청록) — 새 색 도입 금지
+- 한 슬라이드에 본문 6줄 이하. 넘치면 장을 나눌 것
+- 제목은 한 줄. 핵심 키워드에만 그라데이션 강조
+
+<span class="kw">## 완성 기준</span>
+- 브라우저로 열어 전 슬라이드 스크린샷 검사 후 완료 보고
+- 글자 넘침·겹침·저대비 발견 시 보고 전에 스스로 수정
+
+<span class="kw">## 하지 말 것</span>
+- 라이트 테마 금지 · 외부 CDN 폰트 금지 (오프라인 발표 대비)
+- 완료 보고에 "아마도"라는 말 금지 — 확인한 것만 말할 것</pre>
+      </div>
+      <aside class="notes">
+        실제로 갖다 쓸 수 있는 예문. 포인트: 규칙이 전부 "판정 가능"하게 적혀 있다 —
+        6줄 이하, 한 줄 제목, 특정 색상 코드. 애매한 형용사가 없음.
+      </aside>
+    </section>
+
+    <!-- ============= 20. LV3: 잘 쓰는 팁 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:var(--accent-4); color:#241C05 !important;">LV.3</span>
+          <h2>CLAUDE.md 잘 쓰는 <span class="accent4">4가지 요령</span></h2>
+        </div>
+        <div class="grid-2" style="gap:1.2rem; margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>✂️ 짧고 단호하게</h3>
+            <p>산문 말고 규칙 목록. 길어질수록 안 읽(히)습니다. 한 화면 분량이 적정선.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🚫 금지사항이 힘이 셉니다</h3>
+            <p>"~하면 좋다"보다 <b class="accent3">"~금지"</b>가 잘 지켜집니다. 특히 색·폰트처럼 AI가 자꾸 창의력을 발휘하는 곳에.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🔍 판정 가능하게</h3>
+            <p>"깔끔하게" 대신 <b class="accent2">"본문 6줄 이하"</b>. 숫자와 색상 코드는 어길 수도, 봐줄 수도 없습니다.</p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>🌱 사고가 나면 규칙을 추가</h3>
+            <p>같은 지적을 두 번 했다면 그건 대화가 아니라 <b class="accent2">CLAUDE.md에 들어갈 문장</b>입니다. 교훈을 파일로 축적하세요.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        마지막 카드가 운영의 핵심 — CLAUDE.md는 한 번 쓰고 끝나는 문서가 아니라
+        회고가 쌓이는 살아있는 문서.
+      </aside>
+    </section>
+
+    <!-- ============= 21. LV4: 전환 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:linear-gradient(120deg, var(--accent), var(--accent-2));">LV.4</span>
+          <h2>CLAUDE.md의 <span class="accent3">두 가지 아쉬움</span></h2>
+        </div>
+        <div class="grid-2" style="gap:1.5rem; margin-top:.4rem; align-items:stretch;">
+          <div class="card bad autoshow fade-left">
+            <h3>📁 그 폴더에서만 삽니다</h3>
+            <p>다른 프로젝트, 회사 PC, 새 저장소… 폴더가 바뀌면 규칙도 두고 옵니다.</p>
+          </div>
+          <div class="card bad autoshow fade-left">
+            <h3>📢 항상 로드됩니다</h3>
+            <p>슬라이드 규칙이 코드 리뷰 세션에도 끼어듭니다. 컨텍스트 자리도 늘 차지하고요.</p>
+          </div>
+        </div>
+        <p class="quote autoshow fade-up" style="margin-top:1.3rem;">
+          그래서 마지막 레벨 — 슬라이드 만드는 법을 <b class="accent2">Agent Skill</b>로 포장합니다.<br/>
+          <b>어떤 프로젝트에서든, "발표자료 만들어줘"라는 말만 나오면 자동으로.</b>
+        </p>
+      </div>
+      <aside class="notes">
+        LV3→LV4 전환 논리. 스킬의 두 가지 장점(휴대성, 조건부 로드)이
+        정확히 CLAUDE.md의 두 아쉬움에 대응된다.
+      </aside>
+    </section>
+
+    <!-- ============= 22. LV4: SKILL.md 해부 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:linear-gradient(120deg, var(--accent), var(--accent-2));">LV.4</span>
+          <h2>슬라이드 스킬 해부</h2>
+        </div>
+        <div class="grid-2" style="gap:2rem; align-items:start; margin-top:.4rem;">
+          <pre class="ftree"><span class="dir">.claude/skills/slide-deck/</span>
+├─ <span class="hl">SKILL.md</span>        <span class="note">← 슬라이드 제작 매뉴얼</span>
+│   <span class="note">· 언제 발동하는지 (description)</span>
+│   <span class="note">· 디자인 토큰 · 구성 문법 · 금지사항</span>
+│   <span class="note">· 완성 전 자가 검증 절차</span>
+└─ <span class="hl">template.html</span>   <span class="note">← 레퍼런스 실물 동봉!</span>
+    <span class="note">· 시작점으로 복사해서 사용</span></pre>
+          <div class="stack" style="gap:.8rem;">
+            <div class="card autoshow fade-right">
+              <h3>1. 이름표만 상주</h3>
+              <p class="small">평소엔 <span class="mono tiny">name + description</span> 한 줄만 메모리에. 부담 없이 수십 개를 꽂아둘 수 있습니다.</p>
+            </div>
+            <div class="card autoshow fade-right">
+              <h3>2. 요청과 매칭되면 발동</h3>
+              <p class="small">"발표자료/슬라이드 만들어줘" → description과 매칭 → 그때 본문을 펼쳐 읽습니다.</p>
+            </div>
+            <div class="card good autoshow fade-right">
+              <h3>3. 템플릿까지 동봉</h3>
+              <p class="small">규칙(글)만이 아니라 <b class="accent2">레퍼런스 실물(파일)</b>을 스킬 폴더에 함께 넣습니다 — LV.1의 앵커링이 자동화되는 순간.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        스킬 구조. 핵심 통찰: SKILL.md(규칙) + template.html(실물) = LV1+LV3의 합체.
+        progressive disclosure 개념은 agent-skills 세미나에서 자세히 — 여기선 3단계로 압축.
+      </aside>
+    </section>
+
+    <!-- ============= 23. LV4: 실물 스킬 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:linear-gradient(120deg, var(--accent), var(--accent-2));">LV.4</span>
+          <h2>실물이 이 저장소에 있습니다</h2>
+          <span class="pill green">복사 = 설치</span>
+        </div>
+        <pre class="code" style="font-size:.95rem; line-height:1.55;"><span class="cm"># agent-skills/skills/slide-deck/SKILL.md (발췌)</span>
+---
+<span class="kw">name:</span> slide-deck
+<span class="kw">description:</span> 발표 슬라이드(HTML/reveal.js)를 만든다. "슬라이드",
+  "발표자료", "세미나 자료", "덱 만들어줘" 요청 시 사용.
+---
+<span class="kw">## 절차</span>
+1. template.html을 새 폴더로 복사해 시작한다 (디자인 시스템 포함)
+2. 주제·청중·분량을 확인하고 목차부터 합의한다
+3. 내용을 채운다 — 한 슬라이드 6줄 이하, 제목은 한 줄
+4. 브라우저로 열어 전 슬라이드를 스크린샷 검사, 문제는 스스로 고친다
+<span class="kw">## 하지 말 것</span>
+- 팔레트 밖의 새 색 도입 금지 · 외부 CDN 의존 금지</pre>
+        <p class="small autoshow fade-up" style="margin-top:.8rem; color:#B8BFD0 !important;">
+          설치는 <span class="mono tiny">.claude/skills/</span> 아래로 <b class="accent2">폴더 복사 한 번</b> —
+          <a href="https://github.com/geniuskey/vibe-coding/tree/main/agent-skills/skills/slide-deck">github.com/geniuskey/vibe-coding → agent-skills/skills/slide-deck</a>
+        </p>
+      </div>
+      <aside class="notes">
+        오늘의 배포물. 세미나 끝나고 바로 가져다 쓸 수 있는 실물 스킬이 저장소에 있음을 안내.
+        template.html이 이 시리즈의 디자인 시스템 축약판이라는 것도 언급.
+      </aside>
+    </section>
+
+    <!-- ============= 24. LV4: 발동 데모 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="ex-head">
+          <span class="ex-num" style="background:linear-gradient(120deg, var(--accent), var(--accent-2));">LV.4</span>
+          <h2>이제, 요청은 <span class="grad">한 줄</span>입니다</h2>
+        </div>
+        <div class="demo-term" data-demo="skill" style="height:430px; margin-top:.4rem;">
+          <div class="dt-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="dt-title">claude — anywhere, any project</span>
+            <button class="dt-replay" type="button">▶ 다시 재생</button>
+          </div>
+          <div class="dt-body"></div>
+        </div>
+      </div>
+      <aside class="notes">
+        피날레 데모 — LV0과 똑같은 "한 줄 요청"이지만, 뒤에서 스킬이 template 복사 →
+        규칙 적용 → 자가 검증까지. 수미상관: 같은 입력, 다른 하한선.
+      </aside>
+    </section>
+
+    <!-- ============= 25. CLAUDE.md vs Skill ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">COMPARE</div>
+        <h2><span class="mono accent4">CLAUDE.md</span> vs <span class="mono accent2">Agent Skill</span></h2>
+        <table class="rules" style="margin-top:.5rem;">
+          <thead>
+            <tr><th></th><th>CLAUDE.md</th><th>Agent Skill</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>적용 범위</b></td><td>그 프로젝트 폴더</td><td>어디서나 (개인/팀 공유 가능)</td></tr>
+            <tr><td><b>로드 시점</b></td><td>매 세션 항상</td><td>맞는 요청이 올 때만</td></tr>
+            <tr><td><b>동봉 파일</b></td><td>언급만 가능</td><td>템플릿·스크립트 동봉 가능</td></tr>
+            <tr><td><b>어울리는 것</b></td><td>프로젝트 고유 규칙·교훈</td><td>반복 업무의 절차·산출물 표준</td></tr>
+          </tbody>
+        </table>
+        <p class="small autoshow fade-up" style="margin-top:1.1rem;">
+          <b class="accent2">겸용이 정답</b> — 프로젝트 특수 규칙은 CLAUDE.md에, "슬라이드 만드는 법" 같은
+          휴대용 노하우는 스킬로. 서로 대체재가 아니라 <em>계층</em>입니다.
+        </p>
+      </div>
+      <aside class="notes">
+        정리 표. "뭘 어디에 적나"라는 실무 질문에 대한 답 — 범용 절차는 스킬,
+        이 프로젝트만의 사정은 CLAUDE.md.
+      </aside>
+    </section>
+
+    <!-- ============= 26. 메타: 이 덱이 증거 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">META</div>
+        <h2>증거물 제1호: <span class="grad">지금 보고 계신 이 슬라이드</span></h2>
+        <div class="flow" style="margin-top:1rem;">
+          <div class="fstep autoshow zoom-in"><span class="ic">🧱</span><b>intro 덱</b><small>루프를 돌려 수작업으로 완성</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">⚓</span><b>레퍼런스가 됨</b><small>이후 덱들의 품질 기준</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">📚</span><b>7개 덱이 상속</b><small>같은 디자인 시스템으로</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🧬</span><b>스킬로 포장</b><small>slide-deck 스킬 배포</small></div>
+        </div>
+        <p class="quote autoshow fade-up" style="margin-top:1.5rem;">
+          이 덱을 만들 때 사람이 쓴 것은 <b class="accent2">주제와 피드백뿐</b>입니다.<br/>
+          색 하나, 애니메이션 한 줄도 손으로 코딩하지 않았습니다 — 시리즈 전체가 그렇습니다.
+        </p>
+      </div>
+      <aside class="notes">
+        가장 설득력 있는 슬라이드 — 지금 보는 발표자료 자체가 방법론의 산출물.
+        저장소 커밋 히스토리가 실제 증거라는 점도 언급 가능.
+      </aside>
+    </section>
+
+    <!-- ============= 27. 오늘의 3가지 ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">TAKEAWAY</div>
+        <h2 style="font-size:3rem;">오늘 가져가실 <span class="grad">세 가지</span></h2>
+        <div class="flow" style="max-width:1000px; margin:1.4rem auto 0; text-align:left;">
+          <div class="fstep autoshow zoom-in" style="padding:1.2rem 1rem;"><span class="ic">⚓</span><b>실물 레퍼런스를 줘라</b><small>형용사 대신 만족했던 파일 하나</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in" style="padding:1.2rem 1rem;"><span class="ic">🔁</span><b>루프를 돌려라</b><small>좌표+증상으로 꼬집고, 스스로 보게 하라</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in" style="padding:1.2rem 1rem;"><span class="ic">🧬</span><b>반복되면 굳혀라</b><small>규칙은 CLAUDE.md로, 절차는 스킬로</small></div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:1.6rem; color:#B8BFD0 !important;">
+          이 세 문장은 슬라이드만의 이야기가 아닙니다 — <em>모든 반복 업무</em>에 그대로 적용되는 바이브 코딩의 공식입니다.
+        </p>
+      </div>
+      <aside class="notes">
+        3줄 요약. 마지막 문장으로 일반화 — 문서 작성, 리포트, 코드 리뷰 등
+        어디에나 같은 사다리(레퍼런스→루프→고착화)가 성립.
+      </aside>
+    </section>
+
+    <!-- ============= 28. 스타터 킷 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">STARTER KIT</div>
+        <h2>내일 아침용 <span class="accent2">스타터 킷</span></h2>
+        <div class="prompt-card">
+          <div class="pc-label">MASTER PROMPT — 이대로 시작하세요</div>
+          <pre class="code">reference.html은 내가 만족한 발표자료 실물이야. 새 주제 "◯◯◯"로
+reveal.js 슬라이드를 만들어줘. 15장 내외, 목차부터 먼저 보여줘.
+- reference.html의 디자인 시스템(색·폰트·컴포넌트·애니메이션)을 그대로 따를 것
+- 한 슬라이드 본문 6줄 이하, 제목은 한 줄
+- 완성 전에 브라우저로 열어 전 슬라이드를 스스로 검사하고 고칠 것</pre>
+        </div>
+        <div class="grid-2" style="gap:1.5rem; margin-top:.8rem;">
+          <pre class="ftree" style="font-size:.98rem;"><span class="note"># 레퍼런스가 없다면</span>
+<span class="fl">git clone github.com/geniuskey/vibe-coding</span>
+<span class="fl">→ 아무 덱의 index.html이나 reference로</span></pre>
+          <pre class="ftree" style="font-size:.98rem;"><span class="note"># 스킬로 굳히려면</span>
+<span class="fl">agent-skills/skills/slide-deck/ 를</span>
+<span class="fl">내 프로젝트 .claude/skills/ 로 복사</span></pre>
+        </div>
+      </div>
+      <aside class="notes">
+        실행 장벽 제거 — 프롬프트·레퍼런스·스킬 3종 세트를 전부 손에 쥐여주고 끝낸다.
+        복사 버튼 사용 안내.
+      </aside>
+    </section>
+
+    <!-- ============= 29. Q&A ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">WRAP-UP</div>
+        <h2 style="font-size:3.1rem;">다음 발표자료는<br/><span class="grad">내용만 고민</span>하세요</h2>
+        <p class="small autoshow fade-up" style="margin-top:1rem; color:#B8BFD0 !important;">
+          꾸미기는 AI가, 기준은 레퍼런스가, 일관성은 스킬이 지킵니다.
+        </p>
+        <h3 class="autoshow fade-up" style="margin-top:1.6rem;">감사합니다 — Q&amp;A 🙋</h3>
+        <p class="tiny autoshow fade-up" style="color:#9BA6C0 !important; margin-top:1rem;">
+          함께 보기:
+          <a href="../intro/">바이브 코딩 입문</a> ·
+          <a href="../context/">컨텍스트</a> ·
+          <a href="../agent-skills/">Agent Skills</a> ·
+          <a href="../workshop/">실습 워크숍</a>
+        </p>
+      </div>
+      <aside class="notes">
+        마무리 + Q&A. 로컬 발표 모드(npm run dev)에서만 실시간 질문이 동작.
+        당부: 다음 발표 준비를 LV0으로라도 시작해 볼 것 — 사다리는 오르면서 생긴다.
+      </aside>
+    </section>
+
+  </div>
+</div>
+<!-- reveal.js 5.1.0 — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ===== 프롬프트 카드 복사 버튼 =====
+  (function () {
+    document.querySelectorAll('.prompt-card').forEach((card) => {
+      const pre = card.querySelector('pre');
+      if (!pre) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = '복사';
+      btn.setAttribute('aria-label', '프롬프트 복사');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText.trim());
+          btn.textContent = '복사됨 ✓';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          btn.textContent = 'Ctrl+C로 복사';
+        }
+        setTimeout(() => { btn.textContent = '복사'; }, 1600);
+      });
+      card.appendChild(btn);
+    });
+  })();
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? h.textContent : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur();
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+
+  // ===== 타이틀: 슬라이드가 지어지는 목업 =====
+  // 프롬프트 → 요소가 하나씩 생기고 → 배포 스탬프까지, 루프 재생.
+  (function () {
+    const stage = document.getElementById('bf-stage');
+    if (!stage) return;
+    const els = Array.from(stage.querySelectorAll('.bf-el'));
+    const typed = document.getElementById('bf-typed');
+    const caret = document.getElementById('bf-caret');
+    const stamp = document.getElementById('bf-stamp');
+    const TITLE = [
+      { t: '바이브 코딩, ', grad: false },
+      { t: '왜 지금인가', grad: true },
+    ];
+    let timers = [];
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function clearAll() { timers.forEach(clearTimeout); timers = []; }
+    function reset() {
+      clearAll();
+      els.forEach((el) => el.classList.remove('on'));
+      stamp.classList.remove('on');
+      typed.innerHTML = '';
+      caret.style.display = 'inline-block';
+    }
+    function typeTitle(done) {
+      const flat = [];
+      TITLE.forEach((seg) => { for (const ch of seg.t) flat.push({ ch, grad: seg.grad }); });
+      let i = 0;
+      let gradSpan = null;
+      (function step() {
+        if (i >= flat.length) { caret.style.display = 'none'; done(); return; }
+        const { ch, grad } = flat[i++];
+        if (grad) {
+          if (!gradSpan) { gradSpan = document.createElement('span'); gradSpan.className = 'bt-grad'; typed.appendChild(gradSpan); }
+          gradSpan.textContent += ch;
+        } else {
+          typed.appendChild(document.createTextNode(ch));
+        }
+        later(step, 55 + Math.random() * 50);
+      })();
+    }
+    function play() {
+      reset();
+      if (REDUCED_MOTION) {
+        els.forEach((el) => el.classList.add('on'));
+        typed.innerHTML = '바이브 코딩, <span class="bt-grad">왜 지금인가</span>';
+        caret.style.display = 'none';
+        stamp.classList.add('on');
+        return;
+      }
+      later(() => els[0].classList.add('on'), 400);
+      later(() => {
+        els[1].classList.add('on');
+        typeTitle(() => {
+          later(() => els[2].classList.add('on'), 350);
+          later(() => stamp.classList.add('on'), 1100);
+          later(play, 5200); // 루프
+        });
+      }, 900);
+    }
+    function onTitle() {
+      const idx = Reveal.getIndices();
+      return idx.h === 0 && !document.hidden;
+    }
+    Reveal.on('slidechanged', () => { if (onTitle()) play(); else { clearAll(); } });
+    document.addEventListener('visibilitychange', () => { if (onTitle()) play(); else clearAll(); });
+    Reveal.on('ready', () => { if (onTitle()) later(play, 500); });
+  })();
+
+  // ===== 5레벨 사다리 =====
+  (function () {
+    const steps = document.querySelectorAll('.lv-step');
+    if (!steps.length) return;
+    const title = document.getElementById('lv-title');
+    const desc = document.getElementById('lv-desc');
+    const qf = document.getElementById('lv-q'), qv = document.getElementById('lv-qv');
+    const rf = document.getElementById('lv-r'), rv = document.getElementById('lv-rv');
+    const DATA = [
+      { t: 'LV.0 — 그냥 시켜보기', d: '"슬라이드 만들어줘" 한 줄. 초안은 2분 만에 나오지만 스타일은 복불복 — 백지 공포를 없애는 출발점입니다.', q: 25, r: 10 },
+      { t: 'LV.1 — 레퍼런스 앵커링', d: '만족했던 실물 HTML을 통째로 주고 "이 수준·이 스타일로". 형용사 대신 파일이 명세가 됩니다.', q: 62, r: 32 },
+      { t: 'LV.2 — 다듬기 루프', d: '좌표+증상으로 꼬집어 피드백하고, 스크린샷으로 에이전트가 스스로 검사·수정하게 합니다.', q: 80, r: 40 },
+      { t: 'LV.3 — CLAUDE.md', d: '합의된 규칙과 교훈을 프로젝트에 상주시킵니다. 새 세션도 같은 수준에서 출발합니다.', q: 86, r: 70 },
+      { t: 'LV.4 — Agent Skill', d: '규칙 + 템플릿 실물을 스킬로 포장. 어떤 프로젝트에서든 "발표자료 만들어줘" 한 줄이면 자동 적용됩니다.', q: 92, r: 95 },
+    ];
+    function setLv(n) {
+      steps.forEach((s) => s.classList.toggle('active', Number(s.dataset.lv) === n));
+      const d = DATA[n];
+      title.textContent = d.t;
+      desc.textContent = d.d;
+      qf.style.width = '0'; rf.style.width = '0';
+      requestAnimationFrame(() => setTimeout(() => {
+        qf.style.width = d.q + '%'; rf.style.width = d.r + '%';
+      }, 60));
+      qv.textContent = d.q + '%'; rv.textContent = d.r + '%';
+    }
+    steps.forEach((s) => s.addEventListener('click', () => setLv(Number(s.dataset.lv))));
+    const sec = steps[0].closest('section');
+    Reveal.on('slidechanged', (e) => { if (e.currentSlide === sec) setLv(0); });
+    setLv(0);
+  })();
+
+  // ===== 데모 터미널 (타이핑 재생) =====
+  (function () {
+    // 대사 스크립트: [역할, 텍스트, (선택) 클래스]
+    // 역할: u=사용자, a=AI, s=스킬 로드, o=출력
+    const SCRIPTS = {
+      naive: [
+        ['u', '다음 주 팀 세미나에서 쓸 "바이브 코딩 입문" 슬라이드를 reveal.js로 만들어줘. 10장 정도.'],
+        ['a', '네! reveal.js 기반 HTML 슬라이드를 만들게요. 구성은 제목 → 개념 → 장단점 → 결론으로 잡겠습니다.'],
+        ['o', '  write: my-talk/index.html  (10 slides)'],
+        ['o', '  transition: slide | theme: 기본 화이트'],
+        ['a', '완성했습니다. 브라우저로 열어보세요!'],
+        ['o', '  saved: my-talk/index.html  (18 KB)', 'ok'],
+        ['a', '…열어보니 어떠세요? (→ 다음 슬라이드에서 확인)'],
+      ],
+      selfcheck: [
+        ['u', '덱을 브라우저로 열어서 슬라이드마다 스크린샷 찍고, 문제를 스스로 찾아서 고쳐줘.'],
+        ['a', 'Playwright로 덱을 열고 15장을 순회하며 캡처하겠습니다.'],
+        ['o', '  screenshot: slide-01.png … slide-15.png ✓'],
+        ['a', '검사 결과 3건 발견 — 수정합니다.'],
+        ['o', '  ⚠ slide 7: 제목 2줄로 넘침 → 문구 축약'],
+        ['o', '  ⚠ slide 9: 카드 3개 높이 불일치 → align-items 수정'],
+        ['o', '  ⚠ slide 12: 회색 글자 대비 3.2:1 → #B8BFD0 로 상향'],
+        ['a', '수정 후 재캡처해서 확인했습니다.'],
+        ['o', '  re-check: 15/15 slides PASS ✓', 'ok'],
+        ['a', '이제 사람 눈은 마지막 확인만 하면 됩니다.'],
+      ],
+      skill: [
+        ['u', '다음 주 "코드리뷰 문화" 발표자료 만들어줘.'],
+        ['s', '📖 스킬 발동 · slide-deck — "발표자료" 매칭'],
+        ['a', 'slide-deck 스킬의 template.html을 복사해서 시작합니다 — 디자인 시스템이 이미 들어 있어요.'],
+        ['o', '  copy: skills/slide-deck/template.html → code-review-talk/index.html'],
+        ['a', '스킬 규칙 적용: 본문 6줄 이하 · 제목 한 줄 · 팔레트 고정. 목차 초안입니다: 훅 → 현재 문제 → 제안 → 롤아웃 → Q&A (15장)'],
+        ['u', '좋아, 그대로 진행해.'],
+        ['o', '  write: 15 slides | 컴포넌트: card·flow·quote 재사용'],
+        ['a', '스킬의 검증 절차에 따라 스스로 검사합니다.'],
+        ['o', '  self-check: 15/15 PASS · 넘침 0건 ✓', 'ok'],
+        ['a', '완성 — 레퍼런스 수준이 기본값이 됐습니다. 내용 피드백만 주세요.'],
+      ],
+    };
+
+    const players = new Map();
+    document.querySelectorAll('.demo-term').forEach((el) => {
+      const key = el.dataset.demo;
+      const body = el.querySelector('.dt-body');
+      const script = SCRIPTS[key] || [];
+      const who = { u: '나', a: 'AI', s: 'SKILL', o: '>' };
+      let timer = null, li = 0;
+
+      function stop() { if (timer) { clearTimeout(timer); timer = null; } }
+      function reset() {
+        stop(); li = 0; body.innerHTML = '';
+        script.forEach(([role, text, xtra]) => {
+          const line = document.createElement('div');
+          line.className = 'dt-line ' + role + (xtra ? ' ' + xtra : '');
+          const w = document.createElement('span'); w.className = 'dt-who'; w.textContent = who[role];
+          const m = document.createElement('span'); m.className = 'dt-msg'; m.textContent = '';
+          line.append(w, m); body.appendChild(line);
+        });
+      }
+      function playLine() {
+        const lines = body.children;
+        if (li >= lines.length) return;
+        const line = lines[li]; const msg = line.querySelector('.dt-msg');
+        const full = script[li][1]; const role = script[li][0];
+        line.classList.add('on');
+        line.scrollIntoView({ block: 'nearest', behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
+        if (REDUCED_MOTION) { msg.textContent = full; li++; timer = setTimeout(playLine, 10); return; }
+        if (role === 'o' || role === 's') { // 출력·스킬 라인은 통으로
+          msg.textContent = full; li++;
+          timer = setTimeout(playLine, role === 's' ? 700 : 380);
+          return;
+        }
+        let ci = 0;
+        const caret = document.createElement('span'); caret.className = 'dt-caret'; msg.after(caret);
+        (function type() {
+          const step = 2 + Math.floor(Math.random() * 3);
+          ci = Math.min(full.length, ci + step);
+          msg.textContent = full.slice(0, ci);
+          if (ci < full.length) timer = setTimeout(type, 24);
+          else { caret.remove(); li++; timer = setTimeout(playLine, 480); }
+        })();
+      }
+      function play() { reset(); timer = setTimeout(playLine, 350); }
+      el.querySelector('.dt-replay')?.addEventListener('click', play);
+      players.set(el.closest('section'), { play, stop, reset });
+      reset();
+    });
+
+    function onSlide(section) {
+      players.forEach((p, sec) => {
+        if (sec === section) setTimeout(() => p.play(), 500);
+        else p.stop();
+      });
+    }
+    Reveal.on('slidechanged', (e) => onSlide(e.currentSlide));
+    Reveal.on('ready', (e) => onSlide(e.currentSlide));
+  })();
+</script>
+<!-- 실시간 Q&A (루트 index.html과 동일 위젯, making-slides 전용 방) -->
+<link rel="stylesheet" href="../assets/qa.css">
+
+<div id="qa-root" class="qa-hidden">
+  <div id="qa-note-layer"></div>
+  <div id="qa-float-layer"></div>
+
+  <div id="qa-nick-modal" class="qa-modal qa-hidden">
+    <div class="qa-modal-box">
+      <h3>닉네임을 정해주세요</h3>
+      <input id="qa-nick-input" maxlength="24" placeholder="익명" />
+      <button id="qa-nick-go">입장하기 →</button>
+    </div>
+  </div>
+
+  <div id="qa-audience-dock" class="qa-dock qa-hidden">
+    <button id="qa-follow-toggle" class="qa-follow on">🔗 발표자 따라가기 ON</button>
+    <input id="qa-question-input" maxlength="280" placeholder="질문을 입력하세요" />
+    <button id="qa-question-send">보내기</button>
+    <button id="qa-react-up">👍 <span id="qa-tally-up">0</span></button>
+    <button id="qa-react-confused">🤔 <span id="qa-tally-confused">0</span></button>
+  </div>
+
+  <div id="qa-presenter-bar" class="qa-hidden">
+    <span id="qa-conn-dot" class="qa-dot"></span>
+    <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+    <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
+      👍 <span id="qa-presenter-tally-up">0</span>
+      🤔 <span id="qa-presenter-tally-confused">0</span>
+    </span>
+  </div>
+
+  <div id="qa-history-panel" class="qa-panel qa-hidden">
+    <div class="qa-panel-head">
+      <span>질문 기록</span>
+      <div>
+        <button id="qa-history-clear">전체 삭제</button>
+        <button id="qa-history-close">닫기</button>
+      </div>
+    </div>
+    <div id="qa-history-list"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const QA_ROOM = 'making-slides'; // 다른 발표와 질문·슬라이드가 섞이지 않도록 making-slides 전용 방 사용
+  const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
+  const params = new URLSearchParams(location.search);
+  const IS_PRESENTER = params.has('present');
+
+  let following = true;
+  let liveSlide = 0;
+  const shownIds = new Set();
+  let history = [];
+
+  // 실시간 Q&A 서버는 로컬 발표 환경(localhost 또는 같은 Wi-Fi의 LAN IP)에만 존재한다.
+  // GitHub Pages 등 정적 호스팅에서는 /qa/health 가 404가 되어 콘솔에
+  // "Failed to load resource" 에러를 남기므로(.catch 로도 지워지지 않는다),
+  // 서버가 있을 법한 호스트에서만 프로브한다. 정적 호스팅에서는 조용히 슬라이드만 동작.
+  const qaHost = location.hostname;
+  const qaMaybeLive =
+    location.protocol !== 'file:' &&
+    (qaHost === 'localhost' || qaHost === '127.0.0.1' || qaHost === '::1' ||
+      /^10\./.test(qaHost) || /^192\.168\./.test(qaHost) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(qaHost));
+  if (qaMaybeLive) {
+    fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && d.ok) initLiveQa(); })
+      .catch(() => {});
+  }
+
+  function initLiveQa() {
+    document.getElementById('qa-root').classList.remove('qa-hidden');
+    if (IS_PRESENTER) {
+      document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
+    } else {
+      document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
+    }
+    connectSse();
+    setupSlideSync();
+    setupAudienceUI();
+    setupPresenterUI();
+  }
+
+  function api(path, body) {
+    const headers = { 'Content-Type': 'application/json' };
+    const query = new URLSearchParams({ room: QA_ROOM });
+    return fetch(path + '?' + query.toString(), { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function goToSlide(h) {
+    if (!window.Reveal) return;
+    if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
+    else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  function getNickname() {
+    try { return JSON.parse(localStorage.getItem('qa_nickname') || 'null'); } catch { return null; }
+  }
+  function setNickname(name) {
+    localStorage.setItem('qa_nickname', JSON.stringify(name));
+  }
+
+  let es;
+  function connectSse() {
+    es = new EventSource('/qa/events?room=' + encodeURIComponent(QA_ROOM));
+    const dot = document.getElementById('qa-conn-dot');
+    es.onopen = () => dot && dot.classList.add('on');
+    es.onerror = () => dot && dot.classList.remove('on');
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      liveSlide = st.slide || 0;
+      if (!IS_PRESENTER && following) goToSlide(liveSlide);
+      setTally(st.reactions);
+      history = (st.questions || []).slice();
+      renderHistory();
+    });
+
+    es.addEventListener('slide', (e) => {
+      const { h } = JSON.parse(e.data);
+      liveSlide = h;
+      if (IS_PRESENTER) return;
+      if (following) goToSlide(h);
+      updateFollowUI();
+    });
+
+    es.addEventListener('question', (e) => {
+      const q = JSON.parse(e.data);
+      history.push(q);
+      renderHistory();
+      showNote(q);
+    });
+
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
+      if (el) el.textContent = votes;
+      const hq = history.find((q) => q.id === id);
+      if (hq) { hq.votes = votes; renderHistory(); }
+    });
+
+    es.addEventListener('react', (e) => {
+      const d = JSON.parse(e.data);
+      setTally(d.total);
+      spawnFloat(d.kind);
+    });
+
+    es.addEventListener('clear', () => {
+      document.getElementById('qa-note-layer').innerHTML = '';
+      shownIds.clear();
+      history = [];
+      renderHistory();
+    });
+  }
+
+  function setupSlideSync() {
+    if (!window.Reveal) return;
+    if (IS_PRESENTER) {
+      Reveal.on('slidechanged', (e) => { api('/qa/slide', { h: e.indexh }); });
+    } else {
+      Reveal.on('slidechanged', (e) => {
+        if (following && e.indexh !== liveSlide) { following = false; updateFollowUI(); }
+      });
+      const btn = document.getElementById('qa-follow-toggle');
+      btn.onclick = () => {
+        following = !following;
+        if (following) goToSlide(liveSlide);
+        updateFollowUI();
+      };
+    }
+  }
+
+  function updateFollowUI() {
+    const btn = document.getElementById('qa-follow-toggle');
+    if (!btn) return;
+    btn.classList.toggle('on', following);
+    btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
+  }
+  function showNote(q) {
+    if (shownIds.has(q.id)) return;
+    shownIds.add(q.id);
+    const layer = document.getElementById('qa-note-layer');
+    const note = document.createElement('div');
+    note.className = 'qa-note';
+    note.dataset.id = q.id;
+    note.style.background = QA_COLORS[q.id % QA_COLORS.length];
+    const pos = edgePosition();
+    note.style.left = pos.left + 'vw';
+    note.style.top = pos.top + 'vh';
+    note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    note.innerHTML =
+      (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
+      '<div class="qa-note-name">' + esc(q.name) + '</div>' +
+      '<div class="qa-note-text">' + esc(q.text) + '</div>' +
+      '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
+    note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
+    const dismiss = () => {
+      if (note.dataset.dismissed === '1') return;
+      note.dataset.dismissed = '1';
+      note.classList.add('qa-leaving');
+      setTimeout(() => note.remove(), 500);
+    };
+    const close = note.querySelector('.qa-note-close');
+    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    layer.appendChild(note);
+    const autoDismiss = setTimeout(dismiss, 14000);
+    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+  }
+  // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
+  function edgePosition() {
+    const edge = Math.floor(Math.random() * 4);
+    if (edge === 0) return { left: 3 + Math.random() * 70, top: 3 + Math.random() * 9 };   // 위쪽
+    if (edge === 1) return { left: 60 + Math.random() * 18, top: 6 + Math.random() * 58 };  // 오른쪽
+    if (edge === 2) return { left: 3 + Math.random() * 70, top: 60 + Math.random() * 20 };  // 아래쪽
+    return { left: 2 + Math.random() * 7, top: 6 + Math.random() * 58 };                    // 왼쪽
+  }
+  // 발표자가 포스트잇을 드래그해서 위치를 옮길 수 있게 한다
+  function makeDraggable(note, onDragStart) {
+    note.classList.add('qa-draggable');
+    note.addEventListener('pointerdown', (e) => {
+      // 닫기/추천 버튼 클릭은 드래그로 취급하지 않음
+      if (e.target.closest('.qa-note-close, .qa-vote')) return;
+      if (note.dataset.dismissed === '1') return;
+      e.preventDefault();
+      if (onDragStart) onDragStart(); // 옮기는 중에는 자동으로 사라지지 않도록
+      const rect = note.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      note.classList.add('qa-dragging');
+      note.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        const maxLeft = window.innerWidth - rect.width;
+        const maxTop = window.innerHeight - rect.height;
+        const left = Math.max(0, Math.min(ev.clientX - offsetX, maxLeft));
+        const top = Math.max(0, Math.min(ev.clientY - offsetY, maxTop));
+        note.style.left = left + 'px';
+        note.style.top = top + 'px';
+      };
+      const onUp = (ev) => {
+        note.classList.remove('qa-dragging');
+        note.removeEventListener('pointermove', onMove);
+        note.removeEventListener('pointerup', onUp);
+        try { note.releasePointerCapture(ev.pointerId); } catch (_) {}
+      };
+      note.addEventListener('pointermove', onMove);
+      note.addEventListener('pointerup', onUp);
+    });
+  }
+  function renderHistory() {
+    const countEl = document.getElementById('qa-history-count');
+    if (countEl) countEl.textContent = history.length;
+    const list = document.getElementById('qa-history-list');
+    if (!list) return;
+    const sorted = history.slice().sort((a, b) => b.votes - a.votes || a.ts - b.ts);
+    list.innerHTML = sorted.map((q) =>
+      '<div class="qa-history-item">' +
+        '<div class="qa-history-meta"><span>' + esc(q.name) + '</span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="qa-history-text">' + esc(q.text) + '</div>' +
+      '</div>'
+    ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
+  }
+  function setTally(r) {
+    if (!r) return;
+    const up = document.getElementById('qa-tally-up');
+    const conf = document.getElementById('qa-tally-confused');
+    const presenterUp = document.getElementById('qa-presenter-tally-up');
+    const presenterConf = document.getElementById('qa-presenter-tally-confused');
+    if (up) up.textContent = r.up || 0;
+    if (conf) conf.textContent = r.confused || 0;
+    if (presenterUp) presenterUp.textContent = r.up || 0;
+    if (presenterConf) presenterConf.textContent = r.confused || 0;
+  }
+  function spawnFloat(kind) {
+    const layer = document.getElementById('qa-float-layer');
+    const el = document.createElement('div');
+    el.className = 'qa-float';
+    el.textContent = kind === 'confused' ? '🤔' : '👍';
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function setupAudienceUI() {
+    if (IS_PRESENTER) return;
+
+    const nick = getNickname();
+    if (!nick) {
+      document.getElementById('qa-nick-modal').classList.remove('qa-hidden');
+      document.getElementById('qa-nick-go').onclick = () => {
+        const v = document.getElementById('qa-nick-input').value.trim().slice(0, 24) || '익명';
+        setNickname(v);
+        document.getElementById('qa-nick-modal').classList.add('qa-hidden');
+      };
+    }
+
+    const input = document.getElementById('qa-question-input');
+    const send = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      api('/qa/questions', { text, name: getNickname() || '익명' });
+      input.value = '';
+    };
+    document.getElementById('qa-question-send').onclick = send;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+      send();
+    });
+
+    document.getElementById('qa-react-up').onclick = () => api('/qa/react', { kind: 'up' });
+    document.getElementById('qa-react-confused').onclick = () => api('/qa/react', { kind: 'confused' });
+
+    updateFollowUI();
+  }
+  function setupPresenterUI() {
+    if (!IS_PRESENTER) return;
+    document.getElementById('qa-history-toggle').onclick = () => {
+      document.getElementById('qa-history-panel').classList.toggle('qa-hidden');
+    };
+    document.getElementById('qa-history-close').onclick = () => {
+      document.getElementById('qa-history-panel').classList.add('qa-hidden');
+    };
+    document.getElementById('qa-history-clear').onclick = () => {
+      if (confirm('화면의 질문과 질문 기록을 모두 정리할까요?')) api('/qa/clear');
+    };
+  }
+})();
+</script>
+
+</body>
+</html>

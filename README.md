@@ -12,6 +12,7 @@
 | `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub |
 | `workshop/` | 바이브 코딩 실습 워크숍 (8시간 핸즈온) |
 | `agent-skills/` | 반도체 현업을 위한 Agent Skills (DRM 엑셀·PPT·GDS·RTL·TCAD 실무 예제 + 예제 스킬 모음 `agent-skills/skills/`) |
+| `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
 
 ## 실행
@@ -35,6 +36,7 @@
   | 깃허브 | `http://localhost:8080/github/?present` | `http://localhost:8080/github/` |
   | 지식 정리 | `http://localhost:8080/knowledge/?present` | `http://localhost:8080/knowledge/` |
   | Agent Skills | `http://localhost:8080/agent-skills/?present` | `http://localhost:8080/agent-skills/` |
+  | 슬라이드 만들기 | `http://localhost:8080/making-slides/?present` | `http://localhost:8080/making-slides/` |
 
   같은 Wi-Fi에서는 `http://<발표자-IP>:8080/` 로 접속한다 (서버 시작 시 콘솔에 출력됨).
 

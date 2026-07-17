@@ -33,6 +33,7 @@
 | `gds-inspect` | GDS/OASIS 레이아웃 통계·검사 | klayout (pya) |
 | `rtl-helper` | Verilog 포트 요약·TB 생성·사내 룰 체크 | 텍스트 · iverilog(선택) |
 | `tcad-sweep` | TCAD 입력덱 스윕 생성 + I-V 추출·요약 | 텍스트 덱 · CSV |
+| `slide-deck` | 발표 슬라이드(HTML/reveal.js) 제작 — 레퍼런스 템플릿 동봉 | reveal.js (`making-slides/` 세미나 참고) |
 
 ## 연습 데이터
 
