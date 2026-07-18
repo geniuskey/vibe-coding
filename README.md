@@ -6,14 +6,18 @@
 
 | 폴더 | 내용 |
 | --- | --- |
+| `setup/` | 0교시 — 설치와 첫 실행 (환경 세팅 · 로그인 · 첫 대화 · 트러블슈팅 TOP 5) |
 | `intro/` | 바이브 코딩이란 무엇인가? (원본 입문 세미나) |
+| `prompt/` | AI에게 일 시키는 법 — 프롬프트 엔지니어링 (3요소 프레임 · 패턴 8가지 · 다듬기 루프) |
 | `context/` | 컨텍스트 — AI 에이전트의 작업 책상 |
 | `knowledge/` | LLM에게 지식을 가르치는 법 (LLM 위키 · RAG · 지식 그래프 · 온톨로지) |
 | `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub |
-| `workshop/` | 바이브 코딩 실습 워크숍 (8시간 핸즈온) |
+| `workshop/` | 바이브 코딩 실습 워크숍 (8시간 핸즈온 — 강사용 런북은 `workshop/README.md`) |
 | `agent-skills/` | 반도체 현업을 위한 Agent Skills (DRM 엑셀·PPT·GDS·RTL·TCAD 실무 예제 + 예제 스킬 모음 `agent-skills/skills/`) |
 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
+
+추천 학습 경로: `setup/` → `intro/` → `prompt/` → `github/` → `workshop/` → (심화) `context/` · `knowledge/` · `agent-skills/` · `making-slides/`
 
 ## 실행
 
@@ -28,15 +32,22 @@
   URL 끝에 `?present`가 붙으면 발표자 모드(슬라이드 이동 브로드캐스트 + 질문 기록/정리),
   없으면 청중 모드(질문 입력·투표·반응·발표자 따라가기)로 열린다.
 
+  모든 세미나 폴더가 같은 규칙을 따른다 — `http://localhost:8080/<폴더>/?present`(발표자) · `http://localhost:8080/<폴더>/`(청중).
+  예:
+
   | 슬라이드 | 발표자 | 청중 |
   | --- | --- | --- |
+  | 0교시(설치) | `http://localhost:8080/setup/?present` | `http://localhost:8080/setup/` |
   | 입문(원본) | `http://localhost:8080/intro/?present` | `http://localhost:8080/intro/` |
+  | 프롬프트 | `http://localhost:8080/prompt/?present` | `http://localhost:8080/prompt/` |
   | 워크숍 | `http://localhost:8080/workshop/?present` | `http://localhost:8080/workshop/` |
   | 컨텍스트 | `http://localhost:8080/context/?present` | `http://localhost:8080/context/` |
   | 깃허브 | `http://localhost:8080/github/?present` | `http://localhost:8080/github/` |
   | 지식 정리 | `http://localhost:8080/knowledge/?present` | `http://localhost:8080/knowledge/` |
   | Agent Skills | `http://localhost:8080/agent-skills/?present` | `http://localhost:8080/agent-skills/` |
   | 슬라이드 만들기 | `http://localhost:8080/making-slides/?present` | `http://localhost:8080/making-slides/` |
+
+  새 세미나 폴더(최상위에 `index.html`이 있는 폴더)는 서버 코드 수정 없이 자동으로 라우팅된다.
 
   같은 Wi-Fi에서는 `http://<발표자-IP>:8080/` 로 접속한다 (서버 시작 시 콘솔에 출력됨).
 

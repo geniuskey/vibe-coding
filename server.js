@@ -5,12 +5,28 @@ const os = require('os');
 
 const PORT = process.env.PORT || 8080;
 const INDEX_PATH = path.join(__dirname, 'index.html');
-const INTRO_INDEX_PATH = path.join(__dirname, 'intro', 'index.html');
-const WORKSHOP_INDEX_PATH = path.join(__dirname, 'workshop', 'index.html');
-const CONTEXT_INDEX_PATH = path.join(__dirname, 'context', 'index.html');
-const GITHUB_INDEX_PATH = path.join(__dirname, 'github', 'index.html');
-const KNOWLEDGE_INDEX_PATH = path.join(__dirname, 'knowledge', 'index.html');
-const FORCHILDREN_INDEX_PATH = path.join(__dirname, 'forChildren', 'index.html');
+
+// 폴더별 단일 index.html 규약: 최상위 폴더에 index.html이 있으면 그게 곧 세미나 덱이다.
+// 덱 목록을 하드코딩하지 않으므로, 새 세미나 폴더를 추가하면 라우트 수정 없이 바로 동작한다.
+function listDecks() {
+  return fs.readdirSync(__dirname, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith('.'))
+    .filter((d) => fs.existsSync(path.join(__dirname, d.name, 'index.html')))
+    .map((d) => d.name)
+    .sort();
+}
+
+// GET /<deck> 또는 /<deck>/ → <deck>/index.html
+function serveDeck(req, res, url) {
+  if (req.method !== 'GET') return false;
+  const m = /^\/([A-Za-z0-9][A-Za-z0-9_-]*)\/?$/.exec(url);
+  if (!m) return false;
+  const filePath = path.join(__dirname, m[1], 'index.html');
+  if (!filePath.startsWith(__dirname + path.sep)) return false;
+  if (!fs.existsSync(filePath)) return false;
+  serveFile(res, filePath);
+  return true;
+}
 
 // 각 발표(덱)는 서로 다른 슬라이드를 가지므로, 질문·투표·반응·슬라이드 위치를
 // "방(room)" 단위로 분리해 섞이지 않게 한다. 파라미터가 없으면 기본 방('main').
@@ -125,13 +141,8 @@ const server = http.createServer(async (req, res) => {
   const url = req.url.split('?')[0];
 
   if (url === '/' && req.method === 'GET') return serveFile(res, INDEX_PATH);
-  if ((url === '/intro' || url === '/intro/') && req.method === 'GET') return serveFile(res, INTRO_INDEX_PATH);
-  if ((url === '/workshop' || url === '/workshop/') && req.method === 'GET') return serveFile(res, WORKSHOP_INDEX_PATH);
-  if ((url === '/context' || url === '/context/') && req.method === 'GET') return serveFile(res, CONTEXT_INDEX_PATH);
-  if ((url === '/github' || url === '/github/') && req.method === 'GET') return serveFile(res, GITHUB_INDEX_PATH);
-  if ((url === '/knowledge' || url === '/knowledge/') && req.method === 'GET') return serveFile(res, KNOWLEDGE_INDEX_PATH);
-  if ((url === '/forChildren' || url === '/forChildren/') && req.method === 'GET') return serveFile(res, FORCHILDREN_INDEX_PATH);
   if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
+  if (serveDeck(req, res, url)) return;
 
   if (url === '/qa/questions' && req.method === 'POST') {
     const room = getRoom(roomIdOf(req));
@@ -207,17 +218,10 @@ if (require.main === module) {
   server.listen(PORT, () => {
     const lan = lanAddress();
     console.log('Live Q&A running:');
-    console.log(`  대표 페이지:      http://localhost:${PORT}/`);
-    console.log(`  발표자(입문):   http://localhost:${PORT}/intro/?present`);
-    console.log(`  청중(입문):     http://localhost:${PORT}/intro/`);
-    console.log(`  발표자(워크숍): http://localhost:${PORT}/workshop/?present`);
-    console.log(`  청중(워크숍):   http://localhost:${PORT}/workshop/`);
-    console.log(`  발표자(컨텍스트): http://localhost:${PORT}/context/?present`);
-    console.log(`  청중(컨텍스트):   http://localhost:${PORT}/context/`);
-    console.log(`  발표자(깃허브):   http://localhost:${PORT}/github/?present`);
-    console.log(`  청중(깃허브):     http://localhost:${PORT}/github/`);
-    console.log(`  발표자(지식):     http://localhost:${PORT}/knowledge/?present`);
-    console.log(`  청중(지식):       http://localhost:${PORT}/knowledge/`);
+    console.log(`  대표 페이지: http://localhost:${PORT}/`);
+    for (const deck of listDecks()) {
+      console.log(`  ${deck}: 발표자 http://localhost:${PORT}/${deck}/?present · 청중 http://localhost:${PORT}/${deck}/`);
+    }
     if (lan) console.log(`  (같은 Wi-Fi에서는 http://${lan}:${PORT}/ 로 접속)`);
   });
 }
