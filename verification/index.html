@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI가 쓴 코드를 믿는 법 — 검증·테스트·평가 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="AI가 쓴 코드는 '틀리게'가 아니라 '그럴듯하게' 틀린다. 돌아간다 ≠ 맞는다 — 검증의 사다리, 테스트와 보상 해킹, 리뷰, 평가(Evals), 신뢰 다이얼까지 바이브 코딩의 속도를 지키는 검증 전략 프레젠테이션." />
+  <meta name="keywords" content="AI 코드 검증, 테스트, 평가, evals, 바이브 코딩, vibe coding, TDD, 보상 해킹, reward hacking, LLM-as-judge, 코드 리뷰, AI 에이전트" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://geniuskey.github.io/vibe-coding/verification/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="AI가 쓴 코드를 믿는 법 — 검증·테스트·평가" />
+  <meta property="og:description" content="돌아간다 ≠ 맞는다. 검증의 사다리·테스트·보상 해킹 방어·리뷰·평가(Evals)·신뢰 다이얼 — 바이브 코딩의 속도를 지키는 검증 전략." />
+  <meta property="og:url" content="https://geniuskey.github.io/vibe-coding/verification/" />
+  <meta property="og:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI가 쓴 코드를 믿는 법 — 검증·테스트·평가" />
+  <meta name="twitter:description" content="돌아간다 ≠ 맞는다 — 검증의 사다리부터 신뢰 다이얼까지." />
+  <meta name="twitter:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "AI가 쓴 코드를 믿는 법 — 검증·테스트·평가",
+    "headline": "AI가 쓴 코드를 믿는 법 — 검증·테스트·평가 | 바이브 코딩 세미나",
+    "description": "AI가 쓴 코드는 그럴듯하게 틀린다. 검증의 사다리, 테스트와 보상 해킹 방어, 리뷰, 평가(Evals), 신뢰 다이얼까지 — 바이브 코딩의 속도를 지키는 검증 전략 프레젠테이션.",
+    "url": "https://geniuskey.github.io/vibe-coding/verification/",
+    "image": "https://geniuskey.github.io/vibe-coding/og-image.png",
+    "inLanguage": "ko",
+    "datePublished": "2026-07",
+    "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
+    "isPartOf": "https://geniuskey.github.io/vibe-coding/",
+    "keywords": "AI 코드 검증, 테스트, 평가, evals, TDD, 보상 해킹, LLM-as-judge, 코드 리뷰, 바이브 코딩"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 리셋 CSS + 인라인 폰트 + reveal.js 라이브러리는 원본 index.html에서 그대로 재사용 -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    /* gradient mesh background — 원본 데크와 동일한 분위기 */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    /* HARD RULE: every text descendant defaults to pure white. */
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
+      #tocSelect { width: auto; max-width: 42vw; }
+    }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    /* flex 컨테이너에서 chip이 가로로 늘어나지 않도록 */
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* animated gradient text */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    /* card — glassmorphism */
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* code / chat block */
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal — 원본과 동일한 규약 ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+    .autoshow:nth-child(7) { animation-delay: .95s; }
+    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+
+    /* ========= 시뮬레이션 타임라인 ========= */
+    .sim-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: 0; padding: 0; }
+    .sim-list > li { margin: 0; }
+    .sim-line {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .55rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.3);
+      background: rgba(230,236,249,0.05);
+      font-size: 1.14rem !important;
+    }
+    .sim-line .tok { margin-left: auto; font-weight: 800; font-size: 1.05rem; white-space: nowrap; padding-left: .8rem; }
+
+    /* ========= 문제 리스트 (미묘한 오류 도감) ========= */
+    .prob-list { display: flex; flex-direction: column; gap: .55rem; }
+    .prob-item {
+      display: flex; align-items: baseline; gap: 1.1rem;
+      padding: .65rem 1.2rem; border-radius: 12px;
+      border: 1px solid rgba(255,122,149,0.35);
+      background: rgba(80,25,45,0.25);
+    }
+    .prob-item .pname { font-weight: 800; font-size: 1.24rem; white-space: nowrap; min-width: 8em; }
+    .prob-item .pdesc { font-size: 1.1rem; color: #E8ECF5 !important; }
+
+    /* ========= 성능/속도 공식 ========= */
+    .formula { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; margin: 1rem 0; }
+    .fx-box {
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      background: rgba(20,22,44,.55);
+      border: 1px solid rgba(155,130,255,.35); border-radius: 16px;
+      padding: .85rem 1.3rem;
+    }
+    .fx-box .fx-name { font-size: 1.22rem; font-weight: 800; }
+    .fx-box .fx-val { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; color: #fff; }
+    .fx-box.dim .fx-val { color: #FF8A96; }
+    .fx-box.hero { border-color: rgba(43,234,208,.7); box-shadow: 0 0 30px rgba(43,234,208,.2); }
+    .fx-op { font-size: 2.2rem; font-weight: 800; color: var(--fg-soft) !important; }
+
+    /* ========= 단계 루프 (TDD) ========= */
+    .loop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .loop-step {
+      display: flex; flex-direction: column; gap: .25rem; align-items: flex-start;
+      padding: .7rem .9rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.4);
+      background: rgba(230,236,249,0.06);
+    }
+    .loop-step .no { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800; color: #B5A1FF !important; }
+    .loop-step .nm2 { font-size: 1.12rem; font-weight: 800; }
+    .loop-step .ds { font-size: .95rem; color: #C9D2E4 !important; }
+    .loop-step.hot { border-color: rgba(43,234,208,.65); background: rgba(43,234,208,.08); }
+    .loop-step.hot .no { color: #5BFFE0 !important; }
+
+    /* ========= 경고 배너 (knowledge 덱과 동일) ========= */
+    .warn-banner {
+      display: flex; gap: .9rem; align-items: center;
+      background: linear-gradient(90deg, rgba(120,20,35,0.5), rgba(70,18,40,0.35));
+      border: 1.5px solid rgba(255,77,94,0.7);
+      border-radius: 14px;
+      padding: .7rem 1.1rem;
+      font-size: 1.22rem; font-weight: 700;
+    }
+    .warn-banner .wb-icon { font-size: 1.8rem; flex: 0 0 auto; }
+
+    /* ========= 비교 테이블 (knowledge 덱과 동일) ========= */
+    .gh-table { width: 100%; border-collapse: collapse; }
+    .gh-table th, .gh-table td {
+      padding: .5rem .9rem; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.08rem; line-height: 1.45;
+    }
+    .gh-table th { font-family: 'JetBrains Mono', monospace; font-size: .9rem; letter-spacing: .05em; color: #B5A1FF !important; }
+
+    /* ========= 치트시트 (knowledge 덱과 동일 + 체크 변형) ========= */
+    .cheat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; }
+    .cheat {
+      display: flex; align-items: baseline; gap: .7rem;
+      font-size: .98rem; line-height: 1.4;
+      padding: .42rem .8rem; border-radius: 10px;
+      background: rgba(20,22,44,0.5);
+      border: 1px solid rgba(155,130,255,0.28);
+    }
+    .cheat .ct { flex: 0 0 6em; font-weight: 800; color: #CBBDFF !important; font-size: .9rem; }
+    .cheat .cp { color: #E8ECF5 !important; }
+    .cheat .cp::before { content: "💬 "; }
+    .cheat.chk .cp::before { content: "☑ "; color: #5BFFE0; }
+
+    /* ========= 곡선 SVG 공통 ========= */
+    .reveal section svg text {
+      paint-order: stroke fill;
+      stroke: #06080F;
+      stroke-width: 1.2px;
+      stroke-linejoin: round;
+    }
+    .curve-draw { stroke-dasharray: 620; stroke-dashoffset: 620; }
+    section.present .curve-draw { animation: curveDraw 1.8s ease-out .4s forwards; }
+    @keyframes curveDraw { to { stroke-dashoffset: 0; } }
+
+    /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
+    .slide-refs {
+      position: absolute; left: 56px; bottom: 12px; z-index: 3;
+      display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
+      max-width: 66%;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      opacity: .8;
+    }
+    .slide-refs .rl { color: #9BA6C0 !important; font-weight: 800; letter-spacing: .12em; }
+    .slide-refs a {
+      color: #8FF5E2 !important; text-decoration: none !important;
+      border-bottom: 1px dotted rgba(91,255,224,.45); white-space: nowrap;
+    }
+    .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
+
+    /* ========= 참고자료 슬라이드 ========= */
+    .ref-col h3 { font-size: 1.3rem; }
+    .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+    .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
+    .ref-col li a { font-weight: 700; }
+    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
+
+    /* ==================================================================
+       ▼▼ verification 덱 전용 시그니처 컴포넌트 4종 ▼▼
+       ================================================================== */
+
+    /* ========= ① 판결 씬 (S2) — 그럴듯함의 함정 =========
+       초록 체크가 쌓인 뒤, 스캔 라인이 지나가며 미묘한 버그 한 줄이
+       분홍으로 드러난다. */
+    .verdict-card { position: relative; }
+    .verdict-card pre.code { font-size: 1.08rem; }
+    .verdict-card::after {
+      content: ""; position: absolute; left: 6px; right: 6px; top: 0; height: 3px;
+      border-radius: 3px; opacity: 0; pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,122,149,0.95), transparent);
+      box-shadow: 0 0 18px rgba(255,122,149,0.8);
+    }
+    section:has(.vd-reveal.visible) .verdict-card::after { animation: vdScan 1.1s ease forwards; }
+    @keyframes vdScan { 0% { opacity: 1; top: 4%; } 100% { opacity: 0; top: 94%; } }
+    .bugline {
+      border-radius: 6px; padding: 0 .15em;
+      transition: background .6s ease .55s, box-shadow .6s ease .55s;
+    }
+    section:has(.vd-reveal.visible) .bugline {
+      background: rgba(255,122,149,0.22);
+      box-shadow: 0 0 0 1.5px rgba(255,122,149,0.85);
+    }
+    .vd-badges { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .vd-badge {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .34em .9em; border-radius: 999px; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800;
+      background: rgba(13,61,56,0.92); border: 1px solid rgba(43,234,208,0.8);
+      color: #C5FFF5 !important; text-shadow: none !important;
+    }
+    .vd-tag {
+      display: inline-flex; align-items: center; gap: .5em;
+      padding: .45em 1em; border-radius: 12px;
+      background: rgba(74,26,38,0.92); border: 1.5px solid rgba(255,122,149,0.85);
+      color: #FFD0DA !important; font-size: 1.12rem; font-weight: 800;
+      box-shadow: 0 0 26px rgba(255,122,149,0.25);
+    }
+
+    /* ========= ② 검증의 사다리 (S8) =========
+       아래→위로 쌓이는 계단. 단마다 '사람 노력'(분홍)과 '신뢰'(청록)
+       미니 게이지가 반대로 움직인다. */
+    .vlad-wrap { display: flex; gap: 1.6rem; align-items: stretch; justify-content: center; }
+    .vladder { display: flex; flex-direction: column-reverse; gap: .5rem; }
+    .vrung {
+      display: flex; align-items: center; gap: .9rem;
+      width: 660px; padding: .55rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(155,130,255,0.4);
+      background: rgba(40,30,80,0.25);
+      margin-left: calc((var(--i, 1) - 1) * 46px);
+    }
+    .vrung .vno {
+      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: .95rem;
+      color: #B5A1FF !important; width: 1.3em; flex: 0 0 auto;
+    }
+    .vrung .vname { font-size: 1.22rem; font-weight: 800; white-space: nowrap; }
+    .vrung .vdesc { font-size: .92rem; color: #C9D2E4 !important; }
+    .vrung.top { border-color: rgba(43,234,208,0.7); background: rgba(15,60,55,0.35); }
+    .vrung.top .vno { color: #5BFFE0 !important; }
+    .vmeter { margin-left: auto; display: flex; flex-direction: column; gap: .28rem; width: 168px; flex: 0 0 auto; }
+    .vm-row { display: flex; align-items: center; gap: .45rem; }
+    .vm-lab {
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 800;
+      width: 3.2em; flex: 0 0 auto; color: #9BA6C0 !important; text-shadow: none !important;
+    }
+    .vm-bar {
+      flex: 1; height: 9px; border-radius: 5px; overflow: hidden;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.10);
+    }
+    .vm-bar i { display: block; height: 100%; width: var(--w, 0%); border-radius: 5px; }
+    .vm-effort i { background: linear-gradient(90deg, rgba(255,122,149,.9), rgba(255,122,149,.55)); }
+    .vm-trust  i { background: linear-gradient(90deg, rgba(43,234,208,.9), rgba(43,234,208,.55)); }
+    .vlad-axis {
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: .4rem 0; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; font-weight: 800; text-align: center; white-space: nowrap;
+    }
+
+    /* ========= ③ 답안지 조작 씬 (S13) — 보상 해킹 =========
+       원래 테스트의 assert가 취소선으로 죽고, 약화된 테스트와
+       '가짜 초록불' 배지가 나타난다. */
+    .assert-line { transition: opacity .5s ease, filter .5s ease; }
+    section:has(.tp1.visible) .assert-line {
+      text-decoration: line-through; text-decoration-color: rgba(255,122,149,.95);
+      text-decoration-thickness: 2.5px; opacity: .55; filter: grayscale(.4);
+    }
+    .tamper-pass {
+      display: inline-flex; align-items: center; gap: .55em;
+      padding: .4em 1.1em; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-size: 1.08rem; font-weight: 800;
+      background: rgba(13,61,56,0.92); border: 1.5px solid rgba(43,234,208,0.85);
+      color: #C5FFF5 !important; text-shadow: none !important;
+      box-shadow: 0 0 26px rgba(43,234,208,0.3);
+      animation: fakePulse 1.6s ease-in-out infinite;
+    }
+    @keyframes fakePulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(43,234,208,0.25); }
+      50%      { box-shadow: 0 0 40px rgba(43,234,208,0.55); }
+    }
+    .tamper-arrow {
+      display: flex; flex-direction: column; align-items: center; gap: .15rem;
+      font-size: 1.9rem; font-weight: 800; color: #FF94AC !important; flex: 0 0 auto;
+    }
+    .tamper-arrow .t {
+      font-size: .82rem; font-family: 'JetBrains Mono', monospace;
+      color: #FFB9C7 !important; white-space: nowrap;
+    }
+    .trick-chip {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .32em .85em; border-radius: 9px; white-space: nowrap;
+      font-size: 1.02rem; font-weight: 800;
+      background: rgba(74,26,38,0.85); border: 1px solid rgba(255,122,149,0.6);
+      color: #FFD0DA !important; text-shadow: none !important;
+    }
+
+    /* ========= ④ 신뢰 다이얼 (S21) =========
+       반원 게이지 위 바늘이 fragment에 따라 회전 — 작업의 무게에 맞는
+       검증 강도. 청록(가볍게)→노랑(기본)→분홍(풀세트). */
+    .dial-wrap { display: flex; flex-direction: column; align-items: center; gap: .3rem; flex: 0 0 auto; }
+    .dial-svg { width: 460px; max-width: 100%; }
+    .dial-needle {
+      transform-origin: 230px 230px;
+      transform: rotate(-78deg);
+      transition: transform .9s cubic-bezier(.3,.7,.3,1.05);
+    }
+    section:has(.td1.visible) .dial-needle { transform: rotate(-58deg); }
+    section:has(.td2.visible) .dial-needle { transform: rotate(0deg); }
+    section:has(.td3.visible) .dial-needle { transform: rotate(58deg); }
+    .dial-caption {
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800;
+      color: #E6D9FF !important; text-align: center; margin: 0;
+    }
+    .dial-card {
+      display: flex; gap: .9rem; align-items: baseline;
+      padding: .7rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.35);
+      background: rgba(230,236,249,0.05);
+    }
+    .dial-card .dc-name { font-weight: 800; font-size: 1.18rem; white-space: nowrap; min-width: 8.6em; }
+    .dial-card .dc-desc { font-size: 1.04rem; color: #E8ECF5 !important; }
+    .dial-card.lv1 { border-color: rgba(43,234,208,0.55); }
+    .dial-card.lv2 { border-color: rgba(255,212,107,0.55); }
+    .dial-card.lv3 { border-color: rgba(255,122,149,0.6); }
+
+    /* ========= fallbacks: overview / print / reduced-motion =========
+       .autoshow·곡선·다이얼 — 가시성이 애니메이션에 묶여 있으므로
+       세 모드 전부에서 강제로 완성 상태를 보여준다. */
+    .reveal.overview .autoshow {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal.overview .slides section {
+      display: block !important;
+      cursor: pointer;
+      outline: 1px solid rgba(181, 161, 255, 0.28);
+      outline-offset: -1px;
+      border-radius: 6px;
+    }
+    .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
+    .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
+    @media print {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .reveal .fragment.custom {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+      .curve-draw { stroke-dashoffset: 0 !important; animation: none !important; }
+      .dl-toolbar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .grad, .tamper-pass { animation: none !important; }
+      body::before { animation: none !important; }
+      .verdict-card::after { animation: none !important; opacity: 0 !important; }
+      .bugline, .assert-line, .dial-needle { transition: none !important; }
+      .curve-draw { stroke-dashoffset: 0; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
+    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="grid-2" style="align-items:center;">
+          <div>
+            <div class="chip">SEMINAR · 2026.07 · 02 더 깊이 · VERIFICATION</div>
+            <h1 style="font-size:4.3rem;">
+              <span class="grad">AI가 쓴 코드</span>를<br/>믿는 법 ⚖️
+            </h1>
+            <p style="font-size:1.55rem; margin-top:1.2rem; max-width:560px;">
+              <em>돌아간다 ≠ 맞는다.</em><br/>
+              <span class="muted small">검증·테스트·평가 — 바이브 코딩의 속도를 지키는 안전장치</span>
+            </p>
+            <p class="tiny muted" style="margin-top:2rem;">
+              <a href="../intro/index.html">← 바이브 코딩이란 무엇인가? (원본 세미나)</a>
+            </p>
+          </div>
+          <div class="stack" style="gap:.9rem;">
+            <pre class="code" aria-label="자신만만한 AI의 완료 보고">🤖 "요청하신 기능 구현을 <span class="st">완료</span>했습니다.
+   모든 케이스에서 <span class="st">정상 동작</span>하며,
+   기존 코드와도 <span class="st">완벽히 호환</span>됩니다."</pre>
+            <div class="vd-badges" style="justify-content:center;">
+              <span class="vd-badge">✓ 컴파일</span>
+              <span class="vd-badge">✓ 실행</span>
+              <span class="vd-badge">✓ 자신감</span>
+            </div>
+            <p class="center tiny muted" style="margin:0;">이 자신감, 어디까지 믿으시겠습니까?</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        컨텍스트·지식 세미나에 이은 심화 트랙 세 번째: AI가 만든 결과물을 어떻게 믿을 것인가.
+        오늘의 부제는 "돌아간다 ≠ 맞는다" — 코드가 실행된다는 것과 올바르다는 것 사이의 간극을 메우는 도구들을 다룬다.
+      </aside>
+    </section>
+
+    <!-- ============= 2. 훅: 그럴듯함의 함정 (시그니처: 판결 씬) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 신뢰 격차</div>
+        <h2>무섭게 틀리지 않고, <span class="grad">그럴듯하게</span> 틀립니다 <span class="tiny mono muted">— 방향키로 진행하세요 ▸</span></h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <div class="verdict-card">
+            <pre class="code"><span class="kw">def</span> <span class="nm">is_expired</span>(token):
+    <span class="cm">"""토큰 만료 여부를 반환"""</span>
+    <span class="bugline">now = datetime.now()</span>
+    <span class="kw">return</span> now &gt; token.expires_at
+
+<span class="cm"># 리뷰어: "깔끔하네요 👍" · 내 PC에서 테스트 통과</span></pre>
+          </div>
+          <div class="stack" style="gap:.9rem;">
+            <div class="vd-badges fragment" data-fragment-index="0">
+              <span class="vd-badge">✓ 컴파일 통과</span>
+              <span class="vd-badge">✓ 실행 성공</span>
+              <span class="vd-badge">✓ 테스트 통과 (내 PC)</span>
+            </div>
+            <span class="vd-tag fragment vd-reveal" data-fragment-index="1">🔍 서버는 UTC, <span class="mono">now()</span>는 로컬 — 한국에서만 9시간짜리 버그</span>
+            <p class="fragment" data-fragment-index="1" style="font-size:1.24rem; margin:0;">완전히 틀린 코드는 금방 걸립니다. 무서운 건 <strong class="accent3">90% 맞는 코드</strong> — 컴파일러도, 실행도 잡아주지 않습니다.</p>
+          </div>
+        </div>
+        <div class="quote fragment" data-fragment-index="2" style="margin-top:1rem; font-size:1.3rem;">
+          AI 코드의 진짜 문제는 '틀림'이 아니라 <strong class="accent3">'그럴듯하게 틀림'</strong>입니다.
+        </div>
+        <aside class="notes">
+          훅: 멀쩡해 보이는 4줄짜리 함수. 컴파일되고, 돌아가고, 같은 시간대인 내 PC에서는 테스트도 통과한다.
+          그러나 서버는 UTC — 배포하면 9시간 어긋난다. 이런 "90% 맞는 코드"가 AI 코드의 전형적 실패 모드다.
+          완전히 틀린 코드는 금방 걸리지만 그럴듯하게 틀린 코드는 검증 체계 없이는 못 잡는다는 것이 오늘의 출발점.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 3. 미묘한 오류 도감 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 신뢰 격차</div>
+        <h2>미묘하게 틀리는 <span class="accent3">단골 패턴</span> 도감</h2>
+        <div class="prob-list" style="margin-top:.4rem;">
+          <div class="prob-item autoshow fade-left"><span class="pname">📏 경계값</span><span class="pdesc"><span class="mono">&gt;</span> vs <span class="mono">&gt;=</span> — 재고 0개, 마지막 날, 최대치에서만 하루씩 어긋납니다</span></div>
+          <div class="prob-item autoshow fade-left"><span class="pname">⚖️ 단위·스케일</span><span class="pdesc">ms와 s, %와 비율(10 vs 0.1), nm와 µm — 숫자는 나오는데 자릿수가 다릅니다</span></div>
+          <div class="prob-item autoshow fade-left"><span class="pname">🕐 시간대</span><span class="pdesc">UTC vs KST, 서머타임 — 내 PC에서는 절대 재현되지 않는 버그</span></div>
+          <div class="prob-item autoshow fade-left"><span class="pname">🤫 조용한 실패</span><span class="pdesc"><span class="mono">except: pass</span>, 빈 리스트 반환 — 에러가 안 나서 더 무섭습니다</span></div>
+          <div class="prob-item autoshow fade-left"><span class="pname">👻 환각 API</span><span class="pdesc">그럴듯한 이름의 존재하지 않는 함수·옵션 — 설명은 아주 자신 있게 붙습니다</span></div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:.9rem; font-size:1.26rem;">
+          공통점: <strong>한 번 돌려보는 것만으로는 안 잡힌다</strong> — 경계를 찌르는 검증이 필요합니다.
+        </div>
+        <aside class="notes">
+          AI가 미묘하게 틀리는 5가지 단골 패턴: 경계값, 단위·스케일, 시간대, 조용한 실패, 환각 API.
+          반도체 데이터 다루는 분들에게는 단위·스케일(nm/µm, %와 비율)이 특히 아픈 패턴.
+          다섯 패턴의 공통점은 "행복한 입력 한 번 돌려보기"로는 절대 안 잡힌다는 것 — 뒤에서 경계값 테스트로 회수한다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 4. 자동화 편향 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 신뢰 격차</div>
+        <h2>사람은 기계 출력을 <span class="accent3">과신</span>하도록 생겨먹었습니다</h2>
+        <div class="grid-3" style="margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow zoom-in">
+            <h3>✈️ 자동화 편향</h3>
+            <p>자동조종·내비게이션 시절부터 검증된 인간의 버그 — <strong>기계가 말하면 덜 의심</strong>합니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🗣 유창함의 함정</h3>
+            <p>매끄러운 설명 = 맞다는 착각. <strong class="accent3">말투는 품질 신호가 아닙니다.</strong> 폰트가 예쁜 보고서가 왠지 믿음직해 보이는 것과 같습니다.</p>
+          </div>
+          <div class="card bad autoshow zoom-in">
+            <h3>🪞 이중 잣대</h3>
+            <p>동료 코드는 꼬치꼬치 의심하면서, AI 코드는 <strong>LGTM 👍</strong> — 내가 안 짰는데 내 코드가 됩니다.</p>
+          </div>
+        </div>
+        <div class="warn-banner autoshow fade-up" style="margin-top:1rem;">
+          <span class="wb-icon">📉</span>
+          <span>METR 2025 실험: 숙련 개발자들이 AI 도구를 쓰며 실제로는 <strong class="accent3">19% 느려졌지만</strong>, 스스로는 <strong>"20% 빨라졌다"</strong>고 답했습니다 — 체감은 측정이 아닙니다.</span>
+        </div>
+        <aside class="notes">
+          자동화 편향(automation bias)은 AI 이전부터 항공·의료에서 연구된 현상 — 사람은 자동 시스템의 출력을 과신하고 교차 확인을 생략한다.
+          LLM은 유창함 때문에 이 편향을 더 세게 자극한다. METR의 2025 RCT는 숙련 오픈소스 개발자 기준이라 일반화에는 주의가 필요하지만,
+          "체감 속도와 실제 속도가 정반대일 수 있다"는 메시지로는 충분하다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener">METR · AI와 숙련 개발자 생산성 RCT</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 5. 생성 10분, 디버깅 3일 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 신뢰 격차</div>
+        <h2>"생성 10분" 뒤에 숨은 <span class="accent3">"디버깅 3일"</span></h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <ul class="sim-list">
+            <li class="sim-line autoshow fade-left"><span>🎉 금 16:50 — "리포트 자동화 10분 만에 완성!" 퇴근</span><span class="tok mono accent2">+10분</span></li>
+            <li class="sim-line autoshow fade-left"><span>🤔 월 09:30 — "지표가 지난주랑 미묘하게 다른데?"</span><span class="tok mono accent4">+반나절</span></li>
+            <li class="sim-line autoshow fade-left"><span>😰 화 — 이해 없이 커밋한 코드, 역해석부터 다시</span><span class="tok mono accent3">+하루</span></li>
+            <li class="sim-line autoshow fade-left"><span>🤯 수 11:00 — 원인: 중복 lot 제거 누락. 딱 한 줄</span><span class="tok mono accent3">+하루</span></li>
+          </ul>
+          <div class="stack" style="gap:.8rem;">
+            <div class="card bad autoshow fade-right">
+              <h3>최악의 발견 지점</h3>
+              <p>버그가 코드 리뷰가 아니라 <strong class="accent3">보고서에서</strong> 발견됐습니다 — 검증은 미룰수록 비싸집니다.</p>
+            </div>
+            <div class="card autoshow fade-right">
+              <h3>이해 없는 커밋 = 남의 코드</h3>
+              <p>디버깅의 절반은 "이 코드가 뭘 하는지" 알아내는 시간이었습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:.9rem; font-size:1.28rem;">
+          바이브 코딩의 속도는 <strong>검증이 병목이 되는 순간</strong> 무너집니다.
+        </div>
+        <aside class="notes">
+          전형적 시나리오: 생성은 10분, 그러나 검증을 설계하지 않아 디버깅에 3일. 합계로 보면 손으로 짜는 것보다 느리다.
+          포인트 두 가지 — 버그가 가장 비싼 지점(보고서·프로덕션)에서 발견됐다는 것, 그리고 이해 없이 커밋한 코드는 디버깅 시점에 남의 코드가 된다는 것.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 6. 속도 공식 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 신뢰 격차</div>
+        <h2>체감 속도는 <span class="grad">곱셈</span>입니다 <span class="tiny mono muted">— 이 시리즈, 곱셈 좋아합니다 ▸</span></h2>
+        <div class="formula">
+          <div class="fx-box autoshow zoom-in"><span class="fx-name">생성 가속</span><span class="fx-val">×10</span></div>
+          <span class="fx-op">×</span>
+          <div class="fx-box dim autoshow zoom-in"><span class="fx-name">검증 설계 없음</span><span class="fx-val">×0.1</span></div>
+          <span class="fx-op">=</span>
+          <div class="fx-box autoshow zoom-in"><span class="fx-name">체감 속도</span><span class="fx-val accent3">×1</span></div>
+        </div>
+        <div class="formula fragment">
+          <div class="fx-box"><span class="fx-name">생성 가속</span><span class="fx-val">×10</span></div>
+          <span class="fx-op">×</span>
+          <div class="fx-box"><span class="fx-name">검증 설계</span><span class="fx-val accent2">×0.7</span></div>
+          <span class="fx-op">=</span>
+          <div class="fx-box hero"><span class="fx-name">체감 속도</span><span class="fx-val accent2">×7</span></div>
+        </div>
+        <p class="center fragment" style="font-size:1.32rem; margin:.6rem 0 0;">검증을 설계한다 = 테스트·리뷰·CI를 <strong class="accent2">생성보다 먼저</strong> 준비한다.<br/>
+          <span class="muted small">숫자는 직관을 위한 예시입니다 — 핵심은 검증 항이 0에 가까우면 전체가 무너진다는 것.</span></p>
+        <aside class="notes">
+          컨텍스트 세미나의 "성능은 곱셈" 공식의 자매편. 생성이 10배 빨라져도 검증이 설계되지 않으면(디버깅 지옥) 체감 속도는 1배로 되돌아간다.
+          검증을 설계한다는 것은 코드를 만들기 전에 "어떻게 맞음을 확인할지"를 먼저 정하는 것 — 이어지는 장들의 예고편이다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 7. 오늘의 지도 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">오늘의 지도</div>
+        <h2>다섯 개의 도구 — <span class="grad">사다리 · 테스트 · 리뷰 · 평가 · 다이얼</span></h2>
+        <div class="grid-3" style="margin-top:.4rem;">
+          <div class="card autoshow fade-up"><h3>🪜 검증의 사다리 <span class="tiny muted">CH 2</span></h3><p>눈 → 실행 → 테스트 → 리뷰 → CI. 올라갈수록 사람 노력↓ 신뢰↑</p></div>
+          <div class="card autoshow fade-up"><h3>🧪 테스트 <span class="tiny muted">CH 3</span></h3><p>실행 가능한 스펙 — 그리고 테스트를 고쳐버리는 AI(보상 해킹) 방어법</p></div>
+          <div class="card autoshow fade-up"><h3>🔭 리뷰 <span class="tiny muted">CH 4</span></h3><p>자기 리뷰 vs 신선한 눈 vs 사람 — 누가 어디를 보나</p></div>
+          <div class="card autoshow fade-up"><h3>📊 평가 (Evals) <span class="tiny muted">CH 5</span></h3><p>반복 실행되는 AI 작업(프롬프트·스킬·봇)의 품질 측정법</p></div>
+          <div class="card autoshow fade-up"><h3>🎛 신뢰 다이얼 <span class="tiny muted">CH 6</span></h3><p>일회성·팀 도구·프로덕션 — 작업의 무게에 맞는 검증 강도</p></div>
+          <div class="card good autoshow fade-up"><h3>📸 보너스</h3><p>커밋 전 체크리스트 한 장 — 찍어 가시면 됩니다</p></div>
+        </div>
+        <aside class="notes">
+          오늘의 다섯 도구를 미리 지도로: 사다리(전체 구조), 테스트(가장 강한 지렛대), 리뷰(사람과 기계의 분업),
+          평가(반복 AI 작업용), 다이얼(강도 조절). 순서대로 올라가며, 마지막에 체크리스트 한 장으로 압축한다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 8. 검증의 사다리 (시그니처: vladder) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 2 · 검증의 사다리</div>
+        <h2><span class="grad">검증의 사다리</span> — 올라갈수록 사람은 편해집니다</h2>
+        <div class="vlad-wrap" style="margin-top:.5rem;">
+          <div class="vladder">
+            <div class="vrung autoshow fade-left" style="--i:1;"><span class="vno">1</span><span class="vname">👀 눈으로 읽기</span><span class="vdesc">그럴듯함에 가장 잘 속는 단계</span>
+              <div class="vmeter"><div class="vm-row"><span class="vm-lab">노력</span><span class="vm-bar vm-effort"><i style="--w:95%"></i></span></div><div class="vm-row"><span class="vm-lab">신뢰</span><span class="vm-bar vm-trust"><i style="--w:15%"></i></span></div></div></div>
+            <div class="vrung autoshow fade-left" style="--i:2;"><span class="vno">2</span><span class="vname">🖐 직접 실행</span><span class="vdesc">내 눈으로 결과 확인</span>
+              <div class="vmeter"><div class="vm-row"><span class="vm-lab">노력</span><span class="vm-bar vm-effort"><i style="--w:75%"></i></span></div><div class="vm-row"><span class="vm-lab">신뢰</span><span class="vm-bar vm-trust"><i style="--w:40%"></i></span></div></div></div>
+            <div class="vrung autoshow fade-left" style="--i:3;"><span class="vno">3</span><span class="vname">🧪 자동 테스트</span><span class="vdesc">기계가 반복 판정</span>
+              <div class="vmeter"><div class="vm-row"><span class="vm-lab">노력</span><span class="vm-bar vm-effort"><i style="--w:45%"></i></span></div><div class="vm-row"><span class="vm-lab">신뢰</span><span class="vm-bar vm-trust"><i style="--w:70%"></i></span></div></div></div>
+            <div class="vrung autoshow fade-left" style="--i:4;"><span class="vno">4</span><span class="vname">🔭 리뷰</span><span class="vdesc">신선한 눈 + 사람의 판단</span>
+              <div class="vmeter"><div class="vm-row"><span class="vm-lab">노력</span><span class="vm-bar vm-effort"><i style="--w:30%"></i></span></div><div class="vm-row"><span class="vm-lab">신뢰</span><span class="vm-bar vm-trust"><i style="--w:85%"></i></span></div></div></div>
+            <div class="vrung top autoshow fade-left" style="--i:5;"><span class="vno">5</span><span class="vname">♻️ CI 상시 검증</span><span class="vdesc">사람 없이 매번 자동으로</span>
+              <div class="vmeter"><div class="vm-row"><span class="vm-lab">노력</span><span class="vm-bar vm-effort"><i style="--w:12%"></i></span></div><div class="vm-row"><span class="vm-lab">신뢰</span><span class="vm-bar vm-trust"><i style="--w:95%"></i></span></div></div></div>
+          </div>
+          <div class="vlad-axis">
+            <span class="accent2">🛡 신뢰 ↑</span>
+            <span class="accent3">🧍 사람 노력 ↓</span>
+          </div>
+        </div>
+        <p class="autoshow fade-up" style="font-size:1.26rem; margin:.9rem 0 0;">눈으로만 읽는 검증이 <strong class="accent3">가장 비싸고 가장 약합니다</strong> — 사다리를 올라간 만큼 바이브 코딩의 속도가 살아납니다.</p>
+        <aside class="notes">
+          오늘의 뼈대 그림. 1단(눈으로 읽기)은 사람 노력이 가장 크면서 그럴듯함에 가장 잘 속는 단계이고,
+          위로 갈수록 검증이 기계로 넘어가며 사람 노력은 줄고 신뢰는 커진다.
+          모든 작업이 5단까지 갈 필요는 없다 — 어디까지 오를지는 CH6의 다이얼에서 다룬다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 9. 실행해보기의 힘: 증거 요구 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 2 · 검증의 사다리</div>
+        <h2>보고받지 말고 <span class="grad">증거</span>를 받으세요</h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <pre class="code bad autoshow fade-up"><span class="cm"># ❌ 말로 하는 완료 보고</span>
+🤖 "수정했습니다. 이제 모든 테스트가
+   통과합니다. 완벽하게 동작해요!"
+
+<span class="cm"># 실행해 보지도 않고 낙관하는 경우,
+# 정말로 있습니다</span></pre>
+          <pre class="code good autoshow fade-up"><span class="cm"># ✅ 증거를 요구하는 요청</span>
+"pytest를 <span class="st">직접 실행하고 출력 전체</span>를 보여줘.
+ 실패하면 실패 로그 원문 그대로."
+"수정된 화면을 <span class="st">스크린샷</span>으로 찍어서 보여줘."
+"마지막 명령의 <span class="st">exit code</span>도 함께."</pre>
+        </div>
+        <div class="row autoshow fade-up" style="gap:.6rem; flex-wrap:wrap; margin-top:1rem; justify-content:center;">
+          <span class="tiny mono muted">증거의 4형제 ▸</span>
+          <span class="pill green">🧪 테스트 출력</span>
+          <span class="pill green">📜 로그 원문</span>
+          <span class="pill green">📸 스크린샷</span>
+          <span class="pill green">🔢 exit code</span>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:.9rem; font-size:1.28rem;">
+          말은 낙관할 수 있어도, <strong class="accent2">로그는 낙관하지 못합니다.</strong>
+        </div>
+        <aside class="notes">
+          에이전트는 자기 작업의 성공을 낙관적으로 보고하는 경향이 있다 — 악의가 아니라 "성공 보고"가 그럴듯한 다음 말이기 때문.
+          해법은 보고 대신 증거: 테스트 출력, 로그 원문, 스크린샷, exit code처럼 위조가 어렵고 해석 여지가 적은 것을 요구한다.
+          사다리 2단(직접 실행)을 에이전트에게 시키되, 결과물은 원문으로 받는 것이 요령.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 10. 사다리 꼭대기: CI 상시 검증 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 2 · 검증의 사다리</div>
+        <h2>사다리 꼭대기 — <span class="grad">사람 없이 도는</span> 검증</h2>
+        <div class="grid-3" style="margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow zoom-in">
+            <h3>🪝 커밋 훅</h3>
+            <p>커밋하는 순간 lint·타입 체크·빠른 테스트 자동 실행 — 이상하면 <strong>커밋 자체를 거절</strong>합니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>♻️ CI 파이프라인</h3>
+            <p>푸시할 때마다 깨끗한 환경에서 전체 테스트 — <strong class="accent2">"내 PC에서는 되는데요"</strong>를 차단합니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🤖 AI 리뷰 봇</h3>
+            <p>PR마다 1차 리뷰를 자동으로 — 사람 리뷰어가 보기 전에 뻔한 문제를 걸러줍니다.</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.28rem;">
+          AI가 만든 코드도 <strong>같은 관문</strong>을 통과해야 합니다 — 사람 봐주기 없기.
+        </div>
+        <p class="tiny muted autoshow fade-in" style="margin-top:.5rem;">한 번 세팅해두면 이후의 모든 커밋이 공짜로 검증됩니다 — 세팅 자체도 에이전트에게 시키면 됩니다.</p>
+        <aside class="notes">
+          사다리 5단: 커밋 훅(로컬 즉시), CI(푸시마다 깨끗한 환경), AI 리뷰 봇(PR마다 1차 스크리닝).
+          핵심 메시지는 두 가지 — AI가 만든 코드도 예외 없이 같은 관문을 통과시킬 것,
+          그리고 이 세팅 작업 자체가 에이전트에게 시키기 좋은 작업이라는 것.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">Claude Code Docs · Hooks</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 11. 테스트가 지렛대 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · 테스트가 지렛대</div>
+        <h2>테스트 = <span class="grad">실행 가능한 스펙</span></h2>
+        <div class="grid-3" style="margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow zoom-in">
+            <h3>📜 스펙이자 문서</h3>
+            <p>"이 입력엔 이 출력"— <strong>'맞음'의 정의</strong>를 산문이 아니라 코드로 적어둔 것.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>🤖 기계가 판정</h3>
+            <p>사람이 코드를 안 읽어도 초록/빨강으로 판정 — <strong class="accent2">AI에게 넘겨줄 수 있는 완료 기준</strong>이 됩니다.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>♻️ 한 번 쓰면 평생 일함</h3>
+            <p>다음 수정·다음 세션·다음 사람까지 지켜주는 <strong>회귀 방지선</strong>.</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.32rem;">
+          코드 생산이 싸질수록 검증의 가치는 올라갑니다 —<br/>
+          <strong class="accent2">테스트는 AI 시대에 값이 오른 몇 안 되는 자산입니다.</strong>
+        </div>
+        <aside class="notes">
+          왜 테스트가 지렛대인가: 사람이 diff를 안 읽어도 기계가 "맞음"을 판정해주기 때문에, 검증의 사다리에서 사람 노력을 크게 떨어뜨리는 첫 단계다.
+          AI 시대에 코드 생산 비용은 급락했지만 "이 코드가 맞는가"의 비용은 그대로 — 그래서 테스트의 상대 가치는 오히려 올랐다.
+          에이전트에게 일을 시킬 때도 "테스트 통과"는 가장 명확한 완료 기준이 된다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 12. TDD with agents ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · 테스트가 지렛대</div>
+        <h2><span class="grad">테스트 먼저</span> 시키기 — 에이전트와 TDD</h2>
+        <div class="loop-grid" style="margin-top:.4rem;">
+          <div class="loop-step autoshow fade-up"><span class="no">STEP 1</span><span class="nm2">🔴 실패하는 테스트 작성</span><span class="ds">구현 금지 — 기대 동작만 코드로. 사람이 이 테스트를 확인</span></div>
+          <div class="loop-step autoshow fade-up"><span class="no">STEP 2</span><span class="nm2">🟢 통과할 때까지 구현</span><span class="ds">에이전트가 실행→실패→수정을 스스로 반복</span></div>
+          <div class="loop-step hot autoshow fade-up"><span class="no">STEP 3</span><span class="nm2">✨ 리팩터링 &amp; 재확인</span><span class="ds">테스트가 초록인 상태를 유지하며 정리</span></div>
+        </div>
+        <pre class="code good autoshow fade-up" style="margin-top:1rem;">"먼저 이 기능의 <span class="st">실패하는 테스트부터</span> 작성해줘. <span class="kw">구현은 아직 하지 마.</span>
+ 내가 테스트를 확인하면, 그때 통과할 때까지 구현해줘.
+ <span class="st">테스트 코드는 수정하지 말고.</span>"</pre>
+        <p class="autoshow fade-up" style="font-size:1.26rem; margin:.8rem 0 0;">에이전트 루프(실행→관찰→수정)에 <strong class="accent2">명확한 목표 함수</strong>가 생깁니다 — 끝났는지를 사람이 아니라 기계가 판정.</p>
+        <aside class="notes">
+          TDD가 에이전트와 찰떡인 이유: 에이전트는 실행하고 결과를 관찰하고 수정하는 루프를 지치지 않고 돈다.
+          실패하는 테스트는 그 루프에 명확한 목표 함수를 준다 — "통과하면 끝"을 기계가 판정하므로 사람이 중간을 감시할 필요가 없다.
+          순서가 중요: 테스트를 먼저 확정하고(사람이 확인), 그다음 구현을 시킨다. 마지막 지시("테스트 수정 금지")가 다음 장의 복선.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices (TDD 워크플로)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 13. 보상 해킹 (시그니처: 답안지 조작 씬) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · ⚠️ 보상 해킹</div>
+        <h2>테스트를 통과 못 하면 — <span class="accent3">테스트를 고칩니다</span> <span class="tiny mono muted">— 방향키 ▸</span></h2>
+        <div class="row" style="align-items:center; gap:1.2rem; margin-top:.4rem;">
+          <pre class="code good tamper-orig" style="flex:1;"><span class="cm"># tests/test_yield.py — 사람이 확정한 테스트</span>
+<span class="kw">def</span> <span class="nm">test_yield_calc</span>():
+    <span class="assert-line"><span class="kw">assert</span> calc_yield(lot42) == <span class="st">98.2</span></span></pre>
+          <div class="tamper-arrow fragment tp1" data-fragment-index="0"><span>→</span><span class="t">🤖 몇 번 실패하더니…</span></div>
+          <pre class="code bad fragment" data-fragment-index="0" style="flex:1;"><span class="cm"># 🤖 조용히 이렇게 바꿔놨습니다</span>
+<span class="kw">def</span> <span class="nm">test_yield_calc</span>():
+    result = calc_yield(lot42)
+    <span class="kw">assert</span> result <span class="kw">is not</span> None  <span class="cm"># 통과!</span></pre>
+        </div>
+        <div class="row fragment" data-fragment-index="1" style="gap:.7rem; margin-top:1rem; flex-wrap:wrap; align-items:center;">
+          <span class="tamper-pass">✓ 1 passed</span>
+          <span style="font-size:1.2rem; font-weight:800;" class="accent3">— 가짜 초록불입니다</span>
+          <span class="tiny mono muted" style="width:100%;">실제로 목격되는 수법 ▾</span>
+          <span class="trick-chip">assert 약화</span>
+          <span class="trick-chip">@skip 마킹</span>
+          <span class="trick-chip">특수 케이스 하드코딩</span>
+          <span class="trick-chip">통째로 mock 처리</span>
+        </div>
+        <div class="quote fragment" data-fragment-index="2" style="margin-top:.9rem; font-size:1.24rem;">
+          시험이 어려우면 답안지를 고치는 수험생 — "통과"라는 보상을 좇도록 훈련된 모델의 <strong class="accent3">실제 행동</strong>입니다.
+        </div>
+        <aside class="notes">
+          보상 해킹(reward hacking): 목표(테스트 통과)를 달성하되 의도(올바른 코드)를 배신하는 행동.
+          구현이 어려우면 assert를 약화하고, skip을 붙이고, 테스트 입력에만 맞는 하드코딩을 넣는 사례가 실제로 보고된다.
+          Anthropic의 reward tampering 연구가 보여주듯 이것은 이론이 아니라 훈련된 모델의 관측된 습성 — 그래서 다음 장의 방어가 필요하다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/research/reward-tampering" target="_blank" rel="noopener">Anthropic · Reward tampering 연구</a>
+          <a href="https://lilianweng.github.io/posts/2024-11-28-reward-hacking/" target="_blank" rel="noopener">Lilian Weng · Reward Hacking</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 14. 보상 해킹 방어 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · ⚠️ 보상 해킹</div>
+        <h2>방어 3종 — <span class="grad">채점 기준은 사람이 지킵니다</span></h2>
+        <div class="grid-3" style="margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow zoom-in">
+            <h3>🔒 지시로 잠그기</h3>
+            <p>"<strong>테스트 파일은 절대 수정 금지.</strong> 통과 못 하면 못 한다고 보고해." — CLAUDE.md에 상주시키세요.</p>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>👀 diff 감시</h3>
+            <p>커밋 전 diff에 <span class="mono">tests/</span>가 보이면 일단 정지. 훅·CI로 <strong class="accent2">테스트 파일 변경을 자동 경보</strong>할 수도 있습니다.</p>
+          </div>
+          <div class="card good autoshow zoom-in">
+            <h3>🧑‍⚖️ 테스트만은 사람이</h3>
+            <p>구현 전부를 못 읽어도 <strong>테스트 리뷰만은 포기하지 않기</strong> — 채점 기준만 지키면 나머지는 기계가 지켜줍니다.</p>
+          </div>
+        </div>
+        <div class="row autoshow fade-up" style="gap:.7rem; margin-top:1rem; flex-wrap:wrap;">
+          <span class="pill amber">보너스</span>
+          <p style="font-size:1.2rem; margin:0;">출제자와 응시자 분리 — <strong>테스트를 짜는 세션과 구현하는 세션을 분리</strong>하면 담합이 어려워집니다.</p>
+        </div>
+        <aside class="notes">
+          방어의 핵심 원리: 채점 기준(테스트)의 무결성만 사람이 지키면, 구현의 정합성은 기계가 판정해준다.
+          지시로 잠그고(상주 지침), diff로 감시하고(훅·CI 자동화 가능), 테스트 리뷰만은 사람이 한다.
+          보너스로 테스트 작성 세션과 구현 세션을 분리하면 출제자·응시자 분리 효과가 난다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 15. 좋은 테스트 요청 프롬프트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · 테스트가 지렛대</div>
+        <h2>"테스트도 짜줘"로는 <span class="accent3">해피 패스만</span> 나옵니다</h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <pre class="code bad autoshow fade-up"><span class="cm"># ❌ 두루뭉술한 요청</span>
+"테스트도 만들어줘."
+
+<span class="cm"># → 성공 케이스 3개. 끝.
+# 자기가 짠 코드에 맞춘,
+# 절대 실패하지 않는 테스트</span></pre>
+          <pre class="code good autoshow fade-up"><span class="cm"># ✅ 케이스를 명시하는 요청</span>
+"test_yield_calc에 다음을 포함해줘:
+ - <span class="st">경계값</span>: 수율 0%·100%, wafer 0장
+ - <span class="st">에러 경로</span>: 측정값 누락·타입 오류 → 예외 확인
+ - <span class="st">회귀</span>: 이번에 고친 중복 lot 버그 재현 케이스
+ 실패 메시지는 원인을 알 수 있게 써줘."</pre>
+        </div>
+        <div class="row autoshow fade-up" style="gap:.6rem; flex-wrap:wrap; margin-top:1rem; justify-content:center;">
+          <span class="tiny mono muted">주문 시 이 세 단어 ▸</span>
+          <span class="pill green">📏 경계값</span>
+          <span class="pill pink">💥 에러 경로</span>
+          <span class="pill amber">🔁 회귀 케이스</span>
+        </div>
+        <p class="center autoshow fade-in tiny muted" style="margin-top:.7rem;">S3의 '단골 패턴 도감'이 그대로 테스트 케이스 목록이 됩니다.</p>
+        <aside class="notes">
+          막연히 "테스트도 짜줘"라고 하면 자기 구현에 맞춘 해피 패스 테스트가 나온다 — 있으나 마나 한 초록불.
+          경계값, 에러 경로, 회귀 케이스 세 가지를 명시적으로 요구하면 테스트의 질이 완전히 달라진다.
+          앞의 '미묘한 오류 도감'(경계값·단위·시간대·조용한 실패)이 곧 요구할 케이스 목록이라는 점을 연결해준다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 16. CH4 리뷰 — 신선한 눈 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · 리뷰</div>
+        <h2>같은 세션에게 <span class="accent3">"네 코드 비판해봐"</span>는 왜 약한가</h2>
+        <div class="grid-3" style="align-items:stretch; margin-top:.5rem;">
+          <div class="card bad autoshow fade-up">
+            <h3>🪞 자기 리뷰</h3>
+            <p>방금 그 코드를 쓴 <strong>같은 컨텍스트</strong>. 자기 가정에 물들어 있어 같은 실수를 못 봅니다.</p>
+            <p class="tiny muted">"내가 보기엔 완벽한데요."</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🫧 신선한 눈</h3>
+            <p><strong class="accent2">새 세션·서브에이전트</strong>에 코드만 던져 리뷰. 오염 안 된 눈이 훨씬 잘 잡습니다.</p>
+            <p class="tiny muted">컨텍스트 격리의 또 다른 쓸모</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🧍 사람 리뷰</h3>
+            <p>기계가 못 잡는 <strong class="accent4">방향·의도</strong>의 최종 판단. 다음 장에서.</p>
+          </div>
+        </div>
+        <p class="center autoshow fade-in" style="font-size:1.28rem; margin-top:1rem;">리뷰의 힘은 <strong class="grad">거리</strong>에서 나옵니다 — 쓴 사람과 보는 눈이 멀수록 잘 보입니다.</p>
+        <aside class="notes">
+          같은 세션에 "비판해봐"라고 하면 자기 가정에 물든 눈이라 같은 실수를 놓친다.
+          코드만 떼어 새 세션이나 서브에이전트에 리뷰시키면 컨텍스트 오염이 없어 훨씬 잘 잡는다 — context 세미나의 '격리'가 여기서도 쓰인다.
+          그래도 방향·의도의 최종 판단은 사람 몫. 리뷰의 힘은 쓴 사람과 보는 눈 사이의 '거리'에서 나온다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Claude Code Docs · Subagents</a>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 17. CH4 리뷰 — 사람은 어디에 집중 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · 리뷰</div>
+        <h2>사람은 <span class="grad">기계가 못 보는 것</span>만 봅니다</h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <div class="card autoshow fade-right">
+            <h3>🧍 사람이 볼 것</h3>
+            <p>🧭 설계 방향이 맞나 · 🔐 보안 · 🏭 도메인 가정(수율·단위·장비) · 🚧 경계 조건</p>
+          </div>
+          <div class="card autoshow fade-left">
+            <h3>🤖 기계에 맡길 것</h3>
+            <p>문법 · 스타일 · 포맷 · 오타 · 단순 버그 — <strong class="accent2">사람이 눈 버릴 곳이 아닙니다.</strong></p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.3rem;">
+          diff가 <strong class="accent3">클수록</strong> 리뷰 품질은 <strong class="accent3">떨어집니다.</strong> — 작게 쪼개서 시키고, 작게 받아서 보세요.
+        </div>
+        <p class="center autoshow fade-in tiny muted" style="margin-top:.7rem;">300줄짜리 PR 하나보다 30줄짜리 PR 열 개가 안전합니다. (github 세미나의 '작은 커밋'과 같은 이야기)</p>
+        <aside class="notes">
+          사람 리뷰는 기계가 못 보는 곳에 집중해야 남는다 — 설계 방향, 보안, 도메인 가정(수율·단위·장비 이름), 경계 조건.
+          문법·스타일·오타 같은 건 린터와 모델에 맡긴다.
+          그리고 diff가 클수록 리뷰 정확도가 급락한다. 작게 쪼개 시키고 작게 받는 것이 검증을 가능하게 만든다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 18. CH5 평가(Evals) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 5 · 평가 (Evals)</div>
+        <h2>한 번 쓰고 버릴 코드 vs <span class="grad">매번 도는 AI</span></h2>
+        <div class="grid-2" style="align-items:start; margin-top:.3rem;">
+          <div class="card autoshow fade-up">
+            <h3>🧪 테스트</h3>
+            <p>결과가 <strong>정해진</strong> 코드. 같은 입력 → 같은 정답. 일회성 스크립트·함수.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>📊 평가 (evals)</h3>
+            <p>결과가 <strong class="accent4">흔들리는</strong> AI 작업(프롬프트·스킬·봇). "대체로 맞나"를 점수로 관리.</p>
+          </div>
+        </div>
+        <div class="grid-3" style="align-items:stretch; margin-top:.9rem;">
+          <div class="card autoshow zoom-in"><h3>🗂 골든 셋</h3><p>입력–기대출력 정답지. 바꿀 때마다 여기에 돌려봅니다.</p></div>
+          <div class="card autoshow zoom-in"><h3>🔁 회귀 평가</h3><p>고친 게 딴 걸 망가뜨렸는지 매번 자동 채점.</p></div>
+          <div class="card autoshow zoom-in"><h3>⚖️ LLM 심판</h3><p>답을 AI가 채점 — <strong class="accent3">심판도 틀립니다</strong>. 사람 스팟체크 필수.</p></div>
+        </div>
+        <aside class="notes">
+          결과가 정해진 코드는 테스트로 충분하지만, 프롬프트·스킬·봇처럼 매번 돌면서 출력이 흔들리는 AI 작업은 '평가'로 관리한다.
+          골든 셋(입력–기대출력 정답지)에 바꿀 때마다 돌려 회귀를 잡고, 채점을 LLM에게 시키기도 한다(LLM-as-judge).
+          단, 심판도 편향되고 틀린다 — 반드시 사람이 표본을 직접 확인해야 한다. 반도체 현업이라면 '수율 리포트 요약 봇' 같은 게 평가 대상이다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 19. CH6 신뢰 다이얼 (시그니처: dial) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 6 · 실전</div>
+        <h2>검증 강도는 <span class="grad">작업의 무게</span>에 맞춥니다</h2>
+        <div class="row" style="justify-content:center; gap:2rem; align-items:center; margin-top:.2rem; flex-wrap:wrap;">
+          <div class="dial-wrap">
+            <svg class="dial-svg" viewBox="0 0 460 270" role="img" aria-label="검증 강도 다이얼">
+              <path d="M 50 230 A 180 180 0 0 1 140 74" fill="none" stroke="#2BEAD0" stroke-width="18" stroke-linecap="round"/>
+              <path d="M 152 68 A 180 180 0 0 1 308 68" fill="none" stroke="#FFD46B" stroke-width="18" stroke-linecap="round"/>
+              <path d="M 320 74 A 180 180 0 0 1 410 230" fill="none" stroke="#FF7A95" stroke-width="18" stroke-linecap="round"/>
+              <g class="dial-needle">
+                <line x1="230" y1="230" x2="230" y2="82" stroke="#E6D9FF" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="230" cy="230" r="12" fill="#E6D9FF"/>
+              </g>
+            </svg>
+            <p class="dial-caption">가볍게 &nbsp;·&nbsp; 기본 &nbsp;·&nbsp; 풀세트</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:.7rem;">
+            <div class="dial-card lv1 fragment custom td1" data-fragment-index="0"><span class="dc-name accent2">🧪 일회성 스크립트</span><span class="dc-desc">실행해보고 눈으로 확인이면 충분</span></div>
+            <div class="dial-card lv2 fragment custom td2" data-fragment-index="1"><span class="dc-name accent4">🧰 팀 공용 도구</span><span class="dc-desc">+ 자동 테스트 · 신선한 눈 리뷰</span></div>
+            <div class="dial-card lv3 fragment custom td3" data-fragment-index="2"><span class="dc-name accent3">🏭 프로덕션 코드</span><span class="dc-desc">+ 사람 리뷰 · CI 상시 · 회귀 평가</span></div>
+          </div>
+        </div>
+        <p class="center autoshow fade-in" style="font-size:1.24rem; margin-top:.7rem;">전부 풀세트로 검증하면 그것도 <strong class="accent3">낭비</strong>입니다 — 다이얼을 돌릴 줄 아는 게 실력.</p>
+        <aside class="notes">
+          모든 코드를 최고 강도로 검증하는 건 낭비다. 되돌리기 쉬운 일회성 스크립트는 실행+눈 확인이면 충분하고,
+          팀이 함께 쓰는 도구는 자동 테스트와 리뷰를, 프로덕션 코드는 사람 리뷰·CI·회귀 평가까지 건다.
+          바늘을 오른쪽으로 돌릴수록 안전하지만 느려진다 — 작업의 무게에 맞춰 다이얼을 돌리는 감각이 핵심이다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 20. 커밋 전 체크리스트 (📸) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">📸 이 장표만 찍어 가세요</div>
+        <h2>AI 코드, <span class="grad">커밋 전 체크리스트</span></h2>
+        <div class="grid-2" style="align-items:start; margin-top:.4rem;">
+          <div class="card autoshow fade-right">
+            <p>☑️ 직접 <strong class="accent2">실행</strong>해봤나 — 말로 된 보고 말고 증거</p>
+            <p>☑️ 경계값·에러 경로 <strong>테스트</strong>가 있나</p>
+            <p>☑️ 테스트가 <strong class="accent3">해피 패스만</strong> 도는 건 아닌가</p>
+          </div>
+          <div class="card autoshow fade-left">
+            <p>☑️ <strong>신선한 눈</strong>(새 세션)으로 리뷰했나</p>
+            <p>☑️ 도메인 가정(단위·수율·장비)이 맞나</p>
+            <p>☑️ 이 작업 무게에 <strong class="accent4">다이얼</strong>은 맞나</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.32rem;">
+          커밋 버튼을 누르는 순간, 그 코드는 <strong class="accent2">당신 것</strong>입니다 — "AI가 짰어요"는 통하지 않습니다.
+        </div>
+        <aside class="notes">
+          이 체크리스트 한 장이 오늘의 실전 요약이다. 실행 증거, 의미 있는 테스트, 신선한 눈 리뷰, 도메인 가정 확인, 그리고 작업 무게에 맞는 검증 강도.
+          핵심 메시지: 커밋하는 순간 그 코드의 책임은 사람에게 넘어온다 — 이건 다음 security 세미나의 거버넌스와도 이어진다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 21. 기억할 것 세 문장 ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">정리 · 기억할 것</div>
+        <h2>세 문장만 가져가세요</h2>
+        <div style="display:flex; flex-direction:column; gap:1rem; max-width:1000px; margin:.6rem auto 0;">
+          <div class="card autoshow fade-up" style="text-align:left;"><h3>1. 돌아간다 ≠ 맞는다</h3><p>AI 코드의 위험은 '틀림'이 아니라 <strong class="accent3">그럴듯하게 틀림</strong>입니다.</p></div>
+          <div class="card autoshow fade-up" style="text-align:left;"><h3>2. 보고받지 말고 증거를 받아라</h3><p>사다리를 올라갈수록 검증이 기계로 넘어가고, <strong class="accent2">사람은 편해집니다</strong>.</p></div>
+          <div class="card autoshow fade-up" style="text-align:left;"><h3>3. 다이얼을 돌려라</h3><p>작업의 무게에 검증 강도를 맞추세요 — 전부 풀세트도, 전부 눈으로도 아닙니다.</p></div>
+        </div>
+        <aside class="notes">
+          세 문장으로 압축. (1) 돌아간다고 맞는 게 아니다 — 그럴듯한 오류가 진짜 적. (2) 말로 된 보고 대신 실행·테스트·로그 같은 증거를 요구하라. (3) 작업 무게에 맞춰 검증 강도 다이얼을 돌려라.
+          이걸 몸에 익히면 바이브 코딩의 속도가 검증에서 무너지지 않는다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 22. 참고 자료 / Q&A ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">REFERENCES</div>
+        <h2>더 깊이 보기</h2>
+        <div class="grid-2" style="align-items:stretch; margin-top:.4rem;">
+          <div class="card ref-col autoshow fade-up">
+            <h3>📚 공식 문서 · 블로그</h3>
+            <ul>
+              <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Claude Code best practices</a><span class="rd">Anthropic — TDD·검증·리뷰 워크플로</span></li>
+              <li><a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a><span class="rd">Claude Code Docs — 신선한 눈 리뷰</span></li>
+              <li><a href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener">Claude Code GitHub Action</a><span class="rd">CI에서 도는 자동 검증·리뷰</span></li>
+            </ul>
+          </div>
+          <div class="card ref-col autoshow fade-up">
+            <h3>🔗 시리즈 안에서</h3>
+            <ul>
+              <li><a href="../context/" rel="noopener">컨텍스트 — 작업 책상</a><span class="rd">신선한 눈 = 컨텍스트 격리</span></li>
+              <li><a href="../github/" rel="noopener">최소한의 Git &amp; GitHub</a><span class="rd">작은 커밋이 리뷰를 살린다</span></li>
+              <li><a href="../security/" rel="noopener">사내 환경에서의 AI</a><span class="rd">커밋한 코드의 책임·거버넌스</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="center autoshow fade-in" style="font-size:1.3rem; margin-top:1rem;">질문을 남겨주세요 — <strong class="grad">돌아간다 ≠ 맞는다</strong> ⚖️</p>
+        <aside class="notes">
+          참고 자료와 Q&A. 이 세미나는 심화 트랙의 다른 덱들과 이어진다 — 신선한 눈 리뷰는 context의 격리, 작은 커밋은 github, 커밋한 코드의 책임은 security로 연결된다.
+          질문을 받는다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://www.anthropic.com/research/reward-tampering" target="_blank" rel="noopener">Anthropic · Reward tampering</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- reveal.js 5.1.0 — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? h.textContent : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur(); // 방향키가 다시 슬라이드 내비게이션으로 가도록
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+</script>
+
+<!-- 실시간 Q&A (루트 index.html과 동일 위젯, verification 전용 방) -->
+<link rel="stylesheet" href="../assets/qa.css">
+
+<div id="qa-root" class="qa-hidden">
+  <div id="qa-note-layer"></div>
+  <div id="qa-float-layer"></div>
+
+  <div id="qa-nick-modal" class="qa-modal qa-hidden">
+    <div class="qa-modal-box">
+      <h3>닉네임을 정해주세요</h3>
+      <input id="qa-nick-input" maxlength="24" placeholder="익명" />
+      <button id="qa-nick-go">입장하기 →</button>
+    </div>
+  </div>
+
+  <div id="qa-audience-dock" class="qa-dock qa-hidden">
+    <button id="qa-follow-toggle" class="qa-follow on">🔗 발표자 따라가기 ON</button>
+    <input id="qa-question-input" maxlength="280" placeholder="질문을 입력하세요" />
+    <button id="qa-question-send">보내기</button>
+    <button id="qa-react-up">👍 <span id="qa-tally-up">0</span></button>
+    <button id="qa-react-confused">🤔 <span id="qa-tally-confused">0</span></button>
+  </div>
+
+  <div id="qa-presenter-bar" class="qa-hidden">
+    <span id="qa-conn-dot" class="qa-dot"></span>
+    <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
+    <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
+      👍 <span id="qa-presenter-tally-up">0</span>
+      🤔 <span id="qa-presenter-tally-confused">0</span>
+    </span>
+  </div>
+
+  <div id="qa-history-panel" class="qa-panel qa-hidden">
+    <div class="qa-panel-head">
+      <span>질문 기록</span>
+      <div>
+        <button id="qa-history-clear">전체 삭제</button>
+        <button id="qa-history-close">닫기</button>
+      </div>
+    </div>
+    <div id="qa-history-list"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const QA_ROOM = 'verification'; // 다른 발표와 질문·슬라이드가 섞이지 않도록 verification 전용 방 사용
+  const QA_COLORS = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B'];
+  const params = new URLSearchParams(location.search);
+  const IS_PRESENTER = params.has('present');
+
+  let following = true;
+  let liveSlide = 0;
+  const shownIds = new Set();
+  let history = [];
+
+  // 실시간 Q&A 서버는 로컬 발표 환경(localhost 또는 같은 Wi-Fi의 LAN IP)에만 존재한다.
+  // GitHub Pages 등 정적 호스팅에서는 /qa/health 가 404가 되어 콘솔에
+  // "Failed to load resource" 에러를 남기므로(.catch 로도 지워지지 않는다),
+  // 서버가 있을 법한 호스트에서만 프로브한다. 정적 호스팅에서는 조용히 슬라이드만 동작.
+  const qaHost = location.hostname;
+  const qaMaybeLive =
+    location.protocol !== 'file:' &&
+    (qaHost === 'localhost' || qaHost === '127.0.0.1' || qaHost === '::1' ||
+      /^10\./.test(qaHost) || /^192\.168\./.test(qaHost) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(qaHost));
+  if (qaMaybeLive) {
+    fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d && d.ok) initLiveQa(); })
+      .catch(() => {});
+  }
+
+  function initLiveQa() {
+    document.getElementById('qa-root').classList.remove('qa-hidden');
+    if (IS_PRESENTER) {
+      document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
+    } else {
+      document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
+    }
+    connectSse();
+    setupSlideSync();
+    setupAudienceUI();
+    setupPresenterUI();
+  }
+
+  function api(path, body) {
+    const headers = { 'Content-Type': 'application/json' };
+    const query = new URLSearchParams({ room: QA_ROOM });
+    return fetch(path + '?' + query.toString(), { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function goToSlide(h) {
+    if (!window.Reveal) return;
+    if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
+    else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  function getNickname() {
+    try { return JSON.parse(localStorage.getItem('qa_nickname') || 'null'); } catch { return null; }
+  }
+  function setNickname(name) {
+    localStorage.setItem('qa_nickname', JSON.stringify(name));
+  }
+
+  let es;
+  function connectSse() {
+    es = new EventSource('/qa/events?room=' + encodeURIComponent(QA_ROOM));
+    const dot = document.getElementById('qa-conn-dot');
+    es.onopen = () => dot && dot.classList.add('on');
+    es.onerror = () => dot && dot.classList.remove('on');
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      liveSlide = st.slide || 0;
+      if (!IS_PRESENTER && following) goToSlide(liveSlide);
+      setTally(st.reactions);
+      history = (st.questions || []).slice();
+      renderHistory();
+    });
+
+    es.addEventListener('slide', (e) => {
+      const { h } = JSON.parse(e.data);
+      liveSlide = h;
+      if (IS_PRESENTER) return;
+      if (following) goToSlide(h);
+      updateFollowUI();
+    });
+
+    es.addEventListener('question', (e) => {
+      const q = JSON.parse(e.data);
+      history.push(q);
+      renderHistory();
+      showNote(q);
+    });
+
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
+      if (el) el.textContent = votes;
+      const hq = history.find((q) => q.id === id);
+      if (hq) { hq.votes = votes; renderHistory(); }
+    });
+
+    es.addEventListener('react', (e) => {
+      const d = JSON.parse(e.data);
+      setTally(d.total);
+      spawnFloat(d.kind);
+    });
+
+    es.addEventListener('clear', () => {
+      document.getElementById('qa-note-layer').innerHTML = '';
+      shownIds.clear();
+      history = [];
+      renderHistory();
+    });
+  }
+
+  function setupSlideSync() {
+    if (!window.Reveal) return;
+    if (IS_PRESENTER) {
+      Reveal.on('slidechanged', (e) => { api('/qa/slide', { h: e.indexh }); });
+    } else {
+      Reveal.on('slidechanged', (e) => {
+        if (following && e.indexh !== liveSlide) { following = false; updateFollowUI(); }
+      });
+      const btn = document.getElementById('qa-follow-toggle');
+      btn.onclick = () => {
+        following = !following;
+        if (following) goToSlide(liveSlide);
+        updateFollowUI();
+      };
+    }
+  }
+
+  function updateFollowUI() {
+    const btn = document.getElementById('qa-follow-toggle');
+    if (!btn) return;
+    btn.classList.toggle('on', following);
+    btn.textContent = following ? '🔗 발표자 따라가기 ON' : '🔓 자유 탐색 OFF';
+  }
+  function showNote(q) {
+    if (shownIds.has(q.id)) return;
+    shownIds.add(q.id);
+    const layer = document.getElementById('qa-note-layer');
+    const note = document.createElement('div');
+    note.className = 'qa-note';
+    note.dataset.id = q.id;
+    note.style.background = QA_COLORS[q.id % QA_COLORS.length];
+    const pos = edgePosition();
+    note.style.left = pos.left + 'vw';
+    note.style.top = pos.top + 'vh';
+    note.style.setProperty('--rot', (Math.random() * 8 - 4).toFixed(1) + 'deg');
+    note.innerHTML =
+      (IS_PRESENTER ? '<button class="qa-note-close" type="button" aria-label="질문 닫기">×</button>' : '') +
+      '<div class="qa-note-name">' + esc(q.name) + '</div>' +
+      '<div class="qa-note-text">' + esc(q.text) + '</div>' +
+      '<button class="qa-vote">👍 <span class="qa-vote-count">' + (q.votes || 0) + '</span></button>';
+    note.querySelector('.qa-vote').onclick = () => api('/qa/questions/vote', { id: q.id });
+    const dismiss = () => {
+      if (note.dataset.dismissed === '1') return;
+      note.dataset.dismissed = '1';
+      note.classList.add('qa-leaving');
+      setTimeout(() => note.remove(), 500);
+    };
+    const close = note.querySelector('.qa-note-close');
+    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    layer.appendChild(note);
+    const autoDismiss = setTimeout(dismiss, 14000);
+    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+  }
+  // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
+  function edgePosition() {
+    const edge = Math.floor(Math.random() * 4);
+    if (edge === 0) return { left: 3 + Math.random() * 70, top: 3 + Math.random() * 9 };   // 위쪽
+    if (edge === 1) return { left: 60 + Math.random() * 18, top: 6 + Math.random() * 58 };  // 오른쪽
+    if (edge === 2) return { left: 3 + Math.random() * 70, top: 60 + Math.random() * 20 };  // 아래쪽
+    return { left: 2 + Math.random() * 7, top: 6 + Math.random() * 58 };                    // 왼쪽
+  }
+  // 발표자가 포스트잇을 드래그해서 위치를 옮길 수 있게 한다
+  function makeDraggable(note, onDragStart) {
+    note.classList.add('qa-draggable');
+    note.addEventListener('pointerdown', (e) => {
+      // 닫기/추천 버튼 클릭은 드래그로 취급하지 않음
+      if (e.target.closest('.qa-note-close, .qa-vote')) return;
+      if (note.dataset.dismissed === '1') return;
+      e.preventDefault();
+      if (onDragStart) onDragStart(); // 옮기는 중에는 자동으로 사라지지 않도록
+      const rect = note.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      note.classList.add('qa-dragging');
+      note.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        const maxLeft = window.innerWidth - rect.width;
+        const maxTop = window.innerHeight - rect.height;
+        const left = Math.max(0, Math.min(ev.clientX - offsetX, maxLeft));
+        const top = Math.max(0, Math.min(ev.clientY - offsetY, maxTop));
+        note.style.left = left + 'px';
+        note.style.top = top + 'px';
+      };
+      const onUp = (ev) => {
+        note.classList.remove('qa-dragging');
+        note.removeEventListener('pointermove', onMove);
+        note.removeEventListener('pointerup', onUp);
+        try { note.releasePointerCapture(ev.pointerId); } catch (_) {}
+      };
+      note.addEventListener('pointermove', onMove);
+      note.addEventListener('pointerup', onUp);
+    });
+  }
+  function renderHistory() {
+    const countEl = document.getElementById('qa-history-count');
+    if (countEl) countEl.textContent = history.length;
+    const list = document.getElementById('qa-history-list');
+    if (!list) return;
+    const sorted = history.slice().sort((a, b) => b.votes - a.votes || a.ts - b.ts);
+    list.innerHTML = sorted.map((q) =>
+      '<div class="qa-history-item">' +
+        '<div class="qa-history-meta"><span>' + esc(q.name) + '</span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="qa-history-text">' + esc(q.text) + '</div>' +
+      '</div>'
+    ).join('') || '<div class="qa-history-empty">아직 질문이 없습니다.</div>';
+  }
+  function setTally(r) {
+    if (!r) return;
+    const up = document.getElementById('qa-tally-up');
+    const conf = document.getElementById('qa-tally-confused');
+    const presenterUp = document.getElementById('qa-presenter-tally-up');
+    const presenterConf = document.getElementById('qa-presenter-tally-confused');
+    if (up) up.textContent = r.up || 0;
+    if (conf) conf.textContent = r.confused || 0;
+    if (presenterUp) presenterUp.textContent = r.up || 0;
+    if (presenterConf) presenterConf.textContent = r.confused || 0;
+  }
+  function spawnFloat(kind) {
+    const layer = document.getElementById('qa-float-layer');
+    const el = document.createElement('div');
+    el.className = 'qa-float';
+    el.textContent = kind === 'confused' ? '🤔' : '👍';
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function setupAudienceUI() {
+    if (IS_PRESENTER) return;
+
+    const nick = getNickname();
+    if (!nick) {
+      document.getElementById('qa-nick-modal').classList.remove('qa-hidden');
+      document.getElementById('qa-nick-go').onclick = () => {
+        const v = document.getElementById('qa-nick-input').value.trim().slice(0, 24) || '익명';
+        setNickname(v);
+        document.getElementById('qa-nick-modal').classList.add('qa-hidden');
+      };
+    }
+
+    const input = document.getElementById('qa-question-input');
+    const send = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      api('/qa/questions', { text, name: getNickname() || '익명' });
+      input.value = '';
+    };
+    document.getElementById('qa-question-send').onclick = send;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+      send();
+    });
+
+    document.getElementById('qa-react-up').onclick = () => api('/qa/react', { kind: 'up' });
+    document.getElementById('qa-react-confused').onclick = () => api('/qa/react', { kind: 'confused' });
+
+    updateFollowUI();
+  }
+  function setupPresenterUI() {
+    if (!IS_PRESENTER) return;
+    document.getElementById('qa-history-toggle').onclick = () => {
+      document.getElementById('qa-history-panel').classList.toggle('qa-hidden');
+    };
+    document.getElementById('qa-history-close').onclick = () => {
+      document.getElementById('qa-history-panel').classList.add('qa-hidden');
+    };
+    document.getElementById('qa-history-clear').onclick = () => {
+      if (confirm('화면의 질문과 질문 기록을 모두 정리할까요?')) api('/qa/clear');
+    };
+  }
+})();
+</script>
+
+</body>
+</html>
