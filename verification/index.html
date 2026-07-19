@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI가 쓴 코드를 믿는 법 — 검증·테스트·평가 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="AI가 쓴 코드는 '틀리게'가 아니라 '그럴듯하게' 틀린다. 돌아간다 ≠ 맞는다 — 검증의 사다리, 테스트와 보상 해킹, 리뷰, 평가(Evals), 신뢰 다이얼까지 바이브 코딩의 속도를 지키는 검증 전략 프레젠테이션." />
+  <meta name="keywords" content="AI 코드 검증, 테스트, 평가, evals, 바이브 코딩, vibe coding, TDD, 보상 해킹, reward hacking, LLM-as-judge, 코드 리뷰, AI 에이전트" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://geniuskey.github.io/vibe-coding/verification/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="AI가 쓴 코드를 믿는 법 — 검증·테스트·평가" />
+  <meta property="og:description" content="돌아간다 ≠ 맞는다. 검증의 사다리·테스트·보상 해킹 방어·리뷰·평가(Evals)·신뢰 다이얼 — 바이브 코딩의 속도를 지키는 검증 전략." />
+  <meta property="og:url" content="https://geniuskey.github.io/vibe-coding/verification/" />
+  <meta property="og:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI가 쓴 코드를 믿는 법 — 검증·테스트·평가" />
+  <meta name="twitter:description" content="돌아간다 ≠ 맞는다 — 검증의 사다리부터 신뢰 다이얼까지." />
+  <meta name="twitter:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "AI가 쓴 코드를 믿는 법 — 검증·테스트·평가",
+    "headline": "AI가 쓴 코드를 믿는 법 — 검증·테스트·평가 | 바이브 코딩 세미나",
+    "description": "AI가 쓴 코드는 그럴듯하게 틀린다. 검증의 사다리, 테스트와 보상 해킹 방어, 리뷰, 평가(Evals), 신뢰 다이얼까지 — 바이브 코딩의 속도를 지키는 검증 전략 프레젠테이션.",
+    "url": "https://geniuskey.github.io/vibe-coding/verification/",
+    "image": "https://geniuskey.github.io/vibe-coding/og-image.png",
+    "inLanguage": "ko",
+    "datePublished": "2026-07",
+    "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
+    "isPartOf": "https://geniuskey.github.io/vibe-coding/",
+    "keywords": "AI 코드 검증, 테스트, 평가, evals, TDD, 보상 해킹, LLM-as-judge, 코드 리뷰, 바이브 코딩"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 리셋 CSS + 인라인 폰트 + reveal.js 라이브러리는 원본 index.html에서 그대로 재사용 -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    /* gradient mesh background — 원본 데크와 동일한 분위기 */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    /* HARD RULE: every text descendant defaults to pure white. */
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
+      #tocSelect { width: auto; max-width: 42vw; }
+    }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    /* flex 컨테이너에서 chip이 가로로 늘어나지 않도록 */
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* animated gradient text */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    /* card — glassmorphism */
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* code / chat block */
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal — 원본과 동일한 규약 ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+    .autoshow:nth-child(7) { animation-delay: .95s; }
+    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+
+    /* ========= 시뮬레이션 타임라인 ========= */
+    .sim-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: 0; padding: 0; }
+    .sim-list > li { margin: 0; }
+    .sim-line {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .55rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.3);
+      background: rgba(230,236,249,0.05);
+      font-size: 1.14rem !important;
+    }
+    .sim-line .tok { margin-left: auto; font-weight: 800; font-size: 1.05rem; white-space: nowrap; padding-left: .8rem; }
+
+    /* ========= 문제 리스트 (미묘한 오류 도감) ========= */
+    .prob-list { display: flex; flex-direction: column; gap: .55rem; }
+    .prob-item {
+      display: flex; align-items: baseline; gap: 1.1rem;
+      padding: .65rem 1.2rem; border-radius: 12px;
+      border: 1px solid rgba(255,122,149,0.35);
+      background: rgba(80,25,45,0.25);
+    }
+    .prob-item .pname { font-weight: 800; font-size: 1.24rem; white-space: nowrap; min-width: 8em; }
+    .prob-item .pdesc { font-size: 1.1rem; color: #E8ECF5 !important; }
+
+    /* ========= 성능/속도 공식 ========= */
+    .formula { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; margin: 1rem 0; }
+    .fx-box {
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      background: rgba(20,22,44,.55);
+      border: 1px solid rgba(155,130,255,.35); border-radius: 16px;
+      padding: .85rem 1.3rem;
+    }
+    .fx-box .fx-name { font-size: 1.22rem; font-weight: 800; }
+    .fx-box .fx-val { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; color: #fff; }
+    .fx-box.dim .fx-val { color: #FF8A96; }
+    .fx-box.hero { border-color: rgba(43,234,208,.7); box-shadow: 0 0 30px rgba(43,234,208,.2); }
+    .fx-op { font-size: 2.2rem; font-weight: 800; color: var(--fg-soft) !important; }
+
+    /* ========= 단계 루프 (TDD) ========= */
+    .loop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .loop-step {
+      display: flex; flex-direction: column; gap: .25rem; align-items: flex-start;
+      padding: .7rem .9rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.4);
+      background: rgba(230,236,249,0.06);
+    }
+    .loop-step .no { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800; color: #B5A1FF !important; }
+    .loop-step .nm2 { font-size: 1.12rem; font-weight: 800; }
+    .loop-step .ds { font-size: .95rem; color: #C9D2E4 !important; }
+    .loop-step.hot { border-color: rgba(43,234,208,.65); background: rgba(43,234,208,.08); }
+    .loop-step.hot .no { color: #5BFFE0 !important; }
+
+    /* ========= 경고 배너 (knowledge 덱과 동일) ========= */
+    .warn-banner {
+      display: flex; gap: .9rem; align-items: center;
+      background: linear-gradient(90deg, rgba(120,20,35,0.5), rgba(70,18,40,0.35));
+      border: 1.5px solid rgba(255,77,94,0.7);
+      border-radius: 14px;
+      padding: .7rem 1.1rem;
+      font-size: 1.22rem; font-weight: 700;
+    }
+    .warn-banner .wb-icon { font-size: 1.8rem; flex: 0 0 auto; }
+
+    /* ========= 비교 테이블 (knowledge 덱과 동일) ========= */
+    .gh-table { width: 100%; border-collapse: collapse; }
+    .gh-table th, .gh-table td {
+      padding: .5rem .9rem; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.08rem; line-height: 1.45;
+    }
+    .gh-table th { font-family: 'JetBrains Mono', monospace; font-size: .9rem; letter-spacing: .05em; color: #B5A1FF !important; }
+
+    /* ========= 치트시트 (knowledge 덱과 동일 + 체크 변형) ========= */
+    .cheat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; }
+    .cheat {
+      display: flex; align-items: baseline; gap: .7rem;
+      font-size: .98rem; line-height: 1.4;
+      padding: .42rem .8rem; border-radius: 10px;
+      background: rgba(20,22,44,0.5);
+      border: 1px solid rgba(155,130,255,0.28);
+    }
+    .cheat .ct { flex: 0 0 6em; font-weight: 800; color: #CBBDFF !important; font-size: .9rem; }
+    .cheat .cp { color: #E8ECF5 !important; }
+    .cheat .cp::before { content: "💬 "; }
+    .cheat.chk .cp::before { content: "☑ "; color: #5BFFE0; }
+
+    /* ========= 곡선 SVG 공통 ========= */
+    .reveal section svg text {
+      paint-order: stroke fill;
+      stroke: #06080F;
+      stroke-width: 1.2px;
+      stroke-linejoin: round;
+    }
+    .curve-draw { stroke-dasharray: 620; stroke-dashoffset: 620; }
+    section.present .curve-draw { animation: curveDraw 1.8s ease-out .4s forwards; }
+    @keyframes curveDraw { to { stroke-dashoffset: 0; } }
+
+    /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
+    .slide-refs {
+      position: absolute; left: 56px; bottom: 12px; z-index: 3;
+      display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
+      max-width: 66%;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      opacity: .8;
+    }
+    .slide-refs .rl { color: #9BA6C0 !important; font-weight: 800; letter-spacing: .12em; }
+    .slide-refs a {
+      color: #8FF5E2 !important; text-decoration: none !important;
+      border-bottom: 1px dotted rgba(91,255,224,.45); white-space: nowrap;
+    }
+    .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
+
+    /* ========= 참고자료 슬라이드 ========= */
+    .ref-col h3 { font-size: 1.3rem; }
+    .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+    .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
+    .ref-col li a { font-weight: 700; }
+    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
+
+    /* ==================================================================
+       ▼▼ verification 덱 전용 시그니처 컴포넌트 4종 ▼▼
+       ================================================================== */
+
+    /* ========= ① 판결 씬 (S2) — 그럴듯함의 함정 =========
+       초록 체크가 쌓인 뒤, 스캔 라인이 지나가며 미묘한 버그 한 줄이
+       분홍으로 드러난다. */
+    .verdict-card { position: relative; }
+    .verdict-card pre.code { font-size: 1.08rem; }
+    .verdict-card::after {
+      content: ""; position: absolute; left: 6px; right: 6px; top: 0; height: 3px;
+      border-radius: 3px; opacity: 0; pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,122,149,0.95), transparent);
+      box-shadow: 0 0 18px rgba(255,122,149,0.8);
+    }
+    section:has(.vd-reveal.visible) .verdict-card::after { animation: vdScan 1.1s ease forwards; }
+    @keyframes vdScan { 0% { opacity: 1; top: 4%; } 100% { opacity: 0; top: 94%; } }
+    .bugline {
+      border-radius: 6px; padding: 0 .15em;
+      transition: background .6s ease .55s, box-shadow .6s ease .55s;
+    }
+    section:has(.vd-reveal.visible) .bugline {
+      background: rgba(255,122,149,0.22);
+      box-shadow: 0 0 0 1.5px rgba(255,122,149,0.85);
+    }
+    .vd-badges { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .vd-badge {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .34em .9em; border-radius: 999px; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800;
+      background: rgba(13,61,56,0.92); border: 1px solid rgba(43,234,208,0.8);
+      color: #C5FFF5 !important; text-shadow: none !important;
+    }
+    .vd-tag {
+      display: inline-flex; align-items: center; gap: .5em;
+      padding: .45em 1em; border-radius: 12px;
+      background: rgba(74,26,38,0.92); border: 1.5px solid rgba(255,122,149,0.85);
+      color: #FFD0DA !important; font-size: 1.12rem; font-weight: 800;
+      box-shadow: 0 0 26px rgba(255,122,149,0.25);
+    }
+
+    /* ========= ② 검증의 사다리 (S8) =========
+       아래→위로 쌓이는 계단. 단마다 '사람 노력'(분홍)과 '신뢰'(청록)
+       미니 게이지가 반대로 움직인다. */
+    .vlad-wrap { display: flex; gap: 1.6rem; align-items: stretch; justify-content: center; }
+    .vladder { display: flex; flex-direction: column-reverse; gap: .5rem; }
+    .vrung {
+      display: flex; align-items: center; gap: .9rem;
+      width: 660px; padding: .55rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(155,130,255,0.4);
+      background: rgba(40,30,80,0.25);
+      margin-left: calc((var(--i, 1) - 1) * 46px);
+    }
+    .vrung .vno {
+      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: .95rem;
+      color: #B5A1FF !important; width: 1.3em; flex: 0 0 auto;
+    }
+    .vrung .vname { font-size: 1.22rem; font-weight: 800; white-space: nowrap; }
+    .vrung .vdesc { font-size: .92rem; color: #C9D2E4 !important; }
+    .vrung.top { border-color: rgba(43,234,208,0.7); background: rgba(15,60,55,0.35); }
+    .vrung.top .vno { color: #5BFFE0 !important; }
+    .vmeter { margin-left: auto; display: flex; flex-direction: column; gap: .28rem; width: 168px; flex: 0 0 auto; }
+    .vm-row { display: flex; align-items: center; gap: .45rem; }
+    .vm-lab {
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 800;
+      width: 3.2em; flex: 0 0 auto; color: #9BA6C0 !important; text-shadow: none !important;
+    }
+    .vm-bar {
+      flex: 1; height: 9px; border-radius: 5px; overflow: hidden;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.10);
+    }
+    .vm-bar i { display: block; height: 100%; width: var(--w, 0%); border-radius: 5px; }
+    .vm-effort i { background: linear-gradient(90deg, rgba(255,122,149,.9), rgba(255,122,149,.55)); }
+    .vm-trust  i { background: linear-gradient(90deg, rgba(43,234,208,.9), rgba(43,234,208,.55)); }
+    .vlad-axis {
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: .4rem 0; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; font-weight: 800; text-align: center; white-space: nowrap;
+    }
+
+    /* ========= ③ 답안지 조작 씬 (S13) — 보상 해킹 =========
+       원래 테스트의 assert가 취소선으로 죽고, 약화된 테스트와
+       '가짜 초록불' 배지가 나타난다. */
+    .assert-line { transition: opacity .5s ease, filter .5s ease; }
+    section:has(.tp1.visible) .assert-line {
+      text-decoration: line-through; text-decoration-color: rgba(255,122,149,.95);
+      text-decoration-thickness: 2.5px; opacity: .55; filter: grayscale(.4);
+    }
+    .tamper-pass {
+      display: inline-flex; align-items: center; gap: .55em;
+      padding: .4em 1.1em; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-size: 1.08rem; font-weight: 800;
+      background: rgba(13,61,56,0.92); border: 1.5px solid rgba(43,234,208,0.85);
+      color: #C5FFF5 !important; text-shadow: none !important;
+      box-shadow: 0 0 26px rgba(43,234,208,0.3);
+      animation: fakePulse 1.6s ease-in-out infinite;
+    }
+    @keyframes fakePulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(43,234,208,0.25); }
+      50%      { box-shadow: 0 0 40px rgba(43,234,208,0.55); }
+    }
+    .tamper-arrow {
+      display: flex; flex-direction: column; align-items: center; gap: .15rem;
+      font-size: 1.9rem; font-weight: 800; color: #FF94AC !important; flex: 0 0 auto;
+    }
+    .tamper-arrow .t {
+      font-size: .82rem; font-family: 'JetBrains Mono', monospace;
+      color: #FFB9C7 !important; white-space: nowrap;
+    }
+    .trick-chip {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .32em .85em; border-radius: 9px; white-space: nowrap;
+      font-size: 1.02rem; font-weight: 800;
+      background: rgba(74,26,38,0.85); border: 1px solid rgba(255,122,149,0.6);
+      color: #FFD0DA !important; text-shadow: none !important;
+    }
+
+    /* ========= ④ 신뢰 다이얼 (S21) =========
+       반원 게이지 위 바늘이 fragment에 따라 회전 — 작업의 무게에 맞는
+       검증 강도. 청록(가볍게)→노랑(기본)→분홍(풀세트). */
+    .dial-wrap { display: flex; flex-direction: column; align-items: center; gap: .3rem; flex: 0 0 auto; }
+    .dial-svg { width: 460px; max-width: 100%; }
+    .dial-needle {
+      transform-origin: 230px 230px;
+      transform: rotate(-78deg);
+      transition: transform .9s cubic-bezier(.3,.7,.3,1.05);
+    }
+    section:has(.td1.visible) .dial-needle { transform: rotate(-58deg); }
+    section:has(.td2.visible) .dial-needle { transform: rotate(0deg); }
+    section:has(.td3.visible) .dial-needle { transform: rotate(58deg); }
+    .dial-caption {
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800;
+      color: #E6D9FF !important; text-align: center; margin: 0;
+    }
+    .dial-card {
+      display: flex; gap: .9rem; align-items: baseline;
+      padding: .7rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.35);
+      background: rgba(230,236,249,0.05);
+    }
+    .dial-card .dc-name { font-weight: 800; font-size: 1.18rem; white-space: nowrap; min-width: 8.6em; }
+    .dial-card .dc-desc { font-size: 1.04rem; color: #E8ECF5 !important; }
+    .dial-card.lv1 { border-color: rgba(43,234,208,0.55); }
+    .dial-card.lv2 { border-color: rgba(255,212,107,0.55); }
+    .dial-card.lv3 { border-color: rgba(255,122,149,0.6); }
+
+    /* ========= fallbacks: overview / print / reduced-motion =========
+       .autoshow·곡선·다이얼 — 가시성이 애니메이션에 묶여 있으므로
+       세 모드 전부에서 강제로 완성 상태를 보여준다. */
+    .reveal.overview .autoshow {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal.overview .slides section {
+      display: block !important;
+      cursor: pointer;
+      outline: 1px solid rgba(181, 161, 255, 0.28);
+      outline-offset: -1px;
+      border-radius: 6px;
+    }
+    .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
+    .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
+    @media print {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .reveal .fragment.custom {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+      .curve-draw { stroke-dashoffset: 0 !important; animation: none !important; }
+      .dl-toolbar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .grad, .tamper-pass { animation: none !important; }
+      body::before { animation: none !important; }
+      .verdict-card::after { animation: none !important; opacity: 0 !important; }
+      .bugline, .assert-line, .dial-needle { transition: none !important; }
+      .curve-draw { stroke-dashoffset: 0; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
+    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+  </div>
+</div>
+
+</body>
+</html>
