@@ -81,7 +81,7 @@
 
   <div id="qa-presenter-bar" class="qa-hidden">
     <span id="qa-conn-dot" class="qa-dot"></span>
-    <a id="qa-console-link" href="/present/" target="_blank" rel="noopener">🎛️ 발표자 콘솔</a>
+    <a id="qa-console-link" href="/present/">🎛️ 발표자 콘솔</a>
     <button id="qa-history-toggle">📋 질문 기록 (<span id="qa-history-count">0</span>)</button>
     <span class="qa-presenter-tally" aria-label="이모지 클릭 수 요약">
       👍 <span id="qa-presenter-tally-up">0</span>
