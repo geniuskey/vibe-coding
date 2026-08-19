@@ -26,6 +26,8 @@
   let liveSlide = 0;
   let liveDeck = null;
   const shownIds = new Set();
+  // 포스트잇을 id로 다시 찾아 내리거나 붙잡아 둘 수 있게, 노트마다 타이머와 내리는 함수를 둔다.
+  const noteTimers = new Map();
   let history = [];
 
   // 실시간 Q&A는 server.js 가 떠 있는 곳에서만 동작한다. 어디서 프로브할지가 관건인데,
@@ -213,6 +215,10 @@
 
     es.addEventListener('show', (e) => showNote(JSON.parse(e.data), true));
 
+    // 발표자가 ×로 닫으면 모든 화면에서 같이 내리고, 끌어서 붙잡아 두면 자동 사라짐만 끈다.
+    es.addEventListener('hide', (e) => dismissNote(JSON.parse(e.data).id));
+    es.addEventListener('keep', (e) => keepNote(JSON.parse(e.data).id));
+
     es.addEventListener('vote', (e) => {
       const { id, votes } = JSON.parse(e.data);
       const el = document.querySelector('.qa-note[data-id="' + id + '"] .qa-vote-count');
@@ -231,6 +237,8 @@
 
     es.addEventListener('clear', () => {
       document.getElementById('qa-note-layer').innerHTML = '';
+      for (const entry of noteTimers.values()) clearTimeout(entry.timer);
+      noteTimers.clear();
       shownIds.clear();
       history = [];
       renderHistory();
@@ -288,15 +296,31 @@
     const dismiss = () => {
       if (note.dataset.dismissed === '1') return;
       note.dataset.dismissed = '1';
+      noteTimers.delete(q.id);
       note.classList.add('qa-leaving');
       setTimeout(() => note.remove(), 500);
     };
     const close = note.querySelector('.qa-note-close');
-    if (close) close.onclick = () => { clearTimeout(autoDismiss); dismiss(); };
+    // 발표자 화면에서 내린 질문은 청중 화면에서도 같이 내려간다.
+    if (close) close.onclick = () => { dismissNote(q.id); api('/qa/questions/hide', { id: q.id }); };
     layer.appendChild(note);
     const autoDismiss = setTimeout(dismiss, 14000);
-    if (IS_PRESENTER) makeDraggable(note, () => clearTimeout(autoDismiss));
+    noteTimers.set(q.id, { timer: autoDismiss, dismiss });
+    // 발표자가 끌어다 옮긴 질문은 이야기 중이라는 뜻이므로, 청중 화면에서도 붙잡아 둔다.
+    if (IS_PRESENTER) makeDraggable(note, () => { keepNote(q.id); api('/qa/questions/keep', { id: q.id }); });
   }
+  function dismissNote(id) {
+    const entry = noteTimers.get(id);
+    if (!entry) return;
+    clearTimeout(entry.timer);
+    entry.dismiss();
+  }
+  function keepNote(id) {
+    const entry = noteTimers.get(id);
+    if (!entry) return;
+    clearTimeout(entry.timer);
+  }
+
   // 화면 중앙이 아니라 가장자리(위/오른쪽/아래/왼쪽) 근처에 무작위로 배치
   function edgePosition() {
     const edge = Math.floor(Math.random() * 4);

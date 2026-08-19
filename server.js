@@ -233,6 +233,17 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, q);
   }
 
+  // 포스트잇을 언제 내리고 언제 붙잡아 둘지는 발표자 화면이 기준이다. 예전에는 화면마다
+  // 따로 14초 타이머를 돌려서, 발표자가 ×로 닫아도 청중 화면에는 그대로 남아 있었고
+  // 반대로 발표자가 끌어다 붙잡아 둔 질문이 청중 화면에서는 혼자 사라졌다.
+  if ((url === '/qa/questions/hide' || url === '/qa/questions/keep') && req.method === 'POST') {
+    const body = await readBody(req);
+    const q = session.questions.find((x) => x.id === Number(body.id));
+    if (!q) return sendJson(res, 404, { error: 'not found' });
+    broadcast(url.endsWith('/hide') ? 'hide' : 'keep', { id: q.id });
+    return sendJson(res, 200, { id: q.id });
+  }
+
   if (url === '/qa/react' && req.method === 'POST') {
     const body = await readBody(req);
     const kind = body.kind === 'confused' ? 'confused' : 'up';

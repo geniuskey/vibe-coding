@@ -205,6 +205,29 @@ test('POST /qa/questions/show re-broadcasts an existing question', async () => {
   assert.equal(missing.status, 404);
 });
 
+// 포스트잇을 내리고 붙잡아 두는 기준은 발표자 화면이다. 예전에는 화면마다 따로 14초
+// 타이머를 돌려서, 발표자가 ×로 닫아도 청중 화면에는 그대로 남아 있었다.
+test('POST /qa/questions/hide and /keep tell every screen to follow the presenter', async () => {
+  const q = await (await post('/qa/questions', { text: '내렸다 붙잡을 질문' })).json();
+
+  const stream = sseReader(await fetch(`http://localhost:${port}/qa/events`));
+  await stream.nextOf('snapshot');
+
+  const kept = await post('/qa/questions/keep', { id: q.id });
+  assert.equal(kept.status, 200);
+  assert.deepEqual((await stream.nextOf('keep')).data, { id: q.id });
+
+  const hidden = await post('/qa/questions/hide', { id: q.id });
+  assert.equal(hidden.status, 200);
+  assert.deepEqual((await stream.nextOf('hide')).data, { id: q.id });
+
+  await stream.close();
+
+  for (const path of ['/qa/questions/hide', '/qa/questions/keep']) {
+    assert.equal((await post(path, { id: 999999 })).status, 404);
+  }
+});
+
 test('POST /qa/reactions/reset zeroes the tallies', async () => {
   await post('/qa/react', { kind: 'confused' });
   const res = await post('/qa/reactions/reset');
