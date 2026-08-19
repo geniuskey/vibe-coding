@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>발표자 콘솔 — 바이브 코딩 세미나</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+<style>
+  :root {
+    --bg: #06080F;
+    --panel: #0E1220;
+    --line: rgba(155,130,255,0.28);
+    --accent: #9B82FF;
+    --accent-2: #2BEAD0;
+    --muted: #B8BFD0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: #fff;
+    font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-2); }
+
+  header.bar {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+    padding: 14px 20px; background: rgba(6,8,15,0.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { font-weight: 900; font-size: 17px; letter-spacing: -0.02em; }
+  .brand span { color: var(--accent); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #55606f; display: inline-block; }
+  .dot.on { background: var(--accent-2); box-shadow: 0 0 10px var(--accent-2); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px; padding: 6px 13px; font-size: 13px; font-weight: 700;
+  }
+  .chip b { color: var(--accent-2); }
+  .bar .spacer { flex: 1 1 auto; }
+  .linkbox {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(155,130,255,0.14); border: 1px solid var(--line);
+    border-radius: 999px; padding: 5px 6px 5px 14px; font-size: 13px;
+  }
+  .linkbox code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: #fff; }
+  .linkbox button { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 800; cursor: pointer; background: var(--accent); color: #06080F; }
+
+  main { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 18px; padding: 18px 20px 40px; align-items: start; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+  .panel > h2 {
+    margin: 0 0 12px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); display: flex; align-items: center; gap: 10px;
+  }
+  .panel > h2 .spacer { flex: 1 1 auto; }
+
+  .track-label { margin: 16px 0 8px; font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: .06em; }
+  .track-label:first-of-type { margin-top: 0; }
+
+  .deck {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03); margin-bottom: 8px;
+  }
+  .deck.live { border-color: var(--accent-2); background: rgba(43,234,208,0.09); }
+  .deck .emoji { font-size: 22px; line-height: 1; }
+  .deck .meta { flex: 1 1 auto; min-width: 0; }
+  .deck .meta h3 { margin: 0; font-size: 14px; font-weight: 800; }
+  .deck .meta p { margin: 3px 0 0; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .deck .live-tag { font-size: 11px; font-weight: 900; color: #06080F; background: var(--accent-2); border-radius: 999px; padding: 3px 9px; }
+  .deck .go {
+    border: 0; border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 800;
+    cursor: pointer; background: var(--accent); color: #06080F; white-space: nowrap;
+  }
+  .deck .go.secondary { background: rgba(255,255,255,0.12); color: #fff; }
+  .deck .go:disabled { opacity: .5; cursor: not-allowed; }
+
+  .tallies { display: flex; gap: 10px; margin-bottom: 14px; }
+  .tally { flex: 1 1 0; text-align: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 8px; }
+  .tally .num { display: block; font-size: 28px; font-weight: 900; line-height: 1.1; }
+  .tally .lbl { font-size: 12px; color: var(--muted); }
+
+  button.ghost { border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  button.ghost:hover { background: rgba(255,255,255,0.08); }
+  button.ghost.on { background: var(--accent); color: #06080F; border-color: transparent; }
+
+  .q { padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .q:last-child { border-bottom: 0; }
+  .q-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .q-meta .spacer { flex: 1 1 auto; }
+  .q-text { font-size: 14px; line-height: 1.45; word-break: break-word; }
+  .q-actions { margin-top: 7px; display: flex; gap: 6px; }
+  .empty { color: var(--muted); font-size: 13px; text-align: center; padding: 28px 0; }
+
+  #offline { display: none; margin: 40px auto; max-width: 620px; }
+  #offline.show { display: block; }
+  #offline pre { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 14px; overflow-x: auto; font-size: 13px; }
+  body.offline main, body.offline header.bar .linkbox, body.offline header.bar .chip { display: none; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <span class="brand">🎛️ 발표자 <span>콘솔</span></span>
+  <span class="chip"><span id="conn" class="dot"></span> <span id="conn-label">연결 확인 중</span></span>
+  <span class="chip">👥 청중 <b id="viewers">0</b>명</span>
+  <span class="chip">🎬 <b id="now-deck">발표 전</b></span>
+  <span class="spacer"></span>
+  <span class="linkbox">
+    청중 링크 <code id="join-url">—</code>
+    <button id="copy-url" type="button">복사</button>
+  </span>
+</header>
+
+<section id="offline" class="panel">
+  <h2>실시간 서버가 꺼져 있습니다</h2>
+  <p style="color:var(--muted); font-size:14px; line-height:1.6">
+    발표자 콘솔은 로컬 실시간 서버가 있어야 동작합니다. 저장소 루트에서 아래를 실행한 뒤
+    <a href="/present/">이 페이지를 새로고침</a>하세요.
+  </p>
+  <pre>npm run dev        # http://localhost:8080/present/</pre>
+  <p style="color:var(--muted); font-size:13px">
+    GitHub Pages 등 정적 호스팅에서는 슬라이드만 열람할 수 있고 질문·반응 기능은 동작하지 않습니다.
+    <a href="../">세미나 목록으로 가기 →</a>
+  </p>
+</section>
+
+<main>
+  <section class="panel">
+    <h2>세미나 선택 <span class="spacer"></span> <span style="text-transform:none;letter-spacing:0">덱을 바꿔도 질문·이모지는 이어집니다</span></h2>
+    <div id="deck-list"></div>
+  </section>
+
+  <section class="panel">
+    <h2>반응 <span class="spacer"></span> <button id="reset-reactions" class="ghost" type="button">초기화</button></h2>
+    <div class="tallies">
+      <div class="tally"><span class="num" id="tally-up">0</span><span class="lbl">👍 좋아요</span></div>
+      <div class="tally"><span class="num" id="tally-confused">0</span><span class="lbl">🤔 어려워요</span></div>
+    </div>
+
+    <h2>질문 <span id="q-count">(0)</span>
+      <span class="spacer"></span>
+      <button id="sort-votes" class="ghost on" type="button">추천순</button>
+      <button id="sort-recent" class="ghost" type="button">최신순</button>
+      <button id="clear-all" class="ghost" type="button">전체 삭제</button>
+    </h2>
+    <div id="q-list"><div class="empty">아직 질문이 없습니다.</div></div>
+  </section>
+</main>
+
+<script src="../assets/decks.js"></script>
+<script>
+(function () {
+  const DECKS = window.SEMINAR_DECKS || [];
+  let state = { deck: null, slide: 0, questions: [], reactions: { up: 0, confused: 0 }, viewers: 0 };
+  let sort = 'votes';
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function api(path, body) {
+    return fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {}),
+    });
+  }
+
+  // 서버가 없으면(정적 호스팅·서버 미기동) 콘솔 대신 안내 화면만 보여준다.
+  fetch('/qa/health', { signal: AbortSignal.timeout(1500) })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.ok) start(d); else goOffline(); })
+    .catch(goOffline);
+
+  function goOffline() {
+    document.body.classList.add('offline');
+    document.getElementById('offline').classList.add('show');
+    document.getElementById('conn-label').textContent = '서버 없음';
+  }
+
+  function start(health) {
+    // 청중에게는 /live 하나만 알려주면 된다 — 지금 발표 중인 덱으로 넘겨준다.
+    const host = health.lan || location.hostname;
+    const joinUrl = location.protocol + '//' + host + (location.port ? ':' + location.port : '') + '/live';
+    document.getElementById('join-url').textContent = joinUrl;
+    document.getElementById('copy-url').onclick = async () => {
+      const btn = document.getElementById('copy-url');
+      try { await navigator.clipboard.writeText(joinUrl); btn.textContent = '복사됨'; }
+      catch { btn.textContent = '복사 실패'; }
+      setTimeout(() => { btn.textContent = '복사'; }, 1400);
+    };
+
+    renderDecks(health.decks || DECKS.map((d) => d.id));
+    connect();
+
+    document.getElementById('reset-reactions').onclick = () => api('/qa/reactions/reset');
+    document.getElementById('clear-all').onclick = () => {
+      if (confirm('질문을 모두 삭제할까요? 발표 화면의 포스트잇도 함께 사라집니다.')) api('/qa/clear');
+    };
+    document.getElementById('sort-votes').onclick = () => setSort('votes');
+    document.getElementById('sort-recent').onclick = () => setSort('recent');
+  }
+
+  function setSort(next) {
+    sort = next;
+    document.getElementById('sort-votes').classList.toggle('on', sort === 'votes');
+    document.getElementById('sort-recent').classList.toggle('on', sort === 'recent');
+    renderQuestions();
+  }
+
+  function renderDecks(available) {
+    const set = new Set(available);
+    const wrap = document.getElementById('deck-list');
+    let lastTrack = null;
+    wrap.innerHTML = '';
+    for (const d of DECKS) {
+      if (!set.has(d.id)) continue; // 저장소에 없는 덱은 숨긴다
+      if (d.track !== lastTrack) {
+        lastTrack = d.track;
+        const h = document.createElement('div');
+        h.className = 'track-label';
+        h.textContent = d.track;
+        wrap.appendChild(h);
+      }
+      const row = document.createElement('div');
+      row.className = 'deck';
+      row.dataset.deck = d.id;
+      row.innerHTML =
+        '<span class="emoji">' + d.emoji + '</span>' +
+        '<span class="meta"><h3>' + esc(d.title) + '</h3><p>' + esc(d.desc) + '</p></span>' +
+        '<span class="live-tag" hidden>발표 중</span>' +
+        '<button class="go" type="button">발표 시작 →</button>';
+      row.querySelector('.go').onclick = () => startDeck(d.id);
+      wrap.appendChild(row);
+    }
+  }
+
+  // 한 번의 클릭으로 (1) 세션의 현재 덱을 바꾸고 (2) 발표자 화면을 연다.
+  // 따라가기 중인 청중 화면은 서버 브로드캐스트를 받아 알아서 그 덱으로 이동한다.
+  function startDeck(id) {
+    api('/qa/deck', { deck: id, h: 0 })
+      .then(() => window.open('../' + id + '/?present', 'seminar-presenter'))
+      .catch(() => {});
+  }
+
+  function renderNowDeck() {
+    const meta = DECKS.find((d) => d.id === state.deck);
+    document.getElementById('now-deck').textContent = state.deck ? (meta ? meta.title : state.deck) : '발표 전';
+    document.querySelectorAll('.deck').forEach((row) => {
+      const live = row.dataset.deck === state.deck;
+      row.classList.toggle('live', live);
+      row.querySelector('.live-tag').hidden = !live;
+      const btn = row.querySelector('.go');
+      btn.textContent = live ? '발표자 화면 열기' : '발표 시작 →';
+      btn.classList.toggle('secondary', live);
+    });
+  }
+
+  function renderQuestions() {
+    const list = document.getElementById('q-list');
+    document.getElementById('q-count').textContent = '(' + state.questions.length + ')';
+    const qs = state.questions.slice().sort((a, b) =>
+      sort === 'votes' ? (b.votes - a.votes || a.ts - b.ts) : (b.ts - a.ts));
+    if (!qs.length) { list.innerHTML = '<div class="empty">아직 질문이 없습니다.</div>'; return; }
+    list.innerHTML = qs.map((q) =>
+      '<div class="q" data-id="' + q.id + '">' +
+        '<div class="q-meta"><span>' + esc(q.name) + '</span><span class="spacer"></span><span>👍 ' + (q.votes || 0) + '</span></div>' +
+        '<div class="q-text">' + esc(q.text) + '</div>' +
+        '<div class="q-actions">' +
+          '<button class="ghost act-show" type="button">화면에 띄우기</button>' +
+          '<button class="ghost act-vote" type="button">👍 추천</button>' +
+        '</div>' +
+      '</div>'
+    ).join('');
+    list.querySelectorAll('.q').forEach((el) => {
+      const id = Number(el.dataset.id);
+      el.querySelector('.act-show').onclick = () => api('/qa/questions/show', { id });
+      el.querySelector('.act-vote').onclick = () => api('/qa/questions/vote', { id });
+    });
+  }
+
+  function renderTallies() {
+    document.getElementById('tally-up').textContent = state.reactions.up || 0;
+    document.getElementById('tally-confused').textContent = state.reactions.confused || 0;
+  }
+
+  function connect() {
+    const es = new EventSource('/qa/events?role=console');
+    const dot = document.getElementById('conn');
+    const label = document.getElementById('conn-label');
+    es.onopen = () => { dot.classList.add('on'); label.textContent = '실시간 연결됨'; };
+    es.onerror = () => { dot.classList.remove('on'); label.textContent = '재연결 중…'; };
+
+    es.addEventListener('snapshot', (e) => {
+      const st = JSON.parse(e.data);
+      state = { ...state, ...st, reactions: st.reactions || state.reactions };
+      renderViewers();
+      renderNowDeck();
+      renderTallies();
+      renderQuestions();
+    });
+    es.addEventListener('presence', (e) => {
+      state.viewers = JSON.parse(e.data).viewers || 0;
+      renderViewers();
+    });
+    es.addEventListener('slide', (e) => {
+      const d = JSON.parse(e.data);
+      state.deck = d.deck || null;
+      state.slide = d.h || 0;
+      renderNowDeck();
+    });
+    es.addEventListener('question', (e) => {
+      state.questions.push(JSON.parse(e.data));
+      renderQuestions();
+    });
+    es.addEventListener('vote', (e) => {
+      const { id, votes } = JSON.parse(e.data);
+      const q = state.questions.find((x) => x.id === id);
+      if (q) { q.votes = votes; renderQuestions(); }
+    });
+    es.addEventListener('react', (e) => { state.reactions = JSON.parse(e.data).total; renderTallies(); });
+    es.addEventListener('reactions', (e) => { state.reactions = JSON.parse(e.data); renderTallies(); });
+    es.addEventListener('clear', () => { state.questions = []; renderQuestions(); });
+  }
+
+  function renderViewers() {
+    document.getElementById('viewers').textContent = state.viewers || 0;
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /present/
 
 Sitemap: https://geniuskey.github.io/vibe-coding/sitemap.xml

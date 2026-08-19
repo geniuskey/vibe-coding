@@ -888,8 +888,24 @@
     · 마지막 업데이트: 2026-07 (AI 도구는 빨리 바뀝니다 — 설치 명령이 안 맞으면 공식 문서를 우선하세요)<span class="foot-credit">
     · 만든 사람: <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a>
     · <a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a></span>
+    <span id="present-entry" hidden> · <a href="present/">🎛️ 발표자 콘솔 열기</a></span>
   </div>
 </footer>
+
+<!-- 로컬 실시간 서버로 열었을 때만 발표자 콘솔 링크를 노출한다 (GitHub Pages에서는 동작하지 않음). -->
+<script>
+(function () {
+  const h = location.hostname;
+  const maybeLive = location.protocol !== 'file:' &&
+    (h === 'localhost' || h === '127.0.0.1' || h === '::1' ||
+      /^10\./.test(h) || /^192\.168\./.test(h) || /^172\.(1[6-9]|2\d|3[01])\./.test(h));
+  if (!maybeLive) return;
+  fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.ok) document.getElementById('present-entry').hidden = false; })
+    .catch(() => {});
+})();
+</script>
 
 </div><!-- /.page -->
 

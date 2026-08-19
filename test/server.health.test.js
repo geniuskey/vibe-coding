@@ -14,7 +14,10 @@ after(async () => {
 test('GET /qa/health returns ok', async () => {
   const res = await fetch(`http://localhost:${port}/qa/health`);
   assert.equal(res.status, 200);
-  assert.deepEqual(await res.json(), { ok: true });
+  const body = await res.json();
+  assert.equal(body.ok, true);
+  assert.ok('lan' in body);       // 콘솔이 청중용 LAN 링크를 만드는 데 쓴다
+  assert.ok(Array.isArray(body.decks));
 });
 
 test('GET / serves the landing page', async () => {
