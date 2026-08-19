@@ -28,21 +28,33 @@
   const shownIds = new Set();
   let history = [];
 
-  // 실시간 Q&A 서버는 로컬 발표 환경(localhost 또는 같은 Wi-Fi의 LAN IP)에만 존재한다.
-  // GitHub Pages 등 정적 호스팅에서는 /qa/health 가 404가 되어 콘솔에
-  // "Failed to load resource" 에러를 남기므로(.catch 로도 지워지지 않는다),
-  // 서버가 있을 법한 호스트에서만 프로브한다. 정적 호스팅에서는 조용히 슬라이드만 동작.
-  const qaHost = location.hostname;
-  const qaMaybeLive =
-    location.protocol !== 'file:' &&
-    (qaHost === 'localhost' || qaHost === '127.0.0.1' || qaHost === '::1' ||
-      /^10\./.test(qaHost) || /^192\.168\./.test(qaHost) ||
-      /^172\.(1[6-9]|2\d|3[01])\./.test(qaHost));
+  // 실시간 Q&A는 server.js 가 떠 있는 곳에서만 동작한다. 어디서 프로브할지가 관건인데,
+  // 예전에는 사설 IP 대역(localhost·10.·192.168.·172.16~31)만 허용했다. 그러면 사내망처럼
+  // 공인 대역을 사설로 쓰는 네트워크나 ngrok·Cloudflare 터널로 열었을 때, 서버가 멀쩡히
+  // 떠 있는데도 질문·이모지 UI가 통째로 안 뜬다. 그래서 반대로 뒤집었다 — 서버가 있을 리
+  // 없는 정적 호스팅만 빼고 전부 프로브한다. (정적 호스팅을 걸러내는 이유는 /qa/health 가
+  // 404가 되면서 .catch 로도 지워지지 않는 콘솔 에러를 남기기 때문이다.)
+  const STATIC_HOSTS = /(^|\.)(github\.io|netlify\.app|vercel\.app|pages\.dev)$/i;
+  const qaMaybeLive = location.protocol !== 'file:' && !STATIC_HOSTS.test(location.hostname);
   if (qaMaybeLive) {
-    fetch('/qa/health', { signal: AbortSignal.timeout(800) })
+    fetch('/qa/health', { signal: AbortSignal.timeout(1500) })
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => { if (d && d.ok) initLiveQa(); })
-      .catch(() => {});
+      .then((d) => { if (d && d.ok) initLiveQa(); else notifyNoServer(); })
+      .catch(() => notifyNoServer());
+  } else {
+    notifyNoServer();
+  }
+
+  // 서버가 없으면 지금까지는 아무 일도 일어나지 않아서, 발표자 입장에서는 "질문 기능이
+  // 사라졌다"와 "서버를 안 켰다"를 구분할 수 없었다. ?present 로 들어온 사람에게만
+  // 짧은 안내를 띄운다 — 청중 화면은 예전처럼 조용히 슬라이드만 보여준다.
+  function notifyNoServer() {
+    if (!IS_PRESENTER) return;
+    const el = document.createElement('div');
+    el.id = 'qa-offline-hint';
+    el.textContent = '실시간 Q&A 서버에 연결되지 않았습니다 — 발표용 PC에서 npm run dev 로 실행한 주소로 접속하세요.';
+    (document.body || document.documentElement).appendChild(el);
+    setTimeout(() => el.remove(), 8000);
   }
 
   const QA_MARKUP = `
