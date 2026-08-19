@@ -140,6 +140,7 @@ test('questions and reactions survive a deck switch — one session, not one per
 });
 
 test('a slide broadcast carries the deck so audiences on another deck can follow', async () => {
+  await post('/qa/deck', { deck: 'knowledge' }); // 덱 전환은 /qa/deck 으로만 한다
   const res = await fetch(`http://localhost:${port}/qa/events`);
   const stream = sseReader(res);
   await stream.next(); // snapshot
@@ -149,6 +150,24 @@ test('a slide broadcast carries the deck so audiences on another deck can follow
   const evt = await stream.nextOf('slide');
   assert.deepEqual(evt.data, { deck: 'knowledge', h: 4 });
   await stream.close();
+});
+
+// 발표자는 콘솔과 ?present 를 나란히 열어두기 때문에, 덱을 옮긴 뒤에도 옛 ?present 탭이
+// 남아 있기 쉽다. 그 탭에서 방향키만 눌러도 세션이 되돌아가면 청중 전체가 끌려간다.
+test('a slide POST from a deck that is no longer live is ignored', async () => {
+  await post('/qa/deck', { deck: 'security', h: 2 });
+
+  const stale = await post('/qa/slide', { deck: 'context', h: 9 });
+  assert.equal(stale.status, 409);
+
+  const snap = await sessionState();
+  assert.equal(snap.deck, 'security');
+  assert.equal(snap.slide, 2);
+
+  // 발표 중인 덱에서 온 이동은 그대로 받는다
+  const ok = await post('/qa/slide', { deck: 'security', h: 3 });
+  assert.equal(ok.status, 200);
+  assert.equal((await sessionState()).slide, 3);
 });
 
 test('viewers counts only audience connections, not the presenter or the console', async () => {
@@ -184,6 +203,29 @@ test('POST /qa/questions/show re-broadcasts an existing question', async () => {
 
   const missing = await post('/qa/questions/show', { id: 999999 });
   assert.equal(missing.status, 404);
+});
+
+// 포스트잇을 내리고 붙잡아 두는 기준은 발표자 화면이다. 예전에는 화면마다 따로 14초
+// 타이머를 돌려서, 발표자가 ×로 닫아도 청중 화면에는 그대로 남아 있었다.
+test('POST /qa/questions/hide and /keep tell every screen to follow the presenter', async () => {
+  const q = await (await post('/qa/questions', { text: '내렸다 붙잡을 질문' })).json();
+
+  const stream = sseReader(await fetch(`http://localhost:${port}/qa/events`));
+  await stream.nextOf('snapshot');
+
+  const kept = await post('/qa/questions/keep', { id: q.id });
+  assert.equal(kept.status, 200);
+  assert.deepEqual((await stream.nextOf('keep')).data, { id: q.id });
+
+  const hidden = await post('/qa/questions/hide', { id: q.id });
+  assert.equal(hidden.status, 200);
+  assert.deepEqual((await stream.nextOf('hide')).data, { id: q.id });
+
+  await stream.close();
+
+  for (const path of ['/qa/questions/hide', '/qa/questions/keep']) {
+    assert.equal((await post(path, { id: 999999 })).status, 404);
+  }
 });
 
 test('POST /qa/reactions/reset zeroes the tallies', async () => {

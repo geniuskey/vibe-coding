@@ -233,6 +233,17 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, q);
   }
 
+  // 포스트잇을 언제 내리고 언제 붙잡아 둘지는 발표자 화면이 기준이다. 예전에는 화면마다
+  // 따로 14초 타이머를 돌려서, 발표자가 ×로 닫아도 청중 화면에는 그대로 남아 있었고
+  // 반대로 발표자가 끌어다 붙잡아 둔 질문이 청중 화면에서는 혼자 사라졌다.
+  if ((url === '/qa/questions/hide' || url === '/qa/questions/keep') && req.method === 'POST') {
+    const body = await readBody(req);
+    const q = session.questions.find((x) => x.id === Number(body.id));
+    if (!q) return sendJson(res, 404, { error: 'not found' });
+    broadcast(url.endsWith('/hide') ? 'hide' : 'keep', { id: q.id });
+    return sendJson(res, 200, { id: q.id });
+  }
+
   if (url === '/qa/react' && req.method === 'POST') {
     const body = await readBody(req);
     const kind = body.kind === 'confused' ? 'confused' : 'up';
@@ -247,9 +258,16 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, session.reactions);
   }
 
+  // 슬라이드 이동은 '지금 발표 중인 덱'에서 온 것만 받는다. 덱을 바꾸는 건 /qa/deck 뿐이다.
+  // 예전에는 여기서도 session.deck 을 갈아치웠는데, 그러면 발표자가 닫지 않고 남겨둔 옛
+  // ?present 탭(콘솔과 나란히 열어두기 쉽다)에서 방향키만 눌러도 세션이 그 덱으로 되돌아가
+  // 청중 전체가 엉뚱한 자료로 끌려갔다.
   if (url === '/qa/slide' && req.method === 'POST') {
     const body = await readBody(req);
-    if (isDeck(body.deck)) session.deck = body.deck;
+    if (!session.deck && isDeck(body.deck)) session.deck = body.deck; // 첫 발표자
+    if (isDeck(body.deck) && body.deck !== session.deck) {
+      return sendJson(res, 409, { error: 'stale deck', deck: session.deck, h: session.slide });
+    }
     session.slide = Math.max(0, Number(body.h) || 0);
     broadcast('slide', { deck: session.deck, h: session.slide });
     return sendJson(res, 200, { deck: session.deck, h: session.slide });
