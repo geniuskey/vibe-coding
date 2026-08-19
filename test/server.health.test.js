@@ -41,3 +41,20 @@ test('unknown route returns 404', async () => {
   const res = await fetch(`http://localhost:${port}/nope`);
   assert.equal(res.status, 404);
 });
+
+// 발표 시작 전에 들어온 청중을 허브(/)로 보내면, 허브에는 Q&A 스크립트가 없어서
+// 발표가 시작돼도 따라가지 못하고 그대로 멈춘다. 대기 화면을 줘야 스스로 넘어간다.
+test('GET /live before the presentation starts serves the waiting room, not the hub', async () => {
+  const res = await fetch(`http://localhost:${port}/live`, { redirect: 'manual' });
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type'), /text\/html/);
+  const text = await res.text();
+  assert.match(text, /발표가 곧 시작됩니다/);
+  assert.match(text, /qa\/events/); // 덱이 정해지는 순간 스스로 넘어갈 수 있게 SSE를 연다
+});
+
+test('the waiting room and presenter console are not listed as seminar decks', async () => {
+  const body = await (await fetch(`http://localhost:${port}/qa/health`)).json();
+  assert.ok(!body.decks.includes('live'));
+  assert.ok(!body.decks.includes('present'));
+});

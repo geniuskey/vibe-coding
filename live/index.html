@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>발표를 기다리는 중 · 바이브 코딩 세미나</title>
+<link rel="stylesheet" href="../vendor/fonts/pretendard.css" />
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: radial-gradient(1200px 800px at 50% -10%, #2A2350 0%, #14121F 60%, #0E0D16 100%);
+    color: #F3F0FF;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    text-align: center;
+  }
+  .box { max-width: 460px; }
+  .pulse {
+    width: 72px; height: 72px; margin: 0 auto 28px;
+    border-radius: 50%;
+    background: #9B82FF;
+    animation: breathe 1.8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(0.82); opacity: 0.45; box-shadow: 0 0 0 0 rgba(155, 130, 255, 0.45); }
+    50%      { transform: scale(1);    opacity: 1;    box-shadow: 0 0 0 22px rgba(155, 130, 255, 0); }
+  }
+  h1 { margin: 0 0 12px; font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+  p { margin: 0; font-size: 15px; line-height: 1.65; color: #B9B2D8; }
+  .status {
+    margin-top: 26px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(155, 130, 255, 0.28);
+    font-size: 13px; color: #CFC8EA;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #6A6385; transition: background 0.2s; }
+  .dot.on { background: #2BEAD0; }
+  @media (prefers-reduced-motion: reduce) { .pulse { animation: none; opacity: 0.8; } }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="pulse" aria-hidden="true"></div>
+    <h1>발표가 곧 시작됩니다</h1>
+    <p>발표자가 세미나를 시작하면 이 화면이 자동으로 해당 자료로 넘어갑니다.<br />창을 닫지 말고 그대로 두세요.</p>
+    <div class="status"><span class="dot" id="dot"></span><span id="msg">발표자를 기다리는 중…</span></div>
+  </div>
+
+<script>
+(function () {
+  // /live 는 청중에게 안내하는 유일한 링크다. 발표 중이면 server.js 가 곧바로 해당 덱으로
+  // 302 하므로 이 페이지는 "아직 시작 전"일 때만 열린다. 예전에는 시작 전에 들어온 청중을
+  // 허브(/)로 보내버려서, 발표가 시작돼도 영영 따라가지 못하고 그 자리에 멈춰 있었다.
+  // 그래서 여기서 SSE를 붙들고 있다가 덱이 정해지는 순간 넘겨준다.
+  var dot = document.getElementById('dot');
+  var msg = document.getElementById('msg');
+  var gone = false;
+
+  function go(deck, h) {
+    if (gone || !deck) return;
+    gone = true;
+    msg.textContent = deck + ' 자료로 이동합니다…';
+    var url = '../' + deck + '/';
+    if (h) url += '#/' + h;
+    location.replace(url);
+  }
+
+  // 발표자가 이미 시작했는데 302를 놓친 경우(뒤로가기·캐시)를 대비한 첫 확인.
+  fetch('../qa/session')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (st) { if (st && st.deck) go(st.deck, st.slide); })
+    .catch(function () {});
+
+  var es = new EventSource('../qa/events?role=audience');
+  es.onopen = function () { dot.classList.add('on'); };
+  es.onerror = function () { dot.classList.remove('on'); };
+  es.addEventListener('snapshot', function (e) {
+    var st = JSON.parse(e.data);
+    go(st.deck, st.slide);
+  });
+  es.addEventListener('slide', function (e) {
+    var d = JSON.parse(e.data);
+    go(d.deck, d.h);
+  });
+})();
+</script>
+</body>
+</html>

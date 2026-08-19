@@ -6,8 +6,9 @@ const os = require('os');
 const PORT = process.env.PORT || 8080;
 const INDEX_PATH = path.join(__dirname, 'index.html');
 
-// 발표자 콘솔은 세미나 덱이 아니라 운영 화면이므로 덱 목록에서 제외한다.
-const NON_DECK_DIRS = new Set(['present']);
+// 발표자 콘솔(/present)과 청중 대기 화면(/live)은 세미나 덱이 아니라 운영 화면이므로
+// 덱 목록에서 제외한다.
+const NON_DECK_DIRS = new Set(['present', 'live']);
 
 // 폴더별 단일 index.html 규약: 최상위 폴더에 index.html이 있으면 그게 곧 세미나 덱이다.
 // 덱 목록을 하드코딩하지 않으므로, 새 세미나 폴더를 추가하면 라우트 수정 없이 바로 동작한다.
@@ -170,10 +171,16 @@ const server = http.createServer(async (req, res) => {
 
   if (url === '/' && req.method === 'GET') return serveFile(res, INDEX_PATH);
 
-  // 청중에게는 이 링크 하나만 안내하면 된다 — 발표 중인 덱으로 넘겨준다.
-  if (url === '/live' && req.method === 'GET') {
-    res.writeHead(302, { Location: session.deck ? `/${session.deck}/` : '/' });
-    return res.end();
+  // 청중에게는 이 링크 하나만 안내하면 된다.
+  // 발표 중이면 그 덱으로 바로 넘기고, 아직 시작 전이면 대기 화면을 준다. 예전에는 시작 전
+  // 접속을 허브(/)로 보냈는데, 허브에는 Q&A 스크립트가 없어서 발표가 시작돼도 청중이
+  // 따라가지 못하고 그대로 멈춰 있었다. 대기 화면은 SSE를 붙들고 있다가 스스로 넘어간다.
+  if ((url === '/live' || url === '/live/') && req.method === 'GET') {
+    if (session.deck) {
+      res.writeHead(302, { Location: `/${session.deck}/` });
+      return res.end();
+    }
+    return serveFile(res, path.join(__dirname, 'live', 'index.html'));
   }
 
   if (url === '/qa/health' && req.method === 'GET') {
