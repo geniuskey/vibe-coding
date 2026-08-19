@@ -102,8 +102,7 @@
     mountRoot().classList.remove('qa-hidden');
     if (IS_PRESENTER) {
       document.getElementById('qa-presenter-bar').classList.remove('qa-hidden');
-      // 발표자가 덱을 직접 열었을 때도 세션의 "현재 덱"이 이 덱이 되도록 알린다.
-      if (DECK) api('/qa/deck', { deck: DECK, h: currentSlide() });
+      claimDeck();
     } else {
       document.getElementById('qa-audience-dock').classList.remove('qa-hidden');
     }
@@ -131,6 +130,17 @@
     if (!window.Reveal) return;
     if (Reveal.isReady && Reveal.isReady()) Reveal.slide(h);
     else Reveal.on('ready', () => Reveal.slide(h));
+  }
+
+  // 발표자가 콘솔을 거치지 않고 /<덱>/?present 를 직접 열었을 때도 세션의 "현재 덱"을
+  // 이 덱으로 넘긴다. 주소에 #/5 같은 해시가 붙어 있을 수 있으므로 Reveal이 그 슬라이드를
+  // 잡은 뒤에 알려야 청중이 0번이 아니라 실제 슬라이드로 따라온다.
+  function claimDeck() {
+    if (!DECK) return;
+    const send = () => api('/qa/deck', { deck: DECK, h: currentSlide() });
+    if (!window.Reveal) return void send();
+    if (Reveal.isReady && Reveal.isReady()) send();
+    else Reveal.on('ready', send);
   }
 
   // 통합 세션의 핵심: 발표자가 다른 덱으로 넘어가면 따라가기 중인 청중도 그 덱으로 이동한다.
