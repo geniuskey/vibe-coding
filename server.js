@@ -6,14 +6,22 @@ const os = require('os');
 const PORT = process.env.PORT || 8080;
 const INDEX_PATH = path.join(__dirname, 'index.html');
 
+// 발표자 콘솔은 세미나 덱이 아니라 운영 화면이므로 덱 목록에서 제외한다.
+const NON_DECK_DIRS = new Set(['present']);
+
 // 폴더별 단일 index.html 규약: 최상위 폴더에 index.html이 있으면 그게 곧 세미나 덱이다.
 // 덱 목록을 하드코딩하지 않으므로, 새 세미나 폴더를 추가하면 라우트 수정 없이 바로 동작한다.
 function listDecks() {
   return fs.readdirSync(__dirname, { withFileTypes: true })
     .filter((d) => d.isDirectory() && !d.name.startsWith('.'))
+    .filter((d) => !NON_DECK_DIRS.has(d.name))
     .filter((d) => fs.existsSync(path.join(__dirname, d.name, 'index.html')))
     .map((d) => d.name)
     .sort();
+}
+
+function isDeck(name) {
+  return typeof name === 'string' && listDecks().includes(name);
 }
 
 // GET /<deck> 또는 /<deck>/ → <deck>/index.html
@@ -28,29 +36,49 @@ function serveDeck(req, res, url) {
   return true;
 }
 
-// 각 발표(덱)는 서로 다른 슬라이드를 가지므로, 질문·투표·반응·슬라이드 위치를
-// "방(room)" 단위로 분리해 섞이지 않게 한다. 파라미터가 없으면 기본 방('main').
-const rooms = new Map();
-function getRoom(id) {
-  let room = rooms.get(id);
-  if (!room) {
-    room = { slide: 0, questions: [], reactions: { up: 0, confused: 0 }, nextQuestionId: 1, clients: new Set() };
-    rooms.set(id, room);
-  }
-  return room;
-}
-function roomIdOf(req) {
-  const id = new URL(req.url, 'http://x').searchParams.get('room');
-  return id ? id.slice(0, 40) : 'main';
-}
-function snapshotOf(room) {
-  return { slide: room.slide, questions: room.questions, reactions: room.reactions };
+// 통합 발표자 플랫폼: 한 서버는 한 번에 하나의 발표만 진행한다.
+// 덱을 바꿔도 질문·투표·이모지는 이어지고, 청중은 발표자가 연 덱을 그대로 따라간다.
+// (덱별로 방을 나누면 발표 중간에 덱을 옮길 때마다 질문 흐름이 끊겼다.)
+const session = {
+  deck: null,            // 지금 발표 중인 덱 폴더명 (없으면 아직 시작 전)
+  slide: 0,
+  questions: [],
+  reactions: { up: 0, confused: 0 },
+  nextQuestionId: 1,
+  clients: new Set(),
+};
+
+// 발표자 화면과 콘솔도 같은 SSE를 쓰므로, "청중 수"는 role=audience 인 연결만 센다.
+function viewerCount() {
+  let n = 0;
+  for (const res of session.clients) if (res.qaRole === 'audience') n++;
+  return n;
 }
 
-function broadcast(room, event, data) {
+function snapshot() {
+  return {
+    deck: session.deck,
+    slide: session.slide,
+    questions: session.questions,
+    reactions: session.reactions,
+    viewers: viewerCount(),
+  };
+}
+
+// 테스트가 서버를 재사용하며 상태를 되돌릴 수 있도록 노출한다.
+function resetSession() {
+  session.deck = null;
+  session.slide = 0;
+  session.questions = [];
+  session.reactions = { up: 0, confused: 0 };
+  session.nextQuestionId = 1;
+}
+
+function broadcast(event, data, role) {
   const payload = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
-  for (const res of room.clients) {
-    try { res.write(payload); } catch { room.clients.delete(res); }
+  for (const res of session.clients) {
+    if (role && res.qaRole !== role) continue;
+    try { res.write(payload); } catch { session.clients.delete(res); }
   }
 }
 
@@ -141,69 +169,114 @@ const server = http.createServer(async (req, res) => {
   const url = req.url.split('?')[0];
 
   if (url === '/' && req.method === 'GET') return serveFile(res, INDEX_PATH);
-  if (url === '/qa/health' && req.method === 'GET') return sendJson(res, 200, { ok: true });
+
+  // 청중에게는 이 링크 하나만 안내하면 된다 — 발표 중인 덱으로 넘겨준다.
+  if (url === '/live' && req.method === 'GET') {
+    res.writeHead(302, { Location: session.deck ? `/${session.deck}/` : '/' });
+    return res.end();
+  }
+
+  if (url === '/qa/health' && req.method === 'GET') {
+    return sendJson(res, 200, { ok: true, lan: lanAddress(), decks: listDecks() });
+  }
+
+  // SSE를 못 쓰는 환경(또는 콘솔 첫 렌더)에서도 현재 상태를 한 번에 받아갈 수 있게.
+  if (url === '/qa/session' && req.method === 'GET') return sendJson(res, 200, snapshot());
+
   if (serveDeck(req, res, url)) return;
 
+  // 발표자 콘솔이 "이 덱으로 발표 시작"을 누르면 세션의 현재 덱이 바뀌고,
+  // 따라가기 중인 청중은 그 덱으로 이동한다. 질문·이모지는 그대로 유지된다.
+  if (url === '/qa/deck' && req.method === 'POST') {
+    const body = await readBody(req);
+    const deck = (body.deck || '').toString();
+    if (!isDeck(deck)) return sendJson(res, 400, { error: 'unknown deck' });
+    session.deck = deck;
+    session.slide = Math.max(0, Number(body.h) || 0);
+    broadcast('slide', { deck: session.deck, h: session.slide });
+    return sendJson(res, 200, { deck: session.deck, h: session.slide });
+  }
+
   if (url === '/qa/questions' && req.method === 'POST') {
-    const room = getRoom(roomIdOf(req));
     const body = await readBody(req);
     const text = (body.text || '').toString().trim().slice(0, 280);
     if (!text) return sendJson(res, 400, { error: 'empty' });
     const name = (body.name || '').toString().trim().slice(0, 24) || '익명';
-    const q = { id: room.nextQuestionId++, text, name, ts: Date.now(), votes: 0 };
-    room.questions.push(q);
-    broadcast(room, 'question', q);
+    const q = { id: session.nextQuestionId++, text, name, ts: Date.now(), votes: 0, deck: session.deck };
+    session.questions.push(q);
+    broadcast('question', q);
     return sendJson(res, 201, q);
   }
 
   if (url === '/qa/questions/vote' && req.method === 'POST') {
-    const room = getRoom(roomIdOf(req));
     const body = await readBody(req);
-    const q = room.questions.find((x) => x.id === Number(body.id));
+    const q = session.questions.find((x) => x.id === Number(body.id));
     if (!q) return sendJson(res, 404, { error: 'not found' });
     q.votes++;
-    broadcast(room, 'vote', { id: q.id, votes: q.votes });
+    broadcast('vote', { id: q.id, votes: q.votes });
     return sendJson(res, 200, { id: q.id, votes: q.votes });
   }
 
+  // 콘솔에서 지난 질문을 골라 발표 화면에 다시 띄운다 (이미 사라진 포스트잇 소환).
+  if (url === '/qa/questions/show' && req.method === 'POST') {
+    const body = await readBody(req);
+    const q = session.questions.find((x) => x.id === Number(body.id));
+    if (!q) return sendJson(res, 404, { error: 'not found' });
+    broadcast('show', q);
+    return sendJson(res, 200, q);
+  }
+
   if (url === '/qa/react' && req.method === 'POST') {
-    const room = getRoom(roomIdOf(req));
     const body = await readBody(req);
     const kind = body.kind === 'confused' ? 'confused' : 'up';
-    room.reactions[kind]++;
-    broadcast(room, 'react', { kind, count: room.reactions[kind], total: room.reactions });
-    return sendJson(res, 200, room.reactions);
+    session.reactions[kind]++;
+    broadcast('react', { kind, count: session.reactions[kind], total: session.reactions });
+    return sendJson(res, 200, session.reactions);
+  }
+
+  if (url === '/qa/reactions/reset' && req.method === 'POST') {
+    session.reactions = { up: 0, confused: 0 };
+    broadcast('reactions', session.reactions);
+    return sendJson(res, 200, session.reactions);
   }
 
   if (url === '/qa/slide' && req.method === 'POST') {
-    const room = getRoom(roomIdOf(req));
     const body = await readBody(req);
-    room.slide = Math.max(0, Number(body.h) || 0);
-    broadcast(room, 'slide', { h: room.slide });
-    return sendJson(res, 200, { h: room.slide });
+    if (isDeck(body.deck)) session.deck = body.deck;
+    session.slide = Math.max(0, Number(body.h) || 0);
+    broadcast('slide', { deck: session.deck, h: session.slide });
+    return sendJson(res, 200, { deck: session.deck, h: session.slide });
   }
 
   if (url === '/qa/clear' && req.method === 'POST') {
-    const room = getRoom(roomIdOf(req));
-    room.questions = [];
-    broadcast(room, 'clear', {});
+    session.questions = [];
+    broadcast('clear', {});
     return sendJson(res, 200, { ok: true });
   }
 
   if (url === '/qa/events' && req.method === 'GET') {
-    const room = getRoom(roomIdOf(req));
+    const role = new URL(req.url, 'http://x').searchParams.get('role');
+    res.qaRole = role === 'presenter' || role === 'console' ? role : 'audience';
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache, no-transform',
       'Connection': 'keep-alive',
     });
     res.write('retry: 3000\n\n');
-    res.write(`event: snapshot\ndata: ${JSON.stringify(snapshotOf(room))}\n\n`);
-    room.clients.add(res);
+    session.clients.add(res);
+    res.write(`event: snapshot\ndata: ${JSON.stringify(snapshot())}\n\n`);
+    broadcast('presence', { viewers: viewerCount() }, 'console'); // 청중 수는 발표자 콘솔만 쓴다
     const hb = setInterval(() => {
       try { res.write(': ping\n\n'); } catch { drop(); }
     }, 15000);
-    function drop() { room.clients.delete(res); clearInterval(hb); }
+    let dropped = false;
+    function drop() {
+      if (dropped) return;
+      dropped = true;
+      session.clients.delete(res);
+      clearInterval(hb);
+      broadcast('presence', { viewers: viewerCount() }, 'console'); // 청중 수는 발표자 콘솔만 쓴다
+    }
     req.on('close', drop);
     return;
   }
@@ -217,13 +290,15 @@ const server = http.createServer(async (req, res) => {
 if (require.main === module) {
   server.listen(PORT, () => {
     const lan = lanAddress();
-    console.log('Live Q&A running:');
-    console.log(`  대표 페이지: http://localhost:${PORT}/`);
-    for (const deck of listDecks()) {
-      console.log(`  ${deck}: 발표자 http://localhost:${PORT}/${deck}/?present · 청중 http://localhost:${PORT}/${deck}/`);
-    }
-    if (lan) console.log(`  (같은 Wi-Fi에서는 http://${lan}:${PORT}/ 로 접속)`);
+    const base = lan ? `http://${lan}:${PORT}` : `http://localhost:${PORT}`;
+    console.log('통합 발표 플랫폼이 켜졌습니다:');
+    console.log(`  발표자 콘솔: http://localhost:${PORT}/present/   ← 여기 하나만 열면 됩니다`);
+    console.log(`  청중 링크:   ${base}/live`);
+    console.log(`  세미나 목록: http://localhost:${PORT}/`);
+    console.log(`  (덱 ${listDecks().length}종: ${listDecks().join(', ')})`);
   });
 }
 
 module.exports = server;
+module.exports.resetSession = resetSession;
+module.exports.listDecks = listDecks;

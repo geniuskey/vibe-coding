@@ -15,7 +15,7 @@ test('POST /qa/slide updates the slide without any key', async () => {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ h: 5 }),
   });
   assert.equal(res.status, 200);
-  assert.deepEqual(await res.json(), { h: 5 });
+  assert.deepEqual(await res.json(), { deck: null, h: 5 });
 });
 
 test('POST /qa/clear clears questions without any key', async () => {

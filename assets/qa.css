@@ -69,6 +69,8 @@
   .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
   .qa-dot.on { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
   #qa-history-toggle { border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; }
+  #qa-console-link { border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; background: rgba(155,130,255,0.25); color: #fff; text-decoration: none; }
+  #qa-console-link:hover { background: rgba(155,130,255,0.45); }
   .qa-presenter-tally { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 800; color: #fff; background: rgba(255,255,255,0.1); }
 
   .qa-panel { position: fixed; top: 0; left: 0; bottom: 0; width: min(340px, 90vw); background: #0E1220; border-right: 1px solid rgba(155,130,255,0.3); pointer-events: auto; display: flex; flex-direction: column; }
