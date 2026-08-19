@@ -84,3 +84,22 @@
 
   .qa-float { position: fixed; bottom: 70px; font-size: 28px; animation: qaFloatUp 2.6s ease forwards; }
   @keyframes qaFloatUp { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60vh); } }
+
+/* 서버가 없을 때 발표자에게만 잠깐 뜨는 안내 (청중 화면에는 나오지 않는다) */
+#qa-offline-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 2147483000;
+  max-width: min(90vw, 560px);
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(20, 18, 34, 0.94);
+  color: #F3F0FF;
+  border: 1px solid rgba(155, 130, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
