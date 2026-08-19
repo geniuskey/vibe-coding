@@ -241,10 +241,31 @@
 
   // 한 번의 클릭으로 (1) 세션의 현재 덱을 바꾸고 (2) 발표자 화면을 연다.
   // 따라가기 중인 청중 화면은 서버 브로드캐스트를 받아 알아서 그 덱으로 이동한다.
+  //
+  // 이미 발표 중인 덱이면 세션을 절대 건드리지 않는다. 예전에는 이 경우에도 h:0 을 보내서,
+  // 버튼 문구가 '발표자 화면 열기'인 걸 보고 창을 앞으로 꺼내려 누르면 발표자가 20쪽에
+  // 있어도 청중이 전부 첫 장으로 끌려갔다. 게다가 window.open 은 같은 이름의 창을 그 URL로
+  // '다시 로드'하기 때문에 발표자 화면까지 처음부터 새로 뜨면서 발표가 통째로 끊겼다.
+  // 그래서 열어둔 창의 참조를 들고 있다가, 살아 있으면 focus() 만 한다.
+  let presenterWin = null;
   function startDeck(id) {
-    api('/qa/deck', { deck: id, h: 0 })
-      .then(() => window.open('../' + id + '/?present', 'seminar-presenter'))
-      .catch(() => {});
+    const alreadyLive = state.deck === id;
+
+    if (alreadyLive && presenterWin && !presenterWin.closed) {
+      presenterWin.focus(); // 새로 로드하지 않는다 — 발표 중인 화면을 그대로 앞으로만 꺼낸다
+      return;
+    }
+
+    // 창을 닫았거나 콘솔을 새로고침해 참조를 잃은 경우. 발표 중인 덱이라면 첫 장이 아니라
+    // 지금 보고 있는 슬라이드로 연다 (reveal 해시는 1부터 셈).
+    const hash = alreadyLive && state.slide ? '#/' + (state.slide + 1) : '';
+    const open = () => {
+      presenterWin = window.open('../' + id + '/?present' + hash, 'seminar-presenter');
+      if (presenterWin) presenterWin.focus();
+    };
+
+    if (alreadyLive) return open();
+    api('/qa/deck', { deck: id, h: 0 }).then(open).catch(() => {});
   }
 
   function renderNowDeck() {
