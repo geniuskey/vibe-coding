@@ -15,7 +15,7 @@ window.SEMINAR_DECKS = [
   { track: '02 더 깊이',  id: 'orchestration', emoji: '🤖', title: '서브에이전트와 오케스트레이션',              desc: '컨텍스트 격리 · 병렬 fan-out · 파이프라인' },
   { track: '02 더 깊이',  id: 'security',      emoji: '🔐', title: '사내 환경에서의 AI — 보안과 거버넌스',       desc: '데이터 경로 · 프롬프트 인젝션 · 권한 설계' },
 
-  { track: '03 직접 해보기', id: 'workshop',      emoji: '🛠️', title: '바이브 코딩 실습 워크숍',             desc: '8시간 핸즈온 — 강사 런북은 workshop/README.md' },
+  { track: '03 직접 해보기', id: 'workshop',      emoji: '🛠️', title: '바이브 코딩 실습 워크숍',             desc: '90분·3시간·8시간 코스 선택형 핸즈온 — 강사 런북은 workshop/README.md' },
   { track: '03 직접 해보기', id: 'agent-skills',  emoji: '🧬', title: '반도체 현업을 위한 Agent Skills',     desc: 'DRM 엑셀 · 주간보고 PPT · GDS · RTL · TCAD' },
   { track: '03 직접 해보기', id: 'making-slides', emoji: '🎬', title: '바이브 코딩으로 슬라이드 자료 만들기', desc: '레퍼런스 앵커링 → 피드백 루프 → Agent Skill' },
   { track: '03 직접 해보기', id: 'forChildren',   emoji: '🎮', title: '나만의 게임 만들기',                   desc: '어린이 × 부모 — AI와 함께 게임 만들기' },

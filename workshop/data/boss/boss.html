@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>보스전 채점기 — 웨이퍼 맵 감식</title>
+<style>
+  :root {
+    --bg:#06080F; --panel:#0E1220; --line:rgba(147,160,190,.18);
+    --ink:#E8ECF8; --muted:#93A0BE; --violet:#9B82FF; --teal:#2BEAD0;
+    --pink:#FF7AA8; --amber:#FFC24B;
+    --grad:linear-gradient(120deg,#9B82FF,#2BEAD0);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink); padding:34px 20px 60px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard',system-ui,sans-serif;
+    letter-spacing:-.01em;
+  }
+  .wrap { max-width:760px; margin:0 auto; }
+  .kicker {
+    font-size:13px; font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--amber);
+  }
+  h1 { font-size:34px; font-weight:800; margin:8px 0 6px; letter-spacing:-.03em; }
+  .sub { color:var(--muted); font-size:16px; line-height:1.6; margin:0 0 22px; }
+  .sub b { color:var(--ink); }
+  a { color:var(--teal); }
+  .file {
+    display:inline-block; text-decoration:none; font-weight:700; font-size:15px;
+    border:1px solid rgba(43,234,208,.45); background:rgba(43,234,208,.1);
+    color:var(--teal); border-radius:999px; padding:7px 16px; margin-bottom:24px;
+  }
+  .q {
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:15px 18px; margin-bottom:12px;
+  }
+  .q.ok   { border-color:rgba(43,234,208,.6);  background:rgba(43,234,208,.07); }
+  .q.no   { border-color:rgba(255,122,168,.6); background:rgba(255,122,168,.07); }
+  .q-head { display:flex; align-items:baseline; gap:10px; margin-bottom:9px; }
+  .q-n {
+    font-family:ui-monospace,'JetBrains Mono',monospace; font-weight:800; font-size:13px;
+    color:#06080F; background:var(--grad); border-radius:6px; padding:3px 8px; flex:none;
+  }
+  .q-t { font-size:17.5px; font-weight:700; line-height:1.4; }
+  .q-hint { color:var(--muted); font-size:14px; margin-top:3px; font-weight:500; }
+  .q-pt { margin-left:auto; font-family:ui-monospace,monospace; font-size:13px; color:var(--amber); flex:none; }
+  input[type=text], select {
+    width:100%; font:inherit; font-size:17px; color:var(--ink);
+    background:#0A0E1A; border:1px solid rgba(147,160,190,.35);
+    border-radius:9px; padding:10px 13px;
+  }
+  input[type=text]:focus, select:focus { outline:none; border-color:var(--violet); }
+  select option { background:#0A0E1A; }
+  .mark { font-size:14px; font-weight:800; margin-top:8px; display:none; }
+  .q.ok .mark, .q.no .mark { display:block; }
+  .q.ok .mark { color:var(--teal); }
+  .q.no .mark { color:var(--pink); }
+  .actions { display:flex; gap:10px; align-items:center; margin-top:18px; flex-wrap:wrap; }
+  button {
+    font:inherit; font-weight:800; font-size:17px; cursor:pointer;
+    border-radius:11px; padding:12px 26px; border:none;
+    background:var(--grad); color:#06080F;
+  }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--muted); font-size:15px; padding:11px 18px; }
+  .result {
+    display:none; margin-top:22px; border-radius:16px; padding:22px 24px;
+    background:var(--panel); border:1px solid var(--line);
+  }
+  .result.show { display:block; }
+  .score { font-family:ui-monospace,monospace; font-size:52px; font-weight:800; line-height:1;
+    background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .rank { font-size:24px; font-weight:800; margin:8px 0 4px; }
+  .rank-desc { color:var(--muted); font-size:16px; line-height:1.55; }
+  .clear { border-color:rgba(255,194,75,.6); background:rgba(255,194,75,.07); }
+  footer { color:var(--muted); font-size:13.5px; margin-top:30px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">BOSS BATTLE · 자동 채점</div>
+  <h1>🔬 웨이퍼 맵 감식</h1>
+  <p class="sub">
+    <b>boss_wafermap.csv</b> 안에 정답이 숨어 있습니다. 이 파일을 눈으로 읽지 말고,
+    <b>도구를 만들어서</b> 답을 뽑아내세요. 답만 맞히면 되는 게 아니라 —
+    <b>같은 질문을 다음 웨이퍼에도 다시 물을 수 있는 도구</b>가 진짜 목표입니다.
+  </p>
+  <a class="file" href="boss_wafermap.csv" download>📁 boss_wafermap.csv 받기</a>
+
+  <form id="f">
+    <div class="q" data-a="522744389">
+      <div class="q-head"><span class="q-n">Q1</span>
+        <div><div class="q-t">웨이퍼에 다이가 모두 몇 개인가?</div>
+          <div class="q-hint">정수로. CSV 헤더는 세지 않습니다.</div></div>
+        <span class="q-pt">20점</span>
+      </div>
+      <input type="text" name="q1" inputmode="numeric" autocomplete="off" placeholder="예: 1234" />
+      <div class="mark"></div>
+    </div>
+
+    <div class="q" data-a="3433598942">
+      <div class="q-head"><span class="q-n">Q2</span>
+        <div><div class="q-t">수율은 몇 %인가? (bin 1 = 양품)</div>
+          <div class="q-hint">소수 첫째 자리까지. 예: 92.4 — ±0.2 까지 정답 처리</div></div>
+        <span class="q-pt">20점</span>
+      </div>
+      <input type="text" name="q2" inputmode="decimal" autocomplete="off" placeholder="예: 92.4" />
+      <div class="mark"></div>
+    </div>
+
+    <div class="q" data-a="822911587">
+      <div class="q-head"><span class="q-n">Q3</span>
+        <div><div class="q-t">가장 많이 나온 불량 bin 번호는?</div>
+          <div class="q-hint">bin 1(양품)은 제외하고 셉니다.</div></div>
+        <span class="q-pt">20점</span>
+      </div>
+      <input type="text" name="q3" inputmode="numeric" autocomplete="off" placeholder="예: 5" />
+      <div class="mark"></div>
+    </div>
+
+    <div class="q" data-a="1459017788">
+      <div class="q-head"><span class="q-n">Q4</span>
+        <div><div class="q-t">불량의 주된 공간 패턴은?</div>
+          <div class="q-hint">웨이퍼 맵을 그려 보면 바로 보입니다.</div></div>
+        <span class="q-pt">20점</span>
+      </div>
+      <select name="q4">
+        <option value="">— 고르세요 —</option>
+        <option value="center">center — 중앙에 몰림</option>
+        <option value="edge">edge ring — 가장자리 테두리</option>
+        <option value="random">random — 고르게 흩어짐</option>
+        <option value="grid">grid — 격자 줄무늬</option>
+      </select>
+      <div class="mark"></div>
+    </div>
+
+    <div class="q" data-a="2650596061">
+      <div class="q-head"><span class="q-n">Q5</span>
+        <div><div class="q-t">불량률이 가장 높은 사분면은?</div>
+          <div class="q-hint">Q1: x&gt;0,y&gt;0 · Q2: x&lt;0,y&gt;0 · Q3: x&lt;0,y&lt;0 · Q4: x&gt;0,y&lt;0 (x=0 또는 y=0인 다이는 제외)</div></div>
+        <span class="q-pt">20점</span>
+      </div>
+      <select name="q5">
+        <option value="">— 고르세요 —</option>
+        <option value="Q1">Q1 (우상)</option>
+        <option value="Q2">Q2 (좌상)</option>
+        <option value="Q3">Q3 (좌하)</option>
+        <option value="Q4">Q4 (우하)</option>
+      </select>
+      <div class="mark"></div>
+    </div>
+
+    <div class="actions">
+      <button type="submit">채점하기</button>
+      <button type="button" class="ghost" id="clear-btn">지우고 다시</button>
+    </div>
+  </form>
+
+  <div class="result" id="result">
+    <div class="score" id="score">0</div>
+    <div class="rank" id="rank"></div>
+    <div class="rank-desc" id="rankDesc"></div>
+  </div>
+
+  <footer>
+    채점은 이 페이지 안에서만 이뤄집니다 — 아무 데도 전송되지 않습니다.<br />
+    정답은 코드에 그대로 들어 있지 않습니다. 소스를 뒤지는 대신 도구를 만드는 편이 빠릅니다. 🙂
+  </footer>
+</div>
+
+<script>
+  // 정답은 평문 대신 FNV-1a 해시로만 담아 둔다 (소스 훔쳐보기 방지).
+  function fnv(s) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return h;
+  }
+
+  const form = document.getElementById('f');
+  const boxes = [...form.querySelectorAll('.q')];
+
+  // Q2(수율)는 ±0.2 허용 — 후보값들을 해시로 대조한다.
+  function matches(idx, raw) {
+    const want = Number(boxes[idx].dataset.a);
+    const v = raw.trim();
+    if (!v) return false;
+    if (idx === 1) {
+      const n = parseFloat(v.replace('%', ''));
+      if (!isFinite(n)) return false;
+      for (let d = -2; d <= 2; d++) {
+        if (fnv((n + d * 0.1).toFixed(1)) === want) return true;
+      }
+      return false;
+    }
+    if (idx === 0 || idx === 2) {
+      const n = parseInt(v.replace(/[^0-9-]/g, ''), 10);
+      return isFinite(n) && fnv(String(n)) === want;
+    }
+    return fnv(v) === want;
+  }
+
+  const RANKS = [
+    [100, '🏆 수석 감식관', '5문항 전부. 도구가 제대로 돌아갔다는 뜻입니다 — 옆 사람에게 어떤 프롬프트를 썼는지 알려주세요.'],
+    [80,  '🥈 감식관',      '거의 다 왔습니다. 틀린 문항은 도구를 고쳐서 다시 뽑아보세요 — 눈으로 세지 말고.'],
+    [60,  '🥉 견습 감식관',  '절반 이상. 웨이퍼 맵을 화면에 그려 놓고 보면 남은 문항이 훨씬 쉬워집니다.'],
+    [40,  '🔧 수리 중',      '도구가 아직 데이터를 제대로 못 읽고 있을 수 있습니다. "CSV를 읽어서 먼저 개수부터 세줘"로 되돌아가 보세요.'],
+    [0,   '🚀 출발선',      '괜찮습니다. 한 문항씩 — Q1(다이 개수)부터 도구로 세는 것이 시작입니다.'],
+  ];
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const keys = ['q1', 'q2', 'q3', 'q4', 'q5'];
+    let score = 0;
+    keys.forEach((k, i) => {
+      const ok = matches(i, String(data.get(k) || ''));
+      boxes[i].classList.toggle('ok', ok);
+      boxes[i].classList.toggle('no', !ok);
+      boxes[i].querySelector('.mark').textContent = ok ? '✔ 정답 +20' : '✘ 아직 아닙니다';
+      if (ok) score += 20;
+    });
+    const r = RANKS.find((x) => score >= x[0]);
+    document.getElementById('score').textContent = score;
+    document.getElementById('rank').textContent = r[1];
+    document.getElementById('rankDesc').textContent = r[2];
+    const box = document.getElementById('result');
+    box.classList.add('show');
+    box.classList.toggle('clear', score === 100);
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // 버튼 id 를 'reset' 으로 두면 form.reset 이 그 버튼으로 가려져 초기화가 실패한다.
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    form.reset();
+    boxes.forEach((b) => { b.classList.remove('ok', 'no'); });
+    document.getElementById('result').classList.remove('show', 'clear');
+  });
+</script>
+</body>
+</html>

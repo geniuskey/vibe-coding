@@ -15,7 +15,7 @@
 | `orchestration/` | 서브에이전트와 오케스트레이션 (컨텍스트 격리 · 병렬 fan-out · 파이프라인 · CI 속 에이전트) |
 | `security/` | 사내 환경에서의 AI — 보안과 거버넌스 (데이터 경로 · 프롬프트 인젝션 · 권한 설계) |
 | `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub |
-| `workshop/` | 바이브 코딩 실습 워크숍 (8시간 핸즈온 — 강사용 런북은 `workshop/README.md`) |
+| `workshop/` | 바이브 코딩 실습 워크숍 (90분·3시간·8시간 코스 선택형 핸즈온 — 강사용 런북은 `workshop/README.md`) |
 | `agent-skills/` | 반도체 현업을 위한 Agent Skills (DRM 엑셀·PPT·GDS·RTL·TCAD 실무 예제 + 예제 스킬 모음 `agent-skills/skills/`) |
 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |

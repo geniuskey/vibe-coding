@@ -13,10 +13,10 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 8시간 핸즈온</title>
+  <title>바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 핸즈온 (90분 · 3시간 · 8시간)</title>
 
   <!-- SEO -->
-  <meta name="description" content="반도체 엔지니어를 위한 바이브 코딩 8시간 핸즈온 워크숍. 명함 웹페이지부터 웨이퍼 맵 뷰어, SPC 관리도, 수율 대시보드, 업무 자동화까지 — 복사해서 바로 쓰는 실습 프롬프트와 함께." />
+  <meta name="description" content="반도체 엔지니어를 위한 바이브 코딩 핸즈온 워크숍. 90분·3시간·8시간 코스 선택형. 첫 20분에 내 업무 도구를 정해 만들기 시작하고, 스프린트·빈칸·구조·페어·보스전 다섯 가지 실습 형식으로 진행합니다." />
   <meta name="keywords" content="바이브 코딩, vibe coding, 실습, 워크숍, 핸즈온, 반도체, 웨이퍼 맵, SPC, 수율 분석, 업무 자동화, Claude Code, AI 코딩" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
@@ -25,16 +25,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="바이브 코딩 세미나" />
-  <meta property="og:title" content="바이브 코딩 실습 워크숍 — 8시간 핸즈온" />
-  <meta property="og:description" content="반도체 엔지니어를 위한 바이브 코딩 실습. 쉬운 것부터 만들며 자신감을 쌓고, 웨이퍼 맵·SPC·수율 대시보드·업무 자동화까지." />
+  <meta property="og:title" content="바이브 코딩 실습 워크숍 — 코스 선택형 핸즈온" />
+  <meta property="og:description" content="반도체 엔지니어를 위한 바이브 코딩 실습. 첫 20분에 내 업무 도구를 시작하고, 형식이 계속 바뀌는 다섯 가지 실습으로 하루를 채웁니다." />
   <meta property="og:url" content="https://geniuskey.github.io/vibe-coding/workshop/" />
   <meta property="og:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
   <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="바이브 코딩 실습 워크숍 — 8시간 핸즈온" />
-  <meta name="twitter:description" content="반도체 엔지니어를 위한 바이브 코딩 실습. 쉬운 것부터 만들며 자신감을 쌓는 8시간." />
+  <meta name="twitter:title" content="바이브 코딩 실습 워크숍 — 코스 선택형 핸즈온" />
+  <meta name="twitter:description" content="반도체 엔지니어를 위한 바이브 코딩 실습. 90분·3시간·8시간 코스 선택형." />
   <meta name="twitter:image" content="https://geniuskey.github.io/vibe-coding/og-image.png" />
 
   <meta name="theme-color" content="#06080F" />
@@ -44,9 +44,9 @@
   {
     "@context": "https://schema.org",
     "@type": "PresentationDigitalDocument",
-    "name": "바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 8시간 핸즈온",
-    "headline": "바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 8시간 핸즈온",
-    "description": "반도체 엔지니어를 위한 바이브 코딩 8시간 핸즈온 워크숍. 명함 웹페이지부터 웨이퍼 맵 뷰어, SPC 관리도, 수율 대시보드, 업무 자동화까지 단계별 실습 프롬프트로 구성.",
+    "name": "바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 핸즈온",
+    "headline": "바이브 코딩 실습 워크숍 — 반도체 엔지니어를 위한 핸즈온",
+    "description": "반도체 엔지니어를 위한 바이브 코딩 핸즈온 워크숍. 90분·3시간·8시간 코스 선택형이며, 스프린트·빈칸·구조·페어·보스전 다섯 형식으로 실습이 구성된다.",
     "url": "https://geniuskey.github.io/vibe-coding/workshop/",
     "image": "https://geniuskey.github.io/vibe-coding/og-image.png",
     "inLanguage": "ko",
@@ -552,6 +552,200 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 .reveal .fragment.rise { transform: translateY(14px); transition: all 0.35s ease; }
 .reveal .fragment.rise.visible { transform: translateY(0); }
 
+/* ═══════════════ 재설계: 실습 형식 · 코스 · 내 도구 트랙 ═══════════════ */
+
+/* 실습 형식 배지 — 같은 형식이 연속으로 오지 않는 것이 이 덱의 규칙 */
+.lab-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.lab-type.sprint { color: var(--teal);   background: rgba(43, 234, 208, 0.12); border-color: rgba(43, 234, 208, 0.45); }
+.lab-type.blank  { color: var(--violet); background: rgba(155, 130, 255, 0.14); border-color: rgba(155, 130, 255, 0.5); }
+.lab-type.rescue { color: var(--amber);  background: rgba(255, 194, 75, 0.12);  border-color: rgba(255, 194, 75, 0.5); }
+.lab-type.pair   { color: var(--pink);   background: rgba(255, 122, 168, 0.12); border-color: rgba(255, 122, 168, 0.5); }
+.lab-type.duel   { color: #06080F; background: linear-gradient(120deg, #FFC24B, #FF7AA8); border-color: transparent; }
+.lab-type.mytool { color: #06080F; background: var(--grad); border-color: transparent; }
+
+/* 코스 표시 — 이 실습이 어느 길이의 코스에 포함되는가 */
+.course-chips { display: inline-flex; gap: 5px; }
+.course-chips .cc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; font-weight: 800;
+  padding: 4px 8px; border-radius: 6px;
+  border: 1px solid rgba(147, 160, 190, 0.28);
+  color: rgba(147, 160, 190, 0.5);
+}
+.course-chips .cc.on { color: var(--ink); border-color: rgba(43, 234, 208, 0.55); background: rgba(43, 234, 208, 0.1); }
+
+/* 코스 선택 카드 */
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.course-card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 16px; padding: 18px 20px; position: relative;
+}
+.course-card.pick { border-color: rgba(43, 234, 208, 0.55); background: rgba(43, 234, 208, 0.06); }
+.course-card .c-len {
+  font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 800;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: block; line-height: 1;
+}
+.course-card .c-name { font-weight: 800; font-size: 21px; display: block; margin: 8px 0 8px; }
+.course-card ul { margin: 0; list-style: none; }
+.course-card li { font-size: 16.5px; color: var(--muted); margin: 4px 0; padding-left: 18px; position: relative; line-height: 1.4; }
+.course-card li::before { content: '·'; position: absolute; left: 6px; color: var(--teal); font-weight: 800; }
+.course-card .c-badge {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 13px; font-weight: 800; color: var(--teal);
+  border: 1px solid rgba(43, 234, 208, 0.45); border-radius: 999px; padding: 2px 10px;
+}
+
+/* 하루의 리듬 — 형식 로테이션 표 */
+.rhythm { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 6px 0 14px; }
+.rhythm .r-card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 14px 14px 12px; text-align: center;
+}
+.rhythm .r-emoji { font-size: 30px; display: block; margin-bottom: 6px; }
+.rhythm .r-name { font-weight: 800; font-size: 18px; display: block; }
+.rhythm .r-en {
+  font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+  letter-spacing: 0.1em; color: var(--muted); display: block; margin: 2px 0 6px;
+}
+.rhythm .r-desc { font-size: 14.5px; color: var(--muted); line-height: 1.35; display: block; }
+.rhythm .r-card.t-sprint { border-color: rgba(43, 234, 208, 0.4); }
+.rhythm .r-card.t-blank  { border-color: rgba(155, 130, 255, 0.45); }
+.rhythm .r-card.t-rescue { border-color: rgba(255, 194, 75, 0.45); }
+.rhythm .r-card.t-pair   { border-color: rgba(255, 122, 168, 0.45); }
+.rhythm .r-card.t-duel   { border-color: rgba(255, 194, 75, 0.6); background: rgba(255, 194, 75, 0.06); }
+
+/* 내 도구 트랙 진행 바 — v0 → v1 → v2 */
+.mytool-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(155, 130, 255, 0.07);
+  border: 1px solid rgba(155, 130, 255, 0.3);
+  border-radius: 12px; padding: 8px 14px; margin: -2px 0 12px;
+  font-size: 16px;
+}
+.mytool-bar .mt-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 800;
+  letter-spacing: 0.12em; color: var(--violet); text-transform: uppercase;
+}
+.mytool-bar .mt-step { color: var(--muted); font-weight: 700; }
+.mytool-bar .mt-step.now { color: var(--ink); background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mytool-bar .mt-arr { color: rgba(147, 160, 190, 0.4); }
+
+/* 빈칸형 — 프롬프트를 주지 않는다. 힌트는 접어 둔다 */
+.blank-box {
+  background: #0A0E1A;
+  border: 1px dashed rgba(155, 130, 255, 0.55);
+  border-radius: 14px; padding: 15px 17px; margin-bottom: 12px;
+}
+.blank-box .b-label {
+  font-size: 15px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 9px;
+}
+.blank-box .b-line {
+  font-size: 19px; line-height: 1.9; color: #D7DEF3;
+}
+.blank-box .fill {
+  display: inline-block; min-width: 130px;
+  border-bottom: 2px solid rgba(155, 130, 255, 0.6);
+  color: var(--violet); font-weight: 700; text-align: center;
+}
+details.spoiler {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 12px; padding: 10px 15px; margin-bottom: 12px;
+}
+details.spoiler > summary {
+  cursor: pointer; list-style: none; font-size: 17px; font-weight: 800; color: var(--amber);
+}
+details.spoiler > summary::-webkit-details-marker { display: none; }
+details.spoiler > summary::before { content: '▸ '; color: var(--amber); }
+details.spoiler[open] > summary::before { content: '▾ '; }
+details.spoiler .s-body { font-size: 17.5px; color: #C3CDE6; line-height: 1.5; margin-top: 9px; }
+details.spoiler .s-body code { font-size: 0.9em; }
+
+/* 페어 — 역할 카드 */
+.pair-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+.pair-role {
+  border-radius: 14px; padding: 13px 16px;
+  background: var(--panel); border: 1px solid var(--line);
+}
+.pair-role.pilot  { border-color: rgba(43, 234, 208, 0.45); background: rgba(43, 234, 208, 0.06); }
+.pair-role.check  { border-color: rgba(255, 122, 168, 0.45); background: rgba(255, 122, 168, 0.06); }
+.pair-role .pr-name { font-weight: 800; font-size: 20px; display: block; margin-bottom: 5px; }
+.pair-role.pilot .pr-name { color: var(--teal); }
+.pair-role.check .pr-name { color: var(--pink); }
+.pair-role ul { margin: 0; list-style: none; }
+.pair-role li { font-size: 17px; color: #C3CDE6; margin: 4px 0; padding-left: 16px; position: relative; line-height: 1.4; }
+.pair-role li::before { content: '·'; position: absolute; left: 4px; font-weight: 800; }
+.swap-note {
+  text-align: center; font-size: 18px; font-weight: 700; color: var(--amber);
+  border: 1px dashed rgba(255, 194, 75, 0.5); border-radius: 10px; padding: 8px; margin-bottom: 12px;
+}
+
+/* 대결(보스전) — 채점표 */
+.duel-score { width: 100%; border-collapse: collapse; font-size: 17.5px; }
+.duel-score th, .duel-score td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+.duel-score th { font-size: 13.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.duel-score td.pt { font-family: 'JetBrains Mono', monospace; color: var(--amber); font-weight: 800; text-align: right; white-space: nowrap; }
+.duel-score tr.total td { border-bottom: none; font-weight: 800; color: var(--ink); }
+.boss-banner {
+  display: flex; align-items: center; gap: 14px;
+  background: linear-gradient(120deg, rgba(255, 194, 75, 0.14), rgba(255, 122, 168, 0.14));
+  border: 1px solid rgba(255, 194, 75, 0.5);
+  border-radius: 14px; padding: 12px 18px; margin-bottom: 12px;
+}
+.boss-banner .bb-emoji { font-size: 34px; }
+.boss-banner .bb-text { font-size: 18.5px; line-height: 1.4; }
+.boss-banner .bb-text b { color: var(--amber); }
+
+/* 갤러리 워크 / 리듬 전환 슬라이드 */
+section.interlude { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.interlude h2 { font-size: 56px; text-align: center; }
+.interlude .il-emoji { font-size: 76px; display: block; margin-bottom: 6px; }
+.interlude .il-sub { font-size: 24px; color: var(--muted); max-width: 860px; margin: 0 auto 20px; }
+.interlude .il-steps { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.interlude .il-step {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 13px 20px; font-size: 19px; text-align: left; max-width: 300px;
+}
+.interlude .il-step b { display: block; color: var(--teal); font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.interlude .il-timer {
+  font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 800;
+  color: var(--amber); margin-top: 22px;
+}
+
+/* 워크시트 — 내 문제 정하기 */
+.worksheet {
+  background: #0A0E1A; border: 1px solid rgba(43, 234, 208, 0.35);
+  border-radius: 16px; padding: 18px 22px;
+}
+.worksheet .ws-row { display: flex; align-items: baseline; gap: 12px; margin: 12px 0; font-size: 22px; line-height: 1.5; }
+.worksheet .ws-n {
+  font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 16px;
+  color: #06080F; background: var(--grad); border-radius: 6px; padding: 3px 8px; flex: none;
+}
+.worksheet .ws-blank {
+  flex: 1; border-bottom: 2px dashed rgba(43, 234, 208, 0.45);
+  color: var(--muted); font-size: 18px; padding: 0 6px 3px;
+}
+.worksheet .ws-eg { color: var(--muted); font-size: 16px; font-style: italic; }
+
+/* 부록 카드 그리드 */
+.appendix-note {
+  background: rgba(147, 160, 190, 0.07); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 16px; font-size: 18px; color: var(--muted); margin-bottom: 14px;
+}
+.appendix-note b { color: var(--ink); }
+
 /* 프린트/축소 시 넘침 방지 */
 .reveal .slides section { overflow: hidden; }
 
@@ -562,16 +756,16 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 <div class="reveal">
 <div class="slides">
 
-<!-- ═══════════════ 타이틀 & 오리엔테이션 ═══════════════ -->
+<!-- ═══════════════ 오프닝 ═══════════════ -->
 
 <section class="title-slide">
   <canvas id="wafer-canvas" width="520" height="520" aria-hidden="true"></canvas>
   <span class="kicker">VIBE CODING · HANDS-ON WORKSHOP</span>
   <h1>바이브 코딩<br /><span class="grad-text">실습 워크숍</span></h1>
   <p class="subtitle">말로 시키고, 눈으로 확인하고, 다시 시킨다.<br />
-  오늘 하루, <strong>내 업무에 쓸 도구</strong>를 직접 만들어 갑니다.</p>
+  오늘, <strong>내 업무에 쓸 도구 하나</strong>를 직접 만들어 갑니다.</p>
   <div class="title-chips">
-    <span class="chip teal">⏱ 8시간 핸즈온</span>
+    <span class="chip teal">⏱ 90분 · 3시간 · 8시간</span>
     <span class="chip violet">🔬 반도체 엔지니어 대상</span>
     <span class="chip amber">⌨️ 코딩 경험 불필요</span>
   </div>
@@ -582,8 +776,8 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   <span class="kicker">TODAY'S GOAL</span>
   <h2>퇴근할 때, 이것들을 가져갑니다</h2>
   <div class="stat-row">
-    <div class="stat"><div class="n grad-text">5+</div><div class="l">직접 만든 도구 (웹페이지·차트·자동화 스크립트)</div></div>
-    <div class="stat"><div class="n grad-text">20+</div><div class="l">복사해서 바로 쓰는 실습 프롬프트</div></div>
+    <div class="stat"><div class="n grad-text">1</div><div class="l"><strong>내 업무용 도구</strong> — 아침에 정해서 저녁에 들고 나갑니다</div></div>
+    <div class="stat"><div class="n grad-text">✍️</div><div class="l"><strong>내가 직접 쓴</strong> 프롬프트 (복사해 온 게 아니라)</div></div>
     <div class="stat"><div class="n grad-text">1</div><div class="l">"내 업무도 되겠는데?"라는 확신</div></div>
   </div>
   <p class="fragment rise">오늘의 진짜 목표는 코딩 실력이 아니라 <strong>자신감</strong>입니다.<br />
@@ -592,56 +786,93 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 </section>
 
 <section>
-  <span class="kicker">CONTENTS</span>
-  <h2>목차 <span class="muted small">— 쉬운 것에서 내 업무로</span></h2>
-  <div class="toc-grid three">
-    <div class="toc-card">
-      <span class="t-time">09:00</span><span class="t-num">0</span>
-      <span class="t-name">시작하기</span>
-      <span class="t-desc">환경 점검 · 실습 규칙 · 보안 약속 · 워밍업</span>
+  <span class="kicker">COURSE</span>
+  <h2>오늘은 <span class="grad-text">어느 코스</span>인가요?</h2>
+  <p class="muted" style="margin:-6px 0 16px;">덱은 하나지만 길이는 셋입니다. 강사가 오늘의 코스를 먼저 알려줍니다 — 각 실습 오른쪽 위 칩(<span class="course-chips"><span class="cc on">⚡90</span><span class="cc">🔷3h</span><span class="cc">⬛8h</span></span>)이 "이 실습이 어느 코스에 들어가는지"입니다.</p>
+  <div class="course-grid">
+    <div class="course-card">
+      <span class="c-len">90분</span>
+      <span class="c-name">⚡ 스프린트</span>
+      <ul>
+        <li>내 도구 v0 만들기</li>
+        <li>고장난 앱 고치기</li>
+        <li>웨이퍼 맵 보스전</li>
+        <li>공유 10분</li>
+      </ul>
     </div>
-    <div class="toc-card">
-      <span class="t-time">09:30</span><span class="t-num">1</span>
-      <span class="t-name">첫 결과물</span>
-      <span class="t-desc">명함 페이지 · 점심 룰렛 · 단위 변환기 · 타이머</span>
+    <div class="course-card pick">
+      <span class="c-badge">기본</span>
+      <span class="c-len">3시간</span>
+      <span class="c-name">🔷 표준</span>
+      <ul>
+        <li>스프린트 전부 +</li>
+        <li>빈칸 실습 2개</li>
+        <li>페어 검증 1개</li>
+        <li>내 도구 v1 → v2</li>
+      </ul>
     </div>
-    <div class="toc-card">
-      <span class="t-time">10:40</span><span class="t-num">2</span>
-      <span class="t-name">비개발 업무</span>
-      <span class="t-desc">회의록 · 주간보고 · 영문 메일 · 표 정리 · 발표자료</span>
-    </div>
-    <div class="toc-card lunch">
-      <span class="t-time">12:00</span><span class="t-num">🍚</span>
-      <span class="t-name">점심</span>
-      <span class="t-desc">메뉴는 오전에 만든 룰렛으로 결정</span>
-    </div>
-    <div class="toc-card">
-      <span class="t-time">13:00</span><span class="t-num">3</span>
-      <span class="t-name">데이터 만나기</span>
-      <span class="t-desc">측정 CSV · 웨이퍼 맵 · 장비 로그 · 랏 트렌드</span>
-    </div>
-    <div class="toc-card">
-      <span class="t-time">14:40</span><span class="t-num">4</span>
-      <span class="t-name">도메인 도구</span>
-      <span class="t-desc">SPC 관리도 · 수율 대시보드 · 공정 계산기</span>
-    </div>
-    <div class="toc-card">
-      <span class="t-time">16:10</span><span class="t-num">5</span>
-      <span class="t-name">업무 자동화</span>
-      <span class="t-desc">파일 일괄 처리 · 리포트 자동 생성 · 문서 Q&amp;A · 나만의 스킬</span>
-    </div>
-    <div class="toc-card adv">
-      <span class="t-time">★ 심화</span><span class="t-num">★</span>
-      <span class="t-name">진짜 앱 만들기</span>
-      <span class="t-desc">업로드 대시보드 · SQLite CRUD 앱 · 웨이퍼 diff · GitHub Pages 배포</span>
-    </div>
-    <div class="toc-card">
-      <span class="t-time">17:00</span><span class="t-num">6</span>
-      <span class="t-name">미니 프로젝트</span>
-      <span class="t-desc">내 업무 하나 자동화 + 공유 + 치트시트</span>
+    <div class="course-card">
+      <span class="c-len">8시간</span>
+      <span class="c-name">⬛ 풀데이</span>
+      <ul>
+        <li>표준 전부 +</li>
+        <li>부록 실습 23개</li>
+        <li>심화 트랙 (배포까지)</li>
+        <li>미니 프로젝트 45분</li>
+      </ul>
     </div>
   </div>
-  <aside class="notes">목차이자 시간표. 시간은 가이드일 뿐, 파트마다 필수/보너스 실습이 나뉘어 있어 참여자 속도에 맞춰 조절한다. 빠른 사람은 🚀 더 해보기를 계속 파면 된다. 심화 트랙(★)은 빠른 그룹용이거나 강사 데모용으로, 다운로드한 데이터로 완성형 웹앱을 만드는 파트다.</aside>
+  <p class="fragment rise" style="margin-top:16px;"><strong>세 코스 모두 "내 도구 하나"로 끝납니다.</strong> <span class="muted">길이가 다를 뿐, 가져가는 물건은 같습니다.</span></p>
+  <aside class="notes">첫 5분 안에 오늘의 코스를 명시하는 게 중요하다. "오늘은 3시간 표준입니다. 부록 18개는 나중에 혼자 하시라고 덱에 남겨 뒀습니다"라고 말해두면, 진도를 다 못 나갔다는 아쉬움 대신 '가져갈 게 더 있다'는 인상으로 남는다.</aside>
+</section>
+
+<section>
+  <span class="kicker violet">RHYTHM</span>
+  <h2>실습 형식이 <span class="grad-text">계속 바뀝니다</span></h2>
+  <p class="muted" style="margin:-6px 0 14px;">같은 형식을 연속으로 두 번 하지 않는 것이 이 워크숍의 규칙입니다. 손이 하는 일이 매번 달라집니다.</p>
+  <div class="rhythm">
+    <div class="r-card t-sprint">
+      <span class="r-emoji">⚡</span><span class="r-name">스프린트</span><span class="r-en">SPRINT</span>
+      <span class="r-desc">프롬프트를 드립니다.<br />속도로 밀어붙이기</span>
+    </div>
+    <div class="r-card t-blank">
+      <span class="r-emoji">✍️</span><span class="r-name">빈칸</span><span class="r-en">BLANK</span>
+      <span class="r-desc">프롬프트를 <b>안</b> 드립니다.<br />직접 쓰기</span>
+    </div>
+    <div class="r-card t-rescue">
+      <span class="r-emoji">🚑</span><span class="r-name">구조</span><span class="r-en">RESCUE</span>
+      <span class="r-desc">이미 고장난 것을<br />살려내기</span>
+    </div>
+    <div class="r-card t-pair">
+      <span class="r-emoji">👥</span><span class="r-name">페어</span><span class="r-en">PAIR</span>
+      <span class="r-desc">둘이서 역할 나눠<br />5분마다 교대</span>
+    </div>
+    <div class="r-card t-duel">
+      <span class="r-emoji">🏆</span><span class="r-name">보스전</span><span class="r-en">DUEL</span>
+      <span class="r-desc">정답이 있는 과제.<br />자동 채점 + 순위</span>
+    </div>
+  </div>
+  <p class="fragment rise"><strong>가장 중요한 건 ✍️ 빈칸입니다.</strong> <span class="muted">복사해서 붙여넣는 실력은 늘지 않습니다. 프롬프트를 <em>직접 쓰다가 막혀 봐야</em> 늡니다.</span></p>
+  <aside class="notes">이 슬라이드가 재설계의 핵심 선언이다. 예전 버전은 25개 실습이 전부 '프롬프트 복사 → 붙여넣기 → 결과 확인'이라 3~4개만 하면 새로 배울 게 없었다. 형식이 바뀌면 같은 루프라도 지루해지지 않는다. 여기서 "오늘 여러분이 제일 많이 할 일은 복사가 아니라 '쓰기'입니다"를 못 박아 둔다.</aside>
+</section>
+
+<section>
+  <span class="kicker">TODAY · 3시간 표준</span>
+  <h2>오늘의 흐름 <span class="muted small">— 20분마다 손이 하는 일이 바뀝니다</span></h2>
+  <table class="agenda">
+    <tr><th>시각</th><th>형식</th><th>무엇을</th><th>결과물</th></tr>
+    <tr><td class="t">0:00</td><td><span class="lab-type sprint">SPRINT</span></td><td class="part">워밍업 + 내 주제 정하기</td><td class="muted">오늘 만들 것 한 줄</td></tr>
+    <tr><td class="t">0:20</td><td><span class="lab-type mytool">MY TOOL</span></td><td class="part">내 도구 <strong>v0</strong> — 일단 뜨게</td><td class="muted">화면에 뜨는 v0</td></tr>
+    <tr class="break"><td class="t">0:40</td><td>🚶</td><td class="part">갤러리 워크 — 남의 화면 구경</td><td class="muted">훔칠 아이디어 1개</td></tr>
+    <tr><td class="t">0:45</td><td><span class="lab-type rescue">RESCUE</span></td><td class="part">고장난 앱 고치기</td><td class="muted">복구 3단계 경험</td></tr>
+    <tr><td class="t">1:05</td><td><span class="lab-type blank">BLANK</span></td><td class="part">측정 CSV 리포트 — <strong>프롬프트 직접</strong></td><td class="muted">내가 쓴 첫 프롬프트</td></tr>
+    <tr class="break"><td class="t">1:25</td><td>☕</td><td class="part">휴식</td><td class="muted">—</td></tr>
+    <tr><td class="t">1:35</td><td><span class="lab-type duel">DUEL</span></td><td class="part">🏆 웨이퍼 맵 보스전 — 자동 채점</td><td class="muted">점수와 순위</td></tr>
+    <tr><td class="t">2:00</td><td><span class="lab-type pair">PAIR</span></td><td class="part">SPC 관리도 — 조종사 × 검사관</td><td class="muted">남의 결과를 의심하는 법</td></tr>
+    <tr><td class="t">2:20</td><td><span class="lab-type mytool">MY TOOL</span></td><td class="part">내 도구 <strong>v1 → v2</strong></td><td class="muted">내일 쓸 도구</td></tr>
+    <tr><td class="t">2:50</td><td>🎤</td><td class="part">쇼앤텔 + 마무리</td><td class="muted">자랑 2분씩</td></tr>
+  </table>
+  <aside class="notes">예전 시간표는 '파트별 실습 4~5개'였는데, 참가자 입장에서는 같은 일을 20번 반복하는 것으로 느껴졌다. 지금은 시간표 자체가 '형식의 리듬'을 보여준다. 90분 코스는 BLANK·PAIR 줄을 빼고, 풀데이는 각 파트 뒤에 부록 실습을 얹는다.</aside>
 </section>
 
 <section>
@@ -708,8 +939,8 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 
 <section>
   <span class="kicker">GROUND RULES</span>
-  <h2>오늘의 실습 규칙 3가지</h2>
-  <div class="grid3">
+  <h2>오늘의 실습 규칙 4가지</h2>
+  <div class="grid4">
     <div class="card accent">
       <span class="icon">📋</span>
       <h3>에러는 복붙</h3>
@@ -721,12 +952,17 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
       <p class="small">30초 이상 고민되면 그냥 AI에게 물어보세요. <strong>"어떻게 하지?"도 프롬프트</strong>가 됩니다.</p>
     </div>
     <div class="card accent">
+      <span class="icon">✍️</span>
+      <h3>먼저 직접 써 보기</h3>
+      <p class="small">완성 프롬프트를 드리는 실습도, <strong>안 드리는 실습</strong>도 있습니다. 안 드릴 때는 어설퍼도 <strong>내 문장으로</strong> 먼저 보내 보세요.</p>
+    </div>
+    <div class="card accent">
       <span class="icon">🙈</span>
       <h3>코드는 안 읽어도 됨</h3>
       <p class="small">결과물만 보고 판단하세요. 코드가 궁금하면 <strong>"방금 코드 설명해줘"</strong>라고 시키면 됩니다.</p>
     </div>
   </div>
-  <aside class="notes">이 세 가지가 오늘 하루 종일 반복될 행동 규칙. 특히 에러 복붙은 비개발자가 가장 주저하는 부분이므로 첫 에러가 나온 사람을 공개적으로 칭찬해주면 분위기가 살아난다.</aside>
+  <aside class="notes">네 번째 규칙이 이번 개편의 핵심이다. 완성 프롬프트만 복사하면 하루 종일 '복사 실력'만 는다. 이 세 가지가 오늘 하루 종일 반복될 행동 규칙. 특히 에러 복붙은 비개발자가 가장 주저하는 부분이므로 첫 에러가 나온 사람을 공개적으로 칭찬해주면 분위기가 살아난다.</aside>
 </section>
 
 <section>
@@ -757,12 +993,31 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   <aside class="notes">반도체 회사 청중에게 가장 중요한 슬라이드. 오늘 모든 실습이 합성 데이터로 설계된 이유를 설명. "가짜 데이터로 만든 도구는 진짜 데이터에도 그대로 쓸 수 있다"는 메시지로 연결.</aside>
 </section>
 
+
+<!-- ═══════════════ PART 1 · 내 도구 첫 삽 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">1</div>
+  <div class="part-body">
+    <span class="kicker">PART 1 · 0:00–0:45</span>
+    <h2>내 도구, 첫 삽</h2>
+    <p class="subtitle muted">오늘 만들 것을 <strong>지금</strong> 정합니다.<br />남의 예제가 아니라 내 업무로 시작하는 게 이 워크숍의 차이입니다.</p>
+    <div class="part-meta">
+      <span class="chip teal">🎯 시키기→확인→고치기 루프</span>
+      <span class="chip violet">🧰 결과물: 내 도구 v0</span>
+    </div>
+  </div>
+  <aside class="notes">예전 구조는 명함·룰렛 같은 장난감 4~5개를 만든 뒤 8시간째에야 자기 주제로 넘어갔다. 실제로 진행해 보면 사람들은 3~4개쯤에서 흥미를 잃고 스스로 자기 주제로 건너뛴다. 그 건너뜀을 아예 설계에 넣었다 — 자기 주제를 첫 20분에 시작한다.</aside>
+</section>
+
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB 0</span>
+    <span class="lab-type sprint">SPRINT</span>
     <h2>워밍업 — 첫 지시 내려보기</h2>
     <span class="chip amber">⏱ 5분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
+    ☆☆</span>
+    <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
   <p class="lab-goal">키보드 풀기용. AI에게 <strong>말로 시켜서 텍스트 결과</strong>를 받아봅니다. 아직 파일도 안 만듭니다.</p>
   <div class="lab-cols">
@@ -797,125 +1052,143 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   <aside class="notes">가볍게 웃고 시작하는 실습. 여기서 '이어서 수정 요청하기'를 반드시 해보게 한다 — 단발 질문이 아니라 대화라는 감각이 core. ①→②처럼 대화가 이어지는 것이 오늘 하루 종일 할 일의 전부라는 점을 짚는다.</aside>
 </section>
 
-<!-- ═══════════════ PART 1 · 첫 결과물 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">1</div>
-  <div class="part-body">
-    <span class="kicker">PART 1 · 09:30–10:30</span>
-    <h2>첫 결과물 만들기</h2>
-    <p class="subtitle muted">쉽고, 일반적이고, 눈에 바로 보이는 것부터.<br />여기서 만드는 건 장난감이지만, 익히는 근육은 진짜입니다.</p>
-    <div class="part-meta">
-      <span class="chip teal">🎯 시키기→확인→고치기 루프 체화</span>
-      <span class="chip violet">🧪 실습 4개 + 보너스 1개</span>
-    </div>
+<section>
+  <span class="kicker">MY TOOL · 워크시트</span>
+  <h2>오늘 만들 것을 <span class="grad-text">지금 정합니다</span> <span class="chip amber" style="vertical-align:8px;">⏱ 5분</span></h2>
+  <div class="worksheet">
+    <div class="ws-row"><span class="ws-n">1</span>
+      <div style="flex:1;">내가 <strong>매주 반복</strong>하는 귀찮은 일 하나는<br /><span class="ws-blank">예: 매주 월요일 장비별 알람 로그를 훑어서 보고서에 옮겨 적기</span></div></div>
+    <div class="ws-row"><span class="ws-n">2</span>
+      <div style="flex:1;">그 일의 <strong>입력</strong>은 (무엇을 받아서)<br /><span class="ws-blank">예: 장비에서 내려받은 CSV 5개</span></div></div>
+    <div class="ws-row"><span class="ws-n">3</span>
+      <div style="flex:1;">원하는 <strong>출력</strong>은 (무엇이 나오면 끝)<br /><span class="ws-blank">예: 알람 상위 5개와 시간대 차트가 있는 HTML 한 장</span></div></div>
   </div>
-  <aside class="notes">이 파트의 예제는 일부러 업무와 무관하다. 결과가 시각적으로 즉시 보이는 것들로 도파민을 먼저 확보한다.</aside>
+  <p class="fragment rise" style="margin-top:14px;">3분 안에 안 떠오르면 — <strong>다음 장 아이디어 카드에서 하나 집으세요.</strong> <span class="muted">고민하는 시간보다 만드는 시간이 훨씬 남는 장사입니다.</span></p>
+  <aside class="notes">이 5분이 하루 전체의 성패를 가른다. 조교는 이 시간에 돌아다니며 빈칸을 못 채우는 사람 옆에 붙는다. 완벽한 주제를 찾을 필요 없다 — "매주 반복 + 입력/출력이 명확" 두 조건만 맞으면 통과시킨다. 3분 지나면 강제로 아이디어 카드로 넘긴다.</aside>
+</section>
+
+<section>
+  <span class="kicker">IDEA CARDS</span>
+  <h2>주제가 안 떠오르면 — 여기서 고르세요 <span class="chip amber" style="vertical-align:8px;">⏱ 30초 안에</span></h2>
+  <div class="idea-grid">
+    <div class="idea"><span class="i-emoji">📓</span><span class="i-name">교대 인수인계 노트</span><span class="i-desc">쓰면 자동 정리·검색되는 시프트 로그</span></div>
+    <div class="idea"><span class="i-emoji">📅</span><span class="i-name">장비 예약 보드</span><span class="i-desc">측정기 예약 현황 한눈에 + 중복 방지</span></div>
+    <div class="idea"><span class="i-emoji">🧾</span><span class="i-name">레시피 비교기</span><span class="i-desc">파라미터 파일 2개의 차이만 하이라이트</span></div>
+    <div class="idea"><span class="i-emoji">🗂️</span><span class="i-name">실험 노트 정리기</span><span class="i-desc">날짜·조건·결과를 표준 양식으로 축적</span></div>
+    <div class="idea"><span class="i-emoji">🧪</span><span class="i-name">DOE 조건표 생성기</span><span class="i-desc">인자·수준 입력 → 실험 조건 매트릭스</span></div>
+    <div class="idea"><span class="i-emoji">📈</span><span class="i-name">일일 지표 대시보드</span><span class="i-desc">내가 매일 보는 숫자 4개를 한 화면에</span></div>
+    <div class="idea"><span class="i-emoji">⏰</span><span class="i-name">PM 일정 알리미</span><span class="i-desc">주기 입력 → 다가오는 정비 일정 캘린더</span></div>
+    <div class="idea"><span class="i-emoji">📊</span><span class="i-name">회의용 차트 공장</span><span class="i-desc">CSV 던지면 보고서용 차트 3종 자동 생성</span></div>
+    <div class="idea"><span class="i-emoji">🔍</span><span class="i-name">파일명 검색기</span><span class="i-desc">수천 개 측정 파일에서 조건으로 찾기</span></div>
+    <div class="idea"><span class="i-emoji">🧮</span><span class="i-name">우리 팀 계산기</span><span class="i-desc">팀에서 자주 쓰는 계산식 모음 웹앱</span></div>
+    <div class="idea"><span class="i-emoji">✅</span><span class="i-name">체크리스트 앱</span><span class="i-desc">셋업/릴리즈 절차를 클릭형 체크리스트로</span></div>
+    <div class="idea"><span class="i-emoji">🎓</span><span class="i-name">신입 온보딩 퀴즈</span><span class="i-desc">우리 공정 기초 지식 퀴즈 게임</span></div>
+  </div>
+  <aside class="notes">앞 워크시트에서 3분 안에 주제를 못 정한 사람은 여기서 강제로 하나 집게 한다. 고르는 데 30초 이상 쓰지 못하게 하는 것이 요령 — 어느 걸 골라도 오늘 배울 것은 같다. 12개 카드 모두 오늘 배운 패턴의 조합으로 만들 수 있는 크기. 각 카드가 어떤 실습의 변형인지 짚어주면 좋다 (예: 레시피 비교기 = 표 정리 + 파일 읽기).</aside>
 </section>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 1-1</span>
-    <h2>내 명함 웹페이지</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
+    <span class="lab-id">LAB M-0</span>
+    <span class="lab-type mytool">MY TOOL</span>
+    <h2>내 도구 v0 — 일단 뜨게</h2>
+    <span class="chip amber">⏱ 20분</span>
+    <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">생애 첫 웹페이지 — <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열립니다.</p>
+  <div class="mytool-bar">
+    <span class="mt-label">MY TOOL</span>
+    <span class="mt-step now">v0 일단 뜨게</span><span class="mt-arr">→</span>
+    <span class="mt-step">v1 데이터 붙이기</span><span class="mt-arr">→</span>
+    <span class="mt-step">v2 스킬로 굳히기</span>
+  </div>
+  <p class="lab-goal">워크시트에 적은 <strong>내 주제</strong>로 시작합니다. 목표는 완성이 아니라 <strong>화면에 뭐라도 뜨는 것</strong>.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">내 온라인 명함 웹페이지를 card.html 파일 하나로 만들어줘. 이름, 소속, 한 줄 소개, 이메일이 들어가고, 세련된 다크 테마로. 내용은 일단 아무거나 채워놔 — 내가 나중에 알려줄게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 내 정보로</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">이름은 ○○○, 소속은 ○○팀으로 바꿔줘. 한 줄 소개는 "웨이퍼와 씨름하는 엔지니어" 느낌으로 네가 몇 개 제안해줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-card">
-          <div class="mk-avatar">🧑‍🔬</div>
-          <div>
-            <div class="mk-title">김공정 <span class="mk-sub">· 식각기술팀</span></div>
-            <div class="mk-sub">"웨이퍼와 씨름하는 엔지니어"</div>
-            <div class="mk-sub mono">engineer@fab.example</div>
-          </div>
-        </div>
-        <div class="mock-cap">브라우저에 뜨는 다크 테마 카드 한 장</div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li><code>card.html</code>이 브라우저에서 열린다</li>
-          <li>수정 요청을 2번 이상 해봤다</li>
-        </ul>
+        <div class="p-label"><span>📋 만능 첫 프롬프트 — ○○만 내 걸로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야.
+20분 안에 만들 수 있는 v1 계획을 먼저 3줄로 제안해줘. 내가 좋다고 하면 그때 만들기 시작해줘.
+연습용 가짜 데이터도 같이 만들어줘 — 실데이터는 안 쓸 거야.</div>
       </div>
       <div class="panel hint">
-        <div class="panel-title">🚑 막혔다면</div>
+        <div class="panel-title">💡 20분을 지키는 법</div>
         <ul>
-          <li>"방금 만든 파일 경로 알려줘" / 에러는 그대로 복붙</li>
+          <li>계획이 4줄을 넘으면 <strong>"절반으로 줄여줘"</strong></li>
+          <li>기능은 <strong>1개만</strong> — 나머지는 v1에서</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건 — 이 셋이면 통과</div>
+        <ul>
+          <li>브라우저(또는 터미널)에 <strong>뭐라도 뜬다</strong></li>
+          <li>가짜 데이터로 한 번은 <strong>끝까지 돌아간다</strong></li>
+          <li>수정 요청을 <strong>2번 이상</strong> 해봤다</li>
+        </ul>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 20분이 남는다면</div>
+        <ul>
+          <li>"지금 화면이 촌스러워, 더 고급스럽게"</li>
+          <li>"내가 다음에 뭘 붙이면 좋을지 3개 제안해줘"</li>
+        </ul>
+      </div>
+      <div class="panel" style="border-color:rgba(255,122,168,.35);">
+        <div class="panel-title" style="color:var(--pink);">⚠️ 이 20분에 하지 말 것</div>
+        <ul style="list-style:none;">
+          <li style="padding-left:26px;position:relative;"><span style="position:absolute;left:0;">✗</span> 실데이터 열기</li>
+          <li style="padding-left:26px;position:relative;"><span style="position:absolute;left:0;">✗</span> "완성"하려고 하기 — v0는 못생겨야 정상</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">전원이 '브라우저에서 내 이름이 뜨는' 순간을 경험하는 게 목표. 완성한 사람 화면 몇 개를 프로젝터로 보여주면 분위기가 뜬다.</aside>
+  <aside class="notes">여기서 방 전체의 온도가 정해진다. 20분 타이머를 크게 띄우고, 15분 시점에 "5분 남았습니다, 지금 되는 데까지가 v0입니다"라고 못 박는다. 완성하려는 사람을 말리는 게 조교의 주 임무. 못생긴 v0가 나와야 다음 갤러리 워크에서 "다들 못생겼네" 하는 안도감이 생긴다.</aside>
+</section>
+
+<section class="interlude">
+  <span class="il-emoji">🚶</span>
+  <h2>갤러리 워크</h2>
+  <p class="il-sub">자리에서 <strong>일어나서</strong>, 다른 사람 화면 <strong>3개</strong>를 보고 옵니다.<br />설명은 안 해도 됩니다 — 화면만 열어 두세요.</p>
+  <div class="il-steps">
+    <div class="il-step"><b>보는 사람</b>"오, 그건 어떻게 시켰어요?" 한 마디만 물어보세요.</div>
+    <div class="il-step"><b>보여주는 사람</b>미완성이어도 그대로 두세요. 다들 미완성입니다.</div>
+    <div class="il-step"><b>돌아와서</b>남의 것에서 <strong>훔칠 것 1개</strong>를 내 도구에 바로 시킵니다.</div>
+  </div>
+  <div class="il-timer">⏱ 5분 — 3분 구경 + 2분 훔치기</div>
+  <aside class="notes">하루 종일 자기 노트북만 보는 구조가 지루함의 큰 원인이었다. 몸을 일으키는 것만으로 집중이 리셋된다. 강사는 이 시간에 잘된 화면 2~3개를 봐 뒀다가 다음 슬라이드 전에 프로젝터로 띄운다. "설명 안 해도 된다"고 미리 말해야 사람들이 화면을 연다.</aside>
 </section>
 
 <section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 1-2</span>
-    <h2>점심 메뉴 룰렛</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
+  <span class="kicker">PART 1 · WRAP-UP</span>
+  <h2>45분 전의 나에게 없던 것</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="n grad-text">1개</div><div class="l"><strong>내 업무용</strong> 도구 v0 — 남의 예제가 아닌 내 것</div></div>
+    <div class="stat"><div class="n grad-text">0줄</div><div class="l">직접 작성한 코드</div></div>
+    <div class="stat"><div class="n grad-text">∞</div><div class="l">수정 요청 가능 횟수</div></div>
   </div>
-  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>. 오늘 점심은 이걸로 정합니다. 진짜로.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">점심 메뉴 룰렛을 lunch.html 파일 하나로 만들어줘. 돌림판이 빙글빙글 돌다가 하나를 뽑아주는 애니메이션으로. 메뉴는 김치찌개, 돈까스, 초밥, 쌀국수, 샐러드, 구내식당, 짜장면, 버거 8개. 시작 버튼은 크고 누르고 싶게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 감질나게</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 메뉴를 직접 추가/삭제할 수 있는 입력칸도.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"같은 메뉴가 3번 연속 나오면 안 되게 해줘"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-wheel-row">
-          <div class="mk-wheel"></div>
-          <div>
-            <div class="mk-title">🎉 돈까스!</div>
-            <div class="mk-sub">폭죽 + 두구두구 효과</div>
-            <div class="mk-sub">메뉴 추가/삭제 입력칸</div>
-          </div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>돌림판이 돌고 결과가 나온다</li>
-          <li>오늘 점심이 정해졌다 🍜</li>
-        </ul>
-      </div>
+  <ul>
+    <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
+    <li class="fragment rise">다음: 만들다 보면 반드시 <em>막힙니다</em> — 빠져나오는 법부터 익힙니다.</li>
+  </ul>
+  <aside class="notes">'0줄' 스탯이 포인트. 갤러리 워크로 분위기가 이미 올라와 있으니 짧게 짚고 바로 Part 2로 넘어간다.</aside>
+</section>
+
+
+<!-- ═══════════════ PART 2 · 고장과 빈칸 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">2</div>
+  <div class="part-body">
+    <span class="kicker amber">PART 2 · 0:45–1:25</span>
+    <h2>고장과 빈칸</h2>
+    <p class="subtitle muted">잘 되는 것만 해서는 늘지 않습니다.<br /><strong>고장난 걸 살리고, 프롬프트를 직접 써 봅니다.</strong></p>
+    <div class="part-meta">
+      <span class="chip amber">🚑 RESCUE</span>
+      <span class="chip violet">✍️ BLANK — 프롬프트를 드리지 않습니다</span>
     </div>
   </div>
-  <aside class="notes">애니메이션·인터랙션이 '내가 이걸 만들었다고?' 하는 반응을 만든다. 점심시간에 실제로 사용해서 오전 실습이 실생활로 연결되는 경험을 준다.</aside>
+  <aside class="notes">이 파트가 재설계에서 가장 크게 바뀐 곳이다. 예전에는 완성된 프롬프트를 20번 복사하게 했는데, 그러면 '프롬프트 쓰는 능력'은 하루 종일 한 번도 연습되지 않는다. 여기서부터는 참가자가 직접 쓴다.</aside>
 </section>
 
 <section>
@@ -942,166 +1215,6 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   <p class="fragment rise" style="margin-top: 14px;"><strong>"더 예쁘게"도 훌륭한 지시입니다.</strong> <span class="muted">디자이너에게, 신입사원에게 말하듯 하면 됩니다.</span></p>
   <aside class="notes">비개발자가 '이렇게 대충 말해도 되나?' 하는 심리 장벽을 깨는 슬라이드. 실제로 몇 개를 라이브로 시연하면 효과적.</aside>
 </section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 1-3</span>
-    <h2>단위 변환기</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">처음으로 <strong>업무 냄새</strong>가 나는 도구 — 매번 검색하던 단위 변환을 내 것으로.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">반도체 엔지니어용 단위 변환기를 unit.html 파일 하나로 만들어줘. nm ↔ Å ↔ µm ↔ mil 길이, Torr ↔ Pa ↔ mbar 압력, °C ↔ K 온도 세 가지 탭으로. 숫자를 입력하면 실시간으로 전부 같이 변환돼서 보이게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 검증까지 시키기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">1 Å = 0.1 nm, 760 Torr = 101325 Pa 같은 알려진 값으로 변환이 정확한지 표로 검증해서 보여줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>sccm ↔ slm 유량, eV ↔ nm 광자 에너지 탭 추가</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-sub">길이 · <span class="warn-t">압력</span> · 온도</div>
-          <table>
-            <tr><td class="mono">1 Torr</td><td class="mono ok">= 133.322 Pa</td><td class="mono">= 1.333 mbar</td></tr>
-            <tr><td class="mono">760 Torr</td><td class="mono ok">= 101325 Pa</td><td class="mono">= 1013.25 mbar</td></tr>
-          </table>
-        </div>
-        <div class="mock-cap">입력하면 모든 단위가 동시에 갱신</div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>세 종류 변환이 모두 동작</li>
-          <li><strong>아는 값으로 검산</strong>해봤다 (760 Torr)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">첫 번째 '내일부터 실제로 쓸 수 있는' 도구. 검산 습관(golden value 넣어보기)을 여기서 처음 심는다 — 오후 데이터 실습의 복선.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 1-4</span>
-    <h2>회의 타이머</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">요구사항 <strong>여러 개</strong>를 처음부터 번호로 정리해서 시켜봅니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">회의 타이머를 timer.html 파일 하나로 만들어줘. 요구사항:
-1. 발표 시간을 분 단위로 설정 (기본 5분)
-2. 남은 시간이 화면 가득 크게 보이게
-3. 1분 남으면 노란색, 다 되면 빨간색 + 깜빡임
-4. 시작/일시정지/리셋 버튼
-회의실 프로젝터에 띄워놓고 쓸 거야.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"발표자 명단을 넣으면 순서대로 돌아가게"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-timer">00:58</div>
-          <div class="mk-sub" style="text-align:center;">⬜ 5분+ → 🟨 1분 미만 → 🟥 깜빡임</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>타이머가 돌고 색이 바뀐다</li>
-          <li>요구사항 4개를 <strong>하나씩 체크</strong>했다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>번호 요구사항 = 그대로 <strong>검수 체크리스트</strong>. 빠지면 "3번이 안 됐어"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">번호 목록 프롬프트 패턴을 처음 도입. 요구사항이 곧 검수 체크리스트가 된다는 것을 경험하게 한다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 1-5</span>
-    <h2>보너스 — 반응속도 게임</h2>
-    <span class="chip amber">⏱ 여유 있으면</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-    <span class="chip pink">BONUS</span>
-  </div>
-  <p class="lab-goal">빨리 끝난 사람용 — 옆 사람과 <strong>대결</strong>할 수 있는 것.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">반응속도 측정 게임을 reaction.html로 만들어줘. 화면이 빨간색이었다가 랜덤한 순간 초록색으로 바뀌면 최대한 빨리 클릭하는 게임. 반응 시간을 ms로 보여주고, 5회 평균과 최고 기록을 기록해줘. 너무 일찍 누르면 "성급했습니다!" 하고 놀려줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"등급을 매겨줘 — 200ms 미만은 'FAB 알람 대응 S급'"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-title" style="font-size:26px;">⚡ 236 <span class="mk-sub">ms</span></div>
-          <div class="mk-sub">5회 평균 251 ms · 최고 <span class="ok">198 ms</span> — <span class="warn-t">FAB 알람 대응 A급</span></div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>내 평균 반응속도를 알아냈다</li>
-          <li>옆 사람과 대결해봤다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">진도 조절용 버퍼 실습. 전체가 빠르면 다 같이 하고, 아니면 빠른 사람만.</aside>
-</section>
-
-<section>
-  <span class="kicker">PART 1 · WRAP-UP</span>
-  <h2>1시간 전의 나에게 없던 것</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="n grad-text">4~5개</div><div class="l">동작하는 웹 도구</div></div>
-    <div class="stat"><div class="n grad-text">0줄</div><div class="l">직접 작성한 코드</div></div>
-    <div class="stat"><div class="n grad-text">∞</div><div class="l">수정 요청 가능 횟수</div></div>
-  </div>
-  <ul>
-    <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
-    <li class="fragment rise">다음: 만들다 보면 반드시 <em>막힙니다</em> — 빠져나오는 법부터 익힙니다.</li>
-  </ul>
-  <aside class="notes">'0줄' 스탯이 포인트. 잠깐 쉬는 시간을 갖고 Part 2로.</aside>
-</section>
-
-<!-- ═══════════════ SKILL · 트러블슈팅 ═══════════════ -->
 
 <section>
   <span class="kicker amber">SKILL · 막혔을 때</span>
@@ -1147,10 +1260,12 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 1-6</span>
+    <span class="lab-id">LAB R-1</span>
+    <span class="lab-type rescue">RESCUE</span>
     <h2>고장난 앱 고치기</h2>
     <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
+    ☆</span>
+    <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
   <p class="lab-goal">일부러 <strong>3군데 고장 낸</strong> 수율 차트입니다. 복구 3단계로 하나씩 살려보세요.</p>
   <div class="databar">
@@ -1200,367 +1315,24 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
   <aside class="notes">고장 3종: (1) ctx.fillRects 오타 → TypeError로 백지(콘솔 에러 복붙으로 해결), (2) 색 조건 반전(묘사로 해결), (3) 제목 오기·y축 눈금 없음(국소 수정). 앞의 SKILL 3단계를 그대로 실습하는 구조. 완료 후 '고장은 무섭지 않다'는 자신감이 핵심 수확.</aside>
 </section>
 
-<!-- ═══════════════ PART 2 · 비개발 업무 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">2</div>
-  <div class="part-body">
-    <span class="kicker">PART 2 · 10:40–12:00</span>
-    <h2>코딩 말고, 그냥 업무</h2>
-    <p class="subtitle muted">바이브 코딩의 절반은 코딩이 아닙니다.<br />회의록, 보고서, 메일, 표 정리 — 매일 하는 그 일부터 맡겨봅니다.</p>
-    <div class="part-meta">
-      <span class="chip teal">🎯 문서 업무를 AI에게 시키는 감각</span>
-      <span class="chip violet">🧪 실습 6개 (필수 4 + 보너스 2)</span>
-    </div>
-  </div>
-  <aside class="notes">개발 도구로 문서 업무를 시키는 게 어색할 수 있지만, 파일을 읽고 쓰는 에이전트에겐 문서도 코드도 똑같은 텍스트라는 점을 짚는다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-1</span>
-    <h2>회의록 → 요약 + 액션 아이템</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">중구난방 회의 메모 → <strong>정리된 회의록</strong>.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트 (샘플 메모 포함)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">아래 회의 메모를 정리해서 minutes.md 파일로 만들어줘. ①3줄 요약 ②결정사항 ③액션 아이템(담당자/기한 표) 순서로.
-
---- 메모 ---
-설비팀 김프로: 3번 챔버 파티클 이슈 지난주부터 재발, 원인 미상. 정비 일정 협의 필요
-공정팀: 신규 레시피 평가 지연중, 측정 장비 예약이 밀림. 다음주 화요일까지 1차 결과 공유하기로 함
-품질팀 이프로: 월간 감사 준비, 각 팀 문서 목록 금요일까지 제출 요청
-팀장: 파티클 이슈는 설비팀+공정팀 합동으로 이번주 목요일까지 1차 원인 분석. 레시피 평가는 우선순위 상향</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"팀 공지용 3줄 버전도 따로" / 우리 팀 회의록 양식 틀에 맞추기</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-sub">📄 minutes.md — 요약 3줄 + 결정 2건 +</div>
-          <table>
-            <tr><th>액션</th><th>담당</th><th>기한</th></tr>
-            <tr><td>파티클 1차 원인 분석</td><td>설비+공정</td><td class="warn-t">목요일</td></tr>
-            <tr><td>감사 문서 목록 제출</td><td>각 팀</td><td class="warn-t">금요일</td></tr>
-          </table>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>요약/결정/액션이 구분돼 나온다</li>
-          <li>액션에 <strong>담당자·기한</strong>이 표로 정리됐다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">문서 업무 첫 실습. 형식을 ①②③으로 지정하는 패턴이 Part 1의 번호 목록 패턴과 같다는 점을 연결해주면 좋다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-2</span>
-    <h2>메모 → 주간보고 초안</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">일주일치 낙서 같은 메모 → <strong>보고서 문체</strong>.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">아래 이번 주 업무 메모로 주간보고 초안을 작성해줘. 형식: [금주 실적 / 이슈 및 리스크 / 차주 계획] 3개 섹션, 개조식 문어체("~함", "~완료")로.
-
-- 화: 신규 장비 셋업 지원, 캘리브레이션까지 완료
-- 수: 파티클 이슈 미팅. 원인 후보 2개로 좁힘 (밸브 실링 or 배기 라인)
-- 목: 분석 데이터 정리하다 측정기 예약 못 잡아서 반나절 날림
-- 금: 보고서 초안 작성 예정. 다음주엔 재현 실험 하려고 함</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 톤 조절</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">"반나절 날림"처럼 부정적으로 보이는 부분은 리스크와 대응 계획 형태로 다듬어줘. 임원 보고에 들어가도 어색하지 않게.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-sub ok">■ 금주 실적</div>
-          <div class="mk-sub">· 신규 장비 셋업 및 캘리브레이션 완료</div>
-          <div class="mk-sub warn-t">■ 이슈 및 리스크</div>
-          <div class="mk-sub">· 계측 리소스 경합으로 분석 일정 지연 → 예약 선점으로 대응</div>
-          <div class="mk-sub" style="color:#9B82FF;">■ 차주 계획</div>
-          <div class="mk-sub">· 파티클 재현 실험 수행 예정</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>3개 섹션 개조식 보고서가 나왔다</li>
-          <li>톤 조절 요청까지 해봤다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">매주 반복되는 보고서 작성이 '메모만 던지면 되는 일'로 바뀌는 경험. 내용은 내가, 문체·형식은 AI가 — 역할 분담. 팀 보고 양식을 한 번 알려주면 계속 그 틀로 받을 수 있다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-3</span>
-    <h2>영문 메일 — 장비 벤더 문의</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">상황만 한국어로 설명하면 <strong>정중한 영문 메일</strong>이 나옵니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">장비 벤더 엔지니어에게 보낼 영문 메일을 써줘. 상황: 챔버 압력 센서가 간헐적으로 이상값을 보여서 지난주에 문의했는데 아직 답이 없음. 정중하지만, 다음 주 PM 일정 전에는 꼭 답을 받아야 한다는 긴급함이 전달되게. 제목도 같이. 메일 아래에 한국어 번역도 붙여줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 뉘앙스 조절</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">더 부드러운 버전과 더 단호한 버전 두 가지로 만들고, 어떤 상황에 어떤 걸 쓰면 좋을지도 알려줘.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-mail">
-          <div class="mk-row"><b>Subject</b> <span>Follow-up: Intermittent pressure sensor readings — response needed before PM (July 20)</span></div>
-          <div class="mk-row"><b>Body</b> <span>Dear Mr. Tanaka, I'm following up on my inquiry from last week…</span></div>
-          <div class="mk-row"><b>버전</b> <span><span class="ok">🕊 부드럽게</span> / <span class="bad">⚡ 단호하게</span> + 사용 시점 가이드</span></div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>제목 + 본문 + 한국어 번역</li>
-          <li>두 가지 톤 버전을 비교해봤다</li>
-        </ul>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>받은 영문 메일에 대한 회신 / 일본어 버전</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">해외 벤더와 일하는 엔지니어에게 즉효인 실습. '번역'이 아니라 '상황을 주고 작문시키는' 차이를 강조.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-4</span>
-    <h2>지저분한 텍스트 → 깔끔한 표</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">표기가 제각각인 목록 → <strong>정돈된 표 + CSV</strong>.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트 (지저분한 데이터 포함)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">아래 장비 목록을 정리해서 표로 만들고 equipment.csv로 저장해줘. 컬럼: 장비ID / 공정 / 상태 / 비고. 표기가 제각각인 건 통일하고, 뭘 어떻게 통일했는지도 알려줘.
-
-ETCH-01 식각 가동중
-etch02 / Etch / PM예정(금요일)
-CVD 3번장비 - 증착 - idle
-cvd-04, 증착, 가동 중, 신규셋업
-PHOTO_7 노광 다운 (파츠 대기)
-photo8 노광 가동중</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <table>
-            <tr><th>장비ID</th><th>공정</th><th>상태</th><th>비고</th></tr>
-            <tr><td class="mono">ETCH-01</td><td>식각</td><td class="ok">가동</td><td></td></tr>
-            <tr><td class="mono">ETCH-02</td><td>식각</td><td class="warn-t">PM 예정</td><td>금요일</td></tr>
-            <tr><td class="mono">PHOTO-07</td><td>노광</td><td class="bad">다운</td><td>파츠 대기</td></tr>
-          </table>
-          <div class="mock-cap">+ "etch02→ETCH-02로 통일" 변경 내역 보고</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li><code>equipment.csv</code>가 엑셀에서 열린다</li>
-          <li>"뭘 통일했는지" 설명을 <strong>검증</strong>했다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>정리 규칙을 <strong>스스로 보고하게</strong> 하면 검증이 쉬움 — 행이 수백 개여도 동일</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">데이터 클리닝의 미니 버전. 오후 CSV 실습의 다리 역할. '변경 내역을 보고하게 하기'는 오후 내내 쓸 검증 패턴.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-5</span>
-    <h2>발표자료 뼈대 → HTML 슬라이드</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">주제만 주면 <strong>목차 → 슬라이드</strong>까지. 지금 이 자료도 이렇게 만들었습니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 목차 먼저</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">"신입 엔지니어를 위한 클린룸 기본 수칙" 5분 발표 자료를 만들려고 해. 먼저 슬라이드 6장 분량의 목차와 각 장의 핵심 메시지를 제안해줘. 아직 만들지는 마.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 확인 후 제작</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">좋아. 3번 슬라이드는 복장 착용 순서를 단계별 그림처럼 바꿔줘. 그 목차대로 slides.html 파일 하나로 만들어줘. 화살표 키로 넘길 수 있게, 깔끔한 다크 테마로.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-thumbs">
-            <div class="mk-thumb"><div class="bar"></div><div class="ln"></div><div class="ln" style="width:80%"></div></div>
-            <div class="mk-thumb"><div class="bar" style="width:50%"></div><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div></div>
-            <div class="mk-thumb"><div class="bar" style="width:60%"></div><div class="ln" style="width:40%"></div><div class="ln" style="width:70%"></div></div>
-          </div>
-          <div class="mock-cap">화살표로 넘기는 6장짜리 미니 발표자료</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>목차 단계에서 <strong>수정 지시</strong>를 했다</li>
-          <li>슬라이드가 브라우저에서 넘어간다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li><strong>"아직 만들지는 마"</strong> — 목차에서 고치는 게 10배 쌉니다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">'계획 먼저, 제작은 나중' 패턴의 첫 등장. 이 워크숍 자료 자체가 이 방식으로 만들어졌다고 밝히면 설득력이 크다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 2-6</span>
-    <h2>보너스 — 문서 던지고 질문하기</h2>
-    <span class="chip amber">⏱ 여유 있으면</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-    <span class="chip pink">BONUS</span>
-  </div>
-  <p class="lab-goal">긴 문서를 읽는 대신 <strong>문서에게 질문</strong>합니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/manual.txt" download>📁 제공 데이터 manual.txt 받기</a>
-    <span class="chip">가상 장비 유지보수 매뉴얼 (실습 폴더에 저장)</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">manual.txt를 읽고 답해줘: ①월간 점검 항목만 표로 정리 ②"경고"가 붙은 항목 전부 나열 ③신입에게 알려줄 핵심 3가지. 반드시 문서에 있는 내용만 근거로 하고, 문서에 없으면 없다고 말해줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"PG-2가 무응답이면 어떻게 해?" 같은 고장 대응 질문 던지기</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-chat">
-          <div class="bub me">"경고" 붙은 항목 전부 나열해줘</div>
-          <div class="bub ai">경고는 총 4건입니다: ①뷰포트 개방 전 대기압 확인 ②그리스 작업 전 LOTO … <span class="src">— manual.txt 2·4·5장</span></div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>문서 근거 답변을 받았다</li>
-          <li>답이 진짜 문서에 있는지 <strong>한 개는 직접 확인</strong></li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li><strong>"문서에 없으면 없다고 해"</strong> — 아는 척 방지 장치</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">제공된 합성 매뉴얼로 보안 원칙을 지키며 지식 기반 Q&amp;A를 체험. 매뉴얼의 경고는 4건(2장 1개, 4장 2개, 5장 1개). Part 5의 스펙 문서 Q&amp;A로 이어진다. 회사에선 사내 허용 환경에서, 기밀 아닌 문서부터.</aside>
-</section>
-
-<section>
-  <span class="kicker">PATTERN CARDS</span>
-  <h2>오전에 익힌 프롬프트 패턴 4장</h2>
-  <div class="grid4">
-    <div class="card"><span class="icon">🔢</span><h3>번호 목록</h3><p class="tiny muted">요구사항을 1,2,3으로 → 그대로 검수 체크리스트</p></div>
-    <div class="card"><span class="icon">📐</span><h3>형식 지정</h3><p class="tiny muted">"[실적/이슈/계획] 3섹션, 개조식으로" — 틀을 정해주기</p></div>
-    <div class="card"><span class="icon">🛑</span><h3>계획 먼저</h3><p class="tiny muted">"아직 만들지는 마" — 목차·계획 확인 후 제작</p></div>
-    <div class="card"><span class="icon">🔍</span><h3>스스로 검증</h3><p class="tiny muted">"뭘 바꿨는지 보고해줘", "알려진 값으로 검산해줘"</p></div>
-  </div>
-  <p class="fragment rise" style="margin-top: 18px;">오후에는 이 4장의 카드를 들고 <strong>진짜 업무 모양의 데이터</strong>를 만나러 갑니다. 🍚 맛점!</p>
-  <aside class="notes">오전 마무리. 4개 패턴 이름을 붙여서 기억에 남긴다. 점심은 LAB 1-2의 룰렛으로 정하자고 하면 웃으며 마무리된다.</aside>
-</section>
-
-<!-- ═══════════════ PART 3 · 데이터 만나기 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">3</div>
-  <div class="part-body">
-    <span class="kicker">PART 3 · 13:00–14:30</span>
-    <h2>데이터 만나기</h2>
-    <p class="subtitle muted">이제 우리 업무 데이터 <strong>모양</strong>의 것들을 다룹니다.<br />측정 CSV, 웨이퍼 맵, 장비 로그 — 전부 준비된 합성 데이터로.</p>
-    <div class="part-meta">
-      <span class="chip teal">🎯 파일 입력 → 분석/시각화 출력</span>
-      <span class="chip violet">🧪 실습 4개</span>
-      <span class="chip pink">🔒 합성 데이터만 사용</span>
-    </div>
-  </div>
-  <aside class="notes">오후 시작. 난이도가 한 단계 오르지만 패턴은 오전과 동일함(시키고-확인하고-고치기)을 강조.</aside>
-</section>
-
 <section>
   <span class="kicker">DATA PACK</span>
-  <h2>오후 실습 데이터 팩 <a class="chip teal" href="data.zip" download style="vertical-align: 6px; margin-left: 8px;">📦 data.zip 한 번에 받기</a></h2>
+  <h2>실습 데이터 팩 <a class="chip teal" href="data.zip" download style="vertical-align: 6px; margin-left: 8px;">📦 data.zip 한 번에 받기</a></h2>
   <p class="muted small" style="margin-bottom: 14px;">전부 합성 데이터이고, 실습마다 <strong>찾아내야 할 "정답"이 심어져</strong> 있습니다. 압축을 풀어 실습 폴더에 두세요.</p>
   <table class="agenda">
     <tr><th>파일</th><th>내용</th><th>실습</th></tr>
-    <tr><td class="t">thickness.csv</td><td>막 두께 측정 (5랏 × 5매 × 9포인트)</td><td class="part">LAB 3-1</td></tr>
-    <tr><td class="t">wafermap.csv</td><td>다이별 테스트 bin (1,257 다이)</td><td class="part">LAB 3-2</td></tr>
-    <tr><td class="t">tool.log</td><td>장비 로그 24시간 1,000줄</td><td class="part">LAB 3-3 · 5-3</td></tr>
-    <tr><td class="t">trend.csv</td><td>4주치 랏 CD 계측</td><td class="part">LAB 3-4</td></tr>
-    <tr><td class="t">spc.csv</td><td>60랏 SPC 측정값</td><td class="part">LAB 4-1</td></tr>
-    <tr><td class="t">yield.csv</td><td>8주치 수율 + bin 카운트</td><td class="part">LAB 4-2</td></tr>
-    <tr><td class="t">weekly/ · specs/ · manual.txt</td><td>주간 가동 CSV 5개 · 스펙 문서 3개 · 매뉴얼</td><td class="part">LAB 5-2 · 5-4 · 2-6</td></tr>
+    <tr><td class="t">thickness.csv</td><td>막 두께 측정 (5랏 × 5매 × 9포인트)</td><td class="part">LAB B-1</td></tr>
+    <tr><td class="t">wafermap.csv</td><td>다이별 테스트 bin (1,257 다이)</td><td class="part">부록 C-1</td></tr>
+    <tr><td class="t">tool.log</td><td>장비 로그 24시간 1,000줄</td><td class="part">부록 C-2 · E-3</td></tr>
+    <tr><td class="t">trend.csv</td><td>4주치 랏 CD 계측</td><td class="part">부록 C-3</td></tr>
+    <tr><td class="t">spc.csv</td><td>60랏 SPC 측정값</td><td class="part">LAB P-1</td></tr>
+    <tr><td class="t">yield.csv</td><td>8주치 수율 + bin 카운트</td><td class="part">부록 D-1</td></tr>
+    <tr><td class="t">weekly/ · specs/ · manual.txt</td><td>주간 가동 CSV 5개 · 스펙 문서 3개 · 매뉴얼</td><td class="part">부록 E-2 · E-5 · B-6</td></tr>
     <tr><td class="t">fab_runs.csv · pm_assets.csv · wafermap_A/B.csv</td><td>Fab 런 로그 824건 · 설비 자산 시드 · 웨이퍼 A/B</td><td class="part">심화 A-1·A-2·A-3</td></tr>
-    <tr><td class="t">buggy_yield.html · lot_summary.xlsx</td><td>일부러 고장 낸 차트 · 엑셀 원자료(2시트)</td><td class="part">LAB 1-6 · 5-4</td></tr>
+    <tr><td class="t">buggy_yield.html · lot_summary.xlsx</td><td>일부러 고장 낸 차트 · 엑셀 원자료(2시트)</td><td class="part">LAB R-1 · 부록 E-4</td></tr>
+    <tr><td class="t">boss/ <span class="chip amber" style="font-size:12px;padding:1px 8px;">별도</span></td><td>보스전 웨이퍼 437다이 + 자동 채점기</td><td class="part">LAB D-1</td></tr>
   </table>
+  <p class="tiny muted" style="margin-top:10px;"><code>data/boss/</code> 만 <code>data.zip</code> 밖에 있습니다 — 해당 실습 슬라이드에서 바로 받습니다.</p>
   <aside class="notes">정답 스포일러(강사용): thickness=LOT-1003 평균 103nm / wafermap=edge ring, 수율 ~91% / tool.log=ERROR 8건, 02~04시 PRESSURE_SENSOR_TIMEOUT 3회 / trend=마지막 주 +0.8nm drift / spc=#24 상한 이탈·#36~44 9연속·#51~56 상승추세 / yield=B제품 6주차부터 bin4 급증 / weekly=수요일 ETCH-02 uptime 78% / specs=식각 120 mTorr 중단 vs 안전 100 mTorr 인터락 모순.</aside>
 </section>
 
@@ -1583,26 +1355,37 @@ photo8 노광 가동중</div>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 3-1</span>
+    <span class="lab-id">LAB B-1</span>
+    <span class="lab-type blank">BLANK</span>
     <h2>측정 CSV → 통계 리포트</h2>
     <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">CSV를 읽어 <strong>요약 통계와 분포 차트</strong>를 뽑습니다. 숨어 있는 이상 랏 하나를 찾아내세요.</p>
+  <p class="lab-goal"><strong>프롬프트를 드리지 않습니다.</strong> 아래 목표만 보고 직접 쓰세요 — 오늘의 진짜 연습입니다.</p>
   <div class="databar">
     <a class="chip teal" href="data/thickness.csv" download>📁 thickness.csv 받기</a>
-    <span class="chip">또는: "비슷한 가짜 측정 CSV를 만들어줘 (이상 랏 하나 심어서)"</span>
+    <span class="chip">컬럼: lot, wafer, site, thickness_nm · 목표 100nm</span>
   </div>
   <div class="lab-cols">
     <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 분석 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">thickness.csv를 분석해서 report.html로 만들어줘. 목표값은 100nm야.
-1. 전체 평균/표준편차/최소/최대
-2. 랏별 평균 비교 막대 차트
-3. 전체 분포 히스토그램 (목표 100nm 라인 표시)
-4. 평균이 튀는 랏이 있으면 눈에 띄게 경고 표시</div>
+      <div class="blank-box">
+        <div class="b-label">✍️ 직접 쓰세요 — 이 뼈대만 채우면 됩니다</div>
+        <div class="b-line">
+          <span class="fill">파일 이름</span> 을(를) 분석해서<br />
+          <span class="fill">결과물</span> 로 만들어줘.<br />
+          조건은 <span class="fill">①</span> <span class="fill">②</span> <span class="fill">③</span>
+        </div>
       </div>
+      <details class="spoiler">
+        <summary>30초 넘게 막혔다면 — 힌트 열기</summary>
+        <div class="s-body">
+          "무엇을 / 무엇으로 / 어떤 조건으로" 세 조각입니다.<br />
+          조건에 넣을 만한 것: <code>평균·표준편차</code>, <code>랏별 비교 차트</code>,
+          <code>목표 100nm 기준선</code>, <code>튀는 랏 경고 표시</code>.<br />
+          <strong>완성 프롬프트는 일부러 안 드립니다.</strong> 어설퍼도 본인 문장으로 한 번 보내 보고,
+          결과를 보고 고치는 게 이 실습의 전부입니다.
+        </div>
+      </details>
       <div class="panel bonus">
         <div class="panel-title">🚀 더 해보기</div>
         <ul>
@@ -1612,204 +1395,144 @@ photo8 노광 가동중</div>
     </div>
     <div>
       <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="hist" width="440" height="170"></canvas>
+        <div class="panel-title">👀 이 정도가 나오면 성공</div>
+        <canvas class="mock" data-mock="hist" data-blind="1" width="440" height="150"></canvas>
       </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>리포트에 차트가 보인다</li>
           <li>숨어 있던 <strong>이상 랏 하나</strong>가 잡혔다</li>
+          <li><strong>내가 쓴 프롬프트</strong>를 한 번 이상 고쳐 봤다</li>
         </ul>
       </div>
       <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
+        <div class="panel-title">💡 이 실습의 진짜 목표</div>
         <ul>
           <li>정답이 심어진 데이터 = <strong>도구를 채점할 수 있는 데이터</strong></li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">정답: LOT-1003 평균 ~103nm. '정답을 심은 합성 데이터로 검증한다'가 이 실습의 진짜 교훈. 분석 도구를 못 믿겠다는 질문이 나오면 이 방법으로 답한다.</aside>
+  <aside class="notes">정답: LOT-1003 평균 ~103nm. 참가자가 쓴 프롬프트가 엉성해서 결과가 부실하게 나오는 것이 정상이자 목적이다 — "고치는 루프"를 여기서 처음 자기 문장으로 돈다. 조교는 프롬프트를 대신 써 주지 말고 "지금 문장에서 빠진 게 뭘까요?"만 물을 것. 힌트 토글은 강사가 5분 지난 뒤 전체에게 한 번 열어 준다.</aside>
+</section>
+
+<section class="interlude">
+  <span class="il-emoji">🗣️</span>
+  <h2>프롬프트 공유</h2>
+  <p class="il-sub">방금 직접 쓴 프롬프트 중 <strong>제일 잘 먹힌 한 줄</strong>을 세 명만 읽어 주세요.<br />오늘 서로에게 줄 수 있는 가장 값진 것입니다.</p>
+  <div class="il-steps">
+    <div class="il-step"><b>읽는 사람</b>문장 그대로. 잘난 척해도 됩니다.</div>
+    <div class="il-step"><b>듣는 사람</b>쓸 만하면 바로 받아 적으세요.</div>
+    <div class="il-step"><b>강사</b>Q&amp;A 보드에 그대로 붙여 전체 공유.</div>
+  </div>
+  <div class="il-timer">⏱ 5분</div>
+  <aside class="notes">완성 프롬프트를 강사가 나눠 주는 대신 참가자들끼리 유통시킨다. 자기가 쓴 문장이 남에게 채택되는 경험이 만족도를 크게 올린다. 실시간 Q&A 위젯에 붙여 두면 나중에 복기 자료가 된다.</aside>
+</section>
+
+<section>
+  <span class="kicker">PATTERN CARDS</span>
+  <h2>여기까지 나온 프롬프트 패턴 4장</h2>
+  <div class="grid4">
+    <div class="card"><span class="icon">🔢</span><h3>번호 목록</h3><p class="tiny muted">요구사항을 1,2,3으로 → 그대로 검수 체크리스트</p></div>
+    <div class="card"><span class="icon">📐</span><h3>형식 지정</h3><p class="tiny muted">"[실적/이슈/계획] 3섹션, 개조식으로" — 틀을 정해주기</p></div>
+    <div class="card"><span class="icon">🛑</span><h3>계획 먼저</h3><p class="tiny muted">"아직 만들지는 마" — 목차·계획 확인 후 제작</p></div>
+    <div class="card"><span class="icon">🔍</span><h3>스스로 검증</h3><p class="tiny muted">"뭘 바꿨는지 보고해줘", "알려진 값으로 검산해줘"</p></div>
+  </div>
+  <p class="fragment rise" style="margin-top: 18px;">방금 <strong>직접 쓴 프롬프트</strong>에 이 중 몇 장이 들어 있었나요? <span class="muted">빠진 카드가 다음에 쓸 카드입니다.</span></p>
+  <aside class="notes">빈칸 실습과 프롬프트 공유 바로 뒤에 두면 "내가 방금 쓴 문장"과 대조되면서 훨씬 잘 박힌다. 예전에는 오전 마무리용이었지만 지금은 참가자가 자기 프롬프트를 스스로 채점하는 슬라이드다.</aside>
+</section>
+
+
+<!-- ═══════════════ PART 3 · 보스전과 페어 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">3</div>
+  <div class="part-body">
+    <span class="kicker pink">PART 3 · 1:35–2:20</span>
+    <h2>보스전과 페어</h2>
+    <p class="subtitle muted">채점되는 과제와, 남을 의심하는 연습.<br /><strong>혼자 조용히 하는 시간은 여기서 끝납니다.</strong></p>
+    <div class="part-meta">
+      <span class="chip amber">🏆 자동 채점 보스전</span>
+      <span class="chip pink">👥 조종사 × 검사관</span>
+    </div>
+  </div>
+  <aside class="notes">점심 직후나 중반 이후에 집중력이 가장 크게 꺼진다. 그 자리에 '점수가 나오는 과제'와 '둘이서 하는 과제'를 배치했다.</aside>
 </section>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 3-2</span>
-    <h2>웨이퍼 맵 뷰어</h2>
+    <span class="lab-id">LAB D-1</span>
+    <span class="lab-type duel">BOSS</span>
+    <h2>🏆 웨이퍼 맵 감식 — 보스전</h2>
     <span class="chip amber">⏱ 20분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">다이별 bin 데이터를 <strong>웨이퍼 모양 그대로</strong> 색칠해서 봅니다. 오늘의 하이라이트.</p>
+  <div class="boss-banner">
+    <span class="bb-emoji">🔬</span>
+    <span class="bb-text">웨이퍼 하나에 <b>정답 5개가 숨어</b> 있습니다. CSV를 눈으로 읽지 말고 <b>도구를 만들어</b> 답을 뽑아내세요.<br />채점기가 즉시 점수를 매깁니다 — <b>100점이면 손 드세요.</b></span>
+  </div>
   <div class="databar">
-    <a class="chip teal" href="data/wafermap.csv" download>📁 wafermap.csv 받기</a>
+    <a class="chip amber" href="data/boss/boss.html" target="_blank" rel="noopener">🏆 채점기 열기</a>
+    <a class="chip teal" href="data/boss/boss_wafermap.csv" download>📁 boss_wafermap.csv</a>
     <span class="chip">컬럼: die_x, die_y, bin (1=양품)</span>
   </div>
   <div class="lab-cols">
     <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 뷰어 제작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">wafermap.csv를 읽어서 웨이퍼 맵으로 보여주는 wafermap.html을 만들어줘. 요구사항:
-1. 다이를 격자로 그리고 bin별 색 구분 (bin1은 차분하게, 불량은 눈에 띄게)
-2. 마우스를 올리면 좌표와 bin 표시
-3. 우측에 bin별 개수와 수율(%) 요약
-4. bin 번호를 클릭하면 해당 bin만 하이라이트
-불량이 어디에 몰려 있는지 패턴도 한 줄로 말해줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>여러 웨이퍼 썸네일 갤러리 모드 / notch 방향 표시</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="wafer" width="440" height="180"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>원형 웨이퍼 맵이 그려진다</li>
-          <li>불량 <strong>패턴이 눈에 보인다</strong> — 무슨 패턴?</li>
-        </ul>
+      <div class="panel">
+        <div class="panel-title" style="color:var(--amber);">🎯 채점 문항</div>
+        <table class="duel-score">
+          <tr><th>#</th><th>묻는 것</th><th>배점</th></tr>
+          <tr><td>Q1</td><td>총 다이 개수</td><td class="pt">20</td></tr>
+          <tr><td>Q2</td><td>수율 % (bin 1 = 양품)</td><td class="pt">20</td></tr>
+          <tr><td>Q3</td><td>최다 불량 bin 번호</td><td class="pt">20</td></tr>
+          <tr><td>Q4</td><td>불량의 공간 패턴</td><td class="pt">20</td></tr>
+          <tr><td>Q5</td><td>불량률 최악 사분면</td><td class="pt">20</td></tr>
+          <tr class="total"><td></td><td>합계</td><td class="pt">100</td></tr>
+        </table>
       </div>
       <div class="panel hint">
-        <div class="panel-title">🚑 막혔다면</div>
+        <div class="panel-title">💡 이기는 순서</div>
         <ul>
-          <li>"브라우저 콘솔 에러를 확인하고 고쳐줘"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: edge ring 패턴, 수율 ~91%. 비주얼 임팩트가 가장 큰 실습. 타이틀 슬라이드의 웨이퍼 애니메이션이 바로 이것의 확장판이라고 알려주면 동기부여가 된다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 3-3</span>
-    <h2>장비 로그 파싱 — 알람 추출</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">1,000줄 기계 로그에서 필요한 것만 뽑습니다. <strong>사람이 훑으면 20분, 시키면 3초.</strong></p>
-  <div class="databar">
-    <a class="chip teal" href="data/tool.log" download>📁 tool.log 받기</a>
-    <span class="chip">24시간 · 1,000줄 · [시각] [레벨] [모듈] 메시지</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 분석 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">tool.log를 분석해서 log_report.html로 만들어줘.
-1. ERROR/WARN만 추출해 시간순 표로
-2. 메시지 유형별 발생 횟수 집계
-3. 시간대별 발생 분포 차트
-4. 반복되는 패턴이 있으면 짚어줘</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"ERROR 전후 5줄씩 문맥도 같이 보여줘"</li>
+          <li>Q1(개수)부터 — 도구가 파일을 <strong>제대로 읽는지</strong> 확인하는 관문</li>
+          <li>Q4·Q5는 <strong>웨이퍼 맵을 그려 놓고</strong> 보면 3초</li>
         </ul>
       </div>
     </div>
     <div>
       <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="logbars" width="440" height="160"></canvas>
+        <div class="panel-title">👀 Q4 패턴 후보 — 이 넷 중 하나</div>
+        <canvas class="mock" data-mock="defects" width="440" height="140"></canvas>
+        <div class="mock-cap">맵을 화면에 그려 놓으면 Q4·Q5는 눈으로 끝납니다 (이 그림은 예시일 뿐, 답이 아닙니다)</div>
       </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>ERROR 개수가 정확하다 — <strong>몇 건이었나요?</strong></li>
-          <li>새벽 반복 패턴을 AI가 짚어냈다</li>
+          <li>채점기에서 <strong>60점 이상</strong></li>
+          <li>답을 <strong>손으로 세지 않았다</strong> — 도구가 뽑았다</li>
         </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>내 장비 로그 형식이 달라도 <strong>샘플 몇 줄만 보여주면</strong> 됨</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: ERROR 8건, 그중 PRESSURE_SENSOR_TIMEOUT 3건이 02:14/03:02/03:47 새벽 반복. '개수를 아는 데이터로 검증' 패턴이 여기서도 반복된다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 3-4</span>
-    <h2>랏 트렌드 차트</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">시간에 따른 <strong>공정 파라미터 추이</strong>. 어딘가에서 drift가 시작됩니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/trend.csv" download>📁 trend.csv 받기</a>
-    <span class="chip">4주치 · 하루 6랏 · CD 목표 45nm</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 차트 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">trend.csv로 trend.html 트렌드 차트를 만들어줘.
-1. 랏별 CD 값 점 + 일별 평균 선
-2. 목표 45nm과 관리선(±1.5nm) 표시
-3. 구간을 드래그하면 그 구간 평균/표준편차 표시
-4. drift가 시작된 지점을 네가 찾아서 표시해줘</div>
       </div>
       <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
+        <div class="panel-title">🚀 만점자 추가 미션</div>
         <ul>
-          <li>이동평균선 / "drift 감지를 알림 문구로 요약"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="trend" width="440" height="160"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>트렌드에 <strong>drift가 눈에 보인다</strong></li>
-          <li>AI가 찾은 시점이 그럴듯한지 눈으로 검증</li>
+          <li>"다른 CSV를 넣어도 같은 5개 답이 나오게" 일반화</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">정답: 마지막 주(7/6~)에 +0.8nm drift. 다음 파트 SPC 관리도가 이것의 정식 버전임을 예고.</aside>
+  <aside class="notes">정답: 437다이 · 수율 87.0% · 최다 불량 bin 4 · edge ring(좌하 치우침) · Q3(좌하). 채점은 브라우저 안에서만 이뤄지고 정답은 해시로 들어 있어 소스를 봐도 안 보인다. 진행: 15분 제작 + 5분 채점·시상. 만점자가 나오면 프로젝터로 화면을 띄우고 "어떤 프롬프트로 시작했나" 한 마디만 시킨다. 커피 쿠폰 하나면 방 분위기가 완전히 달라진다. 시간이 밀리면 Q1~Q3만 필수로 낮춘다.</aside>
 </section>
 
 <section>
-  <span class="kicker">PART 3 · WRAP-UP</span>
-  <h2>오후의 검증 습관 — 믿지 말고 확인한다</h2>
+  <span class="kicker">CHECK · 검증 습관</span>
+  <h2>믿지 말고 확인한다 — 검증 습관 3가지</h2>
   <div class="grid3">
     <div class="card accent"><span class="icon">🎯</span><h3>정답 심기</h3><p class="small">이상치·drift가 심어진 데이터로 도구를 채점한다</p></div>
     <div class="card accent"><span class="icon">🔢</span><h3>개수 세기</h3><p class="small">"ERROR 8건" — 리포트 숫자를 직접 세본다</p></div>
     <div class="card accent"><span class="icon">📏</span><h3>아는 값 넣기</h3><p class="small">760 Torr = 101325 Pa처럼 답을 아는 입력으로 검산</p></div>
   </div>
   <p class="fragment rise" style="margin-top: 16px;">AI의 결과는 <strong>계측 장비의 데이터처럼</strong> 다루세요 — 캘리브레이션 없이 믿지 않기.</p>
-  <aside class="notes">계측기 캘리브레이션 비유가 이 청중에게 가장 잘 박힌다. 짧게 쉬고 Part 4로.</aside>
-</section>
-
-<!-- ═══════════════ PART 4 · 도메인 도구 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">4</div>
-  <div class="part-body">
-    <span class="kicker">PART 4 · 14:40–16:00</span>
-    <h2>반도체 도메인 도구</h2>
-    <p class="subtitle muted">여러분의 <strong>도메인 지식</strong>이 프롬프트가 되는 시간.<br />AI는 물리를 알고, 여러분은 현장을 압니다.</p>
-    <div class="part-meta">
-      <span class="chip teal">🎯 지식 + AI = 전문 도구</span>
-      <span class="chip violet">🧪 실습 4개 (난이도 ★★★ 등장)</span>
-    </div>
-  </div>
-  <aside class="notes">이 파트부터 '도메인 지식을 가진 사람이 바이브 코딩을 하면 뭐가 다른가'가 드러난다. WE rules, Rayleigh 같은 용어를 아는 것 자체가 강력한 프롬프트 능력.</aside>
+  <aside class="notes">계측기 캘리브레이션 비유가 이 청중에게 가장 잘 박힌다. 보스전 직후에 두는 게 핵심이다 — 방금 채점기에게 점수를 맞고 온 참가자에게 "왜 틀렸나"를 설명해 주는 슬라이드가 된다. 세 가지 습관 모두 보스전에서 이미 겪은 것들이다.</aside>
 </section>
 
 <section>
@@ -1833,206 +1556,71 @@ photo8 노광 가동중</div>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 4-1</span>
-    <h2>SPC 관리도 + 룰 위반 감지</h2>
+    <span class="lab-id">LAB P-1</span>
+    <span class="lab-type pair">PAIR</span>
+    <h2>SPC 관리도 — 둘이서</h2>
     <span class="chip amber">⏱ 20분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
+    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">X̄ 관리도에 <strong>Western Electric 룰 위반</strong>을 자동 표시 — 도메인 지식이 곧 스펙이 됩니다.</p>
+  <p class="lab-goal">노트북 <strong>한 대</strong>로 둘이 합니다. 손을 대는 사람과, <strong>의심하는 사람</strong>을 나눕니다.</p>
   <div class="databar">
     <a class="chip teal" href="data/spc.csv" download>📁 spc.csv 받기</a>
-    <span class="chip">60랏 · 위반 3종이 심어져 있음 (어디인지는 비밀)</span>
+    <span class="chip">50개 측정 · 룰 위반이 <strong>2건</strong> 심어져 있음</span>
   </div>
+  <div class="pair-roles">
+    <div class="pair-role pilot">
+      <span class="pr-name">🎮 조종사 (Pilot)</span>
+      <ul>
+        <li>키보드는 이 사람만 잡습니다</li>
+        <li>프롬프트를 <strong>소리 내어 말하며</strong> 씁니다</li>
+        <li>스스로 코드를 고치지 않습니다 — AI에게만 시킵니다</li>
+      </ul>
+    </div>
+    <div class="pair-role check">
+      <span class="pr-name">🔍 검사관 (Checker)</span>
+      <ul>
+        <li>손을 대지 않습니다. <strong>질문만</strong> 합니다</li>
+        <li>"그 숫자 맞아요? 어떻게 확인하죠?"</li>
+        <li>화면에 뜬 것을 <strong>원본과 한 번은 대조</strong>시킵니다</li>
+      </ul>
+    </div>
+  </div>
+  <div class="swap-note">⏱ 5분마다 역할 교대 — 강사가 종을 칩니다 (4번 교대)</div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 관리도 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">spc.csv로 X-bar 관리도를 spc.html로 만들어줘.
-1. CL/UCL/LCL(±3σ)과 1σ, 2σ 구역 표시
-2. Western Electric rules 1~4 검사, 위반 점은 빨갛게
-3. 아래에 위반 목록 표 (룰 번호 / 위치 / 설명)
-목표값은 50.0이야.</div>
+        <div class="p-label"><span>📋 조종사의 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">spc.csv로 SPC 관리도(x-bar chart)를 spc.html로 만들어줘. 평균선(CL)과 ±3σ 관리선(UCL/LCL)을 그리고, Western Electric 룰 1(관리선 이탈)과 룰 2(9점 연속 한쪽)를 위반한 점을 빨갛게 표시해줘. 위반 목록도 표로 같이.</div>
       </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>R 관리도 추가 / Cpk 계산과 판정 코멘트</li>
+      <div class="panel" style="border-color:rgba(255,122,168,.35);">
+        <div class="panel-title" style="color:var(--pink);">🔍 검사관 대사 카드 — 그대로 읽으세요</div>
+        <ul style="list-style:none;">
+          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "UCL 값이 얼마죠? 손으로 계산하면 맞나요?"</li>
+          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "위반이 2건이라는데, 표의 그 줄을 원본에서 찾아 주세요."</li>
+          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "9점 연속을 어떻게 셌는지 설명해 달라고 시켜 보세요."</li>
         </ul>
       </div>
     </div>
     <div>
       <div class="panel expected">
         <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="spc" width="440" height="170"></canvas>
+        <canvas class="mock" data-mock="spc" width="440" height="155"></canvas>
       </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>σ 구역과 위반 점이 표시된다</li>
-          <li>심어진 위반 <strong>3종을 모두 찾았는지</strong> 강사와 채점</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>룰 정의가 애매하면 <strong>룰을 프롬프트에 직접 써주기</strong></li>
+          <li>관리도가 그려지고 위반 <strong>2건</strong>이 잡혔다</li>
+          <li>검사관이 <strong>숫자 하나를 원본과 대조</strong>했다</li>
+          <li>역할을 <strong>최소 2번</strong> 바꿔 봤다</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">정답(강사용): #24 상한(3σ) 이탈, #36~44 한쪽 9연속(rule 4), #51~56 상승 추세. 참가자들이 스스로 채점하며 AI 신뢰도를 정량 체감한다. WE rule 정의가 문헌마다 미묘하게 달라서, 룰 정의를 프롬프트에 직접 쓰는 게 더 확실하다는 팁으로 연결.</aside>
+  <aside class="notes">왜 둘이서 하는가 — 혼자 하면 AI 결과를 거의 의심하지 않는다. 의심은 의지가 아니라 역할로 만들면 쉬워진다. 이 한 마디를 시작 전에 꼭 해 줄 것. 정답: 룰 1 위반 1건 + 룰 2(9점 연속) 1건. 페어의 핵심은 SPC가 아니라 '검사관' 역할 그 자체다 — 검증 습관을 사람이 아니라 역할에 심는다. 종(타이머)을 실제로 울려야 교대가 일어난다. 홀수 인원이면 3인조: 조종사 1 · 검사관 2. 인원이 적으면 강사가 검사관으로 들어가면 된다.</aside>
 </section>
 
 <section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 4-2</span>
-    <h2>수율 대시보드</h2>
-    <span class="chip amber">⏱ 25분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-  </div>
-  <p class="lab-goal">"쪼개서 시킨다"를 실전으로 — <strong>차트 3개짜리 대시보드</strong>를 단계별로 쌓습니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/yield.csv" download>📁 yield.csv 받기</a>
-    <span class="chip">8주 · 제품 A/B · bin2~8 카운트</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② → ③ → ④ — 반드시 하나씩!</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">② yield.csv로 dashboard.html을 시작하자. 먼저 주차별 수율 트렌드 차트만 (product별 색 구분). 다른 건 아직 만들지 마.
-③ 좋아. 이제 그 아래에 불량 bin 파레토 차트를 추가해줘. 기간을 선택하면 그 기간 기준으로 갱신되게.
-④ 마지막으로 상단에 KPI 카드(이번주 수율, 전주 대비, 최다 불량 bin)를 얹고 배치를 정리해줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"경영진 요약 한 문단을 자동 생성해서 맨 위에"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="dash" width="440" height="180"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>②→③→④ <strong>단계마다 열어서 확인</strong>했다</li>
-          <li>어떤 제품/bin이 문제인지 대시보드에서 읽힌다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">🚑 막혔다면</div>
-        <ul>
-          <li>③에서 ②가 망가짐 → "트렌드 차트가 깨졌어, 둘 다 되게 고쳐줘"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: product B가 6주차부터 bin4 급증, 수율 -3%p. 가장 긴 실습. 프롬프트 ②③④를 한 번에 복사해주되 반드시 하나씩 실행·확인하게 안내. 완성물은 미니 프로젝트의 좋은 재료.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 4-3</span>
-    <h2>공정 계산기 3종 세트</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">엑셀 구석에 있던 계산식을 <strong>팀이 같이 쓰는 도구</strong>로. 식은 여러분이 제공합니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">공정 계산기 모음을 calc.html 파일 하나로 만들어줘. 탭 3개:
-1. 포토 해상도: Rayleigh 식 (R = k1·λ/NA, DOF = k2·λ/NA²). λ는 193/248/365nm 선택, k1·NA는 입력
-2. 면저항: 4-point probe (Rs = 4.532×V/I), 두께 입력 시 비저항까지
-3. 식각 시간: 목표 깊이, 식각 속도, 오버에치(%) → 필요 시간
-각 탭에 식과 변수 설명도 같이.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>내 업무의 계산식을 4번째 탭으로 (증착·임플란트·CMP…)</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-sub"><span class="warn-t">해상도</span> · 면저항 · 식각 시간</div>
-          <table>
-            <tr><td class="mono">λ = 193 nm</td><td class="mono">NA = 1.35</td><td class="mono">k1 = 0.30</td></tr>
-            <tr><td class="mono ok" colspan="3">→ R = 42.9 nm · DOF = k2·λ/NA² </td></tr>
-          </table>
-          <div class="mock-cap">값을 바꾸면 결과 즉시 갱신 + 식 표시</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>세 계산기 동작</li>
-          <li><strong>아는 값으로 검산</strong> — "교과서 예시로 검증해서 표로 보여줘"</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>도메인 공식은 <strong>프롬프트에 직접</strong> — 정확도 급상승</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">'식을 프롬프트에 명시하기'가 핵심 — 도메인 공식을 스스로 제공하는 게 할루시네이션을 막는 최선. 참가자별로 자기 분야 계산기로 변형하게 유도하면 몰입도가 오른다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 4-4</span>
-    <h2>보너스 — 결함 패턴 시뮬레이터</h2>
-    <span class="chip amber">⏱ 여유 있으면</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-    <span class="chip pink">BONUS</span>
-  </div>
-  <p class="lab-goal">결함 패턴을 <strong>만들고, 구분하는 로직</strong>까지 — 퀴즈 게임으로.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 시뮬레이터</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">웨이퍼 결함 패턴 시뮬레이터를 defect.html로 만들어줘. 버튼을 누르면 random / scratch(직선형) / edge ring / center cluster 4가지 중 하나로 결함 맵을 생성해서 보여주는 것. 패턴 이름은 숨겨놔.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 자동 분류 퀴즈</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">"판별" 버튼을 추가해줘. 결함 분포를 분석해 4가지 중 뭔지 추정하고 근거 지표(가장자리 비율, 직선성, 중심 밀집도)와 함께 표시. 내가 먼저 눈으로 맞히고 답을 확인하는 퀴즈 모드로.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="defects" width="440" height="150"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>4가지 패턴이 그럴듯하게 생성된다</li>
-          <li>판별 10회 테스트 — <strong>몇 승 몇 패?</strong></li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>판별이 틀리면 <strong>틀린 사례를 보여주며</strong> 지표를 고치게 — 이게 알고리즘 튜닝</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">여유 있는 참가자용 심화. 규칙 기반 분류의 한계를 몸으로 느끼면 'ML이 왜 필요한가'라는 다음 학습 주제로 자연스럽게 연결된다.</aside>
-</section>
-
-<section>
-  <span class="kicker">PART 4 · WRAP-UP</span>
+  <span class="kicker">KEY MESSAGE</span>
   <h2>도메인 지식 × AI = 여러분의 무기</h2>
   <div class="grid2">
     <div class="card">
@@ -2055,308 +1643,89 @@ photo8 노광 가동중</div>
   <aside class="notes">이 워크숍의 핵심 메시지. '개발자로 전직'이 아니라 '엔지니어 역량의 확장'이라는 프레임을 확실히 박는다.</aside>
 </section>
 
-<!-- ═══════════════ PART 5 · 업무 자동화 ═══════════════ -->
+
+<!-- ═══════════════ PART 4 · 내 도구 완성과 공유 ═══════════════ -->
 
 <section class="part-cover">
-  <div class="part-num">5</div>
+  <div class="part-num">4</div>
   <div class="part-body">
-    <span class="kicker">PART 5 · 16:10–17:00</span>
-    <h2>매주 반복하는 그 일</h2>
-    <p class="subtitle muted">한 번 만들어두면 계속 일하는 것들.<br />파일 정리, 리포트 생성, 요약 메일 — <strong>수동 업무를 은퇴시키는</strong> 시간.</p>
+    <span class="kicker">PART 4 · 2:20–3:00</span>
+    <h2>내 도구, 완성과 공유</h2>
+    <p class="subtitle muted">아침에 정한 그 주제로 돌아옵니다.<br /><strong>오늘 배운 걸 전부 내 도구 하나에 얹습니다.</strong></p>
     <div class="part-meta">
-      <span class="chip teal">🎯 반복 업무 → 스크립트 → 나만의 스킬</span>
-      <span class="chip violet">🧪 실습 4개 (+보너스) · 스킬 만들기</span>
+      <span class="chip violet">🧰 v1 → v2</span>
+      <span class="chip teal">🎤 자랑 2분씩</span>
     </div>
   </div>
-  <aside class="notes">지금까지는 '만들면 끝'인 도구였다면, 이 파트는 '만들어두면 매번 일해주는' 자동화. ROI 관점이 달라진다.</aside>
-</section>
-
-<section>
-  <span class="kicker">HOW TO SPOT</span>
-  <h2>자동화 대상 찾기 — 셀프 문진표</h2>
-  <div class="grid2">
-    <div class="card accent">
-      <h3>이 중 하나라도 "예"라면 후보</h3>
-      <ul class="small">
-        <li>매주/매일 <strong>같은 순서로 클릭</strong>하는 일이 있다</li>
-        <li>파일 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
-        <li>"이건 인턴 시키면 되는데" 싶은 일이 있다</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>자동화 설계 공식 — 한 문장</h3>
-      <p class="small" style="line-height: 1.7;"><em>"__(입력)__을 받아서<br />__(규칙)__대로 처리하고<br />__(출력)__을 만들어줘"</em></p>
-      <p class="tiny muted">못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
-    </div>
-  </div>
-  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 적어두세요 — 마지막 파트에서 그걸 만듭니다.</p>
-  <aside class="notes">여기서 각자 후보를 하나씩 적게 하는 게 중요 — Part 6 미니 프로젝트의 씨앗이 된다. 1분 정도 생각할 시간을 준다.</aside>
+  <aside class="notes">여기서 '오늘 만든 장난감들'이 아니라 '내 도구 하나'로 수렴한다는 게 예전 구조와의 결정적 차이다. 실습이 파편이 아니라 하나의 물건으로 쌓였다는 감각이 만족도를 만든다.</aside>
 </section>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 5-1</span>
-    <h2>파일 100개 일괄 정리</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="lab-id">LAB M-1</span>
+    <span class="lab-type blank">BLANK</span>
+    <h2>내 도구 v1 — 데이터 붙이기</h2>
+    <span class="chip amber">⏱ 20분</span>
+    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">이름 규칙이 엉망인 파일 무더기를 규칙대로 정리 — <strong>손으로 1시간, 시키면 1분.</strong></p>
+  <div class="mytool-bar">
+    <span class="mt-label">MY TOOL</span>
+    <span class="mt-step">v0 일단 뜨게</span><span class="mt-arr">→</span>
+    <span class="mt-step now">v1 데이터 붙이기</span><span class="mt-arr">→</span>
+    <span class="mt-step">v2 스킬로 굳히기</span>
+  </div>
+  <p class="lab-goal">아침의 v0에 <strong>진짜 모양의 데이터</strong>를 붙입니다. 프롬프트는 <strong>또 직접</strong> 씁니다.</p>
   <div class="lab-cols">
     <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 난장판 만들기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">연습용 폴더 messy_data를 만들고 가짜 측정 파일 100개를 만들어줘. 파일명 규칙이 제각각이게: "LOT123_20260701.csv", "20260702-lot124.csv", "측정결과_lot125 (final).csv" 같은 식으로 뒤죽박죽. 내용은 아무 숫자 몇 줄이면 돼.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — 정리 (계획 먼저!)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">messy_data의 파일들을 "LOT번호_날짜.csv" (예: LOT123_2026-07-01.csv) 형식으로 통일해서 clean_data 폴더로 정리하려고 해. 먼저 변경 계획표만 보여줘. 아직 실행하지 마. 원본은 건드리지 말고 복사본으로만 작업해.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-files">
-          <div>측정결과_lot125 (final).csv <span class="arr">→</span> <span class="ok">LOT125_2026-07-03.csv</span></div>
-          <div>20260702-lot124.csv <span class="arr">→</span> <span class="ok">LOT124_2026-07-02.csv</span></div>
-          <div class="mk-sub" style="margin-top:6px;">변경 계획표 100건 → 승인 → 실행 보고: <span class="ok">98 처리</span> · <span class="warn-t">2 규칙 불일치 격리</span></div>
+      <div class="blank-box">
+        <div class="b-label">✍️ 이번엔 세 번에 나눠 시킵니다</div>
+        <div class="b-line">
+          ① 데이터부터: <span class="fill">내 입력 모양</span> 인 가짜 데이터를 만들어줘<br />
+          ② 붙이기: 그걸 읽어서 <span class="fill">내 도구</span> 에 넣어줘<br />
+          ③ 검증: <span class="fill">아는 값</span> 으로 결과가 맞는지 확인해줘
         </div>
       </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>계획표를 <strong>검토한 후</strong> 실행시켰다</li>
-          <li>원본 messy_data는 무사하다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 안전 수칙</div>
-        <ul>
-          <li>파일 자동화는 <strong>①계획 보기 ②사본 작업 ③결과 보고</strong> 3종 세트로</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">파일 조작 자동화의 안전 수칙(계획-사본-검증)을 각인시키는 실습. '아직 실행하지 마' 패턴이 여기서 안전장치로 진화한다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 5-2</span>
-    <h2>CSV 여러 개 → 주간 리포트 자동 생성</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-  </div>
-  <p class="lab-goal">"매주 월요일마다 하던 그 취합"을 <strong>스크립트 한 방</strong>으로.</p>
-  <div class="databar">
-    <a class="chip teal" href="data.zip" download>📁 weekly/ 폴더 (data.zip에 포함)</a>
-    <span class="chip">mon~fri.csv · 장비 6대 가동 데이터</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 리포트 생성기 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">weekly 폴더의 CSV(mon~fri)를 전부 읽어 주간 리포트를 만드는 스크립트를 작성해줘. 실행하면 weekly_report.html이 생성되는 것.
-1. 장비별 주간 가동률 표 (최악 장비 강조)
-2. 일별 에러 추이 차트
-3. "특이사항" 자동 요약 문단
-다음 주에 파일만 갈아끼우면 재사용되게. 실행 방법도 알려줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>엑셀(.xlsx) 출력 / 지난주 대비 변화율 컬럼</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="weekly" width="440" height="160"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>스크립트 실행 → 리포트 생성</li>
-          <li>숨어 있는 <strong>문제 장비·요일</strong>이 특이사항에 잡혔다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>도구와 자동화의 차이 = <strong>"다음에도 쓸 수 있게"</strong>라는 요구</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: 수요일 ETCH-02 uptime 78%, error 9건. 실행이 어려우면 "더블클릭으로 실행되게 해줘". 조교가 돌며 지원.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 5-3</span>
-    <h2>알람 로그 → 아침 요약 메일 초안</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">로그 파싱(3-3) + 보고서 문체(2-2) = <strong>매일 아침 10분 은퇴</strong>.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/tool.log" download>📁 tool.log (LAB 3-3과 동일)</a>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">tool.log를 읽어서 "야간 장비 현황 아침 브리핑" 메일 초안을 만드는 스크립트를 작성해줘. 실행하면 briefing.txt가 생성되는 것. 내용: 제목 한 줄 / 밤사이 ERROR 요약(시각·모듈·횟수) / 반복 패턴 경고 / 조치 필요 체크리스트. 팀장님께 보내는 톤으로 5줄 이내.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"ERROR 0건인 날은 축하 멘트로" / HTML 메일 버전</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-mail">
-          <div class="mk-row"><b>제목</b> <span>[야간 브리핑] ERROR 8건 — VACUUM 반복 이슈 확인 필요</span></div>
-          <div class="mk-row"><b>요약</b> <span>02~04시 PG-2 게이지 타임아웃 <span class="bad">3회 반복</span> 발생</span></div>
-          <div class="mk-row"><b>조치</b> <span>☐ PG-2 커넥터 점검 ☐ 재발 시 게이지 교체</span></div>
+      <details class="spoiler">
+        <summary>막혔다면 — 오늘 배운 것 중 무엇을 쓸지</summary>
+        <div class="s-body">
+          <strong>Part 2에서</strong>: 프롬프트를 직접 쓰고, 결과를 보고 고치는 루프<br />
+          <strong>보스전에서</strong>: 답을 아는 데이터로 도구를 채점하기<br />
+          <strong>페어에서</strong>: 스스로에게 검사관 질문 던지기 —
+          <code>"이 숫자, 원본에서 어떻게 확인하지?"</code>
         </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>briefing.txt가 그대로 보내도 될 수준</li>
-          <li>로그를 바꿔 재실행해도 동작</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>오늘 배운 것들이 <strong>레고처럼 조립</strong>됨 — 파싱+요약+문체</li>
+      </details>
+      <div class="panel" style="border-color:rgba(255,122,168,.35);">
+        <div class="panel-title" style="color:var(--pink);">⚠️ 여전히 실데이터는 안 됩니다</div>
+        <ul style="list-style:none;">
+          <li style="padding-left:26px;position:relative;">모양만 흉내 낸 <strong>가짜 데이터</strong>로. 실데이터 연결은 마지막 체크리스트를 통과한 다음입니다.</li>
         </ul>
       </div>
     </div>
-  </div>
-  <aside class="notes">기존 실습 산출물을 재조합하는 구성 — 도구가 쌓이면 조립 속도가 빨라진다는 것을 체감시킨다. 매일 아침 자동 실행(스케줄러)까지 원하는 사람에겐 OS 스케줄러 등록도 AI에게 시키면 된다고 안내.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 5-4</span>
-    <h2>엑셀 요약 자동화 <span class="chip teal" style="vertical-align:5px;">.xlsx</span></h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">엔지니어가 하루 종일 사는 곳 — <strong>엑셀 파일을 읽고, 집계하고, 서식까지</strong> 갖춰 다시 저장.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/lot_summary.xlsx" download>📁 lot_summary.xlsx 받기</a>
-    <span class="chip">raw 시트 60행 + 빈 summary 시트</span>
-  </div>
-  <div class="lab-cols">
     <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">lot_summary.xlsx의 raw 시트를 읽어서 summary 시트를 채워줘. 제품(product)별로 ①랏 수 ②평균 수율 ③평균 CD ④총 결함 수를 집계한 표로. 수율이 가장 낮은 제품은 셀을 빨갛게 강조하고, 헤더는 굵게. 결과를 lot_summary_done.xlsx로 저장해줘.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 재사용 가능하게</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">다음 달 파일도 같은 형식이면 그대로 돌아가게 스크립트로 만들어줘. 실행 방법이랑, raw 시트 컬럼이 바뀌면 어디를 고치면 되는지도 알려줘.</div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>내 도구가 <strong>파일을 읽어서</strong> 뭔가를 보여준다</li>
+          <li>결과 숫자 하나를 <strong>원본과 대조</strong>했다</li>
+          <li>내일 이걸 <strong>누구에게 보여줄지</strong> 정했다</li>
+        </ul>
       </div>
       <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
+        <div class="panel-title">🚀 빨리 끝났다면</div>
         <ul>
-          <li>제품별 수율 막대 차트를 엑셀 안에 삽입 / 피벗 테이블로</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup">
-          <div class="mk-sub">📊 summary 시트</div>
-          <table>
-            <tr><th>제품</th><th>랏</th><th>평균수율</th><th>결함계</th></tr>
-            <tr><td class="mono">A7</td><td>16</td><td class="ok">92.0</td><td>78</td></tr>
-            <tr><td class="mono">B3</td><td>19</td><td class="ok">91.9</td><td>96</td></tr>
-            <tr><td class="mono">C1</td><td>25</td><td class="bad">90.0 ⚠</td><td>171</td></tr>
-          </table>
-          <div class="mock-cap">최저 수율 C1 셀 빨강 강조 · 헤더 굵게</div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>summary 시트가 채워진 <code>.xlsx</code>가 생성됐다</li>
-          <li>엑셀에서 열어 <strong>서식(색·굵게)</strong>이 살아있다</li>
-          <li>최저 수율 <strong>C1</strong>이 잡혔다</li>
+          <li>부록 실습 중 <strong>내 주제와 가장 가까운 것</strong> 하나를 골라 이식</li>
+          <li>옆 사람 도구의 검사관이 되어 주기</li>
         </ul>
       </div>
       <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
+        <div class="panel-title">💡 진도 격차 흡수</div>
         <ul>
-          <li>AI는 <strong>.xlsx를 직접</strong> 읽고 씁니다 — CSV로 바꿀 필요 없음</li>
+          <li>느린 사람은 <strong>v0 그대로도 통과</strong>입니다 — 공유가 목표지 완성이 아닙니다</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">정답: C1 제품 평균 수율 90.0%로 A7/B3(92%)보다 낮게 심어둠. 엔지니어에게 실무 파급력이 가장 큰 실습 — 매달 하던 엑셀 취합·서식 작업을 통째로 위임. openpyxl 같은 라이브러리를 AI가 알아서 쓴다. 서식(색/굵게)이 살아 있는지 꼭 확인시킨다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB 5-5</span>
-    <h2>보너스 — 스펙 문서 Q&amp;A 도우미</h2>
-    <span class="chip amber">⏱ 여유 있으면</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-    <span class="chip pink">BONUS</span>
-  </div>
-  <p class="lab-goal">문서 여러 개를 <strong>지식 기반</strong> 삼아 답하기 — 문서 사이 <strong>모순</strong>도 하나 숨어 있습니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data.zip" download>📁 specs/ 폴더 (data.zip에 포함)</a>
-    <span class="chip">식각·증착·안전 스펙 3종 (가상)</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 질문 공세 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">specs 폴더 문서들만 근거로 답해줘. 근거 문서명과 해당 구절을 반드시 인용하고, 문서에 없으면 "문서에 없음"이라고 답해.
-Q1. 식각 공정 압력 상한과 그 근거는?
-Q2. 인터락이 걸리는 조건을 전부 나열해줘.
-Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"신입용 요약 카드 한 장으로 만들어줘"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-chat">
-          <div class="bub me">Q3. 모순되는 내용 있어?</div>
-          <div class="bub ai">있습니다. 공정 중단 압력이 <b class="bad">120 mTorr</b>인데 안전 인터락은 <b class="bad">100 mTorr</b>에서 이미 작동합니다. <span class="src">— etch_spec.md §3 vs safety_spec.md §3</span></div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>답변마다 <strong>출처 인용</strong>이 붙는다</li>
-          <li>숨어 있는 모순을 찾아냈다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>문서 간 <strong>모순 찾기</strong> — 사람이 제일 못하고 AI가 제일 잘하는 일</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: etch_spec은 120 mTorr 초과 시 공정 중단이라 하고, safety_spec은 100 mTorr에서 인터락 작동 — 중단 기준이 인터락보다 높아서 실질적으로 도달 불가능한 모순. 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
+  <aside class="notes">빠른 사람과 느린 사람이 여기서 가장 크게 갈린다. 빠른 사람은 부록 실습으로 밀어 넣고, 느린 사람에게는 "v0로 공유해도 된다"를 명시적으로 허락해야 한다. 허락하지 않으면 마지막 공유 시간에 아무도 손을 들지 않는다.</aside>
 </section>
 
 <section>
@@ -2382,466 +1751,80 @@ Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB 5-6</span>
-    <h2>나만의 스킬 만들기</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-    <span class="chip violet">재사용</span>
+    <span class="lab-id">LAB M-2</span>
+    <span class="lab-type mytool">MY TOOL</span>
+    <h2>내 도구 v2 — 다음에도 쓰게 굳히기</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">매주 쓰는 <strong>주간 보고서 프롬프트</strong>를 <code>/weekly-report</code> 스킬로. 파일은 Claude Code에게 만들어달라고 하면 됩니다.</p>
+  <div class="mytool-bar">
+    <span class="mt-label">MY TOOL</span>
+    <span class="mt-step">v0 일단 뜨게</span><span class="mt-arr">→</span>
+    <span class="mt-step">v1 데이터 붙이기</span><span class="mt-arr">→</span>
+    <span class="mt-step now">v2 스킬로 굳히기</span>
+  </div>
+  <p class="lab-goal">오늘 잘 먹힌 프롬프트를 <strong>파일로 남깁니다.</strong> 다음 주의 나는 오늘의 나를 기억하지 못합니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>🤖 ① Claude Code에게 스킬로 만들어달라 하기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">오늘 내가 여러 번 쓴 이 프롬프트를 재사용할 수 있게 스킬로 만들어줘. .claude/skills/weekly-report/SKILL.md 로 저장하고, description에는 "주간 보고 요청 시 자동으로 불려야 한다"는 걸 구체적으로 써줘.
-프롬프트: 이번 주 한 일 목록을 주면 ①3줄 요약 ②주요 성과 ③다음 주 계획 형식의 한국어 주간 보고서로 정리해줘.</div>
+        <div class="p-label"><span>📋 그대로 시키세요</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">오늘 이 도구를 만들면서 우리가 주고받은 지시 중에서 잘 통했던 것들을 정리해줘.
+다음 주에 비슷한 걸 또 만들 때 이 파일 하나만 열면 되도록 SKILL.md 로 저장해줘.
+- 이 도구가 뭘 하는지 3줄
+- 다시 만들 때 그대로 쓸 프롬프트 순서
+- 내가 실제로 겪은 함정과 해결책</div>
       </div>
-      <div class="prompt mono">
-        <div class="p-label"><span>📄 ② 만들어질 SKILL.md (예시)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">---
-name: weekly-report
-description: 주간 보고서 초안 생성. 이번 주 한 일 목록을 주면 3줄 요약·성과·다음 주 계획으로 정리. "주간 보고", "이번 주 리포트" 요청 시 사용.
----
-
-## 하는 일
-아래 형식으로 한국어 주간 보고서를 작성한다.
-1. 3줄 요약
-2. 주요 성과 (불릿)
-3. 다음 주 계획 (불릿)
-정보가 부족하면 먼저 되묻는다.</div>
+      <div class="panel hint">
+        <div class="panel-title">💡 굳히는 방법은 하나가 아닙니다</div>
+        <ul>
+          <li>Claude Code라면 <code>.claude/skills/</code> 에 스킬로</li>
+          <li>아니면 <code>PROMPTS.md</code> 한 장이면 충분합니다</li>
+        </ul>
       </div>
     </div>
     <div>
-      <div class="panel hint">
-        <div class="panel-title">⚙️ ③ 확인하고 호출</div>
-        <ul>
-          <li><code>/skills</code> 로 목록에 떴는지 확인</li>
-          <li>새 대화에서 <code>/weekly-report</code> 입력 — 또는 "주간보고 써줘"라고만 해도 <strong>자동 호출</strong></li>
-          <li><code>.claude/skills/</code>를 <strong>git에 커밋</strong>하면 팀 전체가 같은 스킬 사용</li>
-        </ul>
-      </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>SKILL.md가 생겼고 <code>/skills</code>에 뜬다</li>
-          <li><code>/weekly-report</code>가 실제로 동작한다</li>
+          <li><strong>파일 하나</strong>가 남았다 (SKILL.md 또는 메모)</li>
+          <li>거기에 <strong>내가 쓴 프롬프트</strong>가 들어 있다</li>
         </ul>
       </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 한 단계 더 — skill-creator</div>
-        <ul>
-          <li>스킬을 <strong>평가·튜닝</strong>해주는 플러그인. <code>/plugin install skill-creator@claude-plugins-official</code> → <code>/reload-plugins</code></li>
-          <li>"skill-creator로 내 weekly-report 스킬 평가해줘" — 테스트·벤치마크로 description을 다듬어 줍니다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">파일을 손으로 만들 필요 없이 Claude Code에게 시키는 게 이 실습의 핵심 — 비개발자도 스킬을 만들 수 있다는 자신감. skill-creator는 '스킬을 만드는' 도구가 아니라 이미 만든 스킬을 테스트·벤치마크·A/B로 평가하고 description(자동 호출 트리거)을 튜닝해주는 플러그인이라는 점을 정확히 짚는다(빠른 그룹/데모용, 초보 필수는 아님). 예시는 주간 보고서지만, 각자 오늘 잘 먹힌 프롬프트(웨이퍼 리포트, 스펙 Q&A 등)로 바꿔 만들게 하면 좋다.</aside>
-</section>
-
-<!-- ═══════════════ 심화 트랙 · ADVANCED ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">★</div>
-  <div class="part-body">
-    <span class="kicker pink">ADVANCED TRACK · 심화</span>
-    <h2>진짜 앱을 만들어 봅니다</h2>
-    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기, 그리고 GitHub Pages 배포까지.</p>
-    <div class="part-meta">
-      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱 → 공개 URL</span>
-      <span class="chip violet">🧪 심화 실습 3개 (★★★) + 배포</span>
-      <span class="chip amber">⏱ 빠른 그룹 / 데모용</span>
-    </div>
-  </div>
-  <aside class="notes">심화 트랙은 진도가 빠른 참가자용이거나, 강사가 프로젝터로 시연하며 "이런 것도 됩니다"를 보여주는 용도. 여기서 만드는 건 실제 업무에 바로 쓸 수 있는 수준이라는 점을 강조. 시간이 부족하면 A-1만 다 같이 하고 A-2·A-3는 데모로 넘겨도 된다.</aside>
-</section>
-
-<section>
-  <span class="kicker pink">KEY IDEA</span>
-  <h2>업로드 → 처리 → 저장, 백엔드 없이 브라우저에서</h2>
-  <div class="flow">
-    <div class="step"><span class="s-emoji">📤</span><span class="s-name">파일 업로드</span><div class="s-desc">사용자가 CSV를 끌어다 놓기</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">브라우저 처리</span><div class="s-desc">파싱·집계·SQLite(WASM)</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">🖥️</span><span class="s-name">인터랙티브 UI</span><div class="s-desc">차트·필터·CRUD 폼</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">💾</span><span class="s-name">내보내기</span><div class="s-desc">.csv · .sqlite · 리포트</div></div>
-  </div>
-  <ul>
-    <li class="fragment rise">서버가 없어도 됩니다 — <strong>HTML 파일 하나가 곧 앱</strong>. 사내망 공유도, USB 전달도 쉬움.</li>
-    <li class="fragment rise">데이터가 <em>내 브라우저 밖으로 안 나갑니다</em> — 보안 관점에서도 유리 (그래도 오늘은 합성 데이터).</li>
-  </ul>
-  <aside class="notes">클라이언트 사이드 앱의 장점(무배포·무서버·데이터 로컬)을 짚는 슬라이드. 반도체 사내 보안 환경에서 "데이터가 브라우저를 안 떠난다"는 점이 실제 도입 장벽을 크게 낮춘다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB A-1</span>
-    <h2>업로드형 Fab 대시보드</h2>
-    <span class="chip amber">⏱ 30분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-  </div>
-  <p class="lab-goal">CSV를 <strong>끌어다 놓으면</strong> 살아나는 대시보드. 800여 건 런 로그에서 문제 장비를 찾아냅니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/fab_runs.csv" download>📁 fab_runs.csv 받기</a>
-    <span class="chip">2주 · 824런 · tool/product/recipe/result/defect</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — 골격</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">fab_runs.csv를 드래그&드롭으로 업로드하면 분석해주는 대시보드를 fab.html 파일 하나로 만들어줘. 라이브러리는 CDN으로 불러와도 돼. 먼저 업로드 영역 + CSV 파싱 + "상단 KPI 카드(총 런 수, 전체 fail율, 최다 fail 장비)"까지만. 다른 건 아직 만들지 마.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② → ③ — 쌓기</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">② 장비별 fail율 막대 차트를 추가하고, fail율이 높은 장비는 빨갛게. 이상 장비가 있으면 한 줄로 짚어줘.
-③ 날짜 범위 슬라이더와 product 필터를 추가하고, 필터를 바꾸면 모든 차트가 같이 갱신되게. 장비를 클릭하면 그 장비의 런만 표로 드릴다운.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"필터 상태를 URL에 저장해서 링크 공유되게" / PNG로 내보내기</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="fabdash" width="440" height="188"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>파일을 끌어다 놓으면 KPI·차트가 뜬다</li>
-          <li>필터·드릴다운이 동작한다</li>
-          <li>숨은 <strong>문제 장비를 찾았다</strong> (fail율 급등)</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>골격 → 차트 → 인터랙션 <strong>순서대로</strong> 쌓기 (한 방에 X)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">정답: PHOTO-02가 후반부 fail율 약 15%로 급등(다른 장비는 3~6%). 드래그&드롭 업로드가 이 실습의 새 요소 — "내 데이터를 넣어 쓰는 앱"의 첫 경험. CDN 사용을 허용해 차트 라이브러리(예: Chart.js)를 쓰게 하면 완성도가 확 오른다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB A-2</span>
-    <h2>SQLite + CRUD 관리 앱 <span class="chip pink" style="vertical-align:5px;">HIGHLIGHT</span></h2>
-    <span class="chip amber">⏱ 35분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-  </div>
-  <p class="lab-goal">브라우저 안에 <strong>진짜 SQLite DB</strong>를 띄우고, 설비 자산을 CRUD하는 SPA를 만듭니다.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/pm_assets.csv" download>📁 pm_assets.csv 받기</a>
-    <span class="chip">설비 12대 · PM 주기/상태 시드 데이터</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ① — DB 구축</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">브라우저에서 도는 SQLite로 설비 자산 관리 앱을 assets.html 파일 하나로 만들려고 해. sql.js(SQLite WASM)를 CDN에서 불러와. 먼저 pm_assets.csv를 업로드하면 assets 테이블을 만들어 넣고, 목록을 표로 보여주는 것까지. 컬럼: asset_id, name, type, location, install_date, last_pm, pm_interval_days, status.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 프롬프트 ② — CRUD + 지속성</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">이제 CRUD를 완성해줘.
-1. 추가/수정/삭제 폼 (수정은 행 클릭)
-2. type·status 필터와 이름 검색
-3. last_pm + pm_interval_days로 "다음 PM 예정일"을 계산해 보여주고, 지난 건 빨갛게
-4. DB를 .sqlite 파일로 내보내기 / 다시 불러오기
-5. 새로고침해도 유지되게 (localStorage)</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>SQL 직접 입력 콘솔 / PM 이력 테이블을 조인해 관리</li>
-        </ul>
-      </div>
-    </div>
-    <div>
       <div class="panel expected">
         <div class="panel-title">👀 예상 결과</div>
         <div class="mockup">
-          <div style="display:flex;gap:6px;margin-bottom:6px;align-items:center;">
-            <span class="chip teal" style="font-size:11px;padding:2px 8px;">＋ 추가</span>
-            <span class="mono" style="font-size:11px;color:#93A0BE;">🔍 검색  ▾type  ▾status</span>
-          </div>
-          <table>
-            <tr><th>설비</th><th>type</th><th>다음 PM</th><th>상태</th></tr>
-            <tr><td class="mono">ETCH-01</td><td>식각</td><td class="warn-t">07-16</td><td class="ok">RUN</td></tr>
-            <tr><td class="mono">IMP-01</td><td>이온주입</td><td class="bad">06-14 지남</td><td class="bad">DOWN</td></tr>
-            <tr><td class="mono">METRO-01</td><td>계측</td><td>07-28</td><td class="ok">RUN</td></tr>
-          </table>
-          <div class="mock-cap">💾 .sqlite 내보내기 · localStorage 유지</div>
+          <div class="mk-title mono">SKILL.md</div>
+          <div class="mk-sub" style="margin-top:6px;">## 주간 알람 리포트 만들기</div>
+          <div class="mk-sub">1. "CSV 5개를 읽어서 장비별로 묶어줘"</div>
+          <div class="mk-sub">2. "시간대 분포 차트를 붙여줘"</div>
+          <div class="mk-sub">3. ⚠️ 한글 깨지면 → "UTF-8로 다시 저장"</div>
         </div>
       </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>추가·수정·삭제가 표에 즉시 반영</li>
-          <li>지난 PM이 빨갛게 뜬다</li>
-          <li>새로고침해도 데이터가 남는다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">🚑 막혔다면</div>
-        <ul>
-          <li>sql.js 로딩 실패 → "WASM 경로/CDN 에러를 콘솔에서 확인하고 고쳐줘"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">오늘의 하이라이트. "브라우저 안에 진짜 DB"라는 게 놀라움 포인트. sql.js WASM 로딩이 유일한 난관이라 조교가 붙어야 할 수 있다. 완성하면 실제 설비/자산/샘플 관리 대장으로 바로 쓸 수 있는 수준 — 엑셀 대장을 대체하는 실전 도구.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB A-3</span>
-    <h2>웨이퍼 맵 A/B 비교 diff 뷰어</h2>
-    <span class="chip amber">⏱ 20분</span>
-    <span class="chip"><span class="stars">★★★</span></span>
-  </div>
-  <p class="lab-goal">두 웨이퍼를 겹쳐 <strong>새로 생긴 불량만</strong> 도드라지게. 공정 전후 비교의 정석.</p>
-  <div class="databar">
-    <a class="chip teal" href="data/wafermap_A.csv" download>📁 wafermap_A.csv</a>
-    <a class="chip teal" href="data/wafermap_B.csv" download>📁 wafermap_B.csv</a>
-    <span class="chip">A→B: 무엇이 달라졌나?</span>
-  </div>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">웨이퍼 맵 두 개를 비교하는 diff 뷰어를 wdiff.html 파일 하나로 만들어줘. wafermap_A.csv(before)와 wafermap_B.csv(after)를 각각 업로드하면:
-1. 왼쪽에 A, 오른쪽에 B 웨이퍼 맵
-2. 가운데에 diff 맵 — B에서 새로 불량이 된 die는 빨강, 회복된 die는 초록, 나머지는 흐리게
-3. 새 불량 개수와 위치, 그리고 "패턴이 있으면" 한 줄 코멘트
-4. 슬라이더로 A↔B 오버레이 페이드</div>
-      </div>
       <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
+        <div class="panel-title">🚀 팀으로 넘기려면</div>
         <ul>
-          <li>여러 스텝(A→B→C) 연속 비교 / 새 불량 die 목록 CSV 내보내기</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="wdiff" width="440" height="170"></canvas>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>세 개 맵(A · diff · B)이 나란히 뜬다</li>
-          <li>B에 <strong>새로 생긴 불량 패턴</strong>을 찾았다 — 무슨 모양?</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 포인트</div>
-        <ul>
-          <li>"before/after 비교"는 계측·수율·불량 어디에나 재사용되는 패턴</li>
+          <li>이 파일을 팀 공유 폴더에 — 다음 사람의 출발선이 오늘의 도착선이 됩니다</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">정답: B에는 왼쪽 아래에 대각선 scratch 결함 클러스터가 A 대비 새로 추가돼 있다. diff 뷰어는 공정 전후, 챔버 A/B, PM 전후 비교 등 재사용성이 매우 높은 실전 패턴. 시간이 없으면 데모로.</aside>
-</section>
-
-<section>
-  <span class="kicker pink">DEPLOY · GitHub Pages</span>
-  <h2>만든 앱, 링크 하나로 — 무료로 웹에 올리기</h2>
-  <p class="lab-goal" style="margin-bottom:16px;">방금 만든 <code>index.html</code>을 내 GitHub 계정 레포에 올리면, <strong>서버도 비용도 없이</strong> <code>https://아이디.github.io/레포이름/</code> 주소가 생깁니다. 팀에게는 링크만 보내면 끝.</p>
-  <div class="flow">
-    <div class="step"><span class="s-emoji">📦</span><span class="s-name">① 레포 생성</span><div class="s-desc">내 계정에 새 저장소 (Public)</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">⬆️</span><span class="s-name">② 파일 push</span><div class="s-desc">index.html을 main 브랜치로</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">③ Pages 켜기</span><div class="s-desc">Settings ▸ Pages ▸ main · /root</div></div>
-    <div class="arrow">→</div>
-    <div class="step"><span class="s-emoji">🌐</span><span class="s-name">④ 공개 URL</span><div class="s-desc">1~2분 뒤 접속 가능</div></div>
-  </div>
-  <ul>
-    <li class="fragment rise">배포 방식은 <strong>"Deploy from a branch"</strong> — <em>main 브랜치의 루트(<code>/</code>)를 그대로 정적 서빙</em>합니다. 빌드 서버도, 파이프라인도 없이 파일 그대로.</li>
-    <li class="fragment rise">한 번 켜두면 이후로는 <strong>push만 하면 자동 반영</strong>. HTTPS도 자동입니다.</li>
-    <li class="fragment rise">🔒 단, Public 레포는 <strong>전 세계에 공개</strong>됩니다 — 오늘처럼 <em>합성/더미 데이터</em>만. 사내 데이터는 절대 올리지 않기.</li>
-  </ul>
-  <aside class="notes">심화 트랙에서 만든 단일 HTML 앱을 실제 URL로 올려보는 파트. 핵심은 "빌드 없이 main/root를 그대로 정적 서빙"이라는 점 — 반도체 엔지니어에게 CI/CD 개념 없이도 배포가 된다는 게 놀라움 포인트다. Public 공개라 데이터 보안을 반드시 짚는다. 사내에서 github.com이 막혀 있으면 Part 6의 '팀에 넘기는 4가지 방법'(공유드라이브·사내 호스팅)으로 대체.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">LAB A-4</span>
-    <h2>GitHub Pages로 배포하기</h2>
-    <span class="chip amber">⏱ 15분</span>
-    <span class="chip"><span class="stars">★★</span>☆</span>
-  </div>
-  <p class="lab-goal">A-1에서 만든 <code>fab.html</code> 대시보드를 <strong>진짜 URL</strong>로. main 브랜치 루트를 그대로 서빙합니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt mono">
-        <div class="p-label"><span>📋 ① 파일 준비 + 올리기 (터미널)</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text"># Pages는 루트의 index.html을 먼저 엶 → 진입 파일 이름을 맞춰준다
-cp fab.html index.html
-
-git init
-git add index.html
-git commit -m "Add fab dashboard"
-git branch -M main
-
-# 아래 주소는 방금 GitHub에서 만든 레포로 바꾸기
-git remote add origin https://github.com/&lt;아이디&gt;/fab-dashboard.git
-git push -u origin main</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>🤖 또는 Claude Code에게 통째로</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">이 폴더를 GitHub Pages로 배포하고 싶어. fab.html을 index.html로 복사하고, git 저장소로 초기화해서 커밋해줘. 그다음 GitHub 웹에서 새 레포(Public)를 만들고 Settings에서 Pages를 켜는 방법을 단계별로 알려줘.</div>
-      </div>
-    </div>
-    <div>
-      <div class="panel hint">
-        <div class="panel-title">⚙️ ② 레포 만들고 Pages 켜기 (웹)</div>
-        <ul>
-          <li>github.com ▸ <strong>New repository</strong> ▸ 이름 <code>fab-dashboard</code> ▸ <strong>Public</strong> ▸ Create (README 없이)</li>
-          <li>레포 ▸ <strong>Settings ▸ Pages</strong></li>
-          <li>Source: <strong>Deploy from a branch</strong></li>
-          <li>Branch: <strong>main</strong> · 폴더: <strong>/ (root)</strong> ▸ <strong>Save</strong></li>
-        </ul>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li><code>https://아이디.github.io/fab-dashboard/</code> 접속 시 대시보드가 뜬다</li>
-          <li>파일을 고쳐 <strong>다시 push</strong>하면 URL에 반영된다</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">실습의 새 요소는 git push와 Pages 설정 두 가지뿐. gh CLI가 없어도 되도록 웹 UI 단계를 명시했다. 흔한 막힘: (1) 진입 파일이 index.html이 아님, (2) 첫 배포 전파에 1~2분, (3) 회사 계정 정책. cp 대신 처음부터 index.html로 만들게 해도 된다. A-2(assets.html)·A-3(wdiff.html)도 같은 방식으로 각자 레포에 올려볼 수 있다.</aside>
-</section>
-
-<section>
-  <span class="kicker pink">DEPLOY · 함정 피하기</span>
-  <h2>SPA를 올릴 때 자주 걸리는 것들</h2>
-  <p class="muted small" style="margin-bottom:14px;">화면이 깨지거나 새로고침에서 404가 뜬다면 십중팔구 아래 셋 중 하나입니다.</p>
-  <div class="grid2">
-    <div class="panel hint">
-      <div class="panel-title">🧭 3대 함정</div>
-      <ul>
-        <li><strong>진입 파일</strong> — 루트에 <code>index.html</code>이 없으면 빈 화면/404. 진입 파일은 반드시 이 이름.</li>
-        <li><strong>절대경로</strong> — 앱이 <code>/레포이름/</code> 하위에서 열립니다. <code>/style.css</code>(❌) → <code>./style.css</code>(✅). Vite·React 빌드면 <code>base:&nbsp;'/레포이름/'</code>.</li>
-        <li><strong>새로고침 404</strong> — 클라이언트 라우터(<code>/page</code> 직접 접속)는 404. <code>index.html</code>을 <code>404.html</code>로 복사하거나 HashRouter 사용.</li>
-      </ul>
-    </div>
-    <div class="panel check">
-      <div class="panel-title">✅ 배포 체크리스트</div>
-      <ul>
-        <li>루트에 빈 <code>.nojekyll</code> 파일 (<code>_</code>로 시작하는 폴더 무시 방지)</li>
-        <li>안 바뀌어 보이면 강력 새로고침 <code>Ctrl+Shift+R</code> · 첫 배포는 1~2분</li>
-        <li>🔒 Public = 전 세계 공개 → 합성/더미 데이터만</li>
-      </ul>
-    </div>
-  </div>
-  <div class="prompt" style="margin-top:14px;">
-    <div class="p-label"><span>🚑 막히면 이 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-    <div class="p-text">GitHub Pages(https://아이디.github.io/레포이름/)에 올렸는데 화면이 깨지거나 새로고침하면 404가 떠. 원인을 찾아서 진입 파일(index.html)·자원 상대경로·base 경로·404.html 문제를 점검하고 고쳐줘.</div>
-  </div>
-  <aside class="notes">단일 HTML 앱(A-1~A-3)은 라우팅이 없어 대부분 index.html 이름만 맞추면 바로 된다. 절대경로/base·404 함정은 나중에 Vite·React로 진짜 SPA를 빌드해 올릴 때를 위한 예방 접종. .nojekyll은 파일명이 _로 시작할 때 등 은근한 버그를 막아준다. 데이터 공개 경고를 한 번 더 반복.</aside>
-</section>
-
-<section>
-  <span class="kicker pink">ADVANCED · WRAP-UP</span>
-  <h2>방금 만든 것들, 사실 대단한 겁니다</h2>
-  <div class="grid3">
-    <div class="card accent"><span class="icon">📊</span><h3>업로드 대시보드</h3><p class="small">BI 툴 없이 CSV → 인터랙티브 분석. 배포도 공유도 파일 하나.</p></div>
-    <div class="card accent"><span class="icon">🗄️</span><h3>SQLite CRUD 앱</h3><p class="small">엑셀 대장을 대체하는 진짜 DB 앱. 서버·설치 0.</p></div>
-    <div class="card accent"><span class="icon">🔬</span><h3>비교 뷰어</h3><p class="small">before/after 패턴 — 계측·수율·불량에 두루 재사용.</p></div>
-  </div>
-  <p class="fragment rise" style="margin-top: 16px;">…게다가 방금 <strong>GitHub Pages 링크 하나</strong>로 팀에 배포까지 해봤습니다.<br />
-  몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들 — <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
-  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작 + 링크 배포'로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
-</section>
-
-<!-- ═══════════════ PART 6 · 미니 프로젝트 & 마무리 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">6</div>
-  <div class="part-body">
-    <span class="kicker">PART 6 · 17:00–18:00</span>
-    <h2>미니 프로젝트 — 내 업무 하나</h2>
-    <p class="subtitle muted">연습은 끝났습니다. 이제 <strong>진짜 내 업무</strong>에서 하나를 골라 만듭니다.<br />45분 제작 + 15분 공유.</p>
-    <div class="part-meta">
-      <span class="chip teal">🎯 목표: 내일 출근해서 실제로 쓸 것 1개</span>
-      <span class="chip amber">⏱ 45분 + 공유 15분</span>
-    </div>
-  </div>
-  <aside class="notes">하루의 클라이맥스. Part 5에서 적어둔 '자동화 후보'를 꺼내게 한다. 주제를 못 정한 사람은 다음 슬라이드의 아이디어 카드에서 고르면 된다.</aside>
-</section>
-
-<section>
-  <span class="kicker">PROJECT RULES</span>
-  <h2>미니 프로젝트 규칙</h2>
-  <div class="grid2">
-    <div class="card accent">
-      <h3>✅ 이렇게</h3>
-      <ul class="small">
-        <li><strong>작게:</strong> 45분에 v1이 나올 크기로 (기능 1~2개)</li>
-        <li><strong>합성 데이터로:</strong> 실데이터 모양만 흉내</li>
-        <li><strong>계획 먼저:</strong> "어떻게 만들지 계획부터 보여줘"</li>
-        <li><strong>단계별로:</strong> 하나 되면 다음 것</li>
-      </ul>
-    </div>
-    <div class="card warn">
-      <h3>⚠️ 이것만 피하기</h3>
-      <ul class="small">
-        <li>사내 기밀·실데이터 사용 ❌</li>
-        <li>"우리 팀 전체 시스템"급 대작 ❌ <span class="muted">(그건 다음 주부터)</span></li>
-        <li>완성 욕심 — <strong>동작하는 반쪽</strong>이 계획서 100장보다 낫습니다</li>
-      </ul>
-    </div>
-  </div>
-  <div class="prompt" style="margin-top: 12px;">
-    <div class="p-label"><span>📋 시작이 막막할 때 — 만능 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-    <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야. 45분 안에 만들 수 있는 v1 계획을 먼저 제안해줘. 연습용 가짜 데이터도 같이 만들어줘.</div>
-  </div>
-  <aside class="notes">만능 프롬프트의 빈칸(○○)을 채우는 것 자체가 요구사항 정의 연습. 못 채우는 사람은 조교와 1:1로 빈칸을 채워준다.</aside>
-</section>
-
-<section>
-  <span class="kicker">IDEA CARDS</span>
-  <h2>주제가 안 떠오르면 — 여기서 고르세요</h2>
-  <div class="idea-grid">
-    <div class="idea"><span class="i-emoji">📓</span><span class="i-name">교대 인수인계 노트</span><span class="i-desc">쓰면 자동 정리·검색되는 시프트 로그</span></div>
-    <div class="idea"><span class="i-emoji">📅</span><span class="i-name">장비 예약 보드</span><span class="i-desc">측정기 예약 현황 한눈에 + 중복 방지</span></div>
-    <div class="idea"><span class="i-emoji">🧾</span><span class="i-name">레시피 비교기</span><span class="i-desc">파라미터 파일 2개의 차이만 하이라이트</span></div>
-    <div class="idea"><span class="i-emoji">🗂️</span><span class="i-name">실험 노트 정리기</span><span class="i-desc">날짜·조건·결과를 표준 양식으로 축적</span></div>
-    <div class="idea"><span class="i-emoji">🧪</span><span class="i-name">DOE 조건표 생성기</span><span class="i-desc">인자·수준 입력 → 실험 조건 매트릭스</span></div>
-    <div class="idea"><span class="i-emoji">📈</span><span class="i-name">일일 지표 대시보드</span><span class="i-desc">내가 매일 보는 숫자 4개를 한 화면에</span></div>
-    <div class="idea"><span class="i-emoji">⏰</span><span class="i-name">PM 일정 알리미</span><span class="i-desc">주기 입력 → 다가오는 정비 일정 캘린더</span></div>
-    <div class="idea"><span class="i-emoji">📊</span><span class="i-name">회의용 차트 공장</span><span class="i-desc">CSV 던지면 보고서용 차트 3종 자동 생성</span></div>
-    <div class="idea"><span class="i-emoji">🔍</span><span class="i-name">파일명 검색기</span><span class="i-desc">수천 개 측정 파일에서 조건으로 찾기</span></div>
-    <div class="idea"><span class="i-emoji">🧮</span><span class="i-name">우리 팀 계산기</span><span class="i-desc">팀에서 자주 쓰는 계산식 모음 웹앱</span></div>
-    <div class="idea"><span class="i-emoji">✅</span><span class="i-name">체크리스트 앱</span><span class="i-desc">셋업/릴리즈 절차를 클릭형 체크리스트로</span></div>
-    <div class="idea"><span class="i-emoji">🎓</span><span class="i-name">신입 온보딩 퀴즈</span><span class="i-desc">우리 공정 기초 지식 퀴즈 게임</span></div>
-  </div>
-  <aside class="notes">12개 카드 모두 오늘 배운 패턴의 조합으로 만들 수 있는 크기. 각 카드가 어떤 실습의 변형인지 짚어주면 좋다 (예: 레시피 비교기 = 표 정리 + 파일 읽기).</aside>
+  <aside class="notes">예전 덱에서 '나만의 스킬'은 5교시 끝자락 보너스였는데, 사실 이게 워크숍 이후로 이어지는 유일한 고리다. 그래서 본편 필수로 올렸다. 10분이라 짧지만 파일 하나가 남는 게 핵심 — 완성도는 상관없다.</aside>
 </section>
 
 <section>
   <span class="kicker">SHOW &amp; TELL</span>
-  <h2>공유 시간 — 자랑 3분씩</h2>
+  <h2>공유 시간 — 자랑 2분씩 <span class="chip teal" style="vertical-align:8px;">v0도 환영</span></h2>
   <div class="grid3">
-    <div class="card"><span class="icon">1️⃣</span><h3>뭘 만들었나</h3><p class="small">화면 시연 30초 — 말보다 보여주기</p></div>
+    <div class="card"><span class="icon">1️⃣</span><h3>뭘 만들었나</h3><p class="small">화면 시연 30초 — 말보다 보여주기. <strong>안 굴러가도 켜 놓으세요.</strong></p></div>
     <div class="card"><span class="icon">2️⃣</span><h3>어떤 프롬프트가 잘 먹혔나</h3><p class="small">오늘의 진짜 지식 공유는 이것</p></div>
     <div class="card"><span class="icon">3️⃣</span><h3>어디서 막혔나</h3><p class="small">막힌 얘기가 남에게 제일 유용합니다</p></div>
   </div>
   <p class="fragment rise" style="margin-top: 16px;">🏆 투표: <strong>내일 당장 훔쳐 쓰고 싶은 도구</strong> 한 표씩 — 우승자는 커피 쿠폰.</p>
   <aside class="notes">발표 부담을 낮추기 위해 '자랑'이라는 단어를 쓴다. 미완성도 공유 대상 — 어디서 막혔는지가 최고의 콘텐츠임을 강조. 다음 슬라이드에서 '어떻게 팀에 넘기나'로 자연스럽게 연결.</aside>
 </section>
+
+
+<!-- ═══════════════ 마무리 ═══════════════ -->
 
 <section>
   <span class="kicker">SHIP IT</span>
@@ -2963,6 +1946,1589 @@ git push -u origin main</div>
     <span class="chip violet">📬 피드백 환영</span>
   </div>
   <aside class="notes">Q&A로 마무리. 시간이 남으면 미니 프로젝트 우승작을 한 번 더 시연하며 끝내면 여운이 좋다.</aside>
+</section>
+
+
+<!-- ═══════════════ APPENDIX · 부록 실습 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">+</div>
+  <div class="part-body">
+    <span class="kicker violet">APPENDIX · 부록</span>
+    <h2>혼자 할 실습 23개</h2>
+    <p class="subtitle muted">본편에서 다루지 않은 실습 23개입니다. 잘라낸 게 아니라 <strong>남겨 둔</strong> 것입니다.<br />풀데이 코스에서는 이 중 골라서 진행합니다.</p>
+    <div class="part-meta">
+      <span class="chip violet">📚 전부 프롬프트 포함</span>
+      <span class="chip teal">🏠 집에서 각자</span>
+    </div>
+  </div>
+  <aside class="notes">여기서부터는 진행하지 않고 넘긴다. 마무리 멘트: "오늘 못 한 실습 18개가 이 뒤에 그대로 있습니다. 링크 하나로 언제든 열립니다." 참가자 입장에서 '진도를 못 뺐다'가 아니라 '더 받아 간다'로 프레이밍되는 게 중요하다.</aside>
+</section>
+
+<section>
+  <span class="kicker violet">APPENDIX · 쓰는 법</span>
+  <h2>부록 실습, 이렇게 쓰세요</h2>
+  <div class="appendix-note">
+    본편 실습은 형식을 계속 바꿔가며 <b>루프를 몸에 익히는 것</b>이 목적이었습니다.
+    부록은 반대입니다 — <b>필요할 때 골라 쓰는 레시피 모음</b>입니다. 순서대로 다 할 필요가 전혀 없습니다.
+  </div>
+  <div class="grid3">
+    <div class="card accent"><span class="icon">🎯</span><h3>내 업무와 가까운 것부터</h3><p class="small">18개를 순서대로 하지 마세요. 지금 내 일에 닿는 것 <strong>1~2개</strong>면 충분합니다.</p></div>
+    <div class="card"><span class="icon">✍️</span><h3>프롬프트는 가리고</h3><p class="small">제목과 완료 조건만 보고 <strong>먼저 직접 써 보기</strong> — 그래야 실력이 늡니다.</p></div>
+    <div class="card"><span class="icon">🔁</span><h3>내 도구에 이식</h3><p class="small">새 파일을 만들기보다 <strong>오늘 만든 도구에 기능으로</strong> 붙이는 편이 남습니다.</p></div>
+  </div>
+  <p class="fragment rise" style="margin-top:16px;"><strong>가장 좋은 다음 한 걸음:</strong> <span class="muted">오늘 만든 도구를 내일 회의에서 한 번 켜 보는 것. 부록 18개보다 그게 큽니다.</span></p>
+  <aside class="notes">부록을 '숙제'로 만들면 아무도 안 한다. '레시피 모음'으로 프레이밍하고, 진짜 다음 걸음은 부록이 아니라 '내일 도구를 켜 보는 것'이라고 못 박는다.</aside>
+</section>
+
+<section>
+  <span class="kicker">HOW TO SPOT</span>
+  <h2>자동화 대상 찾기 — 셀프 문진표</h2>
+  <div class="grid2">
+    <div class="card accent">
+      <h3>이 중 하나라도 "예"라면 후보</h3>
+      <ul class="small">
+        <li>매주/매일 <strong>같은 순서로 클릭</strong>하는 일이 있다</li>
+        <li>파일 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
+        <li>"이건 인턴 시키면 되는데" 싶은 일이 있다</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>자동화 설계 공식 — 한 문장</h3>
+      <p class="small" style="line-height: 1.7;"><em>"__(입력)__을 받아서<br />__(규칙)__대로 처리하고<br />__(출력)__을 만들어줘"</em></p>
+      <p class="tiny muted">못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
+    </div>
+  </div>
+  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 적어두세요 — 마지막 파트에서 그걸 만듭니다.</p>
+  <aside class="notes">여기서 각자 후보를 하나씩 적게 하는 게 중요 — Part 6 미니 프로젝트의 씨앗이 된다. 1분 정도 생각할 시간을 준다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 A-1</span>
+    <h2>내 명함 웹페이지</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">생애 첫 웹페이지 — <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열립니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">내 온라인 명함 웹페이지를 card.html 파일 하나로 만들어줘. 이름, 소속, 한 줄 소개, 이메일이 들어가고, 세련된 다크 테마로. 내용은 일단 아무거나 채워놔 — 내가 나중에 알려줄게.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 내 정보로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이름은 ○○○, 소속은 ○○팀으로 바꿔줘. 한 줄 소개는 "웨이퍼와 씨름하는 엔지니어" 느낌으로 네가 몇 개 제안해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-card">
+          <div class="mk-avatar">🧑‍🔬</div>
+          <div>
+            <div class="mk-title">김공정 <span class="mk-sub">· 식각기술팀</span></div>
+            <div class="mk-sub">"웨이퍼와 씨름하는 엔지니어"</div>
+            <div class="mk-sub mono">engineer@fab.example</div>
+          </div>
+        </div>
+        <div class="mock-cap">브라우저에 뜨는 다크 테마 카드 한 장</div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li><code>card.html</code>이 브라우저에서 열린다</li>
+          <li>수정 요청을 2번 이상 해봤다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">🚑 막혔다면</div>
+        <ul>
+          <li>"방금 만든 파일 경로 알려줘" / 에러는 그대로 복붙</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">전원이 '브라우저에서 내 이름이 뜨는' 순간을 경험하는 게 목표. 완성한 사람 화면 몇 개를 프로젝터로 보여주면 분위기가 뜬다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 A-2</span>
+    <h2>점심 메뉴 룰렛</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>. 오늘 점심은 이걸로 정합니다. 진짜로.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">점심 메뉴 룰렛을 lunch.html 파일 하나로 만들어줘. 돌림판이 빙글빙글 돌다가 하나를 뽑아주는 애니메이션으로. 메뉴는 김치찌개, 돈까스, 초밥, 쌀국수, 샐러드, 구내식당, 짜장면, 버거 8개. 시작 버튼은 크고 누르고 싶게.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 감질나게</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 메뉴를 직접 추가/삭제할 수 있는 입력칸도.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"같은 메뉴가 3번 연속 나오면 안 되게 해줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-wheel-row">
+          <div class="mk-wheel"></div>
+          <div>
+            <div class="mk-title">🎉 돈까스!</div>
+            <div class="mk-sub">폭죽 + 두구두구 효과</div>
+            <div class="mk-sub">메뉴 추가/삭제 입력칸</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>돌림판이 돌고 결과가 나온다</li>
+          <li>오늘 점심이 정해졌다 🍜</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">애니메이션·인터랙션이 '내가 이걸 만들었다고?' 하는 반응을 만든다. 점심시간에 실제로 사용해서 오전 실습이 실생활로 연결되는 경험을 준다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 A-3</span>
+    <h2>단위 변환기</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">처음으로 <strong>업무 냄새</strong>가 나는 도구 — 매번 검색하던 단위 변환을 내 것으로.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">반도체 엔지니어용 단위 변환기를 unit.html 파일 하나로 만들어줘. nm ↔ Å ↔ µm ↔ mil 길이, Torr ↔ Pa ↔ mbar 압력, °C ↔ K 온도 세 가지 탭으로. 숫자를 입력하면 실시간으로 전부 같이 변환돼서 보이게.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 검증까지 시키기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">1 Å = 0.1 nm, 760 Torr = 101325 Pa 같은 알려진 값으로 변환이 정확한지 표로 검증해서 보여줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>sccm ↔ slm 유량, eV ↔ nm 광자 에너지 탭 추가</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">길이 · <span class="warn-t">압력</span> · 온도</div>
+          <table>
+            <tr><td class="mono">1 Torr</td><td class="mono ok">= 133.322 Pa</td><td class="mono">= 1.333 mbar</td></tr>
+            <tr><td class="mono">760 Torr</td><td class="mono ok">= 101325 Pa</td><td class="mono">= 1013.25 mbar</td></tr>
+          </table>
+        </div>
+        <div class="mock-cap">입력하면 모든 단위가 동시에 갱신</div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>세 종류 변환이 모두 동작</li>
+          <li><strong>아는 값으로 검산</strong>해봤다 (760 Torr)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">첫 번째 '내일부터 실제로 쓸 수 있는' 도구. 검산 습관(golden value 넣어보기)을 여기서 처음 심는다 — 오후 데이터 실습의 복선.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 A-4</span>
+    <h2>회의 타이머</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">요구사항 <strong>여러 개</strong>를 처음부터 번호로 정리해서 시켜봅니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">회의 타이머를 timer.html 파일 하나로 만들어줘. 요구사항:
+1. 발표 시간을 분 단위로 설정 (기본 5분)
+2. 남은 시간이 화면 가득 크게 보이게
+3. 1분 남으면 노란색, 다 되면 빨간색 + 깜빡임
+4. 시작/일시정지/리셋 버튼
+회의실 프로젝터에 띄워놓고 쓸 거야.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"발표자 명단을 넣으면 순서대로 돌아가게"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-timer">00:58</div>
+          <div class="mk-sub" style="text-align:center;">⬜ 5분+ → 🟨 1분 미만 → 🟥 깜빡임</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>타이머가 돌고 색이 바뀐다</li>
+          <li>요구사항 4개를 <strong>하나씩 체크</strong>했다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>번호 요구사항 = 그대로 <strong>검수 체크리스트</strong>. 빠지면 "3번이 안 됐어"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">번호 목록 프롬프트 패턴을 처음 도입. 요구사항이 곧 검수 체크리스트가 된다는 것을 경험하게 한다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 A-5</span>
+    <h2>보너스 — 반응속도 게임</h2>
+    <span class="chip amber">⏱ 여유 있으면</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="chip pink">BONUS</span>
+  </div>
+  <p class="lab-goal">빨리 끝난 사람용 — 옆 사람과 <strong>대결</strong>할 수 있는 것.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">반응속도 측정 게임을 reaction.html로 만들어줘. 화면이 빨간색이었다가 랜덤한 순간 초록색으로 바뀌면 최대한 빨리 클릭하는 게임. 반응 시간을 ms로 보여주고, 5회 평균과 최고 기록을 기록해줘. 너무 일찍 누르면 "성급했습니다!" 하고 놀려줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"등급을 매겨줘 — 200ms 미만은 'FAB 알람 대응 S급'"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-title" style="font-size:26px;">⚡ 236 <span class="mk-sub">ms</span></div>
+          <div class="mk-sub">5회 평균 251 ms · 최고 <span class="ok">198 ms</span> — <span class="warn-t">FAB 알람 대응 A급</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>내 평균 반응속도를 알아냈다</li>
+          <li>옆 사람과 대결해봤다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">진도 조절용 버퍼 실습. 전체가 빠르면 다 같이 하고, 아니면 빠른 사람만.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-1</span>
+    <h2>회의록 → 요약 + 액션 아이템</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">중구난방 회의 메모 → <strong>정리된 회의록</strong>.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트 (샘플 메모 포함)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">아래 회의 메모를 정리해서 minutes.md 파일로 만들어줘. ①3줄 요약 ②결정사항 ③액션 아이템(담당자/기한 표) 순서로.
+
+--- 메모 ---
+설비팀 김프로: 3번 챔버 파티클 이슈 지난주부터 재발, 원인 미상. 정비 일정 협의 필요
+공정팀: 신규 레시피 평가 지연중, 측정 장비 예약이 밀림. 다음주 화요일까지 1차 결과 공유하기로 함
+품질팀 이프로: 월간 감사 준비, 각 팀 문서 목록 금요일까지 제출 요청
+팀장: 파티클 이슈는 설비팀+공정팀 합동으로 이번주 목요일까지 1차 원인 분석. 레시피 평가는 우선순위 상향</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"팀 공지용 3줄 버전도 따로" / 우리 팀 회의록 양식 틀에 맞추기</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">📄 minutes.md — 요약 3줄 + 결정 2건 +</div>
+          <table>
+            <tr><th>액션</th><th>담당</th><th>기한</th></tr>
+            <tr><td>파티클 1차 원인 분석</td><td>설비+공정</td><td class="warn-t">목요일</td></tr>
+            <tr><td>감사 문서 목록 제출</td><td>각 팀</td><td class="warn-t">금요일</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>요약/결정/액션이 구분돼 나온다</li>
+          <li>액션에 <strong>담당자·기한</strong>이 표로 정리됐다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">문서 업무 첫 실습. 형식을 ①②③으로 지정하는 패턴이 Part 1의 번호 목록 패턴과 같다는 점을 연결해주면 좋다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-2</span>
+    <h2>메모 → 주간보고 초안</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">일주일치 낙서 같은 메모 → <strong>보고서 문체</strong>.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">아래 이번 주 업무 메모로 주간보고 초안을 작성해줘. 형식: [금주 실적 / 이슈 및 리스크 / 차주 계획] 3개 섹션, 개조식 문어체("~함", "~완료")로.
+
+- 화: 신규 장비 셋업 지원, 캘리브레이션까지 완료
+- 수: 파티클 이슈 미팅. 원인 후보 2개로 좁힘 (밸브 실링 or 배기 라인)
+- 목: 분석 데이터 정리하다 측정기 예약 못 잡아서 반나절 날림
+- 금: 보고서 초안 작성 예정. 다음주엔 재현 실험 하려고 함</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 톤 조절</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">"반나절 날림"처럼 부정적으로 보이는 부분은 리스크와 대응 계획 형태로 다듬어줘. 임원 보고에 들어가도 어색하지 않게.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub ok">■ 금주 실적</div>
+          <div class="mk-sub">· 신규 장비 셋업 및 캘리브레이션 완료</div>
+          <div class="mk-sub warn-t">■ 이슈 및 리스크</div>
+          <div class="mk-sub">· 계측 리소스 경합으로 분석 일정 지연 → 예약 선점으로 대응</div>
+          <div class="mk-sub" style="color:#9B82FF;">■ 차주 계획</div>
+          <div class="mk-sub">· 파티클 재현 실험 수행 예정</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>3개 섹션 개조식 보고서가 나왔다</li>
+          <li>톤 조절 요청까지 해봤다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">매주 반복되는 보고서 작성이 '메모만 던지면 되는 일'로 바뀌는 경험. 내용은 내가, 문체·형식은 AI가 — 역할 분담. 팀 보고 양식을 한 번 알려주면 계속 그 틀로 받을 수 있다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-3</span>
+    <h2>영문 메일 — 장비 벤더 문의</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">상황만 한국어로 설명하면 <strong>정중한 영문 메일</strong>이 나옵니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">장비 벤더 엔지니어에게 보낼 영문 메일을 써줘. 상황: 챔버 압력 센서가 간헐적으로 이상값을 보여서 지난주에 문의했는데 아직 답이 없음. 정중하지만, 다음 주 PM 일정 전에는 꼭 답을 받아야 한다는 긴급함이 전달되게. 제목도 같이. 메일 아래에 한국어 번역도 붙여줘.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 뉘앙스 조절</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">더 부드러운 버전과 더 단호한 버전 두 가지로 만들고, 어떤 상황에 어떤 걸 쓰면 좋을지도 알려줘.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-mail">
+          <div class="mk-row"><b>Subject</b> <span>Follow-up: Intermittent pressure sensor readings — response needed before PM (July 20)</span></div>
+          <div class="mk-row"><b>Body</b> <span>Dear Mr. Tanaka, I'm following up on my inquiry from last week…</span></div>
+          <div class="mk-row"><b>버전</b> <span><span class="ok">🕊 부드럽게</span> / <span class="bad">⚡ 단호하게</span> + 사용 시점 가이드</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>제목 + 본문 + 한국어 번역</li>
+          <li>두 가지 톤 버전을 비교해봤다</li>
+        </ul>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>받은 영문 메일에 대한 회신 / 일본어 버전</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">해외 벤더와 일하는 엔지니어에게 즉효인 실습. '번역'이 아니라 '상황을 주고 작문시키는' 차이를 강조.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-4</span>
+    <h2>지저분한 텍스트 → 깔끔한 표</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★</span>☆☆</span>
+  </div>
+  <p class="lab-goal">표기가 제각각인 목록 → <strong>정돈된 표 + CSV</strong>.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트 (지저분한 데이터 포함)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">아래 장비 목록을 정리해서 표로 만들고 equipment.csv로 저장해줘. 컬럼: 장비ID / 공정 / 상태 / 비고. 표기가 제각각인 건 통일하고, 뭘 어떻게 통일했는지도 알려줘.
+
+ETCH-01 식각 가동중
+etch02 / Etch / PM예정(금요일)
+CVD 3번장비 - 증착 - idle
+cvd-04, 증착, 가동 중, 신규셋업
+PHOTO_7 노광 다운 (파츠 대기)
+photo8 노광 가동중</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <table>
+            <tr><th>장비ID</th><th>공정</th><th>상태</th><th>비고</th></tr>
+            <tr><td class="mono">ETCH-01</td><td>식각</td><td class="ok">가동</td><td></td></tr>
+            <tr><td class="mono">ETCH-02</td><td>식각</td><td class="warn-t">PM 예정</td><td>금요일</td></tr>
+            <tr><td class="mono">PHOTO-07</td><td>노광</td><td class="bad">다운</td><td>파츠 대기</td></tr>
+          </table>
+          <div class="mock-cap">+ "etch02→ETCH-02로 통일" 변경 내역 보고</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li><code>equipment.csv</code>가 엑셀에서 열린다</li>
+          <li>"뭘 통일했는지" 설명을 <strong>검증</strong>했다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>정리 규칙을 <strong>스스로 보고하게</strong> 하면 검증이 쉬움 — 행이 수백 개여도 동일</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">데이터 클리닝의 미니 버전. 오후 CSV 실습의 다리 역할. '변경 내역을 보고하게 하기'는 오후 내내 쓸 검증 패턴.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-5</span>
+    <h2>발표자료 뼈대 → HTML 슬라이드</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">주제만 주면 <strong>목차 → 슬라이드</strong>까지. 지금 이 자료도 이렇게 만들었습니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ① — 목차 먼저</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">"신입 엔지니어를 위한 클린룸 기본 수칙" 5분 발표 자료를 만들려고 해. 먼저 슬라이드 6장 분량의 목차와 각 장의 핵심 메시지를 제안해줘. 아직 만들지는 마.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② — 확인 후 제작</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">좋아. 3번 슬라이드는 복장 착용 순서를 단계별 그림처럼 바꿔줘. 그 목차대로 slides.html 파일 하나로 만들어줘. 화살표 키로 넘길 수 있게, 깔끔한 다크 테마로.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-thumbs">
+            <div class="mk-thumb"><div class="bar"></div><div class="ln"></div><div class="ln" style="width:80%"></div></div>
+            <div class="mk-thumb"><div class="bar" style="width:50%"></div><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div></div>
+            <div class="mk-thumb"><div class="bar" style="width:60%"></div><div class="ln" style="width:40%"></div><div class="ln" style="width:70%"></div></div>
+          </div>
+          <div class="mock-cap">화살표로 넘기는 6장짜리 미니 발표자료</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>목차 단계에서 <strong>수정 지시</strong>를 했다</li>
+          <li>슬라이드가 브라우저에서 넘어간다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li><strong>"아직 만들지는 마"</strong> — 목차에서 고치는 게 10배 쌉니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">'계획 먼저, 제작은 나중' 패턴의 첫 등장. 이 워크숍 자료 자체가 이 방식으로 만들어졌다고 밝히면 설득력이 크다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 B-6</span>
+    <h2>보너스 — 문서 던지고 질문하기</h2>
+    <span class="chip amber">⏱ 여유 있으면</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="chip pink">BONUS</span>
+  </div>
+  <p class="lab-goal">긴 문서를 읽는 대신 <strong>문서에게 질문</strong>합니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/manual.txt" download>📁 제공 데이터 manual.txt 받기</a>
+    <span class="chip">가상 장비 유지보수 매뉴얼 (실습 폴더에 저장)</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">manual.txt를 읽고 답해줘: ①월간 점검 항목만 표로 정리 ②"경고"가 붙은 항목 전부 나열 ③신입에게 알려줄 핵심 3가지. 반드시 문서에 있는 내용만 근거로 하고, 문서에 없으면 없다고 말해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"PG-2가 무응답이면 어떻게 해?" 같은 고장 대응 질문 던지기</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-chat">
+          <div class="bub me">"경고" 붙은 항목 전부 나열해줘</div>
+          <div class="bub ai">경고는 총 4건입니다: ①뷰포트 개방 전 대기압 확인 ②그리스 작업 전 LOTO … <span class="src">— manual.txt 2·4·5장</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>문서 근거 답변을 받았다</li>
+          <li>답이 진짜 문서에 있는지 <strong>한 개는 직접 확인</strong></li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li><strong>"문서에 없으면 없다고 해"</strong> — 아는 척 방지 장치</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">제공된 합성 매뉴얼로 보안 원칙을 지키며 지식 기반 Q&amp;A를 체험. 매뉴얼의 경고는 4건(2장 1개, 4장 2개, 5장 1개). Part 5의 스펙 문서 Q&amp;A로 이어진다. 회사에선 사내 허용 환경에서, 기밀 아닌 문서부터.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 C-1</span>
+    <h2>웨이퍼 맵 뷰어</h2>
+    <span class="chip amber">⏱ 20분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">다이별 bin 데이터를 <strong>웨이퍼 모양 그대로</strong> 색칠해서 봅니다. 오늘의 하이라이트.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/wafermap.csv" download>📁 wafermap.csv 받기</a>
+    <span class="chip">컬럼: die_x, die_y, bin (1=양품)</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 뷰어 제작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">wafermap.csv를 읽어서 웨이퍼 맵으로 보여주는 wafermap.html을 만들어줘. 요구사항:
+1. 다이를 격자로 그리고 bin별 색 구분 (bin1은 차분하게, 불량은 눈에 띄게)
+2. 마우스를 올리면 좌표와 bin 표시
+3. 우측에 bin별 개수와 수율(%) 요약
+4. bin 번호를 클릭하면 해당 bin만 하이라이트
+불량이 어디에 몰려 있는지 패턴도 한 줄로 말해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>여러 웨이퍼 썸네일 갤러리 모드 / notch 방향 표시</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="wafer" width="440" height="180"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>원형 웨이퍼 맵이 그려진다</li>
+          <li>불량 <strong>패턴이 눈에 보인다</strong> — 무슨 패턴?</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">🚑 막혔다면</div>
+        <ul>
+          <li>"브라우저 콘솔 에러를 확인하고 고쳐줘"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: edge ring 패턴, 수율 ~91%. 비주얼 임팩트가 가장 큰 실습. 타이틀 슬라이드의 웨이퍼 애니메이션이 바로 이것의 확장판이라고 알려주면 동기부여가 된다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 C-2</span>
+    <h2>장비 로그 파싱 — 알람 추출</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">1,000줄 기계 로그에서 필요한 것만 뽑습니다. <strong>사람이 훑으면 20분, 시키면 3초.</strong></p>
+  <div class="databar">
+    <a class="chip teal" href="data/tool.log" download>📁 tool.log 받기</a>
+    <span class="chip">24시간 · 1,000줄 · [시각] [레벨] [모듈] 메시지</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 분석 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">tool.log를 분석해서 log_report.html로 만들어줘.
+1. ERROR/WARN만 추출해 시간순 표로
+2. 메시지 유형별 발생 횟수 집계
+3. 시간대별 발생 분포 차트
+4. 반복되는 패턴이 있으면 짚어줘</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"ERROR 전후 5줄씩 문맥도 같이 보여줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="logbars" width="440" height="160"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>ERROR 개수가 정확하다 — <strong>몇 건이었나요?</strong></li>
+          <li>새벽 반복 패턴을 AI가 짚어냈다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>내 장비 로그 형식이 달라도 <strong>샘플 몇 줄만 보여주면</strong> 됨</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: ERROR 8건, 그중 PRESSURE_SENSOR_TIMEOUT 3건이 02:14/03:02/03:47 새벽 반복. '개수를 아는 데이터로 검증' 패턴이 여기서도 반복된다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 C-3</span>
+    <h2>랏 트렌드 차트</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">시간에 따른 <strong>공정 파라미터 추이</strong>. 어딘가에서 drift가 시작됩니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/trend.csv" download>📁 trend.csv 받기</a>
+    <span class="chip">4주치 · 하루 6랏 · CD 목표 45nm</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 차트 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">trend.csv로 trend.html 트렌드 차트를 만들어줘.
+1. 랏별 CD 값 점 + 일별 평균 선
+2. 목표 45nm과 관리선(±1.5nm) 표시
+3. 구간을 드래그하면 그 구간 평균/표준편차 표시
+4. drift가 시작된 지점을 네가 찾아서 표시해줘</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>이동평균선 / "drift 감지를 알림 문구로 요약"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="trend" width="440" height="160"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>트렌드에 <strong>drift가 눈에 보인다</strong></li>
+          <li>AI가 찾은 시점이 그럴듯한지 눈으로 검증</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: 마지막 주(7/6~)에 +0.8nm drift. 다음 파트 SPC 관리도가 이것의 정식 버전임을 예고.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 D-1</span>
+    <h2>수율 대시보드</h2>
+    <span class="chip amber">⏱ 25분</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+  </div>
+  <p class="lab-goal">"쪼개서 시킨다"를 실전으로 — <strong>차트 3개짜리 대시보드</strong>를 단계별로 쌓습니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/yield.csv" download>📁 yield.csv 받기</a>
+    <span class="chip">8주 · 제품 A/B · bin2~8 카운트</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② → ③ → ④ — 반드시 하나씩!</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">② yield.csv로 dashboard.html을 시작하자. 먼저 주차별 수율 트렌드 차트만 (product별 색 구분). 다른 건 아직 만들지 마.
+③ 좋아. 이제 그 아래에 불량 bin 파레토 차트를 추가해줘. 기간을 선택하면 그 기간 기준으로 갱신되게.
+④ 마지막으로 상단에 KPI 카드(이번주 수율, 전주 대비, 최다 불량 bin)를 얹고 배치를 정리해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"경영진 요약 한 문단을 자동 생성해서 맨 위에"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="dash" width="440" height="180"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>②→③→④ <strong>단계마다 열어서 확인</strong>했다</li>
+          <li>어떤 제품/bin이 문제인지 대시보드에서 읽힌다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">🚑 막혔다면</div>
+        <ul>
+          <li>③에서 ②가 망가짐 → "트렌드 차트가 깨졌어, 둘 다 되게 고쳐줘"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: product B가 6주차부터 bin4 급증, 수율 -3%p. 가장 긴 실습. 프롬프트 ②③④를 한 번에 복사해주되 반드시 하나씩 실행·확인하게 안내. 완성물은 미니 프로젝트의 좋은 재료.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 D-2</span>
+    <h2>공정 계산기 3종 세트</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">엑셀 구석에 있던 계산식을 <strong>팀이 같이 쓰는 도구</strong>로. 식은 여러분이 제공합니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">공정 계산기 모음을 calc.html 파일 하나로 만들어줘. 탭 3개:
+1. 포토 해상도: Rayleigh 식 (R = k1·λ/NA, DOF = k2·λ/NA²). λ는 193/248/365nm 선택, k1·NA는 입력
+2. 면저항: 4-point probe (Rs = 4.532×V/I), 두께 입력 시 비저항까지
+3. 식각 시간: 목표 깊이, 식각 속도, 오버에치(%) → 필요 시간
+각 탭에 식과 변수 설명도 같이.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>내 업무의 계산식을 4번째 탭으로 (증착·임플란트·CMP…)</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub"><span class="warn-t">해상도</span> · 면저항 · 식각 시간</div>
+          <table>
+            <tr><td class="mono">λ = 193 nm</td><td class="mono">NA = 1.35</td><td class="mono">k1 = 0.30</td></tr>
+            <tr><td class="mono ok" colspan="3">→ R = 42.9 nm · DOF = k2·λ/NA² </td></tr>
+          </table>
+          <div class="mock-cap">값을 바꾸면 결과 즉시 갱신 + 식 표시</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>세 계산기 동작</li>
+          <li><strong>아는 값으로 검산</strong> — "교과서 예시로 검증해서 표로 보여줘"</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>도메인 공식은 <strong>프롬프트에 직접</strong> — 정확도 급상승</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">'식을 프롬프트에 명시하기'가 핵심 — 도메인 공식을 스스로 제공하는 게 할루시네이션을 막는 최선. 참가자별로 자기 분야 계산기로 변형하게 유도하면 몰입도가 오른다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 D-3</span>
+    <h2>보너스 — 결함 패턴 시뮬레이터</h2>
+    <span class="chip amber">⏱ 여유 있으면</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+    <span class="chip pink">BONUS</span>
+  </div>
+  <p class="lab-goal">결함 패턴을 <strong>만들고, 구분하는 로직</strong>까지 — 퀴즈 게임으로.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ① — 시뮬레이터</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">웨이퍼 결함 패턴 시뮬레이터를 defect.html로 만들어줘. 버튼을 누르면 random / scratch(직선형) / edge ring / center cluster 4가지 중 하나로 결함 맵을 생성해서 보여주는 것. 패턴 이름은 숨겨놔.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② — 자동 분류 퀴즈</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">"판별" 버튼을 추가해줘. 결함 분포를 분석해 4가지 중 뭔지 추정하고 근거 지표(가장자리 비율, 직선성, 중심 밀집도)와 함께 표시. 내가 먼저 눈으로 맞히고 답을 확인하는 퀴즈 모드로.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="defects" width="440" height="150"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>4가지 패턴이 그럴듯하게 생성된다</li>
+          <li>판별 10회 테스트 — <strong>몇 승 몇 패?</strong></li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>판별이 틀리면 <strong>틀린 사례를 보여주며</strong> 지표를 고치게 — 이게 알고리즘 튜닝</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">여유 있는 참가자용 심화. 규칙 기반 분류의 한계를 몸으로 느끼면 'ML이 왜 필요한가'라는 다음 학습 주제로 자연스럽게 연결된다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-1</span>
+    <h2>파일 100개 일괄 정리</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">이름 규칙이 엉망인 파일 무더기를 규칙대로 정리 — <strong>손으로 1시간, 시키면 1분.</strong></p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ① — 난장판 만들기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">연습용 폴더 messy_data를 만들고 가짜 측정 파일 100개를 만들어줘. 파일명 규칙이 제각각이게: "LOT123_20260701.csv", "20260702-lot124.csv", "측정결과_lot125 (final).csv" 같은 식으로 뒤죽박죽. 내용은 아무 숫자 몇 줄이면 돼.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② — 정리 (계획 먼저!)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">messy_data의 파일들을 "LOT번호_날짜.csv" (예: LOT123_2026-07-01.csv) 형식으로 통일해서 clean_data 폴더로 정리하려고 해. 먼저 변경 계획표만 보여줘. 아직 실행하지 마. 원본은 건드리지 말고 복사본으로만 작업해.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-files">
+          <div>측정결과_lot125 (final).csv <span class="arr">→</span> <span class="ok">LOT125_2026-07-03.csv</span></div>
+          <div>20260702-lot124.csv <span class="arr">→</span> <span class="ok">LOT124_2026-07-02.csv</span></div>
+          <div class="mk-sub" style="margin-top:6px;">변경 계획표 100건 → 승인 → 실행 보고: <span class="ok">98 처리</span> · <span class="warn-t">2 규칙 불일치 격리</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>계획표를 <strong>검토한 후</strong> 실행시켰다</li>
+          <li>원본 messy_data는 무사하다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 안전 수칙</div>
+        <ul>
+          <li>파일 자동화는 <strong>①계획 보기 ②사본 작업 ③결과 보고</strong> 3종 세트로</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">파일 조작 자동화의 안전 수칙(계획-사본-검증)을 각인시키는 실습. '아직 실행하지 마' 패턴이 여기서 안전장치로 진화한다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-2</span>
+    <h2>CSV 여러 개 → 주간 리포트 자동 생성</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+  </div>
+  <p class="lab-goal">"매주 월요일마다 하던 그 취합"을 <strong>스크립트 한 방</strong>으로.</p>
+  <div class="databar">
+    <a class="chip teal" href="data.zip" download>📁 weekly/ 폴더 (data.zip에 포함)</a>
+    <span class="chip">mon~fri.csv · 장비 6대 가동 데이터</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 리포트 생성기 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">weekly 폴더의 CSV(mon~fri)를 전부 읽어 주간 리포트를 만드는 스크립트를 작성해줘. 실행하면 weekly_report.html이 생성되는 것.
+1. 장비별 주간 가동률 표 (최악 장비 강조)
+2. 일별 에러 추이 차트
+3. "특이사항" 자동 요약 문단
+다음 주에 파일만 갈아끼우면 재사용되게. 실행 방법도 알려줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>엑셀(.xlsx) 출력 / 지난주 대비 변화율 컬럼</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="weekly" width="440" height="160"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>스크립트 실행 → 리포트 생성</li>
+          <li>숨어 있는 <strong>문제 장비·요일</strong>이 특이사항에 잡혔다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>도구와 자동화의 차이 = <strong>"다음에도 쓸 수 있게"</strong>라는 요구</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: 수요일 ETCH-02 uptime 78%, error 9건. 실행이 어려우면 "더블클릭으로 실행되게 해줘". 조교가 돌며 지원.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-3</span>
+    <h2>알람 로그 → 아침 요약 메일 초안</h2>
+    <span class="chip amber">⏱ 10분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">로그 파싱(3-3) + 보고서 문체(2-2) = <strong>매일 아침 10분 은퇴</strong>.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/tool.log" download>📁 tool.log (LAB 3-3과 동일)</a>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">tool.log를 읽어서 "야간 장비 현황 아침 브리핑" 메일 초안을 만드는 스크립트를 작성해줘. 실행하면 briefing.txt가 생성되는 것. 내용: 제목 한 줄 / 밤사이 ERROR 요약(시각·모듈·횟수) / 반복 패턴 경고 / 조치 필요 체크리스트. 팀장님께 보내는 톤으로 5줄 이내.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"ERROR 0건인 날은 축하 멘트로" / HTML 메일 버전</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-mail">
+          <div class="mk-row"><b>제목</b> <span>[야간 브리핑] ERROR 8건 — VACUUM 반복 이슈 확인 필요</span></div>
+          <div class="mk-row"><b>요약</b> <span>02~04시 PG-2 게이지 타임아웃 <span class="bad">3회 반복</span> 발생</span></div>
+          <div class="mk-row"><b>조치</b> <span>☐ PG-2 커넥터 점검 ☐ 재발 시 게이지 교체</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>briefing.txt가 그대로 보내도 될 수준</li>
+          <li>로그를 바꿔 재실행해도 동작</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>오늘 배운 것들이 <strong>레고처럼 조립</strong>됨 — 파싱+요약+문체</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">기존 실습 산출물을 재조합하는 구성 — 도구가 쌓이면 조립 속도가 빨라진다는 것을 체감시킨다. 매일 아침 자동 실행(스케줄러)까지 원하는 사람에겐 OS 스케줄러 등록도 AI에게 시키면 된다고 안내.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-4</span>
+    <h2>엑셀 요약 자동화 <span class="chip teal" style="vertical-align:5px;">.xlsx</span></h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">엔지니어가 하루 종일 사는 곳 — <strong>엑셀 파일을 읽고, 집계하고, 서식까지</strong> 갖춰 다시 저장.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/lot_summary.xlsx" download>📁 lot_summary.xlsx 받기</a>
+    <span class="chip">raw 시트 60행 + 빈 summary 시트</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">lot_summary.xlsx의 raw 시트를 읽어서 summary 시트를 채워줘. 제품(product)별로 ①랏 수 ②평균 수율 ③평균 CD ④총 결함 수를 집계한 표로. 수율이 가장 낮은 제품은 셀을 빨갛게 강조하고, 헤더는 굵게. 결과를 lot_summary_done.xlsx로 저장해줘.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 재사용 가능하게</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">다음 달 파일도 같은 형식이면 그대로 돌아가게 스크립트로 만들어줘. 실행 방법이랑, raw 시트 컬럼이 바뀌면 어디를 고치면 되는지도 알려줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>제품별 수율 막대 차트를 엑셀 안에 삽입 / 피벗 테이블로</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div class="mk-sub">📊 summary 시트</div>
+          <table>
+            <tr><th>제품</th><th>랏</th><th>평균수율</th><th>결함계</th></tr>
+            <tr><td class="mono">A7</td><td>16</td><td class="ok">92.0</td><td>78</td></tr>
+            <tr><td class="mono">B3</td><td>19</td><td class="ok">91.9</td><td>96</td></tr>
+            <tr><td class="mono">C1</td><td>25</td><td class="bad">90.0 ⚠</td><td>171</td></tr>
+          </table>
+          <div class="mock-cap">최저 수율 C1 셀 빨강 강조 · 헤더 굵게</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>summary 시트가 채워진 <code>.xlsx</code>가 생성됐다</li>
+          <li>엑셀에서 열어 <strong>서식(색·굵게)</strong>이 살아있다</li>
+          <li>최저 수율 <strong>C1</strong>이 잡혔다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>AI는 <strong>.xlsx를 직접</strong> 읽고 씁니다 — CSV로 바꿀 필요 없음</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: C1 제품 평균 수율 90.0%로 A7/B3(92%)보다 낮게 심어둠. 엔지니어에게 실무 파급력이 가장 큰 실습 — 매달 하던 엑셀 취합·서식 작업을 통째로 위임. openpyxl 같은 라이브러리를 AI가 알아서 쓴다. 서식(색/굵게)이 살아 있는지 꼭 확인시킨다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-5</span>
+    <h2>보너스 — 스펙 문서 Q&amp;A 도우미</h2>
+    <span class="chip amber">⏱ 여유 있으면</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+    <span class="chip pink">BONUS</span>
+  </div>
+  <p class="lab-goal">문서 여러 개를 <strong>지식 기반</strong> 삼아 답하기 — 문서 사이 <strong>모순</strong>도 하나 숨어 있습니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data.zip" download>📁 specs/ 폴더 (data.zip에 포함)</a>
+    <span class="chip">식각·증착·안전 스펙 3종 (가상)</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 질문 공세 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">specs 폴더 문서들만 근거로 답해줘. 근거 문서명과 해당 구절을 반드시 인용하고, 문서에 없으면 "문서에 없음"이라고 답해.
+Q1. 식각 공정 압력 상한과 그 근거는?
+Q2. 인터락이 걸리는 조건을 전부 나열해줘.
+Q3. 문서들 사이에 서로 모순되는 내용이 있는지 찾아줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"신입용 요약 카드 한 장으로 만들어줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-chat">
+          <div class="bub me">Q3. 모순되는 내용 있어?</div>
+          <div class="bub ai">있습니다. 공정 중단 압력이 <b class="bad">120 mTorr</b>인데 안전 인터락은 <b class="bad">100 mTorr</b>에서 이미 작동합니다. <span class="src">— etch_spec.md §3 vs safety_spec.md §3</span></div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>답변마다 <strong>출처 인용</strong>이 붙는다</li>
+          <li>숨어 있는 모순을 찾아냈다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>문서 간 <strong>모순 찾기</strong> — 사람이 제일 못하고 AI가 제일 잘하는 일</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: etch_spec은 120 mTorr 초과 시 공정 중단이라 하고, safety_spec은 100 mTorr에서 인터락 작동 — 중단 기준이 인터락보다 높아서 실질적으로 도달 불가능한 모순. 실무 킬러 유스케이스(스펙 개정 시 정합성 검토). 회사 적용 시엔 보안 환경 전제를 재강조.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">부록 E-6</span>
+    <h2>나만의 스킬 만들기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+    <span class="chip violet">재사용</span>
+  </div>
+  <p class="lab-goal">매주 쓰는 <strong>주간 보고서 프롬프트</strong>를 <code>/weekly-report</code> 스킬로. 파일은 Claude Code에게 만들어달라고 하면 됩니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 ① Claude Code에게 스킬로 만들어달라 하기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">오늘 내가 여러 번 쓴 이 프롬프트를 재사용할 수 있게 스킬로 만들어줘. .claude/skills/weekly-report/SKILL.md 로 저장하고, description에는 "주간 보고 요청 시 자동으로 불려야 한다"는 걸 구체적으로 써줘.
+프롬프트: 이번 주 한 일 목록을 주면 ①3줄 요약 ②주요 성과 ③다음 주 계획 형식의 한국어 주간 보고서로 정리해줘.</div>
+      </div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📄 ② 만들어질 SKILL.md (예시)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">---
+name: weekly-report
+description: 주간 보고서 초안 생성. 이번 주 한 일 목록을 주면 3줄 요약·성과·다음 주 계획으로 정리. "주간 보고", "이번 주 리포트" 요청 시 사용.
+---
+
+## 하는 일
+아래 형식으로 한국어 주간 보고서를 작성한다.
+1. 3줄 요약
+2. 주요 성과 (불릿)
+3. 다음 주 계획 (불릿)
+정보가 부족하면 먼저 되묻는다.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ③ 확인하고 호출</div>
+        <ul>
+          <li><code>/skills</code> 로 목록에 떴는지 확인</li>
+          <li>새 대화에서 <code>/weekly-report</code> 입력 — 또는 "주간보고 써줘"라고만 해도 <strong>자동 호출</strong></li>
+          <li><code>.claude/skills/</code>를 <strong>git에 커밋</strong>하면 팀 전체가 같은 스킬 사용</li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>SKILL.md가 생겼고 <code>/skills</code>에 뜬다</li>
+          <li><code>/weekly-report</code>가 실제로 동작한다</li>
+        </ul>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 한 단계 더 — skill-creator</div>
+        <ul>
+          <li>스킬을 <strong>평가·튜닝</strong>해주는 플러그인. <code>/plugin install skill-creator@claude-plugins-official</code> → <code>/reload-plugins</code></li>
+          <li>"skill-creator로 내 weekly-report 스킬 평가해줘" — 테스트·벤치마크로 description을 다듬어 줍니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">파일을 손으로 만들 필요 없이 Claude Code에게 시키는 게 이 실습의 핵심 — 비개발자도 스킬을 만들 수 있다는 자신감. skill-creator는 '스킬을 만드는' 도구가 아니라 이미 만든 스킬을 테스트·벤치마크·A/B로 평가하고 description(자동 호출 트리거)을 튜닝해주는 플러그인이라는 점을 정확히 짚는다(빠른 그룹/데모용, 초보 필수는 아님). 예시는 주간 보고서지만, 각자 오늘 잘 먹힌 프롬프트(웨이퍼 리포트, 스펙 Q&A 등)로 바꿔 만들게 하면 좋다.</aside>
+</section>
+
+<section>
+  <span class="kicker">PROJECT RULES</span>
+  <h2>미니 프로젝트 규칙</h2>
+  <div class="grid2">
+    <div class="card accent">
+      <h3>✅ 이렇게</h3>
+      <ul class="small">
+        <li><strong>작게:</strong> 45분에 v1이 나올 크기로 (기능 1~2개)</li>
+        <li><strong>합성 데이터로:</strong> 실데이터 모양만 흉내</li>
+        <li><strong>계획 먼저:</strong> "어떻게 만들지 계획부터 보여줘"</li>
+        <li><strong>단계별로:</strong> 하나 되면 다음 것</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h3>⚠️ 이것만 피하기</h3>
+      <ul class="small">
+        <li>사내 기밀·실데이터 사용 ❌</li>
+        <li>"우리 팀 전체 시스템"급 대작 ❌ <span class="muted">(그건 다음 주부터)</span></li>
+        <li>완성 욕심 — <strong>동작하는 반쪽</strong>이 계획서 100장보다 낫습니다</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prompt" style="margin-top: 12px;">
+    <div class="p-label"><span>📋 시작이 막막할 때 — 만능 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야. 45분 안에 만들 수 있는 v1 계획을 먼저 제안해줘. 연습용 가짜 데이터도 같이 만들어줘.</div>
+  </div>
+  <aside class="notes">만능 프롬프트의 빈칸(○○)을 채우는 것 자체가 요구사항 정의 연습. 못 채우는 사람은 조교와 1:1로 빈칸을 채워준다.</aside>
+</section>
+
+
+<!-- ═══════════════ APPENDIX · 심화 트랙 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">★</div>
+  <div class="part-body">
+    <span class="kicker pink">ADVANCED TRACK · 심화</span>
+    <h2>진짜 앱을 만들어 봅니다</h2>
+    <p class="subtitle muted">여기부터는 "장난감"이 아니라 <strong>실제로 배포해서 팀이 쓰는 도구</strong>입니다.<br />다운로드한 데이터로 대시보드, 브라우저 안의 DB와 CRUD 앱, 웨이퍼 비교기, 그리고 GitHub Pages 배포까지.</p>
+    <div class="part-meta">
+      <span class="chip pink">🎯 파일 업로드 → 완성형 웹앱 → 공개 URL</span>
+      <span class="chip violet">🧪 심화 실습 3개 (★★★) + 배포</span>
+      <span class="chip amber">⏱ 빠른 그룹 / 데모용</span>
+    </div>
+  </div>
+  <aside class="notes">심화 트랙은 진도가 빠른 참가자용이거나, 강사가 프로젝터로 시연하며 "이런 것도 됩니다"를 보여주는 용도. 여기서 만드는 건 실제 업무에 바로 쓸 수 있는 수준이라는 점을 강조. 시간이 부족하면 A-1만 다 같이 하고 A-2·A-3는 데모로 넘겨도 된다.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">KEY IDEA</span>
+  <h2>업로드 → 처리 → 저장, 백엔드 없이 브라우저에서</h2>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">📤</span><span class="s-name">파일 업로드</span><div class="s-desc">사용자가 CSV를 끌어다 놓기</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">브라우저 처리</span><div class="s-desc">파싱·집계·SQLite(WASM)</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">🖥️</span><span class="s-name">인터랙티브 UI</span><div class="s-desc">차트·필터·CRUD 폼</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">💾</span><span class="s-name">내보내기</span><div class="s-desc">.csv · .sqlite · 리포트</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">서버가 없어도 됩니다 — <strong>HTML 파일 하나가 곧 앱</strong>. 사내망 공유도, USB 전달도 쉬움.</li>
+    <li class="fragment rise">데이터가 <em>내 브라우저 밖으로 안 나갑니다</em> — 보안 관점에서도 유리 (그래도 오늘은 합성 데이터).</li>
+  </ul>
+  <aside class="notes">클라이언트 사이드 앱의 장점(무배포·무서버·데이터 로컬)을 짚는 슬라이드. 반도체 사내 보안 환경에서 "데이터가 브라우저를 안 떠난다"는 점이 실제 도입 장벽을 크게 낮춘다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">심화 A-1</span>
+    <h2>업로드형 Fab 대시보드</h2>
+    <span class="chip amber">⏱ 30분</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+  </div>
+  <p class="lab-goal">CSV를 <strong>끌어다 놓으면</strong> 살아나는 대시보드. 800여 건 런 로그에서 문제 장비를 찾아냅니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/fab_runs.csv" download>📁 fab_runs.csv 받기</a>
+    <span class="chip">2주 · 824런 · tool/product/recipe/result/defect</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ① — 골격</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">fab_runs.csv를 드래그&드롭으로 업로드하면 분석해주는 대시보드를 fab.html 파일 하나로 만들어줘. 라이브러리는 CDN으로 불러와도 돼. 먼저 업로드 영역 + CSV 파싱 + "상단 KPI 카드(총 런 수, 전체 fail율, 최다 fail 장비)"까지만. 다른 건 아직 만들지 마.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② → ③ — 쌓기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">② 장비별 fail율 막대 차트를 추가하고, fail율이 높은 장비는 빨갛게. 이상 장비가 있으면 한 줄로 짚어줘.
+③ 날짜 범위 슬라이더와 product 필터를 추가하고, 필터를 바꾸면 모든 차트가 같이 갱신되게. 장비를 클릭하면 그 장비의 런만 표로 드릴다운.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"필터 상태를 URL에 저장해서 링크 공유되게" / PNG로 내보내기</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="fabdash" width="440" height="188"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>파일을 끌어다 놓으면 KPI·차트가 뜬다</li>
+          <li>필터·드릴다운이 동작한다</li>
+          <li>숨은 <strong>문제 장비를 찾았다</strong> (fail율 급등)</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>골격 → 차트 → 인터랙션 <strong>순서대로</strong> 쌓기 (한 방에 X)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: PHOTO-02가 후반부 fail율 약 15%로 급등(다른 장비는 3~6%). 드래그&드롭 업로드가 이 실습의 새 요소 — "내 데이터를 넣어 쓰는 앱"의 첫 경험. CDN 사용을 허용해 차트 라이브러리(예: Chart.js)를 쓰게 하면 완성도가 확 오른다.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">심화 A-2</span>
+    <h2>SQLite + CRUD 관리 앱 <span class="chip pink" style="vertical-align:5px;">HIGHLIGHT</span></h2>
+    <span class="chip amber">⏱ 35분</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+  </div>
+  <p class="lab-goal">브라우저 안에 <strong>진짜 SQLite DB</strong>를 띄우고, 설비 자산을 CRUD하는 SPA를 만듭니다.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/pm_assets.csv" download>📁 pm_assets.csv 받기</a>
+    <span class="chip">설비 12대 · PM 주기/상태 시드 데이터</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ① — DB 구축</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">브라우저에서 도는 SQLite로 설비 자산 관리 앱을 assets.html 파일 하나로 만들려고 해. sql.js(SQLite WASM)를 CDN에서 불러와. 먼저 pm_assets.csv를 업로드하면 assets 테이블을 만들어 넣고, 목록을 표로 보여주는 것까지. 컬럼: asset_id, name, type, location, install_date, last_pm, pm_interval_days, status.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 프롬프트 ② — CRUD + 지속성</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이제 CRUD를 완성해줘.
+1. 추가/수정/삭제 폼 (수정은 행 클릭)
+2. type·status 필터와 이름 검색
+3. last_pm + pm_interval_days로 "다음 PM 예정일"을 계산해 보여주고, 지난 건 빨갛게
+4. DB를 .sqlite 파일로 내보내기 / 다시 불러오기
+5. 새로고침해도 유지되게 (localStorage)</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>SQL 직접 입력 콘솔 / PM 이력 테이블을 조인해 관리</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup">
+          <div style="display:flex;gap:6px;margin-bottom:6px;align-items:center;">
+            <span class="chip teal" style="font-size:11px;padding:2px 8px;">＋ 추가</span>
+            <span class="mono" style="font-size:11px;color:#93A0BE;">🔍 검색  ▾type  ▾status</span>
+          </div>
+          <table>
+            <tr><th>설비</th><th>type</th><th>다음 PM</th><th>상태</th></tr>
+            <tr><td class="mono">ETCH-01</td><td>식각</td><td class="warn-t">07-16</td><td class="ok">RUN</td></tr>
+            <tr><td class="mono">IMP-01</td><td>이온주입</td><td class="bad">06-14 지남</td><td class="bad">DOWN</td></tr>
+            <tr><td class="mono">METRO-01</td><td>계측</td><td>07-28</td><td class="ok">RUN</td></tr>
+          </table>
+          <div class="mock-cap">💾 .sqlite 내보내기 · localStorage 유지</div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>추가·수정·삭제가 표에 즉시 반영</li>
+          <li>지난 PM이 빨갛게 뜬다</li>
+          <li>새로고침해도 데이터가 남는다</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">🚑 막혔다면</div>
+        <ul>
+          <li>sql.js 로딩 실패 → "WASM 경로/CDN 에러를 콘솔에서 확인하고 고쳐줘"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">오늘의 하이라이트. "브라우저 안에 진짜 DB"라는 게 놀라움 포인트. sql.js WASM 로딩이 유일한 난관이라 조교가 붙어야 할 수 있다. 완성하면 실제 설비/자산/샘플 관리 대장으로 바로 쓸 수 있는 수준 — 엑셀 대장을 대체하는 실전 도구.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">심화 A-3</span>
+    <h2>웨이퍼 맵 A/B 비교 diff 뷰어</h2>
+    <span class="chip amber">⏱ 20분</span>
+    <span class="chip"><span class="stars">★★★</span></span>
+  </div>
+  <p class="lab-goal">두 웨이퍼를 겹쳐 <strong>새로 생긴 불량만</strong> 도드라지게. 공정 전후 비교의 정석.</p>
+  <div class="databar">
+    <a class="chip teal" href="data/wafermap_A.csv" download>📁 wafermap_A.csv</a>
+    <a class="chip teal" href="data/wafermap_B.csv" download>📁 wafermap_B.csv</a>
+    <span class="chip">A→B: 무엇이 달라졌나?</span>
+  </div>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">웨이퍼 맵 두 개를 비교하는 diff 뷰어를 wdiff.html 파일 하나로 만들어줘. wafermap_A.csv(before)와 wafermap_B.csv(after)를 각각 업로드하면:
+1. 왼쪽에 A, 오른쪽에 B 웨이퍼 맵
+2. 가운데에 diff 맵 — B에서 새로 불량이 된 die는 빨강, 회복된 die는 초록, 나머지는 흐리게
+3. 새 불량 개수와 위치, 그리고 "패턴이 있으면" 한 줄 코멘트
+4. 슬라이더로 A↔B 오버레이 페이드</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>여러 스텝(A→B→C) 연속 비교 / 새 불량 die 목록 CSV 내보내기</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <canvas class="mock" data-mock="wdiff" width="440" height="170"></canvas>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>세 개 맵(A · diff · B)이 나란히 뜬다</li>
+          <li>B에 <strong>새로 생긴 불량 패턴</strong>을 찾았다 — 무슨 모양?</li>
+        </ul>
+      </div>
+      <div class="panel hint">
+        <div class="panel-title">💡 포인트</div>
+        <ul>
+          <li>"before/after 비교"는 계측·수율·불량 어디에나 재사용되는 패턴</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">정답: B에는 왼쪽 아래에 대각선 scratch 결함 클러스터가 A 대비 새로 추가돼 있다. diff 뷰어는 공정 전후, 챔버 A/B, PM 전후 비교 등 재사용성이 매우 높은 실전 패턴. 시간이 없으면 데모로.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">DEPLOY · GitHub Pages</span>
+  <h2>만든 앱, 링크 하나로 — 무료로 웹에 올리기</h2>
+  <p class="lab-goal" style="margin-bottom:16px;">방금 만든 <code>index.html</code>을 내 GitHub 계정 레포에 올리면, <strong>서버도 비용도 없이</strong> <code>https://아이디.github.io/레포이름/</code> 주소가 생깁니다. 팀에게는 링크만 보내면 끝.</p>
+  <div class="flow">
+    <div class="step"><span class="s-emoji">📦</span><span class="s-name">① 레포 생성</span><div class="s-desc">내 계정에 새 저장소 (Public)</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⬆️</span><span class="s-name">② 파일 push</span><div class="s-desc">index.html을 main 브랜치로</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">⚙️</span><span class="s-name">③ Pages 켜기</span><div class="s-desc">Settings ▸ Pages ▸ main · /root</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="s-emoji">🌐</span><span class="s-name">④ 공개 URL</span><div class="s-desc">1~2분 뒤 접속 가능</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">배포 방식은 <strong>"Deploy from a branch"</strong> — <em>main 브랜치의 루트(<code>/</code>)를 그대로 정적 서빙</em>합니다. 빌드 서버도, 파이프라인도 없이 파일 그대로.</li>
+    <li class="fragment rise">한 번 켜두면 이후로는 <strong>push만 하면 자동 반영</strong>. HTTPS도 자동입니다.</li>
+    <li class="fragment rise">🔒 단, Public 레포는 <strong>전 세계에 공개</strong>됩니다 — 오늘처럼 <em>합성/더미 데이터</em>만. 사내 데이터는 절대 올리지 않기.</li>
+  </ul>
+  <aside class="notes">심화 트랙에서 만든 단일 HTML 앱을 실제 URL로 올려보는 파트. 핵심은 "빌드 없이 main/root를 그대로 정적 서빙"이라는 점 — 반도체 엔지니어에게 CI/CD 개념 없이도 배포가 된다는 게 놀라움 포인트다. Public 공개라 데이터 보안을 반드시 짚는다. 사내에서 github.com이 막혀 있으면 Part 6의 '팀에 넘기는 4가지 방법'(공유드라이브·사내 호스팅)으로 대체.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">심화 A-4</span>
+    <h2>GitHub Pages로 배포하기</h2>
+    <span class="chip amber">⏱ 15분</span>
+    <span class="chip"><span class="stars">★★</span>☆</span>
+  </div>
+  <p class="lab-goal">A-1에서 만든 <code>fab.html</code> 대시보드를 <strong>진짜 URL</strong>로. main 브랜치 루트를 그대로 서빙합니다.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt mono">
+        <div class="p-label"><span>📋 ① 파일 준비 + 올리기 (터미널)</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text"># Pages는 루트의 index.html을 먼저 엶 → 진입 파일 이름을 맞춰준다
+cp fab.html index.html
+
+git init
+git add index.html
+git commit -m "Add fab dashboard"
+git branch -M main
+
+# 아래 주소는 방금 GitHub에서 만든 레포로 바꾸기
+git remote add origin https://github.com/&lt;아이디&gt;/fab-dashboard.git
+git push -u origin main</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>🤖 또는 Claude Code에게 통째로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이 폴더를 GitHub Pages로 배포하고 싶어. fab.html을 index.html로 복사하고, git 저장소로 초기화해서 커밋해줘. 그다음 GitHub 웹에서 새 레포(Public)를 만들고 Settings에서 Pages를 켜는 방법을 단계별로 알려줘.</div>
+      </div>
+    </div>
+    <div>
+      <div class="panel hint">
+        <div class="panel-title">⚙️ ② 레포 만들고 Pages 켜기 (웹)</div>
+        <ul>
+          <li>github.com ▸ <strong>New repository</strong> ▸ 이름 <code>fab-dashboard</code> ▸ <strong>Public</strong> ▸ Create (README 없이)</li>
+          <li>레포 ▸ <strong>Settings ▸ Pages</strong></li>
+          <li>Source: <strong>Deploy from a branch</strong></li>
+          <li>Branch: <strong>main</strong> · 폴더: <strong>/ (root)</strong> ▸ <strong>Save</strong></li>
+        </ul>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li><code>https://아이디.github.io/fab-dashboard/</code> 접속 시 대시보드가 뜬다</li>
+          <li>파일을 고쳐 <strong>다시 push</strong>하면 URL에 반영된다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">실습의 새 요소는 git push와 Pages 설정 두 가지뿐. gh CLI가 없어도 되도록 웹 UI 단계를 명시했다. 흔한 막힘: (1) 진입 파일이 index.html이 아님, (2) 첫 배포 전파에 1~2분, (3) 회사 계정 정책. cp 대신 처음부터 index.html로 만들게 해도 된다. A-2(assets.html)·A-3(wdiff.html)도 같은 방식으로 각자 레포에 올려볼 수 있다.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">DEPLOY · 함정 피하기</span>
+  <h2>SPA를 올릴 때 자주 걸리는 것들</h2>
+  <p class="muted small" style="margin-bottom:14px;">화면이 깨지거나 새로고침에서 404가 뜬다면 십중팔구 아래 셋 중 하나입니다.</p>
+  <div class="grid2">
+    <div class="panel hint">
+      <div class="panel-title">🧭 3대 함정</div>
+      <ul>
+        <li><strong>진입 파일</strong> — 루트에 <code>index.html</code>이 없으면 빈 화면/404. 진입 파일은 반드시 이 이름.</li>
+        <li><strong>절대경로</strong> — 앱이 <code>/레포이름/</code> 하위에서 열립니다. <code>/style.css</code>(❌) → <code>./style.css</code>(✅). Vite·React 빌드면 <code>base:&nbsp;'/레포이름/'</code>.</li>
+        <li><strong>새로고침 404</strong> — 클라이언트 라우터(<code>/page</code> 직접 접속)는 404. <code>index.html</code>을 <code>404.html</code>로 복사하거나 HashRouter 사용.</li>
+      </ul>
+    </div>
+    <div class="panel check">
+      <div class="panel-title">✅ 배포 체크리스트</div>
+      <ul>
+        <li>루트에 빈 <code>.nojekyll</code> 파일 (<code>_</code>로 시작하는 폴더 무시 방지)</li>
+        <li>안 바뀌어 보이면 강력 새로고침 <code>Ctrl+Shift+R</code> · 첫 배포는 1~2분</li>
+        <li>🔒 Public = 전 세계 공개 → 합성/더미 데이터만</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prompt" style="margin-top:14px;">
+    <div class="p-label"><span>🚑 막히면 이 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">GitHub Pages(https://아이디.github.io/레포이름/)에 올렸는데 화면이 깨지거나 새로고침하면 404가 떠. 원인을 찾아서 진입 파일(index.html)·자원 상대경로·base 경로·404.html 문제를 점검하고 고쳐줘.</div>
+  </div>
+  <aside class="notes">단일 HTML 앱(A-1~A-3)은 라우팅이 없어 대부분 index.html 이름만 맞추면 바로 된다. 절대경로/base·404 함정은 나중에 Vite·React로 진짜 SPA를 빌드해 올릴 때를 위한 예방 접종. .nojekyll은 파일명이 _로 시작할 때 등 은근한 버그를 막아준다. 데이터 공개 경고를 한 번 더 반복.</aside>
+</section>
+
+<section>
+  <span class="kicker pink">ADVANCED · WRAP-UP</span>
+  <h2>방금 만든 것들, 사실 대단한 겁니다</h2>
+  <div class="grid3">
+    <div class="card accent"><span class="icon">📊</span><h3>업로드 대시보드</h3><p class="small">BI 툴 없이 CSV → 인터랙티브 분석. 배포도 공유도 파일 하나.</p></div>
+    <div class="card accent"><span class="icon">🗄️</span><h3>SQLite CRUD 앱</h3><p class="small">엑셀 대장을 대체하는 진짜 DB 앱. 서버·설치 0.</p></div>
+    <div class="card accent"><span class="icon">🔬</span><h3>비교 뷰어</h3><p class="small">before/after 패턴 — 계측·수율·불량에 두루 재사용.</p></div>
+  </div>
+  <p class="fragment rise" style="margin-top: 16px;">…게다가 방금 <strong>GitHub Pages 링크 하나</strong>로 팀에 배포까지 해봤습니다.<br />
+  몇 달 전이라면 <strong>개발팀에 요청서를 넣고 몇 주</strong>를 기다렸을 것들 — <span class="muted">이제는 오후 한나절. 이게 바이브 코딩의 레버리지입니다.</span></p>
+  <aside class="notes">심화 트랙 마무리. '개발 요청 → 몇 주 대기'가 '반나절 자작 + 링크 배포'로 바뀐 것이 조직 차원의 진짜 변화라는 메시지. 다음은 각자 업무로 미니 프로젝트.</aside>
 </section>
 
 </div>
@@ -3138,7 +3704,7 @@ git push -u origin main</div>
     }
 
     const RENDER = {
-      hist(ctx, W, H) {
+      hist(ctx, W, H, ds) {
         const rnd = mulberry(7);
         axis(ctx, W, H, 30);
         // 정규분포 히스토그램 + 오른쪽에 떨어진 이상 랏 봉우리
@@ -3158,7 +3724,9 @@ git push -u origin main</div>
         ctx.beginPath(); ctx.moveTo(tx, 10); ctx.lineTo(tx, H - 30); ctx.stroke();
         ctx.setLineDash([]);
         label(ctx, '목표 100nm', tx + 4, 18, VIOLET);
-        label(ctx, 'LOT-1003 ⚠', W - 36, 26, PINK, 11, 'right');
+        // data-blind 가 붙은 캔버스에서는 이상 랏 이름을 가린다 —
+        // 빈칸형 실습에서 참가자가 직접 찾아내야 하는 답이기 때문.
+        label(ctx, ds && ds.blind ? 'LOT-???? ⚠' : 'LOT-1003 ⚠', W - 36, 26, PINK, 11, 'right');
         label(ctx, 'thickness_nm', W - 8, H - 8, INK, 10, 'right');
       },
       wafer(ctx, W, H) {
@@ -3393,7 +3961,7 @@ git push -u origin main</div>
         if (!fn || c.dataset.drawn === '1') return;
         const ctx = c.getContext('2d');
         frame(ctx, c.width, c.height);
-        fn(ctx, c.width, c.height);
+        fn(ctx, c.width, c.height, c.dataset);
         c.dataset.drawn = '1';
       });
     }
