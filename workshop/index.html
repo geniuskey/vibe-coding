@@ -569,7 +569,7 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 .lab-type.sprint { color: var(--teal);   background: rgba(43, 234, 208, 0.12); border-color: rgba(43, 234, 208, 0.45); }
 .lab-type.blank  { color: var(--violet); background: rgba(155, 130, 255, 0.14); border-color: rgba(155, 130, 255, 0.5); }
 .lab-type.rescue { color: var(--amber);  background: rgba(255, 194, 75, 0.12);  border-color: rgba(255, 194, 75, 0.5); }
-.lab-type.pair   { color: var(--pink);   background: rgba(255, 122, 168, 0.12); border-color: rgba(255, 122, 168, 0.5); }
+.lab-type.solo   { color: var(--pink);   background: rgba(255, 122, 168, 0.12); border-color: rgba(255, 122, 168, 0.5); }
 .lab-type.duel   { color: #06080F; background: linear-gradient(120deg, #FFC24B, #FF7AA8); border-color: transparent; }
 .lab-type.mytool { color: #06080F; background: var(--grad); border-color: transparent; }
 
@@ -622,24 +622,8 @@ section.title-slide { display: flex; flex-direction: column; justify-content: ce
 .rhythm .r-card.t-sprint { border-color: rgba(43, 234, 208, 0.4); }
 .rhythm .r-card.t-blank  { border-color: rgba(155, 130, 255, 0.45); }
 .rhythm .r-card.t-rescue { border-color: rgba(255, 194, 75, 0.45); }
-.rhythm .r-card.t-pair   { border-color: rgba(255, 122, 168, 0.45); }
+.rhythm .r-card.t-solo   { border-color: rgba(255, 122, 168, 0.45); }
 .rhythm .r-card.t-duel   { border-color: rgba(255, 194, 75, 0.6); background: rgba(255, 194, 75, 0.06); }
-
-/* 내 도구 트랙 진행 바 — v0 → v1 → v2 */
-.mytool-bar {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(155, 130, 255, 0.07);
-  border: 1px solid rgba(155, 130, 255, 0.3);
-  border-radius: 12px; padding: 8px 14px; margin: -2px 0 12px;
-  font-size: 16px;
-}
-.mytool-bar .mt-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 800;
-  letter-spacing: 0.12em; color: var(--violet); text-transform: uppercase;
-}
-.mytool-bar .mt-step { color: var(--muted); font-weight: 700; }
-.mytool-bar .mt-step.now { color: var(--ink); background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.mytool-bar .mt-arr { color: rgba(147, 160, 190, 0.4); }
 
 /* 빈칸형 — 프롬프트를 주지 않는다. 힌트는 접어 둔다 */
 .blank-box {
@@ -672,25 +656,6 @@ details.spoiler[open] > summary::before { content: '▾ '; }
 details.spoiler .s-body { font-size: 17.5px; color: #C3CDE6; line-height: 1.5; margin-top: 9px; }
 details.spoiler .s-body code { font-size: 0.9em; }
 
-/* 페어 — 역할 카드 */
-.pair-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
-.pair-role {
-  border-radius: 14px; padding: 13px 16px;
-  background: var(--panel); border: 1px solid var(--line);
-}
-.pair-role.pilot  { border-color: rgba(43, 234, 208, 0.45); background: rgba(43, 234, 208, 0.06); }
-.pair-role.check  { border-color: rgba(255, 122, 168, 0.45); background: rgba(255, 122, 168, 0.06); }
-.pair-role .pr-name { font-weight: 800; font-size: 20px; display: block; margin-bottom: 5px; }
-.pair-role.pilot .pr-name { color: var(--teal); }
-.pair-role.check .pr-name { color: var(--pink); }
-.pair-role ul { margin: 0; list-style: none; }
-.pair-role li { font-size: 17px; color: #C3CDE6; margin: 4px 0; padding-left: 16px; position: relative; line-height: 1.4; }
-.pair-role li::before { content: '·'; position: absolute; left: 4px; font-weight: 800; }
-.swap-note {
-  text-align: center; font-size: 18px; font-weight: 700; color: var(--amber);
-  border: 1px dashed rgba(255, 194, 75, 0.5); border-radius: 10px; padding: 8px; margin-bottom: 12px;
-}
-
 /* 대결(보스전) — 채점표 */
 .duel-score { width: 100%; border-collapse: collapse; font-size: 17.5px; }
 .duel-score th, .duel-score td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; }
@@ -707,7 +672,7 @@ details.spoiler .s-body code { font-size: 0.9em; }
 .boss-banner .bb-text { font-size: 18.5px; line-height: 1.4; }
 .boss-banner .bb-text b { color: var(--amber); }
 
-/* 갤러리 워크 / 리듬 전환 슬라이드 */
+/* 체크포인트 / 리듬 전환 슬라이드 */
 section.interlude { display: flex; flex-direction: column; justify-content: center; text-align: center; }
 .interlude h2 { font-size: 56px; text-align: center; }
 .interlude .il-emoji { font-size: 76px; display: block; margin-bottom: 6px; }
@@ -776,8 +741,8 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   <span class="kicker">TODAY'S GOAL</span>
   <h2>퇴근할 때, 이것들을 가져갑니다</h2>
   <div class="stat-row">
-    <div class="stat"><div class="n grad-text">1</div><div class="l"><strong>내 업무용 도구</strong> — 아침에 정해서 저녁에 들고 나갑니다</div></div>
-    <div class="stat"><div class="n grad-text">✍️</div><div class="l"><strong>내가 직접 쓴</strong> 프롬프트 (복사해 온 게 아니라)</div></div>
+    <div class="stat"><div class="n grad-text">3+</div><div class="l">직접 만든 <strong>동작하는 결과물</strong></div></div>
+    <div class="stat"><div class="n grad-text">1</div><div class="l"><strong>내 업무용 도구</strong> — 마지막 실습에서 만듭니다</div></div>
     <div class="stat"><div class="n grad-text">1</div><div class="l">"내 업무도 되겠는데?"라는 확신</div></div>
   </div>
   <p class="fragment rise">오늘의 진짜 목표는 코딩 실력이 아니라 <strong>자신감</strong>입니다.<br />
@@ -794,10 +759,10 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
       <span class="c-len">90분</span>
       <span class="c-name">⚡ 스프린트</span>
       <ul>
-        <li>내 도구 v0 만들기</li>
+        <li>명함 웹페이지 (복붙)</li>
         <li>고장난 앱 고치기</li>
         <li>웨이퍼 맵 보스전</li>
-        <li>공유 10분</li>
+        <li>내 업무 도구</li>
       </ul>
     </div>
     <div class="course-card pick">
@@ -806,9 +771,9 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
       <span class="c-name">🔷 표준</span>
       <ul>
         <li>스프린트 전부 +</li>
-        <li>빈칸 실습 2개</li>
-        <li>페어 검증 1개</li>
-        <li>내 도구 v1 → v2</li>
+        <li>룰렛 · 빈칸 실습</li>
+        <li>SPC 셀프 검증</li>
+        <li>스킬로 굳히기</li>
       </ul>
     </div>
     <div class="course-card">
@@ -816,63 +781,64 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
       <span class="c-name">⬛ 풀데이</span>
       <ul>
         <li>표준 전부 +</li>
-        <li>부록 실습 23개</li>
+        <li>부록 실습 21개</li>
         <li>심화 트랙 (배포까지)</li>
-        <li>미니 프로젝트 45분</li>
+        <li>미니 프로젝트 확장</li>
       </ul>
     </div>
   </div>
-  <p class="fragment rise" style="margin-top:16px;"><strong>세 코스 모두 "내 도구 하나"로 끝납니다.</strong> <span class="muted">길이가 다를 뿐, 가져가는 물건은 같습니다.</span></p>
-  <aside class="notes">첫 5분 안에 오늘의 코스를 명시하는 게 중요하다. "오늘은 3시간 표준입니다. 부록 18개는 나중에 혼자 하시라고 덱에 남겨 뒀습니다"라고 말해두면, 진도를 다 못 나갔다는 아쉬움 대신 '가져갈 게 더 있다'는 인상으로 남는다.</aside>
+  <p class="fragment rise" style="margin-top:16px;"><strong>세 코스 모두 마지막은 "내 업무 도구 하나"입니다.</strong> <span class="muted">쉬운 것으로 손을 풀고, 마지막에 내 일로 옵니다.</span></p>
+  <aside class="notes">첫 5분 안에 오늘의 코스를 명시하는 게 중요하다. "오늘은 3시간 표준입니다. 부록 21개는 나중에 혼자 하시라고 덱에 남겨 뒀습니다"라고 말해두면, 진도를 다 못 나갔다는 아쉬움 대신 '가져갈 게 더 있다'는 인상으로 남는다.</aside>
 </section>
 
 <section>
   <span class="kicker violet">RHYTHM</span>
   <h2>실습 형식이 <span class="grad-text">계속 바뀝니다</span></h2>
-  <p class="muted" style="margin:-6px 0 14px;">같은 형식을 연속으로 두 번 하지 않는 것이 이 워크숍의 규칙입니다. 손이 하는 일이 매번 달라집니다.</p>
+  <p class="muted" style="margin:-6px 0 14px;">손을 푸는 <strong>앞부분(워밍업·명함·룰렛)은 전부 복붙</strong>이고, 그 뒤로는 형식이 계속 바뀝니다 — 손이 하는 일이 매번 달라집니다. <strong>다섯 형식 모두 혼자 합니다.</strong></p>
   <div class="rhythm">
     <div class="r-card t-sprint">
       <span class="r-emoji">⚡</span><span class="r-name">스프린트</span><span class="r-en">SPRINT</span>
-      <span class="r-desc">프롬프트를 드립니다.<br />속도로 밀어붙이기</span>
-    </div>
-    <div class="r-card t-blank">
-      <span class="r-emoji">✍️</span><span class="r-name">빈칸</span><span class="r-en">BLANK</span>
-      <span class="r-desc">프롬프트를 <b>안</b> 드립니다.<br />직접 쓰기</span>
+      <span class="r-desc">프롬프트를 드립니다.<br />복붙으로 결과 보기</span>
     </div>
     <div class="r-card t-rescue">
       <span class="r-emoji">🚑</span><span class="r-name">구조</span><span class="r-en">RESCUE</span>
       <span class="r-desc">이미 고장난 것을<br />살려내기</span>
     </div>
-    <div class="r-card t-pair">
-      <span class="r-emoji">👥</span><span class="r-name">페어</span><span class="r-en">PAIR</span>
-      <span class="r-desc">둘이서 역할 나눠<br />5분마다 교대</span>
+    <div class="r-card t-blank">
+      <span class="r-emoji">✍️</span><span class="r-name">빈칸</span><span class="r-en">BLANK</span>
+      <span class="r-desc">프롬프트를 <b>안</b> 드립니다.<br />직접 쓰기</span>
     </div>
     <div class="r-card t-duel">
-      <span class="r-emoji">🏆</span><span class="r-name">보스전</span><span class="r-en">DUEL</span>
-      <span class="r-desc">정답이 있는 과제.<br />자동 채점 + 순위</span>
+      <span class="r-emoji">🏆</span><span class="r-name">보스전</span><span class="r-en">BOSS</span>
+      <span class="r-desc">정답이 있는 과제.<br />채점기가 점수를 준다</span>
+    </div>
+    <div class="r-card t-solo">
+      <span class="r-emoji">🔍</span><span class="r-name">셀프 검증</span><span class="r-en">SELF-CHECK</span>
+      <span class="r-desc">내 결과를 내가<br />의심해 보기</span>
     </div>
   </div>
-  <p class="fragment rise"><strong>가장 중요한 건 ✍️ 빈칸입니다.</strong> <span class="muted">복사해서 붙여넣는 실력은 늘지 않습니다. 프롬프트를 <em>직접 쓰다가 막혀 봐야</em> 늡니다.</span></p>
-  <aside class="notes">이 슬라이드가 재설계의 핵심 선언이다. 예전 버전은 25개 실습이 전부 '프롬프트 복사 → 붙여넣기 → 결과 확인'이라 3~4개만 하면 새로 배울 게 없었다. 형식이 바뀌면 같은 루프라도 지루해지지 않는다. 여기서 "오늘 여러분이 제일 많이 할 일은 복사가 아니라 '쓰기'입니다"를 못 박아 둔다.</aside>
+  <p class="fragment rise"><strong>순서가 곧 난이도입니다.</strong> <span class="muted">복붙으로 시작해서, 마지막엔 프롬프트를 직접 써서 <em>내 업무 도구</em>를 만듭니다.</span></p>
+  <aside class="notes">이 슬라이드가 구성의 선언이다. 초판은 25개 실습이 전부 '프롬프트 복사 → 붙여넣기 → 결과 확인'이라 3~4개만 하면 새로 배울 게 없었다. 형식이 바뀌면 같은 루프라도 지루해지지 않는다. 다섯 형식 모두 개인 작업이므로 짝을 짓거나 발표를 강요할 필요가 없다 — 사내 실습에서 부담이 되는 부분은 넣지 않았다.</aside>
 </section>
 
 <section>
   <span class="kicker">TODAY · 3시간 표준</span>
-  <h2>오늘의 흐름 <span class="muted small">— 20분마다 손이 하는 일이 바뀝니다</span></h2>
+  <h2>오늘의 흐름 <span class="muted small">— 쉬운 복붙에서 내 업무로</span></h2>
   <table class="agenda">
     <tr><th>시각</th><th>형식</th><th>무엇을</th><th>결과물</th></tr>
-    <tr><td class="t">0:00</td><td><span class="lab-type sprint">SPRINT</span></td><td class="part">워밍업 + 내 주제 정하기</td><td class="muted">오늘 만들 것 한 줄</td></tr>
-    <tr><td class="t">0:20</td><td><span class="lab-type mytool">MY TOOL</span></td><td class="part">내 도구 <strong>v0</strong> — 일단 뜨게</td><td class="muted">화면에 뜨는 v0</td></tr>
-    <tr class="break"><td class="t">0:40</td><td>🚶</td><td class="part">갤러리 워크 — 남의 화면 구경</td><td class="muted">훔칠 아이디어 1개</td></tr>
+    <tr><td class="t">0:00</td><td>—</td><td class="part">코스 · 규칙 · 보안 약속 · 워밍업</td><td class="muted">첫 응답 받아보기</td></tr>
+    <tr><td class="t">0:15</td><td><span class="lab-type sprint">SPRINT</span></td><td class="part">명함 웹페이지 <span class="muted small">— 프롬프트 복붙</span></td><td class="muted">브라우저에 뜨는 내 이름</td></tr>
+    <tr><td class="t">0:30</td><td><span class="lab-type sprint">SPRINT</span></td><td class="part">점심 메뉴 룰렛 <span class="muted small">— 움직이는 것</span></td><td class="muted">돌아가는 돌림판</td></tr>
     <tr><td class="t">0:45</td><td><span class="lab-type rescue">RESCUE</span></td><td class="part">고장난 앱 고치기</td><td class="muted">복구 3단계 경험</td></tr>
     <tr><td class="t">1:05</td><td><span class="lab-type blank">BLANK</span></td><td class="part">측정 CSV 리포트 — <strong>프롬프트 직접</strong></td><td class="muted">내가 쓴 첫 프롬프트</td></tr>
     <tr class="break"><td class="t">1:25</td><td>☕</td><td class="part">휴식</td><td class="muted">—</td></tr>
-    <tr><td class="t">1:35</td><td><span class="lab-type duel">DUEL</span></td><td class="part">🏆 웨이퍼 맵 보스전 — 자동 채점</td><td class="muted">점수와 순위</td></tr>
-    <tr><td class="t">2:00</td><td><span class="lab-type pair">PAIR</span></td><td class="part">SPC 관리도 — 조종사 × 검사관</td><td class="muted">남의 결과를 의심하는 법</td></tr>
-    <tr><td class="t">2:20</td><td><span class="lab-type mytool">MY TOOL</span></td><td class="part">내 도구 <strong>v1 → v2</strong></td><td class="muted">내일 쓸 도구</td></tr>
-    <tr><td class="t">2:50</td><td>🎤</td><td class="part">쇼앤텔 + 마무리</td><td class="muted">자랑 2분씩</td></tr>
+    <tr><td class="t">1:40</td><td><span class="lab-type duel">BOSS</span></td><td class="part">🏆 웨이퍼 맵 보스전 — 자동 채점</td><td class="muted">내 점수</td></tr>
+    <tr><td class="t">2:05</td><td><span class="lab-type solo">SELF-CHECK</span></td><td class="part">SPC 관리도 + 스스로 검산하기</td><td class="muted">의심하는 습관</td></tr>
+    <tr><td class="t">2:30</td><td><span class="lab-type mytool">MY TOOL</span></td><td class="part"><strong>내 업무 도구</strong> — 오늘의 마지막 실습</td><td class="muted">내일 쓸 도구</td></tr>
+    <tr><td class="t">2:55</td><td>—</td><td class="part">스킬로 굳히기 + 마무리</td><td class="muted">남는 파일 하나</td></tr>
   </table>
-  <aside class="notes">예전 시간표는 '파트별 실습 4~5개'였는데, 참가자 입장에서는 같은 일을 20번 반복하는 것으로 느껴졌다. 지금은 시간표 자체가 '형식의 리듬'을 보여준다. 90분 코스는 BLANK·PAIR 줄을 빼고, 풀데이는 각 파트 뒤에 부록 실습을 얹는다.</aside>
+  <p class="tiny muted" style="margin-top:8px;">모든 실습은 <strong>개인 작업</strong>입니다. 막히면 조교를 부르거나 Q&amp;A에 익명으로 남기면 됩니다.</p>
+  <aside class="notes">초판 시간표는 '파트별 실습 4~5개'였는데 참가자 입장에서는 같은 일을 20번 반복하는 것으로 느껴졌다. 지금은 시간표 자체가 형식의 리듬을 보여준다. 90분 코스는 룰렛·빈칸·셀프검증 줄을 빼고, 풀데이는 각 파트 뒤에 부록 실습을 얹는다. 마지막 실습이 '내 업무 도구'인 것이 중요하다 — 앞의 실습들이 그 준비운동이라는 걸 여기서 보여준다.</aside>
 </section>
 
 <section>
@@ -895,7 +861,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 
 <section>
   <span class="kicker">SETUP CHECK</span>
-  <h2>시작 전 점검 <span class="muted small">— 옆 사람과 서로 확인</span></h2>
+  <h2>시작 전 점검 <span class="muted small">— 각자 확인, 안 되면 손 들기</span></h2>
   <div class="grid2">
     <div class="card accent">
       <h3>✅ 필수</h3>
@@ -910,7 +876,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
       <ul class="small">
         <li>설치부터 필요하면 → <a href="../setup/" target="_blank" rel="noopener">0교시: 설치와 첫 실행</a> (30분 가이드)</li>
         <li>터미널에서 실습 폴더로 이동 후 도구 실행</li>
-        <li>모르면 손 들기 — 짝과 화면 공유해서 함께 진행해도 OK</li>
+        <li>모르면 손 들기 — 조교가 옆에서 같이 봐 드립니다</li>
       </ul>
     </div>
   </div>
@@ -954,7 +920,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
     <div class="card accent">
       <span class="icon">✍️</span>
       <h3>먼저 직접 써 보기</h3>
-      <p class="small">완성 프롬프트를 드리는 실습도, <strong>안 드리는 실습</strong>도 있습니다. 안 드릴 때는 어설퍼도 <strong>내 문장으로</strong> 먼저 보내 보세요.</p>
+      <p class="small">앞부분은 프롬프트를 <strong>드립니다</strong>(복붙 OK). 뒤로 갈수록 <strong>안 드리는</strong> 실습이 나옵니다 — 그때는 어설퍼도 <strong>내 문장으로</strong> 먼저 보내 보세요.</p>
     </div>
     <div class="card accent">
       <span class="icon">🙈</span>
@@ -994,25 +960,26 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 </section>
 
 
-<!-- ═══════════════ PART 1 · 내 도구 첫 삽 ═══════════════ -->
+<!-- ═══════════════ PART 1 · 첫 결과물 (복붙) ═══════════════ -->
 
 <section class="part-cover">
   <div class="part-num">1</div>
   <div class="part-body">
     <span class="kicker">PART 1 · 0:00–0:45</span>
-    <h2>내 도구, 첫 삽</h2>
-    <p class="subtitle muted">오늘 만들 것을 <strong>지금</strong> 정합니다.<br />남의 예제가 아니라 내 업무로 시작하는 게 이 워크숍의 차이입니다.</p>
+    <h2>첫 결과물 만들기</h2>
+    <p class="subtitle muted">쉽고, 눈에 바로 보이는 것부터. <strong>프롬프트는 드립니다 — 복사해서 붙여넣으면 됩니다.</strong><br />여기서 만드는 건 장난감이지만, 익히는 근육은 진짜입니다.</p>
     <div class="part-meta">
-      <span class="chip teal">🎯 시키기→확인→고치기 루프</span>
-      <span class="chip violet">🧰 결과물: 내 도구 v0</span>
+      <span class="chip teal">🎯 시키기→확인→고치기 루프 체화</span>
+      <span class="chip violet">⚡ 복붙 실습 2개</span>
     </div>
   </div>
-  <aside class="notes">예전 구조는 명함·룰렛 같은 장난감 4~5개를 만든 뒤 8시간째에야 자기 주제로 넘어갔다. 실제로 진행해 보면 사람들은 3~4개쯤에서 흥미를 잃고 스스로 자기 주제로 건너뛴다. 그 건너뜀을 아예 설계에 넣었다 — 자기 주제를 첫 20분에 시작한다.</aside>
+  <aside class="notes">첫 실습의 유일한 목표는 '되네?'라는 감각이다. 난이도를 일부러 바닥에 둔다 — 프롬프트를 그대로 복사해 붙이면 결과가 나온다. 여기서 한 명이라도 못 따라오면 하루 종일 못 따라온다.</aside>
 </section>
 
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB 0</span>
+    <span class="lab-type sprint">SPRINT</span>
     <span class="lab-type sprint">SPRINT</span>
     <h2>워밍업 — 첫 지시 내려보기</h2>
     <span class="chip amber">⏱ 5분</span>
@@ -1053,142 +1020,61 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 </section>
 
 <section>
-  <span class="kicker">MY TOOL · 워크시트</span>
-  <h2>오늘 만들 것을 <span class="grad-text">지금 정합니다</span> <span class="chip amber" style="vertical-align:8px;">⏱ 5분</span></h2>
-  <div class="worksheet">
-    <div class="ws-row"><span class="ws-n">1</span>
-      <div style="flex:1;">내가 <strong>매주 반복</strong>하는 귀찮은 일 하나는<br /><span class="ws-blank">예: 매주 월요일 장비별 알람 로그를 훑어서 보고서에 옮겨 적기</span></div></div>
-    <div class="ws-row"><span class="ws-n">2</span>
-      <div style="flex:1;">그 일의 <strong>입력</strong>은 (무엇을 받아서)<br /><span class="ws-blank">예: 장비에서 내려받은 CSV 5개</span></div></div>
-    <div class="ws-row"><span class="ws-n">3</span>
-      <div style="flex:1;">원하는 <strong>출력</strong>은 (무엇이 나오면 끝)<br /><span class="ws-blank">예: 알람 상위 5개와 시간대 차트가 있는 HTML 한 장</span></div></div>
-  </div>
-  <p class="fragment rise" style="margin-top:14px;">3분 안에 안 떠오르면 — <strong>다음 장 아이디어 카드에서 하나 집으세요.</strong> <span class="muted">고민하는 시간보다 만드는 시간이 훨씬 남는 장사입니다.</span></p>
-  <aside class="notes">이 5분이 하루 전체의 성패를 가른다. 조교는 이 시간에 돌아다니며 빈칸을 못 채우는 사람 옆에 붙는다. 완벽한 주제를 찾을 필요 없다 — "매주 반복 + 입력/출력이 명확" 두 조건만 맞으면 통과시킨다. 3분 지나면 강제로 아이디어 카드로 넘긴다.</aside>
-</section>
-
-<section>
-  <span class="kicker">IDEA CARDS</span>
-  <h2>주제가 안 떠오르면 — 여기서 고르세요 <span class="chip amber" style="vertical-align:8px;">⏱ 30초 안에</span></h2>
-  <div class="idea-grid">
-    <div class="idea"><span class="i-emoji">📓</span><span class="i-name">교대 인수인계 노트</span><span class="i-desc">쓰면 자동 정리·검색되는 시프트 로그</span></div>
-    <div class="idea"><span class="i-emoji">📅</span><span class="i-name">장비 예약 보드</span><span class="i-desc">측정기 예약 현황 한눈에 + 중복 방지</span></div>
-    <div class="idea"><span class="i-emoji">🧾</span><span class="i-name">레시피 비교기</span><span class="i-desc">파라미터 파일 2개의 차이만 하이라이트</span></div>
-    <div class="idea"><span class="i-emoji">🗂️</span><span class="i-name">실험 노트 정리기</span><span class="i-desc">날짜·조건·결과를 표준 양식으로 축적</span></div>
-    <div class="idea"><span class="i-emoji">🧪</span><span class="i-name">DOE 조건표 생성기</span><span class="i-desc">인자·수준 입력 → 실험 조건 매트릭스</span></div>
-    <div class="idea"><span class="i-emoji">📈</span><span class="i-name">일일 지표 대시보드</span><span class="i-desc">내가 매일 보는 숫자 4개를 한 화면에</span></div>
-    <div class="idea"><span class="i-emoji">⏰</span><span class="i-name">PM 일정 알리미</span><span class="i-desc">주기 입력 → 다가오는 정비 일정 캘린더</span></div>
-    <div class="idea"><span class="i-emoji">📊</span><span class="i-name">회의용 차트 공장</span><span class="i-desc">CSV 던지면 보고서용 차트 3종 자동 생성</span></div>
-    <div class="idea"><span class="i-emoji">🔍</span><span class="i-name">파일명 검색기</span><span class="i-desc">수천 개 측정 파일에서 조건으로 찾기</span></div>
-    <div class="idea"><span class="i-emoji">🧮</span><span class="i-name">우리 팀 계산기</span><span class="i-desc">팀에서 자주 쓰는 계산식 모음 웹앱</span></div>
-    <div class="idea"><span class="i-emoji">✅</span><span class="i-name">체크리스트 앱</span><span class="i-desc">셋업/릴리즈 절차를 클릭형 체크리스트로</span></div>
-    <div class="idea"><span class="i-emoji">🎓</span><span class="i-name">신입 온보딩 퀴즈</span><span class="i-desc">우리 공정 기초 지식 퀴즈 게임</span></div>
-  </div>
-  <aside class="notes">앞 워크시트에서 3분 안에 주제를 못 정한 사람은 여기서 강제로 하나 집게 한다. 고르는 데 30초 이상 쓰지 못하게 하는 것이 요령 — 어느 걸 골라도 오늘 배울 것은 같다. 12개 카드 모두 오늘 배운 패턴의 조합으로 만들 수 있는 크기. 각 카드가 어떤 실습의 변형인지 짚어주면 좋다 (예: 레시피 비교기 = 표 정리 + 파일 읽기).</aside>
-</section>
-
-<section>
   <div class="lab-head">
-    <span class="lab-id">LAB M-0</span>
-    <span class="lab-type mytool">MY TOOL</span>
-    <h2>내 도구 v0 — 일단 뜨게</h2>
-    <span class="chip amber">⏱ 20분</span>
+    <span class="lab-id">LAB S-1</span>
+    <span class="lab-type sprint">SPRINT</span>
+    <h2>내 명함 웹페이지</h2>
+    <span class="chip amber">⏱ 10분</span>
+    ☆☆</span>
     <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <div class="mytool-bar">
-    <span class="mt-label">MY TOOL</span>
-    <span class="mt-step now">v0 일단 뜨게</span><span class="mt-arr">→</span>
-    <span class="mt-step">v1 데이터 붙이기</span><span class="mt-arr">→</span>
-    <span class="mt-step">v2 스킬로 굳히기</span>
-  </div>
-  <p class="lab-goal">워크시트에 적은 <strong>내 주제</strong>로 시작합니다. 목표는 완성이 아니라 <strong>화면에 뭐라도 뜨는 것</strong>.</p>
+  <p class="lab-goal">생애 첫 웹페이지 — <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열립니다.<br /><span class="muted small">아래 프롬프트를 <strong>그대로 복사해서 붙여넣기만</strong> 하면 됩니다. 오늘 가장 쉬운 실습입니다.</span></p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 만능 첫 프롬프트 — ○○만 내 걸로</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야.
-20분 안에 만들 수 있는 v1 계획을 먼저 3줄로 제안해줘. 내가 좋다고 하면 그때 만들기 시작해줘.
-연습용 가짜 데이터도 같이 만들어줘 — 실데이터는 안 쓸 거야.</div>
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">내 온라인 명함 웹페이지를 card.html 파일 하나로 만들어줘. 이름, 소속, 한 줄 소개, 이메일이 들어가고, 세련된 다크 테마로. 내용은 일단 아무거나 채워놔 — 내가 나중에 알려줄게.</div>
       </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 20분을 지키는 법</div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 내 정보로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">이름은 ○○○, 소속은 ○○팀으로 바꿔줘. 한 줄 소개는 "웨이퍼와 씨름하는 엔지니어" 느낌으로 네가 몇 개 제안해줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
         <ul>
-          <li>계획이 4줄을 넘으면 <strong>"절반으로 줄여줘"</strong></li>
-          <li>기능은 <strong>1개만</strong> — 나머지는 v1에서</li>
+          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
         </ul>
       </div>
     </div>
     <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-card">
+          <div class="mk-avatar">🧑‍🔬</div>
+          <div>
+            <div class="mk-title">김공정 <span class="mk-sub">· 식각기술팀</span></div>
+            <div class="mk-sub">"웨이퍼와 씨름하는 엔지니어"</div>
+            <div class="mk-sub mono">engineer@fab.example</div>
+          </div>
+        </div>
+        <div class="mock-cap">브라우저에 뜨는 다크 테마 카드 한 장</div>
+      </div>
       <div class="panel check">
-        <div class="panel-title">✅ 완료 조건 — 이 셋이면 통과</div>
+        <div class="panel-title">✅ 완료 조건</div>
         <ul>
-          <li>브라우저(또는 터미널)에 <strong>뭐라도 뜬다</strong></li>
-          <li>가짜 데이터로 한 번은 <strong>끝까지 돌아간다</strong></li>
-          <li>수정 요청을 <strong>2번 이상</strong> 해봤다</li>
+          <li><code>card.html</code>이 브라우저에서 열린다</li>
+          <li>수정 요청을 2번 이상 해봤다</li>
         </ul>
       </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 20분이 남는다면</div>
+      <div class="panel hint">
+        <div class="panel-title">🚑 막혔다면</div>
         <ul>
-          <li>"지금 화면이 촌스러워, 더 고급스럽게"</li>
-          <li>"내가 다음에 뭘 붙이면 좋을지 3개 제안해줘"</li>
-        </ul>
-      </div>
-      <div class="panel" style="border-color:rgba(255,122,168,.35);">
-        <div class="panel-title" style="color:var(--pink);">⚠️ 이 20분에 하지 말 것</div>
-        <ul style="list-style:none;">
-          <li style="padding-left:26px;position:relative;"><span style="position:absolute;left:0;">✗</span> 실데이터 열기</li>
-          <li style="padding-left:26px;position:relative;"><span style="position:absolute;left:0;">✗</span> "완성"하려고 하기 — v0는 못생겨야 정상</li>
+          <li>"방금 만든 파일 경로 알려줘" / 에러는 그대로 복붙</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">여기서 방 전체의 온도가 정해진다. 20분 타이머를 크게 띄우고, 15분 시점에 "5분 남았습니다, 지금 되는 데까지가 v0입니다"라고 못 박는다. 완성하려는 사람을 말리는 게 조교의 주 임무. 못생긴 v0가 나와야 다음 갤러리 워크에서 "다들 못생겼네" 하는 안도감이 생긴다.</aside>
-</section>
-
-<section class="interlude">
-  <span class="il-emoji">🚶</span>
-  <h2>갤러리 워크</h2>
-  <p class="il-sub">자리에서 <strong>일어나서</strong>, 다른 사람 화면 <strong>3개</strong>를 보고 옵니다.<br />설명은 안 해도 됩니다 — 화면만 열어 두세요.</p>
-  <div class="il-steps">
-    <div class="il-step"><b>보는 사람</b>"오, 그건 어떻게 시켰어요?" 한 마디만 물어보세요.</div>
-    <div class="il-step"><b>보여주는 사람</b>미완성이어도 그대로 두세요. 다들 미완성입니다.</div>
-    <div class="il-step"><b>돌아와서</b>남의 것에서 <strong>훔칠 것 1개</strong>를 내 도구에 바로 시킵니다.</div>
-  </div>
-  <div class="il-timer">⏱ 5분 — 3분 구경 + 2분 훔치기</div>
-  <aside class="notes">하루 종일 자기 노트북만 보는 구조가 지루함의 큰 원인이었다. 몸을 일으키는 것만으로 집중이 리셋된다. 강사는 이 시간에 잘된 화면 2~3개를 봐 뒀다가 다음 슬라이드 전에 프로젝터로 띄운다. "설명 안 해도 된다"고 미리 말해야 사람들이 화면을 연다.</aside>
-</section>
-
-<section>
-  <span class="kicker">PART 1 · WRAP-UP</span>
-  <h2>45분 전의 나에게 없던 것</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="n grad-text">1개</div><div class="l"><strong>내 업무용</strong> 도구 v0 — 남의 예제가 아닌 내 것</div></div>
-    <div class="stat"><div class="n grad-text">0줄</div><div class="l">직접 작성한 코드</div></div>
-    <div class="stat"><div class="n grad-text">∞</div><div class="l">수정 요청 가능 횟수</div></div>
-  </div>
-  <ul>
-    <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
-    <li class="fragment rise">다음: 만들다 보면 반드시 <em>막힙니다</em> — 빠져나오는 법부터 익힙니다.</li>
-  </ul>
-  <aside class="notes">'0줄' 스탯이 포인트. 갤러리 워크로 분위기가 이미 올라와 있으니 짧게 짚고 바로 Part 2로 넘어간다.</aside>
-</section>
-
-
-<!-- ═══════════════ PART 2 · 고장과 빈칸 ═══════════════ -->
-
-<section class="part-cover">
-  <div class="part-num">2</div>
-  <div class="part-body">
-    <span class="kicker amber">PART 2 · 0:45–1:25</span>
-    <h2>고장과 빈칸</h2>
-    <p class="subtitle muted">잘 되는 것만 해서는 늘지 않습니다.<br /><strong>고장난 걸 살리고, 프롬프트를 직접 써 봅니다.</strong></p>
-    <div class="part-meta">
-      <span class="chip amber">🚑 RESCUE</span>
-      <span class="chip violet">✍️ BLANK — 프롬프트를 드리지 않습니다</span>
-    </div>
-  </div>
-  <aside class="notes">이 파트가 재설계에서 가장 크게 바뀐 곳이다. 예전에는 완성된 프롬프트를 20번 복사하게 했는데, 그러면 '프롬프트 쓰는 능력'은 하루 종일 한 번도 연습되지 않는다. 여기서부터는 참가자가 직접 쓴다.</aside>
+  <aside class="notes">오늘의 첫 실습이므로 난이도를 일부러 바닥에 둔다 — 복사 버튼을 누르고 붙여넣으면 끝난다. 여기서 한 명이라도 못 따라오면 하루 종일 못 따라오므로, 조교는 전원이 결과를 볼 때까지 돌아본다. 전원이 '브라우저에서 내 이름이 뜨는' 순간을 경험하는 게 목표. 완성한 사람 화면 몇 개를 프로젝터로 보여주면 분위기가 뜬다.</aside>
 </section>
 
 <section>
@@ -1214,6 +1100,89 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   </div>
   <p class="fragment rise" style="margin-top: 14px;"><strong>"더 예쁘게"도 훌륭한 지시입니다.</strong> <span class="muted">디자이너에게, 신입사원에게 말하듯 하면 됩니다.</span></p>
   <aside class="notes">비개발자가 '이렇게 대충 말해도 되나?' 하는 심리 장벽을 깨는 슬라이드. 실제로 몇 개를 라이브로 시연하면 효과적.</aside>
+</section>
+
+<section>
+  <div class="lab-head">
+    <span class="lab-id">LAB S-2</span>
+    <span class="lab-type sprint">SPRINT</span>
+    <h2>점심 메뉴 룰렛</h2>
+    <span class="chip amber">⏱ 10분</span>
+    ☆☆</span>
+    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
+  </div>
+  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>. 오늘 점심은 이걸로 정합니다. 진짜로.</p>
+  <div class="lab-cols">
+    <div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">점심 메뉴 룰렛을 lunch.html 파일 하나로 만들어줘. 돌림판이 빙글빙글 돌다가 하나를 뽑아주는 애니메이션으로. 메뉴는 김치찌개, 돈까스, 초밥, 쌀국수, 샐러드, 구내식당, 짜장면, 버거 8개. 시작 버튼은 크고 누르고 싶게.</div>
+      </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 이어서 — 감질나게</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 메뉴를 직접 추가/삭제할 수 있는 입력칸도.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"같은 메뉴가 3번 연속 나오면 안 되게 해줘"</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel expected">
+        <div class="panel-title">👀 예상 결과</div>
+        <div class="mockup mk-wheel-row">
+          <div class="mk-wheel"></div>
+          <div>
+            <div class="mk-title">🎉 돈까스!</div>
+            <div class="mk-sub">폭죽 + 두구두구 효과</div>
+            <div class="mk-sub">메뉴 추가/삭제 입력칸</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel check">
+        <div class="panel-title">✅ 완료 조건</div>
+        <ul>
+          <li>돌림판이 돌고 결과가 나온다</li>
+          <li>오늘 점심이 정해졌다 🍜</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">애니메이션·인터랙션이 '내가 이걸 만들었다고?' 하는 반응을 만든다. 점심시간에 실제로 사용해서 오전 실습이 실생활로 연결되는 경험을 준다.</aside>
+</section>
+
+<section>
+  <span class="kicker">PART 1 · WRAP-UP</span>
+  <h2>45분 전의 나에게 없던 것</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="n grad-text">2개</div><div class="l">동작하는 웹 도구</div></div>
+    <div class="stat"><div class="n grad-text">0줄</div><div class="l">직접 작성한 코드</div></div>
+    <div class="stat"><div class="n grad-text">∞</div><div class="l">수정 요청 가능 횟수</div></div>
+  </div>
+  <ul>
+    <li class="fragment rise">병목은 코딩이 아니라 <strong>"뭘 원하는지 말하기"</strong>였습니다.</li>
+    <li class="fragment rise">다음: 만들다 보면 반드시 <em>막힙니다</em> — 빠져나오는 법부터 익힙니다.</li>
+  </ul>
+  <aside class="notes">'0줄' 스탯이 포인트. 복붙만으로 두 개를 만들었다는 사실을 짚어 주면 다음 파트(직접 쓰기)로 넘어갈 자신감이 생긴다.</aside>
+</section>
+
+
+<!-- ═══════════════ PART 2 · 고장과 빈칸 ═══════════════ -->
+
+<section class="part-cover">
+  <div class="part-num">2</div>
+  <div class="part-body">
+    <span class="kicker amber">PART 2 · 0:45–1:25</span>
+    <h2>고장과 빈칸</h2>
+    <p class="subtitle muted">잘 되는 것만 해서는 늘지 않습니다.<br /><strong>고장난 걸 살리고, 프롬프트를 직접 써 봅니다.</strong></p>
+    <div class="part-meta">
+      <span class="chip amber">🚑 RESCUE</span>
+      <span class="chip violet">✍️ BLANK — 프롬프트를 드리지 않습니다</span>
+    </div>
+  </div>
+  <aside class="notes">여기가 구성의 전환점이다. 완성 프롬프트만 복사하면 '프롬프트 쓰는 능력'은 하루 종일 한 번도 연습되지 않는다. 앞 파트에서 복붙으로 자신감을 쌓았으니, 이제 직접 쓰게 한다.</aside>
 </section>
 
 <section>
@@ -1261,6 +1230,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB R-1</span>
+    <span class="lab-type rescue">RESCUE</span>
     <span class="lab-type rescue">RESCUE</span>
     <h2>고장난 앱 고치기</h2>
     <span class="chip amber">⏱ 15분</span>
@@ -1357,6 +1327,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   <div class="lab-head">
     <span class="lab-id">LAB B-1</span>
     <span class="lab-type blank">BLANK</span>
+    <span class="lab-type blank">BLANK</span>
     <h2>측정 CSV → 통계 리포트</h2>
     <span class="chip amber">⏱ 15분</span>
     <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
@@ -1417,19 +1388,6 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   <aside class="notes">정답: LOT-1003 평균 ~103nm. 참가자가 쓴 프롬프트가 엉성해서 결과가 부실하게 나오는 것이 정상이자 목적이다 — "고치는 루프"를 여기서 처음 자기 문장으로 돈다. 조교는 프롬프트를 대신 써 주지 말고 "지금 문장에서 빠진 게 뭘까요?"만 물을 것. 힌트 토글은 강사가 5분 지난 뒤 전체에게 한 번 열어 준다.</aside>
 </section>
 
-<section class="interlude">
-  <span class="il-emoji">🗣️</span>
-  <h2>프롬프트 공유</h2>
-  <p class="il-sub">방금 직접 쓴 프롬프트 중 <strong>제일 잘 먹힌 한 줄</strong>을 세 명만 읽어 주세요.<br />오늘 서로에게 줄 수 있는 가장 값진 것입니다.</p>
-  <div class="il-steps">
-    <div class="il-step"><b>읽는 사람</b>문장 그대로. 잘난 척해도 됩니다.</div>
-    <div class="il-step"><b>듣는 사람</b>쓸 만하면 바로 받아 적으세요.</div>
-    <div class="il-step"><b>강사</b>Q&amp;A 보드에 그대로 붙여 전체 공유.</div>
-  </div>
-  <div class="il-timer">⏱ 5분</div>
-  <aside class="notes">완성 프롬프트를 강사가 나눠 주는 대신 참가자들끼리 유통시킨다. 자기가 쓴 문장이 남에게 채택되는 경험이 만족도를 크게 올린다. 실시간 Q&A 위젯에 붙여 두면 나중에 복기 자료가 된다.</aside>
-</section>
-
 <section>
   <span class="kicker">PATTERN CARDS</span>
   <h2>여기까지 나온 프롬프트 패턴 4장</h2>
@@ -1440,29 +1398,43 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
     <div class="card"><span class="icon">🔍</span><h3>스스로 검증</h3><p class="tiny muted">"뭘 바꿨는지 보고해줘", "알려진 값으로 검산해줘"</p></div>
   </div>
   <p class="fragment rise" style="margin-top: 18px;">방금 <strong>직접 쓴 프롬프트</strong>에 이 중 몇 장이 들어 있었나요? <span class="muted">빠진 카드가 다음에 쓸 카드입니다.</span></p>
-  <aside class="notes">빈칸 실습과 프롬프트 공유 바로 뒤에 두면 "내가 방금 쓴 문장"과 대조되면서 훨씬 잘 박힌다. 예전에는 오전 마무리용이었지만 지금은 참가자가 자기 프롬프트를 스스로 채점하는 슬라이드다.</aside>
+  <aside class="notes">빈칸 실습 바로 뒤에 두면 "내가 방금 쓴 문장"과 대조되면서 훨씬 잘 박힌다. 예전에는 오전 마무리용이었지만 지금은 참가자가 자기 프롬프트를 스스로 채점하는 슬라이드다.</aside>
+</section>
+
+<section class="interlude">
+  <span class="il-emoji">📍</span>
+  <h2>체크포인트</h2>
+  <p class="il-sub">잠깐 멈추고, <strong>내 상태만</strong> 점검합니다. 발표도 공유도 없습니다.</p>
+  <div class="il-steps">
+    <div class="il-step"><b>확인</b>지금까지 만든 파일이 어디에 있는지 알고 있나요? 모르면 <strong>"방금 만든 파일 경로 알려줘"</strong></div>
+    <div class="il-step"><b>정리</b>안 되는 게 하나라도 있으면 <strong>Q&amp;A에 익명으로</strong> 남겨 주세요.</div>
+    <div class="il-step"><b>강사</b>공통 질문만 골라 전체에게 한 번에 답합니다.</div>
+  </div>
+  <div class="il-timer">⏱ 3분</div>
+  <aside class="notes">진도 확인용 짧은 호흡. 손을 들게 하거나 돌아가며 말하게 하지 않는다 — Q&A 위젯의 익명 질문이 심리 장벽이 훨씬 낮고, 강사도 어디서 막히는지 한눈에 본다. 여기서 나온 질문 두세 개만 전체 공유하고 바로 다음 파트로 넘어간다.</aside>
 </section>
 
 
-<!-- ═══════════════ PART 3 · 보스전과 페어 ═══════════════ -->
+<!-- ═══════════════ PART 3 · 채점과 의심 ═══════════════ -->
 
 <section class="part-cover">
   <div class="part-num">3</div>
   <div class="part-body">
-    <span class="kicker pink">PART 3 · 1:35–2:20</span>
-    <h2>보스전과 페어</h2>
-    <p class="subtitle muted">채점되는 과제와, 남을 의심하는 연습.<br /><strong>혼자 조용히 하는 시간은 여기서 끝납니다.</strong></p>
+    <span class="kicker pink">PART 3 · 1:40–2:30</span>
+    <h2>채점과 의심</h2>
+    <p class="subtitle muted">정답이 있는 과제로 내 도구를 채점하고,<br /><strong>내가 만든 결과를 내가 의심해 봅니다.</strong></p>
     <div class="part-meta">
       <span class="chip amber">🏆 자동 채점 보스전</span>
-      <span class="chip pink">👥 조종사 × 검사관</span>
+      <span class="chip pink">🔍 셀프 검증</span>
     </div>
   </div>
-  <aside class="notes">점심 직후나 중반 이후에 집중력이 가장 크게 꺼진다. 그 자리에 '점수가 나오는 과제'와 '둘이서 하는 과제'를 배치했다.</aside>
+  <aside class="notes">중반 이후에 집중력이 가장 크게 꺾인다. 그 자리에 '점수가 나오는 과제'를 배치했다. 점수는 채점기가 각자 화면에서 보여주므로 남과 비교당하는 부담이 없다.</aside>
 </section>
 
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB D-1</span>
+    <span class="lab-type duel">BOSS</span>
     <span class="lab-type duel">BOSS</span>
     <h2>🏆 웨이퍼 맵 감식 — 보스전</h2>
     <span class="chip amber">⏱ 20분</span>
@@ -1532,7 +1504,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
     <div class="card accent"><span class="icon">📏</span><h3>아는 값 넣기</h3><p class="small">760 Torr = 101325 Pa처럼 답을 아는 입력으로 검산</p></div>
   </div>
   <p class="fragment rise" style="margin-top: 16px;">AI의 결과는 <strong>계측 장비의 데이터처럼</strong> 다루세요 — 캘리브레이션 없이 믿지 않기.</p>
-  <aside class="notes">계측기 캘리브레이션 비유가 이 청중에게 가장 잘 박힌다. 보스전 직후에 두는 게 핵심이다 — 방금 채점기에게 점수를 맞고 온 참가자에게 "왜 틀렸나"를 설명해 주는 슬라이드가 된다. 세 가지 습관 모두 보스전에서 이미 겪은 것들이다.</aside>
+  <aside class="notes">계측기 캘리브레이션 비유가 이 청중에게 가장 잘 박힌다. 보스전 직후에 두는 게 핵심이다 — 방금 채점기에게 점수를 맞고 온 참가자에게 "왜 틀렸나"를 설명해 주는 슬라이드가 된다. 세 가지 습관 모두 보스전에서 이미 겪은 것들이고, 바로 다음 셀프 검증 실습에서 프롬프트로 굳힌다.</aside>
 </section>
 
 <section>
@@ -1556,67 +1528,58 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">LAB P-1</span>
-    <span class="lab-type pair">PAIR</span>
-    <h2>SPC 관리도 — 둘이서</h2>
+    <span class="lab-id">LAB V-1</span>
+    <span class="lab-type solo">SELF-CHECK</span>
+    <h2>SPC 관리도 — 그리고 스스로 검산</h2>
     <span class="chip amber">⏱ 20분</span>
     <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <p class="lab-goal">노트북 <strong>한 대</strong>로 둘이 합니다. 손을 대는 사람과, <strong>의심하는 사람</strong>을 나눕니다.</p>
+  <p class="lab-goal">만드는 것은 절반입니다. 나머지 절반은 <strong>내가 만든 결과를 내가 의심하는 것</strong>.</p>
   <div class="databar">
     <a class="chip teal" href="data/spc.csv" download>📁 spc.csv 받기</a>
     <span class="chip">50개 측정 · 룰 위반이 <strong>2건</strong> 심어져 있음</span>
   </div>
-  <div class="pair-roles">
-    <div class="pair-role pilot">
-      <span class="pr-name">🎮 조종사 (Pilot)</span>
-      <ul>
-        <li>키보드는 이 사람만 잡습니다</li>
-        <li>프롬프트를 <strong>소리 내어 말하며</strong> 씁니다</li>
-        <li>스스로 코드를 고치지 않습니다 — AI에게만 시킵니다</li>
-      </ul>
-    </div>
-    <div class="pair-role check">
-      <span class="pr-name">🔍 검사관 (Checker)</span>
-      <ul>
-        <li>손을 대지 않습니다. <strong>질문만</strong> 합니다</li>
-        <li>"그 숫자 맞아요? 어떻게 확인하죠?"</li>
-        <li>화면에 뜬 것을 <strong>원본과 한 번은 대조</strong>시킵니다</li>
-      </ul>
-    </div>
-  </div>
-  <div class="swap-note">⏱ 5분마다 역할 교대 — 강사가 종을 칩니다 (4번 교대)</div>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 조종사의 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 ① 만들기</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">spc.csv로 SPC 관리도(x-bar chart)를 spc.html로 만들어줘. 평균선(CL)과 ±3σ 관리선(UCL/LCL)을 그리고, Western Electric 룰 1(관리선 이탈)과 룰 2(9점 연속 한쪽)를 위반한 점을 빨갛게 표시해줘. 위반 목록도 표로 같이.</div>
       </div>
-      <div class="panel" style="border-color:rgba(255,122,168,.35);">
-        <div class="panel-title" style="color:var(--pink);">🔍 검사관 대사 카드 — 그대로 읽으세요</div>
-        <ul style="list-style:none;">
-          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "UCL 값이 얼마죠? 손으로 계산하면 맞나요?"</li>
-          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "위반이 2건이라는데, 표의 그 줄을 원본에서 찾아 주세요."</li>
-          <li style="padding-left:24px;position:relative;font-size:18px;margin:5px 0;"><span style="position:absolute;left:0;">💬</span> "9점 연속을 어떻게 셌는지 설명해 달라고 시켜 보세요."</li>
+      <div class="prompt">
+        <div class="p-label"><span>📋 ② AI에게 검산까지 시키기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">방금 만든 결과를 네가 직접 검산해서 표로 보여줘. UCL/LCL 값을 원본 데이터로 다시 계산하고, 위반으로 표시한 점이 정말 위반인지 근거(몇 번째 점, 어떤 룰)를 하나씩 적어줘. 틀린 게 있으면 고쳐줘.</div>
+      </div>
+      <div class="panel bonus">
+        <div class="panel-title">🚀 더 해보기</div>
+        <ul>
+          <li>"룰 3~4까지 추가하고, 각 룰을 한 줄로 설명해줘"</li>
         </ul>
       </div>
     </div>
     <div>
       <div class="panel expected">
         <div class="panel-title">👀 예상 결과</div>
-        <canvas class="mock" data-mock="spc" width="440" height="155"></canvas>
+        <canvas class="mock" data-mock="spc" width="440" height="150"></canvas>
+      </div>
+      <div class="panel" style="border-color:rgba(255,122,168,.4);">
+        <div class="panel-title" style="color:var(--pink);">🔍 스스로에게 던지는 질문 3개</div>
+        <ul style="list-style:none;">
+          <li style="padding-left:24px;position:relative;font-size:17.5px;margin:5px 0;color:#CBD4EA;"><span style="position:absolute;left:0;">①</span> UCL 값이 얼마인가? <strong>손으로도 맞나?</strong></li>
+          <li style="padding-left:24px;position:relative;font-size:17.5px;margin:5px 0;color:#CBD4EA;"><span style="position:absolute;left:0;">②</span> 위반 2건이라는데, <strong>그 줄을 원본에서</strong> 찾을 수 있나?</li>
+          <li style="padding-left:24px;position:relative;font-size:17.5px;margin:5px 0;color:#CBD4EA;"><span style="position:absolute;left:0;">③</span> 9점 연속을 <strong>어떻게 셌는지</strong> 설명할 수 있나?</li>
+        </ul>
       </div>
       <div class="panel check">
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>관리도가 그려지고 위반 <strong>2건</strong>이 잡혔다</li>
-          <li>검사관이 <strong>숫자 하나를 원본과 대조</strong>했다</li>
-          <li>역할을 <strong>최소 2번</strong> 바꿔 봤다</li>
+          <li>숫자 하나를 <strong>원본과 대조</strong>했다</li>
+          <li>②번 프롬프트로 <strong>AI에게 검산을 시켜</strong> 봤다</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">왜 둘이서 하는가 — 혼자 하면 AI 결과를 거의 의심하지 않는다. 의심은 의지가 아니라 역할로 만들면 쉬워진다. 이 한 마디를 시작 전에 꼭 해 줄 것. 정답: 룰 1 위반 1건 + 룰 2(9점 연속) 1건. 페어의 핵심은 SPC가 아니라 '검사관' 역할 그 자체다 — 검증 습관을 사람이 아니라 역할에 심는다. 종(타이머)을 실제로 울려야 교대가 일어난다. 홀수 인원이면 3인조: 조종사 1 · 검사관 2. 인원이 적으면 강사가 검사관으로 들어가면 된다.</aside>
+  <aside class="notes">정답: 룰 1 위반 1건 + 룰 2(9점 연속) 1건. 이 실습의 핵심은 SPC가 아니라 '검산을 습관으로 만드는 것'이다. 혼자 하면 AI 결과를 거의 의심하지 않게 되는데, ②번 프롬프트가 그 역할을 대신해 준다 — 검증을 의지가 아니라 프롬프트로 만든다. 오른쪽 질문 3개를 소리 내어 읽어 주고 각자 확인하게 하면 충분하다.</aside>
 </section>
 
 <section>
@@ -1644,88 +1607,131 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 </section>
 
 
-<!-- ═══════════════ PART 4 · 내 도구 완성과 공유 ═══════════════ -->
+<!-- ═══════════════ PART 4 · 이제 내 업무로 ═══════════════ -->
 
 <section class="part-cover">
   <div class="part-num">4</div>
   <div class="part-body">
-    <span class="kicker">PART 4 · 2:20–3:00</span>
-    <h2>내 도구, 완성과 공유</h2>
-    <p class="subtitle muted">아침에 정한 그 주제로 돌아옵니다.<br /><strong>오늘 배운 걸 전부 내 도구 하나에 얹습니다.</strong></p>
+    <span class="kicker">PART 4 · 2:30–3:00</span>
+    <h2>이제 내 업무로</h2>
+    <p class="subtitle muted">오늘 배운 걸 전부 들고, <strong>내가 매주 반복하는 그 일</strong>로 옵니다.<br />오늘의 마지막 실습이자, 유일하게 주제가 각자 다른 실습입니다.</p>
     <div class="part-meta">
-      <span class="chip violet">🧰 v1 → v2</span>
-      <span class="chip teal">🎤 자랑 2분씩</span>
+      <span class="chip violet">🧰 내 업무 도구 하나</span>
+      <span class="chip teal">💾 다음에도 쓰게 굳히기</span>
     </div>
   </div>
-  <aside class="notes">여기서 '오늘 만든 장난감들'이 아니라 '내 도구 하나'로 수렴한다는 게 예전 구조와의 결정적 차이다. 실습이 파편이 아니라 하나의 물건으로 쌓였다는 감각이 만족도를 만든다.</aside>
+  <aside class="notes">앞의 실습이 전부 이 파트의 준비운동이었다는 것을 명시해 주면 흐름이 살아난다. "지금까지는 제가 정한 주제였고, 마지막은 여러분이 정합니다." 주제를 못 정하는 사람이 반드시 나오므로 다음 두 슬라이드(문진표·아이디어 카드)로 바로 넘긴다.</aside>
+</section>
+
+<section>
+  <span class="kicker">HOW TO SPOT</span>
+  <h2>자동화 대상 찾기 — 셀프 문진표</h2>
+  <div class="grid2">
+    <div class="card accent">
+      <h3>이 중 하나라도 "예"라면 후보</h3>
+      <ul class="small">
+        <li>매주/매일 <strong>같은 순서로 클릭</strong>하는 일이 있다</li>
+        <li>파일 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
+        <li>"이건 인턴 시키면 되는데" 싶은 일이 있다</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>자동화 설계 공식 — 한 문장</h3>
+      <p class="small" style="line-height: 1.7;"><em>"__(입력)__을 받아서<br />__(규칙)__대로 처리하고<br />__(출력)__을 만들어줘"</em></p>
+      <p class="tiny muted">못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
+    </div>
+  </div>
+  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 적어두세요 — 마지막 파트에서 그걸 만듭니다.</p>
+  <aside class="notes">여기서 각자 후보를 하나씩 적게 하는 게 중요 — Part 6 미니 프로젝트의 씨앗이 된다. 1분 정도 생각할 시간을 준다.</aside>
+</section>
+
+<section>
+  <span class="kicker">MY TOOL · 워크시트</span>
+  <h2>마지막 실습에서 만들 것을 <span class="grad-text">정합니다</span> <span class="chip amber" style="vertical-align:8px;">⏱ 5분</span></h2>
+  <div class="worksheet">
+    <div class="ws-row"><span class="ws-n">1</span>
+      <div style="flex:1;">내가 <strong>매주 반복</strong>하는 귀찮은 일 하나는<br /><span class="ws-blank">예: 매주 월요일 장비별 알람 로그를 훑어서 보고서에 옮겨 적기</span></div></div>
+    <div class="ws-row"><span class="ws-n">2</span>
+      <div style="flex:1;">그 일의 <strong>입력</strong>은 (무엇을 받아서)<br /><span class="ws-blank">예: 장비에서 내려받은 CSV 5개</span></div></div>
+    <div class="ws-row"><span class="ws-n">3</span>
+      <div style="flex:1;">원하는 <strong>출력</strong>은 (무엇이 나오면 끝)<br /><span class="ws-blank">예: 알람 상위 5개와 시간대 차트가 있는 HTML 한 장</span></div></div>
+  </div>
+  <p class="fragment rise" style="margin-top:14px;">3분 안에 안 떠오르면 — <strong>다음 장 아이디어 카드에서 하나 집으세요.</strong> <span class="muted">고민하는 시간보다 만드는 시간이 훨씬 남는 장사입니다.</span></p>
+  <aside class="notes">지금까지는 강사가 정한 주제였고, 마지막 실습만 각자 다르다. 이 5분이 마지막 실습의 성패를 가른다. 조교는 이 시간에 돌아다니며 빈칸을 못 채우는 사람 옆에 붙는다. 완벽한 주제를 찾을 필요 없다 — "매주 반복 + 입력/출력이 명확" 두 조건만 맞으면 통과시킨다. 3분 지나면 강제로 아이디어 카드로 넘긴다.</aside>
+</section>
+
+<section>
+  <span class="kicker">IDEA CARDS</span>
+  <h2>주제가 안 떠오르면 — 여기서 고르세요 <span class="chip amber" style="vertical-align:8px;">⏱ 30초 안에</span></h2>
+  <div class="idea-grid">
+    <div class="idea"><span class="i-emoji">📓</span><span class="i-name">교대 인수인계 노트</span><span class="i-desc">쓰면 자동 정리·검색되는 시프트 로그</span></div>
+    <div class="idea"><span class="i-emoji">📅</span><span class="i-name">장비 예약 보드</span><span class="i-desc">측정기 예약 현황 한눈에 + 중복 방지</span></div>
+    <div class="idea"><span class="i-emoji">🧾</span><span class="i-name">레시피 비교기</span><span class="i-desc">파라미터 파일 2개의 차이만 하이라이트</span></div>
+    <div class="idea"><span class="i-emoji">🗂️</span><span class="i-name">실험 노트 정리기</span><span class="i-desc">날짜·조건·결과를 표준 양식으로 축적</span></div>
+    <div class="idea"><span class="i-emoji">🧪</span><span class="i-name">DOE 조건표 생성기</span><span class="i-desc">인자·수준 입력 → 실험 조건 매트릭스</span></div>
+    <div class="idea"><span class="i-emoji">📈</span><span class="i-name">일일 지표 대시보드</span><span class="i-desc">내가 매일 보는 숫자 4개를 한 화면에</span></div>
+    <div class="idea"><span class="i-emoji">⏰</span><span class="i-name">PM 일정 알리미</span><span class="i-desc">주기 입력 → 다가오는 정비 일정 캘린더</span></div>
+    <div class="idea"><span class="i-emoji">📊</span><span class="i-name">회의용 차트 공장</span><span class="i-desc">CSV 던지면 보고서용 차트 3종 자동 생성</span></div>
+    <div class="idea"><span class="i-emoji">🔍</span><span class="i-name">파일명 검색기</span><span class="i-desc">수천 개 측정 파일에서 조건으로 찾기</span></div>
+    <div class="idea"><span class="i-emoji">🧮</span><span class="i-name">우리 팀 계산기</span><span class="i-desc">팀에서 자주 쓰는 계산식 모음 웹앱</span></div>
+    <div class="idea"><span class="i-emoji">✅</span><span class="i-name">체크리스트 앱</span><span class="i-desc">셋업/릴리즈 절차를 클릭형 체크리스트로</span></div>
+    <div class="idea"><span class="i-emoji">🎓</span><span class="i-name">신입 온보딩 퀴즈</span><span class="i-desc">우리 공정 기초 지식 퀴즈 게임</span></div>
+  </div>
+  <aside class="notes">사내 실습에서는 "내 업무 중 자동화할 것"을 즉석에서 떠올리지 못하는 사람이 반드시 나온다. 앞 워크시트에서 3분 안에 주제를 못 정한 사람은 여기서 강제로 하나 집게 한다. 고르는 데 30초 이상 쓰지 못하게 하는 것이 요령 — 어느 걸 골라도 오늘 배울 것은 같다. 12개 카드 모두 오늘 배운 패턴의 조합으로 만들 수 있는 크기. 각 카드가 어떤 실습의 변형인지 짚어주면 좋다 (예: 레시피 비교기 = 표 정리 + 파일 읽기).</aside>
 </section>
 
 <section>
   <div class="lab-head">
     <span class="lab-id">LAB M-1</span>
-    <span class="lab-type blank">BLANK</span>
-    <h2>내 도구 v1 — 데이터 붙이기</h2>
-    <span class="chip amber">⏱ 20분</span>
-    <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
+    <span class="lab-type mytool">MY TOOL</span>
+    <h2>내 업무 도구 만들기</h2>
+    <span class="chip amber">⏱ 25분</span>
+    <span class="course-chips"><span class="cc on">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
   </div>
-  <div class="mytool-bar">
-    <span class="mt-label">MY TOOL</span>
-    <span class="mt-step">v0 일단 뜨게</span><span class="mt-arr">→</span>
-    <span class="mt-step now">v1 데이터 붙이기</span><span class="mt-arr">→</span>
-    <span class="mt-step">v2 스킬로 굳히기</span>
-  </div>
-  <p class="lab-goal">아침의 v0에 <strong>진짜 모양의 데이터</strong>를 붙입니다. 프롬프트는 <strong>또 직접</strong> 씁니다.</p>
+  <p class="lab-goal">오늘의 <strong>마지막 실습</strong>. 주제는 각자 다릅니다 — 앞 실습들이 전부 이걸 위한 준비였습니다.</p>
   <div class="lab-cols">
     <div>
-      <div class="blank-box">
-        <div class="b-label">✍️ 이번엔 세 번에 나눠 시킵니다</div>
-        <div class="b-line">
-          ① 데이터부터: <span class="fill">내 입력 모양</span> 인 가짜 데이터를 만들어줘<br />
-          ② 붙이기: 그걸 읽어서 <span class="fill">내 도구</span> 에 넣어줘<br />
-          ③ 검증: <span class="fill">아는 값</span> 으로 결과가 맞는지 확인해줘
-        </div>
+      <div class="prompt">
+        <div class="p-label"><span>📋 만능 첫 프롬프트 — ○○만 내 걸로</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야.
+25분 안에 만들 수 있는 v1 계획을 먼저 3줄로 제안해줘. 내가 좋다고 하면 그때 만들기 시작해줘.
+연습용 가짜 데이터도 같이 만들어줘 — 실데이터는 안 쓸 거야.</div>
       </div>
-      <details class="spoiler">
-        <summary>막혔다면 — 오늘 배운 것 중 무엇을 쓸지</summary>
-        <div class="s-body">
-          <strong>Part 2에서</strong>: 프롬프트를 직접 쓰고, 결과를 보고 고치는 루프<br />
-          <strong>보스전에서</strong>: 답을 아는 데이터로 도구를 채점하기<br />
-          <strong>페어에서</strong>: 스스로에게 검사관 질문 던지기 —
-          <code>"이 숫자, 원본에서 어떻게 확인하지?"</code>
-        </div>
-      </details>
-      <div class="panel" style="border-color:rgba(255,122,168,.35);">
-        <div class="panel-title" style="color:var(--pink);">⚠️ 여전히 실데이터는 안 됩니다</div>
-        <ul style="list-style:none;">
-          <li style="padding-left:26px;position:relative;">모양만 흉내 낸 <strong>가짜 데이터</strong>로. 실데이터 연결은 마지막 체크리스트를 통과한 다음입니다.</li>
+      <div class="panel hint">
+        <div class="panel-title">💡 25분을 지키는 법</div>
+        <ul>
+          <li>계획이 4줄을 넘으면 <strong>"절반으로 줄여줘"</strong></li>
+          <li>기능은 <strong>1개만</strong> — 욕심이 제일 큰 적입니다</li>
+          <li>막히면 오늘 배운 <strong>복구 문장 사전</strong>으로</li>
         </ul>
       </div>
     </div>
     <div>
       <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
+        <div class="panel-title">✅ 완료 조건 — 이 셋이면 통과</div>
         <ul>
-          <li>내 도구가 <strong>파일을 읽어서</strong> 뭔가를 보여준다</li>
+          <li>가짜 데이터로 한 번은 <strong>끝까지 돌아간다</strong></li>
           <li>결과 숫자 하나를 <strong>원본과 대조</strong>했다</li>
-          <li>내일 이걸 <strong>누구에게 보여줄지</strong> 정했다</li>
+          <li>내일 이걸 <strong>어디에 쓸지</strong> 말할 수 있다</li>
+        </ul>
+      </div>
+      <div class="panel" style="border-color:rgba(255,122,168,.35);">
+        <div class="panel-title" style="color:var(--pink);">⚠️ 이 25분에 하지 말 것</div>
+        <ul style="list-style:none;">
+          <li style="padding-left:26px;position:relative;color:#CBD4EA;"><span style="position:absolute;left:0;">✗</span> 실데이터 열기 — 모양만 흉내 낸 가짜 데이터로</li>
+          <li style="padding-left:26px;position:relative;color:#CBD4EA;"><span style="position:absolute;left:0;">✗</span> "우리 팀 전체 시스템"급 대작 <span class="muted">(그건 다음 주부터)</span></li>
+          <li style="padding-left:26px;position:relative;color:#CBD4EA;"><span style="position:absolute;left:0;">✗</span> 완성 욕심 — <strong>동작하는 반쪽</strong>이 계획서 100장보다 낫습니다</li>
         </ul>
       </div>
       <div class="panel bonus">
         <div class="panel-title">🚀 빨리 끝났다면</div>
         <ul>
-          <li>부록 실습 중 <strong>내 주제와 가장 가까운 것</strong> 하나를 골라 이식</li>
-          <li>옆 사람 도구의 검사관이 되어 주기</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">💡 진도 격차 흡수</div>
-        <ul>
-          <li>느린 사람은 <strong>v0 그대로도 통과</strong>입니다 — 공유가 목표지 완성이 아닙니다</li>
+          <li>부록 실습에서 <strong>내 주제와 가까운 것</strong> 하나를 골라 이식</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="notes">빠른 사람과 느린 사람이 여기서 가장 크게 갈린다. 빠른 사람은 부록 실습으로 밀어 넣고, 느린 사람에게는 "v0로 공유해도 된다"를 명시적으로 허락해야 한다. 허락하지 않으면 마지막 공유 시간에 아무도 손을 들지 않는다.</aside>
+  <aside class="notes">주제가 각자 다르므로 조교가 개별로 붙는 시간이다. 20분 시점에 "5분 남았습니다, 지금 되는 데까지가 오늘의 결과물입니다"를 크게 말한다. 완성하려는 사람을 말리는 게 조교의 주 임무. 미완성이 정상이라는 것을 반복해서 허락해야 마지막 슬라이드까지 분위기가 유지된다.</aside>
 </section>
 
 <section>
@@ -1753,23 +1759,17 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   <div class="lab-head">
     <span class="lab-id">LAB M-2</span>
     <span class="lab-type mytool">MY TOOL</span>
-    <h2>내 도구 v2 — 다음에도 쓰게 굳히기</h2>
-    <span class="chip amber">⏱ 10분</span>
+    <h2>다음에도 쓰게 굳히기</h2>
+    <span class="chip amber">⏱ 5분</span>
     <span class="course-chips"><span class="cc">⚡90</span><span class="cc on">🔷3h</span><span class="cc on">⬛8h</span></span>
-  </div>
-  <div class="mytool-bar">
-    <span class="mt-label">MY TOOL</span>
-    <span class="mt-step">v0 일단 뜨게</span><span class="mt-arr">→</span>
-    <span class="mt-step">v1 데이터 붙이기</span><span class="mt-arr">→</span>
-    <span class="mt-step now">v2 스킬로 굳히기</span>
   </div>
   <p class="lab-goal">오늘 잘 먹힌 프롬프트를 <strong>파일로 남깁니다.</strong> 다음 주의 나는 오늘의 나를 기억하지 못합니다.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
-        <div class="p-label"><span>📋 그대로 시키세요</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="p-label"><span>📋 그대로 시키세요 — 이 한 줄로 끝</span><button class="copy-btn" type="button">복사</button></div>
         <div class="p-text">오늘 이 도구를 만들면서 우리가 주고받은 지시 중에서 잘 통했던 것들을 정리해줘.
-다음 주에 비슷한 걸 또 만들 때 이 파일 하나만 열면 되도록 SKILL.md 로 저장해줘.
+다음에 비슷한 걸 또 만들 때 이 파일 하나만 열면 되도록 SKILL.md 로 저장해줘.
 - 이 도구가 뭘 하는지 3줄
 - 다시 만들 때 그대로 쓸 프롬프트 순서
 - 내가 실제로 겪은 함정과 해결책</div>
@@ -1778,7 +1778,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
         <div class="panel-title">💡 굳히는 방법은 하나가 아닙니다</div>
         <ul>
           <li>Claude Code라면 <code>.claude/skills/</code> 에 스킬로</li>
-          <li>아니면 <code>PROMPTS.md</code> 한 장이면 충분합니다</li>
+          <li>아니면 <code>PROMPTS.md</code> 메모 한 장이면 충분합니다</li>
         </ul>
       </div>
     </div>
@@ -1800,27 +1800,21 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
           <div class="mk-sub">3. ⚠️ 한글 깨지면 → "UTF-8로 다시 저장"</div>
         </div>
       </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 팀으로 넘기려면</div>
-        <ul>
-          <li>이 파일을 팀 공유 폴더에 — 다음 사람의 출발선이 오늘의 도착선이 됩니다</li>
-        </ul>
-      </div>
     </div>
   </div>
-  <aside class="notes">예전 덱에서 '나만의 스킬'은 5교시 끝자락 보너스였는데, 사실 이게 워크숍 이후로 이어지는 유일한 고리다. 그래서 본편 필수로 올렸다. 10분이라 짧지만 파일 하나가 남는 게 핵심 — 완성도는 상관없다.</aside>
+  <aside class="notes">초판에서 '나만의 스킬'은 5교시 끝자락 보너스였는데, 사실 이게 워크숍 이후로 이어지는 유일한 고리다. 5분이라 짧지만 파일 하나가 남는 게 핵심 — 완성도는 상관없다. 시간이 없으면 강사가 자기 화면으로 한 번 시연하고 "집에서 이 프롬프트 한 번 돌려보세요"로 넘겨도 된다.</aside>
 </section>
 
 <section>
   <span class="kicker">SHOW &amp; TELL</span>
-  <h2>공유 시간 — 자랑 2분씩 <span class="chip teal" style="vertical-align:8px;">v0도 환영</span></h2>
+  <h2>마무리 공유 <span class="chip teal" style="vertical-align:8px;">희망자만 · 2분</span></h2>
   <div class="grid3">
     <div class="card"><span class="icon">1️⃣</span><h3>뭘 만들었나</h3><p class="small">화면 시연 30초 — 말보다 보여주기. <strong>안 굴러가도 켜 놓으세요.</strong></p></div>
     <div class="card"><span class="icon">2️⃣</span><h3>어떤 프롬프트가 잘 먹혔나</h3><p class="small">오늘의 진짜 지식 공유는 이것</p></div>
     <div class="card"><span class="icon">3️⃣</span><h3>어디서 막혔나</h3><p class="small">막힌 얘기가 남에게 제일 유용합니다</p></div>
   </div>
-  <p class="fragment rise" style="margin-top: 16px;">🏆 투표: <strong>내일 당장 훔쳐 쓰고 싶은 도구</strong> 한 표씩 — 우승자는 커피 쿠폰.</p>
-  <aside class="notes">발표 부담을 낮추기 위해 '자랑'이라는 단어를 쓴다. 미완성도 공유 대상 — 어디서 막혔는지가 최고의 콘텐츠임을 강조. 다음 슬라이드에서 '어떻게 팀에 넘기나'로 자연스럽게 연결.</aside>
+  <p class="fragment rise" style="margin-top: 16px;"><strong>부담 없이.</strong> <span class="muted">보여주고 싶은 사람만 하면 됩니다. 아무도 없으면 강사가 오늘 나온 결과물 중 몇 개를 소개하고 끝냅니다.</span></p>
+  <aside class="notes">사내 실습에서 돌아가며 발표를 시키면 부담이 크다. 희망자만 받고, 아무도 손을 들지 않으면 강사가 돌아다니며 봐 둔 결과물 두세 개를 대신 소개하는 것으로 충분하다. 발표 부담을 낮추기 위해 '자랑'이라는 단어를 쓴다. 미완성도 공유 대상 — 어디서 막혔는지가 최고의 콘텐츠임을 강조. 다음 슬라이드에서 '어떻게 팀에 넘기나'로 자연스럽게 연결.</aside>
 </section>
 
 
@@ -1955,14 +1949,14 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
   <div class="part-num">+</div>
   <div class="part-body">
     <span class="kicker violet">APPENDIX · 부록</span>
-    <h2>혼자 할 실습 23개</h2>
-    <p class="subtitle muted">본편에서 다루지 않은 실습 23개입니다. 잘라낸 게 아니라 <strong>남겨 둔</strong> 것입니다.<br />풀데이 코스에서는 이 중 골라서 진행합니다.</p>
+    <h2>혼자 할 실습 21개</h2>
+    <p class="subtitle muted">본편에서 다루지 않은 실습 21개입니다. 잘라낸 게 아니라 <strong>남겨 둔</strong> 것입니다.<br />풀데이 코스에서는 이 중 골라서 진행합니다.</p>
     <div class="part-meta">
       <span class="chip violet">📚 전부 프롬프트 포함</span>
       <span class="chip teal">🏠 집에서 각자</span>
     </div>
   </div>
-  <aside class="notes">여기서부터는 진행하지 않고 넘긴다. 마무리 멘트: "오늘 못 한 실습 18개가 이 뒤에 그대로 있습니다. 링크 하나로 언제든 열립니다." 참가자 입장에서 '진도를 못 뺐다'가 아니라 '더 받아 간다'로 프레이밍되는 게 중요하다.</aside>
+  <aside class="notes">여기서부터는 진행하지 않고 넘긴다. 마무리 멘트: "오늘 못 한 실습 21개가 이 뒤에 그대로 있습니다. 링크 하나로 언제든 열립니다." 참가자 입장에서 '진도를 못 뺐다'가 아니라 '더 받아 간다'로 프레이밍되는 게 중요하다.</aside>
 </section>
 
 <section>
@@ -1973,144 +1967,46 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
     부록은 반대입니다 — <b>필요할 때 골라 쓰는 레시피 모음</b>입니다. 순서대로 다 할 필요가 전혀 없습니다.
   </div>
   <div class="grid3">
-    <div class="card accent"><span class="icon">🎯</span><h3>내 업무와 가까운 것부터</h3><p class="small">18개를 순서대로 하지 마세요. 지금 내 일에 닿는 것 <strong>1~2개</strong>면 충분합니다.</p></div>
+    <div class="card accent"><span class="icon">🎯</span><h3>내 업무와 가까운 것부터</h3><p class="small">21개를 순서대로 하지 마세요. 지금 내 일에 닿는 것 <strong>1~2개</strong>면 충분합니다.</p></div>
     <div class="card"><span class="icon">✍️</span><h3>프롬프트는 가리고</h3><p class="small">제목과 완료 조건만 보고 <strong>먼저 직접 써 보기</strong> — 그래야 실력이 늡니다.</p></div>
     <div class="card"><span class="icon">🔁</span><h3>내 도구에 이식</h3><p class="small">새 파일을 만들기보다 <strong>오늘 만든 도구에 기능으로</strong> 붙이는 편이 남습니다.</p></div>
   </div>
-  <p class="fragment rise" style="margin-top:16px;"><strong>가장 좋은 다음 한 걸음:</strong> <span class="muted">오늘 만든 도구를 내일 회의에서 한 번 켜 보는 것. 부록 18개보다 그게 큽니다.</span></p>
+  <p class="fragment rise" style="margin-top:16px;"><strong>가장 좋은 다음 한 걸음:</strong> <span class="muted">오늘 만든 도구를 내일 업무에서 한 번 켜 보는 것. 부록 21개보다 그게 큽니다.</span></p>
   <aside class="notes">부록을 '숙제'로 만들면 아무도 안 한다. '레시피 모음'으로 프레이밍하고, 진짜 다음 걸음은 부록이 아니라 '내일 도구를 켜 보는 것'이라고 못 박는다.</aside>
 </section>
 
 <section>
-  <span class="kicker">HOW TO SPOT</span>
-  <h2>자동화 대상 찾기 — 셀프 문진표</h2>
+  <span class="kicker">PROJECT RULES</span>
+  <h2>미니 프로젝트 규칙</h2>
   <div class="grid2">
     <div class="card accent">
-      <h3>이 중 하나라도 "예"라면 후보</h3>
+      <h3>✅ 이렇게</h3>
       <ul class="small">
-        <li>매주/매일 <strong>같은 순서로 클릭</strong>하는 일이 있다</li>
-        <li>파일 열어 <strong>복사–붙여넣기–저장</strong>을 반복한다</li>
-        <li>"이건 인턴 시키면 되는데" 싶은 일이 있다</li>
+        <li><strong>작게:</strong> 45분에 v1이 나올 크기로 (기능 1~2개)</li>
+        <li><strong>합성 데이터로:</strong> 실데이터 모양만 흉내</li>
+        <li><strong>계획 먼저:</strong> "어떻게 만들지 계획부터 보여줘"</li>
+        <li><strong>단계별로:</strong> 하나 되면 다음 것</li>
       </ul>
     </div>
-    <div class="card">
-      <h3>자동화 설계 공식 — 한 문장</h3>
-      <p class="small" style="line-height: 1.7;"><em>"__(입력)__을 받아서<br />__(규칙)__대로 처리하고<br />__(출력)__을 만들어줘"</em></p>
-      <p class="tiny muted">못 채우겠으면 AI에게 같이 채워달라고 하면 됩니다.</p>
+    <div class="card warn">
+      <h3>⚠️ 이것만 피하기</h3>
+      <ul class="small">
+        <li>사내 기밀·실데이터 사용 ❌</li>
+        <li>"우리 팀 전체 시스템"급 대작 ❌ <span class="muted">(그건 다음 주부터)</span></li>
+        <li>완성 욕심 — <strong>동작하는 반쪽</strong>이 계획서 100장보다 낫습니다</li>
+      </ul>
     </div>
   </div>
-  <p class="fragment rise" style="margin-top: 12px;">💭 잠깐: 지금 <strong>내 업무에서 후보 하나</strong>를 적어두세요 — 마지막 파트에서 그걸 만듭니다.</p>
-  <aside class="notes">여기서 각자 후보를 하나씩 적게 하는 게 중요 — Part 6 미니 프로젝트의 씨앗이 된다. 1분 정도 생각할 시간을 준다.</aside>
+  <div class="prompt" style="margin-top: 12px;">
+    <div class="p-label"><span>📋 시작이 막막할 때 — 만능 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
+    <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야. 45분 안에 만들 수 있는 v1 계획을 먼저 제안해줘. 연습용 가짜 데이터도 같이 만들어줘.</div>
+  </div>
+  <aside class="notes">만능 프롬프트의 빈칸(○○)을 채우는 것 자체가 요구사항 정의 연습. 못 채우는 사람은 조교와 1:1로 빈칸을 채워준다.</aside>
 </section>
 
 <section>
   <div class="lab-head">
     <span class="lab-id">부록 A-1</span>
-    <h2>내 명함 웹페이지</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">생애 첫 웹페이지 — <strong>파일 하나</strong>가 만들어지고, 브라우저에서 열립니다.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">내 온라인 명함 웹페이지를 card.html 파일 하나로 만들어줘. 이름, 소속, 한 줄 소개, 이메일이 들어가고, 세련된 다크 테마로. 내용은 일단 아무거나 채워놔 — 내가 나중에 알려줄게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 내 정보로</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">이름은 ○○○, 소속은 ○○팀으로 바꿔줘. 한 줄 소개는 "웨이퍼와 씨름하는 엔지니어" 느낌으로 네가 몇 개 제안해줘.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"마우스 올리면 반짝이는 효과 넣어줘"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-card">
-          <div class="mk-avatar">🧑‍🔬</div>
-          <div>
-            <div class="mk-title">김공정 <span class="mk-sub">· 식각기술팀</span></div>
-            <div class="mk-sub">"웨이퍼와 씨름하는 엔지니어"</div>
-            <div class="mk-sub mono">engineer@fab.example</div>
-          </div>
-        </div>
-        <div class="mock-cap">브라우저에 뜨는 다크 테마 카드 한 장</div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li><code>card.html</code>이 브라우저에서 열린다</li>
-          <li>수정 요청을 2번 이상 해봤다</li>
-        </ul>
-      </div>
-      <div class="panel hint">
-        <div class="panel-title">🚑 막혔다면</div>
-        <ul>
-          <li>"방금 만든 파일 경로 알려줘" / 에러는 그대로 복붙</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">전원이 '브라우저에서 내 이름이 뜨는' 순간을 경험하는 게 목표. 완성한 사람 화면 몇 개를 프로젝터로 보여주면 분위기가 뜬다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">부록 A-2</span>
-    <h2>점심 메뉴 룰렛</h2>
-    <span class="chip amber">⏱ 10분</span>
-    <span class="chip"><span class="stars">★</span>☆☆</span>
-  </div>
-  <p class="lab-goal">버튼을 누르면 <strong>움직이는 것</strong>. 오늘 점심은 이걸로 정합니다. 진짜로.</p>
-  <div class="lab-cols">
-    <div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 시작 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">점심 메뉴 룰렛을 lunch.html 파일 하나로 만들어줘. 돌림판이 빙글빙글 돌다가 하나를 뽑아주는 애니메이션으로. 메뉴는 김치찌개, 돈까스, 초밥, 쌀국수, 샐러드, 구내식당, 짜장면, 버거 8개. 시작 버튼은 크고 누르고 싶게.</div>
-      </div>
-      <div class="prompt">
-        <div class="p-label"><span>📋 이어서 — 감질나게</span><button class="copy-btn" type="button">복사</button></div>
-        <div class="p-text">당첨 순간에 폭죽 효과랑 두구두구 하는 긴장감을 추가해줘. 메뉴를 직접 추가/삭제할 수 있는 입력칸도.</div>
-      </div>
-      <div class="panel bonus">
-        <div class="panel-title">🚀 더 해보기</div>
-        <ul>
-          <li>"같은 메뉴가 3번 연속 나오면 안 되게 해줘"</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="panel expected">
-        <div class="panel-title">👀 예상 결과</div>
-        <div class="mockup mk-wheel-row">
-          <div class="mk-wheel"></div>
-          <div>
-            <div class="mk-title">🎉 돈까스!</div>
-            <div class="mk-sub">폭죽 + 두구두구 효과</div>
-            <div class="mk-sub">메뉴 추가/삭제 입력칸</div>
-          </div>
-        </div>
-      </div>
-      <div class="panel check">
-        <div class="panel-title">✅ 완료 조건</div>
-        <ul>
-          <li>돌림판이 돌고 결과가 나온다</li>
-          <li>오늘 점심이 정해졌다 🍜</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">애니메이션·인터랙션이 '내가 이걸 만들었다고?' 하는 반응을 만든다. 점심시간에 실제로 사용해서 오전 실습이 실생활로 연결되는 경험을 준다.</aside>
-</section>
-
-<section>
-  <div class="lab-head">
-    <span class="lab-id">부록 A-3</span>
     <h2>단위 변환기</h2>
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★</span>☆☆</span>
@@ -2159,7 +2055,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">부록 A-4</span>
+    <span class="lab-id">부록 A-2</span>
     <h2>회의 타이머</h2>
     <span class="chip amber">⏱ 10분</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
@@ -2211,13 +2107,13 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
 
 <section>
   <div class="lab-head">
-    <span class="lab-id">부록 A-5</span>
+    <span class="lab-id">부록 A-3</span>
     <h2>보너스 — 반응속도 게임</h2>
     <span class="chip amber">⏱ 여유 있으면</span>
     <span class="chip"><span class="stars">★★</span>☆</span>
     <span class="chip pink">BONUS</span>
   </div>
-  <p class="lab-goal">빨리 끝난 사람용 — 옆 사람과 <strong>대결</strong>할 수 있는 것.</p>
+  <p class="lab-goal">빨리 끝난 사람용 — <strong>내 최고 기록</strong>을 깨보는 것.</p>
   <div class="lab-cols">
     <div>
       <div class="prompt">
@@ -2243,7 +2139,7 @@ section.interlude { display: flex; flex-direction: column; justify-content: cent
         <div class="panel-title">✅ 완료 조건</div>
         <ul>
           <li>내 평균 반응속도를 알아냈다</li>
-          <li>옆 사람과 대결해봤다</li>
+          <li>최고 기록이 저장되고 갱신된다</li>
         </ul>
       </div>
     </div>
@@ -3172,35 +3068,6 @@ description: 주간 보고서 초안 생성. 이번 주 한 일 목록을 주면
     </div>
   </div>
   <aside class="notes">파일을 손으로 만들 필요 없이 Claude Code에게 시키는 게 이 실습의 핵심 — 비개발자도 스킬을 만들 수 있다는 자신감. skill-creator는 '스킬을 만드는' 도구가 아니라 이미 만든 스킬을 테스트·벤치마크·A/B로 평가하고 description(자동 호출 트리거)을 튜닝해주는 플러그인이라는 점을 정확히 짚는다(빠른 그룹/데모용, 초보 필수는 아님). 예시는 주간 보고서지만, 각자 오늘 잘 먹힌 프롬프트(웨이퍼 리포트, 스펙 Q&A 등)로 바꿔 만들게 하면 좋다.</aside>
-</section>
-
-<section>
-  <span class="kicker">PROJECT RULES</span>
-  <h2>미니 프로젝트 규칙</h2>
-  <div class="grid2">
-    <div class="card accent">
-      <h3>✅ 이렇게</h3>
-      <ul class="small">
-        <li><strong>작게:</strong> 45분에 v1이 나올 크기로 (기능 1~2개)</li>
-        <li><strong>합성 데이터로:</strong> 실데이터 모양만 흉내</li>
-        <li><strong>계획 먼저:</strong> "어떻게 만들지 계획부터 보여줘"</li>
-        <li><strong>단계별로:</strong> 하나 되면 다음 것</li>
-      </ul>
-    </div>
-    <div class="card warn">
-      <h3>⚠️ 이것만 피하기</h3>
-      <ul class="small">
-        <li>사내 기밀·실데이터 사용 ❌</li>
-        <li>"우리 팀 전체 시스템"급 대작 ❌ <span class="muted">(그건 다음 주부터)</span></li>
-        <li>완성 욕심 — <strong>동작하는 반쪽</strong>이 계획서 100장보다 낫습니다</li>
-      </ul>
-    </div>
-  </div>
-  <div class="prompt" style="margin-top: 12px;">
-    <div class="p-label"><span>📋 시작이 막막할 때 — 만능 첫 프롬프트</span><button class="copy-btn" type="button">복사</button></div>
-    <div class="p-text">나는 반도체 ○○ 업무를 하는 엔지니어야. 매주 ○○하는 일이 번거로워서 자동화하고 싶어. 입력은 ○○이고, 원하는 출력은 ○○이야. 45분 안에 만들 수 있는 v1 계획을 먼저 제안해줘. 연습용 가짜 데이터도 같이 만들어줘.</div>
-  </div>
-  <aside class="notes">만능 프롬프트의 빈칸(○○)을 채우는 것 자체가 요구사항 정의 연습. 못 채우는 사람은 조교와 1:1로 빈칸을 채워준다.</aside>
 </section>
 
 
