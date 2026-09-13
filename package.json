@@ -1,6 +1,7 @@
 {
   "name": "vibe-coding-live-qa",
   "private": true,
+  "license": "CC-BY-NC-4.0",
   "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",

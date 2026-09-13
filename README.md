@@ -84,3 +84,33 @@
 ```bash
 npm test
 ```
+
+## 라이선스
+
+이 저장소의 슬라이드·문서·예제 코드·이미지는
+[**CC BY-NC 4.0**](https://creativecommons.org/licenses/by-nc/4.0/deed.ko)
+(저작자표시-비영리 4.0 국제) 라이선스로 배포된다. 전문은 [`LICENSE`](LICENSE) 참고.
+
+| | |
+| --- | --- |
+| ✅ 공유 | 복제·배포·전시·공유 — 매체나 형식에 상관없이 자유롭게 |
+| ✅ 변경 | 리믹스·수정·번안 — 사내 세미나에 맞게 고쳐 쓰는 것도 자유 |
+| ⚠️ 저작자 표시 | 저작자·출처 URL·라이선스를 밝히고, 변경했다면 변경 사실을 표시 |
+| 🚫 비영리 | 상업적 목적(유료 강의·유료 교육 상품·상업 출판 등)으로는 이용 불가 |
+
+사내 스터디·부서 세미나처럼 **돈을 받지 않는 교육**에 쓰는 것은 허용된다.
+영리 목적으로 쓰고 싶다면 [이슈](https://github.com/geniuskey/vibe-coding/issues)로 문의하면 된다.
+
+출처 표기 예시:
+
+> "바이브 코딩 세미나 슬라이드" by geniuskey (https://github.com/geniuskey/vibe-coding),
+> [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — 일부 수정함
+
+### 제3자 구성요소
+
+아래는 각자의 원 라이선스를 따르며 CC BY-NC 4.0의 적용을 받지 않는다.
+
+| 경로 | 구성요소 | 라이선스 |
+| --- | --- | --- |
+| `vendor/reveal/` | reveal.js 5.1.0 | MIT |
+| `vendor/fonts/` | Pretendard | SIL Open Font License 1.1 |
