@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>바이브 코더를 위한 UI/UX 용어 사전 — 레이아웃 · 엘리먼트 · 테마 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="웹 개발을 해본 적 없는 사람이 AI에게 화면을 제대로 주문하기 위한 UI/UX 용어 사전. 레이아웃(뷰포트·컨테이너·그리드·거터·박스 모델), 화면 골격(헤더·사이드바·드로어·푸터), 베젤·노치·세이프 에어리어, UI 엘리먼트 40여 종의 이름과 실물 모양, 상태(hover·focus·disabled·empty), 디자인 토큰, 테마(머티리얼·쿠퍼티노·플루언트)까지 — 그리고 각 용어를 그대로 쓴 프롬프트 예문." />
+  <meta name="keywords" content="바이브 코딩, vibe coding, UI 용어, UX 용어, UI 엘리먼트, 레이아웃, 베젤, 사이드바, 드로어, 모달, 토스트, 스낵바, 머티리얼 디자인, 쿠퍼티노, Human Interface Guidelines, Fluent, 디자인 토큰, 반응형, 브레이크포인트, 프롬프트" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://geniuskey.github.io/vibe-coding/ui-ux/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="바이브 코더를 위한 UI/UX 용어 사전" />
+  <meta property="og:description" content="&quot;그거 좀 이쁘게 해줘&quot;를 &quot;사이드바를 240px 고정폭 드로어로, 카드 라운드 16px&quot;로 바꾸는 용어집. 레이아웃 · 엘리먼트 도감 · 테마(머티리얼/쿠퍼티노)." />
+  <meta property="og:url" content="https://geniuskey.github.io/vibe-coding/ui-ux/" />
+  <meta property="og:image" content="https://geniuskey.github.io/vibe-coding/og-image.png?v=2" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="바이브 코더를 위한 UI/UX 용어 사전" />
+  <meta name="twitter:description" content="레이아웃 · 베젤 · 사이드바 · UI 엘리먼트 40종 · 상태 · 디자인 토큰 · 머티리얼/쿠퍼티노 — 프롬프트에 그대로 쓰는 단어들." />
+  <meta name="twitter:image" content="https://geniuskey.github.io/vibe-coding/og-image.png?v=2" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "바이브 코더를 위한 UI/UX 용어 사전 — 레이아웃 · 엘리먼트 · 테마",
+    "description": "웹 개발 경험이 없는 사람이 AI에게 화면을 정확히 주문할 수 있도록, UI/UX 기본 용어를 실물 모양과 함께 정리한 세미나. 레이아웃과 박스 모델, 화면 골격, 디바이스 용어(베젤·노치·세이프 에어리어), UI 엘리먼트 도감, 컴포넌트 상태, 디자인 토큰, 머티리얼·쿠퍼티노·플루언트 테마, 그리고 용어를 활용한 프롬프트 작성법.",
+    "inLanguage": "ko",
+    "author": { "@type": "Person", "name": "geniuskey" },
+    "url": "https://geniuskey.github.io/vibe-coding/ui-ux/"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 공통 디자인 시스템은 agent-skills/index.html 의 것을 그대로 상속 -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
+      #tocSelect { width: auto; max-width: 42vw; }
+    }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      animation: gradMove 7s ease infinite;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .2s; }
+    .autoshow:nth-child(3) { animation-delay: .35s; }
+    .autoshow:nth-child(4) { animation-delay: .5s; }
+    .autoshow:nth-child(5) { animation-delay: .65s; }
+    .autoshow:nth-child(6) { animation-delay: .8s; }
+    .autoshow:nth-child(7) { animation-delay: .95s; }
+    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+
+    /* ========= 프롬프트 카드 ========= */
+    .prompt-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(38,30,82,0.72), rgba(16,22,44,0.72));
+      border: 1.5px solid rgba(155,130,255,0.65);
+      border-radius: 16px;
+      padding: 1.0rem 1.25rem 1.1rem;
+      margin: .7rem 0;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6);
+    }
+    .prompt-card .pc-label {
+      display: flex; align-items: center; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .92rem; font-weight: 800; letter-spacing: .06em;
+      color: #CBBDFF !important;
+      margin-bottom: .5rem;
+    }
+    .prompt-card pre.code {
+      margin: 0;
+      border: 0;
+      background: rgba(6,8,15,0.55);
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-size: 1.32rem;
+      font-weight: 600;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: keep-all;
+    }
+    .prompt-card.mini pre.code { font-size: 1.1rem; padding: .8rem 1rem; }
+    .prompt-card.mini { padding: .75rem 1rem .85rem; margin: .45rem 0; }
+    .prompt-card.bad { border-color: rgba(255,122,149,0.6); }
+    .prompt-card.bad .pc-label { color: #FFB3C2 !important; }
+    .prompt-card.good { border-color: rgba(43,234,208,0.65); }
+    .prompt-card.good .pc-label { color: #A8FFEE !important; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px;
+      border: 1px solid rgba(155,130,255,0.55);
+      background: rgba(20,22,44,0.85);
+      color: #E1D9FF; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; font-weight: 700;
+      padding: 4px 12px; cursor: pointer;
+      opacity: .7; transition: opacity .25s ease, transform .25s ease;
+    }
+    .copy-btn:hover { opacity: 1; transform: translateY(-1px); }
+
+    .list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+
+    /* ---- 규칙 표 ---- */
+    table.rules { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 1.18rem; }
+    table.rules th, table.rules td { padding: .62rem 1rem; text-align: left; }
+    table.rules thead th {
+      font-family: 'JetBrains Mono', monospace; font-size: .95rem; letter-spacing: .05em;
+      color: #CBBDFF !important; border-bottom: 2px solid rgba(155,130,255,0.6);
+      background: rgba(42,33,80,0.5);
+    }
+    table.rules thead th:first-child { border-top-left-radius: 12px; }
+    table.rules thead th:last-child { border-top-right-radius: 12px; }
+    table.rules tbody td { border-bottom: 1px solid rgba(190,200,224,0.18); background: rgba(230,236,249,0.03); }
+    table.rules tbody tr:hover td { background: rgba(124,92,255,0.12); }
+    table.rules .mono { font-size: 1.02rem; }
+
+    /* ---- 폴더 트리 ---- */
+    .ftree {
+      font-family: 'JetBrains Mono', monospace; font-size: 1.12rem; line-height: 1.85;
+      background: #0A0D18; border: 1px solid rgba(155,130,255,0.5); border-radius: 14px;
+      padding: 1.1rem 1.5rem; margin: 0;
+    }
+    .ftree .dir { color: #B5A1FF !important; font-weight: 800; }
+    .ftree .fl { color: #E8ECF5 !important; }
+    .ftree .hl { color: #7DFFDF !important; font-weight: 800; }
+    .ftree .note { color: #9BA6C0 !important; font-size: .92rem; }
+
+    /* ---- 워크플로 화살표 행 ---- */
+    .flow { display: flex; align-items: stretch; gap: .6rem; }
+    .flow .fstep {
+      flex: 1; border: 1.5px solid rgba(155,130,255,0.5); border-radius: 14px;
+      background: rgba(42,33,80,0.35); padding: .8rem .9rem; text-align: center;
+      display: flex; flex-direction: column; gap: .25rem; align-items: center; justify-content: center;
+    }
+    .flow .fstep .ic { font-size: 1.7rem; }
+    .flow .fstep b { font-size: 1.08rem; }
+    .flow .fstep small { font-size: .88rem; color: #B8BFD0 !important; }
+    .flow .farr { align-self: center; font-size: 1.5rem; color: #7DFFDF !important; flex: 0 0 auto; }
+
+    /* ---- 데모 터미널 (재생형 대화) ---- */
+    .demo-term {
+      position: relative;
+      background: #0A0D18;
+      border: 1px solid rgba(155,130,255,0.5);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7);
+      display: flex; flex-direction: column;
+    }
+    .dt-bar {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(30,26,60,0.9);
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(155,130,255,0.35);
+    }
+    .dt-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dt-bar .dot.r { background: #FF5F57; } .dt-bar .dot.y { background: #FEBC2E; } .dt-bar .dot.g { background: #28C840; }
+    .dt-bar .dt-title { margin-left: 6px; font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: #B8BFD0 !important; }
+    .dt-replay {
+      margin-left: auto; border: 1px solid rgba(155,130,255,0.55); background: rgba(20,22,44,0.9);
+      color: #E1D9FF; border-radius: 999px; font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem; font-weight: 700; padding: 3px 12px; cursor: pointer;
+      transition: background .25s ease;
+    }
+    .dt-replay:hover { background: rgba(124,92,255,0.45); }
+    .dt-body {
+      padding: .9rem 1.15rem; display: flex; flex-direction: column; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .98rem; line-height: 1.5;
+      min-height: 0; flex: 1; overflow-y: auto;
+    }
+    .dt-line { display: flex; gap: .6rem; align-items: flex-start; opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+    .dt-line.on { opacity: 1; transform: none; }
+    .dt-line .dt-who { flex: 0 0 auto; font-weight: 800; border-radius: 6px; padding: 1px 8px; font-size: .78rem; margin-top: 2px; white-space: nowrap; }
+    .dt-line.u .dt-who { background: rgba(155,130,255,.25); color: #D9CDFF !important; border: 1px solid rgba(155,130,255,.6); }
+    .dt-line.a .dt-who { background: rgba(43,234,208,.16); color: #A8FFEE !important; border: 1px solid rgba(43,234,208,.55); }
+    .dt-line.s .dt-who { background: rgba(255,212,107,.16); color: #FFE9AE !important; border: 1px solid rgba(255,212,107,.55); }
+    .dt-line.o .dt-who { background: rgba(230,236,249,.08); color: #B8BFD0 !important; border: 1px solid rgba(190,200,224,.35); }
+    .dt-line .dt-msg { color: #E8ECF5 !important; word-break: break-all; white-space: pre-wrap; }
+    .dt-line.u .dt-msg { color: #FFFFFF !important; font-weight: 600; word-break: keep-all; }
+    .dt-line.s .dt-msg { color: #FFE9AE !important; }
+    .dt-line.ok .dt-msg { color: #7DFFDF !important; font-weight: 700; }
+    .dt-caret { display: inline-block; width: .55em; height: 1.05em; background: #7DFFDF; vertical-align: -0.15em; animation: dtBlink .8s steps(1) infinite; }
+    @keyframes dtBlink { 50% { opacity: 0; } }
+
+    /* ==================================================================
+       이하 이 세미나 전용 컴포넌트
+       — UI 표본(specimen)은 "실물"이어야 뜻이 전달되므로, 어두운 덱 위에
+         밝은 표면(.uic)을 얹고 그 안에서 진짜 위젯을 그린다.
+       ================================================================== */
+
+    /* ---- 밝은 UI 캔버스 (표본의 무대) ---- */
+    .uic {
+      --s: #FFFFFF;          /* surface */
+      --s2: #F1F3F8;         /* surface variant */
+      --on: #14161F;         /* on-surface */
+      --on2: #5A6072;        /* on-surface muted */
+      --pri: #4F46E5;        /* primary */
+      --pri-on: #FFFFFF;
+      --line: #D8DCE7;
+      --rad: 12px;
+      color-scheme: light;      /* 밝은 표면이므로 네이티브 컨트롤도 라이트로 */
+      background: var(--s);
+      color: var(--on) !important;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 26px 50px -24px rgba(0,0,0,0.75);
+      padding: 1rem 1.1rem;
+      font-family: 'Pretendard', system-ui, sans-serif;
+      overflow: hidden;
+    }
+    .uic, .uic * { color: var(--on) !important; text-shadow: none !important; }
+    .uic *, .uic *::before, .uic *::after { box-sizing: border-box; }
+    .uic .u-dim { color: var(--on2) !important; }
+
+    /* ---- 표본 그리드: [실물] + [이름] + [한 줄 설명] ---- */
+    .spec-grid { display: grid; gap: .7rem; }
+    .spec-grid.c2 { grid-template-columns: repeat(2, 1fr); }
+    .spec-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+    .spec-grid.c4 { grid-template-columns: repeat(4, 1fr); }
+    .spec {
+      border: 1px solid rgba(155,130,255,0.4);
+      border-radius: 14px;
+      background: rgba(42,33,80,0.3);
+      padding: .55rem .7rem .6rem;
+      display: flex; flex-direction: column; gap: .45rem;
+      transition: border-color .3s ease, transform .3s ease;
+    }
+    .spec:hover { border-color: rgba(155,130,255,0.9); transform: translateY(-2px); }
+    .spec > .uic {
+      border-radius: 10px; padding: .7rem .75rem; min-height: 72px;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      flex-wrap: wrap; box-shadow: none; border: 0;
+    }
+    .spec .sp-name {
+      font-size: 1.04rem; font-weight: 800; color: #FFFFFF !important; line-height: 1.25;
+    }
+    .spec .sp-en {
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 700;
+      color: #7DFFDF !important; letter-spacing: .02em; display: block;
+    }
+    .spec .sp-desc { font-size: .92rem; line-height: 1.45; color: #C6CDDD !important; margin: 0; }
+    .spec.tight > .uic { min-height: 58px; }
+
+    /* ---- 진짜 위젯들 (밝은 캔버스 안) ---- */
+    .uic .btn {
+      font: 700 .92rem/1 'Pretendard', system-ui, sans-serif;
+      padding: .62em 1.15em; border-radius: 9px; border: 1px solid transparent;
+      background: var(--pri); color: var(--pri-on) !important; cursor: pointer;
+      display: inline-flex; align-items: center; gap: .4em;
+    }
+    .uic .btn.sec { background: var(--s2); color: var(--on) !important; border-color: var(--line); }
+    .uic .btn.ghost { background: transparent; color: var(--pri) !important; }
+    .uic .btn.dest { background: #DC2626; color: #fff !important; }
+    .uic .btn.ico { padding: .55em; border-radius: 9px; width: 2.2em; height: 2.2em; justify-content: center; }
+    .uic .btn[disabled] { background: var(--s2); color: #A6AEC0 !important; cursor: not-allowed; border-color: var(--line); }
+    .uic .fab {
+      width: 3rem; height: 3rem; border-radius: 50%; border: 0; cursor: pointer;
+      background: var(--pri); color: #fff !important; font-size: 1.3rem;
+      box-shadow: 0 8px 18px -6px rgba(79,70,229,.7);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .uic .field {
+      display: flex; flex-direction: column; gap: .22rem; width: 100%; text-align: left;
+    }
+    .uic .field > label { font-size: .78rem; font-weight: 700; color: var(--on2) !important; }
+    .uic input[type="text"], .uic input[type="email"], .uic input[type="password"], .uic select, .uic textarea {
+      font: 500 .92rem 'Pretendard', system-ui, sans-serif;
+      padding: .55em .7em; border-radius: 9px; border: 1px solid var(--line);
+      background: #FFF; color: var(--on) !important; width: 100%; box-sizing: border-box;
+    }
+    .uic input::placeholder { color: #9AA2B4 !important; }
+    .uic input:focus, .uic select:focus, .uic textarea:focus {
+      outline: 2px solid rgba(79,70,229,.45); outline-offset: 1px; border-color: var(--pri);
+    }
+    .uic .field .help { font-size: .72rem; color: var(--on2) !important; }
+    .uic .field.err input { border-color: #DC2626; }
+    .uic .field.err .help { color: #DC2626 !important; font-weight: 700; }
+    .uic .cbrow { display: flex; align-items: center; gap: .45rem; font-size: .9rem; font-weight: 600; }
+    .uic input[type="checkbox"], .uic input[type="radio"] { width: 1.05rem; height: 1.05rem; accent-color: var(--pri); margin: 0; }
+    .uic .sw {
+      width: 2.7rem; height: 1.5rem; border-radius: 999px; background: var(--pri);
+      position: relative; display: inline-block; flex: 0 0 auto;
+    }
+    .uic .sw::after {
+      content: ""; position: absolute; top: 3px; right: 3px; width: 1.1rem; height: 1.1rem;
+      border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    }
+    .uic .sw.off { background: #C3C8D6; }
+    .uic .sw.off::after { right: auto; left: 3px; }
+    .uic input[type="range"] { width: 100%; accent-color: var(--pri); }
+    .uic .tabs { display: flex; gap: .1rem; border-bottom: 1px solid var(--line); width: 100%; }
+    .uic .tabs span { padding: .45em .8em; font-size: .86rem; font-weight: 700; color: var(--on2) !important; border-bottom: 2px solid transparent; }
+    .uic .tabs span.on { color: var(--pri) !important; border-bottom-color: var(--pri); }
+    .uic .segc { display: inline-flex; background: var(--s2); border-radius: 9px; padding: 2px; gap: 2px; }
+    .uic .segc span { padding: .35em .8em; font-size: .84rem; font-weight: 700; border-radius: 7px; color: var(--on2) !important; }
+    .uic .segc span.on { background: #fff; color: var(--on) !important; box-shadow: 0 1px 3px rgba(0,0,0,.18); }
+    .uic .chipx {
+      display: inline-flex; align-items: center; gap: .3em;
+      padding: .3em .7em; border-radius: 999px; background: var(--s2);
+      border: 1px solid var(--line); font-size: .82rem; font-weight: 700;
+    }
+    .uic .badgex {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 1.25rem; height: 1.25rem; padding: 0 .35em; border-radius: 999px;
+      background: #DC2626; color: #fff !important; font-size: .72rem; font-weight: 800;
+    }
+    .uic .avatar {
+      width: 2.2rem; height: 2.2rem; border-radius: 50%; background: linear-gradient(140deg,#6366F1,#0EA5A4);
+      color: #fff !important; font-size: .82rem; font-weight: 800;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .uic .tip {
+      position: relative; background: #14161F; color: #fff !important;
+      font-size: .78rem; font-weight: 700; padding: .35em .6em; border-radius: 7px;
+    }
+    .uic .tip::after {
+      content: ""; position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%);
+      border: 5px solid transparent; border-top-color: #14161F; border-bottom: 0;
+    }
+    .uic .toastx {
+      background: #14161F; color: #fff !important; border-radius: 10px;
+      padding: .5em .8em; font-size: .84rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: .6em;
+    }
+    .uic .toastx b { color: #7DFFDF !important; }
+    .uic .alertx {
+      display: flex; gap: .5em; align-items: flex-start; width: 100%; text-align: left;
+      border-radius: 9px; padding: .5em .7em; font-size: .82rem; font-weight: 600;
+      background: #FEF3C7; border: 1px solid #FCD34D;
+    }
+    .uic .alertx.err { background: #FEE2E2; border-color: #FCA5A5; }
+    .uic .spinx {
+      width: 1.6rem; height: 1.6rem; border-radius: 50%;
+      border: 3px solid var(--s2); border-top-color: var(--pri);
+      animation: spinx 1s linear infinite;
+    }
+    @keyframes spinx { to { transform: rotate(360deg); } }
+    .uic .barx { width: 100%; height: .5rem; border-radius: 999px; background: var(--s2); overflow: hidden; }
+    .uic .barx i { display: block; height: 100%; width: 62%; background: var(--pri); border-radius: 999px; }
+    .uic .skelx { width: 100%; display: flex; flex-direction: column; gap: .35rem; }
+    .uic .skelx i {
+      display: block; height: .62rem; border-radius: 999px;
+      background: linear-gradient(90deg, #E7EAF2 25%, #F5F7FB 50%, #E7EAF2 75%);
+      background-size: 200% 100%; animation: skelx 1.4s ease-in-out infinite;
+    }
+    .uic .skelx i:nth-child(2) { width: 78%; }
+    .uic .skelx i:nth-child(3) { width: 52%; }
+    @keyframes skelx { 0% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+    .uic .crumb { font-size: .82rem; font-weight: 700; color: var(--on2) !important; }
+    .uic .crumb b { color: var(--on) !important; }
+    .uic .pager { display: inline-flex; gap: .25rem; }
+    .uic .pager span {
+      min-width: 1.7rem; height: 1.7rem; border-radius: 7px; border: 1px solid var(--line);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: var(--on2) !important;
+    }
+    .uic .pager span.on { background: var(--pri); color: #fff !important; border-color: var(--pri); }
+    .uic .menux {
+      width: 100%; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+      box-shadow: 0 8px 18px -10px rgba(0,0,0,.4); text-align: left;
+    }
+    .uic .menux div { padding: .38em .7em; font-size: .84rem; font-weight: 600; }
+    .uic .menux div + div { border-top: 1px solid var(--s2); }
+    .uic .menux div.on { background: var(--s2); }
+    .uic .accx { width: 100%; border: 1px solid var(--line); border-radius: 10px; text-align: left; overflow: hidden; }
+    .uic .accx .ah { padding: .4em .7em; font-size: .85rem; font-weight: 800; display: flex; justify-content: space-between; }
+    .uic .accx .ab { padding: .1em .7em .45em; font-size: .78rem; color: var(--on2) !important; border-top: 1px solid var(--s2); }
+    .uic .stepx { display: flex; align-items: center; gap: .3rem; font-size: .76rem; font-weight: 800; }
+    .uic .stepx i {
+      width: 1.35rem; height: 1.35rem; border-radius: 50%; background: var(--s2); color: var(--on2) !important;
+      display: inline-flex; align-items: center; justify-content: center; font-style: normal;
+    }
+    .uic .stepx i.on { background: var(--pri); color: #fff !important; }
+    .uic .stepx u { width: 1rem; height: 2px; background: var(--line); text-decoration: none; }
+    .uic table.tbx { width: 100%; border-collapse: collapse; font-size: .78rem; }
+    .uic table.tbx th { text-align: left; font-weight: 800; color: var(--on2) !important; border-bottom: 1px solid var(--line); padding: .25em .4em; }
+    .uic table.tbx td { padding: .25em .4em; border-bottom: 1px solid var(--s2); }
+    .uic .cardx {
+      width: 100%; border: 1px solid var(--line); border-radius: var(--rad); overflow: hidden; text-align: left;
+      box-shadow: 0 6px 14px -8px rgba(0,0,0,.35);
+    }
+    .uic .cardx .cimg { height: 2.1rem; background: linear-gradient(120deg,#818CF8,#22D3EE); }
+    .uic .cardx .cbody { padding: .4em .6em .5em; }
+    .uic .cardx b { font-size: .86rem; }
+    .uic .cardx p { font-size: .74rem; margin: .1em 0 0; color: var(--on2) !important; }
+    .uic .modalx {
+      width: 100%; position: relative; border-radius: 12px; background: #fff; text-align: left;
+      border: 1px solid var(--line); box-shadow: 0 14px 30px -14px rgba(0,0,0,.55); padding: .55em .7em;
+    }
+    .uic .modalx b { font-size: .86rem; }
+    .uic .modalx p { font-size: .74rem; margin: .15em 0 .4em; color: var(--on2) !important; }
+    .uic .modalx .mrow { display: flex; gap: .35rem; justify-content: flex-end; }
+    .uic .scrim { background: rgba(10,12,22,.72); border-radius: 12px; padding: .5rem; width: 100%; }
+    .uic .sheetx {
+      width: 100%; background: #fff; border-radius: 14px 14px 0 0; border: 1px solid var(--line);
+      border-bottom: 0; padding: .5em .7em .7em; text-align: left;
+    }
+    .uic .sheetx .grab { width: 2.2rem; height: .25rem; border-radius: 999px; background: var(--line); margin: 0 auto .4em; }
+    .uic .emptyx { text-align: center; color: var(--on2) !important; font-size: .8rem; font-weight: 600; }
+    .uic .emptyx .eic { font-size: 1.5rem; display: block; margin-bottom: .2rem; }
+
+    /* ---- 와이어프레임 (화면 골격 해부) ---- */
+    .wire {
+      --wl: rgba(155,130,255,0.55);
+      background: #0A0D18; border: 1px solid var(--wl); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 28px 56px -26px rgba(0,0,0,0.8);
+    }
+    .wire .wz {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 800;
+      letter-spacing: .06em; color: #CBBDFF !important;
+      border: 1px dashed rgba(155,130,255,0.45); background: rgba(42,33,80,0.34);
+      transition: background .3s ease, border-color .3s ease, color .3s ease;
+      text-align: center; padding: .3rem; gap: .35rem; flex-direction: column;
+    }
+    .wire .wz small { font-family: 'Pretendard', system-ui, sans-serif; font-size: .7rem; font-weight: 600; color: #9BA6C0 !important; letter-spacing: 0; }
+    .wire .wz.lit { background: rgba(124,92,255,0.5); border-color: #7DFFDF; color: #FFFFFF !important; }
+    .wire .wz.lit small { color: #DFF9F3 !important; }
+    .wire .w-top { height: 44px; flex: 0 0 auto; }
+    .wire .w-mid { display: flex; flex: 1; min-height: 0; }
+    .wire .w-side { width: 140px; flex: 0 0 auto; }
+    .wire .w-main { flex: 1; flex-direction: column; gap: .4rem; }
+    .wire .w-aside { width: 96px; flex: 0 0 auto; }
+    .wire .w-bot { height: 38px; flex: 0 0 auto; }
+    .wire .w-hero { height: 58px; }
+    .wire .w-cards { display: flex; gap: .4rem; width: 100%; height: 56px; }
+    .wire .w-cards .wz { flex: 1; }
+
+    .anat { display: flex; flex-direction: column; gap: .35rem; }
+    .anat .ar {
+      display: grid; grid-template-columns: 8.5rem 1fr; gap: .6rem; align-items: baseline;
+      padding: .4rem .55rem; border-radius: 10px; border: 1px solid transparent;
+      cursor: default; transition: background .25s ease, border-color .25s ease;
+    }
+    .anat .ar:hover, .anat .ar.lit { background: rgba(124,92,255,0.22); border-color: rgba(125,255,223,0.55); }
+    .anat .ar .an {
+      font-weight: 800; font-size: 1.02rem; color: #FFFFFF !important; line-height: 1.2;
+    }
+    .anat .ar .an em {
+      display: block; font-family: 'JetBrains Mono', monospace; font-style: normal;
+      font-size: .74rem; font-weight: 700; color: #7DFFDF !important;
+    }
+    .anat .ar .ad { font-size: .95rem; line-height: 1.45; color: #D5DAE8 !important; }
+
+    /* ---- 박스 모델 ---- */
+    .boxm { font-family: 'JetBrains Mono', monospace; text-align: center; }
+    .boxm .bl {
+      border: 2px dashed rgba(255,122,149,0.75); background: rgba(255,122,149,0.10);
+      padding: 1.5rem 1.2rem .8rem; border-radius: 10px; position: relative;
+    }
+    .boxm .bl > .tag {
+      position: absolute; top: .3rem; left: .6rem; font-size: .76rem; font-weight: 800;
+      color: #FFB3C2 !important; letter-spacing: .06em;
+    }
+    .boxm .bd {
+      border: 3px solid rgba(255,212,107,0.85); background: rgba(255,212,107,0.10);
+      padding: 1.4rem 1.1rem .8rem; border-radius: 8px; position: relative;
+    }
+    .boxm .bd > .tag { position: absolute; top: .25rem; left: .55rem; font-size: .76rem; font-weight: 800; color: #FFE08A !important; letter-spacing: .06em; }
+    .boxm .bp2 {
+      border: 2px dashed rgba(43,234,208,0.8); background: rgba(43,234,208,0.10);
+      padding: 1.4rem 1rem .9rem; border-radius: 6px; position: relative;
+    }
+    .boxm .bp2 > .tag { position: absolute; top: .25rem; left: .55rem; font-size: .76rem; font-weight: 800; color: #A8FFEE !important; letter-spacing: .06em; }
+    .boxm .bc {
+      background: rgba(155,130,255,0.35); border: 1px solid rgba(155,130,255,0.8);
+      border-radius: 4px; padding: .9rem .6rem; font-size: .9rem; font-weight: 800; color: #FFFFFF !important;
+    }
+
+    /* ---- 디바이스 프레임 (베젤 · 노치 · 세이프 에어리어) ---- */
+    .dev-wrap { display: flex; justify-content: center; }
+    .device {
+      position: relative; width: 236px; aspect-ratio: 9 / 18.5;
+      border-radius: 34px; background: #14161F;
+      border: 3px solid #2B3047;
+      padding: 11px 9px;                 /* ← 이 여백이 베젤 */
+      box-shadow: 0 30px 60px -22px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .device .screen {
+      position: relative; width: 100%; height: 100%; border-radius: 24px; overflow: hidden;
+      background: linear-gradient(170deg, #1B2036, #0E1220);
+      display: flex; flex-direction: column;
+    }
+    .device .notch {
+      position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+      width: 78px; height: 17px; border-radius: 999px; background: #05070D; z-index: 3;
+    }
+    .device .statusbar {
+      height: 30px; flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: space-between;
+      padding: 0 12px 3px; font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+      color: #DCE2F0 !important; font-weight: 700;
+    }
+    .device .appbar {
+      height: 30px; flex: 0 0 auto; display: flex; align-items: center; gap: 6px;
+      padding: 0 10px; background: rgba(124,92,255,.28); border-bottom: 1px solid rgba(155,130,255,.4);
+      font-size: .62rem; font-weight: 800; color: #EFE9FF !important;
+    }
+    .device .content {
+      flex: 1; min-height: 0; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .device .content .ln { height: 7px; border-radius: 999px; background: rgba(230,236,249,.16); }
+    .device .content .ln.s { width: 62%; }
+    .device .content .blk { flex: 1; border-radius: 10px; border: 1px dashed rgba(125,255,223,.4); background: rgba(43,234,208,.07); }
+    .device .tabbar {
+      height: 34px; flex: 0 0 auto; display: flex; align-items: center; justify-content: space-around;
+      border-top: 1px solid rgba(155,130,255,.35); background: rgba(20,22,44,.85); font-size: .72rem;
+    }
+    .device .homebar {
+      height: 16px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    }
+    .device .homebar i { width: 74px; height: 4px; border-radius: 999px; background: rgba(230,236,249,.45); }
+    .device .safe-hint {
+      position: absolute; inset: 30px 0 16px; z-index: 2; pointer-events: none;
+      border: 1px dashed rgba(255,212,107,.0); transition: border-color .4s ease, background .4s ease;
+    }
+    .device.show-safe .safe-hint { border-color: rgba(255,212,107,.9); background: rgba(255,212,107,.07); }
+    .dev-legend { display: flex; flex-direction: column; gap: .5rem; }
+    .dev-legend .dlr {
+      display: grid; grid-template-columns: 1.1rem 1fr; gap: .6rem; align-items: start;
+      font-size: 1.0rem; line-height: 1.45;
+    }
+    .dev-legend .dlr i { width: 1.1rem; height: 1.1rem; border-radius: 4px; margin-top: .22rem; }
+    .dev-legend .dlr b { color: #FFFFFF !important; }
+    .dev-legend .dlr span { color: #C6CDDD !important; }
+    .dev-legend .dlr .mono { color: #7DFFDF !important; font-size: .84rem; }
+
+    /* ---- 테마 표본 (머티리얼 · 쿠퍼티노 · 플루언트) ---- */
+    .theme-card {
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .theme-card > .uic { padding: .8rem .85rem; }
+    .theme-card .th-head {
+      display: flex; align-items: baseline; gap: .5rem; justify-content: space-between;
+    }
+    .theme-card .th-head b { font-size: 1.15rem; color: #FFFFFF !important; }
+    .theme-card .th-head span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; color: #9BA6C0 !important; }
+    .theme-card .th-note { font-size: .9rem; line-height: 1.45; color: #C6CDDD !important; margin: 0; }
+    .th-demo { display: flex; flex-direction: column; gap: .55rem; align-items: stretch; }
+    .th-demo .tbar {
+      display: flex; align-items: center; gap: .4rem; font-size: .8rem; font-weight: 800;
+      padding: .45em .6em;
+    }
+    .th-demo .trow { display: flex; gap: .4rem; align-items: center; }
+
+    /* 머티리얼: 각지지 않은 큰 라운드, 앱바 색면, 그림자(elevation), 대문자 라벨 */
+    .uic.mat { --pri: #6750A4; --rad: 16px; }
+    .uic.mat .tbar { background: #6750A4; color: #fff !important; border-radius: 0; margin: -.8rem -.85rem 0; padding: .6em .85em; }
+    .uic.mat .tbar * { color: #fff !important; }
+    .uic.mat .btn { border-radius: 999px; box-shadow: 0 3px 8px -2px rgba(103,80,164,.6); letter-spacing: .04em; }
+    .uic.mat .btn.sec { background: #E8DEF8; color: #21005D !important; border: 0; box-shadow: none; }
+    .uic.mat .cardx { border-radius: 16px; border-color: #E4E0EA; box-shadow: 0 2px 6px rgba(0,0,0,.18); }
+    .uic.mat .field > label { color: #6750A4 !important; }
+    .uic.mat input[type="text"] { border-radius: 4px 4px 0 0; border: 0; border-bottom: 2px solid #6750A4; background: #F3EDF7; }
+
+    /* 쿠퍼티노: 얇은 구분선, 큰 타이틀, 중앙 정렬 내비, 파란 텍스트 버튼 */
+    .uic.cup { --pri: #007AFF; --rad: 10px; --s2: #F2F2F7; }
+    .uic.cup .tbar {
+      background: rgba(249,249,249,.94); border-bottom: .5px solid #C6C6C8;
+      justify-content: center; margin: -.8rem -.85rem 0; padding: .5em .85em;
+      font-size: .82rem; font-weight: 700;
+    }
+    .uic.cup .btn { background: transparent; color: #007AFF !important; font-weight: 600; padding: .4em .5em; }
+    .uic.cup .btn.filled { background: #007AFF; color: #fff !important; border-radius: 10px; padding: .6em 1.1em; font-weight: 700; }
+    .uic.cup .cardx { border-radius: 10px; border: .5px solid #E5E5EA; box-shadow: none; background: #fff; }
+    .uic.cup .listx { background: #fff; border-radius: 10px; overflow: hidden; border: .5px solid #E5E5EA; }
+    .uic.cup .listx div { padding: .42em .7em; font-size: .82rem; font-weight: 600; display: flex; justify-content: space-between; }
+    .uic.cup .listx div + div { border-top: .5px solid #E5E5EA; }
+    .uic.cup .listx .chev { color: #C7C7CC !important; }
+    .uic.cup .sw { background: #34C759; }
+
+    /* 플루언트: 작은 라운드, 은은한 테두리, 강조 밑선 */
+    .uic.flu { --pri: #0F6CBD; --rad: 6px; --s2: #F5F5F5; }
+    .uic.flu .tbar { background: #F5F5F5; border-bottom: 1px solid #E1E1E1; margin: -.8rem -.85rem 0; padding: .5em .85em; }
+    .uic.flu .btn { border-radius: 4px; box-shadow: none; }
+    .uic.flu .btn.sec { background: #fff; border: 1px solid #D1D1D1; }
+    .uic.flu .cardx { border-radius: 6px; border-color: #E1E1E1; box-shadow: 0 1px 2px rgba(0,0,0,.14); }
+    .uic.flu input[type="text"] { border-radius: 4px; border-bottom: 2px solid #0F6CBD; }
+
+    /* ---- 상태 표 ---- */
+    .states { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+    .state {
+      border: 1px solid rgba(155,130,255,0.4); border-radius: 12px; padding: .5rem .6rem;
+      background: rgba(42,33,80,0.3); display: flex; flex-direction: column; gap: .4rem; align-items: center;
+    }
+    .state .snm { font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 800; color: #7DFFDF !important; }
+    .state .sko { font-size: .86rem; font-weight: 700; color: #FFFFFF !important; }
+    .state .btn-demo {
+      font: 700 .86rem 'Pretendard', system-ui, sans-serif; padding: .5em 1em; border-radius: 9px;
+      background: #4F46E5; color: #fff !important; border: 1px solid transparent;
+    }
+    .state .btn-demo.hov { background: #6366F1; transform: translateY(-1px); box-shadow: 0 6px 14px -6px rgba(99,102,241,.9); }
+    .state .btn-demo.foc { outline: 3px solid #7DFFDF; outline-offset: 2px; }
+    .state .btn-demo.act { background: #4338CA; transform: translateY(1px); }
+    .state .btn-demo.dis { background: #3A3F52; color: #8B93A7 !important; }
+
+    /* ---- 토큰 스케일 ---- */
+    .tok { display: flex; flex-direction: column; gap: .3rem; }
+    .tok .trow2 { display: grid; grid-template-columns: 5.4rem 1fr 3.2rem; gap: .5rem; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: .84rem; }
+    .tok .trow2 .tn { color: #CBBDFF !important; font-weight: 800; }
+    .tok .trow2 .tv { color: #9BA6C0 !important; text-align: right; }
+    .tok .trow2 .tb { height: .8rem; border-radius: 3px; background: linear-gradient(90deg, #9B82FF, #2BEAD0); }
+    .rad-row { display: flex; gap: .55rem; align-items: flex-end; }
+    .rad-row .rr {
+      flex: 1; height: 3.1rem; background: rgba(124,92,255,.3); border: 1px solid rgba(155,130,255,.8);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: .76rem; font-weight: 800; color: #E1D9FF !important;
+    }
+    /* 그림자는 밝은 면 위에서만 보이므로, 이 줄만 라이트 표면으로 깐다 */
+    .elev-row {
+      display: flex; gap: .8rem; background: #EDEFF6; border: 1px solid rgba(255,255,255,.2);
+      border-radius: 12px; padding: .75rem .8rem;
+    }
+    .elev-row .er {
+      flex: 1; height: 2.7rem; border-radius: 10px; background: #FFFFFF;
+      border: 1px solid #DCE0EA;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 800;
+      color: #14161F !important; text-shadow: none !important;
+    }
+    .elev-row .er:nth-child(1) { box-shadow: none; }
+    .elev-row .er:nth-child(2) { box-shadow: 0 1px 3px rgba(20,22,40,.22); }
+    .elev-row .er:nth-child(3) { box-shadow: 0 5px 12px rgba(20,22,40,.3); }
+    .elev-row .er:nth-child(4) { box-shadow: 0 12px 26px rgba(20,22,40,.38); }
+    .type-scale { display: flex; flex-direction: column; gap: .1rem; }
+    .type-scale div { line-height: 1.2; color: #FFFFFF !important; }
+    .type-scale .ts-l { font-family: 'JetBrains Mono', monospace; font-size: .74rem; color: #9BA6C0 !important; margin-left: .5rem; }
+
+    /* ---- 브레이크포인트 눈금자 ---- */
+    .bpr { display: flex; align-items: stretch; gap: .35rem; }
+    .bpr .bpc {
+      flex: 1; border: 1px solid rgba(155,130,255,.5); border-radius: 10px;
+      background: rgba(42,33,80,.34); padding: .55rem .5rem; text-align: center;
+      display: flex; flex-direction: column; gap: .2rem;
+    }
+    .bpr .bpc .bic { font-size: 1.4rem; }
+    .bpr .bpc b { font-size: .92rem; color: #FFFFFF !important; }
+    .bpr .bpc .mono { font-size: .74rem; color: #7DFFDF !important; }
+    .bpr .bpc small { font-size: .74rem; color: #B8BFD0 !important; }
+    .bpr .bpc.one { flex: 0 0 15%; }
+    .bpr .bpc.two { flex: 0 0 22%; }
+
+    /* ---- 번역기 (모호한 말 → 용어) ---- */
+    .tr2 { display: grid; grid-template-columns: 1fr 1.9rem 1.25fr; gap: .5rem; align-items: center; }
+    .tr2 .vague, .tr2 .exact {
+      border-radius: 11px; padding: .5rem .7rem; font-size: 1.0rem; line-height: 1.4;
+    }
+    .tr2 .vague { background: rgba(80,25,45,.45); border: 1px solid rgba(255,122,149,.55); color: #FFD7DF !important; }
+    .tr2 .exact { background: rgba(15,60,55,.5); border: 1px solid rgba(43,234,208,.6); color: #DFFFF8 !important; }
+    .tr2 .exact .mono { color: #7DFFDF !important; font-size: .9rem; }
+    .tr2 .ar2 { text-align: center; color: #7DFFDF !important; font-size: 1.2rem; }
+
+    /* ---- 치트시트 ---- */
+    .cheat { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+    .cheat .cg {
+      border: 1px solid rgba(155,130,255,.45); border-radius: 12px; padding: .55rem .7rem;
+      background: rgba(42,33,80,.3);
+    }
+    .cheat .cg h4 {
+      font-size: .92rem; margin: 0 0 .3rem; color: #7DFFDF !important;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
+    }
+    .cheat .cg p { font-size: .84rem; line-height: 1.5; margin: 0; color: #D5DAE8 !important; }
+    .cheat .cg p b { color: #FFFFFF !important; }
+  </style>
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../prompt/index.html" title="함께 보기: AI에게 일 시키는 법 — 프롬프트 엔지니어링">
+    <span aria-hidden="true">↗</span><span>프롬프트 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="grid-2" style="align-items:center; gap:2.6rem;">
+          <div>
+            <div class="chip">SEMINAR · 바이브 코딩 × 화면 만들기</div>
+            <h1 style="font-size:3.2rem;">바이브 코더를 위한<br/><span class="grad">UI/UX 용어 사전</span></h1>
+            <p class="small" style="color:#D5DAE8 !important; margin-top:.6rem;">
+              "그거 좀 이쁘게 해줘"가 안 먹히는 이유는 실력이 아니라 <b class="accent2">단어</b>입니다.<br/>
+              레이아웃 · 베젤 · 사이드바 · 엘리먼트 이름 · 테마까지 — 이름을 알면 주문이 됩니다.
+            </p>
+            <p class="tiny" style="color:#9BA6C0 !important; margin-top:1.2rem;">
+              바이브 코딩 세미나 시리즈 · geniuskey
+            </p>
+          </div>
+          <div>
+            <div class="wire" id="ttl-wire" style="height:330px;" aria-label="화면 골격이 이름을 찾아가는 데모">
+              <div class="wz w-top" data-t="1">HEADER<small>헤더 · 앱 바</small></div>
+              <div class="w-mid">
+                <div class="wz w-side" data-t="2">SIDEBAR<small>사이드바</small></div>
+                <div class="wz w-main" data-t="3">MAIN<small>메인 콘텐츠</small></div>
+              </div>
+              <div class="wz w-bot" data-t="4">FOOTER<small>푸터</small></div>
+            </div>
+            <p class="tiny center" style="margin-top:.7rem; color:#9BA6C0 !important;">
+              <span id="ttl-line" class="mono" style="color:#7DFFDF !important;"></span><span class="dt-caret" id="ttl-caret"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        인사 + 오늘의 문제 제기. 오른쪽 목업은 자동 재생 — 화면의 각 칸에 이미 이름이 다 붙어 있다는 것,
+        그 이름을 쓰면 프롬프트가 바뀐다는 것을 예고. 청중에게 "웹 개발 해보신 분?" 손 들어보게 하고 시작.
+      </aside>
+    </section>
+
+    <!-- ============= 2. WHY — 왜 안 먹히나 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WHY</div>
+        <h2>AI는 잘하는데, <span class="accent3">주문이</span> 안 된다</h2>
+        <div class="grid-2" style="gap:1.6rem; margin-top:.4rem;">
+          <div class="prompt-card bad mini">
+            <div class="pc-label">내가 쓴 말</div>
+            <pre class="code">왼쪽에 메뉴 같은 거 있고, 위에 띠 하나 있고,
+버튼은 좀 더 예쁘게… 아 그리고 폰에서도 잘 되게.</pre>
+          </div>
+          <div class="prompt-card good mini">
+            <div class="pc-label">AI가 알아듣는 말</div>
+            <pre class="code">좌측에 240px 고정 사이드바, 상단에 56px 앱 바.
+버튼은 primary / secondary 두 종류, 라운드 12px.
+모바일(&lt;768px)에서는 사이드바를 햄버거 드로어로.</pre>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:1.2rem;">
+          <div class="card autoshow fade-up">
+            <h3>😵 말이 안 나옴</h3>
+            <p>머릿속엔 그림이 있는데 <b class="accent3">부를 이름이 없다</b>. 그래서 "그거", "저거"로 설명하게 됩니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🎲 결과가 복불복</h3>
+            <p>모호한 말은 AI가 <b class="accent3">알아서 해석</b>합니다. 매번 다른 화면이 나오는 게 당연합니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🔁 수정이 산으로</h3>
+            <p>"위에 있는 거 좀 내려줘"는 <b class="accent3">어느 것</b>인지 모릅니다. 고치다 멀쩡한 데가 깨집니다.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        핵심 메시지: 바이브 코딩에서 막히는 지점은 코딩이 아니라 용어. 오른쪽 프롬프트는 어려운 게
+        아니라 '이름을 쓴 것'뿐이라는 점을 강조. 오늘 끝나면 저 오른쪽 문장을 쓸 수 있게 된다고 약속.
+      </aside>
+    </section>
+
+    <!-- ============= 3. 오늘의 지도 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">MAP</div>
+        <h2>오늘 챙겨갈 <span class="accent2">다섯 묶음</span></h2>
+        <div class="flow" style="margin-top:1rem;">
+          <div class="fstep autoshow zoom-in"><span class="ic">📐</span><b>레이아웃</b><small>화면을 나누는 말</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🧱</span><b>골격</b><small>헤더·사이드바·푸터</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🎛️</span><b>엘리먼트</b><small>부품 40종의 이름</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🎚️</span><b>상태·토큰</b><small>hover·간격·라운드</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in"><span class="ic">🎨</span><b>테마</b><small>머티리얼·쿠퍼티노</small></div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:1.6rem; color:#B8BFD0 !important;">
+          외우지 않아도 됩니다. <em>"아, 저게 그거였구나"</em> 한 번만 연결되면, 다음부터는 프롬프트에 자연스럽게 나옵니다.<br/>
+          마지막 장에 <b class="accent2">치트시트 한 장</b>과 <b class="accent2">화면 주문서 템플릿</b>을 드립니다.
+        </p>
+      </div>
+      <aside class="notes">
+        진행 안내. 용어 암기 세미나가 아니라 '지목하는 법'을 배우는 세미나라고 프레이밍.
+      </aside>
+    </section>
+
+    <!-- ============= 4. 레이아웃 ① 화면을 담는 그릇 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">LAYOUT 1/3</div>
+        <h2>화면을 담는 그릇 — <span class="accent2">뷰포트 · 컨테이너 · 그리드</span></h2>
+        <div class="grid-2" style="gap:1.8rem; align-items:center;">
+          <div class="uic" style="padding:0;">
+            <div style="background:#E9ECF4; padding:.5rem; border-bottom:1px dashed #9AA2B4;">
+              <div style="font:800 .7rem/1 'JetBrains Mono',monospace; color:#5A6072 !important; margin-bottom:.35rem;">VIEWPORT — 브라우저 보이는 영역</div>
+              <div style="background:#fff; border:1px dashed #4F46E5; border-radius:8px; padding:.5rem;">
+                <div style="font:800 .7rem/1 'JetBrains Mono',monospace; color:#4F46E5 !important; margin-bottom:.4rem;">CONTAINER — max-width 1200px, 가운데 정렬</div>
+                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
+                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
+                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
+                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
+                </div>
+                <div style="display:flex; justify-content:center; gap:.4rem; margin-top:.35rem; font:700 .66rem 'JetBrains Mono',monospace; color:#5A6072 !important;">
+                  <span>◀ COLUMN 컬럼 ▶</span><span style="color:#0E9488 !important;">◀ GUTTER 거터(10px) ▶</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="anat">
+            <div class="ar"><div class="an">뷰포트<em>viewport</em></div><div class="ad">브라우저 창에서 실제로 보이는 영역. "뷰포트 높이만큼 꽉 차게"가 첫 화면 주문의 관용구입니다.</div></div>
+            <div class="ar"><div class="an">컨테이너<em>container</em></div><div class="ad">내용을 감싸는 폭 제한 상자. <span class="mono">max-width 1200px + 가운데 정렬</span>이 웹의 기본값 같은 값.</div></div>
+            <div class="ar"><div class="an">그리드 · 컬럼<em>grid / column</em></div><div class="ad">화면을 세로로 n등분한 격자. "12 컬럼 그리드", "카드를 3열로"처럼 씁니다.</div></div>
+            <div class="ar"><div class="an">거터<em>gutter</em></div><div class="ad">컬럼 사이 간격. 요소 사이 간격 전반은 <span class="mono">gap</span>이라고 하면 통합니다.</div></div>
+            <div class="ar"><div class="an">여백<em>whitespace</em></div><div class="ad">비어 있는 공간. "여백을 더 주자"는 "촘촘한 걸 숨 쉬게 하자"는 뜻의 전문 용어입니다.</div></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        여기서 가장 자주 쓰이는 실전 표현 3개만 각인: "뷰포트 꽉 차게", "컨테이너 max-width 1200",
+        "카드 3열 그리드, gap 16px". 숫자를 함께 말하는 습관을 강조.
+      </aside>
+    </section>
+
+    <!-- ============= 5. 레이아웃 ② 박스 모델 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">LAYOUT 2/3</div>
+        <h2>모든 것은 상자다 — <span class="accent2">박스 모델</span></h2>
+        <div class="grid-2" style="gap:2rem; align-items:center;">
+          <div class="boxm">
+            <div class="bl"><span class="tag">MARGIN — 바깥 여백</span>
+              <div class="bd"><span class="tag">BORDER — 테두리</span>
+                <div class="bp2"><span class="tag">PADDING — 안쪽 여백</span>
+                  <div class="bc">CONTENT — 내용</div>
+                </div>
+              </div>
+            </div>
+            <p class="tiny" style="margin-top:.6rem; color:#9BA6C0 !important;">
+              버튼·카드·화면 전체 — 웹의 모든 요소가 이 4겹 상자입니다.
+            </p>
+          </div>
+          <div class="stack" style="gap:.9rem;">
+            <div class="card" style="padding:1rem 1.2rem;">
+              <h3 style="margin-bottom:.4rem;">🧩 이 둘만 구분하면 절반은 끝</h3>
+              <p><b class="accent2">padding</b> = 테두리 <em>안쪽</em> 숨통 → "버튼이 너무 꽉 껴요"의 답.<br/>
+                 <b class="accent">margin</b> = 테두리 <em>바깥</em> 거리 → "요소들이 너무 붙었어요"의 답.</p>
+            </div>
+            <table class="rules" style="font-size:1.06rem;">
+              <thead><tr><th>이렇게 말하는 대신</th><th>이렇게</th></tr></thead>
+              <tbody>
+                <tr><td>버튼이 답답해요</td><td class="mono accent2">padding 12px 20px</td></tr>
+                <tr><td>카드가 서로 붙었어요</td><td class="mono accent2">gap 16px</td></tr>
+                <tr><td>테두리 좀 둥글게</td><td class="mono accent2">border-radius 12px</td></tr>
+                <tr><td>선 얇게 한 줄</td><td class="mono accent2">border 1px solid</td></tr>
+                <tr><td>내용이 벽에 붙었어요</td><td class="mono accent2">컨테이너 padding 24px</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        padding/margin 혼동은 초보 프롬프트의 1위 실수. 왼쪽 그림을 손으로 짚으며 설명.
+        오른쪽 표는 사진 찍으라고 안내해도 좋다.
+      </aside>
+    </section>
+
+    <!-- ============= 6. 레이아웃 ③ 붙이고 쌓는 말 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">LAYOUT 3/3</div>
+        <h2>붙이고, 쌓고, 넘칠 때 쓰는 말</h2>
+        <div class="grid-2" style="gap:1.6rem;">
+          <div class="stack" style="gap:.7rem;">
+            <div class="card" style="padding:.9rem 1.1rem;">
+              <h3 style="font-size:1.25rem; margin-bottom:.35rem;">가로/세로로 늘어놓기</h3>
+              <p class="small"><b class="accent2">flex row</b> 가로 한 줄 · <b class="accent2">flex column</b> 세로 한 줄 ·
+                 <b class="accent2">grid</b> 격자.<br/>
+                 정렬은 <span class="mono">가운데 정렬(center)</span> · <span class="mono">양끝 정렬(space-between)</span>만 알아도 대부분 됩니다.</p>
+            </div>
+            <div class="card" style="padding:.9rem 1.1rem;">
+              <h3 style="font-size:1.25rem; margin-bottom:.35rem;">스크롤해도 따라오게</h3>
+              <p class="small"><b class="accent2">sticky</b> 스크롤하다 특정 위치에서 붙음(헤더가 상단에 고정되는 그것) ·
+                 <b class="accent2">fixed</b> 화면에 완전히 고정 · <b class="accent2">absolute</b> 부모 기준 좌표로 얹기.</p>
+            </div>
+            <div class="card" style="padding:.9rem 1.1rem;">
+              <h3 style="font-size:1.25rem; margin-bottom:.35rem;">겹치고 넘칠 때</h3>
+              <p class="small"><b class="accent2">z-index</b> 위아래 순서(모달이 가려지면 이 얘기) ·
+                 <b class="accent2">overflow scroll</b> 넘치면 스크롤 · <b class="accent2">truncate / ellipsis</b> 넘치면 <span class="mono">…</span>로 자르기.</p>
+            </div>
+          </div>
+          <div class="stack" style="gap:.7rem;">
+            <div class="prompt-card mini good" style="margin:0;">
+              <div class="pc-label">이렇게 쓰면 한 번에 나옵니다</div>
+              <pre class="code">헤더는 sticky로 상단 고정하고 z-index 높게.
+목록은 flex column, gap 12px.
+제목이 길면 한 줄로 truncate 처리해줘.
+본문 영역만 overflow-y: auto 로 스크롤되게.</pre>
+            </div>
+            <div class="card bad" style="padding:.9rem 1.1rem;">
+              <h3 style="font-size:1.25rem; margin-bottom:.35rem;">⚠️ 자주 겪는 증상 → 진짜 원인</h3>
+              <p class="small">"모달이 뒤에 깔려요" → <span class="mono">z-index</span> ·
+                 "글자가 넘쳐 흘러요" → <span class="mono">overflow</span> ·
+                 "스크롤하면 헤더가 사라져요" → <span class="mono">sticky</span> ·
+                 "화면이 두 번 스크롤돼요" → <span class="mono">height 100% / 100vh</span> 충돌.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        증상 → 용어 매핑이 이 슬라이드의 값어치. 실제로 겪어본 사람은 여기서 "그거!" 반응이 나온다.
+      </aside>
+    </section>
+
+    <!-- ============= 7. 화면 골격 해부 (인터랙티브) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ANATOMY</div>
+        <h2>화면 골격 — <span class="accent2">칸마다 이름이 있다</span></h2>
+        <div class="grid-2" style="gap:1.8rem; align-items:center;">
+          <div class="wire" id="an-wire" style="height:360px;">
+            <div class="wz w-top" data-z="header">HEADER / APP BAR<small>로고 · 검색 · 프로필</small></div>
+            <div class="w-mid">
+              <div class="wz w-side" data-z="sidebar">SIDEBAR<small>내비게이션</small></div>
+              <div class="w-main" style="display:flex; padding:.4rem; gap:.4rem;">
+                <div class="wz w-hero" data-z="hero" style="flex:0 0 auto;">HERO<small>첫 화면 큰 영역</small></div>
+                <div class="w-cards" style="flex:1;">
+                  <div class="wz" data-z="content">CARD</div>
+                  <div class="wz" data-z="content">CARD</div>
+                  <div class="wz" data-z="content">CARD</div>
+                </div>
+              </div>
+              <div class="wz w-aside" data-z="aside">ASIDE<small>보조 패널</small></div>
+            </div>
+            <div class="wz w-bot" data-z="footer">FOOTER<small>저작권 · 링크</small></div>
+          </div>
+          <div class="anat" id="an-list">
+            <div class="ar" data-z="header"><div class="an">헤더 / 앱 바<em>header / app bar</em></div><div class="ad">화면 맨 위 띠. 웹은 헤더, 모바일 앱은 앱 바(상단 바)라고 부릅니다.</div></div>
+            <div class="ar" data-z="sidebar"><div class="an">사이드바<em>sidebar</em></div><div class="ad">측면 내비게이션 기둥. 보통 좌측, 폭 <span class="mono">240~280px</span> 고정.</div></div>
+            <div class="ar" data-z="hero"><div class="an">히어로<em>hero</em></div><div class="ad">첫 화면의 큰 제목·이미지 영역. "히어로에 카피 한 줄과 CTA 버튼"처럼 씁니다.</div></div>
+            <div class="ar" data-z="content"><div class="an">메인 · 콘텐츠<em>main / content</em></div><div class="ad">본문. 그 안의 반복 단위가 <b>카드</b>·<b>리스트 아이템</b>입니다.</div></div>
+            <div class="ar" data-z="aside"><div class="an">어사이드 / 패널<em>aside / panel</em></div><div class="ad">본문 옆 보조 영역(필터·속성창). 오른쪽에 붙으면 <b>인스펙터</b>라고도 합니다.</div></div>
+            <div class="ar" data-z="footer"><div class="an">푸터<em>footer</em></div><div class="ad">맨 아래 띠. 저작권·링크·연락처가 들어갑니다.</div></div>
+          </div>
+        </div>
+        <p class="tiny center" style="margin-top:.5rem; color:#9BA6C0 !important;">오른쪽 이름에 마우스를 올리면 해당 칸이 켜집니다 — 자동으로도 순회합니다.</p>
+      </div>
+      <aside class="notes">
+        가장 실용적인 슬라이드. 이름 6개만 알면 "어디를" 지목하는 문제가 해결된다.
+        발표 중 마우스로 하나씩 올려 보여줄 것.
+      </aside>
+    </section>
+
+    <!-- ============= 8. 사이드바 3형제 + 바텀 내비 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">NAVIGATION</div>
+        <h2>사이드바라고 다 같지 않다</h2>
+        <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:.3rem;">
+          <div class="spec">
+            <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
+              <div style="display:flex; width:100%;">
+                <div style="width:38%; background:#EEF0F7; border-right:1px solid #D8DCE7; padding:.4rem .3rem; display:flex; flex-direction:column; gap:.25rem;">
+                  <i style="height:.4rem; border-radius:99px; background:#4F46E5; display:block;"></i>
+                  <i style="height:.4rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
+                  <i style="height:.4rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
+                </div>
+                <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
+              </div>
+            </div>
+            <div class="sp-name">고정 사이드바<span class="sp-en">persistent sidebar</span></div>
+            <p class="sp-desc">항상 펼쳐진 상태. 데스크톱 업무용 화면의 기본. "240px 고정 사이드바".</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
+              <div style="display:flex; width:100%; position:relative;">
+                <div style="width:16%; background:#EEF0F7; border-right:1px solid #D8DCE7; padding:.4rem .2rem; display:flex; flex-direction:column; gap:.3rem; align-items:center; font-size:.62rem;">
+                  <span>🏠</span><span>📊</span><span>⚙️</span>
+                </div>
+                <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
+              </div>
+            </div>
+            <div class="sp-name">레일 (아이콘만)<span class="sp-en">navigation rail</span></div>
+            <p class="sp-desc">아이콘 폭만 남긴 얇은 사이드바. "레일로 접어두고 hover 시 펼치기".</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
+              <div style="display:flex; width:100%; position:relative; background:#fff;">
+                <div style="position:absolute; inset:0; background:rgba(10,12,22,.6);"></div>
+                <div style="position:relative; z-index:2; width:52%; background:#fff; box-shadow:4px 0 14px rgba(0,0,0,.3); padding:.4rem .35rem; display:flex; flex-direction:column; gap:.25rem;">
+                  <b style="font-size:.6rem;">☰ 메뉴</b>
+                  <i style="height:.36rem; border-radius:99px; background:#4F46E5; display:block;"></i>
+                  <i style="height:.36rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
+                </div>
+              </div>
+            </div>
+            <div class="sp-name">드로어 (햄버거)<span class="sp-en">drawer</span></div>
+            <p class="sp-desc">평소엔 숨어 있고 <span class="mono">☰</span> 누르면 밀려 나옴. 뒤를 덮는 어두운 막이 <b>스크림</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
+              <div style="display:flex; flex-direction:column; width:100%; height:130px;">
+                <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
+                <div style="height:26px; border-top:1px solid #D8DCE7; background:#F7F8FC; display:flex; align-items:center; justify-content:space-around; font-size:.66rem;">
+                  <span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span>
+                </div>
+              </div>
+            </div>
+            <div class="sp-name">바텀 내비게이션<span class="sp-en">bottom navigation / tab bar</span></div>
+            <p class="sp-desc">모바일 하단 탭. 엄지로 닿는 자리라 앱에서는 사이드바보다 이걸 씁니다.</p>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:1rem;">
+          <div class="pc-label">골라서 말하기</div>
+          <pre class="code">데스크톱은 240px 고정 사이드바, 태블릿은 아이콘 레일,
+모바일은 햄버거 드로어(스크림 포함) + 하단 탭 4개로 해줘.</pre>
+        </div>
+      </div>
+      <aside class="notes">
+        "사이드바"라는 한 단어가 실제로는 네 가지 물건이라는 것. 여기서 반응이 좋다.
+        드로어/스크림은 모달 슬라이드에서 다시 등장한다고 예고.
+      </aside>
+    </section>
+
+    <!-- ============= 9. 디바이스 용어 (베젤 · 노치 · 세이프 에어리어) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">DEVICE</div>
+        <h2>베젤 · 노치 · <span class="accent2">세이프 에어리어</span></h2>
+        <div class="grid-2" style="gap:2rem; align-items:center;">
+          <div class="dev-wrap">
+            <div class="device" id="dev">
+              <div class="notch"></div>
+              <div class="screen">
+                <div class="safe-hint"></div>
+                <div class="statusbar"><span>9:41</span><span>▮▮▮ ▲ 🔋</span></div>
+                <div class="appbar">☰ &nbsp;내 앱</div>
+                <div class="content">
+                  <div class="ln"></div><div class="ln s"></div>
+                  <div class="blk"></div>
+                </div>
+                <div class="tabbar"><span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span></div>
+                <div class="homebar"><i></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="dev-legend">
+            <div class="dlr"><i style="background:#2B3047; border:1px solid #6B7390;"></i><div><b>베젤 <span class="mono">bezel</span></b> — <span>화면을 둘러싼 기기의 테두리. 화면 안 여백이 아니라 <em>하드웨어</em>입니다. "베젤이 얇다"는 기기 얘기.</span></div></div>
+            <div class="dlr"><i style="background:#05070D; border:1px solid #6B7390;"></i><div><b>노치 · 다이나믹 아일랜드 <span class="mono">notch</span></b> — <span>카메라가 화면을 파먹은 자리. 여기에 글자를 놓으면 가려집니다.</span></div></div>
+            <div class="dlr"><i style="background:rgba(230,236,249,.2);"></i><div><b>스테이터스 바 <span class="mono">status bar</span></b> — <span>시각·배터리·신호가 있는 최상단 띠. OS 영역입니다.</span></div></div>
+            <div class="dlr"><i style="background:rgba(255,212,107,.35); border:1px dashed #FFD46B;"></i><div><b>세이프 에어리어 <span class="mono">safe area</span></b> — <span>노치·홈 인디케이터를 피해 <em>안전하게 그릴 수 있는</em> 영역. 모바일 주문의 필수 단어.</span></div></div>
+            <div class="dlr"><i style="background:rgba(155,130,255,.4);"></i><div><b>앱 바 / 탭 바 <span class="mono">app bar / tab bar</span></b> — <span>앱의 상단 바와 하단 탭. 홈 인디케이터(맨 아래 작은 막대)와 겹치지 않게 띄웁니다.</span></div></div>
+            <div class="prompt-card mini good" style="margin-top:.3rem;">
+              <div class="pc-label">모바일 웹/앱 프롬프트 관용구</div>
+              <pre class="code">하단 탭 바는 safe-area-inset-bottom 만큼 패딩 줘서
+홈 인디케이터에 안 겹치게 해줘.</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        목업의 노란 점선(세이프 에어리어)이 자동으로 켜졌다 꺼진다. 베젤은 하드웨어, 세이프 에어리어는
+        소프트웨어라는 구분이 이 슬라이드의 핵심.
+      </aside>
+    </section>
+
+    <!-- ============= 10. 엘리먼트 ① 누르는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 1/6 · 누르는 것</div>
+        <h2>버튼도 <span class="accent2">종류</span>가 있다</h2>
+        <div class="spec-grid c3">
+          <div class="spec tight">
+            <div class="uic"><button class="btn">저장하기</button></div>
+            <div class="sp-name">주 버튼<span class="sp-en">primary button</span></div>
+            <p class="sp-desc">화면에서 가장 하고 싶은 행동 <b>딱 하나</b>. 색이 꽉 찬 버튼. 이 행동을 <b>CTA</b>라고 부릅니다.</p>
+          </div>
+          <div class="spec tight">
+            <div class="uic"><button class="btn sec">취소</button></div>
+            <div class="sp-name">보조 버튼<span class="sp-en">secondary / outline</span></div>
+            <p class="sp-desc">회색 또는 테두리만. 테두리형은 <b>아웃라인 버튼</b>이라고 부르면 바로 통합니다.</p>
+          </div>
+          <div class="spec tight">
+            <div class="uic"><button class="btn ghost">건너뛰기</button></div>
+            <div class="sp-name">고스트 · 텍스트 버튼<span class="sp-en">ghost / text button</span></div>
+            <p class="sp-desc">배경 없이 글자만. 링크처럼 보이지만 동작은 버튼.</p>
+          </div>
+          <div class="spec tight">
+            <div class="uic"><button class="btn dest">삭제</button></div>
+            <div class="sp-name">위험 버튼<span class="sp-en">destructive</span></div>
+            <p class="sp-desc">되돌릴 수 없는 행동은 빨강. "삭제는 destructive 스타일로"라고 주문하세요.</p>
+          </div>
+          <div class="spec tight">
+            <div class="uic"><button class="btn ico">✏️</button><button class="btn sec ico">⋯</button></div>
+            <div class="sp-name">아이콘 버튼<span class="sp-en">icon button</span></div>
+            <p class="sp-desc">아이콘만 있는 정사각 버튼. <span class="mono">⋯</span>는 더보기(케밥/미트볼) 메뉴 버튼.</p>
+          </div>
+          <div class="spec tight">
+            <div class="uic"><span class="fab">＋</span></div>
+            <div class="sp-name">플로팅 액션 버튼<span class="sp-en">FAB</span></div>
+            <p class="sp-desc">우하단에 떠 있는 동그란 버튼. 머티리얼(안드로이드)의 상징적 부품.</p>
+          </div>
+        </div>
+        <p class="small" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          "버튼 만들어줘" 대신 <b class="accent2">"primary 버튼 하나 + ghost 취소 버튼"</b> — 위계가 정해지면 AI가 색과 크기를 스스로 맞춥니다.
+        </p>
+      </div>
+      <aside class="notes">
+        위계(primary/secondary/ghost)라는 개념이 색을 고르는 수고를 없애준다는 점을 강조.
+        CTA는 UX 용어 슬라이드에서 한 번 더 나온다.
+      </aside>
+    </section>
+
+    <!-- ============= 11. 엘리먼트 ② 입력하는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 2/6 · 입력하는 것</div>
+        <h2>폼(form)을 이루는 부품들</h2>
+        <div class="spec-grid c4">
+          <div class="spec">
+            <div class="uic">
+              <div class="field">
+                <label>이메일</label>
+                <input type="text" placeholder="name@company.com" />
+                <span class="help">회사 메일을 입력하세요</span>
+              </div>
+            </div>
+            <div class="sp-name">텍스트 필드<span class="sp-en">text field / input</span></div>
+            <p class="sp-desc">위 작은 글자는 <b>레이블</b>, 안쪽 흐린 안내는 <b>플레이스홀더</b>, 아래 설명은 <b>헬퍼 텍스트</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="flex-direction:column; align-items:flex-start; gap:.3rem;">
+              <span class="cbrow"><input type="checkbox" checked /> 약관 동의</span>
+              <span class="cbrow"><input type="checkbox" /> 뉴스레터 받기</span>
+            </div>
+            <div class="sp-name">체크박스<span class="sp-en">checkbox</span></div>
+            <p class="sp-desc">여러 개를 <b>동시에</b> 고를 때. 네모.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="flex-direction:column; align-items:flex-start; gap:.3rem;">
+              <span class="cbrow"><input type="radio" name="r1" checked /> 월간 결제</span>
+              <span class="cbrow"><input type="radio" name="r1" /> 연간 결제</span>
+            </div>
+            <div class="sp-name">라디오 버튼<span class="sp-en">radio button</span></div>
+            <p class="sp-desc">여럿 중 <b>하나만</b> 고를 때. 동그라미.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="gap:.6rem;">
+              <span class="sw"></span><span class="sw off"></span>
+            </div>
+            <div class="sp-name">토글 스위치<span class="sp-en">toggle / switch</span></div>
+            <p class="sp-desc">켜고 끄는 설정. 누르는 <b>즉시</b> 적용됩니다(저장 버튼 없음).</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><input type="range" value="62" /></div>
+            <div class="sp-name">슬라이더<span class="sp-en">slider</span></div>
+            <p class="sp-desc">범위 값 조절(볼륨·가격대). 손잡이는 <b>썸</b>, 지나온 구간은 <b>트랙</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic">
+              <div class="field"><label>부서</label>
+                <select><option>공정기술</option><option>설계</option></select>
+              </div>
+            </div>
+            <div class="sp-name">셀렉트 · 드롭다운<span class="sp-en">select / dropdown</span></div>
+            <p class="sp-desc">눌러서 목록에서 고르기. 검색까지 되면 <b>콤보박스</b>·<b>오토컴플리트</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic">
+              <div class="field" style="position:relative;">
+                <input type="text" placeholder="🔍  검색" />
+              </div>
+            </div>
+            <div class="sp-name">검색 입력<span class="sp-en">search field</span></div>
+            <p class="sp-desc">돋보기가 붙은 입력. 입력 안 왼쪽 아이콘은 <b>leading icon</b>, 오른쪽은 <b>trailing icon</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic">
+              <div class="field err">
+                <input type="text" value="euiyun" />
+                <span class="help">⚠ 올바른 이메일 형식이 아닙니다</span>
+              </div>
+            </div>
+            <div class="sp-name">유효성 검증<span class="sp-en">validation / error state</span></div>
+            <p class="sp-desc">입력이 틀렸을 때 빨간 테두리 + 아래 메시지. "인라인 검증"이라고 주문합니다.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        체크박스/라디오 구분(다중 vs 단일)은 실무에서 AI가 자주 헷갈리는 부분 — 명시하면 정확해진다.
+        레이블/플레이스홀더/헬퍼 3단 구조는 폼 프롬프트의 기본 문형.
+      </aside>
+    </section>
+
+    <!-- ============= 12. 엘리먼트 ③ 이동하는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 3/6 · 이동하는 것</div>
+        <h2>길을 안내하는 부품 (내비게이션)</h2>
+        <div class="spec-grid c3">
+          <div class="spec">
+            <div class="uic"><div class="tabs"><span class="on">개요</span><span>이력</span><span>설정</span></div></div>
+            <div class="sp-name">탭<span class="sp-en">tabs</span></div>
+            <p class="sp-desc">같은 층위의 화면을 갈아타기. 밑줄이 있는 게 현재 탭(<b>액티브</b>).</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="segc"><span class="on">일별</span><span>주별</span><span>월별</span></div></div>
+            <div class="sp-name">세그먼티드 컨트롤<span class="sp-en">segmented control</span></div>
+            <p class="sp-desc">같은 화면의 <b>보기 방식</b>만 바꾸는 알약형 스위치. 애플 쪽에서 즐겨 씁니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><span class="crumb">홈 &nbsp;›&nbsp; 프로젝트 &nbsp;›&nbsp; <b>설정</b></span></div>
+            <div class="sp-name">브레드크럼<span class="sp-en">breadcrumb</span></div>
+            <p class="sp-desc">"지금 여기" 경로 표시. 깊은 구조에서 길 잃지 않게 해줍니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><span class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>›</span></span></div>
+            <div class="sp-name">페이지네이션<span class="sp-en">pagination</span></div>
+            <p class="sp-desc">목록을 페이지로 끊기. 스크롤로 계속 불러오는 방식은 <b>무한 스크롤</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="menux"><div>이름 바꾸기</div><div class="on">복제</div><div>삭제</div></div></div>
+            <div class="sp-name">드롭다운 메뉴<span class="sp-en">menu / dropdown</span></div>
+            <p class="sp-desc">버튼을 눌러 뜨는 명령 목록. 마우스 오른쪽으로 뜨면 <b>컨텍스트 메뉴</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><span class="stepx"><i class="on">1</i><u></u><i class="on">2</i><u></u><i>3</i> &nbsp;배송 정보</span></div>
+            <div class="sp-name">스테퍼 / 위저드<span class="sp-en">stepper / wizard</span></div>
+            <p class="sp-desc">여러 단계를 순서대로. "3단계 스테퍼로 나눠줘"처럼 주문합니다.</p>
+          </div>
+        </div>
+        <p class="small" style="margin-top:.9rem; color:#B8BFD0 !important;">
+          <b class="accent3">탭 vs 세그먼티드</b> — 탭은 <em>다른 내용</em>으로 이동, 세그먼티드는 <em>같은 내용</em>의 표현만 변경. 이 구분을 말해주면 화면 구조가 제대로 잡힙니다.
+        </p>
+      </div>
+      <aside class="notes">
+        탭/세그먼티드 혼동은 실제 화면 구조를 망친다. 구분 한 줄이 이 슬라이드의 핵심.
+      </aside>
+    </section>
+
+    <!-- ============= 13. 엘리먼트 ④ 보여주는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 4/6 · 보여주는 것</div>
+        <h2>내용을 담는 그릇들</h2>
+        <div class="spec-grid c4">
+          <div class="spec">
+            <div class="uic"><div class="cardx"><div class="cimg"></div><div class="cbody"><b>웨이퍼 수율 리포트</b><p>2026-09-21 · 공정기술팀</p></div></div></div>
+            <div class="sp-name">카드<span class="sp-en">card</span></div>
+            <p class="sp-desc">한 덩어리 정보를 담는 상자. 목록을 <b>카드 그리드</b>로 보여달라는 주문이 가장 흔합니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="menux"><div>📄 &nbsp;주간보고.pptx</div><div>📄 &nbsp;DRM_v3.xlsx</div><div>📄 &nbsp;layout.gds</div></div></div>
+            <div class="sp-name">리스트 · 리스트 아이템<span class="sp-en">list / list item</span></div>
+            <p class="sp-desc">한 줄씩 쌓인 목록. 줄 왼쪽 아이콘·오른쪽 화살표를 <b>leading/trailing</b>이라 부릅니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic">
+              <table class="tbx"><thead><tr><th>Lot</th><th>수율</th></tr></thead>
+                <tbody><tr><td>A-113</td><td>98.2%</td></tr><tr><td>A-114</td><td>96.7%</td></tr></tbody></table>
+            </div>
+            <div class="sp-name">테이블 · 데이터 그리드<span class="sp-en">table / data grid</span></div>
+            <p class="sp-desc">행·열 표. 정렬·필터·고정 헤더가 붙으면 <b>데이터 그리드</b>입니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="gap:.4rem;">
+              <span class="avatar">EK</span><span class="avatar" style="background:linear-gradient(140deg,#F472B6,#F59E0B);">JS</span>
+              <span style="position:relative; display:inline-block;"><span class="avatar">🔔</span><span class="badgex" style="position:absolute; top:-4px; right:-6px;">3</span></span>
+            </div>
+            <div class="sp-name">아바타 · 배지<span class="sp-en">avatar / badge</span></div>
+            <p class="sp-desc">아바타는 사람 표시(이니셜·사진), 배지는 숫자·점 알림. 여러 개 겹치면 <b>아바타 그룹</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="gap:.3rem;">
+              <span class="chipx">#공정</span><span class="chipx">#수율 ✕</span>
+            </div>
+            <div class="sp-name">칩 · 태그<span class="sp-en">chip / tag</span></div>
+            <p class="sp-desc">작은 알약형 라벨. 지우기(✕)가 붙으면 필터용 <b>입력 칩</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="padding-top:1.3rem;"><span class="tip">클릭하면 복사됩니다</span></div>
+            <div class="sp-name">툴팁<span class="sp-en">tooltip</span></div>
+            <p class="sp-desc">마우스를 올렸을 때만 뜨는 짧은 설명. 길면 툴팁이 아니라 <b>팝오버</b>로.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="accx"><div class="ah">자주 묻는 질문 <span>⌄</span></div><div class="ab">클릭하면 펼쳐지는 영역입니다.</div></div></div>
+            <div class="sp-name">아코디언<span class="sp-en">accordion / collapsible</span></div>
+            <p class="sp-desc">눌러서 접고 펴는 영역. FAQ·설정 화면의 단골.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="flex-direction:column; gap:.3rem;">
+              <div style="display:flex; gap:.25rem; width:100%;">
+                <div style="flex:2; height:1.5rem; border-radius:6px; background:linear-gradient(120deg,#818CF8,#22D3EE);"></div>
+                <div style="flex:1; height:1.5rem; border-radius:6px; background:#E7EAF2;"></div>
+              </div>
+              <span style="font-size:.66rem; letter-spacing:.3em;">● ○ ○</span>
+            </div>
+            <div class="sp-name">캐러셀<span class="sp-en">carousel / slider</span></div>
+            <p class="sp-desc">좌우로 넘기는 배너. 아래 점들이 <b>페이지 인디케이터(dots)</b>.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        카드/리스트/테이블 중 무엇으로 보여줄지는 프롬프트에서 사람이 정해줘야 하는 결정이라는 점을 짚는다.
+      </aside>
+    </section>
+
+    <!-- ============= 14. 엘리먼트 ⑤ 끼어드는 것 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 5/6 · 끼어드는 것 (오버레이)</div>
+        <h2>화면 위에 <span class="accent2">얹히는</span> 것들</h2>
+        <div class="spec-grid c3">
+          <div class="spec">
+            <div class="uic" style="min-height:96px;">
+              <div class="scrim"><div class="modalx"><b>삭제하시겠어요?</b><p>이 작업은 되돌릴 수 없습니다.</p>
+                <div class="mrow"><button class="btn sec" style="font-size:.76rem;">취소</button><button class="btn dest" style="font-size:.76rem;">삭제</button></div></div></div>
+            </div>
+            <div class="sp-name">모달 · 다이얼로그<span class="sp-en">modal / dialog</span></div>
+            <p class="sp-desc">답할 때까지 뒤를 막는 창. 뒤의 어두운 막이 <b>스크림(백드롭·오버레이)</b>. 확인용 짧은 것은 <b>컨펌 다이얼로그</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:96px; align-items:flex-start;">
+              <div style="width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:.3rem;">
+                <button class="btn sec" style="font-size:.76rem;">필터 ⌄</button>
+                <div class="menux" style="width:75%;"><div>기간: 최근 7일</div><div>상태: 진행중</div></div>
+              </div>
+            </div>
+            <div class="sp-name">팝오버<span class="sp-en">popover</span></div>
+            <p class="sp-desc">누른 요소 옆에 붙어 뜨는 작은 패널. 뒤를 막지 않아 계속 쓸 수 있습니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:96px; align-items:flex-end; padding-bottom:0;">
+              <div class="sheetx"><div class="grab"></div><b style="font-size:.8rem;">공유</b>
+                <p style="font-size:.7rem; margin:.15em 0 0;">카카오톡 · 메일 · 링크 복사</p></div>
+            </div>
+            <div class="sp-name">바텀 시트 · 액션 시트<span class="sp-en">bottom sheet / action sheet</span></div>
+            <p class="sp-desc">아래에서 올라오는 패널. 모바일에서 모달 대신 씁니다. 위 손잡이는 <b>그래버</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:96px;"><div class="toastx">✅ 저장했습니다 &nbsp;<b>되돌리기</b></div></div>
+            <div class="sp-name">토스트 · 스낵바<span class="sp-en">toast / snackbar</span></div>
+            <p class="sp-desc">잠깐 떴다 사라지는 알림. 안드로이드/머티리얼에선 스낵바(되돌리기 버튼 포함).</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:96px; flex-direction:column; gap:.35rem;">
+              <div class="alertx">⚠️ 저장 공간이 90% 찼습니다.</div>
+              <div class="alertx err">⛔ 업로드에 실패했습니다. 다시 시도해 주세요.</div>
+            </div>
+            <div class="sp-name">배너 · 얼럿<span class="sp-en">banner / alert / callout</span></div>
+            <p class="sp-desc">사라지지 않고 자리를 차지하는 안내 띠. 문서 안의 강조 박스는 <b>콜아웃</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:96px; flex-direction:column; gap:.3rem;">
+              <span class="chipx" style="font-size:.7rem;">스크림 없음 → 계속 작업 가능</span>
+              <span class="chipx" style="font-size:.7rem; background:#14161F; color:#fff !important; border-color:#14161F;">스크림 있음 → 답해야 진행</span>
+            </div>
+            <div class="sp-name">모달 vs 논모달<span class="sp-en">modal vs non-modal</span></div>
+            <p class="sp-desc"><b>모달</b>은 흐름을 끊고, <b>논모달</b>(팝오버·토스트)은 안 끊습니다. 끊을지 말지를 정해서 주문하세요.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        오버레이 4종(모달/팝오버/바텀시트/토스트)의 차이를 "흐름을 끊는가"로 정리해 주는 것이 포인트.
+        "알림 띄워줘"가 네 가지로 갈린다는 점을 시연.
+      </aside>
+    </section>
+
+    <!-- ============= 15. 엘리먼트 ⑥ 기다림과 빈칸 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ELEMENTS 6/6 · 기다림과 빈칸</div>
+        <h2>초보 화면과 <span class="accent2">프로 화면</span>의 차이는 여기서 갈린다</h2>
+        <div class="spec-grid c4">
+          <div class="spec">
+            <div class="uic"><div class="spinx"></div></div>
+            <div class="sp-name">스피너 · 로더<span class="sp-en">spinner / loader</span></div>
+            <p class="sp-desc">짧은 대기(1초 내외)에. 길어지면 답답해 보입니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="flex-direction:column; gap:.3rem;">
+              <div class="barx"><i></i></div><span style="font-size:.7rem;" class="u-dim">62% · 12/20 파일</span>
+            </div>
+            <div class="sp-name">프로그레스 바<span class="sp-en">progress bar</span></div>
+            <p class="sp-desc">끝이 보이는 작업에. 퍼센트·남은 개수를 함께 보여주면 신뢰가 생깁니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="skelx"><i></i><i></i><i></i></div></div>
+            <div class="sp-name">스켈레톤<span class="sp-en">skeleton</span></div>
+            <p class="sp-desc">들어올 내용의 회색 뼈대. 목록·카드 로딩의 요즘 기본값.</p>
+          </div>
+          <div class="spec">
+            <div class="uic"><div class="emptyx"><span class="eic">📭</span>아직 리포트가 없습니다<br/><span style="font-size:.7rem;">첫 리포트를 만들어 보세요</span></div></div>
+            <div class="sp-name">엠프티 스테이트<span class="sp-en">empty state</span></div>
+            <p class="sp-desc">데이터가 0건일 때의 화면. 그림 + 한 줄 설명 + <b>다음 행동 버튼</b>이 정석.</p>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:1rem;">
+          <div class="pc-label">이 한 줄이 화면 완성도를 바꿉니다</div>
+          <pre class="code">로딩 중에는 스켈레톤, 데이터 0건이면 엠프티 스테이트(안내 문구 + 생성 버튼),
+실패하면 에러 상태(재시도 버튼)까지 같이 만들어줘.</pre>
+        </div>
+        <p class="tiny center" style="margin-top:.6rem; color:#9BA6C0 !important;">
+          AI는 "잘 된 경우"만 그려주기 쉽습니다 — <b class="accent2">로딩 · 빈 상태 · 에러</b> 세 가지를 요구하는 습관이 아마추어와 프로를 가릅니다.
+        </p>
+      </div>
+      <aside class="notes">
+        이 세미나에서 실무 효용이 가장 큰 슬라이드. "해피 패스만 만들어진다"는 AI의 기본 습성과
+        그 처방(로딩/빈/에러 3종 요구)을 반드시 말로 강조.
+      </aside>
+    </section>
+
+    <!-- ============= 16. 헷갈리는 짝 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CONFUSING PAIRS</div>
+        <h2>이름이 헷갈리는 <span class="accent3">단골 짝</span></h2>
+        <table class="rules" style="font-size:1.12rem;">
+          <thead><tr><th style="width:15rem;">헷갈리는 둘</th><th>구분하는 한 문장</th><th style="width:17rem;">프롬프트에 쓸 때</th></tr></thead>
+          <tbody>
+            <tr><td><b>모달</b> vs <b>팝오버</b></td><td>모달은 뒤를 <b class="accent3">막는다</b>(스크림). 팝오버는 안 막는다.</td><td class="mono small">확인은 모달, 필터는 팝오버</td></tr>
+            <tr><td><b>토스트</b> vs <b>배너</b></td><td>토스트는 <b class="accent3">사라진다</b>. 배너는 자리를 차지하고 남는다.</td><td class="mono small">저장 완료는 토스트</td></tr>
+            <tr><td><b>탭</b> vs <b>세그먼티드</b></td><td>탭은 <b class="accent3">다른 내용</b>으로, 세그먼티드는 같은 내용의 보기 방식.</td><td class="mono small">일/주/월은 세그먼티드</td></tr>
+            <tr><td><b>사이드바</b> vs <b>드로어</b></td><td>사이드바는 항상 있고, 드로어는 <b class="accent3">눌러야</b> 나온다.</td><td class="mono small">모바일은 드로어로 전환</td></tr>
+            <tr><td><b>칩</b> vs <b>배지</b></td><td>칩은 <b class="accent3">누를 수 있는</b> 라벨, 배지는 숫자·점 표시.</td><td class="mono small">태그는 칩, 알림 수는 배지</td></tr>
+            <tr><td><b>베젤</b> vs <b>패딩</b></td><td>베젤은 <b class="accent3">기기 테두리</b>(하드웨어), 패딩은 화면 안 여백.</td><td class="mono small">여백은 언제나 padding</td></tr>
+            <tr><td><b>플레이스홀더</b> vs <b>레이블</b></td><td>플레이스홀더는 입력하면 <b class="accent3">사라진다</b> — 그래서 레이블이 따로 필요.</td><td class="mono small">레이블은 항상 밖에</td></tr>
+            <tr><td><b>스피너</b> vs <b>스켈레톤</b></td><td>스피너는 "기다려", 스켈레톤은 "<b class="accent3">이런 게</b> 올 거야".</td><td class="mono small">목록 로딩은 스켈레톤</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="notes">
+        표는 읽어주지 말고 2~3줄만 짚는다. 나머지는 나중에 찾아보는 참고용.
+        여기까지가 '이름' 파트, 다음부터 '성질' 파트.
+      </aside>
+    </section>
+
+    <!-- ============= 17. 컴포넌트 상태 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">STATES</div>
+        <h2>같은 버튼의 <span class="accent2">여덟 얼굴</span></h2>
+        <div class="states">
+          <div class="state"><span class="btn-demo">저장</span><span class="snm">default</span><span class="sko">기본</span></div>
+          <div class="state"><span class="btn-demo hov">저장</span><span class="snm">hover</span><span class="sko">마우스 올림</span></div>
+          <div class="state"><span class="btn-demo foc">저장</span><span class="snm">focus</span><span class="sko">키보드 선택</span></div>
+          <div class="state"><span class="btn-demo act">저장</span><span class="snm">active / pressed</span><span class="sko">누르는 순간</span></div>
+          <div class="state"><span class="btn-demo dis">저장</span><span class="snm">disabled</span><span class="sko">비활성</span></div>
+          <div class="state"><span class="btn-demo" style="display:inline-flex; align-items:center; gap:.4em;"><span class="spinx" style="width:.9rem; height:.9rem; border-width:2px; border-color:rgba(255,255,255,.35); border-top-color:#fff;"></span>저장 중</span><span class="snm">loading</span><span class="sko">처리 중</span></div>
+          <div class="state"><span class="btn-demo" style="background:#0E9488;">✓ 저장됨</span><span class="snm">success</span><span class="sko">완료 피드백</span></div>
+          <div class="state"><span class="btn-demo" style="background:#B91C1C;">⛔ 실패</span><span class="snm">error</span><span class="sko">오류</span></div>
+        </div>
+        <div class="grid-2" style="gap:1.4rem; margin-top:1.2rem;">
+          <div class="card" style="padding:1rem 1.2rem;">
+            <h3 style="font-size:1.3rem; margin-bottom:.4rem;">왜 이 단어들이 중요한가</h3>
+            <p class="small">"버튼 만들어줘"라고만 하면 <b class="accent3">default 하나만</b> 나옵니다.
+              상태 이름을 말하면 AI가 <span class="mono">hover</span>·<span class="mono">disabled</span>·<span class="mono">loading</span>을 알아서 다 만들어 줍니다.</p>
+          </div>
+          <div class="prompt-card mini good" style="margin:0;">
+            <div class="pc-label">상태를 지목한 프롬프트</div>
+            <pre class="code">버튼에 hover / focus-visible / disabled / loading 상태를
+전부 넣어줘. 제출 중에는 버튼을 disabled + 스피너로.</pre>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        focus와 hover의 차이(키보드 vs 마우스)를 한 번 짚고, focus-visible은 접근성 슬라이드에서 재등장.
+      </aside>
+    </section>
+
+    <!-- ============= 18. 디자인 토큰 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">DESIGN TOKENS</div>
+        <h2>취향을 <span class="accent2">숫자</span>로 바꾸는 말 — 디자인 토큰</h2>
+        <div class="grid-2" style="gap:1.6rem;">
+          <div class="stack" style="gap:.8rem;">
+            <div>
+              <h3 style="font-size:1.25rem;">간격 스케일 <span class="mono tiny accent2">spacing scale · 4/8px 단위</span></h3>
+              <div class="tok">
+                <div class="trow2"><span class="tn">xs</span><span class="tb" style="width:4px;"></span><span class="tv">4px</span></div>
+                <div class="trow2"><span class="tn">sm</span><span class="tb" style="width:8px;"></span><span class="tv">8px</span></div>
+                <div class="trow2"><span class="tn">md</span><span class="tb" style="width:16px;"></span><span class="tv">16px</span></div>
+                <div class="trow2"><span class="tn">lg</span><span class="tb" style="width:24px;"></span><span class="tv">24px</span></div>
+                <div class="trow2"><span class="tn">xl</span><span class="tb" style="width:40px;"></span><span class="tv">40px</span></div>
+              </div>
+            </div>
+            <div>
+              <h3 style="font-size:1.25rem;">라운드 <span class="mono tiny accent2">border-radius</span></h3>
+              <div class="rad-row">
+                <div class="rr" style="border-radius:0;">0</div>
+                <div class="rr" style="border-radius:6px;">6</div>
+                <div class="rr" style="border-radius:12px;">12</div>
+                <div class="rr" style="border-radius:20px;">20</div>
+                <div class="rr" style="border-radius:999px;">999<br/>pill</div>
+              </div>
+            </div>
+            <div>
+              <h3 style="font-size:1.25rem;">그림자 · 높이 <span class="mono tiny accent2">elevation / shadow</span></h3>
+              <div class="elev-row">
+                <div class="er">0</div><div class="er">1</div><div class="er">2</div><div class="er">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="stack" style="gap:.8rem;">
+            <div>
+              <h3 style="font-size:1.25rem;">타입 스케일 <span class="mono tiny accent2">type scale</span></h3>
+              <div class="type-scale">
+                <div style="font-size:1.9rem; font-weight:800;">Display<span class="ts-l">36px / 800</span></div>
+                <div style="font-size:1.4rem; font-weight:800;">Heading<span class="ts-l">24px / 700</span></div>
+                <div style="font-size:1.05rem;">Body 본문입니다<span class="ts-l">16px / 400</span></div>
+                <div style="font-size:.85rem; color:#B8BFD0 !important;">Caption 보조 설명<span class="ts-l">13px / 400</span></div>
+              </div>
+            </div>
+            <div>
+              <h3 style="font-size:1.25rem;">컬러 역할 <span class="mono tiny accent2">color role</span></h3>
+              <table class="rules" style="font-size:1.0rem;">
+                <tbody>
+                  <tr><td class="mono accent2" style="width:9rem;">primary</td><td>브랜드 강조색 (주 버튼·링크)</td></tr>
+                  <tr><td class="mono accent2">surface / bg</td><td>카드·배경 면의 색</td></tr>
+                  <tr><td class="mono accent2">on-surface</td><td>그 면 <em>위에 올라가는</em> 글자색</td></tr>
+                  <tr><td class="mono accent2">muted</td><td>보조 설명용 흐린 글자</td></tr>
+                  <tr><td class="mono accent2">semantic</td><td>success·warning·danger·info</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="tiny" style="margin-top:.7rem; color:#9BA6C0 !important;">
+          토큰 = <b class="accent2">이름 붙인 숫자</b>. "간격은 8의 배수, 라운드는 12px, 글자 크기는 4단계로 고정해줘" 한 줄이면 화면 전체가 정돈됩니다.
+        </p>
+      </div>
+      <aside class="notes">
+        디자인 감각이 없어도 '일관성'은 숫자 규칙으로 만들 수 있다는 것이 메시지.
+        8의 배수 규칙(8pt grid)과 primary/on-surface 개념만 기억시켜도 충분.
+      </aside>
+    </section>
+
+    <!-- ============= 19. 반응형 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">RESPONSIVE</div>
+        <h2>"폰에서도 잘 되게" = <span class="accent2">반응형</span></h2>
+        <div class="bpr" style="margin-top:.4rem;">
+          <div class="bpc one"><span class="bic">📱</span><b>모바일</b><span class="mono">&lt; 640px</span><small>1열 · 드로어 · 하단 탭</small></div>
+          <div class="bpc two"><span class="bic">📲</span><b>태블릿</b><span class="mono">640–1024px</span><small>2열 · 아이콘 레일</small></div>
+          <div class="bpc"><span class="bic">💻</span><b>데스크톱</b><span class="mono">1024–1440px</span><small>3열 · 고정 사이드바</small></div>
+          <div class="bpc"><span class="bic">🖥️</span><b>와이드</b><span class="mono">&gt; 1440px</span><small>컨테이너 폭 제한 + 여백</small></div>
+        </div>
+        <div class="grid-3" style="margin-top:1.1rem;">
+          <div class="card autoshow fade-up">
+            <h3>브레이크포인트<span class="mono tiny accent2" style="display:block;">breakpoint</span></h3>
+            <p>레이아웃이 바뀌는 <b class="accent2">경계 폭</b>. "768px 아래에서는 1열로"처럼 숫자로 말하면 정확합니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>모바일 퍼스트<span class="mono tiny accent2" style="display:block;">mobile first</span></h3>
+            <p>좁은 화면을 먼저 만들고 넓은 쪽을 더하는 순서. 요즘 웹의 기본 전략입니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>플루이드 vs 픽셀<span class="mono tiny accent2" style="display:block;">fluid / fixed</span></h3>
+            <p><span class="mono">%</span>·<span class="mono">1fr</span>처럼 늘어나는 값과 <span class="mono">240px</span> 고정값. 사이드바는 고정, 본문은 유동이 흔한 조합.</p>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:1rem;">
+          <div class="pc-label">반응형 주문의 완성형</div>
+          <pre class="code">모바일 퍼스트로 만들고, 브레이크포인트는 640 / 1024 두 개만 써줘.
+카드 그리드는 1열 → 2열 → 3열, 사이드바는 1024px 미만에서 드로어로 전환.</pre>
+        </div>
+      </div>
+      <aside class="notes">
+        "폰에서도 잘 되게" 한 마디가 왜 위험한지(AI가 임의로 정함), 숫자 두 개만 주면 끝난다는 점.
+      </aside>
+    </section>
+
+    <!-- ============= 20. 테마란 — 같은 화면, 세 표정 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">THEME</div>
+        <h2>테마 — <span class="grad">같은 화면, 다른 표정</span></h2>
+        <p class="small" style="margin:-.2rem 0 .8rem; color:#B8BFD0 !important;">
+          아래 세 개는 <b class="accent2">완전히 같은 화면</b>입니다. 라운드·그림자·버튼 모양·구분선 두께만 그 진영의 규칙을 따랐습니다.
+        </p>
+        <div class="spec-grid c3">
+          <div class="theme-card">
+            <div class="th-head"><b>머티리얼</b><span>Material Design 3 · Google</span></div>
+            <div class="uic mat">
+              <div class="th-demo">
+                <div class="tbar">☰ &nbsp;내 작업</div>
+                <div class="cardx"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
+                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" /></div>
+                <div class="trow"><button class="btn">저장</button><button class="btn sec">취소</button><span class="fab" style="width:2.2rem;height:2.2rem;font-size:1rem; margin-left:auto;">＋</span></div>
+              </div>
+            </div>
+            <p class="th-note">둥근 알약 버튼 · 색면 앱 바 · 그림자로 높이 표현 · FAB · 스낵바. <b>안드로이드·구글 앱</b>의 문법.</p>
+          </div>
+          <div class="theme-card">
+            <div class="th-head"><b>쿠퍼티노</b><span>Cupertino · Apple HIG</span></div>
+            <div class="uic cup">
+              <div class="th-demo">
+                <div class="tbar">내 작업</div>
+                <div class="listx"><div>수율 리포트 <span class="chev">›</span></div><div>공정 이력 <span class="chev">›</span></div></div>
+                <div class="segc" style="align-self:center;"><span class="on">일별</span><span>주별</span></div>
+                <div class="trow" style="justify-content:space-between;"><button class="btn">취소</button><button class="btn filled">저장</button></div>
+              </div>
+            </div>
+            <p class="th-note">얇은 구분선 · 중앙 정렬 타이틀 · 파란 텍스트 버튼 · 세그먼티드 · 바텀 시트. <b>iOS·macOS</b>의 문법. 애플 공식 가이드 이름은 <b>HIG</b>.</p>
+          </div>
+          <div class="theme-card">
+            <div class="th-head"><b>플루언트</b><span>Fluent 2 · Microsoft</span></div>
+            <div class="uic flu">
+              <div class="th-demo">
+                <div class="tbar">📁 &nbsp;내 작업</div>
+                <div class="cardx"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
+                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" /></div>
+                <div class="trow"><button class="btn">저장</button><button class="btn sec">취소</button></div>
+              </div>
+            </div>
+            <p class="th-note">작은 라운드(4px) · 은은한 테두리 · 입력 아래 강조선 · 정보 밀도 높음. <b>Windows·Office·Teams</b>의 문법.</p>
+          </div>
+        </div>
+        <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">
+          테마 = <b class="accent2">디자인 시스템</b>(색·간격·부품 모양의 규칙 묶음). 이름 하나만 대면 수백 가지 결정이 한 번에 정해집니다.
+        </p>
+      </div>
+      <aside class="notes">
+        이 슬라이드가 '테마'의 실체를 보여준다. 세 개가 같은 화면이라는 사실을 먼저 말하고,
+        차이를 하나씩 손으로 짚는다(버튼 모양 → 구분선 → 앱 바).
+      </aside>
+    </section>
+
+    <!-- ============= 21. 머티리얼 vs 쿠퍼티노 상세 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">THEME · 두 거인</div>
+        <h2>머티리얼 &amp; 쿠퍼티노 — <span class="accent2">부품 이름도 다르다</span></h2>
+        <table class="rules" style="font-size:1.1rem;">
+          <thead><tr><th style="width:13rem;">같은 물건</th><th>머티리얼 (Google · Android)</th><th>쿠퍼티노 (Apple · iOS/HIG)</th></tr></thead>
+          <tbody>
+            <tr><td>상단 바</td><td class="mono">Top app bar</td><td class="mono">Navigation bar (중앙 타이틀)</td></tr>
+            <tr><td>하단 탭</td><td class="mono">Navigation bar / bottom nav</td><td class="mono">Tab bar</td></tr>
+            <tr><td>잠깐 뜨는 알림</td><td class="mono">Snackbar (되돌리기 포함)</td><td class="mono">Toast / Alert</td></tr>
+            <tr><td>선택지 시트</td><td class="mono">Bottom sheet</td><td class="mono">Action sheet</td></tr>
+            <tr><td>주 액션 버튼</td><td class="mono">FAB (떠 있는 원형)</td><td class="mono">화면 하단 꽉 찬 버튼 / 우상단 Done</td></tr>
+            <tr><td>켜고 끄기</td><td class="mono">Switch (보라)</td><td class="mono">Toggle (초록)</td></tr>
+            <tr><td>보기 전환</td><td class="mono">Tabs</td><td class="mono">Segmented control</td></tr>
+            <tr><td>아이콘 세트</td><td class="mono">Material Symbols</td><td class="mono">SF Symbols</td></tr>
+          </tbody>
+        </table>
+        <div class="grid-2" style="gap:1.4rem; margin-top:1rem;">
+          <div class="card good" style="padding:.9rem 1.1rem;">
+            <h3 style="font-size:1.25rem; margin-bottom:.35rem;">✅ 이렇게 쓰세요</h3>
+            <p class="small">"안드로이드 느낌으로" → <b class="accent2">"Material 3 스타일로, FAB와 스낵바 사용"</b><br/>
+               "아이폰 앱처럼" → <b class="accent2">"Cupertino/HIG 스타일, 하단 탭 바와 액션 시트"</b></p>
+          </div>
+          <div class="card bad" style="padding:.9rem 1.1rem;">
+            <h3 style="font-size:1.25rem; margin-bottom:.35rem;">⚠️ 섞으면 어색해집니다</h3>
+            <p class="small">iOS 화면에 FAB, 안드로이드 화면에 중앙 정렬 타이틀 — 사용자는 이유는 몰라도 <em>"싼 앱 같다"</em>고 느낍니다. <b>한 테마를 골라 끝까지</b>.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        같은 물건의 이름이 진영마다 다르다는 사실 자체가 초보에게 큰 발견. 표는 참고용,
+        오른쪽 두 카드가 실전 지침.
+      </aside>
+    </section>
+
+    <!-- ============= 22. 웹에서 실제로 고르는 것들 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">THEME · 실전 선택</div>
+        <h2>웹에서는 보통 <span class="accent2">이 중 하나</span>를 고른다</h2>
+        <div class="spec-grid c3" style="margin-top:.2rem;">
+          <div class="spec">
+            <div class="uic" style="min-height:64px; justify-content:flex-start; gap:.35rem;">
+              <span class="chipx" style="border-radius:6px;">rounded-xl</span><span class="chipx" style="border-radius:6px;">p-4</span><span class="chipx" style="border-radius:6px;">gap-2</span>
+            </div>
+            <div class="sp-name">Tailwind CSS<span class="sp-en">유틸리티 클래스</span></div>
+            <p class="sp-desc">디자인 규칙이 아니라 <b>간격·색을 짧은 클래스</b>로 쓰는 방식. AI가 가장 잘 쓰는 도구. 요즘 기본값.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:64px;">
+              <div class="cardx" style="box-shadow:none;"><div class="cbody"><b>깔끔한 기본형</b><p>중립적 회색 + 라운드 8px</p></div></div>
+            </div>
+            <div class="sp-name">shadcn/ui<span class="sp-en">복사해 쓰는 컴포넌트</span></div>
+            <p class="sp-desc">Tailwind 기반의 <b>현대적 기본값</b>. "shadcn/ui 스타일로"라고 하면 지금 SaaS 느낌이 나옵니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:64px;"><button class="btn" style="background:#0D6EFD; border-radius:6px;">Bootstrap 버튼</button></div>
+            <div class="sp-name">Bootstrap<span class="sp-en">가장 오래된 표준</span></div>
+            <p class="sp-desc">사내 업무 페이지에서 흔히 보는 파란 버튼. 익숙하지만 "좀 옛날 느낌"으로 읽힙니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:64px;">
+              <table class="tbx"><thead><tr><th>이름</th><th>값</th></tr></thead><tbody><tr><td>A-113</td><td>98.2%</td></tr></tbody></table>
+            </div>
+            <div class="sp-name">Ant Design · MUI<span class="sp-en">기업용 컴포넌트 묶음</span></div>
+            <p class="sp-desc">표·폼·필터가 많은 <b>내부 관리 도구</b>에 강함. MUI는 머티리얼의 React 구현체.</p>
+          </div>
+          <div class="spec">
+            <div class="uic flu" style="min-height:64px;"><button class="btn">Fluent 버튼</button><button class="btn sec">보조</button></div>
+            <div class="sp-name">Fluent UI<span class="sp-en">Microsoft</span></div>
+            <p class="sp-desc">Office·Teams와 나란히 놓을 화면이라면 이쪽이 자연스럽습니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:64px; background:#0E1220;">
+              <span style="color:#E6E9F5 !important; font-size:.8rem; font-weight:700;">🌙 다크 테마 표면</span>
+            </div>
+            <div class="sp-name">다크 모드<span class="sp-en">dark mode / color scheme</span></div>
+            <p class="sp-desc">테마와 별개인 <b>밝기 축</b>. "라이트/다크 둘 다 지원, 시스템 설정 따라가게"라고 주문합니다.</p>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:.9rem;">
+          <div class="pc-label">고민되면 이 한 줄</div>
+          <pre class="code">Tailwind + shadcn/ui 스타일로, 라이트/다크 모드 둘 다. 라운드 12px, 그림자는 약하게.</pre>
+        </div>
+      </div>
+      <aside class="notes">
+        "뭘 골라야 하나요?"에 대한 답을 미리 준다 — 웹이면 Tailwind+shadcn, 사내 관리도구면 Ant/MUI,
+        Office 붙이면 Fluent. 다크모드는 테마가 아니라 축이라는 구분도 짚는다.
+      </aside>
+    </section>
+
+    <!-- ============= 23. 색과 움직임 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">COLOR &amp; MOTION</div>
+        <h2>색과 움직임을 말하는 법</h2>
+        <div class="grid-2" style="gap:1.8rem;">
+          <div class="stack" style="gap:.7rem;">
+            <h3 style="font-size:1.35rem; margin:0;">🎨 색</h3>
+            <table class="rules" style="font-size:1.04rem;">
+              <tbody>
+                <tr><td class="mono accent2" style="width:8.5rem;">#4F46E5</td><td><b>헥사 코드</b> — 색을 지정하는 표준 표기. 색을 정확히 옮길 때 씁니다.</td></tr>
+                <tr><td class="mono accent2">on-color</td><td><b>그 색 위의 글자색</b>. "파란 버튼에 흰 글자"가 primary/on-primary.</td></tr>
+                <tr><td class="mono accent2">contrast</td><td><b>명암비</b>. 본문은 <span class="mono">4.5:1</span> 이상이어야 읽힙니다.</td></tr>
+                <tr><td class="mono accent2">semantic</td><td>의미가 정해진 색 — success(초록)·warning(노랑)·danger(빨강)·info(파랑).</td></tr>
+                <tr><td class="mono accent2">gradient</td><td>두 색이 섞이는 면. "보라→민트 그라데이션"처럼.</td></tr>
+                <tr><td class="mono accent2">opacity</td><td>투명도. 유리 같은 흐린 배경은 <span class="mono">blur</span>(글래스모피즘).</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="stack" style="gap:.7rem;">
+            <h3 style="font-size:1.35rem; margin:0;">🎬 움직임</h3>
+            <table class="rules" style="font-size:1.04rem;">
+              <tbody>
+                <tr><td class="mono accent2" style="width:8.5rem;">transition</td><td>상태가 바뀔 때 <b>부드럽게</b> 넘어가기. <span class="mono">200ms</span>가 무난한 기본값.</td></tr>
+                <tr><td class="mono accent2">duration</td><td>지속 시간. 150~300ms가 "빠릿하다"는 느낌의 구간.</td></tr>
+                <tr><td class="mono accent2">easing</td><td>속도 곡선. <span class="mono">ease-out</span>은 빨리 시작해 천천히 멈춤 — 대부분 이걸로.</td></tr>
+                <tr><td class="mono accent2">micro-interaction</td><td>버튼 눌림, 좋아요 하트 튐 같은 <b>작은 반응</b>.</td></tr>
+                <tr><td class="mono accent2">skeleton / fade-in</td><td>내용이 들어올 때 깜빡임 없이 스며들게.</td></tr>
+                <tr><td class="mono danger">reduced motion</td><td>움직임에 민감한 사용자를 위해 애니메이션을 끄는 설정. 존중해야 합니다.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:.9rem;">
+          <div class="pc-label">감각적인 요구를 숫자로</div>
+          <pre class="code">호버와 전환은 200ms ease-out, 카드가 나타날 때만 살짝 fade-up.
+과한 애니메이션은 넣지 말고, prefers-reduced-motion이면 전부 끄게 해줘.</pre>
+        </div>
+      </div>
+      <aside class="notes">
+        "세련되게"의 실체가 대개 200ms ease-out과 적당한 그림자라는 점을 알려준다.
+        reduced motion은 접근성 슬라이드로 자연스럽게 연결.
+      </aside>
+    </section>
+
+    <!-- ============= 24. 접근성 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ACCESSIBILITY · a11y</div>
+        <h2>모두가 쓸 수 있게 — <span class="accent2">여섯 단어</span></h2>
+        <div class="spec-grid c3">
+          <div class="spec">
+            <div class="uic" style="min-height:62px;"><button class="btn" style="outline:3px solid #7DFFDF; outline-offset:2px;">확인</button></div>
+            <div class="sp-name">포커스 링<span class="sp-en">focus ring / focus-visible</span></div>
+            <p class="sp-desc">키보드로 이동할 때 "지금 여기"를 알려주는 테두리. <b>지우지 말 것</b>.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
+              <span style="font-size:.78rem; font-weight:700;">Tab 순서: 1 → 2 → 3</span>
+              <span style="font-size:.68rem;" class="u-dim">보이는 순서와 같아야 함</span>
+            </div>
+            <div class="sp-name">탭 순서<span class="sp-en">tab order</span></div>
+            <p class="sp-desc">키보드만으로도 모든 버튼에 도달할 수 있어야 합니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
+              <span style="font-size:.8rem; color:#14161F !important; font-weight:700;">읽기 쉬움 — 4.5:1 ✓</span>
+              <span style="font-size:.8rem; color:#C3C8D6 !important; font-weight:700;">읽기 어려움 — 1.8:1 ✕</span>
+            </div>
+            <div class="sp-name">명암비<span class="sp-en">contrast ratio</span></div>
+            <p class="sp-desc">본문 <span class="mono">4.5:1</span>, 큰 글자 <span class="mono">3:1</span> 이상. 회색 글씨가 예뻐 보여도 흐리면 실패.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:62px;"><span class="btn sec ico" style="width:2.75rem; height:2.75rem; outline:1px dashed #4F46E5;">👍</span></div>
+            <div class="sp-name">터치 타깃<span class="sp-en">touch target</span></div>
+            <p class="sp-desc">손가락으로 누를 영역은 <span class="mono">44×44px</span> 이상. 아이콘만 작게 두면 안 눌립니다.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
+              <span style="font-size:.72rem;" class="mono">&lt;button aria-label="닫기"&gt;✕&lt;/button&gt;</span>
+              <span style="font-size:.68rem;" class="u-dim">화면 낭독기에 이름을 알려줌</span>
+            </div>
+            <div class="sp-name">대체 텍스트 · aria-label<span class="sp-en">alt text / aria</span></div>
+            <p class="sp-desc">이미지·아이콘 버튼에 이름을 달아주는 속성. 눈으로 못 읽는 사용자를 위한 이름표.</p>
+          </div>
+          <div class="spec">
+            <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
+              <span class="alertx err" style="font-size:.7rem;">⛔ 재고 부족</span>
+              <span style="font-size:.68rem;" class="u-dim">색만으로 전달하지 않기</span>
+            </div>
+            <div class="sp-name">색에만 의존하지 않기<span class="sp-en">not color-only</span></div>
+            <p class="sp-desc">빨강만으로 오류를 표현하면 색약 사용자는 못 봅니다 — <b>아이콘·글자</b>를 함께.</p>
+          </div>
+        </div>
+        <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">
+          프롬프트 한 줄로 챙길 수 있습니다 — <b class="accent2">"접근성 지켜줘: 포커스 링 유지, 명암비 4.5:1, 아이콘 버튼엔 aria-label"</b>
+        </p>
+      </div>
+      <aside class="notes">
+        접근성은 도덕 문제가 아니라 품질 문제라는 프레이밍. 프롬프트 한 줄로 대부분 해결된다는 점이 실용 포인트.
+      </aside>
+    </section>
+
+    <!-- ============= 25. UX 용어 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">UX</div>
+        <h2>UI가 아니라 <span class="accent2">UX</span>를 말하는 단어</h2>
+        <div class="grid-2" style="gap:1.6rem;">
+          <div class="anat">
+            <div class="ar"><div class="an">와이어프레임<em>wireframe</em></div><div class="ad">색 없이 <b>칸만</b> 잡은 뼈대 그림. "먼저 와이어프레임만 보여줘"가 시간 절약의 요령.</div></div>
+            <div class="ar"><div class="an">목업<em>mockup</em></div><div class="ad">색·글꼴까지 입힌 <b>완성 이미지</b>. 아직 눌리지는 않습니다.</div></div>
+            <div class="ar"><div class="an">프로토타입<em>prototype</em></div><div class="ad"><b>실제로 눌러지는</b> 시제품. 바이브 코딩이 잘하는 영역입니다.</div></div>
+            <div class="ar"><div class="an">유저 플로<em>user flow</em></div><div class="ad">사용자가 목적을 이루기까지의 <b>화면 순서</b>. "로그인 → 목록 → 상세 → 저장".</div></div>
+            <div class="ar"><div class="an">정보 구조<em>IA</em></div><div class="ad">메뉴와 화면의 <b>계층</b>. 사이드바에 무엇을 몇 개 둘지의 근거.</div></div>
+          </div>
+          <div class="anat">
+            <div class="ar"><div class="an">어포던스<em>affordance</em></div><div class="ad">"이건 누를 수 있겠다"고 <b>보이게</b> 하는 성질. 버튼처럼 안 생긴 버튼은 안 눌립니다.</div></div>
+            <div class="ar"><div class="an">CTA<em>call to action</em></div><div class="ad">사용자가 해주길 바라는 <b>단 하나의 행동</b>. 화면마다 하나면 충분합니다.</div></div>
+            <div class="ar"><div class="an">해피 패스<em>happy path</em></div><div class="ad">모든 게 잘 되는 경로. AI는 이것만 만들어 줍니다 — <b>예외</b>는 사람이 요구해야 합니다.</div></div>
+            <div class="ar"><div class="an">온보딩<em>onboarding</em></div><div class="ad">첫 사용자를 안내하는 과정. 빈 화면 + 3단계 안내가 기본형.</div></div>
+            <div class="ar"><div class="an">피드백<em>feedback</em></div><div class="ad">누르면 <b>반응이 있어야</b> 합니다. 토스트·스피너·색 변화가 그 수단.</div></div>
+          </div>
+        </div>
+        <div class="prompt-card mini good" style="margin-top:.9rem;">
+          <div class="pc-label">단계를 나눠 시키는 프롬프트</div>
+          <pre class="code">먼저 유저 플로를 글로 정리하고, 그다음 와이어프레임(HTML)만 만들어줘.
+확인하면 색·컴포넌트를 입혀 프로토타입으로 발전시키자.</pre>
+        </div>
+      </div>
+      <aside class="notes">
+        "와이어프레임부터"는 바이브 코딩에서 가장 비용을 아끼는 습관 — 여기서 강하게 권할 것.
+        해피 패스 이야기는 15번 슬라이드(로딩/빈/에러)와 짝을 이룬다.
+      </aside>
+    </section>
+
+    <!-- ============= 26. 번역기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">TRANSLATOR</div>
+        <h2>"이쁘게 해줘"를 <span class="accent2">번역</span>하면</h2>
+        <div class="stack" style="gap:.5rem; margin-top:.3rem;">
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"좀 더 예쁘게 해줘"</div><div class="ar2">→</div>
+            <div class="exact">여백을 <span class="mono">8의 배수</span>로 통일, 카드 라운드 <span class="mono">12px</span>, 그림자는 약하게, 글자 크기 4단계로 정리</div>
+          </div>
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"왼쪽에 메뉴 같은 거"</div><div class="ar2">→</div>
+            <div class="exact"><span class="mono">240px</span> 고정 <b>사이드바</b>, 현재 메뉴는 <b>active</b> 표시, 모바일에서는 <b>드로어</b>로 전환</div>
+          </div>
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"버튼 좀 많이 넣어줘"</div><div class="ar2">→</div>
+            <div class="exact"><b>primary</b> 1개 + <b>ghost</b> 취소 1개, 나머지 명령은 <span class="mono">⋯</span> <b>드롭다운 메뉴</b>로</div>
+          </div>
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"로딩이 좀 이상해"</div><div class="ar2">→</div>
+            <div class="exact">목록은 <b>스켈레톤</b>, 0건이면 <b>엠프티 스테이트</b>, 실패하면 재시도 버튼이 있는 <b>에러 상태</b></div>
+          </div>
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"알림 좀 띄워줘"</div><div class="ar2">→</div>
+            <div class="exact">저장 성공은 <b>토스트</b>(3초), 삭제 확인은 <b>모달</b>, 용량 경고는 상단 <b>배너</b></div>
+          </div>
+          <div class="tr2 autoshow fade-up">
+            <div class="vague">"폰에서도 되게"</div><div class="ar2">→</div>
+            <div class="exact"><b>모바일 퍼스트</b>, 브레이크포인트 <span class="mono">640 / 1024</span>, 하단 탭 4개, <b>세이프 에어리어</b> 여백 확보</div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        오늘 배운 단어가 전부 오른쪽 칸에 들어 있음을 확인시켜 준다. 왼쪽을 읽고 청중에게
+        오른쪽을 먼저 말해보게 하면 참여도가 올라간다.
+      </aside>
+    </section>
+
+    <!-- ============= 27. 데모: 같은 요구, 두 프롬프트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">DEMO</div>
+        <h2>단어 하나 차이의 <span class="accent2">결과 차이</span></h2>
+        <div class="grid-2" style="gap:1.4rem; align-items:stretch;">
+          <div class="demo-term" data-demo="vague" style="height:400px;">
+            <div class="dt-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="dt-title">이름 없이 주문하기</span>
+              <button class="dt-replay" type="button">↻ 재생</button>
+            </div>
+            <div class="dt-body"></div>
+          </div>
+          <div class="demo-term" data-demo="exact" style="height:400px;">
+            <div class="dt-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="dt-title">이름을 대고 주문하기</span>
+              <button class="dt-replay" type="button">↻ 재생</button>
+            </div>
+            <div class="dt-body"></div>
+          </div>
+        </div>
+        <p class="tiny center" style="margin-top:.7rem; color:#9BA6C0 !important;">
+          왼쪽은 왕복 4번, 오른쪽은 <b class="accent2">한 번에</b>. 실력 차이가 아니라 <em>단어</em> 차이입니다.
+        </p>
+      </div>
+      <aside class="notes">
+        두 터미널은 슬라이드에 들어오면 자동 재생. 왼쪽 재생이 끝나갈 때쯤 "이게 익숙하시죠?"라고 묻고,
+        오른쪽으로 시선을 옮긴다.
+      </aside>
+    </section>
+
+    <!-- ============= 28. 화면 주문서 템플릿 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">TEMPLATE</div>
+        <h2>복사해서 쓰는 <span class="accent2">화면 주문서</span></h2>
+        <div class="prompt-card">
+          <div class="pc-label">SCREEN ORDER — 빈칸만 채우면 됩니다</div>
+          <pre class="code">◯◯◯ 화면을 만들어줘. Tailwind + shadcn/ui 스타일, 라이트/다크 모드 둘 다.
+
+[레이아웃] 상단 56px 앱 바 + 좌측 240px 고정 사이드바 + 본문. 컨테이너 max-width 1200px.
+[내용]     본문은 카드 그리드(데스크톱 3열 / 태블릿 2열 / 모바일 1열, gap 16px).
+[부품]     검색 입력, 필터는 칩, 행 클릭 시 상세는 팝오버가 아니라 모달로.
+[상태]     로딩은 스켈레톤, 0건은 엠프티 스테이트(생성 버튼 포함), 실패는 재시도 버튼이 있는 에러 상태.
+[토큰]     간격 8의 배수, 라운드 12px, 그림자 약하게, 글자 크기 4단계(Display/Heading/Body/Caption).
+[반응형]   모바일 퍼스트, 브레이크포인트 640/1024. 1024px 미만에서 사이드바는 드로어로.
+[접근성]   포커스 링 유지, 명암비 4.5:1 이상, 아이콘 버튼에 aria-label.
+
+먼저 와이어프레임 수준으로 만들고 스크린샷을 보여줘. 확인하면 스타일을 입히자.</pre>
+        </div>
+        <p class="small" style="margin-top:.8rem; color:#B8BFD0 !important;">
+          여덟 줄 전부 <b class="accent2">오늘 배운 단어</b>로만 쓰여 있습니다. 프로젝트 성격에 맞게 한 번 고쳐두면
+          <span class="mono accent">CLAUDE.md</span>에 넣어 <em>매번 자동 적용</em>할 수 있습니다.
+        </p>
+      </div>
+      <aside class="notes">
+        복사 버튼 안내. CLAUDE.md로 굳히는 방법은 making-slides 세미나에서 자세히 다룬다고 연결.
+      </aside>
+    </section>
+
+    <!-- ============= 29. 치트시트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CHEAT SHEET</div>
+        <h2>한 장 <span class="accent2">요약</span> — 프롬프트에 그대로 쓰는 단어들</h2>
+        <div class="cheat">
+          <div class="cg"><h4>LAYOUT</h4><p><b>viewport</b> 보이는 영역 · <b>container</b> 폭 제한 · <b>grid/column</b> 격자 · <b>gutter/gap</b> 간격 · <b>padding</b> 안쪽 · <b>margin</b> 바깥 · <b>radius</b> 라운드 · <b>sticky/fixed</b> 고정 · <b>z-index</b> 겹침 · <b>overflow</b> 넘침</p></div>
+          <div class="cg"><h4>SKELETON</h4><p><b>header/app bar</b> 상단 띠 · <b>sidebar</b> 측면 메뉴 · <b>rail</b> 아이콘만 · <b>drawer</b> 햄버거 · <b>hero</b> 첫 큰 영역 · <b>main</b> 본문 · <b>aside/panel</b> 보조 · <b>footer</b> 하단 · <b>bottom nav</b> 하단 탭</p></div>
+          <div class="cg"><h4>DEVICE</h4><p><b>bezel</b> 기기 테두리 · <b>notch</b> 카메라 홈 · <b>status bar</b> 최상단 OS 띠 · <b>safe area</b> 안전 영역 · <b>home indicator</b> 하단 막대 · <b>touch target 44px</b> 누를 최소 크기</p></div>
+          <div class="cg"><h4>BUTTONS</h4><p><b>primary</b> 주 행동 · <b>secondary/outline</b> 보조 · <b>ghost/text</b> 글자만 · <b>destructive</b> 위험 · <b>icon button</b> 아이콘만 · <b>FAB</b> 떠 있는 원형 · <b>CTA</b> 그 화면의 목표 행동</p></div>
+          <div class="cg"><h4>FORM</h4><p><b>text field</b> 입력 · <b>label</b> 이름 · <b>placeholder</b> 흐린 예시 · <b>helper text</b> 아래 설명 · <b>checkbox</b> 다중 · <b>radio</b> 단일 · <b>switch</b> 즉시 켬/끔 · <b>slider</b> 범위 · <b>select</b> 목록 · <b>validation</b> 검증</p></div>
+          <div class="cg"><h4>NAVIGATION</h4><p><b>tabs</b> 내용 전환 · <b>segmented</b> 보기 전환 · <b>breadcrumb</b> 현재 경로 · <b>pagination</b> 페이지 · <b>menu/dropdown</b> 명령 목록 · <b>stepper</b> 단계</p></div>
+          <div class="cg"><h4>CONTENT</h4><p><b>card</b> 정보 상자 · <b>list item</b> 목록 줄 · <b>table/data grid</b> 표 · <b>avatar</b> 사람 · <b>chip/tag</b> 라벨 · <b>badge</b> 숫자 알림 · <b>tooltip</b> 짧은 설명 · <b>accordion</b> 접기 · <b>carousel</b> 넘기기</p></div>
+          <div class="cg"><h4>OVERLAY</h4><p><b>modal/dialog</b> 막는 창 · <b>scrim/backdrop</b> 어두운 막 · <b>popover</b> 안 막는 패널 · <b>bottom sheet</b> 아래서 올라옴 · <b>toast/snackbar</b> 사라지는 알림 · <b>banner</b> 남는 안내</p></div>
+          <div class="cg"><h4>STATES</h4><p><b>default · hover · focus · active · disabled · loading · success · error</b> — "전부 넣어줘"라고 한 줄 쓰면 끝</p></div>
+          <div class="cg"><h4>WAITING</h4><p><b>spinner</b> 짧은 대기 · <b>progress</b> 퍼센트 · <b>skeleton</b> 회색 뼈대 · <b>empty state</b> 0건 화면 · <b>error state</b> 실패 화면 + 재시도</p></div>
+          <div class="cg"><h4>TOKENS</h4><p><b>spacing 8의 배수</b> · <b>radius</b> 12px · <b>elevation/shadow</b> 높이 · <b>type scale</b> 글자 단계 · <b>primary/surface/on-surface</b> 색 역할 · <b>semantic</b> 의미색</p></div>
+          <div class="cg"><h4>THEME</h4><p><b>Material 3</b> 구글·안드로이드 · <b>Cupertino/HIG</b> 애플 · <b>Fluent</b> MS·Office · <b>Tailwind + shadcn/ui</b> 웹 기본값 · <b>Ant/MUI</b> 기업용 · <b>dark mode</b> 밝기 축</p></div>
+        </div>
+      </div>
+      <aside class="notes">
+        이 장은 사진 찍는 장. "지금 찍으세요" 한마디 하고 10초 기다릴 것.
+      </aside>
+    </section>
+
+    <!-- ============= 30. 3줄 요약 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WRAP</div>
+        <h2>3줄로 <span class="grad">요약</span></h2>
+        <div class="flow" style="margin-top:.8rem;">
+          <div class="fstep autoshow zoom-in" style="padding:1.3rem 1rem;"><span class="ic">🏷️</span><b>이름을 대라</b><small>"그거" 대신 사이드바·모달·스켈레톤</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in" style="padding:1.3rem 1rem;"><span class="ic">🔢</span><b>숫자를 붙여라</b><small>240px · 12px · 640/1024 · 200ms</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow zoom-in" style="padding:1.3rem 1rem;"><span class="ic">🧯</span><b>예외를 요구하라</b><small>로딩 · 빈 상태 · 에러까지</small></div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:1.6rem; color:#B8BFD0 !important;">
+          디자인 감각이 없어도 됩니다. <em>지목할 이름</em>과 <em>숫자</em>, 그리고 <em>잘 안 될 때의 화면</em>을 요구하는 것 —
+          이 셋이 바이브 코딩으로 만든 화면을 "만들어본 것"에서 <b class="accent2">"쓸 수 있는 것"</b>으로 바꿉니다.
+        </p>
+      </div>
+      <aside class="notes">
+        3줄 요약. 마지막 문장을 천천히 — 오늘의 결론.
+      </aside>
+    </section>
+
+    <!-- ============= 31. Q&A ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">WRAP-UP</div>
+        <h2 style="font-size:3.1rem;">이제 <span class="grad">지목할 수</span> 있습니다</h2>
+        <p class="small autoshow fade-up" style="margin-top:1rem; color:#B8BFD0 !important;">
+          화면의 모든 칸과 부품에는 이미 이름이 있었습니다. 그 이름이 곧 프롬프트입니다.
+        </p>
+        <h3 class="autoshow fade-up" style="margin-top:1.6rem;">감사합니다 — Q&amp;A 🙋</h3>
+        <p class="tiny autoshow fade-up" style="color:#9BA6C0 !important; margin-top:1rem;">
+          함께 보기:
+          <a href="../prompt/">프롬프트 엔지니어링</a> ·
+          <a href="../making-slides/">슬라이드 자료 만들기</a> ·
+          <a href="../workshop/">실습 워크숍</a> ·
+          <a href="../intro/">바이브 코딩 입문</a>
+        </p>
+      </div>
+      <aside class="notes">
+        마무리 + Q&A. 로컬 발표 모드(npm run dev)에서만 실시간 질문이 동작.
+        후속 안내: 다음 화면을 만들 때 28번 슬라이드의 주문서를 그대로 복사해 쓸 것.
+      </aside>
+    </section>
+
+  </div>
+</div>
+<!-- reveal.js 5.1.0 — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ===== 프롬프트 카드 복사 버튼 =====
+  (function () {
+    document.querySelectorAll('.prompt-card').forEach((card) => {
+      const pre = card.querySelector('pre');
+      if (!pre) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = '복사';
+      btn.setAttribute('aria-label', '프롬프트 복사');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText.trim());
+          btn.textContent = '복사됨 ✓';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          btn.textContent = 'Ctrl+C로 복사';
+        }
+        setTimeout(() => { btn.textContent = '복사'; }, 1600);
+      });
+      card.appendChild(btn);
+    });
+  })();
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? h.textContent : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur();
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+
+  // ===== 타이틀: 칸에 이름이 하나씩 붙는 목업 =====
+  // "그거 좀 이쁘게 해줘" → 칸마다 이름이 켜지며 프롬프트 문장으로 바뀐다.
+  (function () {
+    const wire = document.getElementById('ttl-wire');
+    if (!wire) return;
+    const zones = Array.from(wire.querySelectorAll('[data-t]'))
+      .sort((a, b) => Number(a.dataset.t) - Number(b.dataset.t));
+    const line = document.getElementById('ttl-line');
+    const caret = document.getElementById('ttl-caret');
+    const TEXT = '헤더 · 사이드바 · 메인 · 푸터 — 이름이 곧 프롬프트';
+    let timers = [];
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function clearAll() { timers.forEach(clearTimeout); timers = []; }
+    function reset() {
+      clearAll();
+      zones.forEach((z) => z.classList.remove('lit'));
+      line.textContent = '';
+      caret.style.display = 'inline-block';
+    }
+    function type(done) {
+      let i = 0;
+      (function step() {
+        if (i >= TEXT.length) { caret.style.display = 'none'; done(); return; }
+        line.textContent += TEXT[i++];
+        later(step, 42);
+      })();
+    }
+    function play() {
+      reset();
+      if (REDUCED_MOTION) {
+        zones.forEach((z) => z.classList.add('lit'));
+        line.textContent = TEXT;
+        caret.style.display = 'none';
+        return;
+      }
+      zones.forEach((z, i) => later(() => z.classList.add('lit'), 500 + i * 420));
+      later(() => type(() => later(play, 4200)), 500 + zones.length * 420 + 200);
+    }
+    function onTitle() {
+      const idx = Reveal.getIndices();
+      return idx.h === 0 && !document.hidden;
+    }
+    Reveal.on('slidechanged', () => { if (onTitle()) play(); else clearAll(); });
+    document.addEventListener('visibilitychange', () => { if (onTitle()) play(); else clearAll(); });
+    Reveal.on('ready', () => { if (onTitle()) later(play, 400); });
+  })();
+
+  // ===== 화면 골격 해부: 이름 ↔ 칸 연결 (hover + 자동 순회) =====
+  (function () {
+    const wire = document.getElementById('an-wire');
+    const list = document.getElementById('an-list');
+    if (!wire || !list) return;
+    const rows = Array.from(list.querySelectorAll('.ar'));
+    const section = wire.closest('section');
+    let auto = null, cursor = 0, paused = false;
+
+    function lightUp(key) {
+      wire.querySelectorAll('[data-z]').forEach((z) => z.classList.toggle('lit', z.dataset.z === key));
+      rows.forEach((r) => r.classList.toggle('lit', r.dataset.z === key));
+    }
+    function clear() {
+      wire.querySelectorAll('[data-z]').forEach((z) => z.classList.remove('lit'));
+      rows.forEach((r) => r.classList.remove('lit'));
+    }
+    rows.forEach((r) => {
+      r.addEventListener('mouseenter', () => { paused = true; lightUp(r.dataset.z); });
+      r.addEventListener('mouseleave', () => { paused = false; });
+    });
+    function tick() {
+      if (!paused) { lightUp(rows[cursor % rows.length].dataset.z); cursor++; }
+    }
+    function start() {
+      if (auto || REDUCED_MOTION) return;
+      cursor = 0; tick();
+      auto = setInterval(tick, 1800);
+    }
+    function stop() { if (auto) { clearInterval(auto); auto = null; } clear(); }
+    Reveal.on('slidechanged', (e) => { if (e.currentSlide === section) start(); else stop(); });
+    Reveal.on('ready', (e) => { if (e.currentSlide === section) start(); });
+  })();
+
+  // ===== 디바이스: 세이프 에어리어 점선 깜빡이기 =====
+  (function () {
+    const dev = document.getElementById('dev');
+    if (!dev) return;
+    const section = dev.closest('section');
+    let t = null, on = false;
+    function toggle() { on = !on; dev.classList.toggle('show-safe', on); }
+    function start() {
+      if (t) return;
+      if (REDUCED_MOTION) { dev.classList.add('show-safe'); return; }
+      on = false; dev.classList.remove('show-safe');
+      setTimeout(toggle, 700);
+      t = setInterval(toggle, 2200);
+    }
+    function stop() { if (t) { clearInterval(t); t = null; } dev.classList.remove('show-safe'); }
+    Reveal.on('slidechanged', (e) => { if (e.currentSlide === section) start(); else stop(); });
+    Reveal.on('ready', (e) => { if (e.currentSlide === section) start(); });
+  })();
+
+  // ===== 데모 터미널 (타이핑 재생) =====
+  (function () {
+    // 대사 스크립트: [역할, 텍스트, (선택) 클래스]
+    // 역할: u=사용자, a=AI, s=시스템 메모, o=출력
+    const SCRIPTS = {
+      vague: [
+        ['u', '대시보드 화면 하나 만들어줘. 왼쪽에 메뉴 같은 거 있고 예쁘게.'],
+        ['a', '만들었습니다! 좌측 내비게이션과 카드 목록으로 구성했어요.'],
+        ['o', '  write: dashboard.html  (카드 6개 · 기본 회색 테마)'],
+        ['u', '음… 메뉴가 너무 넓고, 폰에서는 다 깨져.'],
+        ['a', '폭을 줄이고 반응형을 적용하겠습니다. 기준 폭은 임의로 잡았어요.'],
+        ['u', '로딩할 때 흰 화면이 번쩍여. 그리고 데이터 없을 때 아무것도 안 나와.'],
+        ['a', '로딩 표시와 빈 화면을 추가하겠습니다.'],
+        ['u', '버튼이 너무 많아 보이는데 뭐가 중요한지 모르겠어…'],
+        ['o', '  4번째 왕복 · 아직 합의된 기준 없음', 'ok'],
+      ],
+      exact: [
+        ['u', '대시보드 화면을 만들어줘. Tailwind + shadcn/ui 스타일, 라이트/다크 둘 다.'],
+        ['u', '좌측 240px 고정 사이드바 + 상단 56px 앱 바, 본문은 카드 3열 그리드(gap 16px).'],
+        ['u', '로딩은 스켈레톤, 0건은 엠프티 스테이트, 실패는 재시도 버튼. primary 버튼은 화면에 하나만.'],
+        ['u', '모바일 퍼스트로 640/1024 브레이크포인트, 1024 미만에서 사이드바는 드로어로.'],
+        ['a', '요구가 명확하니 한 번에 잡겠습니다 — 용어가 곧 명세가 되었습니다.'],
+        ['o', '  layout: app bar 56px · sidebar 240px · container 1200px'],
+        ['o', '  states: skeleton / empty / error  ✓'],
+        ['o', '  responsive: 1 → 2 → 3 열 · drawer < 1024px  ✓'],
+        ['o', '  a11y: focus ring 유지 · aria-label 부여  ✓'],
+        ['a', '첫 결과부터 고칠 게 거의 없습니다. 이제 내용만 보세요.'],
+        ['o', '  왕복 1번 · 합의된 기준으로 고정', 'ok'],
+      ],
+    };
+
+    const players = new Map();
+    document.querySelectorAll('.demo-term').forEach((el) => {
+      const key = el.dataset.demo;
+      const body = el.querySelector('.dt-body');
+      const script = SCRIPTS[key] || [];
+      const who = { u: '나', a: 'AI', s: 'NOTE', o: '>' };
+      let timer = null, li = 0;
+
+      function stop() { if (timer) { clearTimeout(timer); timer = null; } }
+      function reset() {
+        stop(); li = 0; body.innerHTML = '';
+        script.forEach(([role, text, xtra]) => {
+          const line = document.createElement('div');
+          line.className = 'dt-line ' + role + (xtra ? ' ' + xtra : '');
+          const w = document.createElement('span'); w.className = 'dt-who'; w.textContent = who[role];
+          const m = document.createElement('span'); m.className = 'dt-msg'; m.textContent = '';
+          line.append(w, m); body.appendChild(line);
+        });
+      }
+      function playLine() {
+        const lines = body.children;
+        if (li >= lines.length) return;
+        const line = lines[li]; const msg = line.querySelector('.dt-msg');
+        const full = script[li][1]; const role = script[li][0];
+        line.classList.add('on');
+        line.scrollIntoView({ block: 'nearest', behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
+        if (REDUCED_MOTION) { msg.textContent = full; li++; timer = setTimeout(playLine, 10); return; }
+        if (role === 'o' || role === 's') { // 출력 라인은 통으로
+          msg.textContent = full; li++;
+          timer = setTimeout(playLine, 380);
+          return;
+        }
+        let ci = 0;
+        const caret = document.createElement('span'); caret.className = 'dt-caret'; msg.after(caret);
+        (function type() {
+          const step = 2 + Math.floor(Math.random() * 3);
+          ci = Math.min(full.length, ci + step);
+          msg.textContent = full.slice(0, ci);
+          if (ci < full.length) timer = setTimeout(type, 22);
+          else { caret.remove(); li++; timer = setTimeout(playLine, 420); }
+        })();
+      }
+      function play() { reset(); timer = setTimeout(playLine, 350); }
+      el.querySelector('.dt-replay')?.addEventListener('click', play);
+      const sec = el.closest('section');
+      const list = players.get(sec) || [];
+      list.push({ play, stop, reset });
+      players.set(sec, list);
+      reset();
+    });
+
+    function onSlide(section) {
+      players.forEach((list, sec) => {
+        list.forEach((p, i) => {
+          if (sec === section) setTimeout(() => p.play(), 500 + i * 250);
+          else p.stop();
+        });
+      });
+    }
+    Reveal.on('slidechanged', (e) => onSlide(e.currentSlide));
+    Reveal.on('ready', (e) => onSlide(e.currentSlide));
+  })();
+</script>
+
+<!-- 통합 발표 플랫폼: 질문·이모지·슬라이드 동기화는 모든 덱이 공유하는 assets/qa.js 하나가 담당한다. -->
+<link rel="stylesheet" href="../assets/qa.css">
+<script src="../assets/qa.js" defer></script>
+
+</body>
+</html>

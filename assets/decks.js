@@ -7,6 +7,7 @@ window.SEMINAR_DECKS = [
   { track: '01 시작하기', id: 'setup',         emoji: '🧰', title: '0교시 — 설치와 첫 실행',                  desc: '환경 세팅 · 로그인 · 첫 대화 · 트러블슈팅 TOP 5' },
   { track: '01 시작하기', id: 'intro',         emoji: '🚀', title: '바이브 코딩이란 무엇인가?',                desc: '원본 입문 세미나 — 시리즈의 출발점' },
   { track: '01 시작하기', id: 'prompt',        emoji: '🗣️', title: 'AI에게 일 시키는 법 — 프롬프트 엔지니어링', desc: '3요소 프레임 · 패턴 8가지 · 다듬기 루프' },
+  { track: '01 시작하기', id: 'ui-ux',         emoji: '🎨', title: '바이브 코더를 위한 UI/UX 용어 사전',   desc: '레이아웃 · 사이드바 · 엘리먼트 도감 · 테마' },
   { track: '01 시작하기', id: 'github',        emoji: '🌿', title: '최소한의 Git & GitHub',                    desc: '바이브 코딩에 꼭 필요한 만큼의 버전 관리' },
 
   { track: '02 더 깊이',  id: 'context',       emoji: '🧠', title: '컨텍스트 — AI 에이전트의 작업 책상',        desc: '컨텍스트 창의 원리와 컨텍스트 엔지니어링' },
