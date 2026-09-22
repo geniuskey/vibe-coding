@@ -1092,8 +1092,7 @@
 
     /* ==================================================================
        설명 ↔ 그림 연결
-       — 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 함께 켜지고,
-         둘 사이에 연결선이 그려진다. (클릭하면 고정)
+       — 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 함께 켜진다. (클릭하면 고정)
        — data-peek 용어는 다른 슬라이드의 실물을 미리보기로 띄우고, 클릭하면 그리로 간다.
        ================================================================== */
     [data-hl] { cursor: pointer; }
@@ -1197,17 +1196,6 @@
     .spec:hover .drawer-scrim { animation: asFadeIn .45s ease; }
     @keyframes drawerIn { from { transform: translateX(-100%); } }
 
-    /* 연결선 (화면 전체 위에 얹는 SVG) */
-    .hl-wires { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 50; overflow: visible; }
-    .hl-wires path {
-      fill: none; stroke: #7DFFDF; stroke-width: 2; stroke-linecap: round;
-      stroke-dasharray: 1; stroke-dashoffset: 0;
-      filter: drop-shadow(0 0 3px rgba(125,255,223,.85));
-      animation: hlDraw .38s ease-out;
-    }
-    .hl-wires circle { fill: #7DFFDF; filter: drop-shadow(0 0 4px rgba(125,255,223,.9)); }
-    @keyframes hlDraw { from { stroke-dashoffset: 1; } }
-
     /* 다른 슬라이드 미리보기 */
     .pk {
       border-bottom: 1.5px dotted rgba(255,212,107,.9); border-radius: 3px; cursor: zoom-in;
@@ -1241,7 +1229,6 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hl-wires path { animation: none; }
       .spec:hover .drawer-panel, .spec:hover .drawer-scrim { animation: none; }
       .rsp-frame, .rsp-side, .rsp-main, .rail-nav { transition: none; }
     }
@@ -1404,7 +1391,7 @@
       <aside class="notes">
         여기서 가장 자주 쓰이는 실전 표현 3개만 각인: "뷰포트 꽉 차게", "컨테이너 max-width 1200",
         "카드 3열 그리드, gap 16px". 숫자를 함께 말하는 습관을 강조.
-        오른쪽 용어가 자동으로 돌며 왼쪽 도식의 해당 부분과 선으로 이어진다. 마우스를 올리면 순회가 멈춘다.
+        오른쪽 용어가 자동으로 돌며 왼쪽 도식의 해당 부분이 함께 켜진다. 마우스를 올리면 순회가 멈춘다.
       </aside>
     </section>
 
@@ -1645,7 +1632,7 @@
         </div>
       </div>
       <aside class="notes">
-        오른쪽 설명이 자동으로 돌며 목업의 해당 부위와 선으로 이어진다(세이프 에어리어는 노란 점선). 베젤은 하드웨어, 세이프 에어리어는
+        오른쪽 설명이 자동으로 돌며 목업의 해당 부위가 함께 켜진다(세이프 에어리어는 노란 점선). 베젤은 하드웨어, 세이프 에어리어는
         소프트웨어라는 구분이 이 슬라이드의 핵심.
       </aside>
     </section>
@@ -2070,7 +2057,7 @@
       </div>
       <aside class="notes">
         focus와 hover의 차이(키보드 vs 마우스)를 한 번 짚고, focus-visible은 접근성 슬라이드에서 재등장.
-        아래 '진짜 버튼'을 직접 올리고 눌러 보이면 해당 상태 카드가 선으로 연결된다. 누르면 loading → success(세 번째마다 error).
+        아래 '진짜 버튼'을 직접 올리고 눌러 보이면 해당 상태 카드가 함께 켜진다. 누르면 loading → success(세 번째마다 error).
       </aside>
     </section>
 
@@ -2153,7 +2140,7 @@
           <div class="bpc" data-hl="bp-d"><span class="bic">💻</span><b>데스크톱</b><span class="mono">1024–1440px</span><small>3열 · 고정 사이드바</small></div>
           <div class="bpc" data-hl="bp-w"><span class="bic">🖥️</span><b>와이드</b><span class="mono">&gt; 1440px</span><small>컨테이너 폭 제한 + 여백</small></div>
         </div>
-        <div class="rsp" data-hk="bp-m bp-t bp-d bp-w" data-hl-oneway data-hk-noline data-peek-root data-peek-id="responsive" data-peek-w="520">
+        <div class="rsp" data-hk="bp-m bp-t bp-d bp-w" data-hl-oneway data-peek-root data-peek-id="responsive" data-peek-w="520">
           <div class="rsp-stage">
             <div class="rsp-frame">
               <div class="rsp-top"><span class="rsp-burger">☰</span><i></i></div>
@@ -2787,16 +2774,10 @@
   })();
 
   // ===== 설명 ↔ 그림 연결 =====
-  // 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 켜고, 둘 사이에 선을 긋는다.
+  // 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 함께 켠다.
   // 키는 가장 가까운 [data-hl-scope](없으면 슬라이드) 안에서만 찾는다.
   // [data-hl-tour] 의 바로 아래 항목들은 슬라이드에 들어오면 자동으로 순회한다.
   const Link = (function () {
-    const NS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('class', 'hl-wires');
-    svg.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(svg);
-
     const UNIT = '.spec, .theme-card, .state';
     const keysOf = (el, attr) => (el.getAttribute(attr) || '').split(/\s+/).filter(Boolean);
     const scopeOf = (el) => el.closest('[data-hl-scope]') || el.closest('section');
@@ -2806,8 +2787,7 @@
     let hover = null;      // 마우스·포커스가 올라가 있는 트리거/타깃
     let pinned = null;     // 클릭으로 고정한 표시(다시 그리는 함수)
     let pinnedEl = null;
-    let shown = null;      // 지금 화면에 그려진 표시(리사이즈 때 다시 그림)
-    let shownBy = null;
+    let shownBy = null;    // 지금 켜진 표시를 만든 요소
     let lastUser = 0;
 
     function clear() {
@@ -2816,53 +2796,7 @@
         delete e.dataset.hlKey;
       });
       document.querySelectorAll('section.hl-dim').forEach((s) => s.classList.remove('hl-dim'));
-      svg.replaceChildren();
-      shown = null; shownBy = null;
-    }
-
-    function line(a, b) {
-      const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
-      if (!ra.width || !rb.width) return;
-      const gx = Math.max(rb.left - ra.right, ra.left - rb.right);
-      const gy = Math.max(rb.top - ra.bottom, ra.top - rb.bottom);
-      if (gx < 6 && gy < 6) return; // 겹치거나 맞닿아 있으면 선이 오히려 방해
-      const ax = (ra.left + ra.right) / 2, ay = (ra.top + ra.bottom) / 2;
-      const bx = (rb.left + rb.right) / 2, by = (rb.top + rb.bottom) / 2;
-      let p, q, c1, c2;
-      if (gx >= gy) {
-        const d = bx > ax ? 1 : -1;
-        p = [d > 0 ? ra.right + 3 : ra.left - 3, ay];
-        q = [d > 0 ? rb.left - 3 : rb.right + 3, by];
-        const k = Math.abs(q[0] - p[0]) * 0.45;
-        c1 = [p[0] + d * k, p[1]]; c2 = [q[0] - d * k, q[1]];
-      } else {
-        const d = by > ay ? 1 : -1;
-        p = [ax, d > 0 ? ra.bottom + 3 : ra.top - 3];
-        q = [bx, d > 0 ? rb.top - 3 : rb.bottom + 3];
-        const k = Math.abs(q[1] - p[1]) * 0.45;
-        c1 = [p[0], p[1] + d * k]; c2 = [q[0], q[1] - d * k];
-      }
-      const path = document.createElementNS(NS, 'path');
-      path.setAttribute('d', `M${p} C${c1} ${c2} ${q}`);
-      path.setAttribute('pathLength', '1');
-      svg.appendChild(path);
-      [p, q].forEach(([x, y]) => {
-        const c = document.createElementNS(NS, 'circle');
-        c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 3.5);
-        svg.appendChild(c);
-      });
-    }
-
-    // 카드(단위)별로 묶어서, 묶음이 여럿이면 묶음마다 하나씩, 하나뿐이면 최대 둘까지 선을 긋는다
-    function wireUp(from, tos) {
-      const groups = new Map();
-      tos.filter((t) => !t.hasAttribute('data-hk-noline')).forEach((t) => {
-        const u = t.closest(UNIT);
-        groups.set(u, (groups.get(u) || []).concat(t));
-      });
-      const per = groups.size > 1 ? 1 : 2;
-      let n = 0;
-      groups.forEach((g) => (g.length <= per ? g : g.slice(0, 1)).forEach((t) => { if (n++ < 6) line(from, t); }));
+      shownBy = null;
     }
 
     function dim(sec, els) {
@@ -2877,8 +2811,7 @@
       tr.classList.add('hl-src');
       ts.forEach((t) => { t.classList.add('hl-on'); t.dataset.hlKey = ks.join(' '); });
       dim(tr.closest('section'), ts);
-      wireUp(tr, ts);
-      shown = () => fromTrigger(tr); shownBy = tr;
+      shownBy = tr;
     }
 
     function triggersOf(tg) {
@@ -2896,8 +2829,7 @@
       tg.classList.add('hl-on');
       trs.forEach((t) => t.classList.add('hl-src'));
       dim(tg.closest('section'), [tg]);
-      wireUp(tg, trs);
-      shown = () => fromTarget(tg, trs); shownBy = tg;
+      shownBy = tg;
     }
 
     function restore() {
@@ -2923,7 +2855,6 @@
           clear();
           ts.forEach((t) => t.classList.add('hl-on'));
           dim(sec, ts);
-          shown = pinned;
         };
       }
       pinned();
@@ -3006,7 +2937,6 @@
       startTour(e.currentSlide);
     });
     Reveal.on('ready', (e) => startTour(e.currentSlide));
-    Reveal.on('resize', () => { if (shown) shown(); });
 
     return {
       show(el) { fromTrigger(el); },
