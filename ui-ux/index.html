@@ -620,20 +620,40 @@
     .uic input[type="checkbox"], .uic input[type="radio"] { width: 1.05rem; height: 1.05rem; accent-color: var(--pri); margin: 0; }
     .uic .sw {
       width: 2.7rem; height: 1.5rem; border-radius: 999px; background: var(--pri);
-      position: relative; display: inline-block; flex: 0 0 auto;
+      position: relative; display: inline-block; flex: 0 0 auto; cursor: pointer;
+      transition: background .2s ease;
     }
     .uic .sw::after {
-      content: ""; position: absolute; top: 3px; right: 3px; width: 1.1rem; height: 1.1rem;
+      content: ""; position: absolute; top: 3px; left: 3px; width: 1.1rem; height: 1.1rem;
       border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35);
+      transform: translateX(calc(1.6rem - 6px)); transition: transform .2s ease;
     }
     .uic .sw.off { background: #C3C8D6; }
-    .uic .sw.off::after { right: auto; left: 3px; }
-    .uic input[type="range"] { width: 100%; accent-color: var(--pri); }
+    .uic .sw.off::after { transform: none; }
+    .uic .sldx {
+      --v: 62%; position: relative; width: 100%; height: 1.5rem;
+      display: flex; align-items: center; cursor: pointer; touch-action: none;
+    }
+    .uic .sldx:focus-visible { outline: 2px solid rgba(79,70,229,.5); outline-offset: 3px; border-radius: 6px; }
+    .uic .sl-track { position: relative; display: block; width: 100%; height: .42rem; border-radius: 999px; background: #D8DCE7; }
+    .uic .sl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: var(--v); border-radius: 999px; background: var(--pri); }
+    .uic .sl-thumb {
+      position: absolute; left: var(--v); top: 50%; width: 1.15rem; height: 1.15rem; margin: -.575rem 0 0 -.575rem;
+      border-radius: 50%; background: #fff; border: 2px solid var(--pri); box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    }
+    .uic .srch { position: relative; width: 100%; }
+    .uic .srch input { padding-left: 2.1em; padding-right: 2.1em; }
+    .uic .srch .si {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 1.35em; height: 1.35em;
+      display: inline-flex; align-items: center; justify-content: center; font-size: .8rem; line-height: 1; border-radius: 5px;
+    }
+    .uic .srch .si.l { left: .5em; }
+    .uic .srch .si.r { right: .5em; border-radius: 50%; background: var(--s2); font-size: .66rem; color: var(--on2) !important; }
     .uic .tabs { display: flex; gap: .1rem; border-bottom: 1px solid var(--line); width: 100%; }
-    .uic .tabs span { padding: .45em .8em; font-size: .86rem; font-weight: 700; color: var(--on2) !important; border-bottom: 2px solid transparent; }
+    .uic .tabs span { cursor: pointer; padding: .45em .8em; font-size: .86rem; font-weight: 700; color: var(--on2) !important; border-bottom: 2px solid transparent; }
     .uic .tabs span.on { color: var(--pri) !important; border-bottom-color: var(--pri); }
     .uic .segc { display: inline-flex; background: var(--s2); border-radius: 9px; padding: 2px; gap: 2px; }
-    .uic .segc span { padding: .35em .8em; font-size: .84rem; font-weight: 700; border-radius: 7px; color: var(--on2) !important; }
+    .uic .segc span { cursor: pointer; padding: .35em .8em; font-size: .84rem; font-weight: 700; border-radius: 7px; color: var(--on2) !important; }
     .uic .segc span.on { background: #fff; color: var(--on) !important; box-shadow: 0 1px 3px rgba(0,0,0,.18); }
     .uic .chipx {
       display: inline-flex; align-items: center; gap: .3em;
@@ -691,7 +711,7 @@
     .uic .crumb b { color: var(--on) !important; }
     .uic .pager { display: inline-flex; gap: .25rem; }
     .uic .pager span {
-      min-width: 1.7rem; height: 1.7rem; border-radius: 7px; border: 1px solid var(--line);
+      cursor: pointer; min-width: 1.7rem; height: 1.7rem; border-radius: 7px; border: 1px solid var(--line);
       display: inline-flex; align-items: center; justify-content: center;
       font-size: .8rem; font-weight: 700; color: var(--on2) !important;
     }
@@ -704,7 +724,10 @@
     .uic .menux div + div { border-top: 1px solid var(--s2); }
     .uic .menux div.on { background: var(--s2); }
     .uic .accx { width: 100%; border: 1px solid var(--line); border-radius: 10px; text-align: left; overflow: hidden; }
-    .uic .accx .ah { padding: .4em .7em; font-size: .85rem; font-weight: 800; display: flex; justify-content: space-between; }
+    .uic .accx .ah { cursor: pointer; padding: .4em .7em; font-size: .85rem; font-weight: 800; display: flex; justify-content: space-between; }
+    .uic .accx .ah span { transition: transform .2s ease; }
+    .uic .accx.closed .ah span { transform: rotate(-90deg); }
+    .uic .accx.closed .ab { display: none; }
     .uic .accx .ab { padding: .1em .7em .45em; font-size: .78rem; color: var(--on2) !important; border-top: 1px solid var(--s2); }
     .uic .stepx { display: flex; align-items: center; gap: .3rem; font-size: .76rem; font-weight: 800; }
     .uic .stepx i {
@@ -774,7 +797,8 @@
       padding: .4rem .55rem; border-radius: 10px; border: 1px solid transparent;
       cursor: default; transition: background .25s ease, border-color .25s ease;
     }
-    .anat .ar:hover, .anat .ar.lit { background: rgba(124,92,255,0.22); border-color: rgba(125,255,223,0.55); }
+    .anat .ar[data-hl] { cursor: pointer; }
+    .anat .ar:hover, .anat .ar.hl-src { background: rgba(124,92,255,0.22); border-color: rgba(125,255,223,0.55); }
     .anat .ar .an {
       font-weight: 800; font-size: 1.02rem; color: #FFFFFF !important; line-height: 1.2;
     }
@@ -795,17 +819,17 @@
       color: #FFB3C2 !important; letter-spacing: .06em;
     }
     .boxm .bd {
-      border: 3px solid rgba(255,212,107,0.85); background: rgba(255,212,107,0.10);
+      border: 3px solid rgba(255,212,107,0.85); background: linear-gradient(rgba(255,212,107,0.10), rgba(255,212,107,0.10)), #1F131C;
       padding: 1.4rem 1.1rem .8rem; border-radius: 8px; position: relative;
     }
     .boxm .bd > .tag { position: absolute; top: .25rem; left: .55rem; font-size: .76rem; font-weight: 800; color: #FFE08A !important; letter-spacing: .06em; }
     .boxm .bp2 {
-      border: 2px dashed rgba(43,234,208,0.8); background: rgba(43,234,208,0.10);
+      border: 2px dashed rgba(43,234,208,0.8); background: linear-gradient(rgba(43,234,208,0.10), rgba(43,234,208,0.10)), #352624;
       padding: 1.4rem 1rem .9rem; border-radius: 6px; position: relative;
     }
     .boxm .bp2 > .tag { position: absolute; top: .25rem; left: .55rem; font-size: .76rem; font-weight: 800; color: #A8FFEE !important; letter-spacing: .06em; }
     .boxm .bc {
-      background: rgba(155,130,255,0.35); border: 1px solid rgba(155,130,255,0.8);
+      background: linear-gradient(rgba(155,130,255,0.35), rgba(155,130,255,0.35)), #343A35; border: 1px solid rgba(155,130,255,0.8);
       border-radius: 4px; padding: .9rem .6rem; font-size: .9rem; font-weight: 800; color: #FFFFFF !important;
     }
 
@@ -853,14 +877,16 @@
     .device .homebar i { width: 74px; height: 4px; border-radius: 999px; background: rgba(230,236,249,.45); }
     .device .safe-hint {
       position: absolute; inset: 30px 0 16px; z-index: 2; pointer-events: none;
-      border: 1px dashed rgba(255,212,107,.0); transition: border-color .4s ease, background .4s ease;
+      border: 1.5px dashed rgba(255,212,107,.0); transition: border-color .4s ease, background .4s ease;
     }
-    .device.show-safe .safe-hint { border-color: rgba(255,212,107,.9); background: rgba(255,212,107,.07); }
-    .dev-legend { display: flex; flex-direction: column; gap: .5rem; }
+    .dev-legend { display: flex; flex-direction: column; gap: .2rem; }
     .dev-legend .dlr {
       display: grid; grid-template-columns: 1.1rem 1fr; gap: .6rem; align-items: start;
       font-size: 1.0rem; line-height: 1.45;
+      padding: .3rem .5rem; border-radius: 10px; border: 1px solid transparent;
+      transition: background .25s ease, border-color .25s ease;
     }
+    .dev-legend .dlr:hover, .dev-legend .dlr.hl-src { background: rgba(124,92,255,0.22); border-color: rgba(125,255,223,0.55); }
     .dev-legend .dlr i { width: 1.1rem; height: 1.1rem; border-radius: 4px; margin-top: .22rem; }
     .dev-legend .dlr b { color: #FFFFFF !important; }
     .dev-legend .dlr span { color: #C6CDDD !important; }
@@ -926,14 +952,31 @@
     }
     .state .snm { font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 800; color: #7DFFDF !important; }
     .state .sko { font-size: .86rem; font-weight: 700; color: #FFFFFF !important; }
-    .state .btn-demo {
+    .btn-demo {
       font: 700 .86rem 'Pretendard', system-ui, sans-serif; padding: .5em 1em; border-radius: 9px;
       background: #4F46E5; color: #fff !important; border: 1px solid transparent;
     }
-    .state .btn-demo.hov { background: #6366F1; transform: translateY(-1px); box-shadow: 0 6px 14px -6px rgba(99,102,241,.9); }
-    .state .btn-demo.foc { outline: 3px solid #7DFFDF; outline-offset: 2px; }
-    .state .btn-demo.act { background: #4338CA; transform: translateY(1px); }
-    .state .btn-demo.dis { background: #3A3F52; color: #8B93A7 !important; }
+    .btn-demo.hov { background: #6366F1; transform: translateY(-1px); box-shadow: 0 6px 14px -6px rgba(99,102,241,.9); }
+    .btn-demo.foc { outline: 3px solid #7DFFDF; outline-offset: 2px; }
+    .btn-demo.act { background: #4338CA; transform: translateY(1px); }
+    .btn-demo.dis { background: #3A3F52; color: #8B93A7 !important; }
+    .btn-demo.ok { background: #0E9488; }
+    .btn-demo.err { background: #B91C1C; }
+    .btn-demo .spinx { width: .9rem; height: .9rem; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; animation: spinx 1s linear infinite; }
+    .state[data-hk] { cursor: pointer; }
+    .live-row {
+      display: flex; align-items: center; gap: 1.1rem; margin-top: .9rem; padding: .65rem 1.1rem;
+      border: 1px dashed rgba(125,255,223,.55); border-radius: 14px; background: rgba(10,13,24,.55);
+    }
+    .live-row .btn-demo {
+      font-size: 1.02rem; min-width: 8.2rem; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: .45em;
+      transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+    }
+    .live-row .btn-demo:focus { outline: none; }
+    .live-row .btn-demo.foc { outline: 3px solid #7DFFDF; outline-offset: 2px; }
+    .live-row .live-now { font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800; color: #7DFFDF !important; min-width: 8.5rem; }
+    .live-row .live-hint { font-size: .95rem; line-height: 1.45; color: #B8BFD0 !important; }
 
     /* ---- 토큰 스케일 ---- */
     .tok { display: flex; flex-direction: column; gap: .3rem; }
@@ -980,6 +1023,49 @@
     .bpr .bpc small { font-size: .74rem; color: #B8BFD0 !important; }
     .bpr .bpc.one { flex: 0 0 15%; }
     .bpr .bpc.two { flex: 0 0 22%; }
+    .bpr .bpc[data-hl] { transition: background .25s ease, border-color .25s ease; }
+    .bpr .bpc[data-hl]:hover, .bpr .bpc.hl-src { background: rgba(124,92,255,.4); border-color: #7DFFDF; }
+
+    /* ---- 반응형 미리보기: 눈금자 칸을 고르면 같은 화면이 그 폭으로 바뀐다 ---- */
+    .rsp {
+      margin-top: .6rem; border: 1px solid rgba(155,130,255,.4); border-radius: 14px;
+      background: #0A0D18; padding: .6rem .8rem .5rem; transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .rsp-stage { height: 132px; display: flex; justify-content: center; }
+    .rsp-frame {
+      --w: 72%; width: var(--w); height: 100%; border-radius: 9px; overflow: hidden;
+      background: #F4F6FB; border: 2px solid #3A4160; display: flex; flex-direction: column;
+      transition: width .45s ease;
+    }
+    .rsp-top { height: 18px; flex: 0 0 auto; background: #E3E6F0; border-bottom: 1px solid #CDD2E0; display: flex; align-items: center; gap: 6px; padding: 0 7px; }
+    .rsp-top i { height: 5px; width: 38px; border-radius: 99px; background: #B6BDD0; }
+    .rsp-top .rsp-burger { display: none; font-size: .62rem; color: #14161F !important; text-shadow: none !important; }
+    .rsp-body { flex: 1; min-height: 0; display: flex; }
+    .rsp-side {
+      width: 64px; flex: 0 0 auto; background: #E9ECF4; border-right: 1px solid #CDD2E0;
+      padding: 7px 6px; display: flex; flex-direction: column; gap: 5px; overflow: hidden; transition: width .45s ease, padding .45s ease;
+    }
+    .rsp-side i { height: 5px; border-radius: 99px; background: #B6BDD0; flex: 0 0 auto; }
+    .rsp-side i:first-child { background: #4F46E5; }
+    .rsp-main { flex: 1; min-width: 0; padding: 7px; transition: padding .45s ease; overflow: hidden; }
+    .rsp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .rsp-grid i { height: 38px; border-radius: 5px; background: #fff; border: 1px solid #D8DCE7; box-shadow: 0 2px 5px -3px rgba(0,0,0,.3); }
+    .rsp-tab { display: none; height: 16px; flex: 0 0 auto; border-top: 1px solid #CDD2E0; background: #fff; align-items: center; justify-content: space-around; font-size: .5rem; }
+    .rsp-cap { text-align: center; margin-top: .4rem; font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 700; color: #7DFFDF !important; }
+    .rsp-cap::after { content: "💻 1024–1440px — 3열 · 고정 사이드바"; }
+    .rsp[data-hl-key="bp-m"] .rsp-frame { --w: 22%; }
+    .rsp[data-hl-key="bp-m"] .rsp-side { width: 0; padding: 0; border: 0; }
+    .rsp[data-hl-key="bp-m"] .rsp-grid { grid-template-columns: 1fr; }
+    .rsp[data-hl-key="bp-m"] .rsp-top .rsp-burger { display: inline; }
+    .rsp[data-hl-key="bp-m"] .rsp-tab { display: flex; }
+    .rsp[data-hl-key="bp-m"] .rsp-cap::after { content: "📱 < 640px — 1열 · ☰ 드로어 · 하단 탭"; }
+    .rsp[data-hl-key="bp-t"] .rsp-frame { --w: 42%; }
+    .rsp[data-hl-key="bp-t"] .rsp-side { width: 18px; padding: 7px 4px; }
+    .rsp[data-hl-key="bp-t"] .rsp-grid { grid-template-columns: repeat(2, 1fr); }
+    .rsp[data-hl-key="bp-t"] .rsp-cap::after { content: "📲 640–1024px — 2열 · 아이콘 레일"; }
+    .rsp[data-hl-key="bp-w"] .rsp-frame { --w: 100%; }
+    .rsp[data-hl-key="bp-w"] .rsp-main { padding: 7px 17%; }
+    .rsp[data-hl-key="bp-w"] .rsp-cap::after { content: "🖥️ > 1440px — 컨테이너 폭 제한, 남는 폭은 여백"; }
 
     /* ---- 번역기 (모호한 말 → 용어) ---- */
     .tr2 { display: grid; grid-template-columns: 1fr 1.9rem 1.25fr; gap: .5rem; align-items: center; }
@@ -1003,6 +1089,162 @@
     }
     .cheat .cg p { font-size: .84rem; line-height: 1.5; margin: 0; color: #D5DAE8 !important; }
     .cheat .cg p b { color: #FFFFFF !important; }
+
+    /* ==================================================================
+       설명 ↔ 그림 연결
+       — 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 함께 켜지고,
+         둘 사이에 연결선이 그려진다. (클릭하면 고정)
+       — data-peek 용어는 다른 슬라이드의 실물을 미리보기로 띄우고, 클릭하면 그리로 간다.
+       ================================================================== */
+    [data-hl] { cursor: pointer; }
+    .lk {
+      border-bottom: 1.5px dashed rgba(125,255,223,.7);
+      border-radius: 3px;
+      transition: background .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lk:hover, .lk.hl-src, .lk:focus-visible {
+      background: rgba(125,255,223,.22); border-bottom-color: transparent;
+      box-shadow: 0 0 0 3px rgba(125,255,223,.22); outline: none;
+    }
+    [data-hl].hl-pin { outline: 1.5px solid #7DFFDF; outline-offset: 2px; }
+
+    :where([data-hk]) { transition: box-shadow .25s ease, background-color .25s ease, border-color .25s ease; }
+    [data-hk].hl-on {
+      box-shadow: 0 0 0 2px #0A0D18, 0 0 0 4.5px #7DFFDF, 0 0 20px 3px rgba(125,255,223,.55);
+    }
+    [data-hk][data-hk-inset].hl-on {
+      box-shadow: inset 0 0 0 2.5px #7DFFDF, inset 0 0 0 4px #0A0D18, inset 0 0 22px rgba(125,255,223,.45);
+    }
+    /* 밝은 표본 위에서는 민트가 묻히므로 진한 청록 고리 */
+    .uic [data-hk].hl-on { box-shadow: 0 0 0 2.5px #0FB5A2, 0 0 10px 1px rgba(15,181,162,.45); }
+    .uic [data-hk][data-hk-inset].hl-on { box-shadow: inset 0 0 0 3px #0FB5A2, inset 0 0 20px rgba(15,181,162,.42); }
+    .uic .lay-ws.hl-on { box-shadow: none; }
+    .uic .rail-nav em { color: var(--on) !important; }
+    .reveal .rsp.hl-on { border-color: #7DFFDF; box-shadow: 0 0 22px rgba(125,255,223,.25); }
+    .spec, .theme-card, .state { transition: opacity .25s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease; }
+    section.hl-dim :is(.spec, .theme-card, .state):not(.hl-on):not(:has(.hl-on, .hl-src)) { opacity: .34; }
+    .spec.hl-on, .state.hl-on {
+      border-color: #7DFFDF; box-shadow: 0 0 0 1px #7DFFDF, 0 0 26px rgba(125,255,223,.32);
+    }
+    .state.hl-on { background: rgba(124,92,255,.3); }
+    .wire .wz.hl-on {
+      background: rgba(124,92,255,0.5); border-color: #7DFFDF; border-style: solid; color: #FFFFFF !important;
+      box-shadow: inset 0 0 18px rgba(125,255,223,.35);
+    }
+    .wire .wz.hl-on small { color: #DFF9F3 !important; }
+    table.rules tbody tr[data-hl]:hover td, table.rules tbody tr.hl-src td { background: rgba(124,92,255,.26); }
+    table.rules tbody tr.hl-src td:first-child { box-shadow: inset 3px 0 0 #7DFFDF; }
+
+    /* 박스 모델: 켜진 층의 "고리" 부분만 제 색으로 */
+    .boxm .tag { transition: transform .2s ease; transform-origin: left center; }
+    .boxm .hl-on > .tag { transform: scale(1.15); }
+    .boxm .bl.hl-on { background: rgba(255,122,149,.4); border-style: solid; box-shadow: 0 0 24px rgba(255,122,149,.45); }
+    .boxm .bd.hl-on {
+      background: linear-gradient(rgba(255,212,107,.32), rgba(255,212,107,.32)), #1F131C;
+      border-color: #FFE08A; box-shadow: 0 0 0 3px rgba(255,212,107,.4), 0 0 22px rgba(255,212,107,.45);
+    }
+    .boxm .bp2.hl-on {
+      background: linear-gradient(rgba(43,234,208,.4), rgba(43,234,208,.4)), #352624;
+      border-style: solid; box-shadow: 0 0 22px rgba(43,234,208,.45);
+    }
+    .boxm .bc.hl-on { background: rgba(155,130,255,.8); box-shadow: 0 0 0 2px #FFFFFF, 0 0 22px rgba(155,130,255,.6); }
+
+    /* 디바이스: 베젤은 테두리 안쪽 고리, 세이프 에어리어는 노란 점선 */
+    .device.hl-on {
+      border-color: #7DFFDF;
+      box-shadow: inset 0 0 0 13px rgba(125,255,223,.4), 0 0 0 3px rgba(125,255,223,.3), 0 30px 60px -22px rgba(0,0,0,.85);
+    }
+    .device .safe-hint.hl-on { border-color: rgba(255,212,107,.95); background: rgba(255,212,107,.1); box-shadow: none; }
+
+    /* 레이아웃 도식 (뷰포트 · 컨테이너 · 그리드 · 거터 · 여백) */
+    .uic.lay { padding: 0; }
+    .lay-vp { position: relative; background: #E9ECF4; padding: .6rem; }
+    .lay-tag { font: 800 .7rem/1 'JetBrains Mono', monospace; margin-bottom: .4rem; }
+    .lay-vp > .lay-tag { color: #5A6072 !important; }
+    .lay-ct { position: relative; background: #FFFFFF; border: 1px dashed #4F46E5; border-radius: 8px; padding: .6rem; margin: 0 1.4rem; }
+    .lay-ct > .lay-tag { color: #4F46E5 !important; }
+    .lay-grid { display: grid; grid-template-columns: 1fr 10px 1fr 10px 1fr 10px 1fr; }
+    .lay-col { height: 56px; background: rgba(79,70,229,.18); border: 1px solid #4F46E5; border-radius: 5px; }
+    .lay-gut { border-radius: 2px; }
+    .lay-gut.hl-on { background: rgba(14,148,136,.6); box-shadow: 0 0 0 1.5px #0E9488; }
+    .lay-legend { display: flex; justify-content: center; gap: .5rem; margin-top: .4rem; font: 700 .66rem 'JetBrains Mono', monospace; }
+    .lay-legend span { padding: .1rem .35rem; border-radius: 4px; color: #5A6072 !important; }
+    .lay-legend span + span { color: #0E9488 !important; }
+    .lay-ws { position: absolute; pointer-events: none; border: solid transparent; transition: border-color .25s ease; }
+    .lay-ws.vp { inset: 1.7rem 0 0 0; border-width: 0 2rem .6rem; }
+    .lay-ws.ct { inset: 0; border-width: .6rem; border-radius: 8px; }
+    .lay-ws.hl-on { border-color: rgba(245,158,11,.4); box-shadow: none; }
+
+    /* 사이드바 표본: 레일은 올리면 펼쳐지고, 드로어는 올리면 밀려 나온다 */
+    .nav-demo { display: flex; width: 100%; position: relative; }
+    .nav-demo .body { flex: 1; padding: .5rem; font-size: .7rem; }
+    .nav-demo .body, .nav-demo .body * { color: #9AA2B4 !important; }
+    .rail-nav {
+      width: 16%; flex: 0 0 auto; background: #EEF0F7; border-right: 1px solid #D8DCE7;
+      padding: .4rem .3rem; display: flex; flex-direction: column; gap: .3rem;
+      font-size: .62rem; overflow: hidden; white-space: nowrap; transition: width .3s ease;
+    }
+    .rail-nav span { display: flex; align-items: center; gap: .35rem; }
+    .rail-nav em { font-style: normal; font-weight: 700; opacity: 0; transition: opacity .2s ease; }
+    .spec:hover .rail-nav, .spec.hl-on .rail-nav { width: 46%; }
+    .spec:hover .rail-nav em, .spec.hl-on .rail-nav em { opacity: 1; }
+    .drawer-scrim { position: absolute; inset: 0; background: rgba(10,12,22,.6); }
+    .drawer-panel {
+      position: relative; z-index: 2; width: 52%; background: #fff; box-shadow: 4px 0 14px rgba(0,0,0,.3);
+      padding: .4rem .35rem; display: flex; flex-direction: column; gap: .25rem;
+    }
+    .spec:hover .drawer-panel { animation: drawerIn .45s ease; }
+    .spec:hover .drawer-scrim { animation: asFadeIn .45s ease; }
+    @keyframes drawerIn { from { transform: translateX(-100%); } }
+
+    /* 연결선 (화면 전체 위에 얹는 SVG) */
+    .hl-wires { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 50; overflow: visible; }
+    .hl-wires path {
+      fill: none; stroke: #7DFFDF; stroke-width: 2; stroke-linecap: round;
+      stroke-dasharray: 1; stroke-dashoffset: 0;
+      filter: drop-shadow(0 0 3px rgba(125,255,223,.85));
+      animation: hlDraw .38s ease-out;
+    }
+    .hl-wires circle { fill: #7DFFDF; filter: drop-shadow(0 0 4px rgba(125,255,223,.9)); }
+    @keyframes hlDraw { from { stroke-dashoffset: 1; } }
+
+    /* 다른 슬라이드 미리보기 */
+    .pk {
+      border-bottom: 1.5px dotted rgba(255,212,107,.9); border-radius: 3px; cursor: zoom-in;
+      transition: background .2s ease;
+    }
+    .pk:hover, .pk:focus-visible { background: rgba(255,212,107,.2); outline: none; }
+    tr[data-peek] { cursor: zoom-in; }
+    table.rules tbody tr[data-peek]:hover td, table.rules tbody tr[data-peek]:focus-visible td { background: rgba(255,212,107,.12); }
+    tr[data-peek]:focus-visible { outline: none; }
+    .peek {
+      position: fixed; left: 0; top: 0; z-index: 9990; pointer-events: none;
+      display: flex; gap: .9rem; align-items: flex-start;
+      padding: .8rem .9rem .9rem; border-radius: 16px;
+      background: rgba(8,10,20,.97); border: 1px solid rgba(255,212,107,.65);
+      box-shadow: 0 30px 60px -18px rgba(0,0,0,.9);
+      font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; text-align: left;
+      transform-origin: 0 0; opacity: 0; visibility: hidden; transition: opacity .16s ease, visibility .16s;
+    }
+    .peek.on { opacity: 1; visibility: visible; }
+    .peek-item { display: flex; flex-direction: column; gap: .5rem; }
+    .peek-cap { font: 800 .74rem/1.3 'JetBrains Mono', monospace; color: #FFE08A; letter-spacing: .02em; }
+    .peek-cap small { font-weight: 600; color: #9BA6C0; margin-left: .45rem; }
+    .peek .spec, .peek .spec:hover { transform: none; }
+    .peek .lk { border-bottom-color: transparent; }
+    .peek .autoshow { opacity: 1; }
+    .peek-back { position: fixed; top: 16px; left: 16px; z-index: 9999; opacity: .9; }
+    .peek-back:not(.on) { display: none; }
+    .flow .fstep[data-goto] { cursor: pointer; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease; }
+    .flow .fstep[data-goto]:hover, .flow .fstep[data-goto]:focus-visible {
+      border-color: #7DFFDF; background: rgba(124,92,255,.35); box-shadow: 0 0 22px rgba(125,255,223,.25); outline: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hl-wires path { animation: none; }
+      .spec:hover .drawer-panel, .spec:hover .drawer-scrim { animation: none; }
+      .rsp-frame, .rsp-side, .rsp-main, .rail-nav { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -1069,9 +1311,9 @@
           </div>
           <div class="prompt-card good mini">
             <div class="pc-label">AI가 알아듣는 말</div>
-            <pre class="code">좌측에 240px 고정 사이드바, 상단에 56px 앱 바.
-버튼은 primary / secondary 두 종류, 라운드 12px.
-모바일(&lt;768px)에서는 사이드바를 햄버거 드로어로.</pre>
+            <pre class="code">좌측에 <span class="pk" data-peek="sb-fixed">240px 고정 사이드바</span>, 상단에 <span class="pk" data-peek="header">56px 앱 바</span>.
+버튼은 <span class="pk" data-peek="btn-primary btn-secondary">primary / secondary</span> 두 종류, <span class="pk" data-peek="rad12">라운드 12px</span>.
+모바일(&lt;768px)에서는 사이드바를 <span class="pk" data-peek="drawer">햄버거 드로어</span>로.</pre>
           </div>
         </div>
         <div class="grid-3" style="margin-top:1.2rem;">
@@ -1101,19 +1343,23 @@
         <div class="chip">MAP</div>
         <h2>오늘 챙겨갈 <span class="accent2">다섯 묶음</span></h2>
         <div class="flow" style="margin-top:1rem;">
-          <div class="fstep autoshow zoom-in"><span class="ic">📐</span><b>레이아웃</b><small>화면을 나누는 말</small></div>
+          <div class="fstep autoshow zoom-in" data-goto="vp"><span class="ic">📐</span><b>레이아웃</b><small>화면을 나누는 말</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">🧱</span><b>골격</b><small>헤더·사이드바·푸터</small></div>
+          <div class="fstep autoshow zoom-in" data-goto="header"><span class="ic">🧱</span><b>골격</b><small>헤더·사이드바·푸터</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">🎛️</span><b>엘리먼트</b><small>부품 40종의 이름</small></div>
+          <div class="fstep autoshow zoom-in" data-goto="btn-primary"><span class="ic">🎛️</span><b>엘리먼트</b><small>부품 40종의 이름</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">🎚️</span><b>상태·토큰</b><small>hover·간격·라운드</small></div>
+          <div class="fstep autoshow zoom-in" data-goto="states"><span class="ic">🎚️</span><b>상태·토큰</b><small>hover·간격·라운드</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">🎨</span><b>테마</b><small>머티리얼·쿠퍼티노</small></div>
+          <div class="fstep autoshow zoom-in" data-goto="mat"><span class="ic">🎨</span><b>테마</b><small>머티리얼·쿠퍼티노</small></div>
         </div>
         <p class="small autoshow fade-up" style="margin-top:1.6rem; color:#B8BFD0 !important;">
           외우지 않아도 됩니다. <em>"아, 저게 그거였구나"</em> 한 번만 연결되면, 다음부터는 프롬프트에 자연스럽게 나옵니다.<br/>
           마지막 장에 <b class="accent2">치트시트 한 장</b>과 <b class="accent2">화면 주문서 템플릿</b>을 드립니다.
+        </p>
+        <p class="tiny autoshow fade-up" style="margin-top:1rem; color:#9BA6C0 !important;">
+          읽는 법 — <span class="lk" style="cursor:default;">민트 밑줄</span> 용어에 마우스를 올리면 같은 장 그림에서 그 부분이 켜지고(클릭하면 고정),
+          <span class="pk" style="cursor:default;">노란 점선</span> 용어는 그 부품이 나온 장을 미리 보여줍니다(클릭하면 이동). 위 다섯 칸을 누르면 해당 장으로 갑니다.
         </p>
       </div>
       <aside class="notes">
@@ -1127,35 +1373,38 @@
         <div class="chip">LAYOUT 1/3</div>
         <h2>화면을 담는 그릇 — <span class="accent2">뷰포트 · 컨테이너 · 그리드</span></h2>
         <div class="grid-2" style="gap:1.8rem; align-items:center;">
-          <div class="uic" style="padding:0;">
-            <div style="background:#E9ECF4; padding:.5rem; border-bottom:1px dashed #9AA2B4;">
-              <div style="font:800 .7rem/1 'JetBrains Mono',monospace; color:#5A6072 !important; margin-bottom:.35rem;">VIEWPORT — 브라우저 보이는 영역</div>
-              <div style="background:#fff; border:1px dashed #4F46E5; border-radius:8px; padding:.5rem;">
-                <div style="font:800 .7rem/1 'JetBrains Mono',monospace; color:#4F46E5 !important; margin-bottom:.4rem;">CONTAINER — max-width 1200px, 가운데 정렬</div>
-                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
-                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
-                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
-                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
-                  <div style="height:56px; background:rgba(79,70,229,.18); border:1px solid #4F46E5; border-radius:5px;"></div>
+          <div class="uic lay" data-peek-root data-peek-w="440">
+            <div class="lay-vp" data-hk="vp" data-hk-inset>
+              <div class="lay-tag">VIEWPORT — 브라우저 보이는 영역</div>
+              <i class="lay-ws vp" data-hk="ws"></i>
+              <div class="lay-ct" data-hk="ct">
+                <i class="lay-ws ct" data-hk="ws"></i>
+                <div class="lay-tag">CONTAINER — max-width 1200px, 가운데 정렬</div>
+                <div class="lay-grid">
+                  <div class="lay-col" data-hk="grid"></div><div class="lay-gut" data-hk="gutter"></div>
+                  <div class="lay-col" data-hk="grid"></div><div class="lay-gut" data-hk="gutter"></div>
+                  <div class="lay-col" data-hk="grid"></div><div class="lay-gut" data-hk="gutter"></div>
+                  <div class="lay-col" data-hk="grid"></div>
                 </div>
-                <div style="display:flex; justify-content:center; gap:.4rem; margin-top:.35rem; font:700 .66rem 'JetBrains Mono',monospace; color:#5A6072 !important;">
-                  <span>◀ COLUMN 컬럼 ▶</span><span style="color:#0E9488 !important;">◀ GUTTER 거터(10px) ▶</span>
+                <div class="lay-legend">
+                  <span data-hk="grid">◀ COLUMN 컬럼 ▶</span><span data-hk="gutter">◀ GUTTER 거터(10px) ▶</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="anat">
-            <div class="ar"><div class="an">뷰포트<em>viewport</em></div><div class="ad">브라우저 창에서 실제로 보이는 영역. "뷰포트 높이만큼 꽉 차게"가 첫 화면 주문의 관용구입니다.</div></div>
-            <div class="ar"><div class="an">컨테이너<em>container</em></div><div class="ad">내용을 감싸는 폭 제한 상자. <span class="mono">max-width 1200px + 가운데 정렬</span>이 웹의 기본값 같은 값.</div></div>
-            <div class="ar"><div class="an">그리드 · 컬럼<em>grid / column</em></div><div class="ad">화면을 세로로 n등분한 격자. "12 컬럼 그리드", "카드를 3열로"처럼 씁니다.</div></div>
-            <div class="ar"><div class="an">거터<em>gutter</em></div><div class="ad">컬럼 사이 간격. 요소 사이 간격 전반은 <span class="mono">gap</span>이라고 하면 통합니다.</div></div>
-            <div class="ar"><div class="an">여백<em>whitespace</em></div><div class="ad">비어 있는 공간. "여백을 더 주자"는 "촘촘한 걸 숨 쉬게 하자"는 뜻의 전문 용어입니다.</div></div>
+          <div class="anat" data-hl-tour>
+            <div class="ar" data-hl="vp"><div class="an">뷰포트<em>viewport</em></div><div class="ad">브라우저 창에서 실제로 보이는 영역. "뷰포트 높이만큼 꽉 차게"가 첫 화면 주문의 관용구입니다.</div></div>
+            <div class="ar" data-hl="ct"><div class="an">컨테이너<em>container</em></div><div class="ad">내용을 감싸는 폭 제한 상자. <span class="mono">max-width 1200px + 가운데 정렬</span>이 웹의 기본값 같은 값.</div></div>
+            <div class="ar" data-hl="grid"><div class="an">그리드 · 컬럼<em>grid / column</em></div><div class="ad">화면을 세로로 n등분한 격자. "12 컬럼 그리드", "카드를 3열로"처럼 씁니다.</div></div>
+            <div class="ar" data-hl="gutter"><div class="an">거터<em>gutter</em></div><div class="ad">컬럼 사이 간격. 요소 사이 간격 전반은 <span class="mono">gap</span>이라고 하면 통합니다.</div></div>
+            <div class="ar" data-hl="ws"><div class="an">여백<em>whitespace</em></div><div class="ad">비어 있는 공간(그림에선 노란 띠). "여백을 더 주자"는 "촘촘한 걸 숨 쉬게 하자"는 뜻의 전문 용어입니다.</div></div>
           </div>
         </div>
       </div>
       <aside class="notes">
         여기서 가장 자주 쓰이는 실전 표현 3개만 각인: "뷰포트 꽉 차게", "컨테이너 max-width 1200",
         "카드 3열 그리드, gap 16px". 숫자를 함께 말하는 습관을 강조.
+        오른쪽 용어가 자동으로 돌며 왼쪽 도식의 해당 부분과 선으로 이어진다. 마우스를 올리면 순회가 멈춘다.
       </aside>
     </section>
 
@@ -1165,11 +1414,11 @@
         <div class="chip">LAYOUT 2/3</div>
         <h2>모든 것은 상자다 — <span class="accent2">박스 모델</span></h2>
         <div class="grid-2" style="gap:2rem; align-items:center;">
-          <div class="boxm">
-            <div class="bl"><span class="tag">MARGIN — 바깥 여백</span>
-              <div class="bd"><span class="tag">BORDER — 테두리</span>
-                <div class="bp2"><span class="tag">PADDING — 안쪽 여백</span>
-                  <div class="bc">CONTENT — 내용</div>
+          <div class="boxm" data-peek-root data-peek-w="400">
+            <div class="bl" data-hk="margin"><span class="tag">MARGIN — 바깥 여백</span>
+              <div class="bd" data-hk="border"><span class="tag">BORDER — 테두리</span>
+                <div class="bp2" data-hk="padding"><span class="tag">PADDING — 안쪽 여백</span>
+                  <div class="bc" data-hk="content">CONTENT — 내용</div>
                 </div>
               </div>
             </div>
@@ -1180,17 +1429,17 @@
           <div class="stack" style="gap:.9rem;">
             <div class="card" style="padding:1rem 1.2rem;">
               <h3 style="margin-bottom:.4rem;">🧩 이 둘만 구분하면 절반은 끝</h3>
-              <p><b class="accent2">padding</b> = 테두리 <em>안쪽</em> 숨통 → "버튼이 너무 꽉 껴요"의 답.<br/>
-                 <b class="accent">margin</b> = 테두리 <em>바깥</em> 거리 → "요소들이 너무 붙었어요"의 답.</p>
+              <p><b class="accent2 lk" data-hl="padding">padding</b> = 테두리 <em>안쪽</em> 숨통 → "버튼이 너무 꽉 껴요"의 답.<br/>
+                 <b class="accent lk" data-hl="margin">margin</b> = 테두리 <em>바깥</em> 거리 → "요소들이 너무 붙었어요"의 답.</p>
             </div>
             <table class="rules" style="font-size:1.06rem;">
               <thead><tr><th>이렇게 말하는 대신</th><th>이렇게</th></tr></thead>
-              <tbody>
-                <tr><td>버튼이 답답해요</td><td class="mono accent2">padding 12px 20px</td></tr>
-                <tr><td>카드가 서로 붙었어요</td><td class="mono accent2">gap 16px</td></tr>
-                <tr><td>테두리 좀 둥글게</td><td class="mono accent2">border-radius 12px</td></tr>
-                <tr><td>선 얇게 한 줄</td><td class="mono accent2">border 1px solid</td></tr>
-                <tr><td>내용이 벽에 붙었어요</td><td class="mono accent2">컨테이너 padding 24px</td></tr>
+              <tbody data-hl-tour>
+                <tr data-hl="padding"><td>버튼이 답답해요</td><td class="mono accent2">padding 12px 20px</td></tr>
+                <tr data-hl="margin"><td>카드가 서로 붙었어요</td><td class="mono accent2">gap 16px</td></tr>
+                <tr data-hl="border"><td>테두리 좀 둥글게</td><td class="mono accent2">border-radius 12px</td></tr>
+                <tr data-hl="border"><td>선 얇게 한 줄</td><td class="mono accent2">border 1px solid</td></tr>
+                <tr data-hl="padding"><td>내용이 벽에 붙었어요</td><td class="mono accent2">컨테이너 padding 24px</td></tr>
               </tbody>
             </table>
           </div>
@@ -1255,32 +1504,32 @@
         <div class="chip">ANATOMY</div>
         <h2>화면 골격 — <span class="accent2">칸마다 이름이 있다</span></h2>
         <div class="grid-2" style="gap:1.8rem; align-items:center;">
-          <div class="wire" id="an-wire" style="height:360px;">
-            <div class="wz w-top" data-z="header">HEADER / APP BAR<small>로고 · 검색 · 프로필</small></div>
+          <div class="wire" id="an-wire" style="height:360px;" data-peek-root data-peek-w="440" data-peek-h="260">
+            <div class="wz w-top" data-hk="header">HEADER / APP BAR<small>로고 · 검색 · 프로필</small></div>
             <div class="w-mid">
-              <div class="wz w-side" data-z="sidebar">SIDEBAR<small>내비게이션</small></div>
+              <div class="wz w-side" data-hk="sidebar">SIDEBAR<small>내비게이션</small></div>
               <div class="w-main" style="display:flex; padding:.4rem; gap:.4rem;">
-                <div class="wz w-hero" data-z="hero" style="flex:0 0 auto;">HERO<small>첫 화면 큰 영역</small></div>
+                <div class="wz w-hero" data-hk="hero" style="flex:0 0 auto;">HERO<small>첫 화면 큰 영역</small></div>
                 <div class="w-cards" style="flex:1;">
-                  <div class="wz" data-z="content">CARD</div>
-                  <div class="wz" data-z="content">CARD</div>
-                  <div class="wz" data-z="content">CARD</div>
+                  <div class="wz" data-hk="main">CARD</div>
+                  <div class="wz" data-hk="main">CARD</div>
+                  <div class="wz" data-hk="main">CARD</div>
                 </div>
               </div>
-              <div class="wz w-aside" data-z="aside">ASIDE<small>보조 패널</small></div>
+              <div class="wz w-aside" data-hk="aside">ASIDE<small>보조 패널</small></div>
             </div>
-            <div class="wz w-bot" data-z="footer">FOOTER<small>저작권 · 링크</small></div>
+            <div class="wz w-bot" data-hk="footer">FOOTER<small>저작권 · 링크</small></div>
           </div>
-          <div class="anat" id="an-list">
-            <div class="ar" data-z="header"><div class="an">헤더 / 앱 바<em>header / app bar</em></div><div class="ad">화면 맨 위 띠. 웹은 헤더, 모바일 앱은 앱 바(상단 바)라고 부릅니다.</div></div>
-            <div class="ar" data-z="sidebar"><div class="an">사이드바<em>sidebar</em></div><div class="ad">측면 내비게이션 기둥. 보통 좌측, 폭 <span class="mono">240~280px</span> 고정.</div></div>
-            <div class="ar" data-z="hero"><div class="an">히어로<em>hero</em></div><div class="ad">첫 화면의 큰 제목·이미지 영역. "히어로에 카피 한 줄과 CTA 버튼"처럼 씁니다.</div></div>
-            <div class="ar" data-z="content"><div class="an">메인 · 콘텐츠<em>main / content</em></div><div class="ad">본문. 그 안의 반복 단위가 <b>카드</b>·<b>리스트 아이템</b>입니다.</div></div>
-            <div class="ar" data-z="aside"><div class="an">어사이드 / 패널<em>aside / panel</em></div><div class="ad">본문 옆 보조 영역(필터·속성창). 오른쪽에 붙으면 <b>인스펙터</b>라고도 합니다.</div></div>
-            <div class="ar" data-z="footer"><div class="an">푸터<em>footer</em></div><div class="ad">맨 아래 띠. 저작권·링크·연락처가 들어갑니다.</div></div>
+          <div class="anat" data-hl-tour>
+            <div class="ar" data-hl="header"><div class="an">헤더 / 앱 바<em>header / app bar</em></div><div class="ad">화면 맨 위 띠. 웹은 헤더, 모바일 앱은 앱 바(상단 바)라고 부릅니다.</div></div>
+            <div class="ar" data-hl="sidebar"><div class="an">사이드바<em>sidebar</em></div><div class="ad">측면 내비게이션 기둥. 보통 좌측, 폭 <span class="mono">240~280px</span> 고정.</div></div>
+            <div class="ar" data-hl="hero"><div class="an">히어로<em>hero</em></div><div class="ad">첫 화면의 큰 제목·이미지 영역. "히어로에 카피 한 줄과 CTA 버튼"처럼 씁니다.</div></div>
+            <div class="ar" data-hl="main"><div class="an">메인 · 콘텐츠<em>main / content</em></div><div class="ad">본문. 그 안의 반복 단위가 <b>카드</b>·<b>리스트 아이템</b>입니다.</div></div>
+            <div class="ar" data-hl="aside"><div class="an">어사이드 / 패널<em>aside / panel</em></div><div class="ad">본문 옆 보조 영역(필터·속성창). 오른쪽에 붙으면 <b>인스펙터</b>라고도 합니다.</div></div>
+            <div class="ar" data-hl="footer"><div class="an">푸터<em>footer</em></div><div class="ad">맨 아래 띠. 저작권·링크·연락처가 들어갑니다.</div></div>
           </div>
         </div>
-        <p class="tiny center" style="margin-top:.5rem; color:#9BA6C0 !important;">오른쪽 이름에 마우스를 올리면 해당 칸이 켜집니다 — 자동으로도 순회합니다.</p>
+        <p class="tiny center" style="margin-top:.5rem; color:#9BA6C0 !important;">이름에 올리면 칸이, 칸에 올리면 이름이 켜집니다 — 클릭하면 고정, 가만히 두면 자동으로 순회합니다.</p>
       </div>
       <aside class="notes">
         가장 실용적인 슬라이드. 이름 6개만 알면 "어디를" 지목하는 문제가 해결된다.
@@ -1294,37 +1543,37 @@
         <div class="chip">NAVIGATION</div>
         <h2>사이드바라고 다 같지 않다</h2>
         <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:.3rem;">
-          <div class="spec">
+          <div class="spec" data-hk="sb-fixed">
             <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
-              <div style="display:flex; width:100%;">
-                <div style="width:38%; background:#EEF0F7; border-right:1px solid #D8DCE7; padding:.4rem .3rem; display:flex; flex-direction:column; gap:.25rem;">
+              <div class="nav-demo">
+                <div data-hk="sb-col" style="width:38%; background:#EEF0F7; border-right:1px solid #D8DCE7; padding:.4rem .3rem; display:flex; flex-direction:column; gap:.25rem;">
                   <i style="height:.4rem; border-radius:99px; background:#4F46E5; display:block;"></i>
                   <i style="height:.4rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
                   <i style="height:.4rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
                 </div>
-                <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
+                <div class="body">본문</div>
               </div>
             </div>
             <div class="sp-name">고정 사이드바<span class="sp-en">persistent sidebar</span></div>
-            <p class="sp-desc">항상 펼쳐진 상태. 데스크톱 업무용 화면의 기본. "240px 고정 사이드바".</p>
+            <p class="sp-desc"><span class="lk" data-hl="sb-col">항상 펼쳐진</span> 상태. 데스크톱 업무용 화면의 기본. "240px 고정 사이드바".</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="rail">
             <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
-              <div style="display:flex; width:100%; position:relative;">
-                <div style="width:16%; background:#EEF0F7; border-right:1px solid #D8DCE7; padding:.4rem .2rem; display:flex; flex-direction:column; gap:.3rem; align-items:center; font-size:.62rem;">
-                  <span>🏠</span><span>📊</span><span>⚙️</span>
+              <div class="nav-demo">
+                <div class="rail-nav" data-hk="rail-col">
+                  <span>🏠<em>홈</em></span><span>📊<em>리포트</em></span><span>⚙️<em>설정</em></span>
                 </div>
-                <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
+                <div class="body">본문</div>
               </div>
             </div>
             <div class="sp-name">레일 (아이콘만)<span class="sp-en">navigation rail</span></div>
-            <p class="sp-desc">아이콘 폭만 남긴 얇은 사이드바. "레일로 접어두고 hover 시 펼치기".</p>
+            <p class="sp-desc"><span class="lk" data-hl="rail-col">아이콘 폭만 남긴</span> 얇은 사이드바. "레일로 접어두고 hover 시 펼치기" — 카드에 올려 보세요.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="drawer">
             <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
-              <div style="display:flex; width:100%; position:relative; background:#fff;">
-                <div style="position:absolute; inset:0; background:rgba(10,12,22,.6);"></div>
-                <div style="position:relative; z-index:2; width:52%; background:#fff; box-shadow:4px 0 14px rgba(0,0,0,.3); padding:.4rem .35rem; display:flex; flex-direction:column; gap:.25rem;">
+              <div class="nav-demo" style="background:#fff;">
+                <div class="drawer-scrim" data-hk="d-scrim" data-hk-inset></div>
+                <div class="drawer-panel" data-hk="d-panel">
                   <b style="font-size:.6rem;">☰ 메뉴</b>
                   <i style="height:.36rem; border-radius:99px; background:#4F46E5; display:block;"></i>
                   <i style="height:.36rem; border-radius:99px; background:#C3C8D6; display:block;"></i>
@@ -1332,25 +1581,25 @@
               </div>
             </div>
             <div class="sp-name">드로어 (햄버거)<span class="sp-en">drawer</span></div>
-            <p class="sp-desc">평소엔 숨어 있고 <span class="mono">☰</span> 누르면 밀려 나옴. 뒤를 덮는 어두운 막이 <b>스크림</b>.</p>
+            <p class="sp-desc">평소엔 숨어 있고 <span class="mono">☰</span> 누르면 <span class="lk" data-hl="d-panel">밀려 나옴</span>. 뒤를 덮는 어두운 막이 <b class="lk" data-hl="d-scrim">스크림</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="bottomnav">
             <div class="uic" style="min-height:130px; padding:0; align-items:stretch;">
               <div style="display:flex; flex-direction:column; width:100%; height:130px;">
                 <div style="flex:1; padding:.5rem; color:#9AA2B4 !important; font-size:.7rem;">본문</div>
-                <div style="height:26px; border-top:1px solid #D8DCE7; background:#F7F8FC; display:flex; align-items:center; justify-content:space-around; font-size:.66rem;">
+                <div data-hk="bn-bar" style="height:26px; border-top:1px solid #D8DCE7; background:#F7F8FC; display:flex; align-items:center; justify-content:space-around; font-size:.66rem;">
                   <span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span>
                 </div>
               </div>
             </div>
             <div class="sp-name">바텀 내비게이션<span class="sp-en">bottom navigation / tab bar</span></div>
-            <p class="sp-desc">모바일 하단 탭. 엄지로 닿는 자리라 앱에서는 사이드바보다 이걸 씁니다.</p>
+            <p class="sp-desc">모바일 <span class="lk" data-hl="bn-bar">하단 탭</span>. 엄지로 닿는 자리라 앱에서는 사이드바보다 이걸 씁니다.</p>
           </div>
         </div>
         <div class="prompt-card mini good" style="margin-top:1rem;">
           <div class="pc-label">골라서 말하기</div>
-          <pre class="code">데스크톱은 240px 고정 사이드바, 태블릿은 아이콘 레일,
-모바일은 햄버거 드로어(스크림 포함) + 하단 탭 4개로 해줘.</pre>
+          <pre class="code">데스크톱은 <span class="lk" data-hl="sb-fixed">240px 고정 사이드바</span>, 태블릿은 <span class="lk" data-hl="rail">아이콘 레일</span>,
+모바일은 <span class="lk" data-hl="drawer">햄버거 드로어</span>(<span class="lk" data-hl="d-scrim">스크림</span> 포함) + <span class="lk" data-hl="bottomnav">하단 탭 4개</span>로 해줘.</pre>
         </div>
       </div>
       <aside class="notes">
@@ -1365,38 +1614,38 @@
         <div class="chip">DEVICE</div>
         <h2>베젤 · 노치 · <span class="accent2">세이프 에어리어</span></h2>
         <div class="grid-2" style="gap:2rem; align-items:center;">
-          <div class="dev-wrap">
-            <div class="device" id="dev">
-              <div class="notch"></div>
+          <div class="dev-wrap" data-peek-root data-peek-w="260">
+            <div class="device" id="dev" data-hk="bezel">
+              <div class="notch" data-hk="notch"></div>
               <div class="screen">
-                <div class="safe-hint"></div>
-                <div class="statusbar"><span>9:41</span><span>▮▮▮ ▲ 🔋</span></div>
-                <div class="appbar">☰ &nbsp;내 앱</div>
+                <div class="safe-hint" data-hk="safe"></div>
+                <div class="statusbar" data-hk="statusbar" data-hk-inset><span>9:41</span><span>▮▮▮ ▲ 🔋</span></div>
+                <div class="appbar" data-hk="appbar" data-hk-inset>☰ &nbsp;내 앱</div>
                 <div class="content">
                   <div class="ln"></div><div class="ln s"></div>
                   <div class="blk"></div>
                 </div>
-                <div class="tabbar"><span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span></div>
-                <div class="homebar"><i></i></div>
+                <div class="tabbar" data-hk="tabbar" data-hk-inset><span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span></div>
+                <div class="homebar"><i data-hk="homebar"></i></div>
               </div>
             </div>
           </div>
-          <div class="dev-legend">
-            <div class="dlr"><i style="background:#2B3047; border:1px solid #6B7390;"></i><div><b>베젤 <span class="mono">bezel</span></b> — <span>화면을 둘러싼 기기의 테두리. 화면 안 여백이 아니라 <em>하드웨어</em>입니다. "베젤이 얇다"는 기기 얘기.</span></div></div>
-            <div class="dlr"><i style="background:#05070D; border:1px solid #6B7390;"></i><div><b>노치 · 다이나믹 아일랜드 <span class="mono">notch</span></b> — <span>카메라가 화면을 파먹은 자리. 여기에 글자를 놓으면 가려집니다.</span></div></div>
-            <div class="dlr"><i style="background:rgba(230,236,249,.2);"></i><div><b>스테이터스 바 <span class="mono">status bar</span></b> — <span>시각·배터리·신호가 있는 최상단 띠. OS 영역입니다.</span></div></div>
-            <div class="dlr"><i style="background:rgba(255,212,107,.35); border:1px dashed #FFD46B;"></i><div><b>세이프 에어리어 <span class="mono">safe area</span></b> — <span>노치·홈 인디케이터를 피해 <em>안전하게 그릴 수 있는</em> 영역. 모바일 주문의 필수 단어.</span></div></div>
-            <div class="dlr"><i style="background:rgba(155,130,255,.4);"></i><div><b>앱 바 / 탭 바 <span class="mono">app bar / tab bar</span></b> — <span>앱의 상단 바와 하단 탭. 홈 인디케이터(맨 아래 작은 막대)와 겹치지 않게 띄웁니다.</span></div></div>
+          <div class="dev-legend" data-hl-tour>
+            <div class="dlr" data-hl="bezel"><i style="background:#2B3047; border:1px solid #6B7390;"></i><div><b>베젤 <span class="mono">bezel</span></b> — <span>화면을 둘러싼 기기의 테두리. 화면 안 여백이 아니라 <em>하드웨어</em>입니다. "베젤이 얇다"는 기기 얘기.</span></div></div>
+            <div class="dlr" data-hl="notch"><i style="background:#05070D; border:1px solid #6B7390;"></i><div><b>노치 · 다이나믹 아일랜드 <span class="mono">notch</span></b> — <span>카메라가 화면을 파먹은 자리. 여기에 글자를 놓으면 가려집니다.</span></div></div>
+            <div class="dlr" data-hl="statusbar"><i style="background:rgba(230,236,249,.2);"></i><div><b>스테이터스 바 <span class="mono">status bar</span></b> — <span>시각·배터리·신호가 있는 최상단 띠. OS 영역입니다.</span></div></div>
+            <div class="dlr" data-hl="safe"><i style="background:rgba(255,212,107,.35); border:1px dashed #FFD46B;"></i><div><b>세이프 에어리어 <span class="mono">safe area</span></b> — <span>노치·홈 인디케이터를 피해 <em>안전하게 그릴 수 있는</em> 영역. 모바일 주문의 필수 단어.</span></div></div>
+            <div class="dlr" data-hl="appbar tabbar"><i style="background:rgba(155,130,255,.4);"></i><div><b>앱 바 / 탭 바 <span class="mono">app bar / tab bar</span></b> — <span>앱의 상단 바와 하단 탭. <span class="lk" data-hl="homebar">홈 인디케이터(맨 아래 작은 막대)</span>와 겹치지 않게 띄웁니다.</span></div></div>
             <div class="prompt-card mini good" style="margin-top:.3rem;">
               <div class="pc-label">모바일 웹/앱 프롬프트 관용구</div>
-              <pre class="code">하단 탭 바는 safe-area-inset-bottom 만큼 패딩 줘서
-홈 인디케이터에 안 겹치게 해줘.</pre>
+              <pre class="code"><span class="lk" data-hl="tabbar">하단 탭 바</span>는 <span class="lk" data-hl="safe">safe-area-inset-bottom</span> 만큼 패딩 줘서
+<span class="lk" data-hl="homebar">홈 인디케이터</span>에 안 겹치게 해줘.</pre>
             </div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        목업의 노란 점선(세이프 에어리어)이 자동으로 켜졌다 꺼진다. 베젤은 하드웨어, 세이프 에어리어는
+        오른쪽 설명이 자동으로 돌며 목업의 해당 부위와 선으로 이어진다(세이프 에어리어는 노란 점선). 베젤은 하드웨어, 세이프 에어리어는
         소프트웨어라는 구분이 이 슬라이드의 핵심.
       </aside>
     </section>
@@ -1407,39 +1656,39 @@
         <div class="chip">ELEMENTS 1/6 · 누르는 것</div>
         <h2>버튼도 <span class="accent2">종류</span>가 있다</h2>
         <div class="spec-grid c3">
-          <div class="spec tight">
+          <div class="spec tight" data-hk="btn-primary">
             <div class="uic"><button class="btn">저장하기</button></div>
             <div class="sp-name">주 버튼<span class="sp-en">primary button</span></div>
             <p class="sp-desc">화면에서 가장 하고 싶은 행동 <b>딱 하나</b>. 색이 꽉 찬 버튼. 이 행동을 <b>CTA</b>라고 부릅니다.</p>
           </div>
-          <div class="spec tight">
+          <div class="spec tight" data-hk="btn-secondary">
             <div class="uic"><button class="btn sec">취소</button></div>
             <div class="sp-name">보조 버튼<span class="sp-en">secondary / outline</span></div>
             <p class="sp-desc">회색 또는 테두리만. 테두리형은 <b>아웃라인 버튼</b>이라고 부르면 바로 통합니다.</p>
           </div>
-          <div class="spec tight">
+          <div class="spec tight" data-hk="btn-ghost">
             <div class="uic"><button class="btn ghost">건너뛰기</button></div>
             <div class="sp-name">고스트 · 텍스트 버튼<span class="sp-en">ghost / text button</span></div>
             <p class="sp-desc">배경 없이 글자만. 링크처럼 보이지만 동작은 버튼.</p>
           </div>
-          <div class="spec tight">
+          <div class="spec tight" data-hk="btn-dest">
             <div class="uic"><button class="btn dest">삭제</button></div>
             <div class="sp-name">위험 버튼<span class="sp-en">destructive</span></div>
             <p class="sp-desc">되돌릴 수 없는 행동은 빨강. "삭제는 destructive 스타일로"라고 주문하세요.</p>
           </div>
-          <div class="spec tight">
-            <div class="uic"><button class="btn ico">✏️</button><button class="btn sec ico">⋯</button></div>
+          <div class="spec tight" data-hk="btn-icon">
+            <div class="uic"><button class="btn ico" data-hk="btn-edit">✏️</button><button class="btn sec ico" data-hk="btn-more">⋯</button></div>
             <div class="sp-name">아이콘 버튼<span class="sp-en">icon button</span></div>
-            <p class="sp-desc">아이콘만 있는 정사각 버튼. <span class="mono">⋯</span>는 더보기(케밥/미트볼) 메뉴 버튼.</p>
+            <p class="sp-desc"><span class="lk" data-hl="btn-edit">아이콘만 있는 정사각 버튼</span>. <span class="mono lk" data-hl="btn-more">⋯</span>는 더보기(케밥/미트볼) 메뉴 버튼.</p>
           </div>
-          <div class="spec tight">
-            <div class="uic"><span class="fab">＋</span></div>
+          <div class="spec tight" data-hk="fab">
+            <div class="uic" style="justify-content:flex-end; align-items:flex-end;"><span class="fab" data-hk="fab-btn">＋</span></div>
             <div class="sp-name">플로팅 액션 버튼<span class="sp-en">FAB</span></div>
-            <p class="sp-desc">우하단에 떠 있는 동그란 버튼. 머티리얼(안드로이드)의 상징적 부품.</p>
+            <p class="sp-desc"><span class="lk" data-hl="fab-btn">우하단에 떠 있는 동그란 버튼</span>. 머티리얼(안드로이드)의 상징적 부품.</p>
           </div>
         </div>
         <p class="small" style="margin-top:.9rem; color:#B8BFD0 !important;">
-          "버튼 만들어줘" 대신 <b class="accent2">"primary 버튼 하나 + ghost 취소 버튼"</b> — 위계가 정해지면 AI가 색과 크기를 스스로 맞춥니다.
+          "버튼 만들어줘" 대신 <b class="accent2">"<span class="lk" data-hl="btn-primary">primary 버튼 하나</span> + <span class="lk" data-hl="btn-ghost">ghost 취소 버튼</span>"</b> — 위계가 정해지면 AI가 색과 크기를 스스로 맞춥니다.
         </p>
       </div>
       <aside class="notes">
@@ -1454,72 +1703,79 @@
         <div class="chip">ELEMENTS 2/6 · 입력하는 것</div>
         <h2>폼(form)을 이루는 부품들</h2>
         <div class="spec-grid c4">
-          <div class="spec">
+          <div class="spec" data-hk="textfield">
             <div class="uic">
               <div class="field">
-                <label>이메일</label>
-                <input type="text" placeholder="name@company.com" />
-                <span class="help">회사 메일을 입력하세요</span>
+                <label data-hk="label">이메일</label>
+                <input type="text" placeholder="name@company.com" data-hk="placeholder" />
+                <span class="help" data-hk="helper">회사 메일을 입력하세요</span>
               </div>
             </div>
             <div class="sp-name">텍스트 필드<span class="sp-en">text field / input</span></div>
-            <p class="sp-desc">위 작은 글자는 <b>레이블</b>, 안쪽 흐린 안내는 <b>플레이스홀더</b>, 아래 설명은 <b>헬퍼 텍스트</b>.</p>
+            <p class="sp-desc">위 작은 글자는 <b class="lk" data-hl="label">레이블</b>, 안쪽 흐린 안내는 <b class="lk" data-hl="placeholder">플레이스홀더</b>, 아래 설명은 <b class="lk" data-hl="helper">헬퍼 텍스트</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="checkbox">
             <div class="uic" style="flex-direction:column; align-items:flex-start; gap:.3rem;">
-              <span class="cbrow"><input type="checkbox" checked /> 약관 동의</span>
-              <span class="cbrow"><input type="checkbox" /> 뉴스레터 받기</span>
+              <span class="cbrow"><input type="checkbox" checked data-hk="cb-box" /> 약관 동의</span>
+              <span class="cbrow"><input type="checkbox" data-hk="cb-box" /> 뉴스레터 받기</span>
             </div>
             <div class="sp-name">체크박스<span class="sp-en">checkbox</span></div>
-            <p class="sp-desc">여러 개를 <b>동시에</b> 고를 때. 네모.</p>
+            <p class="sp-desc">여러 개를 <b>동시에</b> 고를 때. <span class="lk" data-hl="cb-box">네모</span>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="radio">
             <div class="uic" style="flex-direction:column; align-items:flex-start; gap:.3rem;">
-              <span class="cbrow"><input type="radio" name="r1" checked /> 월간 결제</span>
-              <span class="cbrow"><input type="radio" name="r1" /> 연간 결제</span>
+              <span class="cbrow"><input type="radio" name="r1" checked data-hk="rd-dot" /> 월간 결제</span>
+              <span class="cbrow"><input type="radio" name="r1" data-hk="rd-dot" /> 연간 결제</span>
             </div>
             <div class="sp-name">라디오 버튼<span class="sp-en">radio button</span></div>
-            <p class="sp-desc">여럿 중 <b>하나만</b> 고를 때. 동그라미.</p>
+            <p class="sp-desc">여럿 중 <b>하나만</b> 고를 때. <span class="lk" data-hl="rd-dot">동그라미</span>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="switch">
             <div class="uic" style="gap:.6rem;">
-              <span class="sw"></span><span class="sw off"></span>
+              <span class="sw" role="switch" aria-checked="true" aria-label="켜짐 예시"></span><span class="sw off" role="switch" aria-checked="false" aria-label="꺼짐 예시"></span>
             </div>
             <div class="sp-name">토글 스위치<span class="sp-en">toggle / switch</span></div>
-            <p class="sp-desc">켜고 끄는 설정. 누르는 <b>즉시</b> 적용됩니다(저장 버튼 없음).</p>
+            <p class="sp-desc">켜고 끄는 설정. 누르는 <b>즉시</b> 적용됩니다(저장 버튼 없음) — 눌러 보세요.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><input type="range" value="62" /></div>
+          <div class="spec" data-hk="slider">
+            <div class="uic">
+              <div class="sldx" tabindex="0" role="slider" aria-label="슬라이더 예시" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62">
+                <span class="sl-track" data-hk="track"><span class="sl-fill" data-hk="track-active"></span></span>
+                <span class="sl-thumb" data-hk="thumb"></span>
+              </div>
+            </div>
             <div class="sp-name">슬라이더<span class="sp-en">slider</span></div>
-            <p class="sp-desc">범위 값 조절(볼륨·가격대). 손잡이는 <b>썸</b>, 지나온 구간은 <b>트랙</b>.</p>
+            <p class="sp-desc">범위 값 조절(볼륨·가격대). 손잡이는 <b class="lk" data-hl="thumb">썸</b>, 막대는 <b class="lk" data-hl="track">트랙</b>(채워진 쪽은 <span class="lk" data-hl="track-active">액티브 트랙</span>).</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="select">
             <div class="uic">
               <div class="field"><label>부서</label>
-                <select><option>공정기술</option><option>설계</option></select>
+                <select data-hk="sel-box"><option>공정기술</option><option>설계</option></select>
               </div>
             </div>
             <div class="sp-name">셀렉트 · 드롭다운<span class="sp-en">select / dropdown</span></div>
-            <p class="sp-desc">눌러서 목록에서 고르기. 검색까지 되면 <b>콤보박스</b>·<b>오토컴플리트</b>.</p>
+            <p class="sp-desc"><span class="lk" data-hl="sel-box">눌러서 목록에서 고르기</span>. 검색까지 되면 <b>콤보박스</b>·<b>오토컴플리트</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="search">
             <div class="uic">
-              <div class="field" style="position:relative;">
-                <input type="text" placeholder="🔍  검색" />
+              <div class="srch">
+                <span class="si l" data-hk="lead-icon">🔍</span>
+                <input type="text" placeholder="검색" aria-label="검색 예시" />
+                <span class="si r" data-hk="trail-icon">✕</span>
               </div>
             </div>
             <div class="sp-name">검색 입력<span class="sp-en">search field</span></div>
-            <p class="sp-desc">돋보기가 붙은 입력. 입력 안 왼쪽 아이콘은 <b>leading icon</b>, 오른쪽은 <b>trailing icon</b>.</p>
+            <p class="sp-desc">돋보기가 붙은 입력. 입력 안 왼쪽 아이콘은 <b class="lk" data-hl="lead-icon">leading icon</b>, 오른쪽은 <b class="lk" data-hl="trail-icon">trailing icon</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="validation">
             <div class="uic">
               <div class="field err">
-                <input type="text" value="euiyun" />
-                <span class="help">⚠ 올바른 이메일 형식이 아닙니다</span>
+                <input type="text" value="euiyun" data-hk="v-input" aria-label="검증 오류 예시" />
+                <span class="help" data-hk="v-msg">⚠ 올바른 이메일 형식이 아닙니다</span>
               </div>
             </div>
             <div class="sp-name">유효성 검증<span class="sp-en">validation / error state</span></div>
-            <p class="sp-desc">입력이 틀렸을 때 빨간 테두리 + 아래 메시지. "인라인 검증"이라고 주문합니다.</p>
+            <p class="sp-desc">입력이 틀렸을 때 <span class="lk" data-hl="v-input">빨간 테두리</span> + <span class="lk" data-hl="v-msg">아래 메시지</span>. "인라인 검증"이라고 주문합니다.</p>
           </div>
         </div>
       </div>
@@ -1535,39 +1791,39 @@
         <div class="chip">ELEMENTS 3/6 · 이동하는 것</div>
         <h2>길을 안내하는 부품 (내비게이션)</h2>
         <div class="spec-grid c3">
-          <div class="spec">
-            <div class="uic"><div class="tabs"><span class="on">개요</span><span>이력</span><span>설정</span></div></div>
+          <div class="spec" data-hk="tabs">
+            <div class="uic"><div class="tabs"><span class="on" data-hk="tab-active">개요</span><span>이력</span><span>설정</span></div></div>
             <div class="sp-name">탭<span class="sp-en">tabs</span></div>
-            <p class="sp-desc">같은 층위의 화면을 갈아타기. 밑줄이 있는 게 현재 탭(<b>액티브</b>).</p>
+            <p class="sp-desc">같은 층위의 화면을 갈아타기. 밑줄이 있는 게 현재 탭(<b class="lk" data-hl="tab-active">액티브</b>) — 눌러 보세요.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><div class="segc"><span class="on">일별</span><span>주별</span><span>월별</span></div></div>
+          <div class="spec" data-hk="segmented">
+            <div class="uic"><div class="segc" data-hk="seg-pill"><span class="on">일별</span><span>주별</span><span>월별</span></div></div>
             <div class="sp-name">세그먼티드 컨트롤<span class="sp-en">segmented control</span></div>
-            <p class="sp-desc">같은 화면의 <b>보기 방식</b>만 바꾸는 알약형 스위치. 애플 쪽에서 즐겨 씁니다.</p>
+            <p class="sp-desc">같은 화면의 <b>보기 방식</b>만 바꾸는 <span class="lk" data-hl="seg-pill">알약형 스위치</span>. 애플 쪽에서 즐겨 씁니다.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><span class="crumb">홈 &nbsp;›&nbsp; 프로젝트 &nbsp;›&nbsp; <b>설정</b></span></div>
+          <div class="spec" data-hk="breadcrumb">
+            <div class="uic"><span class="crumb">홈 &nbsp;›&nbsp; 프로젝트 &nbsp;›&nbsp; <b data-hk="crumb-here">설정</b></span></div>
             <div class="sp-name">브레드크럼<span class="sp-en">breadcrumb</span></div>
-            <p class="sp-desc">"지금 여기" 경로 표시. 깊은 구조에서 길 잃지 않게 해줍니다.</p>
+            <p class="sp-desc"><span class="lk" data-hl="crumb-here">"지금 여기"</span> 경로 표시. 깊은 구조에서 길 잃지 않게 해줍니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="pagination">
             <div class="uic"><span class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>›</span></span></div>
             <div class="sp-name">페이지네이션<span class="sp-en">pagination</span></div>
             <p class="sp-desc">목록을 페이지로 끊기. 스크롤로 계속 불러오는 방식은 <b>무한 스크롤</b>.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><div class="menux"><div>이름 바꾸기</div><div class="on">복제</div><div>삭제</div></div></div>
+          <div class="spec" data-hk="menu">
+            <div class="uic"><div class="menux" data-hk="menu-list"><div>이름 바꾸기</div><div class="on">복제</div><div>삭제</div></div></div>
             <div class="sp-name">드롭다운 메뉴<span class="sp-en">menu / dropdown</span></div>
-            <p class="sp-desc">버튼을 눌러 뜨는 명령 목록. 마우스 오른쪽으로 뜨면 <b>컨텍스트 메뉴</b>.</p>
+            <p class="sp-desc">버튼을 눌러 뜨는 <span class="lk" data-hl="menu-list">명령 목록</span>. 마우스 오른쪽으로 뜨면 <b>컨텍스트 메뉴</b>.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><span class="stepx"><i class="on">1</i><u></u><i class="on">2</i><u></u><i>3</i> &nbsp;배송 정보</span></div>
+          <div class="spec" data-hk="stepper">
+            <div class="uic"><span class="stepx"><i class="on">1</i><u></u><i class="on">2</i><u></u><i data-hk="step-next">3</i> &nbsp;배송 정보</span></div>
             <div class="sp-name">스테퍼 / 위저드<span class="sp-en">stepper / wizard</span></div>
-            <p class="sp-desc">여러 단계를 순서대로. "3단계 스테퍼로 나눠줘"처럼 주문합니다.</p>
+            <p class="sp-desc">여러 단계를 순서대로. "<span class="lk" data-hl="step-next">3단계</span> 스테퍼로 나눠줘"처럼 주문합니다.</p>
           </div>
         </div>
         <p class="small" style="margin-top:.9rem; color:#B8BFD0 !important;">
-          <b class="accent3">탭 vs 세그먼티드</b> — 탭은 <em>다른 내용</em>으로 이동, 세그먼티드는 <em>같은 내용</em>의 표현만 변경. 이 구분을 말해주면 화면 구조가 제대로 잡힙니다.
+          <b class="accent3"><span class="lk" data-hl="tabs">탭</span> vs <span class="lk" data-hl="segmented">세그먼티드</span></b> — 탭은 <em>다른 내용</em>으로 이동, 세그먼티드는 <em>같은 내용</em>의 표현만 변경. 이 구분을 말해주면 화면 구조가 제대로 잡힙니다.
         </p>
       </div>
       <aside class="notes">
@@ -1581,59 +1837,63 @@
         <div class="chip">ELEMENTS 4/6 · 보여주는 것</div>
         <h2>내용을 담는 그릇들</h2>
         <div class="spec-grid c4">
-          <div class="spec">
-            <div class="uic"><div class="cardx"><div class="cimg"></div><div class="cbody"><b>웨이퍼 수율 리포트</b><p>2026-09-21 · 공정기술팀</p></div></div></div>
+          <div class="spec" data-hk="card">
+            <div class="uic"><div class="cardx" data-hk="card-box"><div class="cimg"></div><div class="cbody"><b>웨이퍼 수율 리포트</b><p>2026-09-21 · 공정기술팀</p></div></div></div>
             <div class="sp-name">카드<span class="sp-en">card</span></div>
-            <p class="sp-desc">한 덩어리 정보를 담는 상자. 목록을 <b>카드 그리드</b>로 보여달라는 주문이 가장 흔합니다.</p>
+            <p class="sp-desc"><span class="lk" data-hl="card-box">한 덩어리 정보를 담는 상자</span>. 목록을 <b>카드 그리드</b>로 보여달라는 주문이 가장 흔합니다.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><div class="menux"><div>📄 &nbsp;주간보고.pptx</div><div>📄 &nbsp;DRM_v3.xlsx</div><div>📄 &nbsp;layout.gds</div></div></div>
+          <div class="spec" data-hk="list">
+            <div class="uic"><div class="menux">
+              <div style="display:flex; align-items:center; gap:.4rem;"><span data-hk="li-lead" style="border-radius:4px;">📄</span><span style="flex:1;">주간보고.pptx</span><span class="u-dim" data-hk="li-trail" style="padding:0 .2em; border-radius:4px;">›</span></div>
+              <div style="display:flex; align-items:center; gap:.4rem;"><span data-hk="li-lead" style="border-radius:4px;">📄</span><span style="flex:1;">DRM_v3.xlsx</span><span class="u-dim" data-hk="li-trail" style="padding:0 .2em; border-radius:4px;">›</span></div>
+              <div style="display:flex; align-items:center; gap:.4rem;"><span data-hk="li-lead" style="border-radius:4px;">📄</span><span style="flex:1;">layout.gds</span><span class="u-dim" data-hk="li-trail" style="padding:0 .2em; border-radius:4px;">›</span></div>
+            </div></div>
             <div class="sp-name">리스트 · 리스트 아이템<span class="sp-en">list / list item</span></div>
-            <p class="sp-desc">한 줄씩 쌓인 목록. 줄 왼쪽 아이콘·오른쪽 화살표를 <b>leading/trailing</b>이라 부릅니다.</p>
+            <p class="sp-desc">한 줄씩 쌓인 목록. 줄 왼쪽 아이콘·오른쪽 화살표를 <b><span class="lk" data-hl="li-lead">leading</span>/<span class="lk" data-hl="li-trail">trailing</span></b>이라 부릅니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="table">
             <div class="uic">
-              <table class="tbx"><thead><tr><th>Lot</th><th>수율</th></tr></thead>
+              <table class="tbx"><thead><tr data-hk="tbl-head"><th>Lot</th><th>수율 <span data-hk="tbl-sort">↓</span></th></tr></thead>
                 <tbody><tr><td>A-113</td><td>98.2%</td></tr><tr><td>A-114</td><td>96.7%</td></tr></tbody></table>
             </div>
             <div class="sp-name">테이블 · 데이터 그리드<span class="sp-en">table / data grid</span></div>
-            <p class="sp-desc">행·열 표. 정렬·필터·고정 헤더가 붙으면 <b>데이터 그리드</b>입니다.</p>
+            <p class="sp-desc">행·열 표. <span class="lk" data-hl="tbl-sort">정렬</span>·필터·<span class="lk" data-hl="tbl-head">고정 헤더</span>가 붙으면 <b>데이터 그리드</b>입니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="avatar">
             <div class="uic" style="gap:.4rem;">
-              <span class="avatar">EK</span><span class="avatar" style="background:linear-gradient(140deg,#F472B6,#F59E0B);">JS</span>
-              <span style="position:relative; display:inline-block;"><span class="avatar">🔔</span><span class="badgex" style="position:absolute; top:-4px; right:-6px;">3</span></span>
+              <span class="avatar" data-hk="av-person">EK</span><span class="avatar" data-hk="av-person" style="background:linear-gradient(140deg,#F472B6,#F59E0B);">JS</span>
+              <span style="position:relative; display:inline-block;"><span class="avatar">🔔</span><span class="badgex" data-hk="badge" style="position:absolute; top:-4px; right:-6px;">3</span></span>
             </div>
             <div class="sp-name">아바타 · 배지<span class="sp-en">avatar / badge</span></div>
-            <p class="sp-desc">아바타는 사람 표시(이니셜·사진), 배지는 숫자·점 알림. 여러 개 겹치면 <b>아바타 그룹</b>.</p>
+            <p class="sp-desc"><span class="lk" data-hl="av-person">아바타</span>는 사람 표시(이니셜·사진), <span class="lk" data-hl="badge">배지</span>는 숫자·점 알림. 여러 개 겹치면 <b>아바타 그룹</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="chip">
             <div class="uic" style="gap:.3rem;">
-              <span class="chipx">#공정</span><span class="chipx">#수율 ✕</span>
+              <span class="chipx" data-hk="chip-tag">#공정</span><span class="chipx" data-hk="chip-input">#수율 ✕</span>
             </div>
             <div class="sp-name">칩 · 태그<span class="sp-en">chip / tag</span></div>
-            <p class="sp-desc">작은 알약형 라벨. 지우기(✕)가 붙으면 필터용 <b>입력 칩</b>.</p>
+            <p class="sp-desc"><span class="lk" data-hl="chip-tag">작은 알약형 라벨</span>. 지우기(✕)가 붙으면 필터용 <b class="lk" data-hl="chip-input">입력 칩</b>.</p>
           </div>
-          <div class="spec">
-            <div class="uic" style="padding-top:1.3rem;"><span class="tip">클릭하면 복사됩니다</span></div>
+          <div class="spec" data-hk="tooltip">
+            <div class="uic" style="padding-top:1.3rem; flex-direction:column; gap:.35rem;"><span class="tip" data-hk="tip-bubble">클릭하면 복사됩니다</span><span class="btn sec ico" data-hk="tip-anchor" style="width:1.9em; height:1.9em; font-size:.8rem;">⧉</span></div>
             <div class="sp-name">툴팁<span class="sp-en">tooltip</span></div>
-            <p class="sp-desc">마우스를 올렸을 때만 뜨는 짧은 설명. 길면 툴팁이 아니라 <b>팝오버</b>로.</p>
+            <p class="sp-desc"><span class="lk" data-hl="tip-anchor">마우스를 올렸을 때만</span> 뜨는 <span class="lk" data-hl="tip-bubble">짧은 설명</span>. 길면 툴팁이 아니라 <b>팝오버</b>로.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><div class="accx"><div class="ah">자주 묻는 질문 <span>⌄</span></div><div class="ab">클릭하면 펼쳐지는 영역입니다.</div></div></div>
+          <div class="spec" data-hk="accordion">
+            <div class="uic"><div class="accx"><div class="ah" data-hk="acc-head">자주 묻는 질문 <span>⌄</span></div><div class="ab">클릭하면 펼쳐지는 영역입니다.</div></div></div>
             <div class="sp-name">아코디언<span class="sp-en">accordion / collapsible</span></div>
-            <p class="sp-desc">눌러서 접고 펴는 영역. FAQ·설정 화면의 단골.</p>
+            <p class="sp-desc"><span class="lk" data-hl="acc-head">눌러서</span> 접고 펴는 영역 — 직접 눌러 보세요. FAQ·설정 화면의 단골.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="carousel">
             <div class="uic" style="flex-direction:column; gap:.3rem;">
               <div style="display:flex; gap:.25rem; width:100%;">
-                <div style="flex:2; height:1.5rem; border-radius:6px; background:linear-gradient(120deg,#818CF8,#22D3EE);"></div>
+                <div data-hk="car-slide" style="flex:2; height:1.5rem; border-radius:6px; background:linear-gradient(120deg,#818CF8,#22D3EE);"></div>
                 <div style="flex:1; height:1.5rem; border-radius:6px; background:#E7EAF2;"></div>
               </div>
-              <span style="font-size:.66rem; letter-spacing:.3em;">● ○ ○</span>
+              <span data-hk="dots" style="font-size:.66rem; letter-spacing:.3em; padding:0 .2em 0 .5em; border-radius:4px;">● ○ ○</span>
             </div>
             <div class="sp-name">캐러셀<span class="sp-en">carousel / slider</span></div>
-            <p class="sp-desc">좌우로 넘기는 배너. 아래 점들이 <b>페이지 인디케이터(dots)</b>.</p>
+            <p class="sp-desc"><span class="lk" data-hl="car-slide">좌우로 넘기는 배너</span>. 아래 점들이 <b class="lk" data-hl="dots">페이지 인디케이터(dots)</b>.</p>
           </div>
         </div>
       </div>
@@ -1648,52 +1908,52 @@
         <div class="chip">ELEMENTS 5/6 · 끼어드는 것 (오버레이)</div>
         <h2>화면 위에 <span class="accent2">얹히는</span> 것들</h2>
         <div class="spec-grid c3">
-          <div class="spec">
+          <div class="spec" data-hk="modal">
             <div class="uic" style="min-height:96px;">
-              <div class="scrim"><div class="modalx"><b>삭제하시겠어요?</b><p>이 작업은 되돌릴 수 없습니다.</p>
+              <div class="scrim" data-hk="m-scrim" data-hk-inset><div class="modalx" data-hk="m-dialog"><b>삭제하시겠어요?</b><p>이 작업은 되돌릴 수 없습니다.</p>
                 <div class="mrow"><button class="btn sec" style="font-size:.76rem;">취소</button><button class="btn dest" style="font-size:.76rem;">삭제</button></div></div></div>
             </div>
             <div class="sp-name">모달 · 다이얼로그<span class="sp-en">modal / dialog</span></div>
-            <p class="sp-desc">답할 때까지 뒤를 막는 창. 뒤의 어두운 막이 <b>스크림(백드롭·오버레이)</b>. 확인용 짧은 것은 <b>컨펌 다이얼로그</b>.</p>
+            <p class="sp-desc">답할 때까지 뒤를 막는 창. 뒤의 어두운 막이 <b class="lk" data-hl="m-scrim">스크림(백드롭·오버레이)</b>. 확인용 짧은 것은 <b class="lk" data-hl="m-dialog">컨펌 다이얼로그</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="popover">
             <div class="uic" style="min-height:96px; align-items:flex-start;">
               <div style="width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:.3rem;">
-                <button class="btn sec" style="font-size:.76rem;">필터 ⌄</button>
-                <div class="menux" style="width:75%;"><div>기간: 최근 7일</div><div>상태: 진행중</div></div>
+                <button class="btn sec" style="font-size:.76rem;" data-hk="pop-anchor">필터 ⌄</button>
+                <div class="menux" style="width:75%;" data-hk="pop-panel"><div>기간: 최근 7일</div><div>상태: 진행중</div></div>
               </div>
             </div>
             <div class="sp-name">팝오버<span class="sp-en">popover</span></div>
-            <p class="sp-desc">누른 요소 옆에 붙어 뜨는 작은 패널. 뒤를 막지 않아 계속 쓸 수 있습니다.</p>
+            <p class="sp-desc"><span class="lk" data-hl="pop-anchor">누른 요소</span> 옆에 붙어 뜨는 <span class="lk" data-hl="pop-panel">작은 패널</span>. 뒤를 막지 않아 계속 쓸 수 있습니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="sheet">
             <div class="uic" style="min-height:96px; align-items:flex-end; padding-bottom:0;">
-              <div class="sheetx"><div class="grab"></div><b style="font-size:.8rem;">공유</b>
+              <div class="sheetx" data-hk="sheet-panel"><div class="grab" data-hk="grabber"></div><b style="font-size:.8rem;">공유</b>
                 <p style="font-size:.7rem; margin:.15em 0 0;">카카오톡 · 메일 · 링크 복사</p></div>
             </div>
             <div class="sp-name">바텀 시트 · 액션 시트<span class="sp-en">bottom sheet / action sheet</span></div>
-            <p class="sp-desc">아래에서 올라오는 패널. 모바일에서 모달 대신 씁니다. 위 손잡이는 <b>그래버</b>.</p>
+            <p class="sp-desc"><span class="lk" data-hl="sheet-panel">아래에서 올라오는 패널</span>. 모바일에서 모달 대신 씁니다. 위 손잡이는 <b class="lk" data-hl="grabber">그래버</b>.</p>
           </div>
-          <div class="spec">
-            <div class="uic" style="min-height:96px;"><div class="toastx">✅ 저장했습니다 &nbsp;<b>되돌리기</b></div></div>
+          <div class="spec" data-hk="toast">
+            <div class="uic" style="min-height:96px;"><div class="toastx" data-hk="toast-box">✅ 저장했습니다 &nbsp;<b data-hk="undo">되돌리기</b></div></div>
             <div class="sp-name">토스트 · 스낵바<span class="sp-en">toast / snackbar</span></div>
-            <p class="sp-desc">잠깐 떴다 사라지는 알림. 안드로이드/머티리얼에선 스낵바(되돌리기 버튼 포함).</p>
+            <p class="sp-desc"><span class="lk" data-hl="toast-box">잠깐 떴다 사라지는 알림</span>. 안드로이드/머티리얼에선 스낵바(<span class="lk" data-hl="undo">되돌리기 버튼</span> 포함).</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="banner">
             <div class="uic" style="min-height:96px; flex-direction:column; gap:.35rem;">
-              <div class="alertx">⚠️ 저장 공간이 90% 찼습니다.</div>
-              <div class="alertx err">⛔ 업로드에 실패했습니다. 다시 시도해 주세요.</div>
+              <div class="alertx" data-hk="banner-bar">⚠️ 저장 공간이 90% 찼습니다.</div>
+              <div class="alertx err" data-hk="banner-bar">⛔ 업로드에 실패했습니다. 다시 시도해 주세요.</div>
             </div>
             <div class="sp-name">배너 · 얼럿<span class="sp-en">banner / alert / callout</span></div>
-            <p class="sp-desc">사라지지 않고 자리를 차지하는 안내 띠. 문서 안의 강조 박스는 <b>콜아웃</b>.</p>
+            <p class="sp-desc">사라지지 않고 <span class="lk" data-hl="banner-bar">자리를 차지하는 안내 띠</span>. 문서 안의 강조 박스는 <b>콜아웃</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="modal-vs">
             <div class="uic" style="min-height:96px; flex-direction:column; gap:.3rem;">
-              <span class="chipx" style="font-size:.7rem;">스크림 없음 → 계속 작업 가능</span>
-              <span class="chipx" style="font-size:.7rem; background:#14161F; color:#fff !important; border-color:#14161F;">스크림 있음 → 답해야 진행</span>
+              <span class="chipx" data-hk="mv-non" style="font-size:.7rem;">스크림 없음 → 계속 작업 가능</span>
+              <span class="chipx" data-hk="mv-modal" style="font-size:.7rem; background:#14161F; color:#fff !important; border-color:#14161F;">스크림 있음 → 답해야 진행</span>
             </div>
             <div class="sp-name">모달 vs 논모달<span class="sp-en">modal vs non-modal</span></div>
-            <p class="sp-desc"><b>모달</b>은 흐름을 끊고, <b>논모달</b>(팝오버·토스트)은 안 끊습니다. 끊을지 말지를 정해서 주문하세요.</p>
+            <p class="sp-desc"><b class="lk" data-hl="mv-modal">모달</b>은 흐름을 끊고, <b class="lk" data-hl="mv-non">논모달</b>(팝오버·토스트)은 안 끊습니다. 끊을지 말지를 정해서 주문하세요.</p>
           </div>
         </div>
       </div>
@@ -1709,32 +1969,32 @@
         <div class="chip">ELEMENTS 6/6 · 기다림과 빈칸</div>
         <h2>초보 화면과 <span class="accent2">프로 화면</span>의 차이는 여기서 갈린다</h2>
         <div class="spec-grid c4">
-          <div class="spec">
+          <div class="spec" data-hk="spinner">
             <div class="uic"><div class="spinx"></div></div>
             <div class="sp-name">스피너 · 로더<span class="sp-en">spinner / loader</span></div>
             <p class="sp-desc">짧은 대기(1초 내외)에. 길어지면 답답해 보입니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="progress">
             <div class="uic" style="flex-direction:column; gap:.3rem;">
-              <div class="barx"><i></i></div><span style="font-size:.7rem;" class="u-dim">62% · 12/20 파일</span>
+              <div class="barx" data-hk="prog-bar"><i></i></div><span style="font-size:.7rem; padding:0 .2em; border-radius:4px;" class="u-dim" data-hk="prog-label">62% · 12/20 파일</span>
             </div>
             <div class="sp-name">프로그레스 바<span class="sp-en">progress bar</span></div>
-            <p class="sp-desc">끝이 보이는 작업에. 퍼센트·남은 개수를 함께 보여주면 신뢰가 생깁니다.</p>
+            <p class="sp-desc"><span class="lk" data-hl="prog-bar">끝이 보이는 작업</span>에. <span class="lk" data-hl="prog-label">퍼센트·남은 개수</span>를 함께 보여주면 신뢰가 생깁니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="skeleton">
             <div class="uic"><div class="skelx"><i></i><i></i><i></i></div></div>
             <div class="sp-name">스켈레톤<span class="sp-en">skeleton</span></div>
             <p class="sp-desc">들어올 내용의 회색 뼈대. 목록·카드 로딩의 요즘 기본값.</p>
           </div>
-          <div class="spec">
-            <div class="uic"><div class="emptyx"><span class="eic">📭</span>아직 리포트가 없습니다<br/><span style="font-size:.7rem;">첫 리포트를 만들어 보세요</span></div></div>
+          <div class="spec" data-hk="empty">
+            <div class="uic"><div class="emptyx"><span class="eic" data-hk="e-art">📭</span><span data-hk="e-text">아직 리포트가 없습니다</span><br/><button class="btn" data-hk="e-cta" style="font-size:.72rem; padding:.45em .8em; margin-top:.35rem;">＋ 새 리포트</button></div></div>
             <div class="sp-name">엠프티 스테이트<span class="sp-en">empty state</span></div>
-            <p class="sp-desc">데이터가 0건일 때의 화면. 그림 + 한 줄 설명 + <b>다음 행동 버튼</b>이 정석.</p>
+            <p class="sp-desc">데이터가 0건일 때의 화면. <span class="lk" data-hl="e-art">그림</span> + <span class="lk" data-hl="e-text">한 줄 설명</span> + <b class="lk" data-hl="e-cta">다음 행동 버튼</b>이 정석.</p>
           </div>
         </div>
         <div class="prompt-card mini good" style="margin-top:1rem;">
           <div class="pc-label">이 한 줄이 화면 완성도를 바꿉니다</div>
-          <pre class="code">로딩 중에는 스켈레톤, 데이터 0건이면 엠프티 스테이트(안내 문구 + 생성 버튼),
+          <pre class="code">로딩 중에는 <span class="lk" data-hl="skeleton">스켈레톤</span>, 데이터 0건이면 <span class="lk" data-hl="empty">엠프티 스테이트</span>(<span class="lk" data-hl="e-text">안내 문구</span> + <span class="lk" data-hl="e-cta">생성 버튼</span>),
 실패하면 에러 상태(재시도 버튼)까지 같이 만들어줘.</pre>
         </div>
         <p class="tiny center" style="margin-top:.6rem; color:#9BA6C0 !important;">
@@ -1755,16 +2015,19 @@
         <table class="rules" style="font-size:1.12rem;">
           <thead><tr><th style="width:15rem;">헷갈리는 둘</th><th>구분하는 한 문장</th><th style="width:17rem;">프롬프트에 쓸 때</th></tr></thead>
           <tbody>
-            <tr><td><b>모달</b> vs <b>팝오버</b></td><td>모달은 뒤를 <b class="accent3">막는다</b>(스크림). 팝오버는 안 막는다.</td><td class="mono small">확인은 모달, 필터는 팝오버</td></tr>
-            <tr><td><b>토스트</b> vs <b>배너</b></td><td>토스트는 <b class="accent3">사라진다</b>. 배너는 자리를 차지하고 남는다.</td><td class="mono small">저장 완료는 토스트</td></tr>
-            <tr><td><b>탭</b> vs <b>세그먼티드</b></td><td>탭은 <b class="accent3">다른 내용</b>으로, 세그먼티드는 같은 내용의 보기 방식.</td><td class="mono small">일/주/월은 세그먼티드</td></tr>
-            <tr><td><b>사이드바</b> vs <b>드로어</b></td><td>사이드바는 항상 있고, 드로어는 <b class="accent3">눌러야</b> 나온다.</td><td class="mono small">모바일은 드로어로 전환</td></tr>
-            <tr><td><b>칩</b> vs <b>배지</b></td><td>칩은 <b class="accent3">누를 수 있는</b> 라벨, 배지는 숫자·점 표시.</td><td class="mono small">태그는 칩, 알림 수는 배지</td></tr>
-            <tr><td><b>베젤</b> vs <b>패딩</b></td><td>베젤은 <b class="accent3">기기 테두리</b>(하드웨어), 패딩은 화면 안 여백.</td><td class="mono small">여백은 언제나 padding</td></tr>
-            <tr><td><b>플레이스홀더</b> vs <b>레이블</b></td><td>플레이스홀더는 입력하면 <b class="accent3">사라진다</b> — 그래서 레이블이 따로 필요.</td><td class="mono small">레이블은 항상 밖에</td></tr>
-            <tr><td><b>스피너</b> vs <b>스켈레톤</b></td><td>스피너는 "기다려", 스켈레톤은 "<b class="accent3">이런 게</b> 올 거야".</td><td class="mono small">목록 로딩은 스켈레톤</td></tr>
+            <tr data-peek="modal popover"><td><b>모달</b> vs <b>팝오버</b></td><td>모달은 뒤를 <b class="accent3">막는다</b>(스크림). 팝오버는 안 막는다.</td><td class="mono small">확인은 모달, 필터는 팝오버</td></tr>
+            <tr data-peek="toast banner"><td><b>토스트</b> vs <b>배너</b></td><td>토스트는 <b class="accent3">사라진다</b>. 배너는 자리를 차지하고 남는다.</td><td class="mono small">저장 완료는 토스트</td></tr>
+            <tr data-peek="tabs segmented"><td><b>탭</b> vs <b>세그먼티드</b></td><td>탭은 <b class="accent3">다른 내용</b>으로, 세그먼티드는 같은 내용의 보기 방식.</td><td class="mono small">일/주/월은 세그먼티드</td></tr>
+            <tr data-peek="sb-fixed drawer"><td><b>사이드바</b> vs <b>드로어</b></td><td>사이드바는 항상 있고, 드로어는 <b class="accent3">눌러야</b> 나온다.</td><td class="mono small">모바일은 드로어로 전환</td></tr>
+            <tr data-peek="chip badge"><td><b>칩</b> vs <b>배지</b></td><td>칩은 <b class="accent3">누를 수 있는</b> 라벨, 배지는 숫자·점 표시.</td><td class="mono small">태그는 칩, 알림 수는 배지</td></tr>
+            <tr data-peek="bezel padding"><td><b>베젤</b> vs <b>패딩</b></td><td>베젤은 <b class="accent3">기기 테두리</b>(하드웨어), 패딩은 화면 안 여백.</td><td class="mono small">여백은 언제나 padding</td></tr>
+            <tr data-peek="placeholder label"><td><b>플레이스홀더</b> vs <b>레이블</b></td><td>플레이스홀더는 입력하면 <b class="accent3">사라진다</b> — 그래서 레이블이 따로 필요.</td><td class="mono small">레이블은 항상 밖에</td></tr>
+            <tr data-peek="spinner skeleton"><td><b>스피너</b> vs <b>스켈레톤</b></td><td>스피너는 "기다려", 스켈레톤은 "<b class="accent3">이런 게</b> 올 거야".</td><td class="mono small">목록 로딩은 스켈레톤</td></tr>
           </tbody>
         </table>
+        <p class="tiny center" style="margin-top:.7rem; color:#9BA6C0 !important;">
+          줄에 마우스를 올리면 두 부품의 <b class="accent4">실물을 나란히</b> 띄웁니다 — 클릭하면 그 부품이 나온 장으로 이동합니다.
+        </p>
       </div>
       <aside class="notes">
         표는 읽어주지 말고 2~3줄만 짚는다. 나머지는 나중에 찾아보는 참고용.
@@ -1777,15 +2040,20 @@
       <div class="vfill">
         <div class="chip">STATES</div>
         <h2>같은 버튼의 <span class="accent2">여덟 얼굴</span></h2>
-        <div class="states">
-          <div class="state"><span class="btn-demo">저장</span><span class="snm">default</span><span class="sko">기본</span></div>
-          <div class="state"><span class="btn-demo hov">저장</span><span class="snm">hover</span><span class="sko">마우스 올림</span></div>
-          <div class="state"><span class="btn-demo foc">저장</span><span class="snm">focus</span><span class="sko">키보드 선택</span></div>
-          <div class="state"><span class="btn-demo act">저장</span><span class="snm">active / pressed</span><span class="sko">누르는 순간</span></div>
-          <div class="state"><span class="btn-demo dis">저장</span><span class="snm">disabled</span><span class="sko">비활성</span></div>
-          <div class="state"><span class="btn-demo" style="display:inline-flex; align-items:center; gap:.4em;"><span class="spinx" style="width:.9rem; height:.9rem; border-width:2px; border-color:rgba(255,255,255,.35); border-top-color:#fff;"></span>저장 중</span><span class="snm">loading</span><span class="sko">처리 중</span></div>
-          <div class="state"><span class="btn-demo" style="background:#0E9488;">✓ 저장됨</span><span class="snm">success</span><span class="sko">완료 피드백</span></div>
-          <div class="state"><span class="btn-demo" style="background:#B91C1C;">⛔ 실패</span><span class="snm">error</span><span class="sko">오류</span></div>
+        <div class="states" data-peek-root data-peek-id="states" data-peek-w="560">
+          <div class="state" data-hk="st-default"><span class="btn-demo">저장</span><span class="snm">default</span><span class="sko">기본</span></div>
+          <div class="state" data-hk="st-hover"><span class="btn-demo hov">저장</span><span class="snm">hover</span><span class="sko">마우스 올림</span></div>
+          <div class="state" data-hk="st-focus"><span class="btn-demo foc">저장</span><span class="snm">focus</span><span class="sko">키보드 선택</span></div>
+          <div class="state" data-hk="st-active"><span class="btn-demo act">저장</span><span class="snm">active / pressed</span><span class="sko">누르는 순간</span></div>
+          <div class="state" data-hk="st-disabled"><span class="btn-demo dis">저장</span><span class="snm">disabled</span><span class="sko">비활성</span></div>
+          <div class="state" data-hk="st-loading"><span class="btn-demo" style="display:inline-flex; align-items:center; gap:.4em;"><span class="spinx"></span>저장 중</span><span class="snm">loading</span><span class="sko">처리 중</span></div>
+          <div class="state" data-hk="st-success"><span class="btn-demo ok">✓ 저장됨</span><span class="snm">success</span><span class="sko">완료 피드백</span></div>
+          <div class="state" data-hk="st-error"><span class="btn-demo err">⛔ 실패</span><span class="snm">error</span><span class="sko">오류</span></div>
+        </div>
+        <div class="live-row">
+          <button type="button" class="btn-demo" id="st-live" data-hl="st-default" data-hl-nopin>저장</button>
+          <span class="live-now">지금: <span id="st-now">default</span></span>
+          <span class="live-hint">진짜 버튼입니다 — 마우스를 올리고, 누르고, <kbd class="key">Tab</kbd>으로 와 보세요. 위 카드를 누르면 버튼이 그 얼굴로 바뀝니다.</span>
         </div>
         <div class="grid-2" style="gap:1.4rem; margin-top:1.2rem;">
           <div class="card" style="padding:1rem 1.2rem;">
@@ -1802,6 +2070,7 @@
       </div>
       <aside class="notes">
         focus와 hover의 차이(키보드 vs 마우스)를 한 번 짚고, focus-visible은 접근성 슬라이드에서 재등장.
+        아래 '진짜 버튼'을 직접 올리고 눌러 보이면 해당 상태 카드가 선으로 연결된다. 누르면 loading → success(세 번째마다 error).
       </aside>
     </section>
 
@@ -1814,35 +2083,35 @@
           <div class="stack" style="gap:.8rem;">
             <div>
               <h3 style="font-size:1.25rem;">간격 스케일 <span class="mono tiny accent2">spacing scale · 4/8px 단위</span></h3>
-              <div class="tok">
+              <div class="tok" data-peek-root data-peek-id="spacing" data-peek-w="320">
                 <div class="trow2"><span class="tn">xs</span><span class="tb" style="width:4px;"></span><span class="tv">4px</span></div>
-                <div class="trow2"><span class="tn">sm</span><span class="tb" style="width:8px;"></span><span class="tv">8px</span></div>
-                <div class="trow2"><span class="tn">md</span><span class="tb" style="width:16px;"></span><span class="tv">16px</span></div>
-                <div class="trow2"><span class="tn">lg</span><span class="tb" style="width:24px;"></span><span class="tv">24px</span></div>
-                <div class="trow2"><span class="tn">xl</span><span class="tb" style="width:40px;"></span><span class="tv">40px</span></div>
+                <div class="trow2" data-hk="sp8"><span class="tn">sm</span><span class="tb" style="width:8px;"></span><span class="tv">8px</span></div>
+                <div class="trow2" data-hk="sp8"><span class="tn">md</span><span class="tb" style="width:16px;"></span><span class="tv">16px</span></div>
+                <div class="trow2" data-hk="sp8"><span class="tn">lg</span><span class="tb" style="width:24px;"></span><span class="tv">24px</span></div>
+                <div class="trow2" data-hk="sp8"><span class="tn">xl</span><span class="tb" style="width:40px;"></span><span class="tv">40px</span></div>
               </div>
             </div>
             <div>
               <h3 style="font-size:1.25rem;">라운드 <span class="mono tiny accent2">border-radius</span></h3>
-              <div class="rad-row">
+              <div class="rad-row" data-peek-root data-peek-id="radius" data-peek-w="340">
                 <div class="rr" style="border-radius:0;">0</div>
                 <div class="rr" style="border-radius:6px;">6</div>
-                <div class="rr" style="border-radius:12px;">12</div>
+                <div class="rr" style="border-radius:12px;" data-hk="rad12">12</div>
                 <div class="rr" style="border-radius:20px;">20</div>
                 <div class="rr" style="border-radius:999px;">999<br/>pill</div>
               </div>
             </div>
             <div>
               <h3 style="font-size:1.25rem;">그림자 · 높이 <span class="mono tiny accent2">elevation / shadow</span></h3>
-              <div class="elev-row">
-                <div class="er">0</div><div class="er">1</div><div class="er">2</div><div class="er">3</div>
+              <div class="elev-row" data-peek-root data-peek-id="elevation" data-peek-w="340">
+                <div class="er">0</div><div class="er" data-hk="elev1">1</div><div class="er">2</div><div class="er">3</div>
               </div>
             </div>
           </div>
           <div class="stack" style="gap:.8rem;">
             <div>
               <h3 style="font-size:1.25rem;">타입 스케일 <span class="mono tiny accent2">type scale</span></h3>
-              <div class="type-scale">
+              <div class="type-scale" data-peek-root data-peek-id="typescale" data-peek-w="340" data-hk="typescale">
                 <div style="font-size:1.9rem; font-weight:800;">Display<span class="ts-l">36px / 800</span></div>
                 <div style="font-size:1.4rem; font-weight:800;">Heading<span class="ts-l">24px / 700</span></div>
                 <div style="font-size:1.05rem;">Body 본문입니다<span class="ts-l">16px / 400</span></div>
@@ -1864,7 +2133,7 @@
           </div>
         </div>
         <p class="tiny" style="margin-top:.7rem; color:#9BA6C0 !important;">
-          토큰 = <b class="accent2">이름 붙인 숫자</b>. "간격은 8의 배수, 라운드는 12px, 글자 크기는 4단계로 고정해줘" 한 줄이면 화면 전체가 정돈됩니다.
+          토큰 = <b class="accent2">이름 붙인 숫자</b>. "<span class="lk" data-hl="sp8">간격은 8의 배수</span>, <span class="lk" data-hl="rad12">라운드는 12px</span>, <span class="lk" data-hl="elev1">그림자는 1단계</span>, <span class="lk" data-hl="typescale">글자 크기는 4단계</span>로 고정해줘" 한 줄이면 화면 전체가 정돈됩니다.
         </p>
       </div>
       <aside class="notes">
@@ -1878,11 +2147,24 @@
       <div class="vfill">
         <div class="chip">RESPONSIVE</div>
         <h2>"폰에서도 잘 되게" = <span class="accent2">반응형</span></h2>
-        <div class="bpr" style="margin-top:.4rem;">
-          <div class="bpc one"><span class="bic">📱</span><b>모바일</b><span class="mono">&lt; 640px</span><small>1열 · 드로어 · 하단 탭</small></div>
-          <div class="bpc two"><span class="bic">📲</span><b>태블릿</b><span class="mono">640–1024px</span><small>2열 · 아이콘 레일</small></div>
-          <div class="bpc"><span class="bic">💻</span><b>데스크톱</b><span class="mono">1024–1440px</span><small>3열 · 고정 사이드바</small></div>
-          <div class="bpc"><span class="bic">🖥️</span><b>와이드</b><span class="mono">&gt; 1440px</span><small>컨테이너 폭 제한 + 여백</small></div>
+        <div class="bpr" style="margin-top:.4rem;" data-hl-tour>
+          <div class="bpc one" data-hl="bp-m"><span class="bic">📱</span><b>모바일</b><span class="mono">&lt; 640px</span><small>1열 · 드로어 · 하단 탭</small></div>
+          <div class="bpc two" data-hl="bp-t"><span class="bic">📲</span><b>태블릿</b><span class="mono">640–1024px</span><small>2열 · 아이콘 레일</small></div>
+          <div class="bpc" data-hl="bp-d"><span class="bic">💻</span><b>데스크톱</b><span class="mono">1024–1440px</span><small>3열 · 고정 사이드바</small></div>
+          <div class="bpc" data-hl="bp-w"><span class="bic">🖥️</span><b>와이드</b><span class="mono">&gt; 1440px</span><small>컨테이너 폭 제한 + 여백</small></div>
+        </div>
+        <div class="rsp" data-hk="bp-m bp-t bp-d bp-w" data-hl-oneway data-hk-noline data-peek-root data-peek-id="responsive" data-peek-w="520">
+          <div class="rsp-stage">
+            <div class="rsp-frame">
+              <div class="rsp-top"><span class="rsp-burger">☰</span><i></i></div>
+              <div class="rsp-body">
+                <div class="rsp-side"><i></i><i></i><i></i><i></i></div>
+                <div class="rsp-main"><div class="rsp-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+              </div>
+              <div class="rsp-tab"><span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span></div>
+            </div>
+          </div>
+          <div class="rsp-cap"></div>
         </div>
         <div class="grid-3" style="margin-top:1.1rem;">
           <div class="card autoshow fade-up">
@@ -1901,11 +2183,12 @@
         <div class="prompt-card mini good" style="margin-top:1rem;">
           <div class="pc-label">반응형 주문의 완성형</div>
           <pre class="code">모바일 퍼스트로 만들고, 브레이크포인트는 640 / 1024 두 개만 써줘.
-카드 그리드는 1열 → 2열 → 3열, 사이드바는 1024px 미만에서 드로어로 전환.</pre>
+카드 그리드는 <span class="lk" data-hl="bp-m">1열</span> → <span class="lk" data-hl="bp-t">2열</span> → <span class="lk" data-hl="bp-d">3열</span>, 사이드바는 1024px 미만에서 드로어로 전환.</pre>
         </div>
       </div>
       <aside class="notes">
         "폰에서도 잘 되게" 한 마디가 왜 위험한지(AI가 임의로 정함), 숫자 두 개만 주면 끝난다는 점.
+        눈금자 칸이 자동으로 돌며 아래 같은 화면이 그 폭의 레이아웃으로 바뀐다. 칸에 마우스를 올리면 그 폭에서 멈춘다.
       </aside>
     </section>
 
@@ -1915,44 +2198,44 @@
         <div class="chip">THEME</div>
         <h2>테마 — <span class="grad">같은 화면, 다른 표정</span></h2>
         <p class="small" style="margin:-.2rem 0 .8rem; color:#B8BFD0 !important;">
-          아래 세 개는 <b class="accent2">완전히 같은 화면</b>입니다. 라운드·그림자·버튼 모양·구분선 두께만 그 진영의 규칙을 따랐습니다.
+          아래 세 개는 <b class="accent2">완전히 같은 화면</b>입니다. <span class="lk" data-hl="th-card">라운드·그림자</span>·<span class="lk" data-hl="th-btn">버튼 모양</span>·<span class="lk" data-hl="th-bar th-line">구분선 두께</span>만 그 진영의 규칙을 따랐습니다 — 눌러서 세 진영을 나란히 비교해 보세요.
         </p>
         <div class="spec-grid c3">
-          <div class="theme-card">
+          <div class="theme-card" data-hl-scope data-peek-root data-peek-id="mat" data-peek-w="330">
             <div class="th-head"><b>머티리얼</b><span>Material Design 3 · Google</span></div>
             <div class="uic mat">
               <div class="th-demo">
-                <div class="tbar">☰ &nbsp;내 작업</div>
-                <div class="cardx"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
-                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" /></div>
-                <div class="trow"><button class="btn">저장</button><button class="btn sec">취소</button><span class="fab" style="width:2.2rem;height:2.2rem;font-size:1rem; margin-left:auto;">＋</span></div>
+                <div class="tbar" data-hk="th-bar" data-hk-inset>☰ &nbsp;내 작업</div>
+                <div class="cardx" data-hk="th-card"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
+                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" data-hk="th-input" /></div>
+                <div class="trow"><button class="btn" data-hk="th-btn">저장</button><button class="btn sec" data-hk="th-btn">취소</button><span class="fab" data-hk="th-fab" style="width:2.2rem;height:2.2rem;font-size:1rem; margin-left:auto;">＋</span></div>
               </div>
             </div>
-            <p class="th-note">둥근 알약 버튼 · 색면 앱 바 · 그림자로 높이 표현 · FAB · 스낵바. <b>안드로이드·구글 앱</b>의 문법.</p>
+            <p class="th-note"><span class="lk" data-hl="th-btn">둥근 알약 버튼</span> · <span class="lk" data-hl="th-bar">색면 앱 바</span> · <span class="lk" data-hl="th-card">그림자로 높이 표현</span> · <span class="lk" data-hl="th-fab">FAB</span> · 스낵바. <b>안드로이드·구글 앱</b>의 문법.</p>
           </div>
-          <div class="theme-card">
+          <div class="theme-card" data-hl-scope data-peek-root data-peek-id="cup" data-peek-w="330">
             <div class="th-head"><b>쿠퍼티노</b><span>Cupertino · Apple HIG</span></div>
             <div class="uic cup">
               <div class="th-demo">
-                <div class="tbar">내 작업</div>
-                <div class="listx"><div>수율 리포트 <span class="chev">›</span></div><div>공정 이력 <span class="chev">›</span></div></div>
-                <div class="segc" style="align-self:center;"><span class="on">일별</span><span>주별</span></div>
-                <div class="trow" style="justify-content:space-between;"><button class="btn">취소</button><button class="btn filled">저장</button></div>
+                <div class="tbar" data-hk="th-bar th-title" data-hk-inset>내 작업</div>
+                <div class="listx" data-hk="th-card th-line"><div>수율 리포트 <span class="chev">›</span></div><div>공정 이력 <span class="chev">›</span></div></div>
+                <div class="segc" data-hk="th-seg" style="align-self:center;"><span class="on">일별</span><span>주별</span></div>
+                <div class="trow" style="justify-content:space-between;"><button class="btn" data-hk="th-btn th-textbtn">취소</button><button class="btn filled" data-hk="th-btn">저장</button></div>
               </div>
             </div>
-            <p class="th-note">얇은 구분선 · 중앙 정렬 타이틀 · 파란 텍스트 버튼 · 세그먼티드 · 바텀 시트. <b>iOS·macOS</b>의 문법. 애플 공식 가이드 이름은 <b>HIG</b>.</p>
+            <p class="th-note"><span class="lk" data-hl="th-line">얇은 구분선</span> · <span class="lk" data-hl="th-title">중앙 정렬 타이틀</span> · <span class="lk" data-hl="th-textbtn">파란 텍스트 버튼</span> · <span class="lk" data-hl="th-seg">세그먼티드</span> · 바텀 시트. <b>iOS·macOS</b>의 문법. 애플 공식 가이드 이름은 <b>HIG</b>.</p>
           </div>
-          <div class="theme-card">
+          <div class="theme-card" data-hl-scope data-peek-root data-peek-id="flu" data-peek-w="330">
             <div class="th-head"><b>플루언트</b><span>Fluent 2 · Microsoft</span></div>
             <div class="uic flu">
               <div class="th-demo">
-                <div class="tbar">📁 &nbsp;내 작업</div>
-                <div class="cardx"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
-                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" /></div>
-                <div class="trow"><button class="btn">저장</button><button class="btn sec">취소</button></div>
+                <div class="tbar" data-hk="th-bar" data-hk-inset>📁 &nbsp;내 작업</div>
+                <div class="cardx" data-hk="th-card"><div class="cbody"><b>수율 리포트</b><p>공정기술팀 · 오늘</p></div></div>
+                <div class="field"><label>검색</label><input type="text" placeholder="Lot 번호" data-hk="th-input" /></div>
+                <div class="trow"><button class="btn" data-hk="th-btn">저장</button><button class="btn sec" data-hk="th-btn">취소</button></div>
               </div>
             </div>
-            <p class="th-note">작은 라운드(4px) · 은은한 테두리 · 입력 아래 강조선 · 정보 밀도 높음. <b>Windows·Office·Teams</b>의 문법.</p>
+            <p class="th-note"><span class="lk" data-hl="th-btn">작은 라운드(4px)</span> · <span class="lk" data-hl="th-card">은은한 테두리</span> · <span class="lk" data-hl="th-input">입력 아래 강조선</span> · 정보 밀도 높음. <b>Windows·Office·Teams</b>의 문법.</p>
           </div>
         </div>
         <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">
@@ -1973,13 +2256,13 @@
         <table class="rules" style="font-size:1.1rem;">
           <thead><tr><th style="width:13rem;">같은 물건</th><th>머티리얼 (Google · Android)</th><th>쿠퍼티노 (Apple · iOS/HIG)</th></tr></thead>
           <tbody>
-            <tr><td>상단 바</td><td class="mono">Top app bar</td><td class="mono">Navigation bar (중앙 타이틀)</td></tr>
-            <tr><td>하단 탭</td><td class="mono">Navigation bar / bottom nav</td><td class="mono">Tab bar</td></tr>
-            <tr><td>잠깐 뜨는 알림</td><td class="mono">Snackbar (되돌리기 포함)</td><td class="mono">Toast / Alert</td></tr>
-            <tr><td>선택지 시트</td><td class="mono">Bottom sheet</td><td class="mono">Action sheet</td></tr>
-            <tr><td>주 액션 버튼</td><td class="mono">FAB (떠 있는 원형)</td><td class="mono">화면 하단 꽉 찬 버튼 / 우상단 Done</td></tr>
-            <tr><td>켜고 끄기</td><td class="mono">Switch (보라)</td><td class="mono">Toggle (초록)</td></tr>
-            <tr><td>보기 전환</td><td class="mono">Tabs</td><td class="mono">Segmented control</td></tr>
+            <tr data-peek="th-bar@mat th-title@cup"><td>상단 바</td><td class="mono">Top app bar</td><td class="mono">Navigation bar (중앙 타이틀)</td></tr>
+            <tr data-peek="bottomnav"><td>하단 탭</td><td class="mono">Navigation bar / bottom nav</td><td class="mono">Tab bar</td></tr>
+            <tr data-peek="toast"><td>잠깐 뜨는 알림</td><td class="mono">Snackbar (되돌리기 포함)</td><td class="mono">Toast / Alert</td></tr>
+            <tr data-peek="sheet"><td>선택지 시트</td><td class="mono">Bottom sheet</td><td class="mono">Action sheet</td></tr>
+            <tr data-peek="fab"><td>주 액션 버튼</td><td class="mono">FAB (떠 있는 원형)</td><td class="mono">화면 하단 꽉 찬 버튼 / 우상단 Done</td></tr>
+            <tr data-peek="switch"><td>켜고 끄기</td><td class="mono">Switch (보라)</td><td class="mono">Toggle (초록)</td></tr>
+            <tr data-peek="tabs segmented"><td>보기 전환</td><td class="mono">Tabs</td><td class="mono">Segmented control</td></tr>
             <tr><td>아이콘 세트</td><td class="mono">Material Symbols</td><td class="mono">SF Symbols</td></tr>
           </tbody>
         </table>
@@ -2007,38 +2290,38 @@
         <div class="chip">THEME · 실전 선택</div>
         <h2>웹에서는 보통 <span class="accent2">이 중 하나</span>를 고른다</h2>
         <div class="spec-grid c3" style="margin-top:.2rem;">
-          <div class="spec">
+          <div class="spec" data-hk="tailwind">
             <div class="uic" style="min-height:64px; justify-content:flex-start; gap:.35rem;">
-              <span class="chipx" style="border-radius:6px;">rounded-xl</span><span class="chipx" style="border-radius:6px;">p-4</span><span class="chipx" style="border-radius:6px;">gap-2</span>
+              <span class="chipx" data-hk="tw-class" style="border-radius:6px;">rounded-xl</span><span class="chipx" data-hk="tw-class" style="border-radius:6px;">p-4</span><span class="chipx" data-hk="tw-class" style="border-radius:6px;">gap-2</span>
             </div>
             <div class="sp-name">Tailwind CSS<span class="sp-en">유틸리티 클래스</span></div>
-            <p class="sp-desc">디자인 규칙이 아니라 <b>간격·색을 짧은 클래스</b>로 쓰는 방식. AI가 가장 잘 쓰는 도구. 요즘 기본값.</p>
+            <p class="sp-desc">디자인 규칙이 아니라 <b class="lk" data-hl="tw-class">간격·색을 짧은 클래스</b>로 쓰는 방식. AI가 가장 잘 쓰는 도구. 요즘 기본값.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="shadcn">
             <div class="uic" style="min-height:64px;">
               <div class="cardx" style="box-shadow:none;"><div class="cbody"><b>깔끔한 기본형</b><p>중립적 회색 + 라운드 8px</p></div></div>
             </div>
             <div class="sp-name">shadcn/ui<span class="sp-en">복사해 쓰는 컴포넌트</span></div>
             <p class="sp-desc">Tailwind 기반의 <b>현대적 기본값</b>. "shadcn/ui 스타일로"라고 하면 지금 SaaS 느낌이 나옵니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="bootstrap">
             <div class="uic" style="min-height:64px;"><button class="btn" style="background:#0D6EFD; border-radius:6px;">Bootstrap 버튼</button></div>
             <div class="sp-name">Bootstrap<span class="sp-en">가장 오래된 표준</span></div>
             <p class="sp-desc">사내 업무 페이지에서 흔히 보는 파란 버튼. 익숙하지만 "좀 옛날 느낌"으로 읽힙니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="antd">
             <div class="uic" style="min-height:64px;">
               <table class="tbx"><thead><tr><th>이름</th><th>값</th></tr></thead><tbody><tr><td>A-113</td><td>98.2%</td></tr></tbody></table>
             </div>
             <div class="sp-name">Ant Design · MUI<span class="sp-en">기업용 컴포넌트 묶음</span></div>
             <p class="sp-desc">표·폼·필터가 많은 <b>내부 관리 도구</b>에 강함. MUI는 머티리얼의 React 구현체.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="fluentui">
             <div class="uic flu" style="min-height:64px;"><button class="btn">Fluent 버튼</button><button class="btn sec">보조</button></div>
             <div class="sp-name">Fluent UI<span class="sp-en">Microsoft</span></div>
             <p class="sp-desc">Office·Teams와 나란히 놓을 화면이라면 이쪽이 자연스럽습니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="dark">
             <div class="uic" style="min-height:64px; background:#0E1220;">
               <span style="color:#E6E9F5 !important; font-size:.8rem; font-weight:700;">🌙 다크 테마 표면</span>
             </div>
@@ -2048,7 +2331,7 @@
         </div>
         <div class="prompt-card mini good" style="margin-top:.9rem;">
           <div class="pc-label">고민되면 이 한 줄</div>
-          <pre class="code">Tailwind + shadcn/ui 스타일로, 라이트/다크 모드 둘 다. 라운드 12px, 그림자는 약하게.</pre>
+          <pre class="code"><span class="lk" data-hl="tailwind">Tailwind</span> + <span class="lk" data-hl="shadcn">shadcn/ui</span> 스타일로, <span class="lk" data-hl="dark">라이트/다크 모드</span> 둘 다. <span class="pk" data-peek="rad12">라운드 12px</span>, <span class="pk" data-peek="elev1">그림자는 약하게</span>.</pre>
         </div>
       </div>
       <aside class="notes">
@@ -2108,12 +2391,12 @@
         <div class="chip">ACCESSIBILITY · a11y</div>
         <h2>모두가 쓸 수 있게 — <span class="accent2">여섯 단어</span></h2>
         <div class="spec-grid c3">
-          <div class="spec">
+          <div class="spec" data-hk="focus">
             <div class="uic" style="min-height:62px;"><button class="btn" style="outline:3px solid #7DFFDF; outline-offset:2px;">확인</button></div>
             <div class="sp-name">포커스 링<span class="sp-en">focus ring / focus-visible</span></div>
             <p class="sp-desc">키보드로 이동할 때 "지금 여기"를 알려주는 테두리. <b>지우지 말 것</b>.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="taborder">
             <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
               <span style="font-size:.78rem; font-weight:700;">Tab 순서: 1 → 2 → 3</span>
               <span style="font-size:.68rem;" class="u-dim">보이는 순서와 같아야 함</span>
@@ -2121,20 +2404,20 @@
             <div class="sp-name">탭 순서<span class="sp-en">tab order</span></div>
             <p class="sp-desc">키보드만으로도 모든 버튼에 도달할 수 있어야 합니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="contrast">
             <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
-              <span style="font-size:.8rem; color:#14161F !important; font-weight:700;">읽기 쉬움 — 4.5:1 ✓</span>
-              <span style="font-size:.8rem; color:#C3C8D6 !important; font-weight:700;">읽기 어려움 — 1.8:1 ✕</span>
+              <span data-hk="ct-good" style="font-size:.8rem; color:#14161F !important; font-weight:700; padding:0 .25em; border-radius:4px;">읽기 쉬움 — 4.5:1 ✓</span>
+              <span data-hk="ct-bad" style="font-size:.8rem; color:#C3C8D6 !important; font-weight:700; padding:0 .25em; border-radius:4px;">읽기 어려움 — 1.8:1 ✕</span>
             </div>
             <div class="sp-name">명암비<span class="sp-en">contrast ratio</span></div>
-            <p class="sp-desc">본문 <span class="mono">4.5:1</span>, 큰 글자 <span class="mono">3:1</span> 이상. 회색 글씨가 예뻐 보여도 흐리면 실패.</p>
+            <p class="sp-desc">본문 <span class="mono lk" data-hl="ct-good">4.5:1</span>, 큰 글자 <span class="mono">3:1</span> 이상. <span class="lk" data-hl="ct-bad">회색 글씨가 예뻐 보여도 흐리면 실패</span>.</p>
           </div>
-          <div class="spec">
-            <div class="uic" style="min-height:62px;"><span class="btn sec ico" style="width:2.75rem; height:2.75rem; outline:1px dashed #4F46E5;">👍</span></div>
+          <div class="spec" data-hk="touch">
+            <div class="uic" style="min-height:62px;"><span class="btn sec ico" data-hk="touch-box" style="width:2.75rem; height:2.75rem; outline:1px dashed #4F46E5;">👍</span></div>
             <div class="sp-name">터치 타깃<span class="sp-en">touch target</span></div>
-            <p class="sp-desc">손가락으로 누를 영역은 <span class="mono">44×44px</span> 이상. 아이콘만 작게 두면 안 눌립니다.</p>
+            <p class="sp-desc">손가락으로 누를 영역은 <span class="mono lk" data-hl="touch-box">44×44px</span> 이상. 아이콘만 작게 두면 안 눌립니다.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="aria">
             <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
               <span style="font-size:.72rem;" class="mono">&lt;button aria-label="닫기"&gt;✕&lt;/button&gt;</span>
               <span style="font-size:.68rem;" class="u-dim">화면 낭독기에 이름을 알려줌</span>
@@ -2142,17 +2425,17 @@
             <div class="sp-name">대체 텍스트 · aria-label<span class="sp-en">alt text / aria</span></div>
             <p class="sp-desc">이미지·아이콘 버튼에 이름을 달아주는 속성. 눈으로 못 읽는 사용자를 위한 이름표.</p>
           </div>
-          <div class="spec">
+          <div class="spec" data-hk="notcolor">
             <div class="uic" style="min-height:62px; flex-direction:column; gap:.2rem;">
-              <span class="alertx err" style="font-size:.7rem;">⛔ 재고 부족</span>
+              <span class="alertx err" data-hk="nc-icon" style="font-size:.7rem;">⛔ 재고 부족</span>
               <span style="font-size:.68rem;" class="u-dim">색만으로 전달하지 않기</span>
             </div>
             <div class="sp-name">색에만 의존하지 않기<span class="sp-en">not color-only</span></div>
-            <p class="sp-desc">빨강만으로 오류를 표현하면 색약 사용자는 못 봅니다 — <b>아이콘·글자</b>를 함께.</p>
+            <p class="sp-desc">빨강만으로 오류를 표현하면 색약 사용자는 못 봅니다 — <b class="lk" data-hl="nc-icon">아이콘·글자</b>를 함께.</p>
           </div>
         </div>
         <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">
-          프롬프트 한 줄로 챙길 수 있습니다 — <b class="accent2">"접근성 지켜줘: 포커스 링 유지, 명암비 4.5:1, 아이콘 버튼엔 aria-label"</b>
+          프롬프트 한 줄로 챙길 수 있습니다 — <b class="accent2">"접근성 지켜줘: <span class="lk" data-hl="focus">포커스 링 유지</span>, <span class="lk" data-hl="contrast">명암비 4.5:1</span>, <span class="lk" data-hl="aria">아이콘 버튼엔 aria-label</span>"</b>
         </p>
       </div>
       <aside class="notes">
@@ -2201,29 +2484,32 @@
         <div class="stack" style="gap:.5rem; margin-top:.3rem;">
           <div class="tr2 autoshow fade-up">
             <div class="vague">"좀 더 예쁘게 해줘"</div><div class="ar2">→</div>
-            <div class="exact">여백을 <span class="mono">8의 배수</span>로 통일, 카드 라운드 <span class="mono">12px</span>, 그림자는 약하게, 글자 크기 4단계로 정리</div>
+            <div class="exact">여백을 <span class="mono pk" data-peek="sp8">8의 배수</span>로 통일, 카드 라운드 <span class="mono pk" data-peek="rad12">12px</span>, <span class="pk" data-peek="elev1">그림자는 약하게</span>, <span class="pk" data-peek="typescale">글자 크기 4단계</span>로 정리</div>
           </div>
           <div class="tr2 autoshow fade-up">
             <div class="vague">"왼쪽에 메뉴 같은 거"</div><div class="ar2">→</div>
-            <div class="exact"><span class="mono">240px</span> 고정 <b>사이드바</b>, 현재 메뉴는 <b>active</b> 표시, 모바일에서는 <b>드로어</b>로 전환</div>
+            <div class="exact"><span class="mono">240px</span> 고정 <b class="pk" data-peek="sb-fixed">사이드바</b>, 현재 메뉴는 <b class="pk" data-peek="tab-active">active</b> 표시, 모바일에서는 <b class="pk" data-peek="drawer">드로어</b>로 전환</div>
           </div>
           <div class="tr2 autoshow fade-up">
             <div class="vague">"버튼 좀 많이 넣어줘"</div><div class="ar2">→</div>
-            <div class="exact"><b>primary</b> 1개 + <b>ghost</b> 취소 1개, 나머지 명령은 <span class="mono">⋯</span> <b>드롭다운 메뉴</b>로</div>
+            <div class="exact"><b class="pk" data-peek="btn-primary">primary</b> 1개 + <b class="pk" data-peek="btn-ghost">ghost</b> 취소 1개, 나머지 명령은 <span class="mono pk" data-peek="btn-more">⋯</span> <b class="pk" data-peek="menu">드롭다운 메뉴</b>로</div>
           </div>
           <div class="tr2 autoshow fade-up">
             <div class="vague">"로딩이 좀 이상해"</div><div class="ar2">→</div>
-            <div class="exact">목록은 <b>스켈레톤</b>, 0건이면 <b>엠프티 스테이트</b>, 실패하면 재시도 버튼이 있는 <b>에러 상태</b></div>
+            <div class="exact">목록은 <b class="pk" data-peek="skeleton">스켈레톤</b>, 0건이면 <b class="pk" data-peek="empty">엠프티 스테이트</b>, 실패하면 재시도 버튼이 있는 <b class="pk" data-peek="st-error">에러 상태</b></div>
           </div>
           <div class="tr2 autoshow fade-up">
             <div class="vague">"알림 좀 띄워줘"</div><div class="ar2">→</div>
-            <div class="exact">저장 성공은 <b>토스트</b>(3초), 삭제 확인은 <b>모달</b>, 용량 경고는 상단 <b>배너</b></div>
+            <div class="exact">저장 성공은 <b class="pk" data-peek="toast">토스트</b>(3초), 삭제 확인은 <b class="pk" data-peek="modal">모달</b>, 용량 경고는 상단 <b class="pk" data-peek="banner">배너</b></div>
           </div>
           <div class="tr2 autoshow fade-up">
             <div class="vague">"폰에서도 되게"</div><div class="ar2">→</div>
-            <div class="exact"><b>모바일 퍼스트</b>, 브레이크포인트 <span class="mono">640 / 1024</span>, 하단 탭 4개, <b>세이프 에어리어</b> 여백 확보</div>
+            <div class="exact"><b>모바일 퍼스트</b>, 브레이크포인트 <span class="mono pk" data-peek="responsive">640 / 1024</span>, <span class="pk" data-peek="bottomnav">하단 탭 4개</span>, <b class="pk" data-peek="safe">세이프 에어리어</b> 여백 확보</div>
           </div>
         </div>
+        <p class="tiny center" style="margin-top:.8rem; color:#9BA6C0 !important;">
+          오른쪽 <span class="pk" style="cursor:default;">노란 점선</span> 단어에 올리면 오늘 본 실물이 다시 뜹니다 — 클릭하면 그 장으로.
+        </p>
       </div>
       <aside class="notes">
         오늘 배운 단어가 전부 오른쪽 칸에 들어 있음을 확인시켜 준다. 왼쪽을 읽고 청중에게
@@ -2273,13 +2559,13 @@
           <div class="pc-label">SCREEN ORDER — 빈칸만 채우면 됩니다</div>
           <pre class="code">◯◯◯ 화면을 만들어줘. Tailwind + shadcn/ui 스타일, 라이트/다크 모드 둘 다.
 
-[레이아웃] 상단 56px 앱 바 + 좌측 240px 고정 사이드바 + 본문. 컨테이너 max-width 1200px.
-[내용]     본문은 카드 그리드(데스크톱 3열 / 태블릿 2열 / 모바일 1열, gap 16px).
-[부품]     검색 입력, 필터는 칩, 행 클릭 시 상세는 팝오버가 아니라 모달로.
-[상태]     로딩은 스켈레톤, 0건은 엠프티 스테이트(생성 버튼 포함), 실패는 재시도 버튼이 있는 에러 상태.
-[토큰]     간격 8의 배수, 라운드 12px, 그림자 약하게, 글자 크기 4단계(Display/Heading/Body/Caption).
-[반응형]   모바일 퍼스트, 브레이크포인트 640/1024. 1024px 미만에서 사이드바는 드로어로.
-[접근성]   포커스 링 유지, 명암비 4.5:1 이상, 아이콘 버튼에 aria-label.
+[레이아웃] 상단 56px <span class="pk" data-peek="header">앱 바</span> + 좌측 240px <span class="pk" data-peek="sb-fixed">고정 사이드바</span> + 본문. <span class="pk" data-peek="ct">컨테이너</span> max-width 1200px.
+[내용]     본문은 <span class="pk" data-peek="card">카드</span> 그리드(데스크톱 3열 / 태블릿 2열 / 모바일 1열, <span class="pk" data-peek="gutter">gap</span> 16px).
+[부품]     <span class="pk" data-peek="search">검색 입력</span>, 필터는 <span class="pk" data-peek="chip">칩</span>, 행 클릭 시 상세는 <span class="pk" data-peek="popover modal">팝오버가 아니라 모달</span>로.
+[상태]     로딩은 <span class="pk" data-peek="skeleton">스켈레톤</span>, 0건은 <span class="pk" data-peek="empty">엠프티 스테이트</span>(생성 버튼 포함), 실패는 재시도 버튼이 있는 <span class="pk" data-peek="st-error">에러 상태</span>.
+[토큰]     간격 <span class="pk" data-peek="sp8">8의 배수</span>, <span class="pk" data-peek="rad12">라운드 12px</span>, <span class="pk" data-peek="elev1">그림자 약하게</span>, <span class="pk" data-peek="typescale">글자 크기 4단계</span>(Display/Heading/Body/Caption).
+[반응형]   모바일 퍼스트, <span class="pk" data-peek="responsive">브레이크포인트 640/1024</span>. 1024px 미만에서 사이드바는 <span class="pk" data-peek="drawer">드로어</span>로.
+[접근성]   <span class="pk" data-peek="focus">포커스 링</span> 유지, <span class="pk" data-peek="contrast">명암비 4.5:1</span> 이상, 아이콘 버튼에 <span class="pk" data-peek="aria">aria-label</span>.
 
 먼저 와이어프레임 수준으로 만들고 스크린샷을 보여줘. 확인하면 스타일을 입히자.</pre>
         </div>
@@ -2299,19 +2585,22 @@
         <div class="chip">CHEAT SHEET</div>
         <h2>한 장 <span class="accent2">요약</span> — 프롬프트에 그대로 쓰는 단어들</h2>
         <div class="cheat">
-          <div class="cg"><h4>LAYOUT</h4><p><b>viewport</b> 보이는 영역 · <b>container</b> 폭 제한 · <b>grid/column</b> 격자 · <b>gutter/gap</b> 간격 · <b>padding</b> 안쪽 · <b>margin</b> 바깥 · <b>radius</b> 라운드 · <b>sticky/fixed</b> 고정 · <b>z-index</b> 겹침 · <b>overflow</b> 넘침</p></div>
-          <div class="cg"><h4>SKELETON</h4><p><b>header/app bar</b> 상단 띠 · <b>sidebar</b> 측면 메뉴 · <b>rail</b> 아이콘만 · <b>drawer</b> 햄버거 · <b>hero</b> 첫 큰 영역 · <b>main</b> 본문 · <b>aside/panel</b> 보조 · <b>footer</b> 하단 · <b>bottom nav</b> 하단 탭</p></div>
-          <div class="cg"><h4>DEVICE</h4><p><b>bezel</b> 기기 테두리 · <b>notch</b> 카메라 홈 · <b>status bar</b> 최상단 OS 띠 · <b>safe area</b> 안전 영역 · <b>home indicator</b> 하단 막대 · <b>touch target 44px</b> 누를 최소 크기</p></div>
-          <div class="cg"><h4>BUTTONS</h4><p><b>primary</b> 주 행동 · <b>secondary/outline</b> 보조 · <b>ghost/text</b> 글자만 · <b>destructive</b> 위험 · <b>icon button</b> 아이콘만 · <b>FAB</b> 떠 있는 원형 · <b>CTA</b> 그 화면의 목표 행동</p></div>
-          <div class="cg"><h4>FORM</h4><p><b>text field</b> 입력 · <b>label</b> 이름 · <b>placeholder</b> 흐린 예시 · <b>helper text</b> 아래 설명 · <b>checkbox</b> 다중 · <b>radio</b> 단일 · <b>switch</b> 즉시 켬/끔 · <b>slider</b> 범위 · <b>select</b> 목록 · <b>validation</b> 검증</p></div>
-          <div class="cg"><h4>NAVIGATION</h4><p><b>tabs</b> 내용 전환 · <b>segmented</b> 보기 전환 · <b>breadcrumb</b> 현재 경로 · <b>pagination</b> 페이지 · <b>menu/dropdown</b> 명령 목록 · <b>stepper</b> 단계</p></div>
-          <div class="cg"><h4>CONTENT</h4><p><b>card</b> 정보 상자 · <b>list item</b> 목록 줄 · <b>table/data grid</b> 표 · <b>avatar</b> 사람 · <b>chip/tag</b> 라벨 · <b>badge</b> 숫자 알림 · <b>tooltip</b> 짧은 설명 · <b>accordion</b> 접기 · <b>carousel</b> 넘기기</p></div>
-          <div class="cg"><h4>OVERLAY</h4><p><b>modal/dialog</b> 막는 창 · <b>scrim/backdrop</b> 어두운 막 · <b>popover</b> 안 막는 패널 · <b>bottom sheet</b> 아래서 올라옴 · <b>toast/snackbar</b> 사라지는 알림 · <b>banner</b> 남는 안내</p></div>
-          <div class="cg"><h4>STATES</h4><p><b>default · hover · focus · active · disabled · loading · success · error</b> — "전부 넣어줘"라고 한 줄 쓰면 끝</p></div>
-          <div class="cg"><h4>WAITING</h4><p><b>spinner</b> 짧은 대기 · <b>progress</b> 퍼센트 · <b>skeleton</b> 회색 뼈대 · <b>empty state</b> 0건 화면 · <b>error state</b> 실패 화면 + 재시도</p></div>
-          <div class="cg"><h4>TOKENS</h4><p><b>spacing 8의 배수</b> · <b>radius</b> 12px · <b>elevation/shadow</b> 높이 · <b>type scale</b> 글자 단계 · <b>primary/surface/on-surface</b> 색 역할 · <b>semantic</b> 의미색</p></div>
-          <div class="cg"><h4>THEME</h4><p><b>Material 3</b> 구글·안드로이드 · <b>Cupertino/HIG</b> 애플 · <b>Fluent</b> MS·Office · <b>Tailwind + shadcn/ui</b> 웹 기본값 · <b>Ant/MUI</b> 기업용 · <b>dark mode</b> 밝기 축</p></div>
+          <div class="cg"><h4>LAYOUT</h4><p><b class="pk" data-peek="vp">viewport</b> 보이는 영역 · <b class="pk" data-peek="ct">container</b> 폭 제한 · <b class="pk" data-peek="grid">grid/column</b> 격자 · <b class="pk" data-peek="gutter">gutter/gap</b> 간격 · <b class="pk" data-peek="padding">padding</b> 안쪽 · <b class="pk" data-peek="margin">margin</b> 바깥 · <b class="pk" data-peek="radius">radius</b> 라운드 · <b>sticky/fixed</b> 고정 · <b>z-index</b> 겹침 · <b>overflow</b> 넘침</p></div>
+          <div class="cg"><h4>SKELETON</h4><p><b class="pk" data-peek="header">header/app bar</b> 상단 띠 · <b class="pk" data-peek="sidebar">sidebar</b> 측면 메뉴 · <b class="pk" data-peek="rail">rail</b> 아이콘만 · <b class="pk" data-peek="drawer">drawer</b> 햄버거 · <b class="pk" data-peek="hero">hero</b> 첫 큰 영역 · <b class="pk" data-peek="main">main</b> 본문 · <b class="pk" data-peek="aside">aside/panel</b> 보조 · <b class="pk" data-peek="footer">footer</b> 하단 · <b class="pk" data-peek="bottomnav">bottom nav</b> 하단 탭</p></div>
+          <div class="cg"><h4>DEVICE</h4><p><b class="pk" data-peek="bezel">bezel</b> 기기 테두리 · <b class="pk" data-peek="notch">notch</b> 카메라 홈 · <b class="pk" data-peek="statusbar">status bar</b> 최상단 OS 띠 · <b class="pk" data-peek="safe">safe area</b> 안전 영역 · <b class="pk" data-peek="homebar">home indicator</b> 하단 막대 · <b class="pk" data-peek="touch">touch target 44px</b> 누를 최소 크기</p></div>
+          <div class="cg"><h4>BUTTONS</h4><p><b class="pk" data-peek="btn-primary">primary</b> 주 행동 · <b class="pk" data-peek="btn-secondary">secondary/outline</b> 보조 · <b class="pk" data-peek="btn-ghost">ghost/text</b> 글자만 · <b class="pk" data-peek="btn-dest">destructive</b> 위험 · <b class="pk" data-peek="btn-icon">icon button</b> 아이콘만 · <b class="pk" data-peek="fab">FAB</b> 떠 있는 원형 · <b class="pk" data-peek="btn-primary">CTA</b> 그 화면의 목표 행동</p></div>
+          <div class="cg"><h4>FORM</h4><p><b class="pk" data-peek="textfield">text field</b> 입력 · <b class="pk" data-peek="label">label</b> 이름 · <b class="pk" data-peek="placeholder">placeholder</b> 흐린 예시 · <b class="pk" data-peek="helper">helper text</b> 아래 설명 · <b class="pk" data-peek="checkbox">checkbox</b> 다중 · <b class="pk" data-peek="radio">radio</b> 단일 · <b class="pk" data-peek="switch">switch</b> 즉시 켬/끔 · <b class="pk" data-peek="slider">slider</b> 범위 · <b class="pk" data-peek="select">select</b> 목록 · <b class="pk" data-peek="validation">validation</b> 검증</p></div>
+          <div class="cg"><h4>NAVIGATION</h4><p><b class="pk" data-peek="tabs">tabs</b> 내용 전환 · <b class="pk" data-peek="segmented">segmented</b> 보기 전환 · <b class="pk" data-peek="breadcrumb">breadcrumb</b> 현재 경로 · <b class="pk" data-peek="pagination">pagination</b> 페이지 · <b class="pk" data-peek="menu">menu/dropdown</b> 명령 목록 · <b class="pk" data-peek="stepper">stepper</b> 단계</p></div>
+          <div class="cg"><h4>CONTENT</h4><p><b class="pk" data-peek="card">card</b> 정보 상자 · <b class="pk" data-peek="list">list item</b> 목록 줄 · <b class="pk" data-peek="table">table/data grid</b> 표 · <b class="pk" data-peek="av-person">avatar</b> 사람 · <b class="pk" data-peek="chip">chip/tag</b> 라벨 · <b class="pk" data-peek="badge">badge</b> 숫자 알림 · <b class="pk" data-peek="tooltip">tooltip</b> 짧은 설명 · <b class="pk" data-peek="accordion">accordion</b> 접기 · <b class="pk" data-peek="carousel">carousel</b> 넘기기</p></div>
+          <div class="cg"><h4>OVERLAY</h4><p><b class="pk" data-peek="modal">modal/dialog</b> 막는 창 · <b class="pk" data-peek="m-scrim">scrim/backdrop</b> 어두운 막 · <b class="pk" data-peek="popover">popover</b> 안 막는 패널 · <b class="pk" data-peek="sheet">bottom sheet</b> 아래서 올라옴 · <b class="pk" data-peek="toast">toast/snackbar</b> 사라지는 알림 · <b class="pk" data-peek="banner">banner</b> 남는 안내</p></div>
+          <div class="cg"><h4>STATES</h4><p><b class="pk" data-peek="states">default · hover · focus · active · disabled · loading · success · error</b> — "전부 넣어줘"라고 한 줄 쓰면 끝</p></div>
+          <div class="cg"><h4>WAITING</h4><p><b class="pk" data-peek="spinner">spinner</b> 짧은 대기 · <b class="pk" data-peek="progress">progress</b> 퍼센트 · <b class="pk" data-peek="skeleton">skeleton</b> 회색 뼈대 · <b class="pk" data-peek="empty">empty state</b> 0건 화면 · <b class="pk" data-peek="st-error">error state</b> 실패 화면 + 재시도</p></div>
+          <div class="cg"><h4>TOKENS</h4><p><b class="pk" data-peek="sp8">spacing 8의 배수</b> · <b class="pk" data-peek="rad12">radius</b> 12px · <b class="pk" data-peek="elevation">elevation/shadow</b> 높이 · <b class="pk" data-peek="typescale">type scale</b> 글자 단계 · <b>primary/surface/on-surface</b> 색 역할 · <b>semantic</b> 의미색</p></div>
+          <div class="cg"><h4>THEME</h4><p><b class="pk" data-peek="mat">Material 3</b> 구글·안드로이드 · <b class="pk" data-peek="cup">Cupertino/HIG</b> 애플 · <b class="pk" data-peek="flu">Fluent</b> MS·Office · <b class="pk" data-peek="tailwind shadcn">Tailwind + shadcn/ui</b> 웹 기본값 · <b class="pk" data-peek="antd">Ant/MUI</b> 기업용 · <b class="pk" data-peek="dark">dark mode</b> 밝기 축</p></div>
         </div>
+        <p class="tiny center" style="margin-top:.6rem; color:#9BA6C0 !important;">
+          <span class="pk" style="cursor:default;">점선</span> 단어에 올리면 실물 미리보기, 클릭하면 그 장으로 — 복습용으로 쓰세요.
+        </p>
       </div>
       <aside class="notes">
         이 장은 사진 찍는 장. "지금 찍으세요" 한마디 하고 10초 기다릴 것.
@@ -2497,57 +2786,460 @@
     Reveal.on('ready', () => { if (onTitle()) later(play, 400); });
   })();
 
-  // ===== 화면 골격 해부: 이름 ↔ 칸 연결 (hover + 자동 순회) =====
-  (function () {
-    const wire = document.getElementById('an-wire');
-    const list = document.getElementById('an-list');
-    if (!wire || !list) return;
-    const rows = Array.from(list.querySelectorAll('.ar'));
-    const section = wire.closest('section');
-    let auto = null, cursor = 0, paused = false;
+  // ===== 설명 ↔ 그림 연결 =====
+  // 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 켜고, 둘 사이에 선을 긋는다.
+  // 키는 가장 가까운 [data-hl-scope](없으면 슬라이드) 안에서만 찾는다.
+  // [data-hl-tour] 의 바로 아래 항목들은 슬라이드에 들어오면 자동으로 순회한다.
+  const Link = (function () {
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'hl-wires');
+    svg.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(svg);
 
-    function lightUp(key) {
-      wire.querySelectorAll('[data-z]').forEach((z) => z.classList.toggle('lit', z.dataset.z === key));
-      rows.forEach((r) => r.classList.toggle('lit', r.dataset.z === key));
-    }
+    const UNIT = '.spec, .theme-card, .state';
+    const keysOf = (el, attr) => (el.getAttribute(attr) || '').split(/\s+/).filter(Boolean);
+    const scopeOf = (el) => el.closest('[data-hl-scope]') || el.closest('section');
+    const byKey = (root, k) => Array.from(root.querySelectorAll(`[data-hk~="${k}"]`));
+    const inDeck = (el) => !!(el && el.closest && el.closest('.reveal .slides > section.present'));
+
+    let hover = null;      // 마우스·포커스가 올라가 있는 트리거/타깃
+    let pinned = null;     // 클릭으로 고정한 표시(다시 그리는 함수)
+    let pinnedEl = null;
+    let shown = null;      // 지금 화면에 그려진 표시(리사이즈 때 다시 그림)
+    let shownBy = null;
+    let lastUser = 0;
+
     function clear() {
-      wire.querySelectorAll('[data-z]').forEach((z) => z.classList.remove('lit'));
-      rows.forEach((r) => r.classList.remove('lit'));
+      document.querySelectorAll('.hl-on, .hl-src').forEach((e) => {
+        e.classList.remove('hl-on', 'hl-src');
+        delete e.dataset.hlKey;
+      });
+      document.querySelectorAll('section.hl-dim').forEach((s) => s.classList.remove('hl-dim'));
+      svg.replaceChildren();
+      shown = null; shownBy = null;
     }
-    rows.forEach((r) => {
-      r.addEventListener('mouseenter', () => { paused = true; lightUp(r.dataset.z); });
-      r.addEventListener('mouseleave', () => { paused = false; });
+
+    function line(a, b) {
+      const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+      if (!ra.width || !rb.width) return;
+      const gx = Math.max(rb.left - ra.right, ra.left - rb.right);
+      const gy = Math.max(rb.top - ra.bottom, ra.top - rb.bottom);
+      if (gx < 6 && gy < 6) return; // 겹치거나 맞닿아 있으면 선이 오히려 방해
+      const ax = (ra.left + ra.right) / 2, ay = (ra.top + ra.bottom) / 2;
+      const bx = (rb.left + rb.right) / 2, by = (rb.top + rb.bottom) / 2;
+      let p, q, c1, c2;
+      if (gx >= gy) {
+        const d = bx > ax ? 1 : -1;
+        p = [d > 0 ? ra.right + 3 : ra.left - 3, ay];
+        q = [d > 0 ? rb.left - 3 : rb.right + 3, by];
+        const k = Math.abs(q[0] - p[0]) * 0.45;
+        c1 = [p[0] + d * k, p[1]]; c2 = [q[0] - d * k, q[1]];
+      } else {
+        const d = by > ay ? 1 : -1;
+        p = [ax, d > 0 ? ra.bottom + 3 : ra.top - 3];
+        q = [bx, d > 0 ? rb.top - 3 : rb.bottom + 3];
+        const k = Math.abs(q[1] - p[1]) * 0.45;
+        c1 = [p[0], p[1] + d * k]; c2 = [q[0], q[1] - d * k];
+      }
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', `M${p} C${c1} ${c2} ${q}`);
+      path.setAttribute('pathLength', '1');
+      svg.appendChild(path);
+      [p, q].forEach(([x, y]) => {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 3.5);
+        svg.appendChild(c);
+      });
+    }
+
+    // 카드(단위)별로 묶어서, 묶음이 여럿이면 묶음마다 하나씩, 하나뿐이면 최대 둘까지 선을 긋는다
+    function wireUp(from, tos) {
+      const groups = new Map();
+      tos.filter((t) => !t.hasAttribute('data-hk-noline')).forEach((t) => {
+        const u = t.closest(UNIT);
+        groups.set(u, (groups.get(u) || []).concat(t));
+      });
+      const per = groups.size > 1 ? 1 : 2;
+      let n = 0;
+      groups.forEach((g) => (g.length <= per ? g : g.slice(0, 1)).forEach((t) => { if (n++ < 6) line(from, t); }));
+    }
+
+    function dim(sec, els) {
+      if (sec) sec.classList.toggle('hl-dim', els.some((t) => t.closest(UNIT)));
+    }
+
+    function fromTrigger(tr) {
+      clear();
+      const scope = scopeOf(tr);
+      const ks = keysOf(tr, 'data-hl');
+      const ts = Array.from(new Set(ks.flatMap((k) => byKey(scope, k))));
+      tr.classList.add('hl-src');
+      ts.forEach((t) => { t.classList.add('hl-on'); t.dataset.hlKey = ks.join(' '); });
+      dim(tr.closest('section'), ts);
+      wireUp(tr, ts);
+      shown = () => fromTrigger(tr); shownBy = tr;
+    }
+
+    function triggersOf(tg) {
+      const sec = tg.closest('section');
+      if (!sec || tg.hasAttribute('data-hl-oneway')) return [];
+      const ks = keysOf(tg, 'data-hk');
+      return Array.from(sec.querySelectorAll('[data-hl]')).filter((tr) =>
+        keysOf(tr, 'data-hl').some((k) => ks.includes(k)) && scopeOf(tr).contains(tg));
+    }
+
+    function fromTarget(tg, trs) {
+      clear();
+      const scope = scopeOf(trs[0]);
+      keysOf(tg, 'data-hk').forEach((k) => byKey(scope, k).forEach((t) => t.classList.add('hl-on')));
+      tg.classList.add('hl-on');
+      trs.forEach((t) => t.classList.add('hl-src'));
+      dim(tg.closest('section'), [tg]);
+      wireUp(tg, trs);
+      shown = () => fromTarget(tg, trs); shownBy = tg;
+    }
+
+    function restore() {
+      hover = null;
+      if (pinned) pinned(); else clear();
+    }
+
+    function unpin() {
+      if (pinnedEl) pinnedEl.classList.remove('hl-pin');
+      pinned = null; pinnedEl = null;
+    }
+
+    // 다른 슬라이드에서 건너왔을 때: 그 키를 고정 표시
+    function pinKey(sec, k) {
+      unpin();
+      const tr = Array.from(sec.querySelectorAll('[data-hl]')).find((t) => keysOf(t, 'data-hl').includes(k));
+      if (tr) {
+        pinned = () => fromTrigger(tr);
+      } else {
+        const ts = byKey(sec, k);
+        if (!ts.length) return;
+        pinned = () => {
+          clear();
+          ts.forEach((t) => t.classList.add('hl-on'));
+          dim(sec, ts);
+          shown = pinned;
+        };
+      }
+      pinned();
+    }
+
+    document.addEventListener('mouseover', (e) => {
+      if (!inDeck(e.target)) { if (hover) restore(); return; }
+      const tr = e.target.closest('[data-hl]');
+      if (tr) {
+        if (hover !== tr) { hover = tr; lastUser = Date.now(); fromTrigger(tr); }
+        return;
+      }
+      let tg = e.target.closest('[data-hk]');
+      while (tg && !triggersOf(tg).length) tg = tg.parentElement && tg.parentElement.closest('[data-hk]');
+      if (tg) {
+        if (hover !== tg) { hover = tg; lastUser = Date.now(); fromTarget(tg, triggersOf(tg)); }
+        return;
+      }
+      if (hover) restore();
     });
-    function tick() {
-      if (!paused) { lightUp(rows[cursor % rows.length].dataset.z); cursor++; }
+
+    document.addEventListener('focusin', (e) => {
+      const tr = e.target.closest && e.target.closest('[data-hl]');
+      if (tr && inDeck(tr) && hover !== tr) { hover = tr; lastUser = Date.now(); fromTrigger(tr); }
+    });
+    document.addEventListener('focusout', (e) => { if (hover === e.target) restore(); });
+
+    document.addEventListener('click', (e) => {
+      if (!inDeck(e.target)) return;
+      const tr = e.target.closest('[data-hl]');
+      if (tr) {
+        if (tr.hasAttribute('data-hl-nopin')) return;
+        lastUser = Date.now();
+        const again = pinnedEl === tr;
+        unpin();
+        if (!again) {
+          pinnedEl = tr;
+          tr.classList.add('hl-pin');
+          pinned = () => fromTrigger(tr);
+        }
+        fromTrigger(tr);
+        return;
+      }
+      if (pinned && !e.target.closest('[data-hk], [data-peek], .uic')) { unpin(); restore(); }
+    });
+
+    // 키보드: 트리거에 포커스가 가도록
+    document.querySelectorAll('.reveal [data-hl], .reveal [data-peek], .reveal [data-goto], .reveal .states .state').forEach((el) => {
+      if (!el.matches('button, a, input, select, textarea')) el.tabIndex = 0;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const el = document.activeElement;
+      if (el && el.matches('[data-hl], [data-peek], [data-goto], .states .state') && !el.matches('button, a')) el.click();
+    });
+
+    // 자동 순회
+    const tours = Array.from(document.querySelectorAll('[data-hl-tour]')).map((box) => ({
+      sec: box.closest('section'),
+      items: Array.from(box.querySelectorAll(':scope > [data-hl]')),
+    }));
+    let tourTimer = null, tourKick = null;
+    function stopTour() { clearInterval(tourTimer); clearTimeout(tourKick); tourTimer = tourKick = null; }
+    function startTour(sec) {
+      stopTour();
+      if (REDUCED_MOTION) return;
+      const list = tours.filter((t) => t.sec === sec).flatMap((t) => t.items);
+      if (!list.length) return;
+      let i = 0;
+      const tick = () => {
+        if (hover || pinned || document.hidden || Date.now() - lastUser < 2600) return;
+        fromTrigger(list[i++ % list.length]);
+      };
+      tourKick = setTimeout(tick, 800);
+      tourTimer = setInterval(tick, 2000);
     }
-    function start() {
-      if (auto || REDUCED_MOTION) return;
-      cursor = 0; tick();
-      auto = setInterval(tick, 1800);
-    }
-    function stop() { if (auto) { clearInterval(auto); auto = null; } clear(); }
-    Reveal.on('slidechanged', (e) => { if (e.currentSlide === section) start(); else stop(); });
-    Reveal.on('ready', (e) => { if (e.currentSlide === section) start(); });
+
+    Reveal.on('slidechanged', (e) => {
+      stopTour(); unpin(); hover = null; clear();
+      startTour(e.currentSlide);
+    });
+    Reveal.on('ready', (e) => startTour(e.currentSlide));
+    Reveal.on('resize', () => { if (shown) shown(); });
+
+    return {
+      show(el) { fromTrigger(el); },
+      release(el) { if (shownBy === el && hover !== el) restore(); },
+      hold(el) { unpin(); pinned = () => fromTrigger(el); pinned(); },
+      drop() { unpin(); restore(); },
+      pinKey,
+    };
   })();
 
-  // ===== 디바이스: 세이프 에어리어 점선 깜빡이기 =====
+  // ===== 용어 미리보기: 다른 슬라이드의 실물을 띄우고, 클릭하면 그 슬라이드로 =====
+  // data-peek="키 [키…]" — 키는 data-hk 또는 data-peek-id. "부위@루트" 형식이면 그 루트 안의 부위를 켠다.
   (function () {
-    const dev = document.getElementById('dev');
-    if (!dev) return;
-    const section = dev.closest('section');
-    let t = null, on = false;
-    function toggle() { on = !on; dev.classList.toggle('show-safe', on); }
-    function start() {
-      if (t) return;
-      if (REDUCED_MOTION) { dev.classList.add('show-safe'); return; }
-      on = false; dev.classList.remove('show-safe');
-      setTimeout(toggle, 700);
-      t = setInterval(toggle, 2200);
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const box = document.createElement('div');
+    box.className = 'peek';
+    box.setAttribute('aria-hidden', 'true');
+    box.inert = true;
+    document.body.appendChild(box);
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'dl-btn peek-back';
+    document.body.appendChild(back);
+
+    let cur = null, origin = null, pending = null;
+    const find = (k) => document.querySelector(`.reveal .slides [data-hk~="${k}"], .reveal .slides [data-peek-id~="${k}"]`);
+    function source(key) {
+      const [part, at] = key.split('@');
+      const el = at ? find(at) : find(part);
+      const root = el && el.closest('.spec, [data-peek-root]');
+      return root ? { root, part, sec: root.closest('.slides > section') } : null;
     }
-    function stop() { if (t) { clearInterval(t); t = null; } dev.classList.remove('show-safe'); }
-    Reveal.on('slidechanged', (e) => { if (e.currentSlide === section) start(); else stop(); });
-    Reveal.on('ready', (e) => { if (e.currentSlide === section) start(); });
+    function title(sec) {
+      const h = sec.querySelector('h2, h1');
+      return (slides.indexOf(sec) + 1) + '. ' + (h ? h.textContent.replace(/\s+/g, ' ').trim() : '');
+    }
+
+    function show(tr) {
+      const groups = new Map();
+      tr.dataset.peek.split(/\s+/).filter(Boolean).forEach((k) => {
+        const s = source(k);
+        if (!s) return;
+        const g = groups.get(s.root) || { sec: s.sec, parts: [] };
+        g.parts.push(s.part);
+        groups.set(s.root, g);
+      });
+      if (!groups.size) return;
+      box.replaceChildren();
+      groups.forEach(({ sec, parts }, root) => {
+        const c = root.cloneNode(true);
+        [c, ...c.querySelectorAll('*')].forEach((n) => {
+          n.removeAttribute('id');
+          n.classList.remove('hl-on', 'hl-src', 'hl-pin');
+        });
+        parts.forEach((p) => {
+          if (!root.matches(`[data-hk~="${p}"], [data-peek-id~="${p}"]`)) {
+            c.querySelectorAll(`[data-hk~="${p}"]`).forEach((n) => n.classList.add('hl-on'));
+          }
+        });
+        c.style.width = (root.dataset.peekW || 280) + 'px';
+        c.style.margin = '0';
+        if (root.dataset.peekH) c.style.height = root.dataset.peekH + 'px';
+        const item = document.createElement('div');
+        item.className = 'peek-item';
+        const cap = document.createElement('div');
+        cap.className = 'peek-cap';
+        cap.textContent = title(sec);
+        item.append(cap, c);
+        box.append(item);
+      });
+      const hint = document.createElement('small');
+      hint.textContent = '클릭하면 이동';
+      box.querySelector('.peek-cap').append(hint);
+
+      // 트리거 위/아래 중 넓은 쪽에 두고, 모자라면 그만큼 줄인다
+      const r = tr.getBoundingClientRect();
+      const above = r.top - 18, below = innerHeight - r.bottom - 18;
+      const room = Math.max(above, below);
+      const s = Math.min(Reveal.getScale(), room / box.offsetHeight, (innerWidth - 16) / box.offsetWidth);
+      box.style.transform = `scale(${s})`;
+      const w = box.offsetWidth * s, h = box.offsetHeight * s;
+      const top = above >= h || above >= below ? r.top - h - 10 : r.bottom + 10;
+      box.style.left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 8)) + 'px';
+      box.style.top = Math.max(8, top) + 'px';
+      box.classList.add('on');
+    }
+    function hide() { box.classList.remove('on'); }
+
+    document.addEventListener('mouseover', (e) => {
+      const tr = e.target.closest && e.target.closest('[data-peek]');
+      if (tr === cur) return;
+      cur = tr;
+      if (tr && tr.closest('section.present')) show(tr); else hide();
+    });
+    document.addEventListener('focusin', (e) => {
+      const tr = e.target.closest && e.target.closest('[data-peek]');
+      if (tr) { cur = tr; show(tr); }
+    });
+    document.addEventListener('focusout', () => { cur = null; hide(); });
+
+    function go(sec) {
+      const i = slides.indexOf(sec);
+      if (i >= 0) Reveal.slide(i);
+    }
+    document.addEventListener('click', (e) => {
+      const g = e.target.closest('[data-goto]');
+      if (g) { const s = source(g.dataset.goto); if (s) go(s.sec); return; }
+      const tr = e.target.closest('[data-peek]');
+      if (!tr) return;
+      const s = source(tr.dataset.peek.split(/\s+/)[0]);
+      if (!s) return;
+      origin = Reveal.getIndices().h;
+      pending = s.part;
+      hide(); cur = null;
+      go(s.sec);
+    });
+    back.addEventListener('click', () => { if (origin !== null) Reveal.slide(origin); });
+
+    Reveal.on('slidechanged', (e) => {
+      hide(); cur = null;
+      if (pending) {
+        const k = pending, sec = e.currentSlide;
+        pending = null;
+        setTimeout(() => { if (sec.classList.contains('present')) Link.pinKey(sec, k); }, 450);
+      }
+      if (origin !== null && e.indexh === origin) origin = null;
+      back.classList.toggle('on', origin !== null);
+      if (origin !== null) back.textContent = '↩ ' + (origin + 1) + '장으로 돌아가기';
+    });
+  })();
+
+  // ===== 표본 위젯을 실제로 동작하게 (탭·세그먼티드·페이지·스위치·아코디언·슬라이더) =====
+  (function () {
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      const seg = t.closest('.uic .tabs > span, .uic .segc > span, .uic .pager > span');
+      if (seg) {
+        const group = seg.parentElement;
+        const items = Array.from(group.children).filter((n) => !/[‹›]/.test(n.textContent));
+        const prev = group.querySelector('.on');
+        let next = seg;
+        if (!items.includes(seg)) next = items[Math.max(0, Math.min(items.length - 1, items.indexOf(prev) + (seg.textContent.includes('›') ? 1 : -1)))];
+        if (prev && next && prev !== next) {
+          prev.classList.remove('on'); next.classList.add('on');
+          if (prev.dataset.hk) { next.dataset.hk = prev.dataset.hk; prev.removeAttribute('data-hk'); }
+        }
+        return;
+      }
+      const sw = t.closest('.uic .sw');
+      if (sw) { sw.classList.toggle('off'); sw.setAttribute('aria-checked', String(!sw.classList.contains('off'))); return; }
+      const ah = t.closest('.uic .accx .ah');
+      if (ah) ah.parentElement.classList.toggle('closed');
+    });
+
+    document.querySelectorAll('.uic .sldx').forEach((s) => {
+      const set = (v) => {
+        v = Math.max(0, Math.min(100, Math.round(v)));
+        s.style.setProperty('--v', v + '%');
+        s.setAttribute('aria-valuenow', v);
+      };
+      const at = (x) => { const r = s.getBoundingClientRect(); set((x - r.left) / r.width * 100); };
+      s.addEventListener('pointerdown', (e) => { s.setPointerCapture(e.pointerId); at(e.clientX); });
+      s.addEventListener('pointermove', (e) => { if (s.hasPointerCapture(e.pointerId)) at(e.clientX); });
+      s.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+      s.addEventListener('keydown', (e) => {
+        const d = { ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5 }[e.key];
+        if (!d) return;
+        e.preventDefault(); e.stopPropagation();
+        set(Number(s.getAttribute('aria-valuenow')) + d);
+      });
+    });
+  })();
+
+  // ===== 상태: 진짜 버튼 ↔ 상태 카드 =====
+  (function () {
+    const btn = document.getElementById('st-live');
+    if (!btn) return;
+    const now = document.getElementById('st-now');
+    const cards = Array.from(document.querySelectorAll('.states .state'));
+    const VIEW = {
+      default: ['', '저장'],
+      hover: ['hov', '저장'],
+      focus: ['foc', '저장'],
+      active: ['act', '저장'],
+      disabled: ['dis', '저장'],
+      loading: ['', '<span class="spinx"></span>저장 중'],
+      success: ['ok', '✓ 저장됨'],
+      error: ['err', '⛔ 실패'],
+    };
+    let real = 'default', forced = null, preview = null;
+    let over = false, pressed = false, busy = false, clicks = 0, held = false;
+
+    function render() {
+      const s = preview || forced || real;
+      const [cls, html] = VIEW[s];
+      btn.className = 'btn-demo' + (cls ? ' ' + cls : '');
+      btn.innerHTML = html;
+      btn.dataset.hl = 'st-' + s;
+      now.textContent = s + (forced && !preview ? ' (고정)' : '');
+      if (!btn.closest('section.present')) return;
+      if (held && !forced) { held = false; Link.drop(); }
+      if (forced && !preview) { held = true; Link.hold(btn); }
+      else if (over || busy || document.activeElement === btn) Link.show(btn);
+      else Link.release(btn);
+    }
+    function compute() {
+      if (busy) return;
+      real = pressed ? 'active' : over ? 'hover' : btn.matches(':focus-visible') ? 'focus' : 'default';
+      render();
+    }
+    btn.addEventListener('pointerenter', () => { over = true; forced = null; compute(); });
+    btn.addEventListener('pointerleave', () => { over = false; pressed = false; compute(); });
+    btn.addEventListener('pointerdown', () => { pressed = true; forced = null; compute(); });
+    btn.addEventListener('pointerup', () => { pressed = false; compute(); });
+    btn.addEventListener('focus', () => setTimeout(compute));
+    btn.addEventListener('blur', compute);
+    btn.addEventListener('click', () => {
+      if (busy) return;
+      forced = null; busy = true; real = 'loading'; render();
+      setTimeout(() => {
+        real = ++clicks % 3 === 0 ? 'error' : 'success'; render();
+        setTimeout(() => { busy = false; compute(); }, 1300);
+      }, 1100);
+    });
+
+    cards.forEach((card) => {
+      const s = card.dataset.hk.replace('st-', '');
+      card.addEventListener('pointerenter', () => { preview = s; render(); });
+      card.addEventListener('pointerleave', () => { preview = null; render(); });
+      card.addEventListener('click', () => { forced = forced === s ? null : s; preview = null; busy = false; render(); });
+    });
+
+    Reveal.on('slidechanged', () => { forced = preview = null; over = pressed = busy = held = false; real = 'default'; render(); });
   })();
 
   // ===== 데모 터미널 (타이핑 재생) =====
