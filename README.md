@@ -9,6 +9,7 @@
 | `setup/` | 0교시 — 설치와 첫 실행 (환경 세팅 · 로그인 · 첫 대화 · 트러블슈팅 TOP 5) |
 | `intro/` | 바이브 코딩이란 무엇인가? (원본 입문 세미나) |
 | `prompt/` | AI에게 일 시키는 법 — 프롬프트 엔지니어링 (3요소 프레임 · 패턴 8가지 · 다듬기 루프) |
+| `ui-ux/` | 바이브 코더를 위한 UI/UX 용어 사전 (레이아웃 · 베젤 · 사이드바 · UI 엘리먼트 도감 · 상태 · 디자인 토큰 · 머티리얼/쿠퍼티노 테마) |
 | `context/` | 컨텍스트 — AI 에이전트의 작업 책상 |
 | `knowledge/` | LLM에게 지식을 가르치는 법 (LLM 위키 · RAG · 지식 그래프 · 온톨로지) |
 | `verification/` | AI가 쓴 코드를 믿는 법 — 검증과 테스트 (검증의 사다리 · TDD · AI 리뷰 · 평가) |
@@ -20,7 +21,7 @@
 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
 
-추천 학습 경로: `setup/` → `intro/` → `prompt/` → `github/` → `workshop/` → (심화) `context/` · `knowledge/` · `verification/` · `orchestration/` · `security/` · `agent-skills/` · `making-slides/`
+추천 학습 경로: `setup/` → `intro/` → `prompt/` → `ui-ux/` → `github/` → `workshop/` → (심화) `context/` · `knowledge/` · `verification/` · `orchestration/` · `security/` · `agent-skills/` · `making-slides/`
 
 ## 실행
 
