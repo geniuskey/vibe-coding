@@ -1117,6 +1117,37 @@
     .cheat .cg p { font-size: .8rem; line-height: 1.45; margin: 0; color: #D5DAE8 !important; }
     .cheat .cg p b { color: #FFFFFF !important; }
 
+    /* ---- 비주얼 치트시트 소개 ---- */
+    .cs-intro { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2rem; align-items: center; }
+    .cs-feat { list-style: none; margin: 1rem 0 1.2rem; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+    .cs-feat li { display: flex; gap: .8rem; align-items: center; padding: .5rem .8rem; border-radius: 12px; background: rgba(42,33,80,.35); border: 1px solid rgba(155,130,255,.35); }
+    .cs-feat .ic { width: 2rem; flex: none; text-align: center; font-size: 1.25rem; }
+    .cs-feat b { display: block; font-size: 1.05rem; color: #fff !important; line-height: 1.3; }
+    .cs-feat small { display: block; font-size: .86rem; color: #B8BFD0 !important; line-height: 1.35; }
+    .reveal a.cs-open {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .6rem 1.4rem; border-radius: 999px;
+      background: linear-gradient(120deg, #9B82FF, #2BEAD0);
+      color: #06080F !important; font-weight: 800; font-size: 1.15rem; text-decoration: none;
+      box-shadow: 0 12px 30px -10px rgba(43,234,208,.55);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .reveal a.cs-open:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -10px rgba(43,234,208,.7); }
+    .reveal a.cs-shot {
+      display: block; border-radius: 14px; overflow: hidden; text-decoration: none;
+      background: #06080F; border: 1px solid rgba(155,130,255,.55);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);
+      transition: transform .3s ease, border-color .3s ease;
+    }
+    .reveal a.cs-shot:hover { transform: translateY(-4px); border-color: rgba(91,255,224,.8); }
+    .cs-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #161B30; }
+    .cs-bar i { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; }
+    .cs-bar i:nth-child(2) { background: #FEBC2E; }
+    .cs-bar i:nth-child(3) { background: #28C840; }
+    .cs-bar .cs-url { flex: 1; margin-left: 10px; padding: 3px 10px; border-radius: 6px; background: #0E1220; font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 600; color: #9BA6C0 !important; }
+    .cs-view { position: relative; aspect-ratio: 16 / 11; overflow: hidden; }
+    .cs-view iframe { position: absolute; top: 0; left: 0; width: 250%; height: 250%; border: 0; transform: scale(.4); transform-origin: 0 0; pointer-events: none; }
+
     /* ==================================================================
        설명 ↔ 그림 연결
        — 설명 쪽 data-hl 과 그림 쪽 data-hk 가 같은 키면 양방향으로 함께 켜진다. (클릭하면 고정)
@@ -4018,6 +4049,7 @@
         </div>
         <p class="tiny center" style="margin-top:.6rem; color:#9BA6C0 !important;">
           <span class="pk" style="cursor:default;">점선</span> 단어에 올리면 실물 미리보기, 클릭하면 그 장으로 — 복습용으로 쓰세요.
+          <b class="accent2">다음 장</b>에는 이 단어들을 <em>직접 눌러 보는</em> 웹 페이지가 있습니다.
         </p>
       </div>
       <aside class="notes">
@@ -4025,7 +4057,39 @@
       </aside>
     </section>
 
-    <!-- ============= 38. 3줄 요약 ============= -->
+    <!-- ============= 38. 비주얼 치트시트 (웹 페이지) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CHEAT SHEET · LIVE</div>
+        <h2>단어 말고 <span class="accent2">모양으로</span> 찾는 치트시트</h2>
+        <div class="cs-intro">
+          <div>
+            <p class="small" style="color:#D5DAE8 !important; margin:0;">
+              앞 장의 단어들을 전부 <b class="accent2">실제로 동작하는 부품</b>으로 옮긴 웹 페이지 한 장.
+              이름이 기억나지 않을 때는 모양으로 먼저 찾으세요.
+            </p>
+            <ul class="cs-feat">
+              <li class="autoshow fade-left"><span class="ic">👀</span><div><b>16묶음 · 108개 부품이 진짜로 움직임</b><small>드로어를 열고, 모달을 띄우고, 토스트를 울려본다</small></div></li>
+              <li class="autoshow fade-left"><span class="ic">📋</span><div><b>이름을 누르면 복사</b><small>200여 개 용어를 그대로 프롬프트에 붙여넣기</small></div></li>
+              <li class="autoshow fade-left"><span class="ic">⌘</span><div><b>Ctrl / ⌘ + K 로 바로 찾기</b><small>“드로어”를 치면 그 부품으로 점프</small></div></li>
+              <li class="autoshow fade-left"><span class="ic">↩</span><div><b>묶음마다 이 슬라이드로 연결</b><small>헷갈리면 해당 장으로 돌아와 복습</small></div></li>
+            </ul>
+            <a class="cs-open" href="cheatsheet.html" target="_blank" rel="noopener">치트시트 열기 <span aria-hidden="true">↗</span></a>
+            <p class="tiny mono" style="color:#9BA6C0 !important; margin-top:.6rem; font-size:.82rem; white-space:nowrap;">geniuskey.github.io/vibe-coding/ui-ux/cheatsheet.html</p>
+          </div>
+          <a class="cs-shot" href="cheatsheet.html" target="_blank" rel="noopener" aria-label="비주얼 치트시트 새 창에서 열기">
+            <div class="cs-bar"><i></i><i></i><i></i><span class="cs-url">ui-ux/cheatsheet.html</span></div>
+            <div class="cs-view"><iframe data-src="cheatsheet.html?preview" title="비주얼 치트시트 미리보기" tabindex="-1" loading="lazy" scrolling="no"></iframe></div>
+          </a>
+        </div>
+      </div>
+      <aside class="notes">
+        발표 후에도 계속 쓰는 참고서. 링크를 채팅방에 공유하고, 시간이 되면 새 탭에서 열어
+        드로어나 모달 하나를 직접 눌러 보여준다. 오른쪽 미리보기는 실제 페이지가 그대로 도는 것.
+      </aside>
+    </section>
+
+    <!-- ============= 39. 3줄 요약 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">WRAP</div>
@@ -4047,7 +4111,7 @@
       </aside>
     </section>
 
-    <!-- ============= 39. Q&A ============= -->
+    <!-- ============= 40. Q&A ============= -->
     <section>
       <div class="vfill center">
         <div class="chip">WRAP-UP</div>
@@ -4057,6 +4121,7 @@
         </p>
         <h3 class="autoshow fade-up" style="margin-top:1.6rem;">감사합니다 — Q&amp;A 🙋</h3>
         <p class="tiny autoshow fade-up" style="color:#9BA6C0 !important; margin-top:1rem;">
+          부록: <a href="cheatsheet.html" target="_blank" rel="noopener">비주얼 치트시트 ↗</a><br />
           함께 보기:
           <a href="../prompt/">프롬프트 엔지니어링</a> ·
           <a href="../making-slides/">슬라이드 자료 만들기</a> ·
