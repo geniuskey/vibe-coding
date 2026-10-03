@@ -36,7 +36,7 @@
   // 떠 있는데도 질문·이모지 UI가 통째로 안 뜬다. 그래서 반대로 뒤집었다 — 서버가 있을 리
   // 없는 정적 호스팅만 빼고 전부 프로브한다. (정적 호스팅을 걸러내는 이유는 /qa/health 가
   // 404가 되면서 .catch 로도 지워지지 않는 콘솔 에러를 남기기 때문이다.)
-  const STATIC_HOSTS = /(^|\.)(github\.io|netlify\.app|vercel\.app|pages\.dev)$/i;
+  const STATIC_HOSTS = /^vibe-coding\.euiyun\.com$|(^|\.)(github\.io|netlify\.app|vercel\.app|pages\.dev)$/i;
   const qaMaybeLive = location.protocol !== 'file:' && !STATIC_HOSTS.test(location.hostname);
   if (qaMaybeLive) {
     fetch('/qa/health', { signal: AbortSignal.timeout(1500) })

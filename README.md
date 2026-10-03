@@ -23,6 +23,10 @@
 
 추천 학습 경로: `setup/` → `intro/` → `prompt/` → `ui-ux/` → `github/` → `workshop/` → (심화) `context/` · `knowledge/` · `verification/` · `orchestration/` · `security/` · `agent-skills/` · `making-slides/`
 
+공개 사이트: **https://vibe-coding.euiyun.com/**
+
+GitHub Pages 커스텀 도메인은 루트 `CNAME` 파일에 기록한다. 페이지는 도메인 루트에서 제공되므로 URL에 `/vibe-coding/` 접두사를 붙이지 않는다.
+
 ## 실행
 
 - **정적 열람 (GitHub Pages)**: 저장소를 그대로 정적 호스팅. 질문/반응 기능 없이 슬라이드만 동작한다.
