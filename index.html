@@ -515,6 +515,49 @@
       }
     }
 
+    /* ── 세미나별 PDF 다운로드 ───── */
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+      gap: .55rem .7rem;
+    }
+    .pdf-track {
+      grid-column: 1 / -1;
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      color: #6B7390;
+      margin-top: .45rem;
+    }
+    .pdf-track:first-child { margin-top: 0; }
+    a.pdf-dl {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      min-width: 0;
+      padding: .6rem .85rem;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--bg-1);
+      color: var(--fg);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    a.pdf-dl:hover, a.pdf-dl:focus-visible {
+      border-color: rgba(43,234,208,.5);
+      background: rgba(43,234,208,.06);
+    }
+    .pdf-dl .emoji { font-size: 1.1rem; line-height: 1; }
+    .pdf-dl .pdf-name { flex: 1; min-width: 0; line-height: 1.35; }
+    .pdf-dl .pdf-ext {
+      font-family: var(--mono);
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      white-space: nowrap;
+    }
+
     /* 스크롤 리빌 */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -888,6 +931,29 @@
       </div>
     </div>
 
+  </section>
+
+  <section class="reveal" id="pdfs">
+    <h2 class="sec">세미나 자료 PDF 다운로드 <span class="hint">슬라이드 전체를 한 파일로 · 오프라인 열람·인쇄용</span></h2>
+    <div class="pdf-grid">
+      <span class="pdf-track">01 시작하기</span>
+      <a class="pdf-dl" href="pdf/setup.pdf" download="vibe-coding-setup.pdf"><span class="emoji">🧰</span><span class="pdf-name">0교시 — 설치와 첫 실행</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/intro.pdf" download="vibe-coding-intro.pdf"><span class="emoji">🚀</span><span class="pdf-name">바이브 코딩이란 무엇인가?</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/prompt.pdf" download="vibe-coding-prompt.pdf"><span class="emoji">🗣️</span><span class="pdf-name">프롬프트 엔지니어링</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/ui-ux.pdf" download="vibe-coding-ui-ux.pdf"><span class="emoji">🎨</span><span class="pdf-name">UI/UX 용어 사전</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/github.pdf" download="vibe-coding-github.pdf"><span class="emoji">🌿</span><span class="pdf-name">최소한의 Git &amp; GitHub</span><span class="pdf-ext">PDF ↓</span></a>
+      <span class="pdf-track">02 더 깊이</span>
+      <a class="pdf-dl" href="pdf/context.pdf" download="vibe-coding-context.pdf"><span class="emoji">🧠</span><span class="pdf-name">컨텍스트 — 작업 책상</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/knowledge.pdf" download="vibe-coding-knowledge.pdf"><span class="emoji">📚</span><span class="pdf-name">LLM에게 지식을 가르치는 법</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/verification.pdf" download="vibe-coding-verification.pdf"><span class="emoji">⚖️</span><span class="pdf-name">검증과 테스트</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/orchestration.pdf" download="vibe-coding-orchestration.pdf"><span class="emoji">🤖</span><span class="pdf-name">서브에이전트와 오케스트레이션</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/security.pdf" download="vibe-coding-security.pdf"><span class="emoji">🔐</span><span class="pdf-name">보안과 거버넌스</span><span class="pdf-ext">PDF ↓</span></a>
+      <span class="pdf-track">03 직접 해보기</span>
+      <a class="pdf-dl" href="pdf/workshop.pdf" download="vibe-coding-workshop.pdf"><span class="emoji">🛠️</span><span class="pdf-name">실습 워크숍</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/agent-skills.pdf" download="vibe-coding-agent-skills.pdf"><span class="emoji">🧬</span><span class="pdf-name">반도체 현업 Agent Skills</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/making-slides.pdf" download="vibe-coding-making-slides.pdf"><span class="emoji">🎬</span><span class="pdf-name">슬라이드 자료 만들기</span><span class="pdf-ext">PDF ↓</span></a>
+      <a class="pdf-dl" href="pdf/forChildren.pdf" download="vibe-coding-forChildren.pdf"><span class="emoji">🎮</span><span class="pdf-name">나만의 게임 만들기</span><span class="pdf-ext">PDF ↓</span></a>
+    </div>
   </section>
 
 </main>
