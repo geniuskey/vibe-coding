@@ -714,6 +714,7 @@
       .curve-draw { stroke-dashoffset: 0; animation: none !important; }
     }
   </style>
+  <link rel="stylesheet" href="../assets/core.css">
 </head>
 <body>
 
@@ -767,6 +768,34 @@
     </section>
 
     <!-- ============= 2. 훅: 그럴듯함의 함정 (시그니처: 판결 씬) ============= -->
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">AI 코드는 무섭게 틀리지 않고, 그럴듯하게 틀립니다. "돌아간다"와 "맞다"는 다릅니다.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>"다 했어요"를 믿지 말고 증거를 받으세요</strong><span class="sub">테스트 실행 결과 · 원본 로그 · 스크린샷 · 종료 코드. 보고가 아니라 출력을.</span></div></li>
+        <li><span class="n">2</span><div><strong>테스트를 먼저 쓰게 하고, 채점 기준(테스트)은 사람이 지킵니다</strong><span class="sub">AI는 통과를 위해 테스트를 고치기도 합니다. "테스트 파일은 수정 금지"를 명시하세요.</span></div></li>
+        <li><span class="n">3</span><div><strong>경계값·오류·회귀를 콕 집어 요청하고, 리뷰는 새 세션에게</strong><span class="sub">검증 강도는 작업 무게에 맞춥니다 — 일회용 스크립트와 팀 도구는 다릅니다.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지금 바로 써 보는 프롬프트</div>
+          <pre>구현하기 전에 실패하는 테스트부터 써줘 — 경계값, 잘못된 입력, 빈 데이터 케이스 포함.
+내가 테스트를 확인한 뒤에 구현하고, 구현 중에는 테스트 파일을 수정하지 마.
+끝나면 실제 테스트 실행 출력을 그대로 보여줘.</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>AI가 만든 결과를 그대로 써도 될지 불안할 때</li>
+            <li>"고쳤어요" 했는데 또 같은 버그가 날 때</li>
+            <li>팀 공용 도구로 키우기 전에</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="vfill">
         <div class="chip">CH 1 · 신뢰 격차</div>
@@ -825,7 +854,7 @@
     </section>
 
     <!-- ============= 4. 자동화 편향 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · 신뢰 격차</div>
         <h2>사람은 기계 출력을 <span class="accent3">과신</span>하도록 생겨먹었습니다</h2>
@@ -860,7 +889,7 @@
     </section>
 
     <!-- ============= 5. 생성 10분, 디버깅 3일 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · 신뢰 격차</div>
         <h2>"생성 10분" 뒤에 숨은 <span class="accent3">"디버깅 3일"</span></h2>
@@ -893,7 +922,7 @@
     </section>
 
     <!-- ============= 6. 속도 공식 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · 신뢰 격차</div>
         <h2>체감 속도는 <span class="grad">곱셈</span>입니다 <span class="tiny mono muted">— 이 시리즈, 곱셈 좋아합니다 ▸</span></h2>
@@ -925,7 +954,7 @@
     </section>
 
     <!-- ============= 7. 오늘의 지도 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">오늘의 지도</div>
         <h2>다섯 개의 도구 — <span class="grad">사다리 · 테스트 · 리뷰 · 평가 · 다이얼</span></h2>
@@ -1284,7 +1313,7 @@
     </section>
 
     <!-- ============= 18. CH5 평가(Evals) ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 5 · 평가 (Evals)</div>
         <h2>한 번 쓰고 버릴 코드 vs <span class="grad">매번 도는 AI</span></h2>
@@ -1397,7 +1426,7 @@
     </section>
 
     <!-- ============= 22. 참고 자료 / Q&A ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">REFERENCES</div>
         <h2>더 깊이 보기</h2>
@@ -1436,6 +1465,8 @@
 
 <!-- reveal.js 5.1.0 — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
 <script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
 <script src="../vendor/reveal/notes.js"></script>
 <script>
   Reveal.initialize({

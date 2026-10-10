@@ -1184,6 +1184,7 @@
     }
     .gh-table th { font-family: 'JetBrains Mono', monospace; font-size: .9rem; letter-spacing: .05em; color: #B5A1FF !important; }
   </style>
+  <link rel="stylesheet" href="../assets/core.css">
 </head>
 <body>
 
@@ -1249,7 +1250,34 @@ window.SEMINAR_CONFIG = {
     </section>
 
     <!-- ============= 2. 오늘의 여정 ============= -->
-    <section>
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">Git은 세이브 포인트입니다. 명령어는 외우지 마세요 — 에이전트에게 말로 시키면 됩니다.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>잘 될 때마다 "커밋해줘" — 망가지면 한 문장으로 되돌립니다</strong><span class="sub">"_진짜최종_v3" 파일 대신 이력이 남습니다. 바이브 코딩일수록 자주.</span></div></li>
+        <li><span class="n">2</span><div><strong>업무 코드는 무조건 사내 GitHub에</strong><span class="sub">개인 github.com은 개인 실험용. 헷갈리면 사내 쪽이 정답입니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>GitHub Pages로 저장소가 곧 웹사이트</strong><span class="sub">설정 → Pages → main / root, 클릭 4번. 키·.env는 절대 커밋하지 않습니다.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지금 바로 써 보는 프롬프트</div>
+          <pre>이 폴더를 git 저장소로 만들고, 지금 상태를 "첫 버전"으로 커밋해줘.
+.env나 키 같은 민감한 파일이 있으면 커밋하기 전에 .gitignore에 넣고 알려줘.</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>AI가 고친 뒤로 오히려 망가져서 되돌리고 싶을 때</li>
+            <li>만든 도구를 링크 하나로 공유하고 싶을 때</li>
+            <li>동료와 같은 코드를 함께 고치게 될 때</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">오늘의 여정 · 이론 30% + 실습 70%</div>
         <h2>오늘 가져가실 세 가지</h2>
@@ -1282,7 +1310,7 @@ window.SEMINAR_CONFIG = {
     </section>
 
     <!-- ============= 3. CH1 왜 버전 관리인가 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
         <h2>이 폴더… 익숙하지 않으세요?</h2>
@@ -1365,7 +1393,7 @@ window.SEMINAR_CONFIG = {
     </section>
 
     <!-- ============= 6. CH1 Git vs GitHub ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
         <h2>Git과 GitHub는 <span class="accent3">다른 것</span>입니다</h2>
@@ -1729,7 +1757,7 @@ git revert HEAD          <span class="cm"># 마지막 커밋을 "취소하는 �
     </section>
 
     <!-- ============= 18. CH3 branch 방식 선언 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 3 · 내 웹앱 배포</div>
         <h2>배포 방식은 두 가지 — 오늘은 <span class="accent2">branch 방식</span>만</h2>
@@ -1786,7 +1814,7 @@ git revert HEAD          <span class="cm"># 마지막 커밋을 "취소하는 �
     </section>
 
     <!-- ============= 20. 실습 7 SPA 배포 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip live">🖐 실습 7 · SPA(빌드가 필요한 앱) 배포 (10분)</div>
         <h2>React·Vite 앱은 <span class="accent">빌드 결과물</span>을 올립니다</h2>
@@ -1941,6 +1969,8 @@ git subtree push --prefix dist origin gh-pages
 
 <!-- reveal.js 5.1.0 — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
 <script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
 <script src="../vendor/reveal/notes.js"></script>
 <script>
   Reveal.initialize({

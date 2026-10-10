@@ -1,0 +1,64 @@
+/* 핵심만 보기 토글 + TL;DR(3분 요약) 슬라이드 — assets/core.js 와 짝. */
+
+.depth-toggle {
+  position: fixed; left: 14px; bottom: 14px; z-index: 40;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 999px;
+  font: 600 13px/1 'Pretendard', system-ui, sans-serif; color: #E2E6F0;
+  background: rgba(22, 27, 48, 0.82);
+  border: 1px solid rgba(155, 130, 255, 0.45);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  cursor: pointer; opacity: .78; transition: opacity .2s, transform .2s;
+}
+.depth-toggle:hover { opacity: 1; transform: translateY(-2px); }
+.depth-toggle b { color: #2BEAD0; }
+.depth-toggle u { text-decoration: none; color: #B8A6FF; border-bottom: 1px dashed rgba(184,166,255,.6); }
+.depth-toggle .dt-dot { width: 8px; height: 8px; border-radius: 50%; background: #2BEAD0; box-shadow: 0 0 8px #2BEAD0; }
+.depth-toggle .dt-dot.full { background: #FFD46B; box-shadow: 0 0 8px #FFD46B; }
+.reveal-print .depth-toggle, html.print-pdf .depth-toggle { display: none; }
+@media (max-width: 600px) {
+  .depth-toggle { left: 8px; bottom: 8px; padding: 7px 11px; font-size: 12px; }
+}
+
+/* ---------- TL;DR 슬라이드 ---------- */
+.reveal section.tldr { text-align: left; }
+.reveal .tldr h2 { margin-bottom: .2em; }
+.reveal .tldr .tldr-lede { color: #B8BFD0; font-size: 1.2rem; margin: 0 0 1.3rem; }
+.reveal .tldr ol.tldr-points { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
+.reveal .tldr ol.tldr-points li {
+  display: grid; grid-template-columns: 2.6rem 1fr; gap: .9rem; align-items: start;
+  padding: .9rem 1.2rem; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(155,130,255,.10), rgba(43,234,208,.05));
+  border: 1px solid rgba(155,130,255,.28);
+}
+.reveal .tldr ol.tldr-points li .n {
+  font: 800 1.9rem/1.1 'Pretendard', system-ui, sans-serif; color: #2BEAD0;
+  text-shadow: 0 0 18px rgba(43,234,208,.35);
+}
+.reveal .tldr ol.tldr-points li strong { display: block; font-size: 1.42rem; font-weight: 700; color: #fff; line-height: 1.35; }
+.reveal .tldr ol.tldr-points li span.sub { display: block; font-size: 1.02rem; color: #B8BFD0; margin-top: .2rem; line-height: 1.45; }
+
+.reveal .tldr .tldr-bottom { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1rem; margin-top: 1.3rem; }
+.reveal .tldr .tldr-prompt {
+  position: relative; padding: .8rem 1rem .9rem; border-radius: 14px;
+  background: rgba(6, 8, 15, .7); border: 1px solid rgba(43,234,208,.45);
+}
+.reveal .tldr .tldr-label { font: 700 .78rem/1 'Pretendard', system-ui, sans-serif; letter-spacing: .08em; color: #2BEAD0; margin-bottom: .5rem; }
+.reveal .tldr .tldr-prompt pre {
+  margin: 0; padding: 0; box-shadow: none; background: none; width: auto;
+  white-space: pre-wrap; word-break: keep-all;
+  font: 500 .98rem/1.6 'JetBrains Mono', 'D2Coding', ui-monospace, monospace; color: #E2E6F0;
+}
+.reveal .tldr .tldr-copy {
+  position: absolute; top: .55rem; right: .6rem;
+  font: 600 .72rem/1 'Pretendard', system-ui, sans-serif; color: #06080F;
+  background: #2BEAD0; border: 0; border-radius: 999px; padding: .35rem .7rem; cursor: pointer;
+}
+.reveal .tldr .tldr-when {
+  padding: .8rem 1rem; border-radius: 14px;
+  background: rgba(255, 212, 107, .06); border: 1px solid rgba(255,212,107,.35);
+}
+.reveal .tldr .tldr-when .tldr-label { color: #FFD46B; }
+.reveal .tldr .tldr-when ul { margin: 0; padding: 0; list-style: none; }
+.reveal .tldr .tldr-when li { font-size: 1.02rem; color: #E2E6F0; line-height: 1.5; padding-left: 1.1em; position: relative; }
+.reveal .tldr .tldr-when li::before { content: '→'; position: absolute; left: 0; color: #FFD46B; }

@@ -1923,6 +1923,7 @@
       .uic .ix-file, .uic .ix-drop { transition: none; }
     }
   </style>
+  <link rel="stylesheet" href="../assets/core.css">
 </head>
 <body>
 
@@ -1976,6 +1977,34 @@
     </section>
 
     <!-- ============= 2. WHY — 왜 안 먹히나 ============= -->
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">AI는 화면을 잘 만듭니다. 문제는 주문입니다 — "그거 좀 이쁘게"로는 평균적인 화면만 나옵니다.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>"그거" 대신 이름으로 — 사이드바 · 모달 · 토스트 · 스켈레톤</strong><span class="sub">부품 이름을 알면 원하는 것을 한 번에 주문할 수 있습니다.</span></div></li>
+        <li><span class="n">2</span><div><strong>취향은 숫자로 — 240px 사이드바, 둥글기 12px, 200ms</strong><span class="sub">간격·둥글기·글자 크기를 숫자로 주면 결과가 흔들리지 않습니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>로딩 · 빈 화면 · 오류 상태를 꼭 같이 요청하세요</strong><span class="sub">이름이 생각 안 나면 스크린샷에 번호를 달아 지목하면 됩니다.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지금 바로 써 보는 프롬프트</div>
+          <pre>왼쪽에 240px 고정 사이드바, 위에 56px 앱 바가 있는 대시보드를 만들어줘.
+본문은 KPI 카드 4개 + 추세 차트 + 표. 카드 둥글기 12px, 간격 16px.
+로딩(스켈레톤) · 데이터 없음 · 오류 상태 화면도 함께 만들어줘.</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>원하는 화면을 말로 설명하기 어려울 때</li>
+            <li>"좀 더 세련되게"를 반복하고 있을 때</li>
+            <li>만든 화면이 폰에서 깨질 때</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="vfill">
         <div class="chip">WHY</div>
@@ -2015,7 +2044,7 @@
     </section>
 
     <!-- ============= 3. 오늘의 지도 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">MAP</div>
         <h2>오늘 챙겨갈 <span class="accent2">다섯 묶음</span></h2>
@@ -2286,7 +2315,7 @@
     </section>
 
     <!-- ============= 9. 디바이스 용어 (베젤 · 노치 · 세이프 에어리어) ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">DEVICE</div>
         <h2>베젤 · 노치 · <span class="accent2">세이프 에어리어</span></h2>
@@ -3002,7 +3031,7 @@
     </section>
 
     <!-- ============= 19. 엘리먼트+ 이미지와 아이콘 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">ELEMENTS+ · 이미지와 아이콘</div>
         <h2>이미지와 아이콘을 <span class="accent2">말하는 법</span></h2>
@@ -3129,7 +3158,7 @@
     </section>
 
     <!-- ============= 20. 엘리먼트+ 한 수 위 부품 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">ELEMENTS+ · 한 수 위 부품</div>
         <h2>있으면 <span class="accent2">프로 같은</span> 부품과 동작</h2>
@@ -3377,7 +3406,7 @@
     </section>
 
     <!-- ============= 24. 타이포그래피 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">TYPOGRAPHY</div>
         <h2>글자를 말하는 법 — <span class="accent2">타이포그래피</span></h2>
@@ -3572,7 +3601,7 @@
     </section>
 
     <!-- ============= 27. 머티리얼 vs 쿠퍼티노 상세 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">THEME · 두 거인</div>
         <h2>머티리얼 &amp; 쿠퍼티노 — <span class="accent2">부품 이름도 다르다</span></h2>
@@ -3608,7 +3637,7 @@
     </section>
 
     <!-- ============= 28. 웹에서 실제로 고르는 것들 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">THEME · 실전 선택</div>
         <h2>웹에서는 보통 <span class="accent2">이 중 하나</span>를 고른다</h2>
@@ -3734,7 +3763,7 @@
     </section>
 
     <!-- ============= 30. 색과 움직임 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">COLOR &amp; MOTION</div>
         <h2>색과 움직임을 말하는 법</h2>
@@ -3779,7 +3808,7 @@
     </section>
 
     <!-- ============= 31. 접근성 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">ACCESSIBILITY · a11y</div>
         <h2>모두가 쓸 수 있게 — <span class="accent2">여섯 단어</span></h2>
@@ -3837,7 +3866,7 @@
     </section>
 
     <!-- ============= 32. UX 용어 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">UX</div>
         <h2>UI가 아니라 <span class="accent2">UX</span>를 말하는 단어</h2>
@@ -4025,7 +4054,7 @@
     </section>
 
     <!-- ============= 37. 치트시트 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CHEAT SHEET</div>
         <h2>한 장 <span class="accent2">요약</span> — 프롬프트에 그대로 쓰는 단어들</h2>
@@ -4139,6 +4168,8 @@
 </div>
 <!-- reveal.js 5.1.0 — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
 <script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
 <script src="../vendor/reveal/notes.js"></script>
 <script>
   Reveal.initialize({
