@@ -1366,6 +1366,204 @@
 
     /* speakerNotes-friendly */
     @media print { body::before, body::after { display: none; } }
+  
+    /* ===== FINALE: 게임 엔딩 슬라이드 ===== */
+    #ending .end-wrap { height: 100%; display: flex; flex-direction: column; gap: .9rem; }
+    #ending .end-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }
+    #ending .end-title {
+      font-family: 'JetBrains Mono', monospace; font-size: 4.3rem; line-height: 1; letter-spacing: -.02em;
+      margin: .35rem 0 0;
+    }
+    #ending .end-clear { color: #fff; text-shadow: 0 0 22px rgba(155,130,255,.55); }
+    .end-grad {
+      background: linear-gradient(90deg, #9B82FF, #2BEAD0, #FFD46B, #FF7A95, #9B82FF); background-size: 300% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent !important; -webkit-text-fill-color: transparent; text-shadow: none !important;
+      animation: endGrad 3s linear infinite; filter: drop-shadow(0 0 18px rgba(43,234,208,.45));
+    }
+    @keyframes endGrad { to { background-position: 300% 0; } }
+    #ending.is-on .end-title { animation: endPop .7s cubic-bezier(.2,1.6,.4,1) both; }
+    @keyframes endPop { 0% { transform: scale(.6); opacity: 0; filter: blur(8px); } 100% { transform: none; opacity: 1; filter: none; } }
+    #ending .end-sub { margin: .55rem 0 0; font-size: 1.12rem; color: #C9CFDF; }
+    #ending .end-sub b { color: #2BEAD0; }
+
+    #ending .end-stats { display: flex; gap: .7rem; }
+    #ending .es {
+      min-width: 132px; padding: .55rem .9rem .6rem; border-radius: 12px;
+      background: rgba(14,18,32,.85); border: 1px solid rgba(155,130,255,.35);
+      display: grid; grid-template-columns: auto auto; align-items: baseline; justify-content: start; column-gap: .25rem;
+    }
+    #ending .es-k { grid-column: 1 / -1; font: 700 .7rem/1.2 'JetBrains Mono', monospace; letter-spacing: .1em; color: #8E96B0; }
+    #ending .es-v { font: 800 2rem/1.15 'JetBrains Mono', monospace; color: #2BEAD0; }
+    #ending .es-v.pink { color: #FF7A95; }
+    #ending .es-v.gold { color: #FFD46B; }
+    #ending .es-u { font-size: .9rem; color: #B8BFD0; }
+
+    #ending .end-main { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 1rem; }
+    #ending .end-screen {
+      position: relative; border-radius: 16px; overflow: hidden;
+      border: 2px solid rgba(155,130,255,.55);
+      box-shadow: 0 0 0 4px rgba(155,130,255,.08), 0 0 40px rgba(124,92,255,.25), inset 0 0 60px rgba(0,0,0,.6);
+      background: #04050B;
+    }
+    #ending .end-screen::after { /* CRT 주사선 */
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px);
+    }
+    #ending #end-canvas { display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+    #ending .end-flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,255,255,.55), rgba(155,130,255,.15) 60%, transparent); }
+    #ending .end-flash.go { animation: endFlash .5s ease-out; }
+    @keyframes endFlash { 0% { opacity: 1; } 100% { opacity: 0; } }
+    #ending .end-hint {
+      position: absolute; right: .8rem; bottom: .55rem; pointer-events: none;
+      font: 600 .74rem/1 'JetBrains Mono', monospace; color: rgba(226,230,240,.55);
+    }
+
+    #ending .end-side { display: flex; flex-direction: column; gap: .6rem; min-height: 0; }
+    #ending .end-side-h { font-size: .95rem; font-weight: 700; color: #fff; }
+    #ending .end-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+    #ending .end-chip {
+      font: 600 .86rem/1.2 'Pretendard', system-ui, sans-serif; color: #E2E6F0;
+      padding: .5rem .75rem; border-radius: 999px; cursor: pointer;
+      background: rgba(155,130,255,.12); border: 1px solid rgba(155,130,255,.45);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    #ending .end-chip:hover { transform: translateY(-2px); background: rgba(155,130,255,.25); }
+    #ending .end-chip:active { transform: scale(.96); }
+    #ending .end-chip.on { background: rgba(43,234,208,.18); border-color: #2BEAD0; color: #fff; box-shadow: 0 0 14px rgba(43,234,208,.35); }
+    #ending .end-chip.boss { border-color: rgba(255,122,149,.6); background: rgba(255,122,149,.12); }
+    #ending .end-chip.undo { border-color: rgba(255,212,107,.55); background: rgba(255,212,107,.08); }
+    #ending .end-chip:disabled { opacity: .45; cursor: default; transform: none; }
+
+    #ending .end-term {
+      flex: 1; min-height: 0; overflow: hidden; padding: .7rem .8rem; border-radius: 12px;
+      background: rgba(4,5,11,.92); border: 1px solid rgba(43,234,208,.3);
+      font: 500 .8rem/1.55 'JetBrains Mono', monospace; color: #E2E6F0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    #ending .et-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #ending .et-line.you { color: #fff; }
+    #ending .et-line.you::before { content: '> '; color: #2BEAD0; }
+    #ending .et-line.dim { color: #8E96B0; }
+    #ending .et-line.ok { color: #2BEAD0; }
+    #ending .et-line.warn { color: #FFD46B; }
+
+    #ending .end-bottom { display: flex; align-items: center; gap: 1.2rem; }
+    #ending .end-continue {
+      font: 800 1.35rem/1 'JetBrains Mono', monospace; color: #FFD46B; letter-spacing: .06em;
+      min-width: 210px;
+    }
+    #ending .end-continue b { display: inline-block; min-width: 1.6em; color: #fff; }
+    #ending.is-on .end-continue { animation: endBlink 1s steps(2, start) infinite; }
+    #ending .end-continue.done { animation: none !important; color: #2BEAD0; }
+    @keyframes endBlink { to { visibility: hidden; } }
+    #ending .end-msg { flex: 1; margin: 0; font-size: 1.55rem; font-weight: 800; color: #fff; }
+    #ending .end-start {
+      display: inline-flex; align-items: baseline; gap: .6rem; text-decoration: none;
+      font: 800 1.15rem/1 'JetBrains Mono', monospace; color: #06080F;
+      padding: .85rem 1.3rem; border-radius: 12px;
+      background: linear-gradient(90deg, #9B82FF, #2BEAD0); box-shadow: 0 0 26px rgba(43,234,208,.35);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    #ending .end-start small { font: 700 .82rem/1 'Pretendard', system-ui, sans-serif; color: #10132A; }
+    #ending .end-start:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 40px rgba(43,234,208,.55); }
+    #ending.is-on .end-start { animation: endPulse 1.6s ease-in-out infinite; }
+    @keyframes endPulse { 50% { box-shadow: 0 0 46px rgba(155,130,255,.7); } }
+
+    /* 작은 화면: 슬라이드 위 큰 시작 버튼 → 전체 화면 오버레이 */
+    #ending .end-launch { display: none; }
+    #ending.compact .end-launch {
+      position: absolute; inset: 0; margin: auto; width: 78%; height: 62%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
+      font: 800 4.6rem/1 'JetBrains Mono', monospace; color: #fff; cursor: pointer;
+      background: rgba(5,6,13,.62); border: 3px solid #2BEAD0; border-radius: 28px;
+      text-shadow: 0 0 30px rgba(43,234,208,.7); box-shadow: 0 0 60px rgba(43,234,208,.35);
+      animation: endPulse 1.6s ease-in-out infinite;
+    }
+    #ending.compact .end-launch small { font: 700 2.2rem/1.2 'Pretendard', system-ui, sans-serif; color: #2BEAD0; text-shadow: none; }
+    #ending.compact .end-hint { display: none; }
+    #ending.compact .end-title { font-size: 6rem; }
+
+    html.end-lock, html.end-lock body { overflow: hidden !important; }
+    .end-overlay {
+      position: fixed; inset: 0; z-index: 2147483000; overflow-y: auto; overscroll-behavior: contain;
+      background: radial-gradient(circle at 50% 0%, rgba(124,92,255,.28), transparent 55%), #05060D;
+      padding: max(14px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom));
+      color: #fff; font-family: 'Pretendard', system-ui, sans-serif; -webkit-tap-highlight-color: transparent;
+      animation: endIn .45s cubic-bezier(.2,1.2,.4,1) both;
+    }
+    @keyframes endIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+    .end-overlay .end-close {
+      position: fixed; top: max(10px, env(safe-area-inset-top)); right: 10px; z-index: 2;
+      width: 44px; height: 44px; border-radius: 50%; font-size: 20px; color: #fff; cursor: pointer;
+      background: rgba(22,27,48,.85); border: 1px solid rgba(155,130,255,.5);
+    }
+    .end-overlay .end-wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .end-overlay .end-top { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+    .end-overlay .chip {
+      display: inline-block; font: 700 11px/1 'JetBrains Mono', monospace; letter-spacing: .12em; color: #CFC3FF;
+      padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(155,130,255,.5); background: rgba(155,130,255,.12);
+    }
+    .end-overlay .end-title { font-family: 'JetBrains Mono', monospace; font-size: clamp(40px, 13vw, 76px); line-height: 1; margin: 10px 0 0; font-weight: 800; animation: endPop .7s cubic-bezier(.2,1.6,.4,1) both; }
+    .end-overlay .end-clear { color: #fff; text-shadow: 0 0 22px rgba(155,130,255,.55); }
+    .end-overlay .grad { background: linear-gradient(90deg, #9B82FF, #2BEAD0, #FF7A95, #9B82FF); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: endGrad 4s linear infinite; }
+    @keyframes endGrad { to { background-position: 300% 0; } }
+    .end-overlay .end-sub { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: #C9CFDF; }
+    .end-overlay .end-sub b { color: #2BEAD0; }
+    .end-overlay .end-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .end-overlay .es { padding: 8px 10px; border-radius: 12px; background: rgba(14,18,32,.85); border: 1px solid rgba(155,130,255,.35); }
+    .end-overlay .es-k { display: block; font: 700 10px/1.2 'JetBrains Mono', monospace; letter-spacing: .08em; color: #8E96B0; }
+    .end-overlay .es-v { font: 800 26px/1.15 'JetBrains Mono', monospace; color: #2BEAD0; }
+    .end-overlay .es-v.pink { color: #FF7A95; } .end-overlay .es-v.gold { color: #FFD46B; }
+    .end-overlay .es-u { font-size: 12px; color: #B8BFD0; margin-left: 2px; }
+    .end-overlay .end-main { display: flex; flex-direction: column; gap: 12px; }
+    .end-overlay .end-screen {
+      position: relative; border-radius: 16px; overflow: hidden; background: #04050B;
+      border: 2px solid rgba(155,130,255,.55); box-shadow: 0 0 40px rgba(124,92,255,.3);
+      height: min(50vh, 520px); min-height: 280px;
+    }
+    @media (orientation: landscape) { .end-overlay .end-screen { height: 78vh; } }
+    .end-overlay .end-screen::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px); }
+    .end-overlay #end-canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    .end-overlay .end-flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,255,255,.55), rgba(155,130,255,.15) 60%, transparent); }
+    .end-overlay .end-flash.go { animation: endFlash .5s ease-out; }
+    .end-overlay .end-hint { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; pointer-events: none; font: 600 11px/1 'JetBrains Mono', monospace; color: rgba(226,230,240,.6); }
+    .end-overlay .end-launch { display: none; }
+    .end-overlay .end-side-h { font-size: 14px; font-weight: 700; }
+    .end-overlay .end-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .end-overlay .end-chip {
+      min-height: 46px; padding: 10px 12px; border-radius: 14px; text-align: left; cursor: pointer;
+      font: 700 14px/1.25 'Pretendard', system-ui, sans-serif; color: #E2E6F0;
+      background: rgba(155,130,255,.14); border: 1px solid rgba(155,130,255,.5);
+      transition: transform .12s ease, background .2s ease;
+    }
+    .end-overlay .end-chip:active { transform: scale(.95); }
+    .end-overlay .end-chip.on { background: rgba(43,234,208,.2); border-color: #2BEAD0; color: #fff; box-shadow: 0 0 14px rgba(43,234,208,.35); }
+    .end-overlay .end-chip.boss { border-color: rgba(255,122,149,.6); background: rgba(255,122,149,.14); }
+    .end-overlay .end-chip.undo { grid-column: 1 / -1; text-align: center; border-color: rgba(255,212,107,.55); background: rgba(255,212,107,.08); }
+    .end-overlay .end-term {
+      height: 112px; overflow: hidden; padding: 10px 12px; border-radius: 12px; margin-top: 10px;
+      background: rgba(4,5,11,.92); border: 1px solid rgba(43,234,208,.3);
+      font: 500 12px/1.55 'JetBrains Mono', monospace; color: #E2E6F0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .end-overlay .et-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .end-overlay .et-line.you { color: #fff; } .end-overlay .et-line.you::before { content: '> '; color: #2BEAD0; }
+    .end-overlay .et-line.dim { color: #8E96B0; } .end-overlay .et-line.ok { color: #2BEAD0; } .end-overlay .et-line.warn { color: #FFD46B; }
+    .end-overlay .end-bottom { display: flex; flex-direction: column; align-items: stretch; gap: 10px; text-align: center; padding-bottom: 8px; }
+    .end-overlay .end-continue { font: 800 20px/1 'JetBrains Mono', monospace; color: #FFD46B; letter-spacing: .06em; animation: endBlink 1s steps(2, start) infinite; }
+    .end-overlay .end-continue b { color: #fff; }
+    .end-overlay .end-continue.done { animation: none; color: #2BEAD0; }
+    .end-overlay .end-msg { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.4; }
+    .end-overlay .end-start {
+      display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none;
+      font: 800 20px/1 'JetBrains Mono', monospace; color: #06080F; padding: 16px; border-radius: 16px;
+      background: linear-gradient(90deg, #9B82FF, #2BEAD0); box-shadow: 0 0 30px rgba(43,234,208,.4);
+      animation: endPulse 1.6s ease-in-out infinite;
+    }
+    .end-overlay .end-start small { font: 700 13px/1 'Pretendard', system-ui, sans-serif; color: #10132A; }
+    @media (prefers-reduced-motion: reduce) {
+      .end-overlay, .end-overlay * { animation: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -3612,6 +3810,55 @@
       </div>
     </section>
 
+    <!-- ============= FINALE. 엔딩 — STAGE CLEAR → NEW GAME+ (칩을 누르면 게임이 그 자리에서 바뀐다) ============= -->
+    <section id="ending" data-background-color="#05060D">
+      <div class="end-wrap">
+        <div class="end-top">
+          <div>
+            <div class="chip">THE END? · 엔딩</div>
+            <h1 class="end-title"><span class="end-clear">STAGE 1</span> <span class="end-grad">CLEAR</span></h1>
+            <p class="end-sub">엔딩도 바이브 코딩으로 — <b>칩을 눌러 이 게임을 고쳐 보세요.</b> 코드는 한 줄도 안 씁니다.</p>
+          </div>
+          <div class="end-stats" aria-label="오늘의 기록">
+            <div class="es"><span class="es-k">STAGES</span><span class="es-v" data-count="70">70</span></div>
+            <div class="es"><span class="es-k">내가 쓴 코드</span><span class="es-v pink" data-countdown="999">0</span><span class="es-u">줄</span></div>
+            <div class="es"><span class="es-k">NEXT STAGE</span><span class="es-v gold">∞</span></div>
+          </div>
+        </div>
+
+        <div class="end-main">
+          <div class="end-screen">
+            <canvas id="end-canvas" width="1520" height="760" aria-label="버그 잡기 미니 게임 — 마우스로 조종, 가만히 두면 자동 플레이"></canvas>
+            <div class="end-flash" id="end-flash"></div>
+            <div class="end-hint">🖱 마우스로 조종 · 가만히 두면 AI가 플레이</div>
+            <button type="button" class="end-launch" id="end-launch">▶ TAP TO PLAY<small>전체 화면으로 엔딩 플레이</small></button>
+          </div>
+
+          <div class="end-side">
+            <div class="end-side-h">💬 프롬프트 한 줄 = 게임 수정 하나</div>
+            <div class="end-chips" id="end-chips">
+              <button type="button" class="end-chip" data-mod="bugs">🐛 적을 버그로 바꿔줘</button>
+              <button type="button" class="end-chip" data-mod="spread">🔱 총알 3갈래로</button>
+              <button type="button" class="end-chip" data-mod="rainbow">🌈 무지개 모드 켜줘</button>
+              <button type="button" class="end-chip" data-mod="slow">🐢 슬로모션으로</button>
+              <button type="button" class="end-chip" data-mod="boom">💥 폭발 더 화려하게</button>
+              <button type="button" class="end-chip boss" data-mod="boss">👾 보스 등장시켜줘</button>
+              <button type="button" class="end-chip undo" data-mod="undo">↩ 다 되돌려줘</button>
+            </div>
+            <div class="end-term" id="end-term" aria-live="polite">
+              <div class="et-line dim">claude ▸ 무엇을 바꿔 볼까요?</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="end-bottom">
+          <div class="end-continue" id="end-continue">CONTINUE? <b id="end-count">10</b></div>
+          <p class="end-msg" id="end-msg">끝이 아니라 — <span class="end-grad">이제 시작입니다.</span></p>
+          <a class="end-start" href="../workshop/" target="_blank" rel="noopener">▶ NEW GAME+ <small>워크숍에서 내 도구 만들기</small></a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -4753,6 +5000,417 @@
     Reveal.on('ready', () => { if (onThisSlide(out)) autoplay(); });
     Reveal.on('slidechanged', () => { if (onThisSlide(out)) autoplay(); else stop(); });
   })();
+})();
+</script>
+
+<script>
+/* ===== FINALE: 엔딩 게임 — "프롬프트 한 줄 = 게임 수정 하나" =====
+ * 칩을 누르면 터미널에 프롬프트가 타이핑되고, 잠시 뒤 게임 규칙이 그 자리에서 바뀐다.
+ * 슬라이드가 보일 때만 루프가 돈다. 모션 축소 환경에서는 정지 화면 + 클릭하면 시작.
+ */
+(function () {
+  const root = document.getElementById('ending');
+  const canvas = document.getElementById('end-canvas');
+  if (!root || !canvas) return;
+  const ctx = canvas.getContext('2d');
+  // 논리 크기 = 캔버스의 CSS 레이아웃 크기 (슬라이드 안 ≈ 900×400, 모바일 전체 화면은 세로형)
+  let W = 760, H = 380, DPR = 2;
+  function resize() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    if (!w || !h) return;
+    const nw = Math.round(w), nh = Math.round(h);
+    if (nw === W && nh === H && canvas.width === nw * DPR) return;
+    const sx = nw / W, sy = nh / H;
+    W = nw; H = nh;
+    DPR = Math.min(2, (window.devicePixelRatio || 1) * 1.5);
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    [ship, ...enemies, ...stars, ...bullets, ...parts].forEach(o => { o.x *= sx; if ('y' in o && o !== ship) o.y *= sy; });
+    ship.tx *= sx; ship.y = H - 34;
+    if (boss) boss.x *= sx;
+  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const term = document.getElementById('end-term');
+  const flash = document.getElementById('end-flash');
+  const chips = Array.from(root.querySelectorAll('.end-chip'));
+  const countEl = document.getElementById('end-count');
+  const contEl = document.getElementById('end-continue');
+  const msgEl = document.getElementById('end-msg');
+
+  const HI_KEY = 'endingHi';
+  let hi = 0;
+  try { hi = Number(localStorage.getItem(HI_KEY)) || 0; } catch (_) {}
+
+  const mods = { bugs: false, spread: false, rainbow: false, slow: false, boom: false };
+  let edits = 0;
+
+  // ---------- 게임 상태 ----------
+  const ship = { x: W / 2, y: H - 34, tx: W / 2 };
+  let bullets = [], enemies = [], parts = [], pops = [], stars = [], boss = null;
+  let score = 0, combo = 0, fireT = 0, spawnT = 0, shake = 0, hue = 0, t = 0;
+  let pointerAt = -1e9;
+  let banner = null; // { text, sub, life }
+  for (let i = 0; i < 70; i++) stars.push({ x: Math.random() * W, y: Math.random() * H, s: Math.random() * 1.6 + .3, v: Math.random() * 18 + 6 });
+
+  const INVADER = ['00100100', '00011000', '00111100', '01011010', '11111111', '10111101', '10100101', '00011000'];
+  const BUGWORDS = ['NaN', 'null', '404', 'TODO', 'undefined', 'off-by-1', 'typo', 'flaky'];
+
+  function spawn() {
+    const e = { x: 30 + Math.random() * (W - 60), y: -16, vy: 26 + Math.random() * 22, ph: Math.random() * 6, hp: 1, w: 22 };
+    e.word = BUGWORDS[(Math.random() * BUGWORDS.length) | 0];
+    enemies.push(e);
+  }
+  function spawnBoss() {
+    boss = { x: W / 2, y: -60, ty: 74, hp: 60, max: 60, ph: 0, hitT: 0 };
+  }
+
+  function burst(x, y, n, base) {
+    const k = mods.boom ? n * 3 : n;
+    for (let i = 0; i < k; i++) {
+      const a = Math.random() * Math.PI * 2, sp = (mods.boom ? 60 : 40) + Math.random() * (mods.boom ? 260 : 150);
+      parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: .5 + Math.random() * .5, max: 1, h: base == null ? Math.random() * 360 : base + Math.random() * 40 });
+    }
+    if (mods.boom) shake = Math.min(shake + 5, 12);
+  }
+  function pop(x, y, text, color) { pops.push({ x, y, text, color, life: 1 }); }
+  function showBanner(text, sub) { banner = { text, sub, life: 2.2 }; }
+  function fireworks(n) {
+    for (let i = 0; i < n; i++) {
+      const id = setTimeout(() => burst(W * (.15 + Math.random() * .7), H * (.2 + Math.random() * .4), 40, Math.random() * 360), 250 + i * 380);
+      seq.push(id);
+    }
+  }
+
+  function fire() {
+    const angles = mods.spread ? [-0.22, 0, 0.22] : [0];
+    angles.forEach(a => bullets.push({ x: ship.x, y: ship.y - 12, vx: Math.sin(a) * 420, vy: -Math.cos(a) * 420 }));
+  }
+
+  function aiTarget() {
+    let best = null, bd = 1e9;
+    const pool = boss ? [boss] : enemies;
+    pool.forEach(e => { const d = Math.abs(e.x - ship.x) + (H - e.y) * 0.3; if (d < bd) { bd = d; best = e; } });
+    return best ? best.x : W / 2 + Math.sin(t * .7) * 200;
+  }
+
+  function step(dt) {
+    const ts = mods.slow ? 0.35 : 1;
+    dt *= ts; t += dt; hue = (hue + dt * 120) % 360;
+    // 조종: 최근 2.5초 안에 포인터가 움직였으면 사람, 아니면 AI
+    if (performance.now() - pointerAt > 2500) ship.tx = aiTarget();
+    ship.x += (ship.tx - ship.x) * Math.min(1, dt * 7);
+    fireT -= dt; if (fireT <= 0) { fire(); fireT = 0.2; }
+    spawnT -= dt; if (spawnT <= 0 && !boss) { spawn(); spawnT = 0.55 + Math.random() * 0.5; }
+
+    stars.forEach(s => { s.y += s.v * dt * (mods.slow ? .5 : 1) * 3; if (s.y > H) { s.y = 0; s.x = Math.random() * W; } });
+    bullets.forEach(b => { b.x += b.vx * dt; b.y += b.vy * dt; });
+    bullets = bullets.filter(b => b.y > -10 && b.x > -10 && b.x < W + 10);
+
+    enemies.forEach(e => { e.y += e.vy * dt; e.x += Math.sin(t * 2 + e.ph) * 30 * dt; });
+    enemies = enemies.filter(e => { if (e.y > H + 20) { combo = 0; return false; } return true; });
+
+    if (boss) {
+      boss.ph += dt; boss.y += (boss.ty - boss.y) * Math.min(1, dt * 2);
+      boss.x = W / 2 + Math.sin(boss.ph * 1.1) * (W / 2 - 90);
+      boss.hitT = Math.max(0, boss.hitT - dt);
+    }
+
+    // 충돌
+    for (const b of bullets) {
+      if (b.dead) continue;
+      if (boss && Math.abs(b.x - boss.x) < 62 && Math.abs(b.y - boss.y) < 34) {
+        b.dead = true; boss.hp--; boss.hitT = .08; burst(b.x, b.y, 3, 330);
+        if (boss.hp <= 0) {
+          burst(boss.x, boss.y, 90, null); shake = 14; score += 500; pop(boss.x, boss.y, '+500  레거시 리팩토링 완료!', '#FFD46B');
+          showBanner('BOSS DEFEATED', '레거시 코드, 말 한마디로 리팩토링 완료'); fireworks(4);
+          log('✓ 보스 격파 — 레거시 코드가 사라졌습니다', 'ok'); boss = null; setChip('boss', false); flashGo(); buzz([60, 40, 140]);
+        }
+        continue;
+      }
+      for (const e of enemies) {
+        if (e.dead) continue;
+        if (Math.abs(b.x - e.x) < e.w / 2 + 3 && Math.abs(b.y - e.y) < 12) {
+          b.dead = e.dead = true; combo++;
+          const gain = 10 * Math.min(combo, 8);
+          score += gain; burst(e.x, e.y, 14, mods.bugs ? 100 : 260);
+          pop(e.x, e.y, mods.bugs ? '🐛 fixed +' + gain : '+' + gain, mods.bugs ? '#2BEAD0' : '#fff');
+          break;
+        }
+      }
+    }
+    bullets = bullets.filter(b => !b.dead);
+    enemies = enemies.filter(e => !e.dead);
+
+    parts.forEach(p => { p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= .96; p.vy *= .96; p.life -= dt; });
+    parts = parts.filter(p => p.life > 0);
+    pops.forEach(p => { p.y -= 30 * dt; p.life -= dt * .9; });
+    pops = pops.filter(p => p.life > 0);
+    shake = Math.max(0, shake - dt * 30);
+    if (banner) { banner.life -= dt / (mods.slow ? .35 : 1); if (banner.life <= 0) banner = null; }
+    if (score > hi) { hi = score; }
+  }
+
+  function col(h, l) { return mods.rainbow ? `hsl(${(h + hue) % 360} 95% ${l}%)` : null; }
+
+  function draw() {
+    ctx.save();
+    // 무지개 모드에서는 잔상을 남긴다
+    ctx.fillStyle = mods.rainbow ? 'rgba(4,5,11,.28)' : '#04050B';
+    ctx.fillRect(0, 0, W, H);
+    if (shake) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+
+    stars.forEach(s => { ctx.fillStyle = `rgba(200,210,255,${.25 + s.s * .3})`; ctx.fillRect(s.x, s.y, s.s, s.s * (mods.slow ? 1 : 2.4)); });
+
+    // 적
+    enemies.forEach((e, i) => {
+      if (mods.bugs) {
+        ctx.font = '20px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('🐛', e.x, e.y);
+        ctx.font = '600 9px JetBrains Mono, monospace'; ctx.fillStyle = '#FF9DB0'; ctx.fillText(e.word, e.x, e.y + 15);
+      } else {
+        ctx.fillStyle = col(i * 40, 65) || '#9B82FF';
+        const px = 2.6, ox = e.x - 4 * px, oy = e.y - 4 * px, frame = ((t * 3) | 0) % 2;
+        INVADER.forEach((row, r) => { for (let c = 0; c < 8; c++) if (row[c] === '1') ctx.fillRect(ox + (frame && r > 5 ? (c < 4 ? -px : px) : 0) + c * px, oy + r * px, px, px); });
+      }
+    });
+
+    // 보스
+    if (boss) {
+      ctx.save(); ctx.translate(boss.x, boss.y);
+      ctx.fillStyle = boss.hitT ? '#fff' : (col(0, 62) || '#FF7A95');
+      const px = 7;
+      INVADER.forEach((row, r) => { for (let c = 0; c < 8; c++) if (row[c] === '1') ctx.fillRect(-4 * px + c * px, -4 * px + r * px, px - 1, px - 1); });
+      ctx.font = '800 11px JetBrains Mono, monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#FFD46B';
+      ctx.fillText('LEGACY_CODE.js', 0, -40);
+      ctx.fillStyle = 'rgba(255,255,255,.15)'; ctx.fillRect(-60, 36, 120, 5);
+      ctx.fillStyle = '#FF7A95'; ctx.fillRect(-60, 36, 120 * boss.hp / boss.max, 5);
+      ctx.restore();
+    }
+
+    // 총알
+    bullets.forEach(b => { ctx.fillStyle = col(b.x, 70) || '#2BEAD0'; ctx.fillRect(b.x - 1.5, b.y - 7, 3, 10); });
+
+    // 파티클
+    parts.forEach(p => { ctx.globalAlpha = Math.max(0, p.life); ctx.fillStyle = `hsl(${(p.h + (mods.rainbow ? hue : 0)) % 360} 95% 65%)`; ctx.fillRect(p.x, p.y, 2.4, 2.4); });
+    ctx.globalAlpha = 1;
+
+    // 우주선
+    ctx.save(); ctx.translate(ship.x, ship.y);
+    ctx.fillStyle = col(180, 60) || '#E2E6F0';
+    ctx.beginPath(); ctx.moveTo(0, -14); ctx.lineTo(12, 10); ctx.lineTo(0, 5); ctx.lineTo(-12, 10); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#FFD46B'; ctx.fillRect(-2, 8, 4, 4 + Math.random() * 5);
+    ctx.restore();
+
+    // 팝업
+    pops.forEach(p => { ctx.globalAlpha = Math.max(0, p.life); ctx.font = '700 11px Pretendard, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = p.color; ctx.fillText(p.text, p.x, p.y); });
+    ctx.globalAlpha = 1;
+    ctx.restore();
+
+    // HUD
+    ctx.font = '700 12px JetBrains Mono, monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillStyle = '#E2E6F0'; ctx.fillText('SCORE ' + String(score).padStart(6, '0'), 12, 10);
+    const narrow = W < 560;
+    ctx.fillStyle = '#FFD46B'; ctx.fillText('HI ' + String(hi).padStart(6, '0'), narrow ? 12 : 150, narrow ? 27 : 10);
+    ctx.textAlign = 'right'; ctx.fillStyle = '#2BEAD0';
+    ctx.fillText(narrow ? '수정 ' + edits + ' · 코드 0줄' : '수정 ' + edits + '회 · 내가 쓴 코드 0줄', W - 12, 10);
+    if (combo >= 3) { ctx.textAlign = 'left'; ctx.fillStyle = '#FF7A95'; ctx.fillText('COMBO ×' + Math.min(combo, 8), 12, narrow ? 44 : 28); }
+    if (banner) {
+      const a = Math.min(1, banner.life * 2), k = 1 + Math.max(0, banner.life - 1.9) * 2;
+      ctx.save(); ctx.globalAlpha = a; ctx.translate(W / 2, H * .42); ctx.scale(k, k);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const fs = Math.max(26, Math.min(56, W / 11));
+      ctx.font = '800 ' + fs + 'px JetBrains Mono, monospace';
+      const g = ctx.createLinearGradient(-W / 3, 0, W / 3, 0);
+      g.addColorStop(0, '#9B82FF'); g.addColorStop(.5, '#2BEAD0'); g.addColorStop(1, '#FFD46B');
+      ctx.shadowColor = 'rgba(43,234,208,.8)'; ctx.shadowBlur = 24; ctx.fillStyle = g;
+      ctx.fillText(banner.text, 0, 0);
+      ctx.shadowBlur = 0; ctx.font = '700 ' + Math.round(fs * .3) + 'px Pretendard, sans-serif'; ctx.fillStyle = '#fff';
+      ctx.fillText(banner.sub, 0, fs * .8);
+      ctx.restore();
+    }
+  }
+
+  // ---------- 루프 ----------
+  let raf = 0, last = 0, running = false;
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    step(dt); draw();
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (running) return; resize(); running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
+  function stop() {
+    running = false; cancelAnimationFrame(raf);
+    try { localStorage.setItem(HI_KEY, String(hi)); } catch (_) {}
+  }
+
+  // 정지 화면 한 장 (PDF 인쇄·모션 축소용)
+  resize();
+  for (let i = 0; i < 7; i++) enemies.push({ x: W * (i + 1) / 8, y: 70 + (i % 2) * 40, vy: 0, ph: i, hp: 1, w: 22, word: BUGWORDS[i] });
+  draw();
+  window.addEventListener('resize', () => { resize(); if (!running) draw(); });
+
+  // ---------- 조종 ----------
+  function toLocal(ev) {
+    const r = canvas.getBoundingClientRect();
+    return (ev.clientX - r.left) / r.width * W;
+  }
+  canvas.addEventListener('pointermove', ev => { ship.tx = Math.max(14, Math.min(W - 14, toLocal(ev))); pointerAt = performance.now(); });
+  canvas.addEventListener('pointerdown', ev => {
+    ev.stopPropagation(); pointerAt = performance.now(); ship.tx = toLocal(ev);
+    if (!running) start(); fire();
+  });
+  ['touchstart', 'touchmove'].forEach(n => canvas.addEventListener(n, ev => ev.stopPropagation(), { passive: true }));
+
+  // ---------- 프롬프트 칩 ----------
+  function log(text, cls) {
+    const d = document.createElement('div'); d.className = 'et-line ' + (cls || ''); d.textContent = text;
+    term.appendChild(d);
+    while (term.children.length > 9) term.removeChild(term.firstChild);
+  }
+  function typeLine(text, done) {
+    const d = document.createElement('div'); d.className = 'et-line you'; term.appendChild(d);
+    while (term.children.length > 9) term.removeChild(term.firstChild);
+    let i = 0;
+    const iv = setInterval(() => { d.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(iv); done(); } }, reduceMotion ? 0 : 28);
+  }
+  function setChip(mod, on) { const c = chips.find(x => x.dataset.mod === mod); if (c) c.classList.toggle('on', on); }
+  function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (_) {} }
+  function flashGo() { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); }
+
+  const REPLY = {
+    bugs:    ['enemy.sprite = "🐛" — 적을 버그로 교체', '버그 잡기 모드!'],
+    spread:  ['fire(): 총알 1발 → 3갈래 (±12°)', '화력 3배'],
+    rainbow: ['palette = hsl(t) + 잔상 효과', '🌈'],
+    slow:    ['timeScale 1.0 → 0.35', '매트릭스 모드'],
+    boom:    ['particles ×3 + 화면 흔들림', '쾅!'],
+    boss:    ['spawnBoss("LEGACY_CODE.js", hp=60)', '보스전 시작!'],
+  };
+  let busy = false;
+  chips.forEach(chip => chip.addEventListener('click', ev => {
+    ev.stopPropagation();
+    if (busy) return;
+    const mod = chip.dataset.mod;
+    if (mod === 'boss' && boss) return;
+    busy = true;
+    const label = chip.textContent.replace(/^\S+\s/, '');
+    typeLine(label, () => {
+      log('✻ 생각 중… game.js 수정', 'dim');
+      setTimeout(() => {
+        edits++;
+        if (mod === 'undo') {
+          Object.keys(mods).forEach(k => { mods[k] = false; setChip(k, false); });
+          if (boss) { boss = null; setChip('boss', false); }
+          log('↩ git revert — 처음 상태로 복구', 'warn');
+        } else if (mod === 'boss') {
+          spawnBoss(); enemies.forEach(e => burst(e.x, e.y, 6, 260)); enemies = []; setChip('boss', true);
+          log('✓ ' + REPLY.boss[0], 'ok');
+        } else {
+          mods[mod] = !mods[mod]; setChip(mod, mods[mod]);
+          if (Object.values(mods).every(Boolean)) { showBanner('FULL VIBE MODE', '수정 5개, 코드 0줄 — 이게 바이브 코딩입니다'); fireworks(5); buzz([40, 30, 40, 30, 120]); }
+          log((mods[mod] ? '✓ ' : '↩ 끔 — ') + REPLY[mod][0], mods[mod] ? 'ok' : 'warn');
+        }
+        if (mod !== 'undo') pop(W / 2, H / 2, REPLY[mod] ? REPLY[mod][1] : '', '#FFD46B');
+        flashGo(); buzz(25);
+        if (!running && (onSlide() || overlayOpen)) start();
+        busy = false;
+      }, reduceMotion ? 0 : 520);
+    });
+  }));
+
+  // ---------- 엔딩 연출: 기록 집계 → CONTINUE 카운트다운 ----------
+  let seq = [];
+  function clearSeq() { seq.forEach(clearInterval); seq.forEach(clearTimeout); seq = []; }
+  function intro() {
+    clearSeq();
+    root.querySelectorAll('[data-count]').forEach(el => {
+      const to = +el.dataset.count; let v = 0; el.textContent = reduceMotion ? to : 0;
+      if (reduceMotion) return;
+      const iv = setInterval(() => { v = Math.min(to, v + Math.ceil(to / 30)); el.textContent = v; if (v >= to) clearInterval(iv); }, 30); seq.push(iv);
+    });
+    root.querySelectorAll('[data-countdown]').forEach(el => {
+      let v = +el.dataset.countdown; el.textContent = reduceMotion ? 0 : v;
+      if (reduceMotion) return;
+      const iv = setInterval(() => { v = Math.max(0, v - 37); el.textContent = v; if (!v) clearInterval(iv); }, 30); seq.push(iv);
+    });
+    let n = 10; countEl.textContent = n; contEl.classList.remove('done');
+    contEl.innerHTML = 'CONTINUE? <b id="end-count">10</b>';
+    const c = () => contEl.querySelector('b');
+    const iv = setInterval(() => {
+      n--; c().textContent = n;
+      if (n <= 0) {
+        clearInterval(iv);
+        contEl.classList.add('done'); contEl.textContent = '▶ PRESS START';
+        msgEl.innerHTML = 'GAME OVER? 아니요 — <span class="end-grad">세이브는 커밋해 뒀으니까요.</span>';
+      }
+    }, 1000); seq.push(iv);
+    msgEl.innerHTML = '끝이 아니라 — <span class="end-grad">이제 시작입니다.</span>';
+  }
+
+  // ---------- 모바일·작은 화면: 전체 화면 게임 모드 ----------
+  // 슬라이드가 0.6배 미만으로 줄어들면(모바일 세로·가로) 칩 글씨가 너무 작아진다.
+  // 그때는 같은 엔딩 DOM을 화면 크기 그대로의 오버레이로 옮겨 세로형으로 보여 준다.
+  const wrap = root.querySelector('.end-wrap');
+  const launch = document.getElementById('end-launch');
+  const hint = root.querySelector('.end-hint');
+  const hintText = hint ? hint.textContent : '';
+  const overlay = document.createElement('div');
+  overlay.className = 'end-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', '엔딩 게임 — 전체 화면');
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button'; closeBtn.className = 'end-close'; closeBtn.textContent = '✕';
+  closeBtn.setAttribute('aria-label', '슬라이드로 돌아가기');
+  overlay.appendChild(closeBtn);
+  let overlayOpen = false;
+  function compact() {
+    let sc = 1;
+    try { sc = Reveal.getScale ? Reveal.getScale() : 1; } catch (_) {}
+    const scroll = Reveal.isScrollView && Reveal.isScrollView();
+    return scroll || sc < 0.6 || window.innerWidth < 700;
+  }
+  function openOverlay() {
+    if (overlayOpen) return;
+    overlayOpen = true;
+    document.body.appendChild(overlay);
+    overlay.appendChild(wrap);
+    overlay.classList.add('open');
+    document.documentElement.classList.add('end-lock');
+    if (hint) hint.textContent = '👆 드래그로 조종 · 탭하면 발사 · 가만히 두면 AI가 플레이';
+    resize(); intro(); start(); buzz(20);
+    if (!reduceMotion) { showBanner('STAGE CLEAR!', '이제 진짜 게임을 시작할 차례'); fireworks(5); }
+    // 배너가 끝나면 게임 화면 + 칩이 한 화면에 들어오도록 내려 준다
+    const scr = wrap.querySelector('.end-screen');
+    seq.push(setTimeout(() => { if (overlayOpen && overlay.scrollTop < 10) overlay.scrollTo({ top: scr.offsetTop - 10, behavior: reduceMotion ? 'auto' : 'smooth' }); }, 2400));
+  }
+  function closeOverlay() {
+    if (!overlayOpen) return;
+    overlayOpen = false;
+    root.appendChild(wrap);
+    if (hint) hint.textContent = hintText;
+    overlay.classList.remove('open'); overlay.remove();
+    document.documentElement.classList.remove('end-lock');
+    resize();
+    if (!onSlide()) stop();
+  }
+  closeBtn.addEventListener('click', closeOverlay);
+  if (launch) launch.addEventListener('click', ev => { ev.stopPropagation(); openOverlay(); });
+  ['pointerdown', 'touchstart', 'touchmove', 'wheel'].forEach(n => overlay.addEventListener(n, ev => ev.stopPropagation(), { passive: true }));
+  overlay.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeOverlay(); ev.stopPropagation(); });
+
+  function onSlide() { const s = window.Reveal && Reveal.getCurrentSlide && Reveal.getCurrentSlide(); return s === root; }
+  function sync() {
+    root.classList.toggle('compact', compact());
+    if (overlayOpen) return;
+    if (onSlide()) {
+      root.classList.add('is-on'); intro();
+      if (!reduceMotion) { start(); showBanner('STAGE CLEAR!', '70장 완주 — 이제 진짜 게임을 시작할 차례'); fireworks(5); }
+    } else {
+      root.classList.remove('is-on'); clearSeq(); stop();
+    }
+  }
+  Reveal.on('resize', () => { root.classList.toggle('compact', compact()); resize(); });
+  Reveal.on('ready', sync);
+  Reveal.on('slidechanged', sync);
 })();
 </script>
 
