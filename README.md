@@ -99,7 +99,7 @@ GitHub Pages 커스텀 도메인은 루트 `CNAME` 파일에 기록한다. 페�
 
 ## 세미나 PDF
 
-루트 `index.html`의 **세미나 자료 PDF 다운로드** 섹션에서 세미나별 PDF(`pdf/<폴더>.pdf`)를 받을 수 있다.
+각 덱 오른쪽 위 **⋯ 메뉴**에서 그 세미나의 PDF(`pdf/<폴더>.pdf`)를 받을 수 있다.
 PDF는 미리 만들어 커밋해 두는 정적 파일이므로, 덱 내용을 고치면 다시 생성해 함께 커밋한다:
 
 ```bash
@@ -110,7 +110,7 @@ npm run pdf -- intro ui-ux                  # 일부만
 
 `scripts/build-pdfs.js`가 각 덱을 reveal.js `?print-pdf` 모드로 열어 Playwright(Chromium)로 인쇄한다.
 프래그먼트는 펼친 상태로 한 장에 담고, 그림자·글로우·애니메이션·화면용 UI는 인쇄 때만 걷어낸다.
-새 세미나는 `assets/decks.js`에 등록되어 있으면 자동으로 포함되고, 허브 페이지의 PDF 목록에 한 줄 추가하면 된다.
+새 세미나는 `assets/decks.js`에 등록되어 있으면 자동으로 포함된다.
 
 ## 테스트
 
