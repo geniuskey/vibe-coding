@@ -21,7 +21,20 @@
 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
 
-추천 학습 경로: `setup/` → `intro/` → `prompt/` → `ui-ux/` → `github/` → `workshop/` → (심화) `context/` · `knowledge/` · `verification/` · `orchestration/` · `security/` · `agent-skills/` · `making-slides/`
+**핵심 경로는 세 개뿐이다**: `setup/`(30분) → `intro/`(60분) → `workshop/`(90분·3시간·8시간).
+나머지 덱은 순서대로 듣는 커리큘럼이 아니라, 일하다 막혔을 때 펼쳐 보는 **증상별 처방전**이다 —
+허브의 "막혔을 때 — 증상으로 찾기"가 증상 → 덱으로 바로 연결하고, "한 장 요약"이 시리즈 전체를 9줄로 압축한다.
+
+### 핵심만 보기 (`assets/core.js` · `assets/core.css`)
+
+덱이 길어서 안 읽히는 문제의 처방. 슬라이드는 지우지 않고 접는다.
+
+- 배경 이론·사례·참고 장은 `<section data-depth="extra">` — 핵심 모드에서 빠진다.
+- 첫 장 다음의 **3분 요약**은 `<section class="tldr" data-depth="summary">` — 결론 3줄 + 바로 쓰는 프롬프트 + 다시 펼칠 때. 핵심 모드에서만 보인다.
+- 공개 사이트·`file://` 에서는 기본 **핵심 모드**, 왼쪽 아래 토글로 전체를 펼친다(선택은 `localStorage.vibe-depth`에 기억, 보던 장으로 복귀).
+- 실제 발표(`server.js`로 띄운 곳)·`?present`·PDF 인쇄는 **항상 전체 모드** — 발표자와 청중의 슬라이드 번호가 같아야 따라가기가 깨지지 않는다. 강제로 고르려면 `?core` / `?full`.
+- 덱에 붙이는 법: `<head>`에 `<link rel="stylesheet" href="../assets/core.css">`, `reveal.js` 바로 다음(`Reveal.initialize` 앞)에 `<script src="../assets/core.js"></script>`.
+- 적용 덱: prompt · ui-ux · github · context · knowledge · verification · orchestration · security · agent-skills · making-slides. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
 
 공개 사이트: **https://vibe-coding.euiyun.com/**
 
