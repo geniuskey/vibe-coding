@@ -112,6 +112,17 @@ npm run pdf -- intro ui-ux                  # 일부만
 프래그먼트는 펼친 상태로 한 장에 담고, 그림자·글로우·애니메이션·화면용 UI는 인쇄 때만 걷어낸다.
 새 세미나는 `assets/decks.js`에 등록되어 있으면 자동으로 포함된다.
 
+## 링크 미리보기(OG) 이미지
+
+허브는 루트 `og-image.png`(원본 `assets/og-image.html`), 각 세미나는 `og/<폴더>.png`(1200×630)를 쓴다.
+세미나 카드는 템플릿 하나(`assets/og-deck.html?id=<폴더>`)로 그리며, 트랙·이모지·설명은 `assets/decks.js`에서,
+큰 제목·태그라인·터미널 문구는 템플릿 안 `OG` 표에서 가져온다. 고쳤으면 다시 찍고 해당 덱의 `og:image` `?v=`를 올린다:
+
+```bash
+npm run og                    # 전체 → og/*.png (로컬 Chrome + macOS sips)
+npm run og -- intro ui-ux     # 일부만
+```
+
 ## 테스트
 
 ```bash

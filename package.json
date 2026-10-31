@@ -7,6 +7,7 @@
     "dev": "node server.js",
     "start": "node server.js",
     "test": "node --test",
-    "pdf": "node scripts/build-pdfs.js"
+    "pdf": "node scripts/build-pdfs.js",
+    "og": "node scripts/build-og.js"
   }
 }

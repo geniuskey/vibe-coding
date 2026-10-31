@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--
+  세미나별 og/<id>.png(1200×630) 원본. ?id=<덱 id> 로 열면 해당 덱 카드가 그려진다.
+  덱 목록·순서는 assets/decks.js, 카드 문구는 아래 OG 표에서 고친다.
+  전체 다시 렌더: node scripts/build-og.js   (일부만: node scripts/build-og.js intro ui-ux)
+  허브(루트) 카드는 assets/og-image.html 이 따로 맡는다.
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../vendor/fonts/pretendard.css" />
+<script src="decks.js"></script>
+<style>
+  :root{
+    --bg-0:#06080F; --bg-1:#0E1220;
+    --fg:#FFFFFF; --fg-soft:#B8BFD0; --fg-dim:#E2E6F0;
+    --accent:#9B82FF; --accent-2:#2BEAD0; --accent-3:#FF7A95; --accent-4:#FFD46B;
+    --mono:"Cascadia Code","Consolas","D2Coding",monospace;
+    /* 트랙별로 바뀌는 강조색 쌍 (rgb 값) */
+    --k1:43,234,208; --k2:155,130,255;
+  }
+  body.t2{--k1:155,130,255; --k2:255,122,149}
+  body.t3{--k1:255,212,107; --k2:43,234,208}
+  body.kids{--k1:255,122,149; --k2:255,212,107}
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{font-family:"Pretendard","Malgun Gothic",sans-serif;background:var(--bg-0);color:var(--fg);position:relative}
+  .bg{position:absolute;inset:0;
+    background:
+      radial-gradient(760px 420px at 84% -12%, rgba(var(--k2),.30), transparent 62%),
+      radial-gradient(620px 360px at 6% 112%, rgba(var(--k1),.16), transparent 62%),
+      linear-gradient(160deg,#0E1220 0%,#06080F 60%)}
+  .grid{position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(var(--k2),.07) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(var(--k2),.07) 1px,transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(900px 520px at 50% 0%, rgba(0,0,0,.95), transparent 78%)}
+  .frame{position:absolute;inset:18px;border:1px solid rgba(var(--k2),.22);border-radius:22px}
+
+  .stage{position:absolute;left:18px;right:18px;top:18px;bottom:110px;display:grid;
+    grid-template-columns:1fr 372px;gap:34px;padding:44px 52px 0;align-items:center}
+
+  /* ── 좌측 ── */
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+    font-size:16px;letter-spacing:.16em;color:rgb(var(--k1));
+    border:1px solid rgba(var(--k1),.38);border-radius:999px;padding:7px 18px;background:rgba(var(--k1),.07)}
+  .dot{width:9px;height:9px;border-radius:50%;background:rgb(var(--k1));box-shadow:0 0 10px rgb(var(--k1))}
+  .ep{color:var(--fg-soft);letter-spacing:.08em}
+
+  .emoji{font-size:58px;line-height:1;margin-top:26px}
+  h1{font-size:64px;font-weight:800;letter-spacing:-.025em;line-height:1.14;margin-top:16px;word-break:keep-all;text-wrap:balance}
+  .tagline{margin-top:12px;font-size:34px;font-weight:800;letter-spacing:-.01em;word-break:keep-all;
+    background:linear-gradient(90deg,rgb(var(--k2)) 0%,rgb(var(--k1)) 78%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin-top:16px;font-size:20px;line-height:1.5;color:var(--fg-soft);max-width:660px;word-break:keep-all}
+
+  /* ── 우측 터미널 ── */
+  .term{border:1px solid rgba(var(--k2),.28);border-radius:16px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(22,27,48,.96),rgba(10,13,26,.96));
+    box-shadow:0 26px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.02) inset}
+  .term-head{display:flex;align-items:center;gap:8px;padding:11px 14px;
+    border-bottom:1px solid rgba(var(--k2),.18);background:rgba(255,255,255,.03)}
+  .light{width:10px;height:10px;border-radius:50%}
+  .r{background:#FF6058}.y{background:#FFBD2E}.g{background:#28C93F}
+  .term-title{font-family:var(--mono);font-size:12px;color:#7C86A6;margin-left:6px}
+  .live{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent-3)}
+  .term-body{padding:16px 16px 18px;font-family:var(--mono);font-size:14.5px;line-height:1.85}
+  .term-body > div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .p{color:rgb(var(--k1))}
+  .cmd{color:var(--fg-dim)}
+  .out{color:#8892AE}
+  .ok{color:rgb(var(--k1));font-family:"Pretendard",sans-serif;font-weight:700}
+  .hl{color:var(--accent-4)}
+  .caret{display:inline-block;width:9px;height:16px;background:rgb(var(--k1));vertical-align:-3px;margin-left:3px}
+
+  /* ── 하단 ── */
+  .foot{position:absolute;left:70px;right:70px;bottom:46px;display:flex;align-items:flex-end;justify-content:space-between}
+  .url{font-family:var(--mono);font-size:25px;font-weight:700;color:var(--fg);letter-spacing:-.01em}
+  .url i{font-style:normal;color:rgb(var(--k1))}
+  .url .u{display:block;height:3px;margin-top:9px;border-radius:2px;
+    background:linear-gradient(90deg,rgb(var(--k2)),rgb(var(--k1)))}
+  .meta{font-size:19px;color:var(--fg-soft)}
+  .meta b{color:var(--fg);font-weight:700}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="grid"></div>
+<div class="frame"></div>
+
+<div class="stage">
+  <div>
+    <span class="eyebrow"><span class="dot"></span><span id="track"></span><span class="ep" id="ep"></span></span>
+    <div class="emoji" id="emoji"></div>
+    <h1 id="h1"></h1>
+    <div class="tagline" id="tagline"></div>
+    <p class="lede" id="lede"></p>
+  </div>
+
+  <div class="term">
+    <div class="term-head">
+      <span class="light r"></span><span class="light y"></span><span class="light g"></span>
+      <span class="term-title" id="term-title"></span>
+      <span class="live">LIVE</span>
+    </div>
+    <div class="term-body" id="term"></div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="url">vibe-coding.euiyun.com<i id="path"></i><span class="u"></span></div>
+  <div class="meta">바이브 코딩 세미나 <b>시리즈</b></div>
+</div>
+
+<script>
+/* 덱별 카드 문구 — h1(큰 제목) · tag(그라데이션 한 줄) · lede(생략 시 decks.js desc) · ask(터미널 첫 프롬프트) · steps(✓ 줄 3개) · done(마지막 노란 줄) */
+const OG = {
+  'setup':         { h1: '0교시', tag: '설치와 첫 실행',
+                     ask: 'claude', steps: ['Node.js 설치', '로그인', '첫 대화'], done: 'Welcome to Claude Code' },
+  'intro':         { h1: '바이브 코딩이란 무엇인가?', tag: '코드는 AI가, 방향은 내가', lede: '알파고부터 LLM · 에이전트 · Claude Code까지',
+                     ask: '바이브 코딩이 뭐야?', steps: ['알파고에서 LLM까지', '에이전트의 등장', 'Claude Code 실전'], done: 'STAGE 1 CLEAR' },
+  'prompt':        { h1: 'AI에게 일 시키는 법', tag: '프롬프트 엔지니어링',
+                     ask: '목표 · 맥락 · 제약을 줘', steps: ['3요소 프레임', '패턴 8가지', '다듬기 루프'], done: '원하는 결과 한 번에' },
+  'ui-ux':         { h1: 'UI/UX 용어 사전', tag: '화면을 말로 정확히 시키기',
+                     ask: '왼쪽에 사이드바 넣어줘', steps: ['레이아웃 · 베젤', '엘리먼트 도감', '디자인 토큰 · 테마'], done: '이름을 알면 시킬 수 있다' },
+  'ui-ux-cheatsheet': { h1: 'UI/UX 비주얼 치트시트', tag: '모양으로 찾는 UI 용어',
+                     ask: '이거 이름이 뭐야?', steps: ['모달 · 드로어', '토스트 · 스낵바', '탭 · 세그먼트'], done: '한 장으로 보는 UI 도감' },
+  'github':        { h1: '최소한의 Git & GitHub', tag: '바이브 코딩에 꼭 필요한 만큼', lede: '커밋 · 되돌리기 · 브랜치 · 푸시',
+                     ask: 'git commit -m "작동함"', steps: ['저장 지점 만들기', '되돌리기', 'GitHub에 올리기'], done: '망쳐도 돌아올 수 있다' },
+  'context':       { h1: '컨텍스트', tag: 'AI 에이전트의 작업 책상',
+                     ask: '/context', steps: ['컨텍스트 창의 원리', 'CLAUDE.md', '압축과 정리'], done: '책상이 정돈되면 답이 좋아진다' },
+  'knowledge':     { h1: 'LLM에게 지식을 가르치는 법', tag: '모르는 건 찾아서 답하게',
+                     ask: '사내 문서로 답해줘', steps: ['LLM 위키', 'RAG 검색', '지식 그래프 · 온톨로지'], done: '출처와 함께 답변 완료' },
+  'verification':  { h1: 'AI가 쓴 코드를 믿는 법', tag: '검증 · 테스트 · 평가',
+                     ask: '테스트 먼저 써줘', steps: ['검증의 사다리', 'TDD', 'AI 리뷰 · 평가'], done: '12 passed, 0 failed' },
+  'orchestration': { h1: '서브에이전트와 오케스트레이션', tag: '혼자가 아니라 팀으로',
+                     ask: '세 갈래로 나눠 조사해줘', steps: ['컨텍스트 격리', '병렬 fan-out', '파이프라인 · CI'], done: 'agents 3/3 done' },
+  'security':      { h1: '사내 환경에서의 AI', tag: '보안과 거버넌스',
+                     ask: '이 파일 외부로 보내도 돼?', steps: ['데이터 경로', '프롬프트 인젝션', '권한 설계'], done: 'deny: 외부 전송 차단' },
+  'workshop':      { h1: '바이브 코딩 실습 워크숍', tag: '90분 · 3시간 · 8시간 코스', lede: '반도체 엔지니어를 위한 코스 선택형 핸즈온',
+                     ask: 'spc.csv 분석 대시보드', steps: ['데이터 읽기', '차트 그리기', 'MY TOOL 완성'], done: '직접 만들어 본다' },
+  'agent-skills':  { h1: '반도체 현업을 위한 Agent Skills', tag: '내 노하우를 AI에게 물려주는 법',
+                     ask: '/weekly-ppt', steps: ['DRM 엑셀 읽기', '사내 규칙 적용', '주간보고 PPT'], done: '한 번 가르치면 계속 쓴다' },
+  'making-slides': { h1: '슬라이드 자료 만들기', tag: '레퍼런스 → 피드백 → Skill', lede: '바이브 코딩으로 발표 덱을 반복해서 찍어내기',
+                     ask: '이 덱처럼 만들어줘', steps: ['레퍼런스 앵커링', '피드백 루프', 'CLAUDE.md · Skill'], done: 'reveal.js 빌드 없이 실행' },
+  'forChildren':   { h1: '나만의 게임 만들기', tag: '어린이 × 부모, AI와 함께', kids: true, lede: '복사 · 붙여넣기 8번으로 게임 2개 완성',
+                     ask: '점프하는 고양이 게임!', steps: ['액션 게임', '퀴즈 게임', '프롬프트 8단계'], done: 'GAME CLEAR' },
+};
+
+const id = new URLSearchParams(location.search).get('id') || 'intro';
+const decks = window.SEMINAR_DECKS;
+const og = OG[id];
+// 치트시트처럼 decks.js 에 없는 페이지는 부모 덱의 트랙·이모지를 빌려 쓴다
+const deckId = id === 'ui-ux-cheatsheet' ? 'ui-ux' : id;
+const idx = decks.findIndex(d => d.id === deckId);
+const deck = decks[idx];
+
+const $ = s => document.getElementById(s);
+const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+document.body.classList.add('t' + deck.track.slice(0, 2).replace(/^0/, ''));
+if (og.kids) document.body.classList.add('kids');
+
+$('track').textContent = 'TRACK ' + deck.track;
+$('ep').textContent = id === 'ui-ux-cheatsheet' ? '· 부록' : '· ' + String(idx + 1).padStart(2, '0') + '/' + decks.length;
+$('emoji').textContent = deck.emoji;
+$('h1').textContent = og.h1;
+$('tagline').textContent = og.tag;
+$('lede').textContent = og.lede || deck.desc.split(' — ')[0];
+$('term-title').textContent = 'claude-code — ' + deckId;
+$('path').textContent = id === 'ui-ux-cheatsheet' ? '/ui-ux/cheatsheet' : '/' + id;
+$('term').innerHTML =
+  `<div><span class="p">&gt;</span> <span class="cmd">${esc(og.ask)}</span></div>` +
+  og.steps.map(s => `<div class="out">· ${esc(s)} <span class="ok">✓</span></div>`).join('') +
+  `<div><span class="hl">${esc(og.done)}</span></div>` +
+  `<div><span class="p">&gt;</span><span class="caret"></span></div>`;
+
+// 제목이 두 줄을 넘으면 줄어들 때까지 글자 크기를 낮춘다
+const h1 = $('h1');
+for (let fs = 64; fs > 40 && h1.offsetHeight > fs * 1.14 * 2 + 2; fs -= 2) h1.style.fontSize = fs + 'px';
+</script>
+</body>
+</html>
