@@ -53,6 +53,7 @@
     "image": "https://vibe-coding.euiyun.com/og/orchestration.png?v=1",
     "inLanguage": "ko",
     "datePublished": "2026-07",
+    "dateModified": "2026-11",
     "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
     "isPartOf": "https://vibe-coding.euiyun.com/",
     "keywords": "서브에이전트, 오케스트레이션, multi-agent, 컨텍스트 격리, fan-out, 파이프라인, 심판 패널, headless, GitHub Actions, git worktree"
@@ -805,7 +806,7 @@
       <div class="vfill">
         <div class="grid-2" style="align-items:center;">
           <div>
-            <div class="chip">SEMINAR · 2026.07 · ORCHESTRATION</div>
+            <div class="chip">SEMINAR · 2026.11 · ORCHESTRATION</div>
             <h1 style="font-size:4.3rem;">
               <span class="grad">서브에이전트</span>와<br/>오케스트레이션 🤖
             </h1>
@@ -904,7 +905,7 @@
           </div>
           <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
             <figure class="ctx-box slim ctx-anim danger-box" aria-label="긴 세션 끝의 가득 찬 컨텍스트 창">
-              <div class="ctx-freelabel"><span class="mono danger">180K / 200K</span><span class="sub">9주차의 머릿속</span></div>
+              <div class="ctx-freelabel"><span class="mono danger">~900K / 1M</span><span class="sub">9주차의 머릿속</span></div>
               <div class="ctx-seg seg-sys"  style="--h:12%"><span class="ctx-lab">System · 도구</span></div>
               <div class="ctx-seg seg-mem"  style="--h:2%"></div>
               <div class="ctx-seg seg-conv" style="--h:30%"><span class="ctx-lab">긴 대화</span></div>
@@ -981,7 +982,7 @@
           </div>
           <div class="card autoshow fade-up">
             <h3>🌙 CH5 사람이 없는 곳에서도</h3>
-            <p>headless · CI · 스케줄 — 자는 동안 일하는 팀</p>
+            <p>headless · CI · 에이전트 뷰 · Workflow · 클라우드 예약 — 자는 동안 일하는 팀</p>
           </div>
           <div class="card autoshow fade-up">
             <h3>⚖️ CH6 함정과 판단 기준</h3>
@@ -1164,7 +1165,7 @@
           </div>
         </div>
         <aside class="notes">
-          비전공자용 진입로: 한국어로 "서브에이전트로 나눠서"라고 말하면 끝. Claude Code가 내부적으로 Task 도구로 자식을 띄운다.
+          비전공자용 진입로: 한국어로 "서브에이전트로 나눠서"라고 말하면 끝. Claude Code가 내부적으로 Agent 도구(예전 이름 Task)로 자식을 띄운다. 2026년 10월부터는 자식이 기본으로 백그라운드에서 돌아 메인 대화가 막히지 않고(/tasks로 확인), 대화 맥락을 그대로 물려받는 fork 서브에이전트도 기본으로 켜져 있다.
           한 단계 위: .claude/agents/*.md 파일로 커스텀 서브에이전트 정의 — description으로 언제 소환될지, tools로 권한을 제한한다(리뷰어에게 쓰기 권한을 안 주는 식).
         </aside>
         <div class="slide-refs">
@@ -1561,6 +1562,80 @@ $ git worktree add ../feat-search feature/search
       </div>
     </section>
 
+    <!-- ============= 19b. CH5 맡기기 지도 (2026.11) ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 5 · 사람이 없는 곳에서도</div>
+        <h2>2026년의 <span class="grad">맡기기 지도</span> — 누가 계획을 쥐나</h2>
+        <table class="tbl" style="margin-top:.5rem;">
+          <thead>
+            <tr><th>방식</th><th>계획을 쥔 쪽</th><th>규모</th><th>이렇게 시작</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🧬 서브에이전트</td><td>Claude가 턴마다</td><td>한 번에 몇 개</td><td>"서브에이전트로 나눠서" · 진행 상황은 <span class="mono">/tasks</span></td></tr>
+            <tr><td>🗂 에이전트 뷰</td><td><strong>내가</strong> — 독립 작업을 던져 두고 확인</td><td>세션 여러 개</td><td><span class="mono">claude agents</span> — 백그라운드 세션을 한 화면에서</td></tr>
+            <tr class="hl"><td>📜 Workflow</td><td><strong>스크립트가</strong> — Claude가 써 주고 다시 돌릴 수 있음</td><td>수십~수백 개</td><td>"<em>workflow로</em> 해줘" · <span class="mono">/workflows</span>로 관전</td></tr>
+            <tr><td>☁️ 클라우드 예약 작업</td><td>스케줄이 — 내 PC가 꺼져도</td><td>정해진 시각마다</td><td><span class="mono">/schedule</span> "매일 아침 9시에 …"</td></tr>
+          </tbody>
+        </table>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.24rem;">
+          앞에서 배운 원리는 그대로입니다 — 바뀐 건 <strong class="accent2">"얼마나 멀리, 얼마나 오래 맡기느냐"</strong>뿐.
+        </div>
+        <aside class="notes">
+          2026년 하반기 Claude Code 기준 "여러 일을 한꺼번에 맡기는" 다섯 가지 길 중 비전공자가 바로 쓸 네 가지. 차이는 누가 계획을 쥐느냐다.
+          서브에이전트: 한 세션 안에서 Claude가 판단해 자식을 띄우고 요약을 받는다. 지금은 자식이 기본으로 백그라운드에서 돌고(/tasks), 대화를 그대로 물려받는 fork 서브에이전트도 기본으로 켜져 있다.
+          에이전트 뷰(claude agents, 리서치 프리뷰): 서로 독립인 작업 여러 개를 백그라운드 세션으로 던져 두고, 손이 필요한 것만 들여다본다. 각 세션은 수정 전에 자기 worktree로 옮겨 가 파일 충돌을 피한다.
+          Workflow: 계획을 스크립트로 옮긴다 — 다음 장. 클라우드 예약 작업(/schedule, routines): 클라우드에서 정해진 시각에 세션을 돌린다. 노트북을 덮어도 돈다.
+          에이전트 팀(리드가 팀원 세션을 감독)은 아직 실험 기능이라 기본 꺼짐 — 질문이 나오면만 언급.
+          사내 환경 주의: 클라우드 예약 작업은 코드가 클라우드 VM으로 올라간다 — 보안 세미나의 "데이터 경로" 질문을 먼저.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/agents" target="_blank" rel="noopener">Claude Code Docs · Run agents in parallel</a>
+          <a href="https://code.claude.com/docs/en/agent-view" target="_blank" rel="noopener">Agent view</a>
+          <a href="https://code.claude.com/docs/en/routines" target="_blank" rel="noopener">Cloud scheduled tasks</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 19c. CH5 Workflow ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 5 · 사람이 없는 곳에서도</div>
+        <h2>패턴 4가지를 <span class="grad">스크립트로</span> — Workflow</h2>
+        <div class="grid-2" style="margin-top:.4rem; align-items:start;">
+          <div>
+            <p class="tiny mono muted" style="margin:0 0 .3rem;">💬 말로 시키면</p>
+            <pre class="code autoshow fade-up" style="margin:0;"><span class="st">"workflow로 src/ 아래 측정 스크립트 전부를
+ 단위 오류가 있는지 점검하고, 찾은 건
+ 서로 교차 검증한 뒤 보고해줘"</span></pre>
+            <p class="tiny mono muted" style="margin:.8rem 0 .3rem;">📜 Claude가 쓴 스크립트 (요지)</p>
+            <pre class="code autoshow fade-up" style="margin:0;"><span class="kw">const</span> files = <span class="kw">await</span> agent(<span class="st">'점검할 파일 목록'</span>)
+<span class="kw">const</span> found = <span class="kw">await</span> pipeline(files.list, f =&gt;
+  agent(<span class="st">`${f} 단위 오류 점검`</span>))      <span class="cm">// 🍴 fan-out</span>
+<span class="kw">const</span> ok = <span class="kw">await</span> parallel(found.map(x =&gt; () =&gt;
+  agent(<span class="st">`반박해 봐: ${x}`</span>)))           <span class="cm">// ⚖️ 심판</span></pre>
+          </div>
+          <div class="stack" style="gap:.75rem;">
+            <div class="card autoshow fade-left"><h3>🧠 계획이 상자 밖으로</h3><p>중간 결과는 스크립트 변수에 — 메인 대화엔 <strong class="accent2">최종 보고만</strong> 돌아옵니다. 컨텍스트 격리의 끝판.</p></div>
+            <div class="card autoshow fade-left"><h3>🔁 다시 돌릴 수 있다</h3><p>잘 된 실행은 <span class="mono">/workflows</span>에서 <span class="mono">s</span>로 저장 → 다음부턴 <span class="mono">/내-이름</span> 한 줄. 중간에 멈춰도 끝난 에이전트는 다시 안 돕니다.</p></div>
+            <div class="card bad autoshow fade-left"><h3>💸 비용은 ×N</h3><p>에이전트 25개·150만 토큰을 넘으면 경고가 뜹니다. <strong>폴더 하나로 먼저</strong> 시험해 보고 넓히세요.</p></div>
+          </div>
+        </div>
+        <aside class="notes">
+          Dynamic workflow: Claude가 작업에 맞는 JavaScript 스크립트를 써서 백그라운드에서 실행한다. agent()는 자식 하나, pipeline()은 목록 항목마다 하나씩, parallel()은 동시에 여럿 — CH3의 fan-out·파이프라인·심판 패널이 그대로 함수 이름이 된 것.
+          시작: 프롬프트에 "workflow로"라고 직접 요청하거나 ultracode 키워드. 내장 예시로 /deep-research(여러 출처를 교차 검증하는 조사)가 있어 데모하기 좋다.
+          서브에이전트와의 차이: 서브에이전트는 Claude가 턴마다 판단하고 결과가 메인 컨텍스트로 들어온다. Workflow는 스크립트가 루프·분기·중간 결과를 쥐고, 메인 대화엔 최종 답만 온다. 그래서 수백 파일 마이그레이션·전수 점검에 맞다.
+          비용 경고: 에이전트 25개 또는 예상 토큰 150만을 넘으면 Large workflow 경고. Pro 요금제는 /config에서 켜야 하고 기본 규모 가이드도 small(5개 미만). 작은 조각으로 먼저 돌려 비용을 가늠하는 습관.
+          CH6의 판단 기준은 여기서도 똑같다 — 작고 순차적인 일에 Workflow를 쓰면 돈만 쓴다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/workflows" target="_blank" rel="noopener">Claude Code Docs · Dynamic workflows</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ============= 20. CH6 함정 ============= -->
     <section>
       <div class="vfill">
@@ -1736,6 +1811,8 @@ $ git worktree add ../feat-search feature/search
             <h3>📚 공식 문서 · 도구</h3>
             <ul>
               <li><a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a><span class="rd">Claude Code Docs — 커스텀 서브에이전트 정의·도구 권한</span></li>
+              <li><a href="https://code.claude.com/docs/en/workflows" target="_blank" rel="noopener">Dynamic workflows</a><span class="rd">Claude Code Docs — 스크립트로 수십~수백 에이전트 지휘</span></li>
+              <li><a href="https://code.claude.com/docs/en/agents" target="_blank" rel="noopener">Run agents in parallel</a><span class="rd">Claude Code Docs — 서브에이전트 · 에이전트 뷰 · 팀 · Workflow 비교</span></li>
               <li><a href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener">claude-code-action</a><span class="rd">GitHub Actions에서 에이전트 실행 — PR 리뷰·이슈 처리</span></li>
               <li><a href="https://git-scm.com/docs/git-worktree" target="_blank" rel="noopener">git worktree</a><span class="rd">병렬 작업 폴더 — 파일 충돌 격리의 표준 도구</span></li>
             </ul>

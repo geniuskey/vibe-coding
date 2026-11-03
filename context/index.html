@@ -53,6 +53,7 @@
     "image": "https://vibe-coding.euiyun.com/og/context.png?v=1",
     "inLanguage": "ko",
     "datePublished": "2026-07",
+    "dateModified": "2026-11",
     "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
     "isPartOf": "https://vibe-coding.euiyun.com/",
     "keywords": "컨텍스트, context window, context engineering, AI 에이전트, 바이브 코딩, CLAUDE.md, 서브에이전트, MCP, Agent Skill"
@@ -1047,7 +1048,7 @@
       <div class="vfill">
         <div class="grid-2" style="align-items:center;">
           <div>
-            <div class="chip">SEMINAR · 2026.07 · CONTEXT</div>
+            <div class="chip">SEMINAR · 2026.11 · CONTEXT</div>
             <h1 style="font-size:4.6rem;">
               <span class="grad">컨텍스트</span> —<br/>
               AI 에이전트의<br/>작업 책상
@@ -1062,7 +1063,7 @@
           </div>
           <div style="display:flex; flex-direction:column; align-items:center;">
             <figure class="ctx-box" aria-label="비어 있는 컨텍스트 창">
-              <div class="ctx-freelabel"><span class="mono">200K tokens</span><span class="sub">CONTEXT WINDOW</span></div>
+              <div class="ctx-freelabel"><span class="mono">1M tokens</span><span class="sub">CONTEXT WINDOW</span></div>
             </figure>
             <p class="ctx-caption">agent의 작업 책상</p>
           </div>
@@ -1075,9 +1076,9 @@
     <section class="tldr" data-depth="summary">
       <div class="chip">3분 요약 · TL;DR</div>
       <h2>결론부터 — 이 세 줄이면 됩니다</h2>
-      <p class="tldr-lede">AI 에이전트가 아는 건 지금 "상자(컨텍스트 창)" 안에 든 것뿐입니다. 상자는 작고, 차면 흐려집니다.</p>
+      <p class="tldr-lede">AI 에이전트가 아는 건 지금 "상자(컨텍스트 창)" 안에 든 것뿐입니다. 상자는 1M으로 커졌지만, 쌓일수록 흐려집니다.</p>
       <ol class="tldr-points">
-        <li><span class="n">1</span><div><strong>상자는 유한하고, 60%를 넘으면 품질이 먼저 떨어집니다</strong><span class="sub">시작만 해도 ~15%가 차 있습니다. 가득 차기 전에 요약하고 비우세요 (/compact, /clear).</span></div></li>
+        <li><span class="n">1</span><div><strong>상자가 커져도, 넘치기 전에 먼저 흐려집니다</strong><span class="sub">1M 상자는 좀처럼 넘치지 않지만, 쌓인 잡음에 핵심이 묻힙니다. /context로 확인하고, 작업이 끝나면 비우세요 (/compact, /clear).</span></div></li>
         <li><span class="n">2</span><div><strong>넣을 건 목표·완료 기준·정확한 위치, 뺄 건 긴 로그 전체</strong><span class="sub">로그는 마지막 부분 + 한 줄 설명이면 충분합니다. 한 세션에는 한 가지 일.</span></div></li>
         <li><span class="n">3</span><div><strong>오래 갈 기억은 파일로 — 상자는 휘발성, 파일은 영속</strong><span class="sub">CLAUDE.md · PLAN.md · NOTES.md. 무거운 탐색은 서브에이전트에게 맡겨 상자를 지킵니다.</span></div></li>
       </ol>
@@ -1140,19 +1141,19 @@
       <div class="vfill center">
         <div class="chip">CH 1 · 상자의 정체</div>
         <h2>크기는 정해져 있습니다</h2>
-        <div class="big grad" style="margin:.6rem 0 1.2rem;">200K</div>
+        <div class="big grad" style="margin:.6rem 0 1.2rem;">1M</div>
         <div class="grid-3" style="text-align:left;">
           <div class="card autoshow zoom-in">
-            <h3>📖 책 2~3권</h3>
-            <p>소설 500쪽 분량의 텍스트가 통째로 들어가는 크기</p>
+            <h3>📖 책 10권 남짓</h3>
+            <p>소설 500쪽짜리 여러 권이 통째로 들어가는 크기 — 2026년 Claude 기본</p>
           </div>
           <div class="card autoshow zoom-in">
-            <h3>📄 코드 2~3만 줄</h3>
-            <p>웬만한 중형 프로젝트의 핵심 소스 전체</p>
+            <h3>📄 코드 10만 줄 안팎</h3>
+            <p>웬만한 중형 프로젝트 하나가 통째로 들어가는 크기</p>
           </div>
           <div class="card bad autoshow zoom-in">
-            <h3>⚠️ 그런데 금방 찹니다</h3>
-            <p>에이전트 세션에서는 파일·로그·대화가 쏟아져 들어와 <strong>생각보다 훨씬 빨리</strong> 소진됩니다</p>
+            <h3>⚠️ 그런데 넘치기 전에 흐려집니다</h3>
+            <p>크기가 문제가 아니라 <strong>쌓인 양</strong>이 문제 — 들어갈 수 있다고 해서 다 잘 보는 건 아닙니다</p>
           </div>
         </div>
         <div class="tokcmp autoshow fade-up">
@@ -1166,13 +1167,13 @@
             <span class="tok-str"><span class="tk">로그</span><span class="tk">인</span><span class="tk"> 버</span><span class="tk">그</span><span class="tk">를</span><span class="tk"> 고</span><span class="tk">치</span><span class="tk">고</span><span class="tk"> 테스트</span><span class="tk">를</span><span class="tk"> 실</span><span class="tk">행</span><span class="tk">해</span><span class="tk">줘</span><span class="tk">.</span></span>
             <b class="tok-n accent3">~15 tok</b>
           </div>
-          <p class="small" style="margin:.25rem 0 0;">같은 의미라도 <strong class="accent3">한국어는 영어의 ~1.5–2배</strong> — 같은 200K여도 언어에 따라 <strong>체감 용량</strong>이 달라집니다. <span class="muted">그래서 긴 공통 지침은 영어로 쓰기도 합니다.</span></p>
+          <p class="small" style="margin:.25rem 0 0;">같은 의미라도 <strong class="accent3">한국어는 영어의 ~1.5–2배</strong> — 같은 1M이어도 언어에 따라 <strong>체감 용량</strong>이 달라집니다. <span class="muted">그래서 긴 공통 지침은 영어로 쓰기도 합니다.</span></p>
         </div>
-        <p class="tiny muted" style="margin-top:.9rem;">※ 이 발표의 모든 숫자는 감을 잡기 위한 <em>대략치</em>입니다. 모델·도구마다 다릅니다.</p>
+        <p class="tiny muted" style="margin-top:.9rem;">※ 이 발표의 모든 숫자는 감을 잡기 위한 <em>대략치</em>입니다. 모델·도구·요금제마다 다르니, 내 상자 크기와 사용량은 <code>/context</code>로 직접 확인하세요.</p>
         <aside class="notes">
           토크나이저는 영어 중심 텍스트로 만들어져 언어별 효율 격차가 크다.
           같은 의미의 문장도 한국어는 영어보다 대략 1.5~2배의 토큰을 쓰고, 일부 문자(버마어·아르메니아어 등)는 최대 10배까지 벌어진다(Yennie Jun, 2023).
-          그래서 같은 200K 상자라도 한국어 문서 위주면 체감 용량이 줄어든다.
+          그래서 같은 1M 상자라도 한국어 문서 위주면 체감 용량이 줄어든다.
           실전 팁: 매 세션 상주하는 긴 공통 지침(CLAUDE.md 등)은 영어로 쓰면 상주 비용이 줄어든다. 대화는 편한 언어로 해도 무방.
         </aside>
         <div class="slide-refs">
@@ -1190,12 +1191,12 @@
         <h2>상자 안에는 무엇이 들어가나</h2>
         <div class="row" style="align-items:center; gap:2.6rem; margin-top:.4rem;">
           <figure class="ctx-box ctx-anim" aria-label="컨텍스트 구성 요소">
-            <div class="ctx-freelabel"><span class="ctx-counter mono">92K</span><span class="mono"> / 200K</span></div>
-            <div class="ctx-seg seg-sys"  style="--h:12%"><span class="ctx-lab">System · 도구 정의</span></div>
-            <div class="ctx-seg seg-mem"  style="--h:2%"></div>
-            <div class="ctx-seg seg-conv" style="--h:10%"><span class="ctx-lab">요청 · 대화</span></div>
-            <div class="ctx-seg seg-tool" style="--h:18%"><span class="ctx-lab">파일 · 도구 결과</span></div>
-            <div class="ctx-seg seg-plan" style="--h:4%"></div>
+            <div class="ctx-freelabel"><span class="ctx-counter mono">92K</span><span class="mono"> / 1M</span></div>
+            <div class="ctx-seg seg-sys"  style="--h:2.4%"></div>
+            <div class="ctx-seg seg-mem"  style="--h:.4%"></div>
+            <div class="ctx-seg seg-conv" style="--h:2%"></div>
+            <div class="ctx-seg seg-tool" style="--h:3.6%"></div>
+            <div class="ctx-seg seg-plan" style="--h:.8%"></div>
           </figure>
           <div class="ctx-legend" style="flex:0 0 auto;">
             <div class="lg-row"><i class="sw sw-sys"></i>System/Developer 지시 · 도구 정의 <span class="tiny mono">(도구가 자동 주입 — 다음 장)</span><b class="mono">~24K</b></div>
@@ -1203,7 +1204,7 @@
             <div class="lg-row"><i class="sw sw-conv"></i>User 요청 + 대화 히스토리<b class="mono">~20K</b></div>
             <div class="lg-row"><i class="sw sw-tool"></i>검색 · 파일 · 도구 결과 <span class="tiny mono">(코드·로그·테스트)</span><b class="mono">~36K</b></div>
             <div class="lg-row"><i class="sw sw-plan"></i>에이전트의 중간 계획 <span class="tiny mono">(TODO·판단)</span><b class="mono">~8K</b></div>
-            <div class="lg-row"><i class="sw sw-free"></i>여유 공간 — 남은 작업 예산<b class="mono">~108K</b></div>
+            <div class="lg-row"><i class="sw sw-free"></i>여유 공간 — 남은 작업 예산<b class="mono">~908K</b></div>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.3rem; font-size:1.3rem;">
@@ -1211,7 +1212,7 @@
         </div>
         <aside class="notes">
           상자 안 구성: 아래부터 System·도구 정의(하네스가 자동 주입), 메모리·프로젝트 지침, 요청·대화 히스토리, 파일·도구 결과, 에이전트의 중간 계획, 그리고 여유 공간.
-          중간 작업 시점의 스냅샷 예시로 92K/200K — 파일·도구 결과가 가장 큰 소비처다.
+          중간 작업 시점의 스냅샷 예시로 92K/1M — 파일·도구 결과가 가장 큰 소비처다. 1M 상자에서는 아직 바닥에 깔린 얇은 층이지만, 에이전트는 이 층 전체를 매 턴 다시 읽는다.
           핵심: 에이전트는 매 턴 이 상자 전체를 다시 읽고 다음 행동을 결정한다. 상자가 곧 에이전트의 세계다.
         </aside>
         <div class="slide-refs">
@@ -1315,39 +1316,39 @@
       </div>
     </section>
 
-    <!-- ============= 6. 시작부터 15% ============= -->
+    <!-- ============= 6. 시작부터 상주 27K ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · 상자는 어떻게 차오르는가</div>
-        <h2>첫 인사를 하기도 전에, 이미 <span class="accent">~15%</span> <span class="tiny mono muted">— 방향키로 진행하세요 ▸</span></h2>
+        <h2>첫 인사를 하기도 전에, 이미 <span class="accent">27K</span> <span class="tiny mono muted">— 방향키로 진행하세요 ▸</span></h2>
         <div class="grid-2" style="margin-top:.4rem;">
           <div style="display:flex; justify-content:center;">
             <figure class="ctx-box" id="startBox" data-ctx-start='{"sys":"0%","mem":"0%"}' data-tokens-start="0" aria-label="세션 시작 시점의 컨텍스트">
-              <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="27">27</span><span class="mono">K / 200K</span><span class="sub">세션 시작 직후</span></div>
-              <div class="ctx-seg seg-sys" style="--h:12%"><span class="ctx-lab">System · 도구 정의 24K</span></div>
-              <div class="ctx-seg seg-mem" style="--h:1.5%"></div>
+              <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="27">27</span><span class="mono">K / 1M</span><span class="sub">세션 시작 직후</span></div>
+              <div class="ctx-seg seg-sys" style="--h:2.4%"></div>
+              <div class="ctx-seg seg-mem" style="--h:.3%"></div>
             </figure>
           </div>
           <div class="stack" style="gap:.8rem;">
             <ul class="sim-list">
               <li class="sim-line"><span>🔌 세션 시작 — 상자는 비어 있음</span><span class="tok mono muted">0K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"sys":"1.5%"}' data-ctx-tokens="3"><span>🖊 시스템 프롬프트 주입</span><span class="tok mono accent">+3K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"sys":"12%"}' data-ctx-tokens="24"><span>🧰 도구 정의 30~40개 — 이름·설명·파라미터</span><span class="tok mono accent">+21K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"mem":"1.5%"}' data-ctx-tokens="27"><span>📝 CLAUDE.md · 메모리 — <strong>매 세션 자동 로드</strong></span><span class="tok mono accent4">+3K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"sys":".3%"}' data-ctx-tokens="3"><span>🖊 시스템 프롬프트 주입</span><span class="tok mono accent">+3K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"sys":"2.4%"}' data-ctx-tokens="24"><span>🧰 도구 정의 30~40개 — 이름·설명·파라미터</span><span class="tok mono accent">+21K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#startBox" data-ctx='{"mem":".3%"}' data-ctx-tokens="27"><span>📝 CLAUDE.md · 메모리 — <strong>매 세션 자동 로드</strong></span><span class="tok mono accent4">+3K</span></li>
             </ul>
             <div class="fragment">
-              <div class="budget-bar" role="img" aria-label="200K 중 상주 27K를 제외한 실제 작업 예산 약 170K">
-                <div class="bseg b-fixed">상주 27K</div>
-                <div class="bseg b-work">실제 작업 예산 ~170K</div>
+              <div class="budget-bar" role="img" aria-label="1M 중 상주 27K — 상자의 3% 남짓">
+                <div class="bseg b-fixed" style="flex-basis:3%;"></div>
+                <div class="bseg b-work">◀ 상주 27K — 1M 상자의 3%, 작아 보이지만</div>
               </div>
-              <p style="font-size:1.28rem; margin:.7rem 0 0;">여기 넣은 글자는 <em>매 턴</em> 자리를 차지하는 <strong class="accent4">상주 비용</strong>입니다.</p>
+              <p style="font-size:1.28rem; margin:.7rem 0 0;">여기 넣은 글자는 <em>매 턴</em> 다시 읽히는 <strong class="accent4">상주 비용</strong>입니다 — 길수록 느려지고, 비싸지고, 핵심이 묻힙니다.</p>
             </div>
           </div>
         </div>
         <aside class="notes">
           시스템 프롬프트 약 3K + 도구 정의 15~20K + CLAUDE.md·메모리 1~5K가 세션 시작과 동시에 자동 로드된다.
-          이 영역에 넣은 모든 글자는 매 턴 자리를 차지하는 상주 비용이므로 프로젝트 지침은 간결해야 한다.
-          결론: 실제 작업 예산은 200K가 아니라 약 170K다.
+          이 영역에 넣은 모든 글자는 매 턴 다시 읽히는 상주 비용이므로 프로젝트 지침은 간결해야 한다.
+          1M 상자에서 27K는 3%에 불과해 "여유롭다"고 느끼기 쉽다. 하지만 상주 비용은 공간이 아니라 매 턴의 속도·비용·주의력을 갉아먹는다 — CLAUDE.md가 길수록 정작 중요한 규칙이 묻힌다.
         </aside>
         <div class="slide-refs">
           <span class="rl">REF</span>
@@ -1384,19 +1385,19 @@
           <div class="stack" style="gap:.7rem; flex:1; max-width:420px;">
             <ul class="sim-list">
               <li class="sim-line"><span>세션 시작</span><span class="tok mono accent">27K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":"4.5%"}' data-ctx-tokens="36"><span>↺ 1바퀴 — 관련 파일 읽기</span><span class="tok mono accent3">+9K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":"12%"}' data-ctx-tokens="51"><span>↺ 2바퀴 — 테스트 실행 로그</span><span class="tok mono accent3">+15K</span></li>
-              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":"15%","conv":"3%"}' data-ctx-tokens="63"><span>↺ 3바퀴 — 수정 diff · 재검증</span><span class="tok mono accent2">+12K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":".9%"}' data-ctx-tokens="36"><span>↺ 1바퀴 — 관련 파일 읽기</span><span class="tok mono accent3">+9K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":"2.4%"}' data-ctx-tokens="51"><span>↺ 2바퀴 — 테스트 실행 로그</span><span class="tok mono accent3">+15K</span></li>
+              <li class="sim-line fragment" data-ctx-target="#loopBox" data-ctx='{"tool":"3%","conv":".6%"}' data-ctx-tokens="63"><span>↺ 3바퀴 — 수정 diff · 재검증</span><span class="tok mono accent2">+12K</span></li>
             </ul>
             <p class="fragment" style="font-size:1.28rem; margin:0;">모든 파일을 미리 읽지 않고, <strong class="accent2">필요한 것만 점진적으로</strong> 끌어옵니다.</p>
           </div>
           <div style="display:flex; flex-direction:column; align-items:center;">
             <figure class="ctx-box slim" id="loopBox" data-ctx-start='{"conv":"0%","tool":"0%"}' data-tokens-start="27" aria-label="루프가 돌수록 차오르는 컨텍스트">
-              <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="63">63</span><span class="mono">K / 200K</span></div>
-              <div class="ctx-seg seg-sys" style="--h:12%"><span class="ctx-lab">System · 도구</span></div>
-              <div class="ctx-seg seg-mem" style="--h:1.5%"></div>
-              <div class="ctx-seg seg-conv" style="--h:3%"></div>
-              <div class="ctx-seg seg-tool" style="--h:15%"><span class="ctx-lab">파일 · 로그</span></div>
+              <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="63">63</span><span class="mono">K / 1M</span></div>
+              <div class="ctx-seg seg-sys" style="--h:2.4%"></div>
+              <div class="ctx-seg seg-mem" style="--h:.3%"></div>
+              <div class="ctx-seg seg-conv" style="--h:.6%"></div>
+              <div class="ctx-seg seg-tool" style="--h:3%"></div>
             </figure>
             <p class="ctx-caption">루프마다 조금씩 ↑</p>
           </div>
@@ -1417,26 +1418,26 @@
         <div class="row" style="align-items:center; gap:2.4rem; margin-top:.4rem;">
           <ul class="sim-list" style="flex:1;">
             <li class="sim-line"><span>💬 세션 시작 — 시스템 + 도구 + CLAUDE.md</span><span class="tok mono accent">27K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":"2%"}' data-ctx-tokens="31"><span>🙋 "로그인 버그 고쳐줘" + 계획 수립</span><span class="tok mono accent2">+4K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"tool":"17.5%"}' data-ctx-tokens="66"><span>📂 auth.py · login_service.py · test_auth.py 읽기</span><span class="tok mono accent3">+35K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":"5%","tool":"23.5%"}' data-ctx-tokens="84"><span>✏️ 원인 추정 · 코드 수정 · diff 출력</span><span class="tok mono accent3">+18K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"tool":"43.5%"}' data-ctx-tokens="124"><span>🧪 테스트 실행 — 장황한 로그가 통째로</span><span class="tok mono accent3">+40K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":"20%","plan":"6%"}' data-ctx-tokens="166"><span>🔁 재수정 왕복 ×6 + 중간 판단</span><span class="tok mono accent2">+42K</span></li>
-            <li class="fragment" style="list-style:none;"><div class="quote" style="font-size:1.3rem;"><strong class="danger">83%</strong> — 버그 하나 고쳤을 뿐인데.<br/><span class="small">"필요한 정보"와 "이제는 필요 없는 정보"가 뒤섞이기 시작합니다.</span></div></li>
+            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":".4%"}' data-ctx-tokens="31"><span>🙋 "로그인 버그 고쳐줘" + 계획 수립</span><span class="tok mono accent2">+4K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"tool":"3.5%"}' data-ctx-tokens="66"><span>📂 auth.py · login_service.py · test_auth.py 읽기</span><span class="tok mono accent3">+35K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":"1%","tool":"4.7%"}' data-ctx-tokens="84"><span>✏️ 원인 추정 · 코드 수정 · diff 출력</span><span class="tok mono accent3">+18K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"tool":"8.7%"}' data-ctx-tokens="124"><span>🧪 테스트 실행 — 장황한 로그가 통째로</span><span class="tok mono accent3">+40K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#simBox" data-ctx='{"conv":"4%","plan":"1.2%"}' data-ctx-tokens="166"><span>🔁 재수정 왕복 ×6 + 중간 판단</span><span class="tok mono accent2">+42K</span></li>
+            <li class="fragment" style="list-style:none;"><div class="quote" style="font-size:1.3rem;">상자는 겨우 <strong class="accent2">17%</strong> — 그런데 <strong class="danger">166K 중 핵심은 몇 줄</strong>뿐.<br/><span class="small">"필요한 정보"와 "이제는 필요 없는 정보"가 뒤섞이기 시작합니다. 넘칠 걱정보다 묻힐 걱정이 먼저입니다.</span></div></li>
           </ul>
           <figure class="ctx-box" id="simBox" aria-label="세션이 진행되며 차오르는 컨텍스트"
                   data-ctx-start='{"conv":"0%","tool":"0%","plan":"0%"}' data-tokens-start="27">
-            <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="166">166</span><span class="mono">K / 200K</span></div>
-            <div class="ctx-seg seg-sys"  style="--h:12%"><span class="ctx-lab">System · 도구</span></div>
-            <div class="ctx-seg seg-mem"  style="--h:1.5%"></div>
-            <div class="ctx-seg seg-conv" style="--h:20%"><span class="ctx-lab">대화</span></div>
-            <div class="ctx-seg seg-tool" style="--h:43.5%"><span class="ctx-lab">파일 · 로그</span></div>
-            <div class="ctx-seg seg-plan" style="--h:6%"></div>
+            <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="166">166</span><span class="mono">K / 1M</span></div>
+            <div class="ctx-seg seg-sys"  style="--h:2.4%"></div>
+            <div class="ctx-seg seg-mem"  style="--h:.3%"></div>
+            <div class="ctx-seg seg-conv" style="--h:4%"></div>
+            <div class="ctx-seg seg-tool" style="--h:8.7%"><span class="ctx-lab">파일 · 로그</span></div>
+            <div class="ctx-seg seg-plan" style="--h:1.2%"></div>
             <div class="ctx-limit" data-label="auto-compact ~80%"></div>
           </figure>
         </div>
         <aside class="notes">
-          버그 하나 고치는 평범한 세션의 시뮬레이션: 시작 27K → 파일 3개 읽기 +35K → 수정·diff +18K → 테스트 로그가 통째로 +40K → 재수정 왕복 6번 +42K = 166K(83%).
+          버그 하나 고치는 평범한 세션의 시뮬레이션: 시작 27K → 파일 3개 읽기 +35K → 수정·diff +18K → 테스트 로그가 통째로 +40K → 재수정 왕복 6번 +42K = 166K. 200K 시절엔 83%로 한계 직전이었지만, 1M 상자에선 17% — 넘치지는 않는다. 그래서 더 위험하다: 경고 없이 계속 쌓이고, 품질은 조용히 떨어진다(다음 장).
           가장 큰 소비처는 장황한 테스트 로그와 반복 왕복이다.
           이 시점의 상자에는 "여전히 필요한 정보"와 "이미 끝난 정보"(초기 탐색, 실패한 시도, 통과한 테스트 로그)가 뒤섞여 있다 — 다음 장의 문제로 이어진다.
         </aside>
@@ -1509,15 +1510,15 @@
         <div class="row" style="align-items:center; gap:2.6rem; margin-top:.4rem;">
           <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
             <figure class="ctx-box ctx-anim danger-box" aria-label="한계에 도달한 컨텍스트">
-              <div class="ctx-freelabel"><span class="mono danger">184K / 200K</span></div>
-              <div class="ctx-seg seg-sys"  style="--h:12%"><span class="ctx-lab">System · 도구</span></div>
-              <div class="ctx-seg seg-mem"  style="--h:2%"></div>
-              <div class="ctx-seg seg-conv" style="--h:30%"><span class="ctx-lab">대화 히스토리</span></div>
-              <div class="ctx-seg seg-tool" style="--h:42%"><span class="ctx-lab">파일 · 로그</span></div>
+              <div class="ctx-freelabel"><span class="mono danger">~920K / 1M</span></div>
+              <div class="ctx-seg seg-sys"  style="--h:3%"></div>
+              <div class="ctx-seg seg-mem"  style="--h:.5%"></div>
+              <div class="ctx-seg seg-conv" style="--h:34.5%"><span class="ctx-lab">대화 히스토리</span></div>
+              <div class="ctx-seg seg-tool" style="--h:48%"><span class="ctx-lab">파일 · 로그</span></div>
               <div class="ctx-seg seg-danger" style="--h:6%"></div>
               <div class="ctx-limit" data-label="auto-compact ~80%"></div>
             </figure>
-            <p class="ctx-caption danger">92% — 한계 임박</p>
+            <p class="ctx-caption danger">92% — 하루 종일 끌고 온 세션</p>
           </div>
           <div class="stack" style="gap:.85rem; flex:1;">
             <p class="autoshow fade-up" style="font-size:1.28rem;">한계선을 넘으면 <strong class="accent4">자동 압축</strong> — 과거 대화가 <em>요약본으로 교체</em>되고, 세부 결정·이유·예외가 사라집니다.</p>
@@ -1526,15 +1527,15 @@
               <line x1="30" y1="120" x2="405" y2="120" stroke="#8A93B2" stroke-width="1.5"/>
               <path class="curve-draw" d="M 30 25 C 140 27, 200 32, 260 55 S 370 108, 400 115" fill="none" stroke="#FF7A95" stroke-width="3.5" stroke-linecap="round"/>
               <line x1="235" y1="20" x2="235" y2="120" stroke="#FFD46B" stroke-width="1.5" stroke-dasharray="5 4"/>
-              <text x="240" y="32" font-size="12" fill="#FFE08A" font-family="JetBrains Mono">~60%: 심리적 마지노선</text>
+              <text x="240" y="32" font-size="12" fill="#FFE08A" font-family="JetBrains Mono">한계선보다 훨씬 앞에서</text>
               <text x="36" y="20" font-size="12" fill="#E6D9FF" font-family="JetBrains Mono">응답 품질</text>
               <text x="330" y="138" font-size="12" fill="#E6D9FF" font-family="JetBrains Mono">context 사용량 →</text>
             </svg>
-            <p class="autoshow fade-up" style="font-size:1.28rem;">가득 차기 <em>전에</em> 이미 나빠집니다 — <strong class="accent3">context rot</strong></p>
+            <p class="autoshow fade-up" style="font-size:1.28rem;">가득 차기 <em>한참 전에</em> 이미 나빠집니다 — <strong class="accent3">context rot</strong>. 1M 상자에선 압축보다 이쪽을 먼저 만납니다.</p>
           </div>
         </div>
         <aside class="notes">
-          한계선(auto-compact 약 80%)을 넘으면 자동 압축이 일어나 과거 대화가 요약본으로 교체된다.
+          1M 상자도 한계선에 닿으면 자동 압축이 일어나 과거 대화가 요약본으로 교체된다. 다만 1M에선 작업 여러 개를 한 세션에 하루 종일 몰아넣어야 닿는 선이다 — 그 전에 품질이 먼저 떨어진다.
           요약은 손실 압축이라 세부 결정·이유·예외 사항이 사라진다 — "아까 말했잖아"가 통하지 않는 순간이 온다.
           그리고 가득 차기 전에 이미 나빠진다(context rot): 중간에 있는 정보를 놓치고(lost in the middle), 오래된 지시는 최신 잡음에 밀린다.
         </aside>
@@ -1871,7 +1872,7 @@ auth.py를 고쳐 테스트가 통과했다."</pre>
             <div class="mini-pair" style="margin:.4rem 0;">
               <figure class="ctx-box mini"><div class="ctx-freelabel"><span class="mono">85%</span></div><div class="ctx-seg seg-sys" style="--h:14%"></div><div class="ctx-seg seg-conv" style="--h:41%"></div><div class="ctx-seg seg-tool" style="--h:30%"></div></figure>
               <span class="arr">→</span>
-              <figure class="ctx-box mini"><div class="ctx-freelabel"><span class="mono accent2">14%</span></div><div class="ctx-seg seg-sys" style="--h:14%"></div></figure>
+              <figure class="ctx-box mini"><div class="ctx-freelabel"><span class="mono accent2">~3%</span></div><div class="ctx-seg seg-sys" style="--h:3%"></div></figure>
             </div>
             <p><strong class="accent2">작업 하나 = 세션 하나</strong>가 기본기</p>
           </div>
@@ -2043,19 +2044,19 @@ auth.py를 고쳐 테스트가 통과했다."</pre>
         <div class="row" style="align-items:center; gap:2.4rem;">
           <ul class="sim-list" style="flex:1;">
             <li class="sim-line"><span>🔧 기본 도구만 — 파일 · 터미널 · 검색</span><span class="tok mono accent">24K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"21%"}' data-ctx-tokens="42"><span>🔀 + GitHub 서버 — 도구 35개의 이름·설명·파라미터</span><span class="tok mono accent3">+18K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"27%"}' data-ctx-tokens="54"><span>💬 + Slack 서버 — 도구 11개</span><span class="tok mono accent3">+12K</span></li>
-            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"36%"}' data-ctx-tokens="72"><span>📋 + Jira · 사내 DB 서버 …</span><span class="tok mono accent3">+18K</span></li>
-            <li class="fragment" style="list-style:none;"><div class="quote" style="font-size:1.18rem;">첫 인사도 전에 <strong class="danger">36%</strong> — 도구의 <em>정의</em>도 전부 컨텍스트입니다.<br/><span class="small">그래서 최신 하네스는 도구 <strong>이름만</strong> 올려두고 상세 스키마는 필요할 때 검색해 로드합니다(Tool Search). 안 쓰는 서버는 빼는 게 기본입니다.</span></div></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"4.2%"}' data-ctx-tokens="42"><span>🔀 + GitHub 서버 — 도구 35개의 이름·설명·파라미터</span><span class="tok mono accent3">+18K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"5.4%"}' data-ctx-tokens="54"><span>💬 + Slack 서버 — 도구 11개</span><span class="tok mono accent3">+12K</span></li>
+            <li class="sim-line fragment" data-ctx-target="#mcpBox" data-ctx='{"sys":"7.2%"}' data-ctx-tokens="72"><span>📋 + Jira · 사내 DB 서버 …</span><span class="tok mono accent3">+18K</span></li>
+            <li class="fragment" style="list-style:none;"><div class="quote" style="font-size:1.18rem;">첫 인사도 전에 <strong class="danger">72K</strong> — 도구의 <em>정의</em>도 전부 컨텍스트입니다.<br/><span class="small">비슷한 도구 수십 개가 늘어서면 AI가 고르다 헷갈리고, 매 턴 다시 읽혀 느려집니다. 그래서 최신 하네스는 도구 <strong>이름만</strong> 올려두고 상세 스키마는 필요할 때 검색해 로드합니다(Tool Search). 안 쓰는 서버는 빼는 게 기본입니다.</span></div></li>
           </ul>
-          <figure class="ctx-box slim" id="mcpBox" data-ctx-start='{"sys":"12%"}' data-tokens-start="24" aria-label="MCP 서버를 붙일수록 커지는 System 영역">
-            <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="72">72</span><span class="mono">K / 200K</span><span class="sub">대화 시작 전</span></div>
-            <div class="ctx-seg seg-sys" style="--h:36%"><span class="ctx-lab">System · 도구 정의</span></div>
+          <figure class="ctx-box slim" id="mcpBox" data-ctx-start='{"sys":"2.4%"}' data-tokens-start="24" aria-label="MCP 서버를 붙일수록 커지는 System 영역">
+            <div class="ctx-freelabel"><span class="ctx-counter mono" data-count="72">72</span><span class="mono">K / 1M</span><span class="sub">대화 시작 전</span></div>
+            <div class="ctx-seg seg-sys" style="--h:7.2%"><span class="ctx-lab">도구 정의</span></div>
           </figure>
         </div>
         <aside class="notes">
           MCP는 외부 도구·데이터 소스를 하네스에 연결하는 공개 표준("AI 도구의 USB-C").
-          단 서버를 붙이는 순간 그 서버의 도구 정의(이름·설명·파라미터 스키마)가 전부 System 영역에 상주한다 — GitHub+Slack+Jira만 붙여도 첫 인사 전에 36%.
+          단 서버를 붙이는 순간 그 서버의 도구 정의(이름·설명·파라미터 스키마)가 전부 System 영역에 상주한다 — GitHub+Slack+Jira만 붙여도 첫 인사 전에 72K. 1M 상자에선 7%라 공간 문제는 아니지만, 비슷한 도구가 수십 개 늘어서면 도구 선택이 흔들리고 매 턴의 비용·지연이 늘어난다.
           대응: 안 쓰는 서버는 빼는 게 기본, 최신 하네스는 Tool Search로 이름만 올려두고 상세 스키마는 필요할 때 로드한다.
         </aside>
         <div class="slide-refs">
@@ -2263,9 +2264,9 @@ wafer Y 수율이 <span class="nm">72.3%</span>로 떨어졌고…"</pre>
             <h2 style="font-size:2.6rem;">좋은 사용자는<br/><span class="grad">context 설계자</span>입니다</h2>
             <ol style="font-size:1.3rem; line-height:1.7; padding-left:1.3em; margin:.8rem 0;">
               <li class="autoshow fade-up">상자 밖은 <strong>존재하지 않는다</strong></li>
-              <li class="autoshow fade-up">상자는 유한하고, <strong>시작부터 ~15%는 없다</strong></li>
+              <li class="autoshow fade-up">상자는 커졌지만, <strong>넘치기 전에 흐려진다</strong></li>
               <li class="autoshow fade-up">모든 행동에는 <strong>토큰 가격</strong>이 있다</li>
-              <li class="autoshow fade-up"><strong class="accent4">60%를 넘기 전에</strong> — 비우거나, 쪼개거나, 격리하라</li>
+              <li class="autoshow fade-up"><strong class="accent4">작업이 끝나면</strong> — 비우거나, 쪼개거나, 격리하라</li>
             </ol>
             <div class="quote autoshow fade-up" style="font-size:1.32rem;">
               좋은 답을 <em>요구</em>하는 것이 아니라,<br/>
@@ -2289,8 +2290,8 @@ wafer Y 수율이 <span class="nm">72.3%</span>로 떨어졌고…"</pre>
         </div>
         <aside class="notes">
           네 가지만 기억하면 된다: (1) 상자 밖은 존재하지 않는다 — 필요한 정보는 상자에 올려라.
-          (2) 상자는 유한하고 시작부터 ~15%는 상주 비용이다. (3) 파일 읽기·로그·왕복 등 모든 행동에 토큰 가격이 있다.
-          (4) 60%를 넘기 전에 비우거나(/clear·/compact), 쪼개거나(작업 하나=세션 하나), 격리하라(서브에이전트).
+          (2) 상자는 1M으로 커졌지만 쌓일수록 흐려진다(context rot) — 넘칠 걱정보다 묻힐 걱정이 먼저다. (3) 파일 읽기·로그·왕복 등 모든 행동에 토큰 가격이 있다.
+          (4) 작업 하나가 끝나면 비우거나(/clear·/compact), 쪼개거나(작업 하나=세션 하나), 격리하라(서브에이전트).
           마무리 메시지: 좋은 답을 요구하는 것이 아니라, 좋은 판단이 나올 수 있는 작업 환경(상자)을 만들어주는 것.
         </aside>
       </div>
@@ -2345,8 +2346,8 @@ wafer Y 수율이 <span class="nm">72.3%</span>로 떨어졌고…"</pre>
     function setCounter(box, target, instant) {
       const el = box.querySelector('.ctx-counter');
       if (!el) return;
-      el.classList.toggle('warn', target >= 120 && target < 160);
-      el.classList.toggle('crit', target >= 160);
+      el.classList.toggle('warn', target >= 500 && target < 800);
+      el.classList.toggle('crit', target >= 800);
       const cur = Number(el.textContent) || 0;
       if (instant || reducedMotion || cur === target) {
         cancelAnimationFrame(rafs.get(el));

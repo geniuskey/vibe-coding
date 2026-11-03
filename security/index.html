@@ -53,6 +53,7 @@
     "image": "https://vibe-coding.euiyun.com/og/security.png?v=1",
     "inLanguage": "ko",
     "datePublished": "2026-07",
+    "dateModified": "2026-11",
     "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
     "isPartOf": "https://vibe-coding.euiyun.com/",
     "keywords": "AI 보안, 프롬프트 인젝션, prompt injection, 거버넌스, 권한 설계, 데이터 보안, 바이브 코딩, AI 에이전트, OWASP LLM"
@@ -1080,7 +1081,7 @@
       border:1px solid rgba(255,122,149,.6); background:rgba(255,122,149,.09);
     }
 
-    /* ④ 권한 다이얼 — 읽기 전용에서 YOLO까지 */
+    /* ④ 권한 다이얼 — plan · manual · auto(기본) · bypass */
     .permrow { display:flex; align-items:stretch; gap:.7rem; justify-content:center; flex-wrap:nowrap; margin:.5rem 0; }
     .perm-step {
       flex:1 1 0; min-width:0; padding:.85rem .8rem; border-radius:14px; text-align:center;
@@ -1093,6 +1094,8 @@
     .perm-step.p2 { border-color:rgba(155,130,255,.6); }
     .perm-step.p3 { border-color:rgba(255,212,107,.6); }
     .perm-step.p4 { border-color:rgba(255,122,149,.65); background:rgba(255,122,149,.08); }
+    .perm-step.is-default { box-shadow:0 0 0 2px rgba(255,212,107,.85); }
+    .perm-default { align-self:center; font-size:.7rem; font-weight:800; padding:.1rem .5rem; border-radius:999px; background:rgba(255,212,107,.18); color:#FFE08A !important; }
     .perm-gauge { font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.05em; color:#9BA6C0 !important; }
 
     /* 데이터 등급 매트릭스 */
@@ -1131,7 +1134,7 @@
       <div class="vfill">
         <div class="grid-2" style="align-items:center;">
           <div>
-            <div class="chip">SEMINAR · 2026.07 · 02 더 깊이 · SECURITY</div>
+            <div class="chip">SEMINAR · 2026.11 · 02 더 깊이 · SECURITY</div>
             <h1 style="font-size:4.4rem;">
               사내 환경에서의<br/><span class="grad">AI</span> 🔐
             </h1>
@@ -1160,7 +1163,7 @@
       <ol class="tldr-points">
         <li><span class="n">1</span><div><strong>모델보다 데이터 경로 — 학습 사용 · 보관 기간 · 저장 지역</strong><span class="sub">개인 앱, 기업 플랜, 사내 게이트웨이는 같은 "AI"라도 전혀 다릅니다.</span></div></li>
         <li><span class="n">2</span><div><strong>컨텍스트에 올린 것 = 이미 전송한 것</strong><span class="sub">.env · 키 · 고객 데이터는 AI가 읽기 전에 빼 두세요. 유출된 키는 즉시 재발급.</span></div></li>
-        <li><span class="n">3</span><div><strong>외부 문서는 믿지 말고, 권한은 읽기 전용부터</strong><span class="sub">민감 데이터 + 신뢰 못 할 입력 + 외부 전송 — 셋 중 하나를 끊으면 인젝션이 무력화됩니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>외부 문서는 믿지 말고, 실데이터 앞에선 Auto를 내린다</strong><span class="sub">민감 데이터 + 신뢰 못 할 입력 + 외부 전송 — 셋 중 하나를 끊으면 인젝션이 무력화됩니다.</span></div></li>
       </ol>
       <div class="tldr-bottom">
         <div class="tldr-prompt">
@@ -1414,22 +1417,26 @@
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 권한 설계</div>
-        <h2>권한은 <span class="grad">읽기 전용부터</span> 점진적으로</h2>
+        <h2>권한은 <span class="grad">일의 위험도</span>에 맞춰 고른다</h2>
         <div class="permrow">
-          <div class="perm-step p1"><span class="perm-gauge">LV1</span><h4>👀 읽기 전용</h4><p>보기만. 아무것도 못 바꿈. 여기서 시작.</p></div>
-          <div class="perm-step p2"><span class="perm-gauge">LV2</span><h4>✅ 허용목록</h4><p>안전한 명령만 자동 승인(allowlist)</p></div>
-          <div class="perm-step p3"><span class="perm-gauge">LV3</span><h4>🚦 확인 후 실행</h4><p>위험 행동은 매번 사람 승인</p></div>
-          <div class="perm-step p4"><span class="perm-gauge">LV4</span><h4>🎢 자동 승인</h4><p>"YOLO" — 되돌릴 수 있는 곳에서만</p></div>
+          <div class="perm-step p1"><span class="perm-gauge">LV1 · plan</span><h4>👀 계획만</h4><p>읽고 계획만 세움. 아무것도 안 바꿈.</p></div>
+          <div class="perm-step p2"><span class="perm-gauge">LV2 · manual</span><h4>🚦 매번 승인</h4><p>수정·명령마다 사람이 확인. 실데이터·처음 보는 저장소.</p></div>
+          <div class="perm-step p3 is-default"><span class="perm-default">지금의 기본값</span><span class="perm-gauge">LV3 · auto</span><h4>🤖 분류기가 대신 판단</h4><p>요청 범위 안은 자동, 범위를 넘거나 위험한 건 차단.</p></div>
+          <div class="perm-step p4"><span class="perm-gauge">LV4 · bypass</span><h4>🎢 전부 자동</h4><p>모든 확인 생략 — 격리된 컨테이너·VM에서만.</p></div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.24rem;">
-          자동 승인은 <strong class="accent2">샌드박스·컨테이너</strong> 안에서만 — 되돌릴 수 있어야 과감할 수 있습니다.
+          출발점은 이미 <strong class="accent4">LV3(Auto)</strong>입니다 — 회사 실데이터를 다룰 땐 <span class="mono">Shift+Tab</span>으로 <strong class="accent2">한 단계 내리세요.</strong>
         </div>
+        <p class="muted center" style="margin-top:.6rem; font-size:.95rem;">허용·거부 규칙(<span class="mono">/permissions</span>)은 어느 모드에서든 위에 겹쳐집니다. 팀은 관리 설정으로 Auto 자체를 끌 수 있습니다(<span class="mono">disableAutoMode</span>).</p>
         <aside class="notes">
-          권한은 한 번에 다 열지 말고 읽기 전용에서 시작해 단계적으로 넓힌다 — 안전한 명령만 허용목록으로 자동 승인, 위험 행동은 확인 후 실행, 완전 자동(YOLO)은 마지막.
-          자동 승인 모드는 격리된 샌드박스·컨테이너처럼 되돌릴 수 있는 환경에서만 켜야 한다. 되돌릴 수 있다는 전제가 과감한 위임을 가능하게 한다.
+          2026년 8월(v2.1.283)부터 Claude Code는 터미널·VS Code에서 모든 요금제가 Auto 모드로 시작한다. "읽기 전용에서 시작해 넓힌다"가 아니라, 이미 꽤 열린 상태에서 시작해 위험도에 맞춰 내리는 구조로 바뀐 것.
+          Auto는 별도의 분류기 모델이 행동을 실행 전에 검사한다 — 작업 폴더 안 파일 수정·읽기·락파일 기준 의존성 설치는 자동, curl|bash 같은 다운로드 후 실행·운영 배포·force push는 기본 차단, .git·.claude 같은 보호 경로와 rm -rf ~ 류는 여전히 묻는다. 공식 문서도 "안전을 보장하지는 않는다"고 명시한다.
+          그래서 실무 원칙: 회사 실데이터·처음 보는 저장소·외부 문서를 읽히는 작업은 Shift+Tab으로 Manual(또는 Plan)로 내린다. deny 규칙은 bypass에서도 막으므로, 절대 건드리면 안 되는 경로는 /permissions의 deny로 못박는다. 조직은 managed settings의 disableAutoMode로 Auto를 끌 수 있다.
+          Bypass(전부 자동)는 여전히 격리된 컨테이너·VM에서만 — 되돌릴 수 있다는 전제가 과감한 위임을 가능하게 한다.
         </aside>
         <div class="slide-refs">
           <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener">Claude Code Docs · 권한 모드</a>
           <a href="https://code.claude.com/docs/en/iam" target="_blank" rel="noopener">Claude Code Docs · 권한·IAM</a>
         </div>
       </div>
@@ -1531,7 +1538,7 @@
             <p>☑️ 외부 콘텐츠 읽는 곳의 <strong>권한</strong>이 최소인가</p>
           </div>
           <div class="card autoshow fade-left">
-            <p>☑️ 위험 행동에 <strong>사람 승인</strong> 게이트가 있나</p>
+            <p>☑️ 위험 행동에 <strong>사람 승인</strong> 게이트가 있나 <span class="tiny muted">(기본값 Auto라면 더더욱)</span></p>
             <p>☑️ 되돌리기(<strong class="accent2">git·샌드박스</strong>) 경로가 있나</p>
             <p>☑️ 이 데이터 등급이 <strong>팀 규칙상</strong> 허용인가</p>
           </div>
@@ -1552,7 +1559,7 @@
         <div style="display:flex; flex-direction:column; gap:1rem; max-width:1000px; margin:.6rem auto 0;">
           <div class="card autoshow fade-up" style="text-align:left;"><h3>1. 큰 질문을 작게 쪼개라</h3><p>"써도 되나"가 아니라 <strong class="accent2">데이터·학습·지시·권한</strong> 네 질문으로.</p></div>
           <div class="card autoshow fade-up" style="text-align:left;"><h3>2. 컨텍스트에 올린 건 전송한 것</h3><p>인젝션이 무서운 건 에이전트가 <strong class="accent3">손(도구)</strong>을 쥐고 있어서입니다.</p></div>
-          <div class="card autoshow fade-up" style="text-align:left;"><h3>3. 권한은 좁게, 되돌릴 수 있게</h3><p>읽기 전용부터 · 위험엔 승인 · git과 샌드박스가 안전망. 책임은 사람에게.</p></div>
+          <div class="card autoshow fade-up" style="text-align:left;"><h3>3. 권한은 좁게, 되돌릴 수 있게</h3><p>기본값 Auto를 알고 · 실데이터엔 Manual로 · git과 샌드박스가 안전망. 책임은 사람에게.</p></div>
         </div>
         <aside class="notes">
           세 문장 요약. (1) 막연한 질문을 데이터·학습·지시·권한 네 개로 쪼갠다. (2) 컨텍스트에 올린 건 이미 전송한 것이고, 인젝션은 에이전트가 도구를 쥐어서 위험하다.

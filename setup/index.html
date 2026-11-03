@@ -893,7 +893,7 @@ window.SEMINAR_CONFIG = {
         </div>
         <div class="grid-2" style="align-items:start; margin-top:.5rem;">
           <div class="card good autoshow fade-left">
-            <h3>✅ <span class="mono">v18</span> 이상 숫자가 나오면</h3>
+            <h3>✅ <span class="mono">v22</span> 이상 숫자가 나오면</h3>
             <p>통과입니다. 이 슬라이드는 끝 — 다음 STEP으로.</p>
           </div>
           <div class="card autoshow fade-right">
@@ -903,7 +903,7 @@ window.SEMINAR_CONFIG = {
         </div>
         <div class="manual-box autoshow fade-up">
           <p class="mb-title">참고 — Node.js가 왜 필요한가요?</p>
-          <p class="mb-note">npm 방식으로 도구를 설치할 때의 밑바탕입니다. 다음 STEP의 공식 설치 스크립트를 쓰면 Node.js 없이도 되는 경우가 있지만, 실습·배포에서 두루 쓰이므로 깔아두면 두고두고 이득입니다.</p>
+          <p class="mb-note">npm 방식(방법 B)으로 설치할 때만 필요하며, 이때는 v22 이상이어야 합니다. 다음 STEP의 공식 설치 스크립트(방법 A)는 Node.js 없이 됩니다 — 다만 실습·배포에서 두루 쓰이므로 깔아두면 두고두고 이득입니다.</p>
         </div>
       </div>
       <aside class="notes">
@@ -943,11 +943,12 @@ window.SEMINAR_CONFIG = {
         <p class="tiny muted autoshow fade-up" style="margin-top:.8rem;">
           도구는 빠르게 바뀝니다 — 명령이 안 먹으면 공식 문서
           <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>의 최신 설치 안내를 따르세요.
+          터미널이 막혀 있거나 부담스럽다면 <a href="https://claude.com/download" target="_blank" rel="noopener">데스크톱 앱</a>의 Code 탭에서도 같은 Claude Code를 쓸 수 있습니다.
         </p>
       </div>
       <aside class="notes">
         복사 버튼으로 그대로 붙여넣게 안내. Windows에서 PowerShell 실행 정책 에러가 나면 "관리자 PowerShell"로 다시 시도.
-        여기가 오늘의 첫 병목 — 조교가 순회하기 시작할 타이밍. 설치 스크립트/명령은 시점에 따라 바뀔 수 있으므로, 발표 전에 공식 문서와 대조해 한 번 검증할 것.
+        여기가 오늘의 첫 병목 — 조교가 순회하기 시작할 타이밍. 설치 스크립트/명령은 시점에 따라 바뀔 수 있으므로, 발표 전에 공식 문서와 대조해 한 번 검증할 것(2026-11 확인: 방법 A·B 그대로 유효, npm은 Node 22+ 필요, Windows는 관리자 권한 불필요).
       </aside>
     </section>
 
@@ -1037,8 +1038,8 @@ window.SEMINAR_CONFIG = {
             <p>AI는 주고받는 모든 글을 <strong>토큰</strong>으로 계산합니다. 대화가 길수록, 읽는 파일이 클수록 토큰이 늘어납니다.</p>
           </div>
           <div class="card autoshow zoom-in">
-            <h3>⏳ 구독은 시간 단위 한도</h3>
-            <p>구독 요금제는 보통 <strong>몇 시간 단위로 사용 한도</strong>가 차고 다시 풀립니다. 한도에 닿으면 쉬었다 하면 됩니다 — 고장이 아닙니다.</p>
+            <h3>⏳ 구독은 5시간 한도</h3>
+            <p>구독 요금제는 <strong>5시간 단위로 사용 한도</strong>가 차고 다시 풀립니다(주간 한도도 별도). 한도에 닿으면 쉬었다 하면 됩니다 — 고장이 아닙니다. 남은 양은 <span class="mono">/usage</span>로 확인.</p>
           </div>
           <div class="card good autoshow zoom-in">
             <h3>💡 아끼는 습관 하나</h3>
@@ -1051,7 +1052,7 @@ window.SEMINAR_CONFIG = {
         </p>
       </div>
       <aside class="notes">
-        입문자가 가장 자주 하는 질문 "얼마 들어요?"에 대한 답. 정확한 가격표 대신 과금의 구조(토큰, 시간 단위 한도)를 알려주는 것이 오래 간다.
+        입문자가 가장 자주 하는 질문 "얼마 들어요?"에 대한 답. 정확한 가격표 대신 과금의 구조(토큰, 5시간 한도)를 알려주는 것이 오래 간다. 2026년 10월부터 Claude Code 안에서도 공식 명칭이 "5-hour limit"으로 통일됐다.
         "한도가 찼습니다" 메시지를 처음 보면 고장으로 오해하고 문의가 온다 — 미리 예방주사.
       </aside>
     </section>
@@ -1081,10 +1082,11 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
           세 가지가 모두 보이면 — <strong class="accent2">축하합니다, 온보딩 완료입니다.</strong>
           방금 여러분은 첫 바이브 코딩을 했습니다.
         </div>
+        <p class="muted center" style="margin-top:.6rem; font-size:.95rem;">허락을 묻지 않고 파일을 만들어도 정상입니다 — 기본값이 <strong>Auto 모드</strong>(입력창 아래 <span class="mono">⏵⏵ auto</span>)라서입니다. 매번 묻게 하려면 <span class="mono">Shift+Tab</span>.</p>
       </div>
       <aside class="notes">
         단순 인사가 아니라 파일 생성까지 시키는 이유: "AI가 내 컴퓨터에 파일을 만든다"는 에이전트의 본질을 첫 경험으로 심는 것.
-        파일 쓰기 권한 확인을 물어보면 허용하라고 안내. 전원 완료를 확인하고 박수 한 번 — 분위기 환기.
+        2026년 8월(v2.1.283)부터 기본 권한 모드가 Auto라 대부분 묻지 않고 바로 만든다 — "왜 안 물어봐요?"가 나오면 정상이라고 안내하고, Shift+Tab으로 Manual(매번 승인)로 바꾸는 법을 보여 준다. 회사 실데이터를 다룰 땐 Manual이 기본 습관(보안 세미나). 전원 완료를 확인하고 박수 한 번 — 분위기 환기.
       </aside>
     </section>
 
@@ -1209,7 +1211,7 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
           </div>
           <div class="card autoshow fade-right">
             <h3>📅 자료의 유통기한</h3>
-            <p>이 슬라이드의 설치 명령은 <strong>2026년 7월</strong> 기준입니다.</p>
+            <p>이 슬라이드의 설치 명령은 <strong>2026년 11월</strong> 기준입니다.</p>
             <p>명령이 안 먹으면 슬라이드보다 <a href="https://code.claude.com/docs" target="_blank" rel="noopener">공식 문서</a>를 믿으세요 — 도구의 진화 속도가 자료보다 빠릅니다.</p>
           </div>
         </div>
@@ -1220,7 +1222,7 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
       </div>
       <aside class="notes">
         자료 최신성 문제를 정면으로 다루는 슬라이드. "슬라이드보다 공식 문서"라는 원칙을 주면, 자료가 낡아도 참가자가 스스로 길을 찾는다.
-        기준 시점(2026-07)은 자료를 갱신할 때 같이 갱신할 것.
+        기준 시점(2026-11)은 자료를 갱신할 때 같이 갱신할 것.
       </aside>
     </section>
 
@@ -1231,7 +1233,7 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
         <h2>이 장표만 찍어 가세요 📸 — <span class="accent2">완료 체크리스트</span></h2>
         <div class="check-list" style="margin-top:.5rem;">
           <div class="check-item autoshow fade-left"><span class="cb">1</span> 터미널을 열 수 있다 <span class="ci-sub">STEP 1</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">2</span> <span class="mono">node -v</span> 가 v18 이상 <span class="ci-sub">STEP 2</span></div>
+          <div class="check-item autoshow fade-left"><span class="cb">2</span> <span class="mono">node -v</span> 가 v22 이상 <span class="ci-sub">STEP 2</span></div>
           <div class="check-item autoshow fade-left"><span class="cb">3</span> <span class="mono">claude</span> 실행 → 대화창이 뜬다 <span class="ci-sub">STEP 3–4</span></div>
           <div class="check-item autoshow fade-left"><span class="cb">4</span> 로그인 완료 (회사 계정 &gt; 구독 &gt; API) <span class="ci-sub">STEP 4</span></div>
           <div class="check-item autoshow fade-left"><span class="cb">5</span> 첫 대화 + <span class="mono">hello.html</span> 생성 성공 <span class="ci-sub">STEP 5</span></div>
