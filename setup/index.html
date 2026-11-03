@@ -215,9 +215,16 @@
     .transition-select option { background: #14162C; color: #E1D9FF; }
     #tocSelect { width: 340px; max-width: 340px; }
     @media (max-width: 760px) {
-      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
-      #tocSelect { width: auto; max-width: 42vw; }
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 340px; text-overflow: ellipsis; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 11px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) {
+        position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+      }
+      .dl-toolbar .dl-btn > span[aria-hidden] { font-size: 0.95rem; }
     }
+    /* 전체화면을 못 쓰는 브라우저(iOS Safari 등)에서는 버튼을 숨긴다 */
+    .no-fullscreen #fullscreenBtn { display: none; }
 
     .reveal .slide-number {
       color: #E6D9FF;
@@ -1387,9 +1394,11 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
     if (!sel) return;
     const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
     const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    // <br/>는 textContent 에서 사라져 단어가 붙는다 — 공백으로 바꿔 읽는다
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
     slides.forEach((s, i) => {
       const h = s.querySelector('h1, h2');
-      const label = clean(h ? h.textContent : '') || ('페이지 ' + (i + 1));
+      const label = clean(h ? brText(h) : '') || ('페이지 ' + (i + 1));
       const opt = document.createElement('option');
       opt.value = String(i);
       opt.textContent = (i + 1) + '. ' + label;
@@ -1408,6 +1417,7 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
   (function () {
     const fsBtn = document.getElementById('fullscreenBtn');
     if (!fsBtn) return;
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
     fsBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
       else document.exitFullscreen?.();

@@ -4236,9 +4236,11 @@
     if (!sel) return;
     const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
     const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    // <br/>는 textContent 에서 사라져 단어가 붙는다 — 공백으로 바꿔 읽는다
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
     slides.forEach((s, i) => {
       const h = s.querySelector('h1, h2');
-      const label = clean(h ? h.textContent : '') || ('페이지 ' + (i + 1));
+      const label = clean(h ? brText(h) : '') || ('페이지 ' + (i + 1));
       const opt = document.createElement('option');
       opt.value = String(i);
       opt.textContent = (i + 1) + '. ' + label;
@@ -4509,7 +4511,7 @@
     }
     function title(sec) {
       const h = sec.querySelector('h2, h1');
-      return (slides.indexOf(sec) + 1) + '. ' + (h ? h.textContent.replace(/\s+/g, ' ').trim() : '');
+      return (slides.indexOf(sec) + 1) + '. ' + (h ? (() => { const c = h.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; })().replace(/\s+/g, ' ').trim() : '');
     }
 
     function show(tr) {
