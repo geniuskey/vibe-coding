@@ -32,7 +32,7 @@
 - 배경 이론·사례·참고 장은 `<section data-depth="extra">` — 핵심 모드에서 빠진다.
 - 첫 장 다음의 **3분 요약**은 `<section class="tldr" data-depth="summary">` — 결론 3줄 + 바로 쓰는 프롬프트 + 다시 펼칠 때. 핵심 모드에서만 보인다.
 - 공개 사이트·`file://` 에서는 기본 **핵심 모드**, 왼쪽 아래 토글로 전체를 펼친다(선택은 `localStorage.vibe-depth`에 기억, 보던 장으로 복귀).
-- 실제 발표(`server.js`로 띄운 곳)·`?present`·PDF 인쇄는 **항상 전체 모드** — 발표자와 청중의 슬라이드 번호가 같아야 따라가기가 깨지지 않는다. 강제로 고르려면 `?core` / `?full`.
+- 실제 발표(`server.js`로 띄운 곳)·`?present`·인쇄(`?print-pdf`)는 **항상 전체 모드** — 발표자와 청중의 슬라이드 번호가 같아야 따라가기가 깨지지 않는다. 강제로 고르려면 `?core` / `?full`.
 - 덱에 붙이는 법: `<head>`에 `<link rel="stylesheet" href="../assets/core.css">`, `reveal.js` 바로 다음(`Reveal.initialize` 앞)에 `<script src="../assets/core.js"></script>`.
 - 적용 덱: prompt · ui-ux · github · context · knowledge · verification · orchestration · security · agent-skills · making-slides. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
 
@@ -96,21 +96,6 @@ GitHub Pages 커스텀 도메인은 루트 `CNAME` 파일에 기록한다. 페�
 <link rel="stylesheet" href="../assets/qa.css">
 <script src="../assets/qa.js" defer></script>
 ```
-
-## 세미나 PDF
-
-각 덱 오른쪽 위 **⋯ 메뉴**에서 그 세미나의 PDF(`pdf/<폴더>.pdf`)를 받을 수 있다.
-PDF는 미리 만들어 커밋해 두는 정적 파일이므로, 덱 내용을 고치면 다시 생성해 함께 커밋한다:
-
-```bash
-pip install fonttools brotli pypdf pillow   # 용량 최적화용 (없으면 건너뛰고 큰 PDF가 나온다)
-npm run pdf                                 # 전체 → pdf/*.pdf
-npm run pdf -- intro ui-ux                  # 일부만
-```
-
-`scripts/build-pdfs.js`가 각 덱을 reveal.js `?print-pdf` 모드로 열어 Playwright(Chromium)로 인쇄한다.
-프래그먼트는 펼친 상태로 한 장에 담고, 그림자·글로우·애니메이션·화면용 UI는 인쇄 때만 걷어낸다.
-새 세미나는 `assets/decks.js`에 등록되어 있으면 자동으로 포함된다.
 
 ## 링크 미리보기(OG) 이미지
 
