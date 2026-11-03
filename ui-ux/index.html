@@ -136,8 +136,9 @@
     .reveal .quote, .reveal .quote * {
       text-shadow: 0 1px 1px rgba(0,0,0,0.6);
     }
+    /* background-clip:text 위에 text-shadow 가 덧칠되면 그라데이션이 탁해진다 — 글로우는 filter 로만 */
     .reveal .grad {
-      text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+      text-shadow: none !important;
     }
     .reveal h1 { font-size: 4.2rem; }
     .reveal h2 { font-size: 2.9rem; }
@@ -211,9 +212,16 @@
     .transition-select option { background: #14162C; color: #E1D9FF; }
     #tocSelect { width: 340px; max-width: 340px; }
     @media (max-width: 760px) {
-      .dl-toolbar { top: 8px; right: 8px; gap: 6px; }
-      #tocSelect { width: auto; max-width: 42vw; }
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 340px; text-overflow: ellipsis; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 11px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) {
+        position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+      }
+      .dl-toolbar .dl-btn > span[aria-hidden] { font-size: 0.95rem; }
     }
+    /* 전체화면을 못 쓰는 브라우저(iOS Safari 등)에서는 버튼을 숨긴다 */
+    .no-fullscreen #fullscreenBtn { display: none; }
 
     .reveal .slide-number {
       color: #E6D9FF;
@@ -1948,7 +1956,7 @@
         <div class="grid-2" style="align-items:center; gap:2.6rem;">
           <div>
             <div class="chip">SEMINAR · 바이브 코딩 × 화면 만들기</div>
-            <h1 style="font-size:3.2rem;">바이브 코더를 위한<br/><span class="grad">UI/UX 용어 사전</span></h1>
+            <h1 style="font-size:3.2rem;">바이브 코더를 위한 <br/><span class="grad">UI/UX 용어 사전</span></h1>
             <p class="small" style="color:#D5DAE8 !important; margin-top:.6rem;">
               "그거 좀 이쁘게 해줘"가 안 먹히는 이유는 실력이 아니라 <b class="accent2">단어</b>입니다.<br/>
               레이아웃 · 베젤 · 사이드바 · 엘리먼트 이름 · 테마까지 — 이름을 알면 주문이 됩니다.
@@ -2237,7 +2245,7 @@
             <div class="ar" data-hl="footer"><div class="an">푸터<em>footer</em></div><div class="ad">맨 아래 띠. 저작권·링크·연락처가 들어갑니다.</div></div>
           </div>
         </div>
-        <p class="tiny center" style="margin-top:.5rem; color:#9BA6C0 !important;">이름에 올리면 칸이, 칸에 올리면 이름이 켜집니다 — 클릭하면 고정, 가만히 두면 자동으로 순회합니다.</p>
+        <p class="tiny center" style="margin-top:1.1rem; color:#9BA6C0 !important;">이름에 올리면 칸이, 칸에 올리면 이름이 켜집니다 — 클릭하면 고정, 가만히 두면 자동으로 순회합니다.</p>
       </div>
       <aside class="notes">
         가장 실용적인 슬라이드. 이름 6개만 알면 "어디를" 지목하는 문제가 해결된다.
@@ -4249,6 +4257,7 @@
   (function () {
     const fsBtn = document.getElementById('fullscreenBtn');
     if (!fsBtn) return;
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
     fsBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
       else document.exitFullscreen?.();
