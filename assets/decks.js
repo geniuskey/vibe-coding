@@ -13,7 +13,7 @@ window.SEMINAR_DECKS = [
   { track: '02 더 깊이',  id: 'context',       emoji: '🧠', title: '컨텍스트 — AI 에이전트의 작업 책상',        desc: '컨텍스트 창의 원리와 컨텍스트 엔지니어링' },
   { track: '02 더 깊이',  id: 'knowledge',     emoji: '📚', title: 'LLM에게 지식을 가르치는 법',                desc: 'LLM 위키 · RAG · 지식 그래프 · 온톨로지' },
   { track: '02 더 깊이',  id: 'verification',  emoji: '⚖️', title: 'AI가 쓴 코드를 믿는 법 — 검증과 테스트',     desc: '검증의 사다리 · TDD · AI 리뷰 · 평가' },
-  { track: '02 더 깊이',  id: 'orchestration', emoji: '🤖', title: '서브에이전트와 오케스트레이션',              desc: '컨텍스트 격리 · 병렬 fan-out · 파이프라인' },
+  { track: '02 더 깊이',  id: 'orchestration', emoji: '🤖', title: '서브에이전트와 오케스트레이션',              desc: '컨텍스트 격리 · 병렬 fan-out · 파이프라인 · Workflow' },
   { track: '02 더 깊이',  id: 'security',      emoji: '🔐', title: '사내 환경에서의 AI — 보안과 거버넌스',       desc: '데이터 경로 · 프롬프트 인젝션 · 권한 설계' },
 
   { track: '03 직접 해보기', id: 'workshop',      emoji: '🛠️', title: '바이브 코딩 실습 워크숍',             desc: '90분·3시간·8시간 코스 선택형 핸즈온 — 강사 런북은 workshop/README.md' },
