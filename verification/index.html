@@ -53,6 +53,7 @@
     "image": "https://vibe-coding.euiyun.com/og/verification.png?v=1",
     "inLanguage": "ko",
     "datePublished": "2026-07",
+    "dateModified": "2026-11",
     "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
     "isPartOf": "https://vibe-coding.euiyun.com/",
     "keywords": "AI 코드 검증, 테스트, 평가, evals, TDD, 보상 해킹, LLM-as-judge, 코드 리뷰, 바이브 코딩"
@@ -970,7 +971,7 @@
         <div class="grid-3" style="margin-top:.4rem;">
           <div class="card autoshow fade-up"><h3>🪜 검증의 사다리 <span class="tiny muted">CH 2</span></h3><p>눈 → 실행 → 테스트 → 리뷰 → CI. 올라갈수록 사람 노력↓ 신뢰↑</p></div>
           <div class="card autoshow fade-up"><h3>🧪 테스트 <span class="tiny muted">CH 3</span></h3><p>실행 가능한 스펙 — 그리고 테스트를 고쳐버리는 AI(보상 해킹) 방어법</p></div>
-          <div class="card autoshow fade-up"><h3>🔭 리뷰 <span class="tiny muted">CH 4</span></h3><p>자기 리뷰 vs 신선한 눈 vs 사람 — 누가 어디를 보나</p></div>
+          <div class="card autoshow fade-up"><h3>🔭 리뷰 <span class="tiny muted">CH 4</span></h3><p>자기 리뷰 vs 신선한 눈 vs 사람 — 누가 어디를 보나 · 리뷰 명령 3단</p></div>
           <div class="card autoshow fade-up"><h3>📊 평가 (Evals) <span class="tiny muted">CH 5</span></h3><p>반복 실행되는 AI 작업(프롬프트·스킬·봇)의 품질 측정법</p></div>
           <div class="card autoshow fade-up"><h3>🎛 신뢰 다이얼 <span class="tiny muted">CH 6</span></h3><p>일회성·팀 도구·프로덕션 — 작업의 무게에 맞는 검증 강도</p></div>
           <div class="card good autoshow fade-up"><h3>📸 보너스</h3><p>커밋 전 체크리스트 한 장 — 찍어 가시면 됩니다</p></div>
@@ -1290,6 +1291,51 @@
       </div>
     </section>
 
+    <!-- ============= 16b. CH4 리뷰 — 신선한 눈을 도구로 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · 리뷰</div>
+        <h2>신선한 눈을 <span class="grad">명령 하나로</span> — 리뷰 도구 3단</h2>
+        <div class="grid-3" style="align-items:stretch; margin-top:.5rem;">
+          <div class="card autoshow fade-up">
+            <span class="pill green">누구나 · 로컬</span>
+            <h3 class="mono" style="font-size:1.3rem;">/code-review</h3>
+            <p>내 세션에서 바로. 수 초~수 분, <strong class="accent2">평소 사용량</strong>으로.</p>
+            <p class="tiny muted">강도 <span class="mono">low~max</span> · <span class="mono">--fix</span>로 바로 수정</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill amber">머지 직전 · 클라우드</span>
+            <h3 class="mono" style="font-size:1.3rem;">/code-review ultra</h3>
+            <p>리뷰어 에이전트 여러 명이 찾고, <strong class="accent2">발견마다 재현·검증</strong>. 5~15분, 백그라운드.</p>
+            <p class="tiny muted">무료 3회 뒤 건당 약 $5~25 (사용 크레딧)</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill">팀 · GitHub PR</span>
+            <h3 style="font-size:1.3rem;">Code Review</h3>
+            <p>PR이 열리면 자동으로 — 줄마다 <strong class="accent2">심각도별 코멘트</strong>. 승인·차단은 하지 않습니다.</p>
+            <p class="tiny muted">Team·Enterprise · <span class="mono">@claude review</span> · <span class="mono">REVIEW.md</span>로 기준 조정</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.25rem;">
+          셋 다 <strong class="accent2">쓴 세션과 다른 눈</strong>입니다 — 그래도 "발견 없음"이 "버그 없음"은 아닙니다. 머지 버튼은 여전히 사람 몫.
+        </div>
+        <p class="center autoshow fade-in muted" style="margin-top:.6rem; font-size:.95rem;">사내 환경(Bedrock·ZDR 등)에선 클라우드 리뷰가 막혀 있을 수 있습니다 — <span class="mono">/code-review</span>는 어디서나 됩니다.</p>
+        <aside class="notes">
+          앞 장의 "신선한 눈"이 2026년엔 명령으로 들어와 있다. 무게에 따라 3단으로 고른다.
+          /code-review — 어느 플랜이든 내 세션에서 돈다. 작업 중 빠른 피드백용, 강도(effort)를 고를 수 있고 --fix로 바로 반영도 된다.
+          /code-review ultra(=ultrareview) — 클라우드 샌드박스에서 리뷰어 에이전트 여러 명이 돌고, 보고 전에 발견마다 독립 재현·검증한다. 5~15분, 연구 미리보기.
+          Pro·Max·Ultra 계정당 1회성 무료 3회, 이후 변경 규모에 따라 건당 약 $5~25가 사용 크레딧으로 나간다. claude.ai 로그인이 필요하고 Bedrock·ZDR 조직에선 안 된다.
+          Code Review — Team·Enterprise에서 Owner가 켜는 관리형 서비스. GitHub PR에 인라인 코멘트·요약·체크런을 남기지만 승인·차단은 하지 않는다. REVIEW.md로 무엇을 잡을지 조정, 레벨은 Quick·Standard·Deep.
+          세 도구 모두 사람 리뷰를 대체하지 않는다 — 다음 장의 "사람은 기계가 못 보는 것만 본다"로 넘어간다. (2026-11 공식 문서 확인)
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://code.claude.com/docs/en/code-review" target="_blank" rel="noopener">Claude Code Docs · Code Review</a>
+          <a href="https://code.claude.com/docs/en/ultrareview" target="_blank" rel="noopener">Claude Code Docs · Ultrareview</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ============= 17. CH4 리뷰 — 사람은 어디에 집중 ============= -->
     <section>
       <div class="vfill">
@@ -1446,6 +1492,7 @@
               <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Claude Code best practices</a><span class="rd">Anthropic — TDD·검증·리뷰 워크플로</span></li>
               <li><a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a><span class="rd">Claude Code Docs — 신선한 눈 리뷰</span></li>
               <li><a href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener">Claude Code GitHub Action</a><span class="rd">CI에서 도는 자동 검증·리뷰</span></li>
+              <li><a href="https://code.claude.com/docs/en/code-review" target="_blank" rel="noopener">Code Review · Ultrareview</a><span class="rd">Claude Code Docs — PR 자동 리뷰 · 클라우드 심층 리뷰</span></li>
             </ul>
           </div>
           <div class="card ref-col autoshow fade-up">
