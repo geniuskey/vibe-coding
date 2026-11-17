@@ -389,6 +389,39 @@
     }
     .hero-receipt button:hover { color: var(--fg); border-color: rgba(155,130,255,.6); }
 
+    /* 스크롤 안내 — 빌드가 끝나면 화면 아래에 떠서 "아래에 더 있다"를 알려 주고, 한 번 내리면 사라진다 */
+    .scroll-cue {
+      position: fixed;
+      left: 50%;
+      bottom: max(1.1rem, env(safe-area-inset-bottom));
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      padding: .4rem .9rem .5rem;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--fg-soft);
+      text-decoration: none;
+      border-radius: 999px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 10px);
+      transition: opacity .6s ease, transform .6s var(--ease-out), visibility 0s linear .6s, color .15s ease;
+    }
+    .scroll-cue.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+    .scroll-cue:hover { color: var(--fg); }
+    .scroll-cue .chev {
+      width: .7rem; height: .7rem;
+      border-right: 2px solid var(--accent-2);
+      border-bottom: 2px solid var(--accent-2);
+      transform: rotate(45deg);
+      animation: cue-bob 1.6s ease-in-out infinite;
+    }
+    @keyframes cue-bob { 0%, 100% { transform: translateY(-2px) rotate(45deg); opacity: .55; } 50% { transform: translateY(4px) rotate(45deg); opacity: 1; } }
+
     /* ── 빌드 장면 상태 (html.intro) ─────────────── */
     html.intro .hero [data-build] { opacity: 0; transform: translateY(16px); }
     html.intro .hero [data-build].built {
@@ -855,6 +888,8 @@
     </p>
   </div>
 </header>
+
+<a class="scroll-cue" id="scroll-cue" href="#path" aria-label="아래로 내려 세미나 둘러보기"><span>아래로 스크롤</span><i class="chev" aria-hidden="true"></i></a>
 
 <main class="wrap">
 
@@ -1922,6 +1957,22 @@
         첫 방문(세션당 1회) · ?intro · "↻ 다시 빌드" 에서만 튼다.
         재생 중 아무 키·클릭·휠이면 그 자리에서 완성 상태로 건너뛴다.
   ═══════════════════════════════════════════════════ */
+  /* 스크롤 안내 — 인트로가 끝나면 보이고, 사용자가 한 번 내리면 다시 나오지 않는다 */
+  var Cue = (function () {
+    var el = $("#scroll-cue"), done = false, t = 0;
+    function past() { return window.scrollY > 40; }
+    function onScroll() { if (past()) { done = true; hide(); window.removeEventListener("scroll", onScroll); } }
+    function hide() { clearTimeout(t); if (el) el.classList.remove("show"); }
+    function show(delay) {
+      if (!el || done) return;
+      clearTimeout(t);
+      t = setTimeout(function () { if (!done && !past()) el.classList.add("show"); }, delay || 0);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (el) el.addEventListener("click", function () { done = true; hide(); });
+    return { show: show, hide: hide };
+  })();
+
   var Intro = (function () {
     var title = $("#t-main"), rcText = $("#rc-text"), rebuildBtn = $("#rebuild");
     var builds = [].slice.call(document.querySelectorAll(".hero [data-build]"));
@@ -1967,6 +2018,7 @@
       if (playing) return;
       playing = true;
       var id = ++playId;
+      Cue.hide();
       try { sessionStorage.setItem("vibe-intro-seen", "1"); } catch (_) {}
       root.classList.add("intro");
       builds.forEach(function (el) { el.classList.remove("built"); });
@@ -2013,6 +2065,7 @@
         Term.status("done");
         receipt(secs);
         build(".hero-receipt");
+        Cue.show(1400);
         arm(false);
         playing = false;
         setTimeout(function () { if (id === playId) root.classList.remove("intro"); }, 1000);
@@ -2037,6 +2090,7 @@
       title.classList.add("on");
       root.classList.remove("intro");
       receipt(null);
+      Cue.show(900);
       if (FX) FX.enableLens();
       Term.loop(g, 4200);
     }
@@ -2056,6 +2110,7 @@
         root.classList.remove("intro");
         rebuildBtn.hidden = true;
         Term.buildTranscript("");
+        Cue.show(600);
         return;
       }
       rebuildBtn.addEventListener("click", replay);
