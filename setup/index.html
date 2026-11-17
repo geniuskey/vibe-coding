@@ -13,11 +13,11 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>바이브 코딩 0교시 — 설치와 첫 실행 | 바이브 코딩 세미나</title>
+  <title>0교시 — 설치와 기본 조작 | 바이브 코딩 세미나</title>
 
   <!-- SEO -->
-  <meta name="description" content="바이브 코딩을 시작하기 위한 환경 세팅 세미나. 터미널 열기부터 Node.js, Claude Code 설치, 로그인, 첫 대화, 트러블슈팅 TOP 5까지 — 워크숍 전에 30분으로 끝내는 0교시." />
-  <meta name="keywords" content="바이브 코딩, vibe coding, Claude Code 설치, 설치, 온보딩, 환경 세팅, Node.js, 터미널, 비개발자, 트러블슈팅, 프록시" />
+  <meta name="description" content="바이브 코딩을 시작하기 위한 0교시. 터미널 열기부터 Claude Code 설치·로그인·첫 대화, 그리고 @ 파일 참조·Esc 중단·되돌리기·권한 모드·명령어·모델 고르기 같은 기본 조작과 트러블슈팅까지 — 워크숍 전에 40분으로 끝냅니다." />
+  <meta name="keywords" content="바이브 코딩, vibe coding, Claude Code 설치, Claude Code 사용법, 슬래시 명령어, 권한 모드, Plan Mode, 모델 선택, 온보딩, Node.js, 터미널, 비개발자, 트러블슈팅, 프록시" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://vibe-coding.euiyun.com/setup/" />
@@ -25,19 +25,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="바이브 코딩 세미나" />
-  <meta property="og:title" content="바이브 코딩 0교시 — 설치와 첫 실행" />
-  <meta property="og:description" content="터미널 열기부터 도구 설치·로그인·첫 대화까지, 워크숍 전에 30분으로 끝내는 환경 세팅. 막혔을 때 대처법 포함." />
+  <meta property="og:title" content="0교시 — 설치와 기본 조작" />
+  <meta property="og:description" content="설치·로그인·첫 대화에 기본 조작(파일 짚기·멈추기·되돌리기·권한 모드·명령어·모델)까지, 워크숍 전에 40분으로 끝내는 0교시. 막혔을 때 처방전 포함." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/setup/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/setup.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/setup.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="바이브 코딩 0교시 — 설치와 첫 실행" />
-  <meta name="twitter:description" content="설치 30분이면 워크숍 8시간이 산다. 도구 설치·로그인·첫 대화·트러블슈팅 TOP 5." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/setup.png?v=1" />
+  <meta name="twitter:title" content="0교시 — 설치와 기본 조작" />
+  <meta name="twitter:description" content="40분이면 워크숍이 산다. 설치·로그인·첫 대화·기본 조작·트러블슈팅." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/setup.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -46,9 +46,9 @@
   {
     "@context": "https://schema.org",
     "@type": "PresentationDigitalDocument",
-    "name": "바이브 코딩 0교시 — 설치와 첫 실행",
-    "headline": "바이브 코딩 0교시 — 설치와 첫 실행 | 바이브 코딩 세미나",
-    "description": "바이브 코딩 입문·워크숍 전에 듣는 환경 세팅 세미나. 터미널, Node.js, Claude Code 설치, 로그인, 첫 대화, 트러블슈팅.",
+    "name": "0교시 — 설치와 기본 조작",
+    "headline": "0교시 — 설치와 기본 조작 | 바이브 코딩 세미나",
+    "description": "바이브 코딩 입문·워크숍 전에 듣는 0교시. 터미널, Claude Code 설치, 로그인, 첫 대화, 기본 조작(명령어·권한 모드·모델 고르기), 트러블슈팅.",
     "inLanguage": "ko",
     "author": { "@type": "Person", "name": "geniuskey" },
     "isPartOf": { "@type": "WebSite", "name": "바이브 코딩 세미나", "url": "https://vibe-coding.euiyun.com/" }
@@ -85,7 +85,6 @@
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
-      animation: bgFloat 18s ease-in-out infinite alternate;
     }
     @keyframes bgFloat {
       0%   { transform: translate(0,0) scale(1); }
@@ -277,7 +276,7 @@
       -webkit-background-clip: text !important;
       background-clip: text !important;
       color: transparent !important;
-      animation: gradMove 7s ease infinite;
+      background-position: 0% 50% !important;
       font-weight: 800;
       filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
     }
@@ -392,24 +391,25 @@
 
     /* ========= Auto-sequential reveal ========= */
     .autoshow { opacity: 0; }
-    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
-    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
-    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
-    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
-    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
-    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    /* 움직임은 설명 순서만 돕는다 — 짧게(350ms), ease-out, 이동 거리 작게 */
+    section.present .autoshow.fade-up    { animation: asFadeUp .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
     @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
-    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
-    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-16px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(16px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.96); } to { opacity:1; transform:scale(1); } }
     .autoshow:nth-child(1) { animation-delay: .05s; }
-    .autoshow:nth-child(2) { animation-delay: .2s; }
-    .autoshow:nth-child(3) { animation-delay: .35s; }
-    .autoshow:nth-child(4) { animation-delay: .5s; }
-    .autoshow:nth-child(5) { animation-delay: .65s; }
-    .autoshow:nth-child(6) { animation-delay: .8s; }
-    .autoshow:nth-child(7) { animation-delay: .95s; }
-    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+    .autoshow:nth-child(2) { animation-delay: .15s; }
+    .autoshow:nth-child(3) { animation-delay: .25s; }
+    .autoshow:nth-child(4) { animation-delay: .35s; }
+    .autoshow:nth-child(5) { animation-delay: .45s; }
+    .autoshow:nth-child(6) { animation-delay: .55s; }
+    .autoshow:nth-child(7) { animation-delay: .65s; }
+    .autoshow:nth-child(8) { animation-delay: .75s; }
 
     /* ========= fallbacks: overview / print / reduced-motion ========= */
     .reveal.overview .autoshow {
@@ -642,6 +642,27 @@
     .path-map .pm-node.here { border-color: rgba(43,234,208,0.85); background: rgba(15,60,55,0.4); box-shadow: 0 0 22px rgba(43,234,208,0.18); }
     .path-map .pm-arrow { color: #8A93B2 !important; font-size: 1.4rem; font-weight: 800; }
 
+    /* ===== 완료 기준 막대 — 실습 STEP 마다 "눈으로 확인할 것" ===== */
+    .done-bar {
+      display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
+      margin-top: .9rem; padding: .55rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(43,234,208,0.6);
+      background: rgba(15,60,55,0.32);
+      font-size: 1.05rem; font-weight: 600; line-height: 1.4;
+    }
+    .done-bar .db-k {
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800; letter-spacing: .04em;
+      color: #5BFFE0 !important; white-space: nowrap;
+    }
+    .done-bar .db-s { margin-left: auto; font-size: .88rem; font-weight: 500; color: #9BA6C0 !important; white-space: nowrap; }
+
+    .check-item kbd.key { font-size: .72em; padding: .08em .5em; border-bottom-width: 2px; }
+    /* 명령어 표 */
+    .cmd-tbl td { font-size: 1rem; padding: .38rem .7rem; }
+    .cmd-tbl td.mono { color: #5BFFE0 !important; font-weight: 700; white-space: nowrap; width: 1%; }
+    .cmd-tbl th { color: #CBBDFF !important; }
+
     /* 회사 설정 값 표시 — SEMINAR_CONFIG가 치환하는 자리 */
     .cfg { color: #FFE08A !important; font-weight: 700; }
 
@@ -685,63 +706,63 @@ window.SEMINAR_CONFIG = {
       <div class="vfill">
         <div class="grid-2" style="align-items:center; gap:3rem;">
           <div>
-            <div class="chip">SEMINAR · 0교시 · SETUP &amp; ONBOARDING</div>
+            <div class="chip">SEMINAR · 0교시 · SETUP &amp; BASICS</div>
             <h1 style="font-size:3.9rem;">
-              바이브 코딩 0교시<br/><span class="grad">설치와 첫 실행</span>
+              바이브 코딩 0교시<br/><span class="grad">설치와 기본 조작</span>
             </h1>
             <p style="font-size:1.5rem; margin-top:1.1rem; max-width:560px;">
               워크숍 첫 30분이 "설치가 안 돼요"로 사라지지 않도록,<br/>
               <em>오늘 미리 끝냅니다.</em>
             </p>
             <p class="small muted" style="margin-top:1.4rem;">
-              터미널 열기 → 도구 설치 → 로그인 → 첫 대화 → 막혔을 때 대처까지 — 30분.
+              터미널 → 설치 → 로그인 → 첫 대화 → 기본 조작 → 막혔을 때 — 약 40분.
             </p>
           </div>
           <div>
             <div class="prompt-card">
-              <div class="pc-label">💬 오늘의 완료 기준 — 이 인사가 성공하면 끝</div>
+              <div class="pc-label">💬 오늘의 첫 관문 — 이 인사가 성공하면 절반</div>
               <pre class="code">안녕! 방금 설치를 끝냈어.
 잘 연결됐는지 짧게 인사해줘.</pre>
             </div>
-            <p class="center tiny muted" style="margin-top:.7rem;">← 이 대화가 되는 노트북을 만드는 것이 오늘의 전부입니다.</p>
+            <p class="center tiny muted" style="margin-top:.7rem;">나머지 절반은 "고치고 · 멈추고 · 되돌리기"를 손에 익히는 것입니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        인사 + 취지: 이 세미나는 입문 세미나·워크숍의 "0교시"다. 내용이 어려워서가 아니라, 설치는 회사 환경(권한·프록시)에 따라 변수가 많아서 따로 시간을 잡는다.
-        오늘 완료 기준은 단 하나 — AI 코딩 도구와 첫 인사에 성공하는 것.
+        인사 + 취지: 입문 세미나·워크숍 전에 듣는 0교시. 내용이 어려워서가 아니라, 설치는 회사 환경(권한·프록시)에 따라 변수가 많아서 따로 시간을 잡는다.
+        시간 배분(약 40분): 설치·로그인·첫 대화 20분 → 기본 조작(STEP 6) 12분 → 트러블슈팅·체크리스트 8분.
       </aside>
     </section>
 
     <!-- ============= 2. 오늘 가져가실 것 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">오늘의 여정 · 이론 10% + 손 움직이기 90%</div>
-        <h2>오늘 가져가실 세 가지</h2>
+        <div class="chip">오늘의 여정 · 설명 10% + 손 움직이기 90%</div>
+        <h2>40분 뒤, 이 세 가지가 내 노트북에 남습니다</h2>
         <div class="grid-3" style="margin-top:.4rem;">
-          <div class="card autoshow zoom-in">
+          <div class="card autoshow fade-up">
             <h3>🧰 돌아가는 도구</h3>
-            <p>내 노트북에서 실제로 실행되는 AI 코딩 도구. 설치 · 로그인 · 작업 폴더까지.</p>
+            <p>내 노트북에서 실제로 실행되는 AI 코딩 도구. 설치 · 로그인 · 실습 폴더까지.</p>
             <p class="tiny muted">STEP 1–4</p>
           </div>
-          <div class="card autoshow zoom-in">
-            <h3>💬 첫 대화 성공</h3>
-            <p>"잘 연결됐는지 인사해줘" — 첫 응답을 <strong>내 눈으로</strong> 확인한 경험.</p>
+          <div class="card autoshow fade-up">
+            <h3>💬 첫 대화 + 첫 파일</h3>
+            <p>AI가 내 폴더에 <span class="mono">hello.html</span>을 만들고, 그걸 <strong>내 눈으로</strong> 연 경험.</p>
             <p class="tiny muted">STEP 5</p>
           </div>
-          <div class="card good autoshow zoom-in">
-            <h3>🧯 막혔을 때 대처법</h3>
-            <p>자주 나오는 에러 5가지의 처방전과, 그래도 안 될 때 <strong>누구에게 무엇을</strong> 보여줄지.</p>
-            <p class="tiny muted">트러블슈팅</p>
+          <div class="card good autoshow fade-up">
+            <h3>🎛️ 기본 조작</h3>
+            <p>파일 짚어 시키기 · 멈추기 · 되돌리기 · 권한 모드 · 명령어 · 모델 — <strong>마음 놓고 맡기는</strong> 데 필요한 최소한.</p>
+            <p class="tiny muted">STEP 6</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.2rem;">
-          설치에 성공하는 30분이 <strong class="accent2">워크숍 8시간</strong>을 살립니다.
+          그리고 막혔을 때의 <strong class="accent2">처방전 TOP 5</strong> — 설치에 쓰는 40분이 워크숍 시간을 통째로 살립니다.
         </div>
       </div>
       <aside class="notes">
-        진행 안내: 슬라이드마다 복사 버튼이 있는 명령·프롬프트가 있다. 각자 자기 OS에 맞는 것만 따라 하면 된다.
-        이미 설치된 사람은 STEP 5(첫 대화)로 건너뛰고 옆 사람을 도와주기 — 오늘의 조교다.
+        진행 안내: 슬라이드마다 복사 버튼이 있는 명령·프롬프트가 있다. 자기 OS에 맞는 것만 따라 하면 된다.
+        STEP 슬라이드 아래의 초록 막대가 "완료 기준" — 그게 보이면 다음으로. 이미 설치된 사람은 STEP 5로 건너뛰고 옆 사람을 도와주기(오늘의 조교).
       </aside>
     </section>
 
@@ -749,7 +770,7 @@ window.SEMINAR_CONFIG = {
     <section>
       <div class="vfill">
         <div class="chip">BIG PICTURE</div>
-        <h2>준비물은 딱 <span class="accent">4가지</span>입니다</h2>
+        <h2>준비물은 4가지 — <span class="accent">대부분 이미</span> 갖고 있습니다</h2>
         <div class="step-flow" style="margin-top:.6rem;">
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">1</span>
@@ -760,7 +781,7 @@ window.SEMINAR_CONFIG = {
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">2</span>
             <b>⚙️ Node.js</b>
-            <p>도구가 돌아가는 밑바탕(런타임). npm 설치 방식을 쓸 때 필요합니다.</p>
+            <p>도구가 돌아가는 밑바탕. npm 설치 방식을 쓸 때만 필요합니다.</p>
           </div>
           <span class="sf-arrow">→</span>
           <div class="sf-step autoshow fade-up">
@@ -776,12 +797,11 @@ window.SEMINAR_CONFIG = {
           </div>
         </div>
         <p class="small muted autoshow fade-up" style="margin-top:1rem;">
-          4가지 중 이미 갖고 있는 것도 많습니다. 오늘은 <strong class="accent2">빠진 조각만</strong> 채웁니다.
+          실제로 새로 하는 일은 <strong class="accent2">도구 설치 + 로그인</strong> 두 가지뿐입니다.
         </p>
       </div>
       <aside class="notes">
-        "설치"라는 말이 주는 부담을 줄이는 슬라이드. 터미널은 이미 있고, Node.js도 있는 사람이 많다.
-        실제로 새로 하는 일은 도구 설치 + 로그인 두 가지뿐이라는 것을 강조.
+        "설치"라는 말의 부담을 줄이는 장. 터미널은 이미 있고 Node.js도 있는 사람이 많다. 새로 하는 일은 둘뿐.
       </aside>
     </section>
 
@@ -789,25 +809,25 @@ window.SEMINAR_CONFIG = {
     <section>
       <div class="vfill">
         <div class="chip">TOOL MAP</div>
-        <h2>어떤 도구를 깔아야 하나 — <span class="grad">오늘은 하나만</span></h2>
+        <h2>오늘은 도구 <span class="grad">하나만</span>, 끝까지 깝니다</h2>
         <table class="gh-table" style="margin-top:.4rem;">
           <tr><th>도구</th><th>모양</th><th>특징</th><th>오늘의 선택</th></tr>
-          <tr class="autoshow fade-left">
-            <td><strong>Claude Code</strong></td><td>터미널(대화창)</td>
-            <td>이 시리즈의 기본 도구. 파일을 직접 읽고 쓰는 에이전트</td>
-            <td>✅ <strong class="accent2">기본 추천</strong></td>
-          </tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
             <td><strong>사내 허용 도구</strong></td><td>회사마다 다름</td>
             <td><span class="cfg cfg-co">우리 회사</span>가 공식 배포하는 도구가 있다면</td>
             <td>✅ <strong class="accent4">있으면 최우선</strong></td>
           </tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
+            <td><strong>Claude Code</strong></td><td>터미널(대화창)</td>
+            <td>이 시리즈의 기본 도구. 파일을 직접 읽고 쓰는 에이전트</td>
+            <td>✅ <strong class="accent2">기본 추천</strong></td>
+          </tr>
+          <tr class="autoshow fade-in">
             <td>Cursor · Windsurf</td><td>코드 에디터</td>
             <td>에디터에 AI가 내장된 형태. 화면이 익숙하다는 장점</td>
             <td>참고만</td>
           </tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
             <td>Codex CLI · Antigravity CLI</td><td>터미널</td>
             <td>다른 모델 계열의 터미널 에이전트 <span class="muted">(Gemini CLI는 2026.06 개인용 종료 → Antigravity CLI)</span></td>
             <td>참고만</td>
@@ -819,8 +839,8 @@ window.SEMINAR_CONFIG = {
         </div>
       </div>
       <aside class="notes">
-        도구 선택 논쟁으로 흐르지 않게 컷. 회사가 공식 배포하는 도구가 있으면 무조건 그것(보안·비용 문제가 이미 해결돼 있음).
-        없으면 이 자료의 기본인 Claude Code. 명령·개념은 도구가 달라도 90% 통한다.
+        도구 선택 논쟁으로 흐르지 않게 짧게. 회사가 공식 배포하는 도구가 있으면 그것(보안·비용이 이미 해결돼 있음). 없으면 이 자료의 기본인 Claude Code.
+        명령 이름은 도구마다 달라도, 오늘 익히는 조작(파일 짚기·멈추기·되돌리기·권한)은 대부분의 에이전트 도구에 있다.
       </aside>
     </section>
 
@@ -828,64 +848,66 @@ window.SEMINAR_CONFIG = {
     <section>
       <div class="vfill">
         <div class="chip warn">PRE-FLIGHT CHECK</div>
-        <h2>시작 전, 이 <span class="accent">3가지</span>부터 확인</h2>
+        <h2>시작 전 3가지 확인 — <span class="accent">회사 노트북</span>이면 특히</h2>
         <div class="rx-list" style="margin-top:.5rem;">
-          <div class="rx-item autoshow fade-left">
+          <div class="rx-item autoshow fade-in">
             <span class="rx-q">🖥️ 내 노트북에 설치 권한이 있나?</span>
-            <span class="rx-a">회사 노트북은 관리자 권한이 잠긴 경우가 많습니다 — 사내 소프트웨어 센터나 <span class="cfg cfg-help">사내 IT 헬프데스크</span>로 설치 경로를 확인</span>
+            <span class="rx-a">회사 노트북은 관리자 권한이 잠긴 경우가 많습니다 — 사내 소프트웨어 센터나 <span class="cfg cfg-help">사내 IT 헬프데스크</span>로 설치 경로 확인</span>
           </div>
-          <div class="rx-item autoshow fade-left">
+          <div class="rx-item autoshow fade-in">
             <span class="rx-q">🌐 사내망? 프록시? 개인망?</span>
-            <span class="rx-a">사내망은 프록시·인증서 때문에 다운로드가 막힐 수 있습니다. 오늘 실습이 개인 노트북이면 그냥 진행 OK</span>
+            <span class="rx-a">사내망은 프록시·인증서 때문에 다운로드가 막힐 수 있습니다. 개인 노트북 + 개인망이면 그냥 진행</span>
           </div>
-          <div class="rx-item autoshow fade-left">
+          <div class="rx-item autoshow fade-in">
             <span class="rx-q">📜 회사의 AI 도구 정책은?</span>
             <span class="rx-a">허용 도구 목록·데이터 반출 규정이 있다면 그것이 이 슬라이드보다 우선합니다</span>
           </div>
         </div>
         <div class="warn-banner autoshow fade-up" style="margin-top:1rem;">
           <span class="wb-icon">⚠️</span>
-          <span>회사 노트북 + 사내망 조합은 변수가 가장 많습니다. 오늘 안 되면 <strong>붙잡고 있지 말고</strong> 에러 화면을 찍어 IT에 문의 — 그게 표준 절차입니다.</span>
+          <span>회사 노트북 + 사내망은 변수가 가장 많습니다. 10분 넘게 막히면 <strong>붙잡지 말고</strong> 에러 화면을 찍어 IT에 문의 — 그게 표준 절차입니다.</span>
         </div>
       </div>
       <aside class="notes">
-        여기서 참가자 환경을 손들어 조사하면 좋다(개인 노트북 vs 회사 노트북). 회사 노트북 조는 프록시 이슈가 나올 확률이 높으니 조교를 미리 배치.
-        "안 되는 게 정상일 수도 있다"고 미리 말해두면 심리적 좌절을 줄일 수 있다.
+        손을 들어 환경을 조사하면 좋다(개인 노트북 vs 회사 노트북). 회사 노트북 조는 프록시 이슈 확률이 높으니 조교를 미리 배치.
+        "안 되는 게 정상일 수도 있다"고 미리 말해 두면 좌절을 줄일 수 있다. 막힌 사람은 옆 사람 화면으로 나머지 STEP을 따라오게 한다.
       </aside>
     </section>
 
     <!-- ============= 6. STEP 1 터미널 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">STEP 1 / 5 · 실습</div>
+        <div class="chip live">STEP 1 / 6 · 실습</div>
         <h2>터미널 열기 — <span class="grad">이미 갖고 있습니다</span></h2>
         <div class="grid-2" style="align-items:start; margin-top:.4rem;">
           <div class="card autoshow fade-left">
             <h3><span class="os-tag win">🪟 WINDOWS</span></h3>
             <p><kbd class="key">Win</kbd> 키 → <strong>"터미널"</strong> 또는 <strong>"PowerShell"</strong> 검색 → 실행</p>
-            <p class="tiny muted" style="margin-top:.6rem;">파란색/검은색 글자 창이 뜨면 성공. Windows 10 이하는 PowerShell을 쓰세요.</p>
+            <p class="tiny muted" style="margin-top:.6rem;">Windows 10 이하는 PowerShell을 쓰세요.</p>
           </div>
           <div class="card autoshow fade-right">
             <h3><span class="os-tag mac">🍎 MAC</span></h3>
             <p><kbd class="key">Cmd</kbd> + <kbd class="key">Space</kbd> → <strong>"터미널"</strong> 입력 → <kbd class="key">Enter</kbd></p>
-            <p class="tiny muted" style="margin-top:.6rem;">흰색/검은색 입력창이 뜨면 성공.</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
           터미널은 <strong>글자로 대화하는 창</strong>일 뿐입니다. 명령어를 외울 필요는 없습니다 —
           오늘 이후로는 <strong class="accent2">AI가 대신 쳐 줍니다.</strong>
         </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span>글자를 입력할 수 있는 창이 뜨고, 커서가 깜빡인다</span>
+          <span class="db-s">막히면 → 옆 사람 화면으로 같이</span>
+        </div>
       </div>
       <aside class="notes">
-        터미널 공포를 여기서 해소. "까만 화면 = 해커"라는 인상을 농담으로 풀기.
-        전원이 터미널을 띄운 것을 확인하고 다음으로. 이 단계에서 못 여는 사람은 거의 없다.
+        터미널 공포를 여기서 해소. 전원이 터미널을 띄운 것을 확인하고 다음으로. 이 단계에서 못 여는 사람은 거의 없다.
       </aside>
     </section>
 
     <!-- ============= 7. STEP 2 Node.js ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">STEP 2 / 5 · 실습</div>
+        <div class="chip live">STEP 2 / 6 · 실습 · 선택</div>
         <h2>Node.js — <span class="accent">있는지부터</span> 확인</h2>
         <div class="cmd-card autoshow fade-up">
           <div class="cc-label">⌨️ 터미널에 입력 (Windows/Mac 공통)</div>
@@ -894,28 +916,28 @@ window.SEMINAR_CONFIG = {
         <div class="grid-2" style="align-items:start; margin-top:.5rem;">
           <div class="card good autoshow fade-left">
             <h3>✅ <span class="mono">v22</span> 이상 숫자가 나오면</h3>
-            <p>통과입니다. 이 슬라이드는 끝 — 다음 STEP으로.</p>
+            <p>통과입니다. 다음 STEP으로.</p>
           </div>
           <div class="card autoshow fade-right">
             <h3>❌ "찾을 수 없음" 이라면</h3>
-            <p><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>에서 <strong>LTS 버전</strong>을 내려받아 설치 → 터미널을 <strong>껐다 다시 켜고</strong> 재확인.</p>
+            <p><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>에서 <strong>LTS 버전</strong> 설치 → 터미널을 <strong>껐다 다시 켜고</strong> 재확인. 지금 바쁘면 건너뛰어도 됩니다.</p>
           </div>
         </div>
         <div class="manual-box autoshow fade-up">
-          <p class="mb-title">참고 — Node.js가 왜 필요한가요?</p>
-          <p class="mb-note">npm 방식(방법 B)으로 설치할 때만 필요하며, 이때는 v22 이상이어야 합니다. 다음 STEP의 공식 설치 스크립트(방법 A)는 Node.js 없이 됩니다 — 다만 실습·배포에서 두루 쓰이므로 깔아두면 두고두고 이득입니다.</p>
+          <p class="mb-title">참고 — 왜 "선택"인가요?</p>
+          <p class="mb-note">다음 STEP의 공식 설치 스크립트(방법 A)는 Node.js 없이 됩니다. npm 방식(방법 B)으로 깔 때만 v22 이상이 필요합니다. 실습·배포에서 두루 쓰이니 깔아 두면 이득입니다.</p>
         </div>
       </div>
       <aside class="notes">
-        "터미널을 껐다 켜야 반영된다"는 것을 크게 강조 — 설치 후 같은 창에서 재시도하다 실패하는 게 단골 패턴.
-        사내 소프트웨어 센터에 Node.js가 있으면 그쪽 경로가 더 빠를 수 있다.
+        "터미널을 껐다 켜야 반영된다"를 크게 강조 — 설치 후 같은 창에서 재시도하다 실패하는 게 단골 패턴.
+        사내 소프트웨어 센터에 Node.js가 있으면 그쪽이 더 빠를 수 있다. 시간이 빠듯하면 이 STEP은 건너뛰고 방법 A로 간다.
       </aside>
     </section>
 
     <!-- ============= 8. STEP 3 도구 설치 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">STEP 3 / 5 · 실습</div>
+        <div class="chip live">STEP 3 / 6 · 실습</div>
         <h2>Claude Code 설치 — <span class="grad">한 줄</span></h2>
         <div class="grid-2" style="align-items:start; margin-top:.3rem;">
           <div>
@@ -932,31 +954,34 @@ window.SEMINAR_CONFIG = {
             <div class="manual-box autoshow fade-right" style="opacity:1;">
               <p class="mb-title">방법 B — Node.js가 이미 있다면 npm으로</p>
               <pre class="code">npm install -g @anthropic-ai/claude-code</pre>
-              <p class="mb-note">둘 중 아무거나 하나만 성공하면 됩니다. 설치가 끝나면 터미널을 껐다 다시 켜세요.</p>
+              <p class="mb-note">둘 중 하나만 성공하면 됩니다. 끝나면 터미널을 껐다 다시 켜세요.</p>
             </div>
             <div class="warn-banner autoshow fade-right" style="margin-top:.7rem; font-size:1.02rem;">
               <span class="wb-icon">🏢</span>
-              <span>사내망에서 다운로드가 막히면 억지로 우회하지 마세요 — <span class="cfg cfg-co">우리 회사</span>의 공식 설치 경로(소프트웨어 센터·사내 안내 문서)가 우선입니다.</span>
+              <span>사내망에서 다운로드가 막히면 억지로 우회하지 마세요 — <span class="cfg cfg-co">우리 회사</span>의 공식 설치 경로가 우선입니다.</span>
             </div>
           </div>
         </div>
-        <p class="tiny muted autoshow fade-up" style="margin-top:.8rem;">
-          도구는 빠르게 바뀝니다 — 명령이 안 먹으면 공식 문서
-          <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>의 최신 설치 안내를 따르세요.
-          터미널이 막혀 있거나 부담스럽다면 <a href="https://claude.com/download" target="_blank" rel="noopener">데스크톱 앱</a>의 Code 탭에서도 같은 Claude Code를 쓸 수 있습니다.
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span>새 터미널에서 <span class="mono">claude --version</span> 이 버전 숫자를 보여 준다</span>
+          <span class="db-s">막히면 → 에러 5가지 (18장)</span>
+        </div>
+        <p class="tiny muted autoshow fade-up" style="margin-top:.6rem;">
+          명령이 안 먹으면 <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>의 최신 안내를 따르세요.
+          터미널이 막혀 있다면 <a href="https://claude.com/download" target="_blank" rel="noopener">데스크톱 앱</a>의 Code 탭에서도 같은 Claude Code를 쓸 수 있습니다.
         </p>
       </div>
       <aside class="notes">
-        복사 버튼으로 그대로 붙여넣게 안내. Windows에서 PowerShell 실행 정책 에러가 나면 "관리자 PowerShell"로 다시 시도.
-        여기가 오늘의 첫 병목 — 조교가 순회하기 시작할 타이밍. 설치 스크립트/명령은 시점에 따라 바뀔 수 있으므로, 발표 전에 공식 문서와 대조해 한 번 검증할 것(2026-11 확인: 방법 A·B 그대로 유효, npm은 Node 22+ 필요, Windows는 관리자 권한 불필요).
+        복사 버튼으로 그대로 붙여넣게 안내. Windows에서 실행 정책 에러가 나면 "관리자 PowerShell"로 다시.
+        여기가 첫 병목 — 조교가 순회하기 시작할 타이밍. 설치 명령은 바뀔 수 있으니 발표 전에 공식 문서와 대조할 것(2026-11 확인: 방법 A·B 유효, npm은 Node 22+ 필요).
       </aside>
     </section>
 
     <!-- ============= 9. STEP 4 첫 실행 & 로그인 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">STEP 4 / 5 · 실습</div>
-        <h2>첫 실행과 로그인</h2>
+        <div class="chip live">STEP 4 / 6 · 실습</div>
+        <h2>실습 폴더에서 열고, 로그인합니다</h2>
         <div class="step-flow" style="margin-top:.5rem;">
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">1</span>
@@ -967,7 +992,7 @@ window.SEMINAR_CONFIG = {
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">2</span>
             <b>폴더에서 터미널 열기</b>
-            <p>Windows: 폴더에서 우클릭 → "터미널에서 열기"<br/>Mac: 터미널에 <span class="mono">cd&nbsp;</span> 입력 후 폴더를 드래그</p>
+            <p>Windows: 폴더 우클릭 → "터미널에서 열기"<br/>Mac: 터미널에 <span class="mono">cd&nbsp;</span> 입력 후 폴더를 드래그 → Enter</p>
           </div>
           <span class="sf-arrow">→</span>
           <div class="sf-step hot autoshow fade-up">
@@ -982,86 +1007,93 @@ window.SEMINAR_CONFIG = {
             <pre class="code">claude</pre>
           </div>
           <p class="small muted autoshow fade-right" style="margin:0;">
-            로그인 화면에서는 <strong class="accent4">다음 슬라이드의 계정 기준</strong>대로 선택하세요.
-            브라우저가 안 열리면 터미널에 표시된 URL을 복사해 직접 여는 방법도 있습니다.
+            어떤 계정으로 로그인할지는 <strong class="accent4">다음 장</strong>을 보세요.
+            브라우저가 안 열리면 터미널에 나온 URL을 복사해 직접 엽니다.
           </p>
+        </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span>환영 화면과 입력창(<span class="mono">&gt;</span>)이 뜨고, 경로에 <span class="mono">vibe-start</span>가 보인다</span>
+          <span class="db-s">막히면 → 에러 5가지 (18장)</span>
         </div>
       </div>
       <aside class="notes">
-        "왜 폴더에서 여는가" — 에이전트는 현재 폴더를 작업 책상으로 삼기 때문. 문서 전체나 C:\ 루트에서 열지 않도록 주의시키기.
-        로그인 방식은 조직 상황에 따라 갈리므로 다음 슬라이드와 함께 진행.
+        "왜 폴더에서 여는가" — 에이전트는 실행한 폴더 전체를 작업 범위로 삼는다. 문서 폴더 전체나 C:\ 루트에서 열지 않도록 주의.
+        로그인 방식은 조직마다 다르므로 다음 장과 함께 진행.
       </aside>
     </section>
 
-    <!-- ============= 10. 계정과 요금 ============= -->
+    <!-- ============= 10. 계정 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">ACCOUNT &amp; BILLING</div>
-        <h2>어떤 계정으로 로그인하나 — <span class="accent">우선순위</span></h2>
+        <h2>로그인은 <span class="accent">회사 계정 → 구독 → API 키</span> 순서로</h2>
         <table class="gh-table" style="margin-top:.4rem;">
           <tr><th>순위</th><th>방식</th><th>비용</th><th>이런 경우</th></tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
             <td>1️⃣</td><td><strong class="accent4">회사 제공 계정</strong></td>
             <td>회사 부담</td>
-            <td><span class="cfg cfg-co">우리 회사</span>가 계정·게이트웨이를 제공한다면 무조건 이것 — 보안·비용 문제가 이미 해결돼 있습니다</td>
+            <td><span class="cfg cfg-co">우리 회사</span>가 계정·게이트웨이를 제공한다면 무조건 이것 — 보안·비용이 이미 정리돼 있습니다</td>
           </tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
             <td>2️⃣</td><td><strong>Claude 구독 (Pro/Max)</strong></td>
             <td>월 정액</td>
-            <td>개인 학습용. 한도까지 마음껏 쓰는 방식 — 시작하기 가장 무난</td>
+            <td>개인 학습용. 한도 안에서 마음껏 — 시작하기 가장 무난</td>
           </tr>
-          <tr class="autoshow fade-left">
+          <tr class="autoshow fade-in">
             <td>3️⃣</td><td>API 키 (종량제)</td>
             <td>쓴 만큼</td>
             <td>쓴 토큰만큼 과금. 예측이 어려워 입문자에게는 비추천</td>
           </tr>
         </table>
-        <div class="warn-banner autoshow fade-up" style="margin-top:1rem;">
+        <div class="manual-box autoshow fade-up" style="opacity:1; margin-top:.8rem;">
+          <p class="mb-title">🏢 사내 AWS Bedrock 같은 게이트웨이라면 — 한 줄로 끝나지 않습니다</p>
+          <p class="mb-note" style="font-size:.95rem;">로그인 대신 <strong>환경변수 설정</strong>이 필요하고, 세션이 만료될 때마다 <span class="mono">aws sso login</span> 같은 재인증을 합니다. 값은 회사마다 다르니 <strong>사내 가이드</strong>를 그대로 따르세요.</p>
+        </div>
+        <div class="warn-banner autoshow fade-up" style="margin-top:.7rem; font-size:1.1rem;">
           <span class="wb-icon">🔑</span>
-          <span>API 키는 <strong>비밀번호와 같습니다.</strong> 채팅·메일·코드에 붙여넣지 말고, 만약 새 나갔다면 <strong>재발급이 1순위</strong>입니다.</span>
+          <span>API 키는 <strong>비밀번호와 같습니다.</strong> 채팅·메일·코드에 붙여넣지 말고, 새어 나갔다면 삭제가 아니라 <strong>재발급</strong>.</span>
         </div>
       </div>
       <aside class="notes">
-        요금의 구체적 숫자는 자주 바뀌므로 구조만 설명(정액 vs 종량 vs 회사 부담). 회사 계정이 있는 조직이라면 이 슬라이드는 10초 컷.
-        API 키 보안은 github 세미나의 보안 수칙과 같은 메시지 — 반복 노출이 목적.
+        요금 숫자는 자주 바뀌므로 구조만(회사 부담 vs 정액 vs 종량). 회사 계정이 있는 조직이라면 10초 컷.
+        Bedrock 같은 사내 게이트웨이는 "로그인 화면"이 아니라 환경변수로 붙는다 — 사내 가이드 링크를 미리 채팅방에 공유해 두면 좋다.
       </aside>
     </section>
 
-    <!-- ============= 11. 요금의 감 — 토큰과 한도 ============= -->
+    <!-- ============= 11. 토큰과 한도 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">BILLING SENSE</div>
-        <h2>비용의 감 — <span class="grad">토큰</span>이라는 단위</h2>
+        <h2>비용은 <span class="grad">토큰</span> 단위 — 긴 대화가 가장 비쌉니다</h2>
         <div class="grid-3" style="margin-top:.4rem;">
-          <div class="card autoshow zoom-in">
+          <div class="card autoshow fade-up">
             <h3>🧮 토큰 = 글자 조각</h3>
-            <p>AI는 주고받는 모든 글을 <strong>토큰</strong>으로 계산합니다. 대화가 길수록, 읽는 파일이 클수록 토큰이 늘어납니다.</p>
+            <p>주고받는 모든 글을 <strong>토큰</strong>으로 셉니다. 대화가 길수록, 읽는 파일이 클수록 늘어납니다.</p>
           </div>
-          <div class="card autoshow zoom-in">
-            <h3>⏳ 구독은 5시간 한도</h3>
-            <p>구독 요금제는 <strong>5시간 단위로 사용 한도</strong>가 차고 다시 풀립니다(주간 한도도 별도). 한도에 닿으면 쉬었다 하면 됩니다 — 고장이 아닙니다. 남은 양은 <span class="mono">/usage</span>로 확인.</p>
+          <div class="card autoshow fade-up">
+            <h3>⏳ 구독은 세션 한도 + 주간 한도</h3>
+            <p>구독은 <strong>몇 시간 단위의 세션 한도</strong>와 주간 한도가 차고 다시 풀립니다. 한도에 닿아도 고장이 아닙니다. 남은 양과 풀리는 시각은 <span class="mono">/usage</span>.</p>
           </div>
-          <div class="card good autoshow zoom-in">
+          <div class="card good autoshow fade-up">
             <h3>💡 아끼는 습관 하나</h3>
-            <p>주제가 바뀌면 <strong>새 대화</strong>로 시작하세요. 긴 대화를 끌고 다니는 것이 토큰을 가장 많이 씁니다.</p>
+            <p>주제가 바뀌면 <strong>새 대화</strong>(<span class="mono">/clear</span>)로. 긴 대화를 끌고 다니는 것이 토큰을 가장 많이 씁니다.</p>
           </div>
         </div>
         <p class="small muted autoshow fade-up" style="margin-top:1rem;">
-          더 깊은 원리(컨텍스트 창)는 <a href="../context/" target="_blank" rel="noopener">컨텍스트 세미나</a>에서 다룹니다 —
-          오늘은 "긴 대화 = 비용"이라는 감만 가져가면 충분합니다.
+          원리(컨텍스트 창)는 <a href="../context/">컨텍스트 덱</a>에서 — 오늘은 "긴 대화 = 비용 + 품질 저하"라는 감만 가져가세요.
         </p>
       </div>
       <aside class="notes">
-        입문자가 가장 자주 하는 질문 "얼마 들어요?"에 대한 답. 정확한 가격표 대신 과금의 구조(토큰, 5시간 한도)를 알려주는 것이 오래 간다. 2026년 10월부터 Claude Code 안에서도 공식 명칭이 "5-hour limit"으로 통일됐다.
-        "한도가 찼습니다" 메시지를 처음 보면 고장으로 오해하고 문의가 온다 — 미리 예방주사.
+        "얼마 들어요?"에 대한 답. 가격표 대신 과금 구조(토큰, 세션·주간 한도)를 알려 주는 것이 오래간다. Team/Enterprise 문서는 "5시간 롤링 창"으로 명시하지만 개인 요금제는 창 길이를 공개하지 않으므로 /usage 로 확인시킨다.
+        "한도에 도달" 메시지를 처음 보면 고장으로 오해해 문의가 온다 — 미리 예방주사.
       </aside>
     </section>
 
     <!-- ============= 12. STEP 5 첫 대화 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">STEP 5 / 5 · 실습</div>
-        <h2>첫 대화 — <span class="grad">설치 확인</span></h2>
+        <div class="chip live">STEP 5 / 6 · 실습</div>
+        <h2>첫 대화 — AI가 내 폴더에 <span class="grad">파일을 만듭니다</span></h2>
         <div class="grid-2" style="align-items:start; margin-top:.3rem;">
           <div>
             <div class="prompt-card autoshow fade-left">
@@ -1072,63 +1104,238 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
 축하 페이지를 하나 만들어줘.</pre>
             </div>
           </div>
-          <div class="check-list autoshow fade-right">
-            <div class="check-item"><span class="cb">✓</span> AI가 한국어로 응답한다</div>
-            <div class="check-item"><span class="cb">✓</span> 폴더에 <span class="mono">hello.html</span>이 생겼다</div>
-            <div class="check-item"><span class="cb">✓</span> 더블클릭하면 브라우저에 축하 페이지가 뜬다</div>
+          <div>
+            <p class="tiny muted" style="margin:0 0 .4rem; font-weight:700; letter-spacing:.04em;">✅ 완료 기준 — 셋 다 보이면 통과</p>
+            <div class="check-list autoshow fade-right">
+              <div class="check-item"><span class="cb">✓</span> AI가 한국어로 응답한다</div>
+              <div class="check-item"><span class="cb">✓</span> 폴더에 <span class="mono">hello.html</span>이 생겼다</div>
+              <div class="check-item"><span class="cb">✓</span> 더블클릭하면 브라우저에 축하 페이지가 뜬다</div>
+            </div>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          세 가지가 모두 보이면 — <strong class="accent2">축하합니다, 온보딩 완료입니다.</strong>
-          방금 여러분은 첫 바이브 코딩을 했습니다.
+          방금 여러분은 <strong class="accent2">첫 바이브 코딩</strong>을 했습니다 — 말로 시켰고, AI가 파일을 만들었고, 내가 열어서 확인했습니다.
         </div>
-        <p class="muted center" style="margin-top:.6rem; font-size:.95rem;">허락을 묻지 않고 파일을 만들어도 정상입니다 — 기본값이 <strong>Auto 모드</strong>(입력창 아래 <span class="mono">⏵⏵ auto</span>)라서입니다. 매번 묻게 하려면 <span class="mono">Shift+Tab</span>.</p>
+        <p class="muted center" style="margin-top:.6rem; font-size:.95rem;">허락을 묻지 않고 파일을 만들어도 정상입니다 — 기본 권한 모드가 <strong>Auto</strong>(입력창 아래 <span class="mono">⏵⏵ auto</span>)라서입니다. 바꾸는 법은 STEP 6에서.</p>
       </div>
       <aside class="notes">
         단순 인사가 아니라 파일 생성까지 시키는 이유: "AI가 내 컴퓨터에 파일을 만든다"는 에이전트의 본질을 첫 경험으로 심는 것.
-        2026년 8월(v2.1.283)부터 기본 권한 모드가 Auto라 대부분 묻지 않고 바로 만든다 — "왜 안 물어봐요?"가 나오면 정상이라고 안내하고, Shift+Tab으로 Manual(매번 승인)로 바꾸는 법을 보여 준다. 회사 실데이터를 다룰 땐 Manual이 기본 습관(보안 세미나). 전원 완료를 확인하고 박수 한 번 — 분위기 환기.
+        기본 권한 모드가 Auto라 대부분 묻지 않고 바로 만든다 — "왜 안 물어봐요?"가 나오면 정상이라고 안내. 전원 완료를 확인하고 박수 한 번.
       </aside>
     </section>
 
-    <!-- ============= 13. 트러블슈팅 TOP 5 ============= -->
+    <!-- ============= 13. STEP 6-1 기본 조작 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">STEP 6 / 6 · 기본 조작 ① · 실습</div>
+        <h2>파일은 <span class="mono accent2">@</span>로 짚고, 화면은 붙여넣고, 엉뚱하면 <span class="mono accent2">Esc</span></h2>
+        <div class="grid-3" style="margin-top:.4rem;">
+          <div class="card autoshow fade-up">
+            <h3>📎 <span class="mono">@</span> 파일 짚기</h3>
+            <p><span class="mono">@</span>만 치면 폴더 안 파일이 검색됩니다. "그 파일 어디 있더라"를 설명할 필요가 없습니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🖼️ 이미지 붙여넣기</h3>
+            <p>캡처한 화면을 <strong>드래그</strong>하거나 붙여넣기 — "이 화면처럼"이 말보다 정확합니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>⛔ <kbd class="key">Esc</kbd> 멈추기</h3>
+            <p>방향이 틀리면 끝까지 기다리지 말고 <strong>바로 멈춘 뒤</strong> 다시 지시하세요.</p>
+          </div>
+        </div>
+        <div class="prompt-card mini autoshow fade-up" style="margin-top:.9rem;">
+          <div class="pc-label">💬 따라 해 보기 — @ 다음에 파일 이름을 고르세요</div>
+          <pre class="code">@hello.html 글씨를 더 크게 하고, 배경은 짙은 남색으로 바꿔줘.</pre>
+        </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span><span class="mono">@</span>를 치면 파일 목록이 뜨고, 브라우저 새로고침(<kbd class="key">F5</kbd>)에 바뀐 색이 보인다</span>
+        </div>
+      </div>
+      <aside class="notes">
+        말로 시키는 것 외에 가장 자주 쓰는 세 손동작. 이미지 붙여넣기 단축키는 OS·터미널마다 다르다(Mac은 Ctrl+V인 경우가 많음) — 안 되면 드래그.
+        실습: @hello.html 로 수정 요청 → 새로고침해서 확인. "고치고 → 눈으로 확인"이 바이브 코딩 루프의 최소 단위.
+      </aside>
+    </section>
+
+    <!-- ============= 14. STEP 6-2 명령어 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">STEP 6 / 6 · 기본 조작 ②</div>
+        <h2>명령어는 외우지 말고 <span class="mono accent2">/</span>만 치세요 — 오늘은 6개면 충분</h2>
+        <div class="grid-2" style="align-items:start; margin-top:.3rem; gap:1.6rem;">
+          <table class="gh-table cmd-tbl autoshow fade-in">
+            <tr><th colspan="2">오늘부터 쓰는 6개</th></tr>
+            <tr><td class="mono">/help</td><td>지금 쓸 수 있는 명령 보기 — 모르면 일단 이것</td></tr>
+            <tr><td class="mono">/clear</td><td>주제가 바뀌면 새 대화로 — 답이 흐려질 때 1순위</td></tr>
+            <tr><td class="mono">/compact</td><td>이어가야 할 땐 지난 대화를 요약해 자리 만들기</td></tr>
+            <tr><td class="mono">/rewind</td><td>방금 고친 걸 되돌리기 — <kbd class="key">Esc</kbd> 두 번으로도 열림</td></tr>
+            <tr><td class="mono">/usage</td><td>남은 사용 한도 확인 (<span class="mono">/cost</span> 도 같은 명령)</td></tr>
+            <tr><td class="mono">/doctor</td><td>뭔가 이상할 때 설치·연결 상태 진단</td></tr>
+          </table>
+          <table class="gh-table cmd-tbl autoshow fade-in" style="animation-delay:.2s;">
+            <tr><th colspan="2">손에 익으면 6개 더</th></tr>
+            <tr><td class="mono">/resume</td><td>어제 대화 이어가기 — 터미널을 닫아도 남아 있음</td></tr>
+            <tr><td class="mono">/init</td><td>프로젝트를 훑어 규칙 파일(CLAUDE.md) 초안 만들기</td></tr>
+            <tr><td class="mono">/memory</td><td>세션이 바뀌어도 기억할 규칙 파일 열어 고치기</td></tr>
+            <tr><td class="mono">/permissions</td><td>자동 허용·거부할 명령 규칙 정하기</td></tr>
+            <tr><td class="mono">/model</td><td>모델 바꾸기 — 다음다음 장</td></tr>
+            <tr><td class="mono">/agents</td><td>서브에이전트 안내 — 만들기는 "리뷰 담당 서브에이전트 만들어줘"처럼 말로</td></tr>
+          </table>
+        </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span><span class="mono">/</span>를 치면 메뉴가 뜨고, <span class="mono">/help</span> 를 한 번 실행해 봤다</span>
+          <span class="db-s">원리: /clear·/compact → <a href="../context/">context</a> · CLAUDE.md → <a href="../agent-skills/">agent-skills</a></span>
+        </div>
+      </div>
+      <aside class="notes">
+        왼쪽 6개만 오늘 기억. 오른쪽은 "이런 게 있다" 정도. 명령 목록은 버전마다 조금씩 바뀌니 /help 가 늘 최신이다.
+        /clear 가 가장 실용적: 주제가 바뀌었는데 같은 대화를 끌고 가면 답이 흐려지고 토큰도 많이 쓴다.
+      </aside>
+    </section>
+
+    <!-- ============= 15. STEP 6-3 권한 모드 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">STEP 6 / 6 · 기본 조작 ③ · 실습</div>
+        <h2><span class="mono accent2">Shift+Tab</span> 으로 "얼마나 맡길지"를 고릅니다</h2>
+        <table class="gh-table" style="margin-top:.3rem;">
+          <tr><th>모드</th><th>AI가 하는 것</th><th>언제</th></tr>
+          <tr class="autoshow fade-in"><td><strong class="accent2">Auto</strong> <span class="muted tiny">기본값</span></td><td>요청 범위 안의 수정·명령은 묻지 않고 진행, 위험해 보이는 건 멈춤</td><td>연습 파일 · 내 실습 폴더</td></tr>
+          <tr class="autoshow fade-in"><td><strong class="accent4">Manual</strong></td><td>파일 수정·명령마다 "할까요?"를 묻는다</td><td><strong>회사 실데이터 · 처음 보는 폴더</strong></td></tr>
+          <tr class="autoshow fade-in"><td><strong>Plan</strong></td><td>아무것도 고치지 않고 <strong>계획만</strong> 세워 승인을 받는다</td><td>큰 작업을 시키기 전</td></tr>
+          <tr class="autoshow fade-in"><td class="danger"><strong>Bypass</strong></td><td>모든 확인을 건너뜀</td><td>격리된 테스트 환경이 아니면 쓰지 않기</td></tr>
+        </table>
+        <div class="prompt-card mini autoshow fade-up" style="margin-top:.8rem;">
+          <div class="pc-label">💬 따라 해 보기 — Shift+Tab 을 눌러 Plan 으로 바꾼 뒤</div>
+          <pre class="code">이 폴더에 자기소개 페이지 about.html 을 추가하려고 해. 어떤 순서로 만들지 계획만 세워줘.</pre>
+        </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span>입력창 아래 모드 표시가 바뀌고, Plan 에서는 계획만 나오고 <strong>파일은 생기지 않는다</strong></span>
+        </div>
+      </div>
+      <aside class="notes">
+        Auto는 "안전 보장"이 아니라 "범위 안이면 묻지 않음". 회사 데이터를 다룰 땐 Manual로 내리는 게 기본 습관(보안 덱 ../security/).
+        모드 이름과 순서는 버전에 따라 조금 다를 수 있다(수정만 자동 허용하는 accept edits 모드가 끼어 있기도 함) — 화면 아래 표시를 보면 된다.
+        실습 후 계획이 마음에 들면 "좋아, 그대로 진행해"로 실행시켜도 된다.
+      </aside>
+    </section>
+
+    <!-- ============= 16. STEP 6-4 모델 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">STEP 6 / 6 · 기본 조작 ④</div>
+        <h2>모델은 <span class="accent2">기본값 그대로</span> — 바꿀 때는 세 경우뿐</h2>
+        <div class="card autoshow fade-up" style="padding:1rem 1.5rem; border-color: rgba(155,130,255,0.75);">
+          <p style="font-size:1.2rem;"><strong>평소 일의 대부분</strong> — 기본 모델(2026.11 기준 <span class="accent">Opus</span>)로 충분합니다. 지금 무엇인지는 <span class="mono">/model</span> 로 확인.</p>
+        </div>
+        <div class="grid-3" style="margin-top:.8rem;">
+          <div class="card autoshow fade-up">
+            <span class="pill pink">더 깊이 · /effort</span>
+            <p style="margin-top:.5rem;">두세 번 고쳐도 같은 문제가 반복될 때, 설계 결정 · 중요한 변경을 검토받을 때 — 추론 깊이를 올립니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill green">가벼운 모델 · Sonnet · Haiku</span>
+            <p style="margin-top:.5rem;">긴 로그 훑기 · 여러 파일 요약 · 단순 분류처럼 빠르고 싼 게 중요한 일.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill amber">큰 작업용 · Fable</span>
+            <p style="margin-top:.5rem;">한자리에서 끝나지 않는 큰 작업을 통째로 맡길 때. 직접 골라야 켜지고, 느리고 사용량을 많이 씁니다.</p>
+          </div>
+        </div>
+        <p class="small muted autoshow fade-up" style="margin-top:.9rem;">
+          바꿨다면 끝나고 되돌리세요. 회사 계정은 관리자가 모델을 고정해 두었을 수 있습니다 — 그땐 그대로 쓰면 됩니다.
+        </p>
+      </div>
+      <aside class="notes">
+        모델 이름·버전·가격은 몇 달마다 바뀐다(2026.11 기준 기본값 Opus 5.5, 가벼운 Sonnet 5.5 · Haiku 5.5, 큰 작업용 Fable 5.2 — 출처 code.claude.com/docs/en/model-config). 그래서 비율이나 가격 대신 "언제 바꾸나"만 기억시킨다.
+        가장 흔한 실수: 막혔을 때 같은 모델로 같은 말을 반복하는 것. 그땐 /clear 로 새로 시작하거나 /effort 를 올려 "지금까지 시도와 에러를 보고 원인 후보를 좁혀줘".
+      </aside>
+    </section>
+
+    <!-- ============= 17. STEP 6 실습 — 고치고·멈추고·되돌리기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">STEP 6 · 마무리 실습 · 5분</div>
+        <h2>고치고 → 멈추고 → <span class="grad">되돌리기</span>, 한 번씩 해 봅니다</h2>
+        <div class="step-flow" style="margin-top:.5rem;">
+          <div class="sf-step autoshow fade-up">
+            <span class="sf-no">1</span>
+            <b>✏️ 고치기</b>
+            <p class="mono" style="font-size:.9rem !important;">@hello.html 맨 위에 오늘 날짜와 내 이름을 넣어줘</p>
+            <p>→ 새로고침해서 이름이 보이는지 확인</p>
+          </div>
+          <span class="sf-arrow">→</span>
+          <div class="sf-step autoshow fade-up">
+            <span class="sf-no">2</span>
+            <b>⛔ 멈추기</b>
+            <p class="mono" style="font-size:.9rem !important;">hello.html 을 10쪽짜리 사이트로 키워줘</p>
+            <p>→ 작업이 시작되면 바로 <kbd class="key">Esc</kbd>. "중단됨" 표시 확인</p>
+          </div>
+          <span class="sf-arrow">→</span>
+          <div class="sf-step hot autoshow fade-up">
+            <span class="sf-no">3</span>
+            <b>↩️ 되돌리기</b>
+            <p><kbd class="key">Esc</kbd> 두 번(또는 <span class="mono">/rewind</span>) → ① 직후 지점을 고르고 코드까지 되돌리기</p>
+            <p>→ 새로고침해서 ①의 상태인지 확인</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:.9rem; gap:1rem; align-items:stretch;">
+          <div class="card good autoshow fade-up" style="padding:1rem 1.3rem;">
+            <p><strong class="accent2">무엇을 배우나</strong> — AI가 엉뚱하게 가도 <strong>멈출 수 있고, 되돌릴 수 있다.</strong> 그래서 마음 놓고 시켜도 됩니다.</p>
+          </div>
+          <div class="card autoshow fade-up" style="padding:1rem 1.3rem;">
+            <p><strong class="accent4">막히면</strong> — 되돌리기 목록이 비어 있으면 그냥 "방금 바꾼 거 원래대로 돌려줘"라고 말해도 됩니다.</p>
+          </div>
+        </div>
+        <div class="done-bar autoshow fade-up">
+          <span class="db-k">✅ 완료 기준</span><span>브라우저의 hello.html 이 ①(날짜·이름만 추가된) 상태로 돌아와 있다</span>
+        </div>
+      </div>
+      <aside class="notes">
+        이 덱에서 가장 중요한 실습. 실수 비용이 낮다는 걸 몸으로 알면, 워크숍에서 과감하게 시킨다.
+        되돌리기는 Claude가 직접 고친 파일에만 적용된다 — 터미널 명령으로 지운 파일 등은 되돌아오지 않을 수 있다고 한마디. 그래서 중요한 작업은 Git으로(../github/).
+      </aside>
+    </section>
+
+    <!-- ============= 18. 트러블슈팅 TOP 5 ============= -->
     <section>
       <div class="vfill">
         <div class="chip warn">TROUBLESHOOTING</div>
-        <h2>자주 만나는 에러 <span class="accent3">TOP 5</span> 처방전</h2>
+        <h2>자주 만나는 에러 <span class="accent3">5가지</span>와 처방</h2>
         <div class="rx-list" style="margin-top:.5rem;">
-          <div class="rx-item err autoshow fade-left">
+          <div class="rx-item err autoshow fade-in">
             <span class="rx-q">'claude'을(를) 찾을 수 없습니다</span>
             <span class="rx-a">터미널을 <strong>껐다 다시 켜기</strong> — 설치 직후엔 새 창이어야 인식됩니다. 그래도 안 되면 재설치</span>
           </div>
-          <div class="rx-item err autoshow fade-left">
+          <div class="rx-item err autoshow fade-in">
             <span class="rx-q">certificate / SSL / proxy 에러</span>
-            <span class="rx-a">사내망 프록시가 원인 — 사내 인증서 등록 절차를 따르거나, <span class="cfg cfg-help">사내 IT 헬프데스크</span> 문의. 개인망에서 먼저 설치하는 것도 방법</span>
+            <span class="rx-a">사내망 프록시가 원인 — 사내 인증서 등록 절차를 따르거나 <span class="cfg cfg-help">사내 IT 헬프데스크</span> 문의. 개인망에서 먼저 설치하는 것도 방법</span>
           </div>
-          <div class="rx-item err autoshow fade-left">
+          <div class="rx-item err autoshow fade-in">
             <span class="rx-q">EACCES / 권한이 거부되었습니다</span>
             <span class="rx-a">Windows: PowerShell을 <strong>관리자 권한으로 실행</strong> 후 재시도 · Mac: 공식 설치 스크립트(방법 A)로 다시</span>
           </div>
-          <div class="rx-item err autoshow fade-left">
+          <div class="rx-item err autoshow fade-in">
             <span class="rx-q">Node 버전이 낮다는 메시지</span>
-            <span class="rx-a"><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>에서 LTS로 재설치 → 터미널 재시작 → <span class="mono">node -v</span> 재확인</span>
+            <span class="rx-a"><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>에서 LTS로 재설치 → 터미널 재시작 → <span class="mono">node -v</span> 재확인 (또는 방법 A로)</span>
           </div>
-          <div class="rx-item err autoshow fade-left">
+          <div class="rx-item err autoshow fade-in">
             <span class="rx-q">로그인 브라우저가 안 열려요</span>
             <span class="rx-a">터미널에 출력된 URL을 복사해 브라우저에 직접 붙여넣기 — 사내 보안 브라우저 설정이 원인인 경우가 많습니다</span>
           </div>
         </div>
       </div>
       <aside class="notes">
-        이 다섯이 현장의 90%를 커버한다. 각 처방의 공통 1번은 "터미널 재시작" — 제일 싱겁지만 제일 잘 듣는 약.
-        프록시 이슈는 현장에서 못 푸는 경우가 많다 — 붙잡지 말고 IT 문의 루트로 넘기는 판단이 강사의 일.
+        현장의 대부분이 이 다섯. 공통 1번 처방은 "터미널 재시작" — 제일 싱겁지만 제일 잘 듣는다.
+        프록시 이슈는 현장에서 못 푸는 경우가 많다 — 붙잡지 말고 IT 문의로 넘기는 판단이 강사의 일.
       </aside>
     </section>
 
-    <!-- ============= 14. 막혔을 때의 순서 ============= -->
+    <!-- ============= 19. 막혔을 때의 순서 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">WHEN STUCK</div>
-        <h2>그래도 막히면 — <span class="grad">이 순서로</span></h2>
+        <h2>그래도 막히면 — <span class="grad">복사 → 챗봇 → 옆 사람 → IT</span></h2>
         <div class="step-flow" style="margin-top:.6rem;">
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">1</span>
@@ -1139,7 +1346,7 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">2</span>
             <b>🌐 웹 챗봇에게 붙여넣기</b>
-            <p>도구가 아직 없으니, 브라우저의 Claude·챗봇에게 에러를 그대로 붙여넣고 "이거 어떻게 고쳐?" — 임시 조수입니다.</p>
+            <p>도구가 아직 없으니, 사내 승인 챗봇에 에러를 그대로 붙여넣고 "이거 어떻게 고쳐?"</p>
           </div>
           <span class="sf-arrow">→</span>
           <div class="sf-step autoshow fade-up">
@@ -1151,141 +1358,136 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
           <div class="sf-step hot autoshow fade-up">
             <span class="sf-no">4</span>
             <b>🏢 IT 헬프데스크</b>
-            <p>권한·프록시·보안 프로그램 문제는 <span class="cfg cfg-help">사내 IT 헬프데스크</span>의 영역 — 1번에서 확보한 에러를 그대로 전달.</p>
+            <p>권한·프록시·보안 프로그램은 <span class="cfg cfg-help">사내 IT 헬프데스크</span>의 영역 — 1번의 에러와 "몇 번째 STEP"을 함께 전달.</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          설치가 끝난 뒤에는 이 순서의 2번이 <strong class="accent2">설치한 도구 그 자체</strong>가 됩니다 —
-          "에러는 복붙"이 바이브 코딩의 평생 습관입니다.
+          설치가 끝나면 2번이 <strong class="accent2">설치한 도구 그 자체</strong>가 됩니다 —
+          "에러는 통째로 복사해 붙여넣기"가 평생 습관입니다. 더 깊이는 → <a href="../debugging/">디버깅 덱</a>
         </div>
       </div>
       <aside class="notes">
-        워크숍의 "에러는 복붙" 규칙의 예고편. 설치 단계에서만 예외적으로 웹 챗봇을 쓰는 이유(도구가 아직 없으므로)를 설명하면 자연스럽다.
-        IT 문의 시 "에러 원문 + 어느 단계였는지"를 함께 보내면 처리 속도가 몇 배 빨라진다.
+        설치 단계에서만 웹 챗봇을 쓰는 이유: 도구가 아직 없으니까. 회사 노트북이면 사내 승인 챗봇으로.
+        IT 문의 시 "에러 원문 + 어느 STEP이었는지"를 함께 보내면 처리 속도가 몇 배 빨라진다.
       </aside>
     </section>
 
-    <!-- ============= 15. 보안 3줄 약속 ============= -->
+    <!-- ============= 20. 보안 3줄 약속 ============= -->
     <section>
       <div class="vfill">
         <div class="chip warn">SECURITY</div>
-        <h2>시작 전 <span class="accent3">보안 3줄 약속</span></h2>
+        <h2>시작 전 <span class="accent3">보안 약속 3가지</span></h2>
         <div class="stack" style="margin-top:.5rem;">
-          <div class="warn-banner autoshow fade-left">
+          <div class="warn-banner autoshow fade-in">
             <span class="wb-icon">1️⃣</span>
-            <span><strong>회사 기밀·실데이터는 개인 계정 도구에 넣지 않습니다.</strong> 사내 승인 도구에서만 — 애매하면 넣지 않는 쪽이 정답.</span>
+            <span><strong>회사 기밀·실데이터는 사내 승인 도구에서만</strong> — 애매하면 넣지 않는다.</span>
           </div>
-          <div class="warn-banner autoshow fade-left">
+          <div class="warn-banner autoshow fade-in">
             <span class="wb-icon">2️⃣</span>
-            <span><strong>API 키·비밀번호는 코드와 대화에 남기지 않습니다.</strong> 새 나갔다면 삭제가 아니라 <strong>재발급</strong>이 1순위.</span>
+            <span><strong>API 키·비밀번호는 코드·대화·커밋에 남기지 않는다</strong> — 새어 나갔다면 삭제가 아니라 재발급.</span>
           </div>
-          <div class="warn-banner autoshow fade-left">
+          <div class="warn-banner autoshow fade-in">
             <span class="wb-icon">3️⃣</span>
-            <span><strong>회사 정책이 항상 이 자료보다 우선합니다.</strong> <span class="cfg cfg-co">우리 회사</span>의 허용 도구 목록·반출 규정을 먼저 확인하세요.</span>
+            <span><strong>회사 정책이 이 자료보다 우선한다.</strong> <span class="cfg cfg-co">우리 회사</span>의 허용 도구 목록·반출 규정을 먼저 확인하세요.</span>
           </div>
         </div>
         <p class="small muted autoshow fade-up" style="margin-top:1rem;">
-          오늘 실습은 전부 <strong class="accent2">공개해도 무방한 연습용 파일</strong>로만 진행합니다 — 그래서 마음 편히 실험할 수 있습니다.
+          이 덱에서 하나 더: 실데이터가 든 폴더에서는 권한 모드를 <strong class="accent4">Manual</strong>로. 오늘 실습은 전부 공개해도 되는 연습 파일입니다.<br/>
+          자세한 내용은 → <a href="../security/">사내 환경에서의 AI — 보안과 거버넌스</a>
         </p>
       </div>
       <aside class="notes">
-        워크숍의 보안 약속과 같은 내용의 축약판 — 첫 설치 시점부터 습관으로 심는 것이 목적.
+        시리즈 공통 보안 약속 3가지 — 모든 덱에서 같은 문구. 첫 설치 시점부터 습관으로 심는 것이 목적.
         "애매하면 넣지 않는다"가 현장에서 가장 실용적인 판단 기준.
       </aside>
     </section>
 
-    <!-- ============= 16. 업데이트 습관 ============= -->
+    <!-- ============= 21. 업데이트 습관 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">KEEP FRESH</div>
-        <h2>이 도구들은 <span class="grad">몇 주 단위로</span> 바뀝니다</h2>
+        <h2>설치 명령은 바뀝니다 — <span class="grad">공식 문서</span>를 더 믿으세요</h2>
         <div class="grid-2" style="align-items:start; margin-top:.4rem;">
           <div class="card autoshow fade-left">
-            <h3>🔄 가끔 업데이트</h3>
-            <p>도구가 이상하게 느려지거나 새 기능 소식을 들었다면:</p>
+            <h3>🔄 버전 확인</h3>
+            <p>느려졌거나 새 기능 소식을 들었다면 버전부터:</p>
             <div class="cmd-card" style="margin-top:.6rem;">
-              <div class="cc-label">⌨️ 버전 확인 / 업데이트</div>
+              <div class="cc-label">⌨️ 버전 확인</div>
               <pre class="code">claude --version</pre>
             </div>
-            <p class="tiny muted" style="margin-top:.5rem;">대부분 자동 업데이트되지만, 수동 갱신 명령은 공식 문서에서 확인하세요.</p>
+            <p class="tiny muted" style="margin-top:.5rem;">대부분 자동 업데이트됩니다. 수동 갱신 방법은 공식 문서에서.</p>
           </div>
           <div class="card autoshow fade-right">
-            <h3>📅 자료의 유통기한</h3>
-            <p>이 슬라이드의 설치 명령은 <strong>2026년 11월</strong> 기준입니다.</p>
-            <p>명령이 안 먹으면 슬라이드보다 <a href="https://code.claude.com/docs" target="_blank" rel="noopener">공식 문서</a>를 믿으세요 — 도구의 진화 속도가 자료보다 빠릅니다.</p>
+            <h3>📅 이 자료의 기준일</h3>
+            <p>이 슬라이드의 명령·화면은 <strong>2026년 11월</strong> 기준입니다.</p>
+            <p>안 먹으면 <a href="https://code.claude.com/docs" target="_blank" rel="noopener">공식 문서</a>를 따르세요 — 도구가 자료보다 빨리 바뀝니다.</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          바뀌는 것은 <strong class="accent3">설치 명령</strong>이고, 바뀌지 않는 것은
-          <strong class="accent2">"말로 시키고 → 확인하고 → 고쳐달라 한다"</strong>는 리듬입니다.
+          바뀌는 것은 <strong class="accent3">명령과 화면</strong>, 바뀌지 않는 것은
+          <strong class="accent2">"말로 시키고 → 확인하고 → 고쳐 달라 한다"</strong>는 리듬입니다.
         </div>
       </div>
       <aside class="notes">
-        자료 최신성 문제를 정면으로 다루는 슬라이드. "슬라이드보다 공식 문서"라는 원칙을 주면, 자료가 낡아도 참가자가 스스로 길을 찾는다.
-        기준 시점(2026-11)은 자료를 갱신할 때 같이 갱신할 것.
+        자료가 낡는 문제를 정면으로 다룬다. "슬라이드보다 공식 문서"라는 원칙을 주면 자료가 낡아도 스스로 길을 찾는다. 기준일(2026-11)은 자료를 고칠 때 같이 고칠 것.
       </aside>
     </section>
 
-    <!-- ============= 17. 최종 체크리스트 ============= -->
+    <!-- ============= 22. 최종 체크리스트 ============= -->
     <section>
       <div class="vfill">
         <div class="chip live">FINAL CHECK</div>
-        <h2>이 장표만 찍어 가세요 📸 — <span class="accent2">완료 체크리스트</span></h2>
+        <h2>이 장만 찍어 가세요 📸 — <span class="accent2">완료 체크리스트</span></h2>
         <div class="check-list" style="margin-top:.5rem;">
-          <div class="check-item autoshow fade-left"><span class="cb">1</span> 터미널을 열 수 있다 <span class="ci-sub">STEP 1</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">2</span> <span class="mono">node -v</span> 가 v22 이상 <span class="ci-sub">STEP 2</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">3</span> <span class="mono">claude</span> 실행 → 대화창이 뜬다 <span class="ci-sub">STEP 3–4</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">4</span> 로그인 완료 (회사 계정 &gt; 구독 &gt; API) <span class="ci-sub">STEP 4</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">5</span> 첫 대화 + <span class="mono">hello.html</span> 생성 성공 <span class="ci-sub">STEP 5</span></div>
-          <div class="check-item autoshow fade-left"><span class="cb">6</span> 막히면? 에러 복사 → 챗봇/조교 → IT <span class="ci-sub">순서 암기</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">1</span> 터미널을 열 수 있다 <span class="ci-sub">STEP 1</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">2</span> <span class="mono">claude --version</span> 이 버전을 보여 준다 <span class="ci-sub">STEP 2–3</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">3</span> 실습 폴더에서 <span class="mono">claude</span> 실행 + 로그인 (회사 계정 &gt; 구독 &gt; API) <span class="ci-sub">STEP 4</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">4</span> 첫 대화로 <span class="mono">hello.html</span> 을 만들고 브라우저로 열었다 <span class="ci-sub">STEP 5</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">5</span> <span class="mono">@</span>로 파일을 짚어 고치고, <kbd class="key">Esc</kbd>로 멈추고, 되돌려 봤다 <span class="ci-sub">STEP 6</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">6</span> <kbd class="key">Shift</kbd>+<kbd class="key">Tab</kbd>으로 Plan·Manual 모드를 바꿔 봤다 <span class="ci-sub">STEP 6</span></div>
+          <div class="check-item autoshow fade-in"><span class="cb">7</span> 막히면? 에러 복사 → 챗봇 → 옆 사람 → IT <span class="ci-sub">순서 기억</span></div>
         </div>
-        <p class="small muted autoshow fade-up" style="margin-top:.9rem;">
-          6개가 모두 ✓ 이면 입문 세미나·워크숍에서 <strong>단 1분도 세팅으로 잃지 않습니다.</strong>
+        <p class="small muted autoshow fade-up" style="margin-top:.8rem;">
+          7개가 모두 ✓ 이면 입문 세미나·워크숍에서 <strong>세팅으로 잃는 시간이 없습니다.</strong>
         </p>
       </div>
       <aside class="notes">
-        사진 찍을 시간을 실제로 주기. 워크숍 주최자라면 이 체크리스트를 사전 안내 메일에 첨부하는 것을 권장 —
-        당일 아침이 아니라 전날 저녁에 체크하게 만드는 것이 핵심.
+        사진 찍을 시간을 실제로 준다. 워크숍 주최자라면 이 체크리스트를 사전 안내 메일에 첨부 — 당일 아침이 아니라 전날 저녁에 체크하게 만드는 것이 핵심.
       </aside>
     </section>
 
-    <!-- ============= 18. 다음 단계 ============= -->
+    <!-- ============= 23. 다음 단계 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">NEXT</div>
         <h2>환경은 끝났습니다 — <span class="grad">이제 진짜 시작</span></h2>
-        <p class="small muted" style="margin-top:.2rem;">추천 학습 경로 — 여러분은 지금 출발선에 서 있습니다:</p>
+        <p class="small muted" style="margin-top:.2rem;">핵심 경로 — 지금 출발선에 서 있습니다:</p>
         <div class="path-map" style="margin-top:.7rem;">
-          <span class="pm-node here"><b>🧰 0교시 · 설치</b><span>지금 여기</span></span>
+          <span class="pm-node here"><b>🧰 0교시 · 설치와 기본 조작</b><span>지금 여기</span></span>
           <span class="pm-arrow">→</span>
-          <a class="pm-node" href="../intro/"><b>🚀 바이브 코딩이란?</b><span>intro/</span></a>
+          <a class="pm-node" href="../intro/"><b>🚀 바이브 코딩이란 무엇인가?</b><span>intro/ · 왜·무엇에 집중할까</span></a>
           <span class="pm-arrow">→</span>
-          <a class="pm-node" href="../prompt/"><b>🗣️ AI에게 일 시키는 법</b><span>prompt/</span></a>
-          <span class="pm-arrow">→</span>
-          <a class="pm-node" href="../github/"><b>🌿 Git &amp; GitHub</b><span>github/</span></a>
-          <span class="pm-arrow">→</span>
-          <a class="pm-node" href="../workshop/"><b>🛠️ 8시간 워크숍</b><span>workshop/</span></a>
+          <a class="pm-node" href="../workshop/"><b>🛠️ 실습 워크숍</b><span>workshop/ · 내 도구 만들기</span></a>
         </div>
         <div class="grid-2" style="margin-top:1.1rem; align-items:start;">
           <div class="card autoshow fade-left">
-            <h3>🏃 오늘 5분만 더 있다면</h3>
-            <p>방금 만든 <span class="mono">hello.html</span>을 열어두고 이렇게 시켜보세요:<br/>
-            <em>"배경을 밤하늘로 바꾸고 별이 반짝이게 해줘"</em> — 수정 루프의 첫 경험입니다.</p>
+            <h3>🏃 5분 더 있다면</h3>
+            <p>공개해도 되는 내 업무 파일 하나(예: 회의록 양식)를 <strong>복사본으로</strong> 실습 폴더에 넣고:<br/>
+            <em>"@파일이름 에 뭐가 들어 있는지 세 줄로 설명하고, 개선점 하나만 제안해줘"</em></p>
           </div>
           <div class="card good autoshow fade-right">
-            <h3>📚 더 깊이</h3>
-            <p><a href="../context/">컨텍스트</a> · <a href="../knowledge/">LLM 지식 관리</a> · <a href="../agent-skills/">Agent Skills</a> —
-            도구가 익숙해진 뒤에 보면 훨씬 잘 읽힙니다.</p>
+            <h3>📚 01 기본기 — 막히면 펼쳐 볼 덱</h3>
+            <p><a href="../prompt/">AI에게 일 시키는 법</a> · <a href="../github/">Git &amp; GitHub</a> · <a href="../debugging/">AI와 함께 디버깅하기</a> ·
+            <a href="../ui-ux/">UI/UX 용어 사전</a></p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        다음 세미나 일정이 잡혀 있으면 여기서 공지. "밤하늘 별" 미니 과제는 성취감을 하나 더 얹는 장치 —
-        시간이 남는 현장에서는 즉석에서 같이 해보기.
+        다음 세미나 일정이 잡혀 있으면 여기서 공지. 5분 과제는 "내 업무 파일"에 처음 손대 보는 경험 — 반드시 공개해도 되는 파일의 복사본으로.
       </aside>
     </section>
 
-    <!-- ============= 19. Q&A ============= -->
+    <!-- ============= 24. Q&A ============= -->
     <section>
       <div class="vfill center">
         <div class="chip" style="align-self:center;">Q&amp;A</div>
@@ -1298,15 +1500,15 @@ hello.html 파일로 "설치 성공!"이라고 크게 적힌
           <div class="ref-col autoshow fade-left">
             <h3>📚 공식 문서</h3>
             <ul>
-              <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener">Claude Code Docs</a><span class="rd">설치·로그인·문제 해결의 최신 원본</span></li>
+              <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener">Claude Code Docs</a><span class="rd">설치·로그인·명령어·권한 모드의 최신 원본</span></li>
               <li><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a><span class="rd">Node.js LTS 다운로드</span></li>
             </ul>
           </div>
           <div class="ref-col autoshow fade-right">
             <h3>🎓 이 시리즈</h3>
             <ul>
-              <li><a href="../index.html">바이브 코딩 세미나 허브</a><span class="rd">전체 세미나 목록과 추천 경로</span></li>
-              <li><a href="../intro/">바이브 코딩이란 무엇인가?</a><span class="rd">다음 시간 — 개념 입문</span></li>
+              <li><a href="../index.html">바이브 코딩 세미나 허브</a><span class="rd">전체 세미나 목록과 증상별 찾기</span></li>
+              <li><a href="../intro/">바이브 코딩이란 무엇인가?</a><span class="rd">다음 시간 — 왜·무엇에 집중할까</span></li>
             </ul>
           </div>
         </div>

@@ -4,27 +4,37 @@
 
 루트 `index.html`은 전체 세미나를 안내하는 대표(허브) 페이지이고, 각 세미나는 주제별 폴더에 있다:
 
-| 폴더 | 내용 |
-| --- | --- |
-| `setup/` | 0교시 — 설치와 첫 실행 (환경 세팅 · 로그인 · 첫 대화 · 트러블슈팅 TOP 5) |
-| `intro/` | 바이브 코딩이란 무엇인가? (원본 입문 세미나) |
-| `use-cases/` | 이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드 (경품 추첨기 · 엑셀→실시간 대시보드 · 리더 주간보고 · 개발자 주간 활동 · 상황별 처방표). **내레이션 캠페인 덱** — 아래 "내레이션" 참고 |
-| `prompt/` | AI에게 일 시키는 법 — 프롬프트 엔지니어링 (3요소 프레임 · 패턴 8가지 · 다듬기 루프) |
-| `ui-ux/` | 바이브 코더를 위한 UI/UX 용어 사전 (레이아웃 · 베젤 · 사이드바 · 화면 종류/랜딩/대시보드 해부 · UI 엘리먼트 도감 · 상태 · 디자인 토큰 · 타이포그래피 · 머티리얼/쿠퍼티노 테마 · 스타일 키워드) |
-| `context/` | 컨텍스트 — AI 에이전트의 작업 책상 |
-| `knowledge/` | LLM에게 지식을 가르치는 법 (LLM 위키 · RAG · 지식 그래프 · 온톨로지) |
-| `verification/` | AI가 쓴 코드를 믿는 법 — 검증과 테스트 (검증의 사다리 · TDD · AI 리뷰 · 평가) |
-| `orchestration/` | 서브에이전트와 오케스트레이션 (컨텍스트 격리 · 병렬 fan-out · 파이프라인 · CI 속 에이전트) |
-| `security/` | 사내 환경에서의 AI — 보안과 거버넌스 (데이터 경로 · 프롬프트 인젝션 · 권한 설계) |
-| `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub |
-| `workshop/` | 바이브 코딩 실습 워크숍 (90분·3시간·8시간 코스 선택형 핸즈온 — 강사용 런북은 `workshop/README.md`) |
-| `agent-skills/` | 반도체 현업을 위한 Agent Skills (DRM 엑셀·PPT·GDS·RTL·TCAD 실무 예제 + 예제 스킬 모음 `agent-skills/skills/`) |
-| `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 피드백 루프 · CLAUDE.md · Agent Skill — `slide-deck` 예제 스킬 동봉) |
-| `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
+| 구역 | 폴더 | 내용 |
+| --- | --- | --- |
+| 00 맛보기 | `use-cases/` | 이것도 바이브 코딩으로 됩니다 — 5분 상황별 활용 가이드 (경품 추첨기 · 엑셀→실시간 대시보드 · 리더 주간보고 · 개발자 주간 활동 · 상황별 처방표). **내레이션 캠페인 덱** — 아래 "내레이션" 참고 |
+| 핵심 경로 1 | `setup/` | 0교시 — 설치와 기본 조작 (환경 세팅 · 로그인 · 첫 대화 · Esc·@·권한 모드·명령어 · 모델 고르기 · 트러블슈팅 TOP 5) |
+| 핵심 경로 2 | `intro/` | 바이브 코딩이란 무엇인가? (원본 입문 세미나 — 왜·무엇) |
+| 핵심 경로 3 | `workshop/` | 바이브 코딩 실습 워크숍 (90분·3시간·8시간 코스 선택형 핸즈온 · 업무 레시피 11개 · 심화 트랙 — 강사용 런북은 `workshop/README.md`) |
+| 01 기본기 | `prompt/` | AI에게 일 시키는 법 — 프롬프트 엔지니어링 (3요소 프레임 · 패턴 8가지 · 다듬기 루프의 정본: 피드백 공식 · 증상별 복구 문장) |
+| 01 기본기 | `ui-ux/` | 바이브 코더를 위한 UI/UX 용어 사전 (+ 비주얼 치트시트 `ui-ux/cheatsheet.html`) |
+| 01 기본기 | `github/` | 바이브 코딩을 위한 최소한의 Git & GitHub (GitHub Pages 배포의 정본) |
+| 01 기본기 | `debugging/` | 고칠수록 꼬일 때 — AI와 함께 디버깅하기 (재현 · 가설 · 한 번에 하나 · 사내 단골 에러 처방 · 실습 파일 `debugging/lab/`) |
+| 02 더 깊이 | `context/` | 컨텍스트 — AI 에이전트의 작업 책상 |
+| 02 더 깊이 | `knowledge/` | LLM에게 지식을 가르치는 법 (LLM 위키 · RAG · 지식 그래프 · 온톨로지 · 실습 5개) |
+| 02 더 깊이 | `verification/` | AI가 쓴 코드를 믿는 법 — 검증과 테스트 (검증의 사다리 · 분석 숫자 믿는 법 · TDD · AI 리뷰 · 평가) |
+| 02 더 깊이 | `orchestration/` | 서브에이전트와 오케스트레이션 (컨텍스트 격리 · 병렬 fan-out · 파이프라인 · Workflow) |
+| 02 더 깊이 | `security/` | 사내 환경에서의 AI — 보안과 거버넌스 (보안 약속 3개의 정본 `#/promises` · 데이터 경로 · 인젝션 · 권한 · 민감 파일 차단 실습) |
+| 03 직접 해보기 | `agent-skills/` | 내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills (반복 설명을 파일로 승격하는 정본 + 반도체 실무 예제, 예제 스킬 모음 `agent-skills/skills/`) |
+| 03 직접 해보기 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 좌표+증상 피드백 · 스스로 검사 — CLAUDE.md·스킬은 `agent-skills/`로, `slide-deck` 예제 스킬 동봉) |
+| 03 직접 해보기 | `automation/` | 내 도구가 혼자 돌게 — 연결(MCP) · 예약 실행 · 팀이 같이 쓰는 앱 |
+| 번외 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
+| 번외 | `ai-map/` | AI 업계 지도 — 각 진영의 전략 (입문 덱 부록에서 분리, 분기마다 갱신) |
 
-**핵심 경로는 세 개뿐이다**: `setup/`(30분) → `intro/`(60분) → `workshop/`(90분·3시간·8시간).
-나머지 덱은 순서대로 듣는 커리큘럼이 아니라, 일하다 막혔을 때 펼쳐 보는 **증상별 처방전**이다 —
+**핵심 경로는 세 개뿐이다**: `setup/`(40분) → `intro/`(60분) → `workshop/`(90분·3시간·8시간). 시작 전 맛보기로 `use-cases/`(5분).
+처방전 덱은 순서대로 듣는 커리큘럼이 아니라, 일하다 막혔을 때 펼쳐 보는 **증상별 처방전**이다 —
 허브의 "막혔을 때 — 증상으로 찾기"가 증상 → 덱으로 바로 연결하고, "한 장 요약"이 시리즈 전체를 9줄로 압축한다.
+
+**정본 규칙**: 같은 개념이 여러 덱에 나오면 정본 덱에서만 자세히 다루고 나머지는 한 장 요약 + 링크로 둔다 —
+다듬기 루프 → `prompt/` · CLAUDE.md·스킬 → `agent-skills/` · Pages 배포 → `github/` · 명령어·권한 모드·모델 → `setup/` ·
+디버깅 → `debugging/` · 연결·예약 실행 → `automation/` · 보안 약속 → `security/`.
+
+**목록을 바꿀 때 함께 고칠 곳**: `assets/decks.js`(단일 목록 — 발표자 콘솔·OG 카드가 읽음) · 루트 `index.html`(카드·팔레트·구조화 데이터) ·
+`sitemap.xml` · `assets/og-deck.html`의 `OG` 표 → `npm run og` · 이 표.
 
 ### 핵심만 보기 (`assets/core.js` · `assets/core.css`)
 
@@ -35,7 +45,7 @@
 - 공개 사이트·`file://` 에서는 기본 **핵심 모드**, 왼쪽 아래 토글로 전체를 펼친다(선택은 `localStorage.vibe-depth`에 기억, 보던 장으로 복귀).
 - 실제 발표(`server.js`로 띄운 곳)·`?present`·인쇄(`?print-pdf`)는 **항상 전체 모드** — 발표자와 청중의 슬라이드 번호가 같아야 따라가기가 깨지지 않는다. 강제로 고르려면 `?core` / `?full`.
 - 덱에 붙이는 법: `<head>`에 `<link rel="stylesheet" href="../assets/core.css">`, `reveal.js` 바로 다음(`Reveal.initialize` 앞)에 `<script src="../assets/core.js"></script>`.
-- 적용 덱: prompt · ui-ux · github · context · knowledge · verification · orchestration · security · agent-skills · making-slides. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
+- 적용 덱: prompt · ui-ux · github · debugging · context · knowledge · verification · orchestration · security · agent-skills · making-slides · automation · ai-map. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
 
 ### 첫 화면 — 빌드 장면 (루트 `index.html`)
 

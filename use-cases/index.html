@@ -13,7 +13,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드 | 바이브 코딩 세미나</title>
+  <title>이것도 바이브 코딩으로 됩니다 — 0단계 · 5분 맛보기 | 바이브 코딩 세미나</title>
 
   <!-- SEO -->
   <meta name="description" content="코딩 에이전트(Claude Code · Codex · OpenCode)로 어디까지 할 수 있을까. 경품 추첨기, 엑셀→실시간 대시보드, 리더의 주간보고 초안, 개발자 주간 활동 공유까지 — 보통 사람들이 매주 겪는 일을 바이브 코딩으로 바꾸는 상황별 가이드. 내레이션이 있는 캠페인형 슬라이드." />
@@ -28,7 +28,7 @@
   <meta property="og:title" content="이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드" />
   <meta property="og:description" content="경품 추첨기 10분 · 엑셀→실시간 대시보드 · 주간보고 3시간→15분 · 개발자 주간 활동 자동 공유. 코드를 몰라도, 일은 바꿀 수 있습니다." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/use-cases/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="이것도 바이브 코딩으로 됩니다" />
   <meta name="twitter:description" content="코딩 에이전트로 어디까지 할 수 있을까 — 보통 사람들의 일주일을 바꾸는 상황별 가이드." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=1" />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -87,9 +87,7 @@
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.14), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(255,94,126,0.05), transparent 60%);
-      animation: bgFloat 18s ease-in-out infinite alternate;
     }
-    @keyframes bgFloat { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-2%,2%) scale(1.05); } }
     body::after {
       content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image:
@@ -112,12 +110,9 @@
     .reveal a { color: #5BFFE0 !important; }
     .grad {
       background: linear-gradient(100deg, #B8A6FF 0%, #5BFFE0 50%, #FF9AB0 100%);
-      background-size: 200% 100%;
       -webkit-background-clip: text; background-clip: text; color: transparent !important;
       -webkit-text-fill-color: transparent; text-shadow: none !important;
-      animation: gradShift 6s ease-in-out infinite alternate;
     }
-    @keyframes gradShift { to { background-position: 100% 0; } }
     .mono { font-family: var(--mono); }
     .t1 { color: var(--a1) !important; } .t2 { color: var(--a2) !important; }
     .t3 { color: var(--a3) !important; } .t4 { color: var(--a4) !important; }
@@ -140,30 +135,30 @@
        data-x="N" 은 N번째 문장에서 퇴장(.gone), data-d 는 박자 안의 지연(초)
        ──────────────────────────────────────────────────────────── */
     .k {
-      opacity: 0; transform: translateY(28px);
+      opacity: 0; transform: translateY(16px);
       transition-property: opacity, transform, filter, clip-path;
-      transition-duration: .7s, .9s, .9s, .9s;
+      transition-duration: .35s, .4s, .4s, .4s;
       transition-timing-function: var(--ease);
       transition-delay: calc(var(--d, 0) * 1s);
     }
     .k.on { opacity: 1; transform: none; filter: none; }
-    .k.pop { transform: scale(.35); transition-timing-function: var(--ease), var(--spring), var(--ease), var(--ease); }
-    .k.left  { transform: translateX(-70px); }
-    .k.right { transform: translateX(70px); }
-    .k.down  { transform: translateY(-40px); }
-    .k.blur  { filter: blur(16px); transform: scale(1.12); }
+    .k.pop { transform: scale(.9); }
+    .k.left  { transform: translateX(-24px); }
+    .k.right { transform: translateX(24px); }
+    .k.down  { transform: translateY(-16px); }
+    .k.blur  { filter: blur(6px); transform: scale(1.03); }
     .k.wipe  { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
     .k.wipe.on { clip-path: inset(0 0 0 0); }
-    .k.slam  { transform: scale(2.6) rotate(-8deg); transition-duration: .25s, .45s, .45s, .45s; transition-timing-function: ease-out, cubic-bezier(.5,0,.75,0), ease, ease; }
+    .k.slam  { transform: scale(1.25) rotate(var(--rot, 0deg)); transition-duration: .2s, .3s, .3s, .3s; transition-timing-function: ease-out; }
     .k.slam.on { transform: rotate(var(--rot, 0deg)); }
     .k.on.pop, .k.on.left, .k.on.right, .k.on.down, .k.on.blur { transform: none; }
     .k.on.blur { filter: none; }
     .gone {
-      opacity: 0 !important; transform: scale(.88) !important; filter: blur(8px) !important;
+      opacity: 0 !important; transform: scale(.96) !important;
       transition-delay: calc(var(--xd, 0) * 1s) !important; pointer-events: none;
     }
     .snap, .snap * { transition: none !important; animation-play-state: paused; }
-    .dim-out { transition: opacity .8s, filter .8s; }
+    .dim-out { transition: opacity .4s, filter .4s; }
     .dim-out.dimmed { opacity: .22; filter: grayscale(1); }
 
     /* 공통 카드 */
@@ -208,16 +203,14 @@
     .s01 .clock .time { font-size: 150px; font-weight: 900; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
     .s01 .task {
       position: absolute; left: calc(50% + var(--x)); top: calc(50% + var(--y));
-      transform: translateY(-260px) rotate(var(--r)); opacity: 0;
-      transition: transform .9s var(--spring), opacity .5s, filter .8s;
+      transform: translateY(-24px) rotate(var(--r)); opacity: 0;
+      transition: transform .4s var(--ease), opacity .3s, filter .4s;
       transition-delay: calc(var(--d,0) * 1s);
     }
     .s01 .task.on { opacity: 1; transform: rotate(var(--r)); }
     .s01 .task .in { display: block; padding: 12px 18px; font-size: 20px; font-weight: 700; white-space: nowrap; border-radius: 14px; }
-    .s01 .task.on .in { animation: jit 2.6s ease-in-out infinite alternate; animation-delay: calc(var(--d,0) * -1s); }
-    @keyframes jit { 0% { transform: translate(0,0) rotate(0); } 100% { transform: translate(4px,-6px) rotate(2deg); } }
     .s01 .tasks.grey .task { filter: grayscale(1) brightness(.6); }
-    .s01 .task.gone { transform: translate(calc(var(--x) * -1), calc(var(--y) * -1 + 40px)) scale(0) rotate(200deg) !important; filter: blur(2px) !important; transition: transform .8s cubic-bezier(.6,0,.4,1), opacity .8s !important; transition-delay: calc(var(--xd,0) * 1s) !important; }
+    .s01 .task.gone { transform: translate(calc(var(--x) * -.25), calc(var(--y) * -.25)) scale(.6) rotate(var(--r)) !important; filter: none !important; transition: transform .4s ease-in, opacity .35s !important; transition-delay: calc(var(--xd,0) * 1s) !important; }
     .s01 .hero { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
     .s01 .hero h1 { font-size: 92px; }
     .s01 .hero .sub { margin-top: 26px; font-size: 26px; color: var(--dim) !important; }
@@ -225,27 +218,24 @@
     .s01 .tools { margin-top: 30px; display: flex; gap: 12px; justify-content: center; }
 
     /* ═════ S02 상상의 원 ═════ */
-    .s02 .ring-wrap { position: absolute; left: 640px; top: 385px; width: 0; height: 0; }
+    .s02 .ring-wrap { position: absolute; left: 640px; top: 350px; width: 0; height: 0; }
     .s02 .small-c {
       position: absolute; width: 190px; height: 190px; left: -95px; top: -95px; border-radius: 50%;
       background: radial-gradient(circle, rgba(155,130,255,.35), rgba(155,130,255,.08));
       border: 2px solid rgba(155,130,255,.7); display: grid; place-items: center; text-align: center;
       font-size: 24px; font-weight: 800; z-index: 3;
     }
-    .s02 .small-c.on { animation: pulse 2.2s ease-in-out infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 18px rgba(155,130,255,.0), 0 0 40px rgba(155,130,255,.45); } }
     .s02 .big-c {
-      position: absolute; width: 880px; height: 520px; left: -440px; top: -260px; border-radius: 50%;
+      position: absolute; width: 880px; height: 440px; left: -440px; top: -220px; border-radius: 50%;
       border: 2px dashed rgba(43,234,208,.55); background: radial-gradient(circle, rgba(43,234,208,.08), transparent 70%);
-      transform: scale(.25); opacity: 0; transition: transform 1.3s var(--spring), opacity .6s;
+      transform: scale(.4); opacity: 0; transition: transform .5s var(--ease), opacity .35s;
     }
     .s02 .big-c.on { transform: scale(1); opacity: 1; }
     .s02 .shock { position: absolute; width: 200px; height: 200px; left: -100px; top: -100px; border-radius: 50%; border: 3px solid var(--a2); opacity: 0; }
-    .s02 .shock.on { animation: shock 1.4s ease-out forwards; }
+    .s02 .shock.on { animation: shock .6s ease-out forwards; }
     @keyframes shock { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(4.2); opacity: 0; } }
     .s02 .orbit { position: absolute; left: 0; top: 0; width: 0; height: 0; }
-    .s02 .orbit .pos { position: absolute; animation: bob 5s ease-in-out infinite alternate; animation-delay: var(--bd); }
-    @keyframes bob { from { transform: translate(-6px, 5px); } to { transform: translate(6px, -5px); } }
+    .s02 .orbit .pos { position: absolute; }
     .s02 .orbit .pos > .k { translate: -50% -50%; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .s02 .lab { position: absolute; font-family: var(--mono); font-size: 16px; letter-spacing: .14em; }
@@ -253,7 +243,7 @@
     .s02 .lab.l2 { right: 64px; top: 96px; color: var(--a2) !important; text-align: right; }
     .s02 .lab b { display: block; font-family: 'Pretendard'; font-size: 34px; letter-spacing: -.02em; color: #fff !important; margin-top: 6px; }
     .s02 .verdict {
-      position: absolute; left: 0; right: 0; bottom: 156px; text-align: center; font-size: 46px; font-weight: 900;
+      position: absolute; left: 0; right: 0; bottom: 148px; text-align: center; font-size: 44px; font-weight: 900;
     }
     .s02 .verdict .bg { display: inline-block; padding: 14px 34px; border-radius: 18px; background: rgba(6,8,15,.82); border: 1px solid var(--line); backdrop-filter: blur(6px); }
 
@@ -274,10 +264,10 @@
     .s03 .term div { color: #9FF3E4 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .s03 .term .ok { color: var(--a4) !important; }
     .s03 .loop-ring { position: absolute; right: -16px; top: -16px; width: 58px; height: 58px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--a2); border-right-color: var(--a2); opacity: 0; transition: opacity .4s; }
-    .s03 .loop-ring.on { opacity: 1; animation: spin 1.1s linear infinite; }
+    .s03 .loop-ring.on { opacity: 1; animation: spin 1.2s var(--ease) 2; }
     .s03 .result { padding: 20px; }
     .s03 .bars { display: flex; gap: 12px; align-items: flex-end; height: 150px; padding: 8px 4px 0; border-bottom: 1px solid rgba(255,255,255,.15); }
-    .s03 .bars i { flex: 1; height: var(--h); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--c, var(--a1)), rgba(155,130,255,.25)); transform: scaleY(0); transform-origin: bottom; transition: transform 1s var(--spring), background .8s; transition-delay: calc(var(--i) * .09s); }
+    .s03 .bars i { flex: 1; height: var(--h); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--c, var(--a1)), rgba(155,130,255,.25)); transform: scaleY(0); transform-origin: bottom; transition: transform .4s var(--ease), background .4s; transition-delay: calc(var(--i) * .06s); }
     .s03 .result.on .bars i { transform: scaleY(1); }
     .s03 .result.recolor .bars i { background: linear-gradient(180deg, var(--rc), rgba(255,255,255,.08)); }
     .s03 .arrow { position: absolute; top: 300px; font-size: 40px; color: var(--a2) !important; }
@@ -329,8 +319,8 @@
     .s04 .btn:disabled { opacity: .5; cursor: default; transform: none; }
     .s04 .btn.ghost { background: transparent; color: var(--dim) !important; border: 1px solid var(--line); box-shadow: none; font-size: 16px; padding: 10px 16px; }
     .s04 .winners { margin-top: 14px; min-height: 40px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .s04 .winners span { padding: 6px 12px; border-radius: 999px; background: rgba(255,212,107,.14); border: 1px solid rgba(255,212,107,.5); font-size: 17px; font-weight: 700; animation: popIn .5s var(--spring); }
-    @keyframes popIn { from { transform: scale(.3); opacity: 0; } }
+    .s04 .winners span { padding: 6px 12px; border-radius: 999px; background: rgba(255,212,107,.14); border: 1px solid rgba(255,212,107,.5); font-size: 17px; font-weight: 700; animation: popIn .3s var(--ease); }
+    @keyframes popIn { from { transform: scale(.85); opacity: 0; } }
     .s04 .roster-ed { position: absolute; inset: 16px; z-index: 5; display: none; flex-direction: column; gap: 10px; padding: 18px; border-radius: 16px; background: rgba(6,8,15,.97); border: 1px solid var(--line); }
     .s04 .roster-ed.open { display: flex; }
     .s04 .roster-ed textarea { flex: 1; resize: none; font: 18px/1.5 'Pretendard', sans-serif; background: #0B0F1C; color: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
@@ -348,7 +338,7 @@
     .s05 .node { position: absolute; width: 130px; margin-left: -65px; margin-top: -40px; padding: 12px 6px; text-align: center; font-size: 17px; font-weight: 800; }
     .s05 .node span { display: block; font-size: 28px; margin-bottom: 2px; }
     .s05 .dot-run { offset-path: path('M190,40 A150,150 0 1,1 189.9,40'); offset-distance: 0%; width: 16px; height: 16px; border-radius: 50%; background: var(--a3); box-shadow: 0 0 18px var(--a3); position: absolute; left: 0; top: 0; opacity: 0; }
-    .s05 .dot-run.on { opacity: 1; animation: orbitRun 2.4s linear infinite; }
+    .s05 .dot-run.on { opacity: 1; animation: orbitRun 2.4s linear 4 forwards; }
     @keyframes orbitRun { to { offset-distance: 100%; } }
     .s05 .hours { position: absolute; left: 500px; top: 600px; width: 380px; text-align: center; }
     .s05 .hours .big-num { font-size: 54px; color: var(--a3) !important; }
@@ -387,7 +377,7 @@
     .s06 .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: blink 1s steps(1) infinite; }
     .s06 .chart { display: flex; gap: 14px; align-items: flex-end; height: 200px; margin-top: 18px; padding: 0 6px; border-bottom: 1px solid rgba(255,255,255,.14); }
     .s06 .chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-    .s06 .chart .col i { width: 100%; height: var(--h, 0%); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--a2), rgba(43,234,208,.15)); transition: height 1.1s var(--spring); }
+    .s06 .chart .col i { width: 100%; height: var(--h, 0%); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--a2), rgba(43,234,208,.15)); transition: height .4s var(--ease); }
     .s06 .chart .col.flash i { background: linear-gradient(180deg, var(--a4), rgba(255,212,107,.2)); }
     .s06 .chart .col span { font-size: 12px; color: var(--soft) !important; margin-top: 6px; position: absolute; bottom: -22px; }
     .s06 .chart .col { position: relative; }
@@ -402,7 +392,7 @@
     .cmp .row { margin-bottom: 14px; }
     .cmp .row .lbl { display: flex; justify-content: space-between; font-size: 16px; margin-bottom: 6px; color: var(--dim) !important; }
     .cmp .track { height: 20px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
-    .cmp .fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.4s var(--ease); }
+    .cmp .fill { height: 100%; width: 0; border-radius: 999px; transition: width .6s var(--ease); }
     .cmp .on .fill { width: var(--w); }
     .s06 .year { margin-top: 18px; text-align: right; }
     .s06 .year .big-num { font-size: 104px; color: var(--a2) !important; }
@@ -416,7 +406,7 @@
     .s07 .anaclock i { position: absolute; left: 50%; bottom: 50%; width: 3px; margin-left: -1.5px; border-radius: 3px; transform-origin: bottom center; background: #fff; }
     .s07 .anaclock .h { height: 24px; transform: rotate(60deg); }
     .s07 .anaclock .m { height: 34px; background: var(--a3); }
-    .s07 .anaclock.on .m { animation: spin .5s linear infinite; }
+    .s07 .anaclock.on .m { animation: spin .9s linear 6; }
     .s07 .anaclock.on .h { animation: hourAdv 6s linear forwards; }
     @keyframes hourAdv { from { transform: rotate(60deg); } to { transform: rotate(165deg); } }
     .s07 .srcs { position: absolute; left: 530px; top: 196px; width: 686px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -424,12 +414,9 @@
     .s07 .src .ic { font-size: 44px; }
     .s07 .src b { font-size: 46px; font-variant-numeric: tabular-nums; display: block; line-height: 1; }
     .s07 .src small { font-size: 17px; color: var(--soft) !important; }
-    .s07 .src.on.shake { animation: shake .4s ease-in-out 3; animation-delay: calc(var(--sd,0) * 1s); }
-    @keyframes shake { 25% { transform: translateX(-5px) rotate(-1deg); } 75% { transform: translateX(5px) rotate(1deg); } }
     .s07 .tabs { position: absolute; left: 530px; top: 520px; width: 686px; display: flex; gap: 6px; }
     .s07 .tabs span { flex: 1; padding: 9px 10px; font-size: 14px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--soft) !important; }
-    .s07 .tabs.on span { animation: tabFlick 1.2s steps(1) infinite; animation-delay: calc(var(--i) * .2s); }
-    @keyframes tabFlick { 0%, 80% { background: rgba(255,255,255,.05); color: var(--soft); } 81%, 100% { background: rgba(155,130,255,.35); color: #fff; } }
+    .s07 .tabs span.cur { background: rgba(155,130,255,.35); color: #fff !important; transition: background .2s; }
     .s07 .cost { position: absolute; left: 530px; top: 574px; display: flex; align-items: baseline; gap: 14px; }
     .s07 .cost .big-num { font-size: 76px; color: var(--a3) !important; }
     .s07 .cost span:last-child { font-size: 22px; color: var(--dim) !important; }
@@ -440,12 +427,11 @@
     .s08 .srcs { position: absolute; left: 64px; top: 290px; width: 230px; display: flex; flex-direction: column; gap: 16px; }
     .s08 .srcs .chip { font-size: 18px; padding: 10px 16px; justify-content: flex-start; }
     .s08 .core { position: absolute; left: 430px; top: 380px; width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; font-size: 46px; background: radial-gradient(circle, rgba(155,130,255,.55), rgba(155,130,255,.1)); border: 2px solid var(--a1); }
-    .s08 .core.on { animation: corePulse 1.6s ease-in-out infinite; }
-    @keyframes corePulse { 50% { box-shadow: 0 0 0 16px rgba(155,130,255,.12), 0 0 60px rgba(155,130,255,.6); } }
+    .s08 .core.on { box-shadow: 0 0 40px rgba(155,130,255,.45); }
     .s08 .core small { position: absolute; bottom: -32px; font-size: 14px; font-family: var(--mono); color: var(--soft) !important; white-space: nowrap; }
     .s08 svg.flow { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; pointer-events: none; overflow: visible; }
     .s08 svg.flow path { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 14; opacity: 0; transition: opacity .6s; }
-    .s08 svg.flow.on path { opacity: .9; animation: dashMove .8s linear infinite; }
+    .s08 svg.flow.on path { opacity: .9; animation: dashMove .8s linear 5; }
     @keyframes dashMove { to { stroke-dashoffset: -32; } }
     .s08 .report { position: absolute; right: 64px; top: 266px; width: 560px; padding: 22px 26px; }
     .s08 .report .rh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
@@ -455,7 +441,7 @@
     .s08 .sec h4 { font-size: 17px; margin: 0 0 6px; color: var(--a2) !important; font-weight: 800; }
     .s08 .sec p { font-size: 16px; line-height: 1.5; color: var(--dim) !important; }
     .s08 .cite { display: inline-block; font-family: var(--mono); font-size: 12px; padding: 1px 7px; border-radius: 6px; background: rgba(155,130,255,.18); color: #CFC3FF !important; margin-left: 4px; vertical-align: 1px; }
-    .s08 .mark { background: linear-gradient(transparent 58%, rgba(255,212,107,.45) 58%) no-repeat 0 0 / 0% 100%; transition: background-size .7s var(--ease); transition-delay: calc(var(--md, 0) * 1s + .3s); }
+    .s08 .mark { background: linear-gradient(transparent 58%, rgba(255,212,107,.45) 58%) no-repeat 0 0 / 0% 100%; transition: background-size .4s var(--ease); transition-delay: calc(var(--md, 0) * 1s + .2s); }
     .s08 .report.review .mark { background-size: 100% 100%; color: #fff !important; }
     .s08 .pen { position: absolute; right: 18px; bottom: 16px; font-size: 15px; padding: 5px 12px; }
     .s08 .result { position: absolute; left: 64px; top: 556px; display: flex; align-items: baseline; gap: 18px; }
@@ -475,7 +461,7 @@
     .s09 .fog span { font-size: 40px; color: var(--a3) !important; }
     .s09 .feed { position: absolute; left: 64px; top: 432px; width: 430px; height: 210px; overflow: hidden; mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent); -webkit-mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent); }
     .s09 .feed .inner { will-change: transform; }
-    .s09 .feed.on .inner { animation: feedUp 7s linear infinite; }
+    .s09 .feed.on .inner { animation: feedUp 6s var(--ease) forwards; }
     @keyframes feedUp { to { transform: translateY(-50%); } }
     .s09 .feed div { font-family: var(--mono); font-size: 14.5px; padding: 6px 0; color: var(--dim) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .s09 .feed .c { color: var(--a2) !important; } .s09 .feed .p { color: var(--a1) !important; } .s09 .feed .j { color: var(--a4) !important; }
@@ -499,9 +485,7 @@
     .s10 .tile { padding: 20px 18px; height: 270px; position: relative; overflow: hidden; }
     .s10 .tile .tn { font-size: 21px; font-weight: 800; margin-bottom: 14px; }
     .s10 .tile .tn span { margin-right: 6px; }
-    .s10 .tile.k { transform: perspective(800px) rotateY(-80deg); transform-origin: left center; }
-    .s10 .tile.k.on { transform: none; }
-    .s10 .todo div { font-size: 15.5px; padding: 6px 0; color: var(--dim) !important; opacity: .35; transition: opacity .4s, color .4s; transition-delay: calc(var(--i) * .35s + .6s); }
+    .s10 .todo div { font-size: 15.5px; padding: 6px 0; color: var(--dim) !important; opacity: .35; transition: opacity .3s, color .3s; transition-delay: calc(var(--i) * .25s + .4s); }
     .s10 .todo div::before { content: "☐ "; color: var(--soft); }
     .s10 .tile.on .todo div { opacity: 1; }
     .s10 .tile.on .todo div.t::before { content: "☑ "; color: var(--a2); }
@@ -511,7 +495,7 @@
     .s10 .files div b { color: var(--a2) !important; opacity: 0; transform: translateY(8px); font-weight: 600; }
     .s10 .tile.on .files div em { opacity: 0; transform: translateY(-8px); }
     .s10 .tile.on .files div b { opacity: 1; transform: none; }
-    .s10 .pie { width: 150px; height: 150px; margin: 10px auto 0; border-radius: 50%; background: conic-gradient(var(--a1) 0 calc(var(--p) * 38%), var(--a2) 0 calc(var(--p) * 66%), var(--a3) 0 calc(var(--p) * 86%), var(--a4) 0 calc(var(--p) * 100%), rgba(255,255,255,.06) 0); --p: 0; transition: --p 1.6s var(--ease) .4s; }
+    .s10 .pie { width: 150px; height: 150px; margin: 10px auto 0; border-radius: 50%; background: conic-gradient(var(--a1) 0 calc(var(--p) * 38%), var(--a2) 0 calc(var(--p) * 66%), var(--a3) 0 calc(var(--p) * 86%), var(--a4) 0 calc(var(--p) * 100%), rgba(255,255,255,.06) 0); --p: 0; transition: --p .8s var(--ease) .3s; }
     .s10 .tile.on .pie { --p: 1; }
     @property --p { syntax: '<number>'; inherits: false; initial-value: 0; }
     .s10 .pie-l { margin-top: 12px; font-size: 13px; text-align: center; color: var(--soft) !important; }
@@ -533,7 +517,7 @@
     .s11 .hb .lbl b { font-size: 34px; font-variant-numeric: tabular-nums; }
     .s11 .hb .lbl small { font-size: 15px; color: var(--soft) !important; display: block; font-weight: 500; margin-top: 2px; }
     .s11 .hb .track { height: 26px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
-    .s11 .hb .fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.5s var(--ease); }
+    .s11 .hb .fill { height: 100%; width: 0; border-radius: 999px; transition: width .6s var(--ease); }
     .s11 .hb.on .fill { width: var(--w); }
     .s11 .total { position: absolute; left: 64px; top: 540px; display: flex; align-items: baseline; gap: 14px; }
     .s11 .total .big-num { font-size: 104px; }
@@ -558,11 +542,9 @@
     .s12 .arrow { font-size: 30px; color: var(--soft) !important; }
     .s12 .queue { display: flex; gap: 5px; margin-top: 8px; justify-content: center; }
     .s12 .queue i { width: 14px; height: 18px; border-radius: 3px; background: rgba(255,122,149,.55); }
-    .s12 .queue.on i { animation: qmove 1.4s ease-in-out infinite; animation-delay: calc(var(--i) * .15s); }
-    @keyframes qmove { 50% { transform: translateY(-5px); background: var(--a3); } }
-    .s12 .mismatch.on { animation: shake .45s ease-in-out 3 .4s; border-color: var(--danger); }
+    .s12 .mismatch.on { border-color: var(--danger); transition-property: opacity, transform, border-color; }
     .s12 .mismatch .ne { color: var(--danger) !important; font-size: 20px; }
-    .s12 .beam { flex: 1; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--a1), var(--a2)); transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease); transition-delay: calc(var(--d,0)*1s); box-shadow: 0 0 18px rgba(43,234,208,.6); }
+    .s12 .beam { flex: 1; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--a1), var(--a2)); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease); transition-delay: calc(var(--d,0)*1s); box-shadow: 0 0 18px rgba(43,234,208,.6); }
     .s12 .beam.on { transform: scaleX(1); }
     .s12 .station.hero { border-color: var(--a2); box-shadow: 0 0 30px rgba(43,234,208,.25); }
     .s12 .insight { position: absolute; left: 64px; right: 64px; top: 548px; padding: 16px 30px; font-size: 30px; font-weight: 800; line-height: 1.4; border-left: 6px solid var(--a2); }
@@ -571,7 +553,7 @@
     /* ═════ S13 상황별 처방 ═════ */
     .s13 h2 { position: absolute; left: 64px; top: 50px; font-size: 52px; }
     .s13 .tbl { position: absolute; left: 64px; right: 64px; top: 150px; }
-    .s13 .tr { display: grid; grid-template-columns: 250px 210px 1fr 110px; gap: 16px; align-items: center; padding: 14px 18px; margin-bottom: 10px; }
+    .s13 .tr { display: grid; grid-template-columns: 250px 210px 1fr 120px; gap: 16px; align-items: center; padding: 14px 18px; margin-bottom: 10px; }
     .s13 .tr.th { padding: 0 18px 4px; font-family: var(--mono); font-size: 14px; letter-spacing: .14em; color: var(--soft) !important; background: none; border: 0; box-shadow: none; }
     .s13 .tr.th span { color: var(--soft) !important; }
     .s13 .sit { font-size: 19px; font-weight: 800; }
@@ -579,17 +561,21 @@
     .s13 .make { font-size: 17px; font-weight: 700; }
     .s13 .make span { font-size: 24px; margin-right: 6px; vertical-align: -2px; }
     .s13 .say { font-family: var(--mono); font-size: 14.5px; line-height: 1.5; color: #DFFFF8 !important; background: rgba(0,0,0,.35); border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(43,234,208,.25); }
-    .s13 .time { font-size: 18px; font-weight: 800; text-align: right; color: var(--a4) !important; }
+    .s13 .time { font-size: 18px; font-weight: 800; text-align: right; color: var(--a4) !important; text-decoration: none; }
+    .s13 .time small { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; color: #5BFFE0 !important; white-space: nowrap; }
+    .s13 a.time:hover small { text-decoration: underline; }
 
     /* ═════ S14 세 가지 약속 ═════ */
-    .s14 h2 { position: absolute; left: 64px; top: 70px; font-size: 60px; }
-    .s14 .rules { position: absolute; left: 64px; right: 64px; top: 230px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .s14 .rule { padding: 30px 28px; height: 340px; position: relative; overflow: hidden; }
-    .s14 .rule .ic { font-size: 60px; margin-bottom: 18px; display: block; }
-    .s14 .rule b { font-size: 28px; display: block; line-height: 1.3; margin-bottom: 14px; }
+    .s14 h2 { position: absolute; left: 64px; top: 64px; font-size: 58px; }
+    .s14 .rules { position: absolute; left: 64px; right: 64px; top: 196px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .s14 .rule { padding: 28px 28px; height: 300px; position: relative; overflow: hidden; }
+    .s14 .rule .ic { font-size: 52px; margin-bottom: 16px; display: block; }
+    .s14 .rule b { font-size: 27px; display: block; line-height: 1.3; margin-bottom: 14px; }
     .s14 .rule p { font-size: 18px; color: var(--dim) !important; line-height: 1.6; }
     .s14 .rule .n { position: absolute; right: 20px; top: 6px; font-size: 120px; font-weight: 900; color: rgba(255,255,255,.05) !important; }
-    .s14 .rule a { font-size: 16px; display: inline-block; margin-top: 12px; }
+    .s14 .plus { position: absolute; left: 64px; right: 64px; top: 524px; display: flex; align-items: center; gap: 18px; padding: 18px 24px; font-size: 20px; }
+    .s14 .plus > span:nth-child(2) { flex: 1; color: var(--dim) !important; }
+    .s14 .plus a { font-size: 17px; white-space: nowrap; }
 
     /* ═════ S15 첫걸음 ═════ */
     .s15 h2 { position: absolute; left: 64px; top: 60px; font-size: 60px; }
@@ -607,7 +593,6 @@
     .s15 .term .body .y { color: var(--a4) !important; }
 
     /* ═════ S16 엔딩 ═════ */
-    .s16 canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
     .s16 .end { position: absolute; left: 0; right: 0; top: 170px; text-align: center; }
     .s16 .end .l1 { font-size: 66px; font-weight: 800; color: var(--dim) !important; }
     .s16 .end .l2 { font-size: 104px; font-weight: 900; letter-spacing: -.04em; margin-top: 10px; display: block; }
@@ -670,9 +655,9 @@
     #gate .go {
       font: 800 22px 'Pretendard', sans-serif; padding: 18px 40px; border-radius: 999px; border: 0; cursor: pointer;
       background: linear-gradient(135deg, #9B82FF, #2BEAD0); color: #0A0E1A; box-shadow: 0 14px 40px rgba(43,234,208,.35);
-      animation: goPulse 2s ease-in-out infinite;
+      transition: transform .2s var(--ease), box-shadow .2s;
     }
-    @keyframes goPulse { 50% { box-shadow: 0 14px 60px rgba(155,130,255,.6); transform: scale(1.03); } }
+    #gate .go:hover { transform: translateY(-2px); box-shadow: 0 18px 48px rgba(43,234,208,.45); }
     #gate .quiet { display: block; margin: 18px auto 0; background: none; border: 0; color: #9BA6C0; font: 600 16px 'Pretendard', sans-serif; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
     #gate .keys { margin-top: 26px; font: 500 13px var(--mono); color: #6F7A96; letter-spacing: .04em; }
 
@@ -702,9 +687,9 @@
 
 <div id="gate" role="dialog" aria-label="재생 방식 선택">
   <div class="box">
-    <div class="eye">VIBE CODING · CAMPAIGN</div>
+    <div class="eye">VIBE CODING · 0단계 · 5분 맛보기</div>
     <h1>이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
-    <p>내레이션과 함께 한 편의 영상처럼 흘러갑니다. 약 5분.<br/>발표 중이라면 소리 없이 보기를 고르고 방향키로 넘기세요.</p>
+    <p>내레이션과 함께 영상처럼 흘러갑니다 — 약 5분, 16장.<br/>발표 중이라면 “소리 없이 보기”를 고르고 방향키로 넘기세요.</p>
     <button class="go" id="gateGo">▶ 내레이션과 함께 재생</button>
     <button class="quiet" id="gateQuiet">소리 없이 직접 넘기며 보기</button>
     <div class="keys">M 소리 · A 자동 재생 · C 자막 · R 다시 재생 · ← → 이동</div>
@@ -736,7 +721,7 @@
         <div class="hero">
           <div class="k pop" data-b="3" data-d="0.7"><span class="prompt">이거, 해줘.<span class="caret"></span></span></div>
           <h1 class="k blur" data-b="3" data-d="1.4">이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
-          <p class="sub k" data-b="3" data-d="2.0">상황별 바이브 코딩 가이드 — 코딩 에이전트로 어디까지 할 수 있을까</p>
+          <p class="sub k" data-b="3" data-d="2.0">0단계 · 5분 맛보기 — 코딩 에이전트에게 맡길 수 있는 일주일의 일들</p>
           <div class="tools k" data-b="3" data-d="2.4">
             <span class="chip">Claude Code</span><span class="chip teal">Codex</span><span class="chip pink">OpenCode</span>
           </div>
@@ -906,7 +891,7 @@
       <div class="stage">
         <div class="case-head">
           <div class="no k" data-b="0">CASE 02 · 데이터 취합과 공유</div>
-          <h2 class="k wipe" data-b="0" data-d="0.2">🌐 웹 플랫폼 + 실시간 대시보드 <span class="tag-ba after">AFTER</span></h2>
+          <h2 class="k wipe" data-b="0" data-d="0.2">🌐 입력은 웹에서, 보고는 링크 하나로 <span class="tag-ba after">AFTER</span></h2>
         </div>
         <div class="browser card k" data-b="0" data-d="0.5">
           <div class="bar"><i></i><i></i><i></i><span class="url">team-dashboard.사내/q4</span></div>
@@ -935,7 +920,7 @@
           <div class="viewers k" data-b="3" data-d="0.5"><i style="background:#9B82FF"></i><i style="background:#2BEAD0"></i><i style="background:#FF7A95"></i><i style="background:#FFD46B"></i><i style="background:#5BA8FF"></i>&nbsp; 24명이 같은 화면을 보는 중</div>
           <div class="cmp">
             <div class="row k" data-b="4"><div class="lbl"><span>이전 · 엑셀 → PPT</span><b class="t3">주 4시간</b></div><div class="track"><div class="fill" style="--w:100%;background:var(--a3)"></div></div></div>
-            <div class="row k" data-b="4" data-d="0.6"><div class="lbl"><span>이후 · 웹 대시보드</span><b class="t2">구축 1일 · 이후 0</b></div><div class="track"><div class="fill" style="--w:3%;background:var(--a2)"></div></div></div>
+            <div class="row k" data-b="4" data-d="0.6"><div class="lbl"><span>이후 · 웹 대시보드</span><b class="t2">구축 1일 · 이후 거의 0</b></div><div class="track"><div class="fill" style="--w:3%;background:var(--a2)"></div></div></div>
           </div>
           <div class="year k" data-b="5"><span class="big-num" data-fx="count" data-b="5" data-to="208" data-dur="1.8">0</span><small>시간 / 년 — 주 4시간 × 52주</small></div>
         </div>
@@ -967,10 +952,10 @@
           <div id="s07-time" style="position:absolute;left:28px;bottom:24px;font-family:var(--mono);font-size:15px;color:var(--a4)">FRI 14:00</div>
         </div>
         <div class="srcs">
-          <div class="src card k pop shake" data-b="1" data-d="0" style="--sd:1.8"><span class="ic">✉️</span><div><b data-fx="count" data-b="1" data-to="126" data-dur="1.2">0</b><small>메일</small></div></div>
-          <div class="src card k pop shake" data-b="1" data-d="0.35" style="--sd:1.5"><span class="ic">💬</span><div><b data-fx="count" data-b="1" data-d="0.35" data-to="412" data-dur="1.2">0</b><small>메신저 대화</small></div></div>
-          <div class="src card k pop shake" data-b="1" data-d="0.7" style="--sd:1.2"><span class="ic">📘</span><div><b data-fx="count" data-b="1" data-d="0.7" data-to="14" data-dur="1">0</b><small>Confluence 문서</small></div></div>
-          <div class="src card k pop shake" data-b="1" data-d="1.05" style="--sd:.9"><span class="ic">🎫</span><div><b data-fx="count" data-b="1" data-d="1.05" data-to="38" data-dur="1">0</b><small>Jira 티켓</small></div></div>
+          <div class="src card k pop" data-b="1" data-d="0" style="--sd:1.8"><span class="ic">✉️</span><div><b data-fx="count" data-b="1" data-to="126" data-dur="1.2">0</b><small>메일</small></div></div>
+          <div class="src card k pop" data-b="1" data-d="0.35" style="--sd:1.5"><span class="ic">💬</span><div><b data-fx="count" data-b="1" data-d="0.35" data-to="412" data-dur="1.2">0</b><small>메신저 대화</small></div></div>
+          <div class="src card k pop" data-b="1" data-d="0.7" style="--sd:1.2"><span class="ic">📘</span><div><b data-fx="count" data-b="1" data-d="0.7" data-to="14" data-dur="1">0</b><small>Confluence 문서</small></div></div>
+          <div class="src card k pop" data-b="1" data-d="1.05" style="--sd:.9"><span class="ic">🎫</span><div><b data-fx="count" data-b="1" data-d="1.05" data-to="38" data-dur="1">0</b><small>Jira 티켓</small></div></div>
         </div>
         <div class="tabs k" data-b="2">
           <span style="--i:0">Outlook – 받은편지함</span><span style="--i:1">팀 채널 #proj-a</span><span style="--i:2">Confluence · 회의록</span><span style="--i:3">Jira · Sprint 42</span><span style="--i:4">팀 채널 #ops</span>
@@ -1029,7 +1014,7 @@
       <div class="stage">
         <div class="case-head">
           <div class="no k" data-b="0">CASE 04 · 개발자의 주간 활동 공유</div>
-          <h2 class="k wipe" data-b="0" data-d="0.2">🧑‍💻 “이번 주에 뭐 했더라?” <small>GitHub · Jira</small></h2>
+          <h2 class="k wipe" data-b="0" data-d="0.2">🧑‍💻 “이번 주에 뭐 했더라?” <small>기록이 알아서 요약된다</small></h2>
         </div>
         <div class="grid-wrap">
           <div class="cgrid" id="s09-grid" data-b="1"></div>
@@ -1095,6 +1080,7 @@
             <div class="tn"><span>📑</span>쌓인 PDF 요약</div>
             <div class="pdfs"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i></div>
             <div class="sum"><div style="--i:0;--w:92%"></div><div style="--i:1;--w:74%"></div><div style="--i:2;--w:85%"></div><div style="--i:3;--w:55%"></div></div>
+            <div class="pie-l">보고서 PDF 40개 → 요약 한 장</div>
           </div>
         </div>
         <div class="wall" id="s10-wall"></div>
@@ -1144,7 +1130,7 @@
           <div class="lb k t3" data-b="1">지금까지</div>
           <div class="station card k pop" data-b="1" data-d="0.1"><span>🙋</span>현업 담당자<small>문제를 가장 잘 앎</small></div>
           <div class="arrow k" data-b="1" data-d="0.4">→</div>
-          <div class="station card k pop" data-b="1" data-d="0.6"><span>📄</span>요청서 작성<small>설명하다 지침</small></div>
+          <div class="station card k pop" data-b="1" data-d="0.6"><span>📄</span>요청서 작성<small>설명하다 지친다</small></div>
           <div class="arrow k" data-b="1" data-d="0.9">→</div>
           <div class="station card k pop" data-b="1" data-d="1.1"><span>🏢</span>개발팀 대기열<div class="queue k" data-b="1" data-d="1.1"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i></div><small>대기 3개월</small></div>
           <div class="arrow k" data-b="2">→</div>
@@ -1172,41 +1158,43 @@
     <!-- ═════════════ S13 상황별 처방 ═════════════ -->
     <section class="s13" data-nid="s13" data-title="상황별 처방">
       <div class="stage">
-        <h2 class="k" data-b="0">상황별 처방 — <span class="grad">무엇을 만들까</span></h2>
+        <h2 class="k" data-b="0">상황이 다르면, <span class="grad">만드는 것도 다릅니다</span></h2>
         <div class="tbl">
-          <div class="tr th k" data-b="0" data-d="0.3"><span>이런 상황이라면</span><span>이걸 만든다</span><span>첫 마디는 이렇게</span><span style="text-align:right">준비</span></div>
-          <div class="tr card k left" data-b="1"><div class="sit">🎉 한 번 쓰는 이벤트<small>추첨 · 퀴즈 · 타이머 · 투표</small></div><div class="make"><span>📄</span>HTML 파일 하나</div><div class="say">“명단으로 추첨기 만들어줘. 파일 하나로, 더블클릭하면 열리게.”</div><div class="time">10분</div></div>
-          <div class="tr card k left" data-b="2"><div class="sit">📊 매주 반복되는 취합<small>엑셀 메일 · 복붙 · PPT 차트</small></div><div class="make"><span>🌐</span>웹 앱 + 대시보드</div><div class="say">“팀별로 실적을 입력하면 대시보드가 바로 바뀌는 웹 앱 만들어줘. 먼저 계획부터.”</div><div class="time">하루</div></div>
-          <div class="tr card k left" data-b="3"><div class="sit">🗂️ 흩어진 기록 정리<small>메일 · 메신저 · Confluence · Jira</small></div><div class="make"><span>🔌</span>커넥터(MCP) + 초안</div><div class="say">“이번 주 Jira와 Confluence 기록 읽고, 주간보고 초안 써줘. 출처 달아서.”</div><div class="time">1시간</div></div>
-          <div class="tr card k left" data-b="4"><div class="sit">📂 반복 파일 작업<small>이름 바꾸기 · 변환 · 병합</small></div><div class="make"><span>⚙️</span>스크립트 한 개</div><div class="say">“이 폴더 사진 300장, 촬영 날짜_행사명_번호로 이름 바꿔줘. 바꾸기 전 목록부터.”</div><div class="time">20분</div></div>
-          <div class="tr card k left" data-b="5"><div class="sit">⏰ 정해진 때마다 반복<small>주간 요약 · 일일 점검 · 알림</small></div><div class="make"><span>🗓️</span>스케줄 실행</div><div class="say">“매주 금요일 5시에 GitHub·Jira 활동 요약해서 팀 채널에 올려줘.”</div><div class="time">반나절</div></div>
+          <div class="tr th k" data-b="0" data-d="0.3"><span>이런 상황이라면</span><span>이걸 만든다</span><span>첫 마디는 이렇게</span><span style="text-align:right">더 보기</span></div>
+          <div class="tr card k left" data-b="1"><div class="sit">🎉 한 번 쓰는 이벤트<small>추첨 · 퀴즈 · 타이머 · 투표</small></div><div class="make"><span>📄</span>HTML 파일 하나</div><div class="say">“명단으로 추첨기 만들어줘. 파일 하나로, 더블클릭하면 열리게.”</div><a class="time" href="../workshop/">10분<small>실습 워크숍 →</small></a></div>
+          <div class="tr card k left" data-b="2"><div class="sit">📊 매주 반복되는 취합<small>엑셀 메일 · 복붙 · PPT 차트</small></div><div class="make"><span>🌐</span>팀이 같이 쓰는 웹 앱</div><div class="say">“팀별로 실적을 입력하면 대시보드가 바로 바뀌는 웹 앱 만들어줘. 먼저 계획부터.”</div><a class="time" href="../automation/">하루<small>팀 공유 →</small></a></div>
+          <div class="tr card k left" data-b="3"><div class="sit">🗂️ 흩어진 기록 정리<small>메일 · 메신저 · Confluence · Jira</small></div><div class="make"><span>🔌</span>커넥터(MCP) 연결</div><div class="say">“이번 주 Jira와 Confluence 기록 읽고, 주간보고 초안 써줘. 출처 달아서.”</div><a class="time" href="../automation/">1시간<small>연결 →</small></a></div>
+          <div class="tr card k left" data-b="4"><div class="sit">📂 반복 파일 작업<small>이름 바꾸기 · 변환 · 병합</small></div><div class="make"><span>⚙️</span>스크립트 한 개</div><div class="say">“이 폴더 사진 300장, 촬영 날짜_행사명_번호로 이름 바꿔줘. 바꾸기 전 목록부터.”</div><a class="time" href="../workshop/">20분<small>실습 워크숍 →</small></a></div>
+          <div class="tr card k left" data-b="5"><div class="sit">⏰ 정해진 때마다 반복<small>주간 요약 · 일일 점검 · 알림</small></div><div class="make"><span>🗓️</span>예약 실행</div><div class="say">“매주 금요일 5시에 GitHub·Jira 활동 요약해서 팀 채널에 올려줘.”</div><a class="time" href="../automation/">반나절<small>예약 실행 →</small></a></div>
         </div>
       </div>
       <aside class="notes">
         <p>상황에 따라, 만드는 것도 달라집니다.</p>
         <p>한 번 쓰는 이벤트라면, 파일 하나짜리 웹페이지면 충분합니다.</p>
-        <p>매주 반복되는 취합이라면, 데이터가 쌓이는 웹 앱을.</p>
+        <p>매주 반복되는 취합이라면, 팀이 함께 쓰는 웹 앱을.</p>
         <p>흩어진 기록을 정리해야 한다면, 메일과 지라를 연결하는 커넥터를.</p>
         <p>반복되는 파일 작업이라면, 한 번 만든 스크립트를.</p>
-        <p>그리고 정해진 때마다 반복된다면, 스케줄을 걸어 자동으로 돌게 하면 됩니다.</p>
+        <p>그리고 정해진 때마다 반복된다면, 예약을 걸어 혼자 돌게 하면 됩니다.</p>
       </aside>
     </section>
 
     <!-- ═════════════ S14 세 가지 약속 ═════════════ -->
     <section class="s14" data-nid="s14" data-title="세 가지 약속">
       <div class="stage">
-        <h2 class="k" data-b="0">단, <span class="grad">세 가지</span>만은 꼭</h2>
+        <h2 class="k" data-b="0">단, <span class="grad">세 가지</span>는 꼭 지킵니다</h2>
         <div class="rules">
-          <div class="rule card k pop" data-b="1"><span class="n">1</span><span class="ic">🔐</span><b>회사 데이터는<br/>정책부터 확인</b><p>메일·메신저·Jira를 연결하기 전에, 사내 보안 정책과 승인된 도구인지 먼저 봅니다.</p><a href="../security/">→ 보안과 거버넌스</a></div>
-          <div class="rule card k pop" data-b="2"><span class="n">2</span><span class="ic">✅</span><b>초안은 초안,<br/>판단은 사람이</b><p>에이전트가 만든 보고서와 숫자는 출처를 확인하고, 최종 결정은 직접 내립니다.</p><a href="../verification/">→ 검증과 테스트</a></div>
-          <div class="rule card k pop" data-b="3"><span class="n">3</span><span class="ic">🌱</span><b>작게 시작해서<br/>키운다</b><p>추첨기 하나, 스크립트 하나부터. 잘 되면 커밋하고, 다음 단계로 넓힙니다.</p><a href="../workshop/">→ 실습 워크숍</a></div>
+          <div class="rule card k pop" data-b="1"><span class="n">1</span><span class="ic">🔐</span><b>기밀·실데이터는<br/>사내 승인 도구에서만</b><p>회사 자료를 넣어도 되는 도구인지 먼저 확인합니다. 애매하면 넣지 않습니다.</p></div>
+          <div class="rule card k pop" data-b="2"><span class="n">2</span><span class="ic">🔑</span><b>API 키·비밀번호는<br/>남기지 않는다</b><p>코드·대화·커밋 어디에도. 새어 나갔다면 지우는 것으로는 부족합니다 — 재발급합니다.</p></div>
+          <div class="rule card k pop" data-b="3"><span class="n">3</span><span class="ic">📜</span><b>회사 정책이<br/>이 자료보다 우선</b><p>도구·연결·공유 범위는 사내 규정을 따릅니다. 자세한 내용은 <a href="../security/">보안과 거버넌스 →</a></p></div>
         </div>
+        <div class="plus card k" data-b="4"><span class="chip yel">이 덱에서 하나 더</span><span>에이전트가 만든 보고서·숫자는 <b>초안</b>입니다. 출처를 확인하고, 판단은 사람이 합니다.</span><a href="../verification/">검증과 테스트 →</a></div>
       </div>
       <aside class="notes">
-        <p>단, 세 가지는 꼭 기억하세요.</p>
-        <p>회사 데이터를 연결할 때는, 사내 보안 정책부터 확인할 것.</p>
-        <p>에이전트가 만든 보고서는 초안입니다. 최종 판단은, 사람이 합니다.</p>
-        <p>그리고, 작게 시작할 것.</p>
+        <p>단, 세 가지는 꼭 지켜 주세요.</p>
+        <p>회사 기밀과 실데이터는, 사내에서 승인된 도구에서만. 애매하면, 넣지 않습니다.</p>
+        <p data-say="에이피아이 키와 비밀번호는, 코드에도 대화에도 남기지 않습니다. 새어 나갔다면, 지우지 말고 재발급하세요.">API 키와 비밀번호는, 코드에도 대화에도 남기지 않습니다. 새어 나갔다면, 지우지 말고 재발급하세요.</p>
+        <p>그리고, 회사 정책이 이 자료보다 우선합니다.</p>
+        <p>하나 더. 에이전트가 만든 보고서는 초안입니다. 판단은, 사람이 합니다.</p>
       </aside>
     </section>
 
@@ -1241,7 +1229,6 @@
     <!-- ═════════════ S16 엔딩 ═════════════ -->
     <section class="s16" data-nid="s16" data-title="엔딩">
       <div class="stage">
-        <canvas id="s16-canvas" width="1280" height="800"></canvas>
         <div class="end">
           <span class="l1 k blur" data-b="0">코드를 몰라도,</span>
           <span class="l2 k slam" data-b="1"><span class="grad">일은, 바꿀 수 있습니다.</span></span>
@@ -1249,9 +1236,9 @@
           <div class="tag k" data-b="3">여러분의 일주일을, 다시 여러분에게.</div>
         </div>
         <div class="links k" data-b="3" data-d="1.2">
-          <a href="../setup/"><span class="chip teal">🧰 0교시 — 설치하기</span></a>
-          <a href="../intro/"><span class="chip">🚀 바이브 코딩이란?</span></a>
-          <a href="../workshop/"><span class="chip yel">🛠️ 실습 워크숍</span></a>
+          <a href="../setup/"><span class="chip teal">① 0교시 — 설치와 기본 조작</span></a>
+          <a href="../intro/"><span class="chip">② 바이브 코딩이란?</span></a>
+          <a href="../workshop/"><span class="chip yel">③ 실습 워크숍</span></a>
           <button class="chip pink" id="restartBtn" type="button">↺ 처음부터 다시</button>
         </div>
       </div>
@@ -1351,9 +1338,9 @@
   })();
   (function () {
     const w = $('#s10-wall'); if (!w) return;
-    const items = ['📧 반복 메일 초안', '🌏 문서 번역', '🧮 엑셀 수식 디버깅', '📅 일정 충돌 확인', '🧪 교육 퀴즈 앱', '🧾 출장비 정산 양식', '📸 사진 리사이즈', '🔎 경쟁사 자료 조사', '📊 두 엑셀 비교', '🗃️ 사내 위키 정리', '📝 보도자료 초안', '🔔 재고 알림 봇', '🎤 발표 슬라이드', '🔁 CSV → 보고서', '🧹 중복 데이터 정리', '📮 설문 링크 생성'];
+    const items = ['📊 두 엑셀 비교', '🧹 중복 데이터 정리', '🔁 CSV → 보고서', '🧮 엑셀 수식 디버깅', '🌏 문서 번역', '📧 반복 메일 초안', '🧪 교육 퀴즈 앱', '🎤 발표 슬라이드', '📸 사진 일괄 리사이즈', '🔔 조건 알림 봇'];
     const cls = ['', 'teal', 'pink', 'yel'];
-    items.forEach((t, i) => w.insertAdjacentHTML('beforeend', '<span class="chip ' + cls[i % 4] + ' k pop" data-b="5" style="--d:' + (i * 0.07).toFixed(2) + '">' + t + '</span>'));
+    items.forEach((t, i) => w.insertAdjacentHTML('beforeend', '<span class="chip ' + cls[i % 4] + ' k pop" data-b="5" style="--d:' + (i * 0.06).toFixed(2) + '">' + t + '</span>'));
   })();
   (function () {
     const cg = $('#s11-cg'); if (!cg) return;
@@ -1452,16 +1439,19 @@
       },
     },
     s07: {
-      2: () => { ['14:40', '15:25', '16:10', '16:55', '17:30'].forEach((t, i) => later(500 + i * 900, () => { $('#s07-time').textContent = 'FRI ' + t; })); },
+      2: () => {
+        const tabs = $$('.s07 .tabs span');
+        ['14:40', '15:25', '16:10', '16:55', '17:30'].forEach((t, i) => later(500 + i * 900, () => {
+          $('#s07-time').textContent = 'FRI ' + t;
+          tabs.forEach((el, j) => el.classList.toggle('cur', j === i));
+        }));
+      },
     },
     s08: {
       3: () => { $('#s08-report').classList.add('review'); },
     },
     s12: {
       3: () => { later(400, () => $('#s12-old').classList.add('dimmed')); },
-    },
-    s16: {
-      0: () => Particles.start(),
     },
   };
   const RESETS = {
@@ -1470,10 +1460,9 @@
     s04: () => Lottery.reset(),
     s05: () => { $$('.s05 .mail').forEach((m) => m.classList.remove('hot')); $('#s05-ppt').classList.remove('stale'); },
     s06: () => { $$('#s06-chart .col i').forEach((i) => i.style.setProperty('--h', '0%')); $('#s06-rows').innerHTML = ''; $('#s06-ticker').textContent = ''; },
-    s07: () => { $('#s07-time').textContent = 'FRI 14:00'; },
+    s07: () => { $('#s07-time').textContent = 'FRI 14:00'; $$('.s07 .tabs span').forEach((el) => el.classList.toggle('cur', false)); },
     s08: () => $('#s08-report').classList.remove('review'),
     s12: () => $('#s12-old').classList.remove('dimmed'),
-    s16: () => Particles.stop(),
   };
 
   /* ═════════ 경품 추첨기 (진짜 동작) ═════════ */
@@ -1554,19 +1543,6 @@
       })();
     },
   };
-
-  /* ═════════ 엔딩 파티클 ═════════ */
-  const Particles = (function () {
-    const c = $('#s16-canvas'); const g = c.getContext('2d'); let raf = 0, on = false;
-    const ps = Array.from({ length: 90 }, () => ({ x: Math.random() * 1280, y: Math.random() * 800, v: .2 + Math.random() * .8, r: .6 + Math.random() * 2.2, h: Math.random() < .5 ? '155,130,255' : '43,234,208' }));
-    function draw() {
-      g.clearRect(0, 0, 1280, 800);
-      ps.forEach((p) => { p.y -= p.v; if (p.y < -10) { p.y = 810; p.x = Math.random() * 1280; }
-        g.beginPath(); g.arc(p.x, p.y, p.r, 0, Math.PI * 2); g.fillStyle = 'rgba(' + p.h + ',' + (.25 + p.r / 4) + ')'; g.fill(); });
-      if (on) raf = requestAnimationFrame(draw);
-    }
-    return { start() { if (REDUCED || on) return; on = true; draw(); }, stop() { on = false; cancelAnimationFrame(raf); g.clearRect(0, 0, 1280, 800); } };
-  })();
 
   /* ═════════ 내레이션 시퀀서 ═════════
      장의 <aside class="notes"> 안 <p> 하나 = 한 박자.

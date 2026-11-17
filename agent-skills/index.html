@@ -13,11 +13,11 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>반도체 현업을 위한 Agent Skills — 내 노하우를 AI에게 물려주는 법 | 바이브 코딩 세미나</title>
+  <title>내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills | 바이브 코딩 세미나</title>
 
   <!-- SEO -->
-  <meta name="description" content="반도체 현업(공정·소자·설계·레이아웃)의 반복 업무를 Agent Skill로 만드는 법. DRM 환경의 엑셀은 xlwings/win32com, PPT·Word는 win32com, GDS는 KLayout — 사내 규칙까지 스킬에 담아 AI에게 한 번만 가르치는 실무 세미나." />
-  <meta name="keywords" content="Agent Skills, 에이전트 스킬, SKILL.md, skill-creator, 반도체, 바이브 코딩, xlwings, win32com, pywin32, KLayout, GDS, Verilog, RTL, TCAD, DRM 엑셀, 업무 자동화, Claude Code" />
+  <meta name="description" content="매번 AI에게 하던 설명을 파일로 옮기는 법. 늘 지킬 규칙은 CLAUDE.md에, 순서가 있는 업무는 Agent Skill에 — 측정 CSV 리포트·DRM 엑셀(xlwings)·주간보고 PPT(win32com)·GDS(KLayout)·RTL·TCAD 반도체 실무 예제와 실습." />
+  <meta name="keywords" content="CLAUDE.md, Agent Skills, 에이전트 스킬, SKILL.md, skill-creator, 반도체, 바이브 코딩, xlwings, win32com, pywin32, KLayout, GDS, Verilog, RTL, TCAD, DRM 엑셀, 업무 자동화, Claude Code" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://vibe-coding.euiyun.com/agent-skills/" />
@@ -25,19 +25,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="바이브 코딩 세미나" />
-  <meta property="og:title" content="반도체 현업을 위한 Agent Skills" />
-  <meta property="og:description" content="반복 업무를 Agent Skill로: 표준 CSV 리포트, DRM 엑셀(xlwings), 주간보고 PPT(win32com), GDS(KLayout), RTL/Verilog, TCAD 스윕까지 — 비개발자를 위한 실습 세미나." />
+  <meta property="og:title" content="내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills" />
+  <meta property="og:description" content="두 번 한 설명은 파일로 — 말 → CLAUDE.md → Agent Skill. 반도체 실무 예제 7종(CSV 리포트·DRM 엑셀·주간보고 PPT·GDS·RTL·TCAD)과 완료 기준이 보이는 실습." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/agent-skills/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/agent-skills.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/agent-skills.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="반도체 현업을 위한 Agent Skills" />
-  <meta name="twitter:description" content="내 업무 노하우를 SKILL.md 한 장으로 — DRM 엑셀·PPT·GDS·RTL·TCAD 실무 예제와 실습." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/agent-skills.png?v=1" />
+  <meta name="twitter:title" content="내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills" />
+  <meta name="twitter:description" content="반복 설명을 CLAUDE.md와 SKILL.md로 — 반도체 실무 예제 7종과 실습." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/agent-skills.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -45,8 +45,8 @@
   {
     "@context": "https://schema.org",
     "@type": "PresentationDigitalDocument",
-    "name": "반도체 현업을 위한 Agent Skills — 내 노하우를 AI에게 물려주는 법",
-    "description": "반도체 현업의 반복 업무를 Agent Skill로 만드는 실습 세미나. DRM 엑셀(xlwings/win32com), PPT·Word(win32com), GDS(KLayout), RTL/Verilog, TCAD, 표준 CSV 리포트 예제 포함.",
+    "name": "내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills",
+    "description": "반복되는 설명을 CLAUDE.md와 Agent Skill로 옮기는 실습 세미나. 반도체 실무 예제: 표준 CSV 리포트, DRM 엑셀(xlwings/win32com), PPT·Word(win32com), GDS(KLayout), RTL/Verilog, TCAD.",
     "inLanguage": "ko",
     "author": { "@type": "Person", "name": "geniuskey" },
     "url": "https://vibe-coding.euiyun.com/agent-skills/"
@@ -83,11 +83,6 @@
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
-      animation: bgFloat 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgFloat {
-      0%   { transform: translate(0,0) scale(1); }
-      100% { transform: translate(-2%, 2%) scale(1.05); }
     }
     body::after {
       content: "";
@@ -146,6 +141,8 @@
     .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
 
     .reveal a { color: #5BFFE0 !important; }
+    .reveal section p, .reveal section li { word-break: keep-all; overflow-wrap: break-word; }
+    .reveal p.tiny { font-size: 1rem; }
 
     /* Toolbar — fixed top-right */
     .dl-toolbar {
@@ -269,18 +266,11 @@
 
     .reveal .grad, .reveal section .grad {
       background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
-      background-size: 250% 250% !important;
       -webkit-background-clip: text !important;
       background-clip: text !important;
       color: transparent !important;
-      animation: gradMove 7s ease infinite;
       font-weight: 800;
       filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
-    }
-    @keyframes gradMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .chip {
@@ -319,9 +309,9 @@
       box-shadow:
         0 30px 60px -20px rgba(0,0,0,0.6),
         inset 0 1px 0 rgba(255,255,255,0.10);
-      transition: transform .4s ease, border-color .4s ease;
+      transition: border-color .25s ease;
     }
-    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card:hover { border-color: rgba(155,130,255,0.9); }
     .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
     .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
     .card p + p { margin-top: 0.5rem; }
@@ -382,26 +372,17 @@
       color: #E1D9FF;
     }
 
-    /* ========= Auto-sequential reveal ========= */
+    /* ========= 등장 순서 — 설명 순서를 돕는 짧은 페이드만 ========= */
     .autoshow { opacity: 0; }
-    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
-    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
-    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
-    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
-    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
-    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
-    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
-    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
-    .autoshow:nth-child(1) { animation-delay: .05s; }
-    .autoshow:nth-child(2) { animation-delay: .2s; }
-    .autoshow:nth-child(3) { animation-delay: .35s; }
-    .autoshow:nth-child(4) { animation-delay: .5s; }
-    .autoshow:nth-child(5) { animation-delay: .65s; }
-    .autoshow:nth-child(6) { animation-delay: .8s; }
-    .autoshow:nth-child(7) { animation-delay: .95s; }
-    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+    section.present .autoshow { animation: asFadeUp .32s cubic-bezier(.2,.7,.3,1) forwards; }
+    @keyframes asFadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+    .autoshow:nth-child(1) { animation-delay: .04s; }
+    .autoshow:nth-child(2) { animation-delay: .12s; }
+    .autoshow:nth-child(3) { animation-delay: .2s; }
+    .autoshow:nth-child(4) { animation-delay: .28s; }
+    .autoshow:nth-child(5) { animation-delay: .36s; }
+    .autoshow:nth-child(6) { animation-delay: .44s; }
+    .autoshow:nth-child(n+7) { animation-delay: .5s; }
 
     /* ========= 프롬프트 카드 ========= */
     .prompt-card {
@@ -544,21 +525,13 @@
       position: absolute; top: 50%; left: 0; transform: translate(-10%, -58%);
       font-size: 1.7rem; opacity: 0;
     }
-    section.present .drm-play .drm-lane.bad1 .drm-runner  { animation: drmRun1 3.2s ease-in-out .4s infinite; }
-    section.present .drm-play .drm-lane.good .drm-runner  { animation: drmRun2 3.2s ease-in-out .4s infinite; }
-    @keyframes drmRun1 {
-      0% { left: 0; opacity: 0; }
-      12% { opacity: 1; }
-      46% { left: 46%; opacity: 1; transform: translate(-10%,-58%) rotate(0deg); }
-      58% { left: 48%; opacity: 1; transform: translate(-10%,-58%) rotate(90deg) scale(.85); }
-      70%, 100% { left: 48%; opacity: 0; transform: translate(-10%,-58%) rotate(180deg) scale(.5); }
-    }
-    @keyframes drmRun2 {
-      0% { left: 0; opacity: 0; }
-      12% { opacity: 1; }
-      88% { left: 92%; opacity: 1; }
-      100% { left: 92%; opacity: 0; }
-    }
+    /* 한 번만 재생: 위 줄은 자물쇠 앞에서 멈추고, 아래 줄은 끝까지 간다 */
+    section.present .drm-play .drm-lane.bad1 .drm-runner  { animation: drmRun1 1.4s cubic-bezier(.2,.7,.3,1) .3s forwards; }
+    section.present .drm-play .drm-lane.good .drm-runner  { animation: drmRun2 1.4s cubic-bezier(.2,.7,.3,1) .3s forwards; }
+    @keyframes drmRun1 { from { left: 0; opacity: 0; } 20% { opacity: 1; } to { left: 38%; opacity: .55; } }
+    @keyframes drmRun2 { from { left: 0; opacity: 0; } 20% { opacity: 1; } to { left: 90%; opacity: 1; } }
+    .drm-verdict { opacity: 0; }
+    section.present .drm-verdict { animation: asFadeUp .3s cubic-bezier(.2,.7,.3,1) 1s forwards; }
     .drm-wall {
       position: absolute; left: 48%; top: 50%; transform: translate(-50%,-50%);
       font-size: 1.9rem; filter: drop-shadow(0 0 12px rgba(255,77,94,0.7));
@@ -632,10 +605,10 @@
     .vs-tab.on { background: var(--accent); color: #0A0620; }
     .vs-tab.on.t2 { background: var(--accent-2); }
     .vs-pane { display: none; }
-    .vs-pane.on { display: block; animation: asFadeUp .45s ease; }
+    .vs-pane.on { display: block; animation: asFadeUp .3s cubic-bezier(.2,.7,.3,1); }
     .vs-meter { display: flex; align-items: center; gap: 1rem; margin-top: .8rem; }
     .vs-meter .bar { flex: 1; height: 14px; border-radius: 999px; background: rgba(255,255,255,0.1); overflow: hidden; }
-    .vs-meter .fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-3), var(--accent-4)); width: 0; transition: width 1s cubic-bezier(.2,.7,.3,1); }
+    .vs-meter .fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-3), var(--accent-4)); width: 0; transition: width .4s cubic-bezier(.2,.7,.3,1); }
     .vs-meter.good .fill { background: linear-gradient(90deg, var(--accent-2), #7DFFDF); }
     .vs-meter b { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 
@@ -645,9 +618,9 @@
       border: 1.5px solid rgba(155,130,255,0.45); border-radius: 16px;
       background: linear-gradient(160deg, rgba(40,30,80,0.5), rgba(20,50,60,0.35));
       padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem;
-      transition: transform .3s ease, border-color .3s ease;
+      transition: border-color .25s ease;
     }
-    .ex-card:hover { transform: translateY(-5px); border-color: rgba(43,234,208,0.8); }
+    .ex-card:hover { border-color: rgba(43,234,208,0.8); }
     .ex-card .ic { font-size: 2rem; }
     .ex-card h3 { font-size: 1.22rem; margin: 0; }
     .ex-card p { font-size: .98rem !important; line-height: 1.45; color: #C9D1E4 !important; margin: 0; }
@@ -660,14 +633,14 @@
       background: var(--accent); color: #0A0620 !important; border-radius: 10px; padding: .3rem .8rem;
       flex: 0 0 auto;
     }
-    .ex-head h2 { margin: 0; font-size: 2.35rem; }
+    .ex-head h2 { margin: 0; font-size: 2.1rem; }
     .ex-head .pill { margin-left: auto; flex: 0 0 auto; }
 
     /* ---- GDS 미니 뷰어 ---- */
     .gds-wrap { display: grid; grid-template-columns: 1fr 230px; gap: 1.4rem; align-items: stretch; }
     #gds-canvas {
       width: 100%; border-radius: 14px; border: 1px solid rgba(155,130,255,0.5);
-      background: #05070D; cursor: crosshair; display: block;
+      background: #05070D; cursor: crosshair; display: block; max-width: 660px;
       touch-action: none; /* 터치 드래그로 좌표를 읽을 수 있게 스와이프 제스처에 양보하지 않는다 */
     }
     .gds-side { display: flex; flex-direction: column; gap: .6rem; }
@@ -718,7 +691,7 @@
     .fit-fill {
       height: 100%; width: 0; border-radius: 999px;
       background: linear-gradient(90deg, var(--accent-3), var(--accent-4), var(--accent-2));
-      transition: width .8s cubic-bezier(.2,.7,.3,1);
+      transition: width .4s cubic-bezier(.2,.7,.3,1);
     }
     #fit-verdict { font-size: 1.35rem !important; font-weight: 800; min-height: 1.6em; }
 
@@ -734,12 +707,88 @@
     .flow .fstep small { font-size: .88rem; color: #B8BFD0 !important; }
     .flow .farr { align-self: center; font-size: 1.5rem; color: #7DFFDF !important; flex: 0 0 auto; }
 
+    /* ---- 승격 사다리 ---- */
+    .ladder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; align-items: start; }
+    .rung {
+      border: 1.5px solid rgba(155,130,255,0.5); border-radius: 16px;
+      background: rgba(42,33,80,0.35); padding: 1rem 1.2rem;
+      display: flex; flex-direction: column; gap: .35rem;
+    }
+    .rung.r1 { margin-top: 5rem; border-color: rgba(190,200,224,0.4); background: rgba(230,236,249,0.05); }
+    .rung.r2 { margin-top: 2.5rem; border-color: rgba(255,212,107,0.65); background: rgba(70,56,23,0.35); }
+    .rung.r3 { border-color: rgba(43,234,208,0.7); background: rgba(15,60,55,0.45); }
+    .rung-n { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: #CBBDFF !important; }
+    .rung.r2 .rung-n { color: #FFE08A !important; }
+    .rung.r3 .rung-n { color: #7DFFDF !important; }
+    .rung h3 { font-size: 1.35rem; margin: 0; }
+    .rung p { font-size: 1.05rem !important; line-height: 1.5; margin: 0; color: #E2E6F0 !important; }
+    .rung .rung-ex { font-family: 'JetBrains Mono', monospace; font-size: .92rem !important; color: #B8BFD0 !important; margin-top: .3rem; }
+
+    .card.tight { padding: .8rem 1.1rem; }
+    .card.tight h3 { font-size: 1.18rem; margin-bottom: .3rem; }
+    .card.tight p { font-size: 1.02rem; line-height: 1.5; }
+
+    /* ---- 확장 생태계 ---- */
+    .eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .eco-c {
+      border: 1.5px solid rgba(155,130,255,0.55); border-radius: 16px;
+      background: rgba(42,33,80,0.4); padding: 1rem 1.1rem;
+      display: flex; flex-direction: column; gap: .3rem;
+    }
+    .eco-c .ic { font-size: 1.8rem; }
+    .eco-c b { font-size: 1.25rem; }
+    .eco-c small { font-size: .98rem; line-height: 1.45; color: #C9D1E4 !important; }
+    .eco-c.pink { border-color: rgba(255,122,149,0.6); background: rgba(80,25,45,0.3); }
+    .eco-c.green { border-color: rgba(43,234,208,0.6); background: rgba(15,60,55,0.35); }
+
+    /* ---- 실습: 완료 기준 · 막히면 ---- */
+    .done {
+      margin-top: .7rem; border-left: 4px solid var(--accent-2);
+      background: rgba(15,60,55,0.45); border-radius: 0 12px 12px 0;
+      padding: .6rem .9rem; font-size: 1.05rem; line-height: 1.6; color: #E8ECF5 !important;
+    }
+    .done-l, .stuck-l {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800;
+      letter-spacing: .05em; margin-bottom: .15rem;
+    }
+    .done-l { color: #7DFFDF !important; }
+    .stuck {
+      margin-top: .6rem; border-left: 4px solid var(--accent-4);
+      background: rgba(70,56,23,0.3); border-radius: 0 12px 12px 0;
+      padding: .5rem .9rem; font-size: .98rem; line-height: 1.55; color: #E2E6F0 !important;
+    }
+    .stuck-l { color: #FFE08A !important; }
+    .card.mission { padding: 1.1rem 1.3rem; display: flex; flex-direction: column; }
+    .card.mission > .pill { align-self: flex-start; }
+    .card.mission .m-learn { font-size: 1rem !important; color: #CBBDFF !important; margin: .6rem 0 .2rem; }
+    .card.mission .prompt-card { margin: .4rem 0 0; }
+
+    ul.check { list-style: none; margin: .6rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; }
+    ul.check li { font-size: 1.05rem !important; line-height: 1.5; padding-left: 1.5em; position: relative; }
+    ul.check li::before { content: '☐'; position: absolute; left: 0; color: #FFE08A; }
+    .reveal .card .cost { font-size: .98rem; margin-top: .6rem; color: #FFB3C2 !important; }
+    .reveal .card .cost.good { color: #A8FFEE !important; }
+
+    /* ---- 보안 약속 ---- */
+    .promise-n {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2rem; height: 2rem; border-radius: 50%; margin-bottom: .6rem;
+      font-family: 'JetBrains Mono', monospace; font-weight: 900; font-size: 1rem;
+      background: var(--accent-3); color: #2B000B !important;
+    }
+    .reveal .card .promise-n + p { font-size: 1.28rem; line-height: 1.55; }
+    .plus { border: 1px dashed rgba(255,212,107,0.6); border-radius: 14px; padding: .8rem 1.1rem; background: rgba(70,56,23,0.2); }
+    .plus p { font-size: 1.05rem !important; line-height: 1.55; margin: .5rem 0 0; }
+
     /* ---- 발표자 노트 스타일은 reveal 기본 사용 ---- */
     @media (prefers-reduced-motion: reduce) {
       body::before { animation: none; }
       .reveal .grad { animation: none; }
       .autoshow { opacity: 1 !important; animation: none !important; }
       .dt-line { opacity: 1; transform: none; }
+      .drm-runner, .drm-verdict { animation: none !important; opacity: 1 !important; }
+      .drm-lane.bad1 .drm-runner { left: 38%; }
+      .drm-lane.good .drm-runner { left: 90%; }
     }
   </style>
 
@@ -749,8 +798,8 @@
 
 <div class="dl-toolbar">
   <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
-  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
-    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  <a class="dl-btn" href="../#board" title="시리즈 홈: 막혔을 때 펼쳐 보는 처방전">
+    <span aria-hidden="true">↖</span><span>시리즈 홈</span>
   </a>
   <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
     <span aria-hidden="true">⛶</span><span>FULL</span>
@@ -765,331 +814,431 @@
       <div class="vfill">
         <div class="grid-2" style="align-items:center; gap:3rem;">
           <div>
-            <div class="chip">SEMINAR · AGENT SKILLS × 반도체 현업</div>
+            <div class="chip">SEMINAR · CLAUDE.md × AGENT SKILLS</div>
             <h1 style="font-size:3.5rem;">
-              내 업무 노하우를 <br/><span class="grad">AI에게 물려주는 법</span>
+              내 노하우를 <br/><span class="grad">AI에게 물려주는 법</span>
             </h1>
-            <p class="muted" style="font-size:1.5rem; margin-top:1rem;">
-              반도체 현업을 위한 <b class="accent2">Agent Skills</b> 실습 세미나
+            <p class="muted" style="font-size:1.45rem; margin-top:1rem;">
+              <span class="mono accent4">CLAUDE.md</span> · <b class="accent2">Agent Skills</b> — 반도체 실무 예제로
             </p>
             <p class="small" style="color:#B8BFD0 !important; margin-top:1.6rem;">
-              표준 CSV 리포트 · DRM 엑셀 · 주간보고 PPT · GDS 레이아웃 · RTL/Verilog · TCAD —<br/>
-              매주 반복하는 그 일, <em>한 번만 가르치면</em> 됩니다.
+              매주 하는 설명을 <em>파일 한 장</em>으로 바꿉니다.<br/>
+              <span class="mono" style="font-size:.9em;">CSV · Excel · PPT · GDS · RTL · TCAD</span>
             </p>
           </div>
           <div class="hero-wafer-wrap">
-            <canvas id="hero-wafer" width="420" height="420" aria-label="웨이퍼 맵 애니메이션 — 클릭하면 새 랏이 흘러갑니다"></canvas>
+            <canvas id="hero-wafer" width="420" height="420" aria-label="웨이퍼 맵 — 클릭하면 다음 랏을 판정합니다"></canvas>
             <span class="hero-yield" id="hero-yield">YIELD --.-%</span>
-            <span class="hero-wafer-cap">▲ 웨이퍼를 클릭하면 다음 랏이 흘러갑니다</span>
+            <span class="hero-wafer-cap">▲ 클릭하면 다음 랏을 판정합니다</span>
           </div>
         </div>
       </div>
       <aside class="notes">
-        인사. 청중: 공정/소자/설계/레이아웃 엔지니어, 개발 경험 없어도 OK.
-        웨이퍼 캔버스는 장식이 아니라 오늘의 메시지 — "반복되는 랏(lot)처럼 반복되는 업무를 자동으로 흘려보내자".
-        클릭해서 새 랏을 돌려 보여주기.
+        인사. 청중은 공정·소자·설계·레이아웃 엔지니어와 사무직 — 코딩 경험은 필요 없습니다.
+        이 덱은 시리즈에서 "반복 설명은 파일로"를 자세히 다루는 곳입니다. CLAUDE.md로 시작해 Agent Skill까지 갑니다.
+        웨이퍼는 한 번 판정하고 멈춥니다. "매 랏 같은 판정을 하듯, 매주 같은 설명을 하고 계시죠?"로 문을 엽니다.
       </aside>
     </section>
 
-    <!-- ============= 2. 오늘의 여정 ============= -->
     <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
     <section class="tldr" data-depth="summary">
       <div class="chip">3분 요약 · TL;DR</div>
       <h2>결론부터 — 이 세 줄이면 됩니다</h2>
-      <p class="tldr-lede">Agent Skill은 사수가 물려주는 업무 매뉴얼입니다. 매번 같은 규칙을 설명하던 일을 폴더 하나에 담습니다.</p>
+      <p class="tldr-lede">같은 설명을 두 번 했다면 파일로 옮길 때입니다. 늘 지킬 규칙은 CLAUDE.md에, 순서가 있는 업무는 Agent Skill에 담습니다.</p>
       <ol class="tldr-points">
-        <li><span class="n">1</span><div><strong>스킬 = SKILL.md가 든 폴더 하나, 설명(description)이 곧 호출 버튼</strong><span class="sub">내 업무 용어로 "언제 쓰는지"를 적어야 AI가 알아서 꺼내 씁니다.</span></div></li>
-        <li><span class="n">2</span><div><strong>직접 쓰지 말고 skill-creator에게 인터뷰받아 만드세요</strong><span class="sub">좋은 스킬 = 애매하지 않은 규칙 + 결과 검증 단계.</span></div></li>
-        <li><span class="n">3</span><div><strong>우리 환경 규칙(DRM 파일은 xlwings/win32com)부터 첫 스킬로</strong><span class="sub">반복되고 · 설명할 수 있고 · 파일 기반인 일 — 셋 다면 스킬 후보입니다.</span></div></li>
+        <li><span class="n">1</span><div><strong>두 번 한 지적은 CLAUDE.md에 한 줄로</strong><span class="sub">세션을 열 때마다 자동으로 읽힙니다. 짧게, 숫자로 판정할 수 있게 씁니다.</span></div></li>
+        <li><span class="n">2</span><div><strong>반복 업무 절차는 스킬 폴더로 — description이 호출 버튼</strong><span class="sub">내가 실제로 쓰는 말을 넣어야 AI가 알아서 꺼내 씁니다. 초안은 skill-creator에게 맡깁니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>첫 스킬은 우리 환경 규칙 — DRM 파일은 xlwings·win32com</strong><span class="sub">반복되고 · 말로 설명되고 · 파일이 오가는 일이라면 스킬 후보입니다.</span></div></li>
       </ol>
       <div class="tldr-bottom">
         <div class="tldr-prompt">
           <div class="tldr-label">지금 바로 써 보는 프롬프트</div>
-          <pre>skill-creator로 새 스킬을 만들고 싶어. 내가 매주 반복하는 일은 ○○이야.
-입력 파일은 ○○, 결과물은 ○○이야. 필요한 걸 나한테 하나씩 질문하면서 만들어줘.</pre>
+          <pre>오늘 대화에서 내가 두 번 이상 지적한 것만 골라
+CLAUDE.md에 10줄 이내로 추가해줘.
+"깔끔하게" 같은 말 대신 숫자나 금지로 판정할 수 있게 써줘.</pre>
         </div>
         <div class="tldr-when">
           <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
           <ul>
-            <li>같은 작업 설명을 매주 AI에게 반복하고 있을 때</li>
+            <li>같은 설명을 매주 AI에게 반복하고 있을 때</li>
             <li>사내 DRM 엑셀·PPT가 AI 코드로 깨질 때</li>
-            <li>내 노하우를 팀 표준으로 만들고 싶을 때</li>
+            <li>내 노하우를 팀 표준으로 남기고 싶을 때</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip">TODAY</div>
-        <h2>오늘 가져가실 것 <span class="grad">세 가지</span></h2>
-        <div class="grid-3" style="margin-top:1.2rem;">
-          <div class="card autoshow fade-up">
-            <div style="font-size:2.2rem;">🧠</div>
-            <h3>개념 — Agent Skill이 뭔데?</h3>
-            <p>프롬프트를 매번 다시 쓰는 대신, <b>사수의 매뉴얼</b>처럼 한 번 써두고 계속 쓰는 것. SKILL.md 한 장이면 됩니다.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <div style="font-size:2.2rem;">🏢</div>
-            <h3>우리 회사 규칙 담기</h3>
-            <p>DRM 걸린 엑셀은 <span class="mono accent2">xlwings</span>·<span class="mono accent2">win32com</span>으로, PPT/워드도 <span class="mono accent2">win32com</span>으로 — 사내 제약까지 스킬에 새깁니다.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <div style="font-size:2.2rem;">🛠️</div>
-            <h3>실무 예제 7종 + 실습</h3>
-            <p>측정 CSV 리포트, DRM 엑셀 요약, 주간보고 PPT, Word 사양서, GDS(KLayout), RTL/Verilog, TCAD 스윕.</p>
-          </div>
-        </div>
-        <p class="small center" style="margin-top:1.6rem; color:#B8BFD0 !important;">
-          코딩 지식 필요 없음 — <em>내 업무를 글로 설명할 수 있으면</em> 그게 곧 스킬입니다.
-        </p>
-      </div>
-      <aside class="notes">
-        전체 구조 안내: 개념(15분) → 사내 규칙(10분) → 예제 투어(30분) → 실습(나머지).
-        "코드는 AI가 씁니다. 여러분은 일하는 법을 아는 사람입니다."
-      </aside>
-    </section>
-
-    <!-- ============= 3. 어느 엔지니어의 아침 ============= -->
+    <!-- ============= 문제: 화요일 아침 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">PROBLEM</div>
-        <h2>어느 공정 엔지니어의 <span class="accent3">화요일 아침</span></h2>
+        <div class="chip">PROBLEM · 어느 공정 엔지니어의 화요일</div>
+        <h2>판단은 5분, 나머지는 <span class="accent3">매주 같은 손일</span>입니다</h2>
         <ul class="tl" style="margin-top:1rem;">
-          <li class="autoshow fade-left"><span class="tl-time">08:30</span> 📥 설비 12대에서 내려온 측정 CSV를 하나로 모은다 <span class="tl-dur">40분</span></li>
-          <li class="autoshow fade-left"><span class="tl-time">09:10</span> 🔒 DRM 걸린 수율 엑셀을 열어 어제 값 수기 복붙 <span class="tl-dur">30분</span></li>
-          <li class="autoshow fade-left"><span class="tl-time">09:40</span> 📊 트렌드 차트 다시 그려서 그룹장 보고 메일 <span class="tl-dur">25분</span></li>
-          <li class="autoshow fade-left"><span class="tl-time">10:05</span> 🖼️ 주간보고 PPT의 표·그래프 지난주 포맷에 맞춰 갱신 <span class="tl-dur">45분</span></li>
-          <li class="tl-sum autoshow zoom-in"><span class="tl-time">매주</span> <b>같은 일, 같은 순서, 같은 포맷</b> — 판단은 5분, 손일은&hellip; <span class="tl-dur" style="font-size:1.25rem;">주 4시간+</span></li>
+          <li class="autoshow fade-up"><span class="tl-time">08:30</span> 📥 설비 12대의 측정 CSV를 하나로 모은다 <span class="tl-dur">40분</span></li>
+          <li class="autoshow fade-up"><span class="tl-time">09:10</span> 🔒 DRM 걸린 수율 엑셀에 어제 값을 손으로 옮긴다 <span class="tl-dur">30분</span></li>
+          <li class="autoshow fade-up"><span class="tl-time">09:40</span> 📊 트렌드 차트를 다시 그려 그룹장에게 메일 <span class="tl-dur">25분</span></li>
+          <li class="autoshow fade-up"><span class="tl-time">10:05</span> 🖼️ 주간보고 PPT의 표·그래프를 지난주 양식대로 갱신 <span class="tl-dur">45분</span></li>
+          <li class="tl-sum autoshow fade-up"><span class="tl-time">매주</span> <b>같은 일, 같은 순서, 같은 양식</b> <span class="tl-dur" style="font-size:1.25rem;">주 4시간+</span></li>
         </ul>
         <p class="small autoshow fade-up" style="margin-top:1.2rem; color:#B8BFD0 !important;">
-          이 일이 어려워서 오래 걸리는 게 아닙니다. <em>규칙이 내 머릿속에만</em> 있어서 오래 걸립니다.
+          일이 어려워서 오래 걸리는 게 아닙니다. <em>규칙이 내 머릿속에만</em> 있어서 매번 다시 설명해야 하기 때문입니다.
         </p>
       </div>
       <aside class="notes">
-        공감 유도: "본인 얘기 같은 분?" 시간은 예시일 뿐 — 각자 자기 반복 업무를 떠올리게 하기.
-        핵심 문장: 판단(엔지니어링)은 5분, 나머지는 규칙이 정해진 손일.
+        "본인 얘기 같은 분?" 하고 손을 들게 합니다. 시간은 예시입니다 — 각자 자기 반복 업무를 떠올리게 합니다.
+        AI에게 시켜도 마찬가지입니다. 헤더 3줄, 단위, 스펙, DRM… 이 규칙을 매번 다시 말해야 합니다.
+        오늘 할 일: 그 설명을 파일로 옮기는 것.
       </aside>
     </section>
 
-    <!-- ============= 4. AI에게 시키면 되잖아? ============= -->
-    <section data-depth="extra">
+    <!-- ============= 승격 사다리 ============= -->
+    <section>
       <div class="vfill">
-        <div class="chip">PROBLEM 2</div>
-        <h2>"AI한테 시키면 되잖아?" — <span class="accent3">해봤는데요&hellip;</span></h2>
-        <div class="grid-2" style="align-items:start; margin-top:.6rem;">
-          <div class="prompt-card" style="margin-top:0;">
-            <div class="pc-label">💬 매번 이렇게 설명하고 계시죠</div>
-            <pre class="code" style="font-size:1.05rem;">"측정 CSV들을 합쳐줘. 아 근데 3번째 줄까지는 헤더고,
-LOT_ID는 대문자로 통일해야 하고, THK 컬럼은 Å 단위고,
-스펙은 CVD면 450±30이고 Etch면… 아 그리고 엑셀은
-그냥 열면 깨져. 우리 회사 DRM 때문에 xlwings로…
-차트 색은 지난주 보고서랑 똑같이…" <span class="accent3">(이하 900자)</span></pre>
+        <div class="chip">THE LADDER · 말 → CLAUDE.md → Skill</div>
+        <h2>두 번 한 설명은 <span class="grad">파일로 승격</span>합니다</h2>
+        <div class="ladder" style="margin-top:.9rem;">
+          <div class="rung r1 autoshow fade-up">
+            <span class="rung-n">① 대화</span>
+            <h3>이번 한 번만 필요한 지시</h3>
+            <p>세션이 끝나면 사라집니다.</p>
+            <p class="rung-ex">"이번엔 CMP 데이터만 봐줘"</p>
           </div>
-          <div class="stack" style="gap:.8rem;">
-            <div class="card bad autoshow fade-right">
-              <h3>😮‍💨 설명이 일보다 길다</h3>
-              <p>내 머릿속 규칙을 매번 처음부터. 조금만 빠뜨리면 결과가 엉뚱해집니다.</p>
-            </div>
-            <div class="card bad autoshow fade-right">
-              <h3>🎲 사람마다, 날마다 다르다</h3>
-              <p>옆자리 동료의 프롬프트는 또 다르고, 지난달의 나는 뭐라고 썼는지 기억도 안 나고.</p>
-            </div>
-            <div class="card bad autoshow fade-right">
-              <h3>🚪 노하우가 퇴근하면 사라진다</h3>
-              <p>담당자가 바뀌면 처음부터. 조직에 남는 게 없습니다.</p>
-            </div>
+          <div class="rung r2 autoshow fade-up">
+            <span class="rung-n">② CLAUDE.md</span>
+            <h3>이 폴더에서 늘 지킬 규칙</h3>
+            <p>세션을 열 때마다 자동으로 읽힙니다.</p>
+            <p class="rung-ex">"두께는 Å 그대로, 변환 금지"</p>
+          </div>
+          <div class="rung r3 autoshow fade-up">
+            <span class="rung-n">③ Agent Skill</span>
+            <h3>순서가 있는 업무 절차 + 도구</h3>
+            <p>필요할 때만 펼쳐 읽고, 다른 폴더로 들고 다닙니다.</p>
+            <p class="rung-ex">측정 CSV → 일일 리포트 6단계</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1.2rem; font-size:1.4rem;">
+          승격 신호 — 같은 지적을 <b>두 번</b> 했다면 CLAUDE.md 한 줄로. 같은 절차를 <b>세 번</b> 설명했다면 스킬로.
+        </div>
+      </div>
+      <aside class="notes">
+        오늘 전체의 지도입니다. 아래 칸일수록 가볍고, 위 칸일수록 오래 남습니다.
+        처음부터 스킬을 만들 필요는 없습니다. 대화에서 시작해 반복되는 것만 한 칸씩 올립니다.
+        이 순서대로 CLAUDE.md부터 봅니다.
+      </aside>
+    </section>
+
+    <!-- ============= CLAUDE.md 개념 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">② CLAUDE.md</div>
+        <h2>CLAUDE.md는 <span class="accent4">세션마다 자동으로 읽히는</span> 안내문입니다</h2>
+        <div class="grid-2" style="align-items:start; margin-top:.6rem; gap:2rem;">
+          <div>
+            <p class="small" style="margin:0 0 .9rem;">
+              작업 폴더 맨 위에 <span class="mono accent4">CLAUDE.md</span>를 두면 Claude Code가 세션을 시작할 때 먼저 읽습니다.
+              신입에게 주는 <b>첫날 안내문</b>을 AI에게 써 두는 셈입니다.
+            </p>
+            <ul class="list-clean small">
+              <li class="autoshow fade-up">📁 <b>폴더의 CLAUDE.md</b> — 이 업무 규칙, 팀과 공유</li>
+              <li class="autoshow fade-up">🏠 <b class="mono">~/.claude/CLAUDE.md</b> — 내 개인 습관</li>
+              <li class="autoshow fade-up">⚡ <span class="mono accent2">/init</span> 초안 생성 · <span class="mono accent2">/memory</span> 바로 고치기</li>
+            </ul>
+            <p class="tiny" style="margin-top:.9rem; color:#9BA6C0 !important;">다른 에이전트 도구는 <span class="mono">AGENTS.md</span> 같은 이름으로 같은 역할을 합니다.</p>
+          </div>
+          <pre class="ftree autoshow fade-up"><span class="dir">📁 yield-analysis/</span>   <span class="note">← 수율 분석 작업 폴더</span>
+├─ <span class="hl">CLAUDE.md</span>        <span class="note">← 매 세션 자동으로 읽힘</span>
+├─ <span class="fl">data/</span>            <span class="note">← 측정 CSV (읽기 전용)</span>
+├─ <span class="fl">reports/</span>         <span class="note">← 결과물은 새 파일로</span>
+└─ <span class="fl">.claude/skills/</span>  <span class="note">← 절차는 스킬로 (뒤에서)</span></pre>
+        </div>
+      </div>
+      <aside class="notes">
+        위치와 자동 로드만 기억하면 됩니다. /init은 폴더를 훑어 초안을 써 주고, /memory는 메모 파일을 바로 엽니다.
+        개인용(~/.claude/CLAUDE.md)과 폴더용을 구분합니다. 팀이 같이 지킬 규칙은 폴더용에 둡니다.
+        CLAUDE.md는 매번 읽히는 만큼 컨텍스트 자리를 차지합니다 — 원리는 컨텍스트 덱(../context/)에서.
+      </aside>
+    </section>
+
+    <!-- ============= CLAUDE.md 예문 + 요령 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">② CLAUDE.md · 예문</div>
+        <h2>좋은 CLAUDE.md는 <span class="accent2">숫자와 금지</span>로 씁니다</h2>
+        <div class="grid-2" style="grid-template-columns:1.25fr 1fr; align-items:start; gap:1.6rem; margin-top:.3rem;">
+          <pre class="code autoshow fade-up" style="font-size:.93rem; line-height:1.5;"><span class="cm"># CLAUDE.md — CVD/Etch 일일 수율 분석</span>
+
+<span class="kw">## 이 폴더는</span>
+- 입력: data/*.csv (설비 표준 포맷, 맨 위 3줄은 헤더)
+- 결과: reports/ 아래 새 파일. data/는 읽기 전용
+
+<span class="kw">## 규칙</span>
+- 두께 THK_A는 Å 그대로. <span class="nm">단위 변환 금지</span>
+- LOT_ID는 대문자로 통일해서 집계
+- 사내 .xlsx·.pptx는 office-drm 스킬을 따른다
+
+<span class="kw">## 완료 기준</span>
+- 보고에 "병합 행수 = 파일별 행수 합" 검산 결과
+- 확인하지 않은 것은 "미확인"이라고 쓴다
+
+<span class="kw">## 하지 말 것</span>
+- 실데이터를 사외 서비스에 붙여넣지 않는다</pre>
+          <div class="stack" style="gap:.65rem;">
+            <div class="card tight autoshow fade-up"><h3>🔍 판정할 수 있게</h3><p>"깔끔하게" 대신 "Å 그대로", "대문자". 지켰는지 예·아니오로 답할 수 있어야 합니다.</p></div>
+            <div class="card tight autoshow fade-up"><h3>🚫 금지가 힘이 셉니다</h3><p>AI가 친절하게 바꾸려 드는 곳(단위, 원본 파일)엔 "~금지"로 못 박습니다.</p></div>
+            <div class="card tight autoshow fade-up"><h3>✂️ 한 화면 안으로</h3><p>규칙 목록만. 길어지면 매 세션 자리를 차지합니다 — 긴 절차는 스킬로 뺍니다.</p></div>
+            <div class="card tight good autoshow fade-up"><h3>🔁 두 번 지적하면 한 줄 추가</h3><p>"방금 지적한 것 CLAUDE.md에 추가해줘" — 교훈이 파일에 쌓입니다.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        프롬프트 자체의 한계가 아니라 "휘발성"의 문제. 다음 슬라이드에서 해법(스킬 = 저장된 프롬프트+규칙+도구) 제시.
+        그대로 가져다 쓸 수 있는 예문입니다. 모든 줄이 "지켰나?"에 예·아니오로 답할 수 있게 적혀 있다는 점을 짚습니다.
+        완료 기준을 적어 두면 "다 됐습니다" 대신 검산 결과를 보고받습니다.
+        오른쪽 네 요령 중 운영의 핵심은 마지막 — 같은 지적을 두 번 했다면 대화가 아니라 파일에 적습니다.
       </aside>
     </section>
 
-    <!-- ============= 5. Agent Skill = 업무 매뉴얼 ============= -->
+    <!-- ============= Agent Skill = 업무 매뉴얼 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">CONCEPT</div>
-        <h2>Agent Skill = <span class="grad">사수가 물려주는 업무 매뉴얼</span></h2>
+        <div class="chip">③ AGENT SKILL</div>
+        <h2>Agent Skill은 <span class="grad">사수가 물려주는 업무 매뉴얼</span>입니다</h2>
         <div class="grid-2" style="margin-top:.8rem; align-items:start;">
-          <div class="card autoshow fade-left">
+          <div class="card autoshow fade-up">
             <h3>🧑‍🏫 신입에게 일을 가르칠 때</h3>
-            <p>매일 아침 옆에 앉아 처음부터 다시 설명하지 않습니다.</p>
-            <p><b>잘 정리된 매뉴얼 한 부</b>를 주고, 모르면 그걸 펴 보게 하죠.</p>
-            <p style="margin-top:.6rem;">"이 업무는 <em>언제</em> 하는 거고, <em>순서</em>는 이렇고, <em>이런 함정</em>을 조심해."</p>
+            <p>매일 옆에 앉아 처음부터 설명하지 않습니다. <b>정리된 매뉴얼 한 부</b>를 주고, 모르면 펴 보게 합니다.</p>
+            <p>"이 일은 <em>언제</em> 하고, <em>순서</em>는 이렇고, <em>이 함정</em>을 조심해."</p>
           </div>
-          <div class="card good autoshow fade-right">
+          <div class="card good autoshow fade-up">
             <h3>🤖 AI에게 일을 가르칠 때</h3>
             <p>그 매뉴얼을 <span class="mono accent2">SKILL.md</span>라는 텍스트 파일로 씁니다.</p>
-            <p>AI는 관련 업무 요청이 오면 <b>스스로 그 매뉴얼을 꺼내 읽고</b> 그대로 일합니다.</p>
-            <p style="margin-top:.6rem;">한 번 쓰면 — 나도, 동료도, 후임도, <em>내일의 나도</em> 같은 품질.</p>
+            <p>관련 요청이 오면 AI가 <b>스스로 꺼내 읽고</b> 그대로 일합니다. 나도, 동료도, 후임도 같은 품질.</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.3rem;">
-          스킬 = <b>발동 조건</b>(언제) + <b>절차와 규칙</b>(어떻게) + <b>도구</b>(스크립트·참고자료)를 담은 <span class="grad">재사용 폴더</span>
+          스킬 = <b>발동 조건</b>(언제) + <b>절차</b>(어떻게) + <b>도구</b>(스크립트·참고 자료)를 담은 폴더
         </div>
       </div>
       <aside class="notes">
-        비유 하나로 개념 전체를 전달. "prompt는 말로 시키기, skill은 매뉴얼 주기".
-        Claude Code, Claude 앱 등 에이전트 제품들이 이 형식(Agent Skills)을 공통으로 지원한다는 점 언급.
+        비유 하나로 개념 전체를 전달합니다. "프롬프트는 말로 시키기, 스킬은 매뉴얼 건네기."
+        CLAUDE.md와 차이: CLAUDE.md는 늘 읽히는 짧은 규칙, 스킬은 그 업무를 할 때만 펼치는 긴 절차입니다.
+        Claude Code·Claude 앱 외에도 여러 에이전트 도구가 같은 SKILL.md 형식을 읽습니다.
       </aside>
     </section>
 
-    <!-- ============= 6. 스킬의 실체 ============= -->
+    <!-- ============= 스킬의 실체 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">ANATOMY</div>
-        <h2>스킬의 실체는 <span class="accent2">그냥 폴더 하나</span>입니다</h2>
+        <div class="chip">③ AGENT SKILL · 구조</div>
+        <h2>스킬의 실체는 <span class="accent2">폴더 하나와 텍스트 파일</span>입니다</h2>
         <div class="grid-2" style="align-items:start; margin-top:.6rem;">
-          <pre class="ftree autoshow fade-left"><span class="dir">📁 daily-meas-report/</span>
+          <pre class="ftree autoshow fade-up"><span class="dir">📁 csv-report/</span>
 ├─ <span class="hl">SKILL.md</span>        <span class="note">← 매뉴얼 본문 (필수)</span>
 ├─ <span class="fl">scripts/</span>
 │   └─ <span class="fl">merge_csv.py</span> <span class="note">← 검증된 스크립트 (선택)</span>
 └─ <span class="fl">references/</span>
-    └─ <span class="fl">spec_table.md</span> <span class="note">← 스펙 표 등 참고자료 (선택)</span></pre>
-          <pre class="code autoshow fade-right" style="font-size:.98rem;"><span class="cm">--- SKILL.md 맨 위 (이름표) ---</span>
-<span class="kw">name:</span> daily-meas-report
+    └─ <span class="fl">spec_table.md</span> <span class="note">← 스펙 표 (선택)</span></pre>
+          <pre class="code autoshow fade-up" style="font-size:.98rem;"><span class="cm">--- SKILL.md 맨 위 (이름표) ---</span>
+<span class="kw">name:</span> csv-report
 <span class="kw">description:</span> <span class="st">설비 측정 CSV들을 병합해
   일일 수율 리포트(HTML)를 만든다.
   "측정 리포트", "CSV 취합" 요청 시 사용.</span>
 <span class="cm">--- 본문 (업무 매뉴얼) ---</span>
-1. data/*.csv 를 모두 읽는다 (skiprows=3)
-2. LOT_ID 대문자 통일, THK 단위는 Å
-3. 스펙 판정: references/spec_table.md 기준
-4. 리포트는 새 파일 → 어떤 라이브러리든 OK</pre>
+1. data/*.csv 를 모두 읽는다 (헤더 3줄 스킵)
+2. LOT_ID 대문자 통일, THK는 Å 그대로
+3. 스펙 판정: references/spec_table.md
+4. 결과는 새 HTML 파일로</pre>
         </div>
         <p class="small autoshow fade-up" style="margin-top:1rem; color:#B8BFD0 !important;">
-          워드도 파워포인트도 아닌 <b>일반 텍스트</b> — 메모장으로도 쓸 수 있고, 그래서 <em>AI가 직접 써줄 수도</em> 있습니다.
+          두는 곳: 이 폴더 전용은 <span class="mono accent2">.claude/skills/&lt;이름&gt;/</span>, 어디서나 쓸 것은 <span class="mono accent2">~/.claude/skills/&lt;이름&gt;/</span>.
+          메모장으로 쓸 수 있는 글이라 <em>AI가 대신 써 줄 수도</em> 있습니다.
         </p>
       </div>
       <aside class="notes">
-        핵심: 겁먹을 필요 없다. 폴더 + 마크다운 텍스트가 전부.
-        name/description = 이름표(발동 조건), 본문 = 절차, scripts/references = 부록.
+        겁먹을 필요 없습니다. 폴더 + 마크다운 텍스트가 전부입니다.
+        name·description은 이름표(발동 조건), 본문은 절차, scripts·references는 부록입니다.
+        폴더 전용(.claude/skills)은 git으로 팀과 공유되고, 개인용(~/.claude/skills)은 내 모든 작업에서 쓰입니다.
       </aside>
     </section>
 
-    <!-- ============= 7. 발동 원리 (인터랙티브) ============= -->
+    <!-- ============= 발동 원리 (인터랙티브) ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">HOW IT WORKS · 클릭해 보세요</div>
+        <div class="chip">③ AGENT SKILL · 클릭해 보세요</div>
         <h2>AI는 매뉴얼을 <span class="grad">필요할 때만</span> 펼칩니다</h2>
         <div class="pd-wrap" style="margin-top:.8rem;">
           <div class="pd-steps" role="tablist">
-            <button class="pd-step active" data-pd="0"><span class="n">STEP 1</span>평소 — 이름표만 본다<small>모든 스킬의 name+description만 살짝 보임</small></button>
-            <button class="pd-step" data-pd="1"><span class="n">STEP 2</span>"측정 리포트 뽑아줘"<small>맞는 스킬을 찾아 본문(매뉴얼)을 펼침</small></button>
-            <button class="pd-step" data-pd="2"><span class="n">STEP 3</span>실행 — 부록까지 활용<small>스크립트 실행, 스펙 표 참조</small></button>
+            <button class="pd-step active" data-pd="0"><span class="n">STEP 1</span>평소 — 이름표만 본다<small>모든 스킬의 name + description만</small></button>
+            <button class="pd-step" data-pd="1"><span class="n">STEP 2</span>"측정 리포트 뽑아줘"<small>맞는 스킬을 찾아 본문을 펼침</small></button>
+            <button class="pd-step" data-pd="2"><span class="n">STEP 3</span>실행 — 부록까지<small>스크립트 실행, 스펙 표 참조</small></button>
           </div>
           <div class="pd-stage" aria-live="polite">
-            <div class="pd-doc d-meta" id="pd-meta"><b>📇 이름표</b> — daily-meas-report: 측정 CSV 병합·일일 리포트 생성&hellip;</div>
-            <div class="pd-doc d-body" id="pd-body"><b>📖 SKILL.md 본문</b> — ① CSV 읽기(skiprows=3) ② LOT_ID 정규화 ③ 스펙 판정 ④ HTML 리포트&hellip;</div>
+            <div class="pd-doc d-meta" id="pd-meta"><b>📇 이름표</b> — csv-report: 측정 CSV 병합·일일 리포트 생성&hellip;</div>
+            <div class="pd-doc d-body" id="pd-body"><b>📖 SKILL.md 본문</b> — ① CSV 읽기(헤더 3줄 스킵) ② LOT_ID 정규화 ③ 스펙 판정 ④ HTML 리포트&hellip;</div>
             <div class="pd-doc d-res" id="pd-res"><b>🧰 부록</b> — scripts/merge_csv.py 실행 · references/spec_table.md 참조</div>
             <p class="pd-note" id="pd-note">평소에는 이름표만 읽어 둡니다 — 매뉴얼 100권이 꽂혀 있어도 부담이 없습니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        Progressive disclosure를 "책장의 매뉴얼" 비유로: 평소엔 책등(이름표)만, 일 생기면 그 권만 펼친다.
-        그래서 스킬을 수십 개 만들어도 AI가 느려지거나 헷갈리지 않는다 → 팀 스킬 라이브러리가 가능한 이유.
-        스텝 버튼 클릭하며 시연.
+        "점진적 공개"를 책장 비유로: 평소엔 책등(이름표)만 보고, 일이 생기면 그 권만 펼칩니다.
+        그래서 스킬을 수십 개 만들어도 AI가 느려지거나 헷갈리지 않습니다 — 팀 스킬 모음이 가능한 이유.
+        스텝 버튼을 눌러 가며 시연합니다.
       </aside>
     </section>
 
-    <!-- ============= 8. 프롬프트 vs 스킬 (토글) ============= -->
+    <!-- ============= 프롬프트 vs 스킬 (토글) ============= -->
     <section>
       <div class="vfill">
         <div class="chip">BEFORE / AFTER · 탭을 눌러 보세요</div>
-        <h2>같은 요청, <span class="accent3">스킬 없이</span> vs <span class="accent2">스킬로</span></h2>
+        <h2>스킬이 있으면 긴 설명이 <span class="accent2">한 줄 요청</span>이 됩니다</h2>
         <div>
           <div class="vs-tabs" role="tablist">
-            <button class="vs-tab on" data-vs="0">😮‍💨 스킬 없이</button>
-            <button class="vs-tab t2" data-vs="1">✨ 스킬 설치 후</button>
+            <button class="vs-tab on" data-vs="0">스킬 없이</button>
+            <button class="vs-tab t2" data-vs="1">스킬 설치 후</button>
           </div>
         </div>
         <div class="vs-pane on" data-vsp="0">
           <div class="prompt-card" style="margin-top:0;">
-            <div class="pc-label">💬 나 → AI (매번, 전 항목 기억해서)</div>
-            <pre class="code" style="font-size:1.02rem;">"D:\meas 폴더 CSV 합쳐줘. 헤더 3줄 스킵하고, LOT_ID 대문자로,
-THK는 Å 단위, CVD 스펙 450±30 / Etch 1200±80으로 판정하고,
-차트는 파란색-주황 순서로, 파일명은 daily_YYMMDD.html로&hellip;"</pre>
+            <div class="pc-label">💬 나 → AI (매번, 전 항목을 기억해서)</div>
+            <pre class="code" style="font-size:1.05rem;">"D:\meas 폴더 CSV 합쳐줘. 헤더 3줄 스킵하고, LOT_ID 대문자로,
+THK는 Å 단위 그대로, CVD 스펙 450±30 / Etch 1200±80으로 판정하고,
+엑셀은 그냥 열면 깨지니까 xlwings로, 파일명은 report_YYMMDD.html로&hellip;"</pre>
           </div>
-          <div class="vs-meter"><span>설명 비용</span><div class="bar"><div class="fill" data-w="92%"></div></div><b class="accent3">~1,100자 × 매번</b></div>
-          <p class="small" style="margin-top:.6rem; color:#B8BFD0 !important;">빠뜨린 규칙 하나 = 다시 설명 + 재실행. 품질이 <em>그날의 기억력</em>에 달려 있습니다.</p>
+          <div class="vs-meter"><span>설명 길이</span><div class="bar"><div class="fill" data-w="92%"></div></div><b class="accent3">약 1,000자 × 매번</b></div>
+          <p class="small" style="margin-top:.6rem; color:#B8BFD0 !important;">규칙 하나를 빠뜨리면 다시 설명하고 다시 돌립니다. 품질이 <em>그날의 기억력</em>에 달려 있습니다.</p>
         </div>
         <div class="vs-pane" data-vsp="1">
           <div class="prompt-card" style="margin-top:0;">
             <div class="pc-label">💬 나 → AI</div>
             <pre class="code" style="font-size:1.3rem;">"어제 측정 리포트 뽑아줘"</pre>
           </div>
-          <div class="vs-meter good"><span>설명 비용</span><div class="bar"><div class="fill" data-w="8%"></div></div><b class="accent2">한 줄. 규칙은 스킬이 기억</b></div>
-          <p class="small" style="margin-top:.6rem; color:#B8BFD0 !important;">AI가 <span class="mono">daily-meas-report</span> 스킬을 찾아 펼치고, 그 안의 규칙·스크립트대로 실행합니다. <em>누가 시켜도 같은 품질.</em></p>
+          <div class="vs-meter good"><span>설명 길이</span><div class="bar"><div class="fill" data-w="8%"></div></div><b class="accent2">한 줄 — 규칙은 스킬이 기억</b></div>
+          <p class="small" style="margin-top:.6rem; color:#B8BFD0 !important;">AI가 <span class="mono">csv-report</span> 스킬을 찾아 펼치고, 그 안의 규칙대로 실행합니다. <em>누가 시켜도 같은 결과.</em></p>
         </div>
       </div>
       <aside class="notes">
-        탭 전환 시연. 강조: 스킬이 프롬프트를 대체하는 게 아니라 "반복되는 설명"을 흡수하는 것.
-        일회성 요청은 여전히 그냥 프롬프트로.
+        탭을 눌러 전환합니다. 스킬이 프롬프트를 없애는 게 아니라 "반복되는 설명"을 흡수하는 것입니다.
+        한 번만 할 요청은 여전히 그냥 대화로 시킵니다 — 사다리의 ①칸.
       </aside>
     </section>
 
-    <!-- ============= 9. skill-creator ============= -->
+    <!-- ============= skill-creator ============= -->
     <section>
       <div class="vfill">
         <div class="chip">MAKING SKILLS</div>
-        <h2>스킬 만들기? <span class="grad">스킬 만들어 주는 스킬</span>이 있습니다</h2>
+        <h2>스킬은 직접 쓰지 말고 <span class="grad">skill-creator에게 인터뷰</span>받으세요</h2>
         <div class="flow autoshow fade-up" style="margin-top:.6rem;">
-          <div class="fstep"><span class="ic">🗣️</span><b>내 업무를 말로 설명</b><small>skill-creator가 인터뷰하듯 물어봄</small></div>
+          <div class="fstep"><span class="ic">🗣️</span><b>내 업무를 말로 설명</b><small>skill-creator가 빠진 규칙을 되물음</small></div>
           <span class="farr">▶</span>
-          <div class="fstep"><span class="ic">📝</span><b>SKILL.md 초안 자동 생성</b><small>폴더 구조·이름표·본문까지</small></div>
+          <div class="fstep"><span class="ic">📝</span><b>SKILL.md 초안 생성</b><small>폴더 구조·이름표·본문까지</small></div>
           <span class="farr">▶</span>
-          <div class="fstep"><span class="ic">🔁</span><b>실전 투입 → 다듬기</b><small>틀린 부분을 알려주면 매뉴얼이 진화</small></div>
+          <div class="fstep"><span class="ic">🔁</span><b>실전에 써 보며 다듬기</b><small>틀린 곳을 알려 주면 매뉴얼이 고쳐짐</small></div>
         </div>
         <div class="prompt-card">
-          <div class="pc-label">💬 이렇게 시작하면 됩니다 (복사해서 그대로)</div>
-          <pre class="code">skill-creator 스킬을 사용해서 새 스킬을 만들어줘.
+          <div class="pc-label">💬 이렇게 시작하면 됩니다</div>
+          <pre class="code">skill-creator 스킬로 새 스킬을 만들어줘.
 업무: 매일 아침 설비별 측정 CSV(D:\meas\*.csv)를 병합해 일일 리포트를 만든다.
 규칙: 헤더 3줄 스킵, LOT_ID 대문자, THK는 Å, 스펙 판정은 CVD 450±30.
-주의: 회사 엑셀 파일은 DRM 때문에 반드시 xlwings로만 열 것.</pre>
+주의: 회사 엑셀 파일은 DRM 때문에 xlwings로만 연다.</pre>
         </div>
         <p class="small" style="color:#B8BFD0 !important;">
-          여러분이 준비할 것은 코드가 아니라 <em>업무 설명</em>입니다 — 신입에게 말로 가르친다고 생각하고 쓰면 끝.
+          준비할 것은 코드가 아니라 <em>업무 설명</em>입니다.
+          skill-creator가 없으면 <span class="mono">/plugin install skill-creator@claude-plugins-official</span> 로 설치하거나, "SKILL.md 형식으로 만들어줘"라고만 해도 됩니다.
         </p>
       </div>
       <aside class="notes">
-        skill-creator: 스킬 작성 모범 규칙(이름표 쓰는 법, 본문 구조, scripts 분리)을 아는 메타 스킬.
-        Claude가 인터뷰하며 빠진 규칙을 되물어 줌 → 비개발자에게 최적.
-        마지막 줄 강조: DRM 같은 사내 제약도 "말로" 넣으면 스킬에 새겨진다.
+        skill-creator는 스킬 쓰는 요령(이름표, 본문 구조, scripts 분리)을 아는 "스킬 만드는 스킬"입니다.
+        인터뷰하듯 빠진 규칙을 되물어 주므로 비개발자에게 특히 좋습니다.
+        마지막 줄 강조: DRM 같은 사내 제약도 말로 넣으면 스킬에 새겨집니다.
       </aside>
     </section>
 
-    <!-- ============= 10. 좋은 스킬의 조건 ============= -->
+    <!-- ============= 좋은 스킬의 조건 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">QUALITY CHECKLIST</div>
-        <h2>좋은 매뉴얼의 조건 = <span class="accent2">좋은 스킬의 조건</span></h2>
+        <h2>좋은 스킬은 <span class="accent2">신입이 읽고 바로 따라 하는</span> 매뉴얼입니다</h2>
         <div class="grid-2" style="align-items:start; margin-top:.8rem;">
           <ul class="list-clean">
-            <li class="card autoshow fade-left" style="padding:1rem 1.3rem;"><h3>① 이름표(description)가 발동 조건</h3><p>"측정 리포트", "CSV 취합" 같은 <b>내가 실제로 쓰는 말</b>을 넣어야 AI가 알아서 꺼내 씁니다.</p></li>
-            <li class="card autoshow fade-left" style="padding:1rem 1.3rem;"><h3>② 규칙은 애매함 없이</h3><p>"적당히 정리" ❌ → "LOT_ID는 대문자, 소수점 1자리" ⭕. 신입이 읽고 바로 할 수 있는 수준으로.</p></li>
+            <li class="card tight autoshow fade-up"><h3>① description = 발동 조건</h3><p>"측정 리포트", "CSV 취합"처럼 <b>내가 실제로 쓰는 말</b>을 넣어야 AI가 알아서 꺼냅니다.</p></li>
+            <li class="card tight autoshow fade-up"><h3>② 규칙은 애매함 없이</h3><p>"적당히 정리" ❌ → "LOT_ID는 대문자, 소수점 1자리" ⭕</p></li>
           </ul>
           <ul class="list-clean">
-            <li class="card autoshow fade-right" style="padding:1rem 1.3rem;"><h3>③ 검증 방법을 명시</h3><p>"행 수가 원본 합계와 같은지 확인", "스펙 밖 랏 수를 로그로 출력" — AI가 <b>스스로 검산</b>하게.</p></li>
-            <li class="card autoshow fade-right" style="padding:1rem 1.3rem;"><h3>④ 함정·제약을 기록</h3><p>"이 엑셀은 DRM이라 xlwings 필수", "금요일 파일은 컬럼이 하나 더 많음" — <em>고생한 기억이 조직의 자산이 되는 순간.</em></p></li>
+            <li class="card tight autoshow fade-up"><h3>③ 검산 방법을 적는다</h3><p>"병합 행수 = 파일별 합계, 다르면 중단" — AI가 <b>스스로 이상을 잡고</b> 멈춥니다.</p></li>
+            <li class="card tight autoshow fade-up"><h3>④ 함정·제약을 기록한다</h3><p>"이 엑셀은 DRM이라 xlwings 필수", "금요일 파일은 컬럼 하나 더" — 고생한 기억이 자산이 됩니다.</p></li>
           </ul>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1.1rem;">
-          완벽하게 시작할 필요 없습니다 — 스킬은 <b>쓰면서 다듬는 살아있는 문서</b>입니다.
+          처음부터 완벽할 필요는 없습니다 — 스킬은 <b>쓰면서 고치는 문서</b>입니다.
         </div>
       </div>
       <aside class="notes">
-        ④가 오늘 세미나 후반부와 직결: DRM/KLayout 같은 사내·도구 제약이 바로 "함정 기록"의 대표 사례.
+        신입 테스트: 이 문서만 받은 신입이 같은 결과를 낼 수 있는가?
+        ④가 후반부와 이어집니다 — DRM·KLayout 같은 사내·도구 제약이 "함정 기록"의 대표 사례입니다.
       </aside>
     </section>
 
-    <!-- ============= 11. DRM 문제 (애니메이션) ============= -->
+    <!-- ============= CLAUDE.md vs Skill ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">COMPARE</div>
+        <h2>늘 지킬 규칙은 <span class="mono accent4">CLAUDE.md</span>, 순서 있는 업무는 <span class="mono accent2">Skill</span></h2>
+        <table class="rules" style="margin-top:.6rem;">
+          <thead>
+            <tr><th></th><th>CLAUDE.md</th><th>Agent Skill</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>언제 읽나</b></td><td>세션을 열 때마다 항상</td><td>요청이 description과 맞을 때만</td></tr>
+            <tr><td><b>어디에 적용</b></td><td>그 폴더 (개인용은 <span class="mono">~/.claude/</span>)</td><td>폴더째 들고 다니며 어디서나</td></tr>
+            <tr><td><b>담는 것</b></td><td>짧은 규칙 · 금지 · 완료 기준</td><td>절차 + 스크립트 · 템플릿 · 참고 표</td></tr>
+            <tr><td><b>알맞은 길이</b></td><td>한 화면 이내</td><td>길어도 됨 — 평소엔 이름표만 읽힘</td></tr>
+            <tr><td><b>반도체 예</b></td><td>"두께는 Å 그대로", "data/ 읽기 전용"</td><td>csv-report · drm-excel · weekly-ppt</td></tr>
+          </tbody>
+        </table>
+        <p class="small autoshow fade-up" style="margin-top:1.1rem;">
+          <b class="accent2">둘은 함께 씁니다.</b> CLAUDE.md에 "사내 엑셀은 office-drm 스킬을 따른다" 한 줄을 적어 두면 규칙과 절차가 이어집니다.
+        </p>
+      </div>
+      <aside class="notes">
+        "어디에 적나"라는 실무 질문에 대한 답입니다. 이 폴더만의 사정은 CLAUDE.md, 어디서나 반복하는 업무 절차는 스킬.
+        대체재가 아니라 계층입니다 — 사다리의 ②칸과 ③칸.
+      </aside>
+    </section>
+
+    <!-- ============= 확장 생태계 지도 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">ECOSYSTEM</div>
+        <h2>확장은 <span class="accent2">불편이 쌓인 뒤 하나씩</span> 붙입니다</h2>
+        <div class="eco autoshow fade-up" style="margin-top:.9rem;">
+          <div class="eco-c"><span class="ic">📝</span><b>CLAUDE.md</b><small>늘 기억할 규칙</small></div>
+          <div class="eco-c"><span class="ic">📚</span><b>Skills</b><small>필요할 때 펼치는 절차</small></div>
+          <div class="eco-c pink"><span class="ic">🔌</span><b>MCP</b><small>사내 시스템·브라우저 같은 바깥 도구 연결</small></div>
+          <div class="eco-c green"><span class="ic">📦</span><b>Plugins</b><small>명령어·스킬·MCP 묶음 — <span class="mono">/plugin</span>으로 한 번에 설치</small></div>
+        </div>
+        <div class="flow autoshow fade-up" style="margin-top:1.2rem;">
+          <div class="fstep"><b>기본 상태로 써 본다</b><small>어디서 잘하고 어디서 틀리는지</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep"><b>불편·실패를 적어 둔다</b><small>같은 지적, 같은 설명</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep"><b>그때 하나씩 추가</b><small>남의 세팅 복사가 아니라 내 업무에 맞게</small></div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:1rem; color:#B8BFD0 !important;">
+          MCP 연결과 예약 실행은 <a href="../automation/">내 도구가 혼자 돌게</a>에서 다룹니다. 사내망에선 사외 서비스용 MCP가 막힌 경우가 많습니다.
+        </p>
+      </div>
+      <aside class="notes">
+        네 가지 확장의 위치만 잡아 줍니다. 오늘은 앞의 둘(CLAUDE.md, Skills)이 주제입니다.
+        확장은 기본기를 대체하지 않습니다. "좋은 MCP만 붙이면", "고수의 CLAUDE.md만 복사하면" 잘될 거라는 기대는 버립니다.
+        MCP는 automation 덱 담당입니다.
+      </aside>
+    </section>
+
+    <!-- ============= DRM 문제 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">OUR ENVIRONMENT · 왜?</div>
-        <h2>왜 사내 엑셀은 <span class="accent3">그냥 열면 깨질까요?</span></h2>
+        <h2>사내 엑셀은 <span class="accent3">직접 읽으면 깨지고</span>, 앱을 거치면 열립니다</h2>
         <div class="drm-lab drm-play" style="margin-top:.9rem;">
           <div class="drm-lane bad1">
             <div class="drm-node"><span class="ic">🤖</span>pandas /<br/>openpyxl</div>
@@ -1105,106 +1254,108 @@ THK는 Å 단위, CVD 스펙 450±30 / Etch 1200±80으로 판정하고,
           </div>
         </div>
         <div class="grid-2" style="margin-top:1.1rem;">
-          <p class="small" style="color:#B8BFD0 !important; margin:0;">사내 문서는 <b>DRM으로 암호화</b>되어 있어, 파일을 직접 파싱하는 라이브러리(pandas·openpyxl)에게는 <em>암호문 덩어리</em>로 보입니다.</p>
-          <p class="small" style="color:#B8BFD0 !important; margin:0;"><b>Excel·PowerPoint·Word 앱 자체</b>는 DRM을 해독할 권한이 있으므로, <span class="mono accent2">xlwings/win32com</span>으로 <em>앱을 조종해서</em> 읽고 쓰면 됩니다. (우회가 아니라 정식 경로!)</p>
+          <p class="small" style="color:#B8BFD0 !important; margin:0;">사내 문서는 <b>DRM으로 암호화</b>되어 있어, 파일을 직접 읽는 라이브러리(pandas·openpyxl)에게는 <em>암호문 덩어리</em>로 보입니다.</p>
+          <p class="small" style="color:#B8BFD0 !important; margin:0;"><b>Excel·PowerPoint·Word 앱</b>은 해독 권한이 있으니 <span class="mono accent2">xlwings·win32com</span>으로 <em>앱을 조종해</em> 읽고 씁니다. 우회가 아니라 정식 경로입니다.</p>
         </div>
       </div>
       <aside class="notes">
-        애니메이션: 위 레인은 파일이 자물쇠에 막혀 소멸, 아래 레인은 Excel 앱을 통해 통과.
-        "AI가 이걸 모르면 pandas부터 시도하고 실패한다 → 그래서 이 규칙을 스킬에 박아야 한다"로 다음 슬라이드 연결.
+        위 줄은 파일이 자물쇠에 막혀 멈추고, 아래 줄은 Excel 앱을 거쳐 통과합니다 — 한 번만 재생됩니다.
+        AI가 이걸 모르면 pandas부터 시도하고 실패합니다. 그래서 이 규칙을 파일로 남깁니다.
       </aside>
     </section>
 
-    <!-- ============= 12. 사내 파일 규칙 표 ============= -->
+    <!-- ============= 사내 파일 규칙 표 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">HOUSE RULES</div>
-        <h2>우리 환경의 <span class="grad">파일 취급 규칙</span> — 이대로만!</h2>
+        <h2>사내 파일은 <span class="grad">이 표대로만</span> 다룹니다</h2>
         <table class="rules" style="margin-top:.8rem;">
-          <thead><tr><th>대상</th><th>상황</th><th>사용할 도구</th><th>메모</th></tr></thead>
+          <thead><tr><th>대상</th><th>상황</th><th>쓸 도구</th><th>메모</th></tr></thead>
           <tbody>
-            <tr class="autoshow fade-up"><td>📊 엑셀 (.xlsx)</td><td><b>기존 파일</b> 읽기/수정</td><td class="mono accent2">xlwings <span class="muted">또는</span> win32com</td><td class="small">Excel 앱 경유 — DRM 해독은 앱이</td></tr>
-            <tr class="autoshow fade-up"><td>🖼️ 파워포인트 (.pptx)</td><td><b>기존 파일</b> 읽기/수정</td><td class="mono accent2">win32com</td><td class="small">PowerPoint 앱 경유</td></tr>
-            <tr class="autoshow fade-up"><td>📄 워드 (.docx)</td><td><b>기존 파일</b> 읽기/수정</td><td class="mono accent2">win32com</td><td class="small">Word 앱 경유</td></tr>
-            <tr class="autoshow fade-up"><td>✨ 위 문서들</td><td><b>새로 생성</b></td><td class="mono accent4">아무 라이브러리나 OK</td><td class="small">openpyxl · python-pptx · python-docx 자유</td></tr>
-            <tr class="autoshow fade-up"><td>🧩 레이아웃 (.gds)</td><td>읽기/검사/수정</td><td class="mono accent2">klayout (pya)</td><td class="small">GDSII/OASIS 표준 도구</td></tr>
-            <tr class="autoshow fade-up"><td>📈 CSV · 로그 · 텍스트</td><td>모두</td><td class="mono accent4">pandas 등 자유</td><td class="small">DRM 없음</td></tr>
+            <tr><td>📊 엑셀 (.xlsx)</td><td><b>기존 파일</b> 읽기·수정</td><td class="mono accent2">xlwings <span class="muted">또는</span> win32com</td><td class="small">Excel 앱이 DRM 해독</td></tr>
+            <tr><td>🖼️ 파워포인트 (.pptx)</td><td><b>기존 파일</b> 읽기·수정</td><td class="mono accent2">win32com</td><td class="small">PowerPoint 앱 경유</td></tr>
+            <tr><td>📄 워드 (.docx)</td><td><b>기존 파일</b> 읽기·수정</td><td class="mono accent2">win32com</td><td class="small">Word 앱 경유</td></tr>
+            <tr><td>✨ 위 문서들</td><td><b>새로 만들기</b></td><td class="mono accent4">라이브러리 자유</td><td class="small">openpyxl · python-pptx · python-docx</td></tr>
+            <tr><td>🧩 레이아웃 (.gds)</td><td>읽기·검사·수정</td><td class="mono accent2">klayout (pya)</td><td class="small">GDSII/OASIS 표준 도구</td></tr>
+            <tr><td>📈 CSV · 로그 · 텍스트</td><td>모두</td><td class="mono accent4">pandas 등 자유</td><td class="small">DRM 없음</td></tr>
           </tbody>
         </table>
         <p class="small autoshow fade-up" style="margin-top:1rem; color:#B8BFD0 !important;">
-          외우실 필요 없습니다 — <em>이 표를 스킬에 넣을 거니까요.</em> (다음 장)
+          외우실 필요 없습니다 — <em>이 표를 그대로 스킬에 넣습니다.</em>
         </p>
       </div>
       <aside class="notes">
-        win32com = pywin32 패키지의 COM 자동화(win32api 계열). xlwings는 그 위의 친절한 포장.
-        "새로 생성은 자유" — DRM은 저장 후 정책에 따라 적용되므로 생성 자체는 표준 라이브러리로 가능.
+        win32com은 pywin32 패키지의 COM 자동화이고, xlwings는 그 위의 쓰기 쉬운 포장입니다.
+        "새로 만들기는 자유" — DRM은 저장 후 정책에 따라 적용되므로 생성은 표준 라이브러리로 됩니다. 회사마다 다를 수 있으니 사내 정책을 먼저 확인합니다.
       </aside>
     </section>
 
-    <!-- ============= 13. 규칙을 스킬로 ============= -->
+    <!-- ============= 규칙을 스킬로 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">RULES → SKILL</div>
-        <h2>이 규칙 자체가 <span class="accent2">첫 번째 스킬</span>이 됩니다</h2>
+        <h2>이 규칙 표가 <span class="accent2">첫 번째 스킬</span>이 됩니다</h2>
         <div class="grid-2" style="align-items:start; margin-top:.6rem;">
-          <pre class="code autoshow fade-left" style="font-size:.95rem;"><span class="cm"># office-drm/SKILL.md (발췌)</span>
+          <pre class="code autoshow fade-up" style="font-size:.95rem;"><span class="cm"># office-drm/SKILL.md (발췌)</span>
 <span class="kw">name:</span> office-drm
 <span class="kw">description:</span> <span class="st">사내 엑셀/PPT/워드 파일을 읽거나
-  수정할 때의 필수 규칙. Office 문서 작업 전 반드시 참조.</span>
+  수정할 때의 필수 규칙. Office 문서 작업 전 참조.</span>
 
 ## 철칙
-- 기존 .xlsx: <b>xlwings 또는 win32com만</b> 사용.
-  pandas.read_excel / openpyxl로 직접 열기 <span class="nm">금지</span> (DRM 파손)
-- 기존 .pptx/.docx: <b>win32com만</b> 사용
+- 기존 .xlsx: <b>xlwings 또는 win32com만</b>.
+  pandas.read_excel / openpyxl로 열기 <span class="nm">금지</span>
+- 기존 .pptx/.docx: <b>win32com만</b>
 - 새 파일 생성: 라이브러리 자유
-- 작업 후 반드시 앱 종료(quit)로 잠금 해제</pre>
+- 작업 후 반드시 앱 종료(quit) — 잠금 해제
+- DRM 해제·변환 시도 <span class="nm">금지</span></pre>
           <div class="stack" style="gap:.8rem;">
-            <div class="card good autoshow fade-right">
+            <div class="card good autoshow fade-up">
               <h3>💡 무엇이 좋아지나</h3>
-              <p>이제 누가 어떤 요청을 하든 — "수율 엑셀 정리해줘" — AI가 <b>알아서 xlwings 경로</b>를 탑니다. 실패-재시도 없이, 팀원 모두 동일하게.</p>
+              <p>누가 "수율 엑셀 정리해줘"라고 하든 AI가 <b>처음부터 xlwings 경로</b>를 탑니다. 실패 후 재시도가 없습니다.</p>
             </div>
-            <div class="card autoshow fade-right">
-              <h3>🧬 조직 지식의 승격</h3>
-              <p>"그거 pandas로 열면 안 돼요" — 회식 자리에서 구전되던 부족 지식이 <em>버전 관리되는 문서</em>가 됩니다.</p>
+            <div class="card autoshow fade-up">
+              <h3>🧬 말로 돌던 지식이 문서로</h3>
+              <p>"그거 pandas로 열면 안 돼요" — 선배에게 듣던 요령이 <em>버전 관리되는 파일</em>이 됩니다.</p>
             </div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        오늘 배포하는 skills/ 폴더에 이 office-drm 스킬 완성본이 들어 있음.
-        다른 모든 예제 스킬이 이 스킬을 참조하는 구조.
+        skills/ 폴더에 office-drm 완성본이 있습니다. 다른 예제 스킬들이 모두 이 스킬을 참조합니다.
+        CLAUDE.md에는 "사내 Office 파일은 office-drm 스킬을 따른다" 한 줄만 두면 됩니다.
       </aside>
     </section>
 
-    <!-- ============= 14. 예제 지도 ============= -->
+    <!-- ============= 예제 지도 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">FIELD EXAMPLES</div>
-        <h2>오늘의 <span class="grad">실무 예제 7종</span> 지도</h2>
+        <h2>반도체 실무 예제 7종 — <span class="grad">완성본이 저장소에</span> 있습니다</h2>
         <div class="ex-grid" style="margin-top:.9rem;">
-          <div class="ex-card autoshow zoom-in"><span class="ic">📈</span><h3>1. 측정 CSV 리포트</h3><p>표준화된 CSV → 일일 수율/트렌드 리포트</p><span class="lib">pandas · 자유</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">🔒</span><h3>2. DRM 엑셀 요약</h3><p>수율 관리 대장 읽고 요약·기입</p><span class="lib">xlwings</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">🖼️</span><h3>3. 주간보고 PPT</h3><p>지난주 장표 복제 + 표/차트 갱신</p><span class="lib">win32com</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">📄</span><h3>4. Word 사양서</h3><p>변경점 반영 + 개정 이력 추가</p><span class="lib">win32com</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">🧩</span><h3>5. GDS 레이아웃 검사</h3><p>셀·레이어 통계, 밀도, 간단 룰 체크</p><span class="lib">klayout</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">⚡</span><h3>6. RTL / Verilog</h3><p>모듈 포트 요약, 테스트벤치 생성</p><span class="lib">텍스트 · iverilog</span></div>
-          <div class="ex-card autoshow zoom-in"><span class="ic">🧪</span><h3>7. TCAD 스윕</h3><p>입력덱 파라미터 스윕 + I-V 곡선 추출</p><span class="lib">텍스트 덱 · CSV</span></div>
-          <div class="ex-card autoshow zoom-in" style="border-style:dashed;"><span class="ic">➕</span><h3>8. 여러분의 업무</h3><p>오늘 실습 시간에 직접 만듭니다</p><span class="lib">skill-creator</span></div>
+          <div class="ex-card"><span class="ic">📈</span><h3>1. 측정 CSV 리포트</h3><p>표준 CSV → 일일 수율·트렌드 리포트</p><span class="lib">pandas · 자유</span></div>
+          <div class="ex-card"><span class="ic">🔒</span><h3>2. DRM 엑셀 대장</h3><p>수율 관리 대장 읽고 기입</p><span class="lib">xlwings</span></div>
+          <div class="ex-card"><span class="ic">🖼️</span><h3>3. 주간보고 PPT</h3><p>지난주 장표 복제 + 표·차트 갱신</p><span class="lib">win32com</span></div>
+          <div class="ex-card"><span class="ic">📄</span><h3>4. Word 사양서</h3><p>변경점 반영 + 개정 이력 추가</p><span class="lib">win32com</span></div>
+          <div class="ex-card"><span class="ic">🧩</span><h3>5. GDS 레이아웃 검사</h3><p>셀·레이어 통계, 밀도, 간단 룰 체크</p><span class="lib">klayout</span></div>
+          <div class="ex-card"><span class="ic">⚡</span><h3>6. RTL / Verilog</h3><p>포트 요약, 테스트벤치 초안</p><span class="lib">텍스트 · iverilog</span></div>
+          <div class="ex-card"><span class="ic">🧪</span><h3>7. TCAD 스윕</h3><p>입력덱 스윕 + I-V 추출</p><span class="lib">텍스트 덱 · CSV</span></div>
+          <div class="ex-card" style="border-style:dashed;"><span class="ic">➕</span><h3>8. 여러분의 업무</h3><p>실습 시간에 직접 만듭니다</p><span class="lib">skill-creator</span></div>
         </div>
-        <p class="small center" style="margin-top:1rem; color:#B8BFD0 !important;">모든 예제 스킬은 세미나 저장소 <span class="mono accent2">agent-skills/skills/</span> 폴더에 완성본으로 제공됩니다.</p>
+        <p class="small center" style="margin-top:1rem; color:#B8BFD0 !important;">모든 예제는 <a href="https://github.com/geniuskey/vibe-coding/tree/main/agent-skills/skills">agent-skills/skills/</a> 폴더에 완성본으로 들어 있습니다. 값·경로는 연습용 가상 값입니다.</p>
       </div>
       <aside class="notes">
-        각 예제 = 시나리오 1장 + 데모 1장 페이스. 시간 부족하면 4번(Word)과 7번 데모는 건너뛸 수 있게 설계.
+        핵심 모드에서는 1·2·3·5번만 보입니다. 청중에 맞춰 고릅니다 — 설계팀이면 6번, 소자팀이면 7번을 펼칩니다.
+        각 예제에서 볼 것은 코드가 아니라 "어떤 규칙과 함정이 문장으로 적혀 있나"입니다.
       </aside>
     </section>
 
-    <!-- ============= 15. 예제1: CSV 리포트 — 스킬 ============= -->
+    <!-- ============= 예제1: CSV 리포트 ============= -->
     <section>
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 1</span><h2>표준 측정 CSV → 일일 리포트</h2><span class="pill green">새 파일 생성 = 라이브러리 자유</span></div>
+        <div class="ex-head"><span class="ex-num">예제 1</span><h2>측정 CSV 리포트 — 검산까지 스킬에</h2><span class="pill green">새 파일 = 라이브러리 자유</span></div>
         <div class="grid-2" style="align-items:start;">
           <div>
-            <p class="small" style="margin:0 0 .7rem;">설비들이 뱉는 <b>표준 포맷 CSV</b>(랏, 웨이퍼, 두께, 균일도&hellip;)를 병합해 스펙 판정 + 트렌드 차트가 담긴 HTML 리포트를 만듭니다.</p>
+            <p class="small" style="margin:0 0 .7rem;">설비가 내보내는 <b>표준 포맷 CSV</b>(랏, 웨이퍼, 두께, 균일도…)를 병합해 스펙 판정 + 트렌드 차트를 담은 HTML 리포트를 만듭니다.</p>
             <pre class="code" style="font-size:.92rem;"><span class="cm"># csv-report/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">표준 측정 CSV 병합→일일 리포트.
   "측정 리포트", "CSV 취합", "수율 정리" 시 사용</span>
@@ -1218,162 +1369,146 @@ THK는 Å 단위, CVD 스펙 450±30 / Etch 1200±80으로 판정하고,
 - 병합 행수 = 파일별 행수 합 (다르면 중단·보고)</pre>
           </div>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>👀 여기서 볼 것</h3><p>규칙("헤더 3줄", "대문자")이 코드가 아니라 <b>한국어 문장</b>으로 들어있다는 점.</p></div>
-            <div class="card good autoshow fade-right"><h3>✅ 검증 절차 내장</h3><p>행수 검산이 스킬에 있으므로 AI가 <b>스스로 이상을 감지</b>하고 멈춥니다 — "조용히 틀리는" 자동화 방지.</p></div>
+            <div class="card autoshow fade-up"><h3>👀 여기서 볼 것</h3><p>"헤더 3줄", "대문자" 같은 규칙이 코드가 아니라 <b>한국어 문장</b>으로 들어 있습니다.</p></div>
+            <div class="card good autoshow fade-up"><h3>✅ 조용히 틀리지 않는다</h3><p>행수 검산이 스킬에 있어서 AI가 <b>스스로 이상을 잡고 멈춥니다</b>.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        표준화된 CSV라는 전제가 중요: 포맷이 표준이면 스킬은 극도로 안정적.
-        포맷이 들쭉날쭉하면? → "포맷 정규화"가 스킬의 1단계가 되면 된다.
+        포맷이 표준이면 스킬은 매우 안정적입니다. 포맷이 들쭉날쭉하면 "포맷 정규화"를 스킬의 1단계로 넣으면 됩니다.
+        실습 미션 1·2가 바로 이 스킬입니다.
       </aside>
     </section>
 
-    <!-- ============= 16. 예제1: 데모 ============= -->
+    <!-- ============= 예제1: 데모 ============= -->
     <section>
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 1</span><h2>실행 모습</h2><span class="pill">▶ 자동 재생 · REPLAY 가능</span></div>
+        <div class="ex-head"><span class="ex-num">예제 1</span><h2>요청은 한 줄, 검산 로그는 자동으로</h2><span class="pill">▶ 자동 재생</span></div>
         <div class="demo-term" data-demo="csv" style="height:520px;">
-          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — 일일 측정 리포트</span><button class="dt-replay">↻ REPLAY</button></div>
+          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — 일일 측정 리포트</span><button class="dt-replay">↻ 다시 재생</button></div>
           <div class="dt-body"></div>
         </div>
       </div>
       <aside class="notes">
-        시연 포인트 3개: ① 요청은 한 줄 ② 스킬이 자동 발동(이름표 매칭) ③ 검증 로그(행수 검산)까지 출력.
-        실제 발표에서는 라이브 데모로 대체 가능 — 이 화면은 백업.
+        볼 것 세 가지: ① 요청은 한 줄 ② 이름표가 맞아 스킬이 불림 ③ 행수 검산 로그까지 출력.
+        실제 발표에서는 라이브 데모로 바꿔도 됩니다 — 이 화면은 백업입니다.
       </aside>
     </section>
 
-    <!-- ============= 17. 예제2: DRM 엑셀 — 스킬 ============= -->
+    <!-- ============= 예제2: DRM 엑셀 ============= -->
     <section>
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 2</span><h2>DRM 엑셀 수율 대장 요약</h2><span class="pill pink">기존 파일 = xlwings 필수</span></div>
+        <div class="ex-head"><span class="ex-num">예제 2</span><h2>DRM 엑셀 — pandas는 깨지고 xlwings는 열린다</h2><span class="pill pink">기존 파일 = xlwings</span></div>
         <div class="grid-2" style="align-items:start;">
-          <pre class="code bad autoshow fade-left" style="font-size:.95rem;"><span class="cm"># ❌ 스킬이 없을 때 AI가 저지르는 실수</span>
+          <pre class="code bad autoshow fade-up" style="font-size:.95rem;"><span class="cm"># ❌ 스킬이 없을 때 AI가 하는 실수</span>
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 df = pd.read_excel(<span class="st">"수율대장.xlsx"</span>)
-<span class="nm">→ XLRDError / 깨진 바이트: DRM 암호문을
+<span class="nm">→ 에러 또는 깨진 값: DRM 암호문을
   직접 읽으려다 실패</span></pre>
-          <pre class="code good autoshow fade-right" style="font-size:.95rem;"><span class="cm"># ✅ drm-excel 스킬이 시키는 방법</span>
+          <pre class="code good autoshow fade-up" style="font-size:.95rem;"><span class="cm"># ✅ drm-excel 스킬이 시키는 방법</span>
 <span class="kw">import</span> xlwings <span class="kw">as</span> xw
 app = xw.App(visible=<span class="kw">False</span>)
-wb = app.books.open(<span class="st">r"수율대장.xlsx"</span>)  <span class="cm"># Excel이 DRM 해독</span>
+wb = app.books.open(<span class="st">r"수율대장.xlsx"</span>)  <span class="cm"># Excel이 해독</span>
 data = wb.sheets[<span class="st">"주간"</span>].range(<span class="st">"A1"</span>).expand().value
 ...
-wb.save(); wb.close(); app.quit()  <span class="cm"># 잠금 해제 필수</span></pre>
+wb.save(); wb.close(); app.quit()  <span class="cm"># 잠금 해제</span></pre>
         </div>
         <pre class="code autoshow fade-up" style="font-size:.92rem; margin-top:.8rem;"><span class="cm"># drm-excel/SKILL.md 핵심 규칙 (발췌)</span>
-- 기존 사내 xlsx는 <b>반드시 xlwings(또는 win32com)로 Excel 앱을 경유</b>해 연다
-- visible=False로 조용히, 단 <b>끝나면 반드시 quit()</b> — 안 하면 파일이 잠긴 채 남는다
-- 대량 셀은 range().expand().value로 한 번에 (셀 하나씩 루프 금지 — 100배 느림)
-- 저장 전 원본 백업 사본 생성, 수정한 셀 주소를 로그로 남긴다</pre>
+- 기존 사내 xlsx는 <b>xlwings(또는 win32com)로 Excel 앱을 거쳐</b> 연다
+- 끝나면 <b>반드시 quit()</b> — 안 하면 파일이 잠긴 채 남는다
+- 셀은 range().expand().value로 한 번에 (한 칸씩 루프 금지 — 매우 느림)
+- 저장 전 백업 사본, 수정한 셀 주소를 로그로 남긴다</pre>
       </div>
       <aside class="notes">
-        왼쪽 실패 사례를 먼저 — 스킬 없는 AI는 누구나 pandas부터 시도한다.
-        quit() 규칙: 현업에서 진짜 자주 나는 사고(잠긴 엑셀). 이런 게 "함정 기록"의 가치.
-        win32com 직접 쓰는 버전도 skills 폴더에 주석으로 포함.
+        왼쪽 실패 사례를 먼저 보여 줍니다 — 스킬 없는 AI는 거의 언제나 pandas부터 시도합니다.
+        quit() 규칙: 현업에서 실제로 자주 나는 사고(잠긴 엑셀)입니다. 이런 게 "함정 기록"의 가치입니다.
       </aside>
     </section>
 
-    <!-- ============= 18. 예제2: 데모 ============= -->
+    <!-- ============= 예제2: 데모 ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 2</span><h2>실행 모습</h2><span class="pill">▶ 자동 재생</span></div>
+        <div class="ex-head"><span class="ex-num">예제 2</span><h2>백업 → 기입 → quit()까지 스킬이 챙긴다</h2><span class="pill">▶ 자동 재생</span></div>
         <div class="demo-term" data-demo="xl" style="height:520px;">
-          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — DRM 엑셀 요약</span><button class="dt-replay">↻ REPLAY</button></div>
+          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — DRM 엑셀 대장</span><button class="dt-replay">↻ 다시 재생</button></div>
           <div class="dt-body"></div>
         </div>
       </div>
       <aside class="notes">
-        주목: AI가 먼저 office-drm/drm-excel 스킬을 로드하고 나서 코드를 쓴다는 순서.
-        백업 사본 만들고 시작하는 것도 스킬 규칙의 실행 결과.
+        AI가 office-drm·drm-excel 스킬을 먼저 불러온 뒤 코드를 쓰는 순서에 주목합니다.
+        백업 사본을 만들고 시작하는 것도, 마지막에 수정 셀 목록을 남기는 것도 스킬 규칙의 결과입니다.
       </aside>
     </section>
 
-    <!-- ============= 19. 예제3: 주간보고 PPT ============= -->
+    <!-- ============= 예제3: 주간보고 PPT ============= -->
     <section>
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 3</span><h2>주간보고 PPT 자동 갱신</h2><span class="pill pink">기존 파일 = win32com</span></div>
+        <div class="ex-head"><span class="ex-num">예제 3</span><h2>주간보고 PPT — 지난주 파일에 값만 바꾼다</h2><span class="pill pink">기존 파일 = win32com</span></div>
         <div class="grid-2" style="align-items:start;">
           <div>
-            <p class="small" style="margin:0 0 .7rem;">매주 하는 그 일: 지난주 파일 복사 → 날짜 바꾸고 → 표 숫자 갱신 → 차트 데이터 교체. <b>포맷은 그대로, 내용만 이번 주</b>.</p>
+            <p class="small" style="margin:0 0 .7rem;">지난주 파일 복사 → 날짜 바꾸기 → 표 숫자 갱신 → 차트 데이터 교체. <b>양식은 그대로, 내용만 이번 주</b>.</p>
             <pre class="code" style="font-size:.9rem;"><span class="cm"># weekly-ppt/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">주간보고 PPT 갱신. "주간보고",
-  "위클리 장표" 요청 시. 기존 pptx는 win32com만!</span>
+  "위클리 장표" 요청 시. 기존 pptx는 win32com만</span>
 
 ## 절차
-1. 지난주 파일을 이번 주 파일명으로 <b>복사</b> (원본 불변)
-2. win32com으로 PowerPoint 열기:
-   Dispatch("PowerPoint.Application")
-3. 슬라이드 2 제목의 날짜 갱신 (W29 → W30)
-4. 슬라이드 3 표: report_*.html의 주간 집계로 교체
-5. 슬라이드 4 차트: ChartData.Workbook 값 갱신
-   (차트 내장 엑셀도 <b>COM 경유</b>로!)
+1. 지난주 파일을 이번 주 이름으로 <b>복사</b> (원본 불변)
+2. win32com으로 PowerPoint 열기
+3. 슬라이드 2 제목의 주차 갱신 (W29 → W30)
+4. 슬라이드 3 표: 이번 주 집계로 교체
+5. 슬라이드 4 차트: 내장 엑셀도 <b>COM으로</b> 갱신
 ## 검증
-- 갱신 후 표 합계 = 소스 CSV 집계와 일치 확인</pre>
+- 표 합계 = 원본 CSV 집계와 일치 확인</pre>
           </div>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>🧷 템플릿 = 지난주 파일</h3><p>디자인을 코드로 다시 만들지 않습니다. <b>복사 후 값만 교체</b> — 팀 포맷이 100% 보존됩니다.</p></div>
-            <div class="card autoshow fade-right"><h3>🪆 함정: 차트 속의 엑셀</h3><p>PPT 차트 안에는 미니 엑셀이 숨어 있습니다. 이것도 파일 직접 파싱이 아닌 <span class="mono accent2">COM 경유</span>로 — 이런 디테일이 스킬에 적혀 있어야 하는 이유.</p></div>
+            <div class="card autoshow fade-up"><h3>🧷 템플릿 = 지난주 파일</h3><p>디자인을 코드로 다시 만들지 않습니다. <b>복사 후 값만 교체</b>하니 팀 양식이 그대로 남습니다.</p></div>
+            <div class="card autoshow fade-up"><h3>🪆 함정: 차트 속의 엑셀</h3><p>PPT 차트 안에는 작은 엑셀이 숨어 있습니다. 이것도 <span class="mono accent2">COM</span>으로 — 이런 디테일이 스킬에 적혀 있어야 합니다.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        "복사 후 교체" 패턴은 Word에도 동일 적용.
-        python-pptx는 새 PPT를 만들 때만(생성은 자유), 기존 사내 PPT는 win32com.
+        "복사 후 교체" 패턴은 Word에도 똑같이 쓰입니다.
+        python-pptx는 새 PPT를 만들 때만, 기존 사내 PPT는 win32com. 마지막 눈 검수는 반드시 사람이 합니다.
       </aside>
     </section>
 
-    <!-- ============= 20. 예제3: 데모 ============= -->
+    <!-- ============= 예제4: Word 사양서 ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 3</span><h2>실행 모습</h2><span class="pill">▶ 자동 재생</span></div>
-        <div class="demo-term" data-demo="ppt" style="height:520px;">
-          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — 주간보고 W30</span><button class="dt-replay">↻ REPLAY</button></div>
-          <div class="dt-body"></div>
-        </div>
-      </div>
-      <aside class="notes">
-        45분짜리 일이 대화 한 턴. 단, 마지막 눈검수(사람)는 반드시 — 뒤의 '주의사항'에서 다시 강조.
-      </aside>
-    </section>
-
-    <!-- ============= 21. 예제4: Word 사양서 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 4</span><h2>Word 공정 사양서 개정</h2><span class="pill pink">기존 파일 = win32com</span></div>
+        <div class="ex-head"><span class="ex-num">예제 4</span><h2>Word 사양서 — 저장 전에 사람 승인</h2><span class="pill pink">기존 파일 = win32com</span></div>
         <div class="grid-2" style="align-items:start;">
-          <pre class="code autoshow fade-left" style="font-size:.92rem;"><span class="cm"># spec-doc/SKILL.md (발췌)</span>
+          <pre class="code autoshow fade-up" style="font-size:.92rem;"><span class="cm"># spec-doc/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">공정 사양서(.docx) 개정.
   "사양서 업데이트", "스펙 문서 반영" 시 사용</span>
 
 ## 절차
 1. 원본 복사 → _revN 파일로 작업 (원본 보존)
-2. win32com: Dispatch(<span class="st">"Word.Application"</span>)
-3. 변경 파라미터를 표에서 찾아 값 교체
-   — <b>Find/Replace가 아니라 표 좌표로</b> (오치환 방지)
+2. win32com으로 Word 열기
+3. 바꿀 파라미터를 표에서 찾아 값 교체
+   — <b>찾아 바꾸기가 아니라 표 위치로</b> (오치환 방지)
 4. '개정 이력' 표에 행 추가: 날짜/항목/사유/작성자
-5. 변경된 문장은 <b>강조 표시</b> 남기기 (검토자용)
+5. 바뀐 문장은 <b>강조 표시</b> (검토자용)
 ## 검증
-- 바뀐 곳 목록을 채팅으로 보고 → 사람이 승인 후 저장</pre>
+- 바뀐 곳 목록을 보고 → 사람이 승인한 뒤 저장</pre>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>📌 문서 규정과 자동화의 공존</h3><p>개정 이력, 강조 표시, 승인 후 저장 — 팀의 <b>문서 관리 규정 자체</b>가 스킬 절차에 들어갑니다.</p></div>
-            <div class="card good autoshow fade-right"><h3>🤝 사람이 마지막 관문</h3><p>"보고 → 승인 → 저장" 순서를 스킬에 명시하면, AI가 <em>승인을 묻고 나서 저장하는 절차</em>가 고정됩니다. 스킬은 지시일 뿐이라, 확실히 막으려면 Manual 모드나 거부 규칙까지 겹치세요.</p></div>
+            <div class="card autoshow fade-up"><h3>📌 문서 규정이 곧 절차</h3><p>개정 이력, 강조 표시, 승인 후 저장 — 팀의 <b>문서 관리 규정</b>이 그대로 스킬 절차가 됩니다.</p></div>
+            <div class="card good autoshow fade-up"><h3>🤝 사람이 마지막 관문</h3><p>"보고 → 승인 → 저장"을 적어 두면 AI가 묻고 나서 저장합니다. 스킬은 지시일 뿐이니, 확실히 막으려면 <a href="../setup/">권한 설정</a>도 함께.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        시간 조절용 슬라이드(데모 생략 가능). 핵심 전달: 절차 안에 "사람 승인" 게이트를 넣을 수 있다.
+        시간 조절용 장입니다. 핵심: 절차 안에 "사람 승인" 관문을 넣을 수 있다.
+        단, 스킬은 강제 장치가 아니라 지시문입니다. 반드시 막아야 하는 동작은 권한 설정으로 겹쳐 막습니다.
       </aside>
     </section>
 
-    <!-- ============= 22. 예제5: GDS — 스킬 ============= -->
+    <!-- ============= 예제5: GDS ============= -->
     <section>
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 5</span><h2>GDS 레이아웃 검사</h2><span class="pill amber">.gds = KLayout</span></div>
+        <div class="ex-head"><span class="ex-num">예제 5</span><h2>GDS 검사 — 단위 함정을 적어 둔다</h2><span class="pill amber">.gds = KLayout</span></div>
         <div class="grid-2" style="align-items:start;">
           <div>
-            <p class="small" style="margin:0 0 .7rem;">레이아웃 <span class="mono">.gds</span>는 엑셀로도 메모장으로도 못 엽니다. 표준 오픈소스 <b>KLayout</b>의 파이썬 모듈(<span class="mono">pya</span>)이 정답.</p>
+            <p class="small" style="margin:0 0 .7rem;">레이아웃 <span class="mono">.gds</span>는 엑셀로도 메모장으로도 못 엽니다. 오픈소스 <b>KLayout</b>의 파이썬 모듈이 정답입니다.</p>
             <pre class="code" style="font-size:.9rem;"><span class="cm"># gds-inspect/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">GDS/OASIS 레이아웃 검사·통계.
   "GDS 열어줘", "레이어 면적", "밀도 체크" 시 사용</span>
@@ -1381,29 +1516,28 @@ wb.save(); wb.close(); app.quit()  <span class="cm"># 잠금 해제 필수</span
 ## 절차 (pip install klayout)
 <span class="kw">import</span> klayout.db <span class="kw">as</span> db
 ly = db.Layout(); ly.read(<span class="st">"chip.gds"</span>)
-- 셀 트리·인스턴스 수 요약 (top_cell부터)
+- 셀 트리·인스턴스 수 요약 (top cell부터)
 - 레이어별 도형 수·면적 → 표로
-- 밀도 체크: Region으로 면적/윈도우 계산
-- 좌표 단위는 <b>dbu</b>! ly.dbu 곱해 µm 변환 필수
+- 좌표 단위는 <b>dbu</b>! ly.dbu를 곱해 µm로 변환
 ## 금지
 - GDS 바이너리를 직접 파싱하는 코드 작성 금지</pre>
           </div>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>🎯 현업 활용처</h3><p>테스트 패턴 면적 집계, 레이어 커버리지 리포트, 룰 위반 후보 스크리닝, 리비전 간 <b>레이아웃 diff</b>.</p></div>
-            <div class="card autoshow fade-right"><h3>⚠️ 함정: dbu 단위</h3><p>KLayout 좌표는 정수 dbu(보통 1nm). µm로 착각하면 <b>천 배</b> 틀립니다 — 이런 함정이야말로 스킬에 적을 1순위.</p></div>
+            <div class="card autoshow fade-up"><h3>🎯 현업 활용처</h3><p>테스트 패턴 면적 집계, 레이어 커버리지 리포트, 룰 위반 후보 거르기, 리비전 간 <b>레이아웃 비교</b>.</p></div>
+            <div class="card autoshow fade-up"><h3>⚠️ 함정: dbu 단위</h3><p>KLayout 좌표는 정수 dbu(흔히 1nm). µm로 착각하면 <b>천 배</b> 틀립니다 — 스킬에 적을 1순위.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        본격 DRC/LVS는 전용 툴 영역 — 스킬의 역할은 "가벼운 검사·통계·리포트 자동화".
-        다음 장에서 GDS가 어떻게 생겼는지 직접 만져보기.
+        본격 DRC/LVS는 전용 EDA 툴의 영역입니다. 스킬의 역할은 가벼운 검사·통계·리포트 자동화.
+        다음 장(전체 보기)에서 GDS가 어떻게 생겼는지 직접 만져 봅니다.
       </aside>
     </section>
 
-    <!-- ============= 23. 예제5: GDS 뷰어 (인터랙티브) ============= -->
+    <!-- ============= 예제5: GDS 뷰어 (인터랙티브) ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 5</span><h2>GDS는 이렇게 생겼습니다</h2><span class="pill">🖱️ 레이어를 켜고 꺼 보세요</span></div>
+        <div class="ex-head"><span class="ex-num">예제 5</span><h2>GDS는 레이어별 도형의 묶음입니다</h2><span class="pill">🖱️ 레이어를 켜고 꺼 보세요</span></div>
         <div class="gds-wrap">
           <canvas id="gds-canvas" width="760" height="480" aria-label="간단한 인버터 레이아웃 미니 뷰어"></canvas>
           <div class="gds-side" id="gds-layers">
@@ -1412,194 +1546,190 @@ ly = db.Layout(); ly.read(<span class="st">"chip.gds"</span>)
             <label class="gds-layer" data-l="2"><input type="checkbox" checked /><span class="sw2" style="background:#FF5F57;"></span>Poly (3/0)</label>
             <label class="gds-layer" data-l="3"><input type="checkbox" checked /><span class="sw2" style="background:#FFD46B;"></span>Contact (4/0)</label>
             <label class="gds-layer" data-l="4"><input type="checkbox" checked /><span class="sw2" style="background:#B5A1FF;"></span>Metal-1 (5/0)</label>
-            <div class="gds-readout" id="gds-readout">커서를 도형 위에 올리면<br/>레이어·좌표(µm)가 표시됩니다</div>
+            <div class="gds-readout" id="gds-readout">커서를 도형 위에 올리면<br/>레이어·좌표(µm)가 보입니다</div>
           </div>
         </div>
-        <p class="tiny" style="margin-top:.7rem; color:#9BA6C0 !important;">※ CMOS 인버터의 단순화 레이아웃 — 레이어 번호(layer/datatype) 체계로 도형이 쌓인 파일이 GDS입니다. 스킬은 이 도형들을 숫자(면적·수·밀도)로 바꿔 줍니다.</p>
+        <p class="tiny" style="margin-top:.7rem; color:#9BA6C0 !important;">※ CMOS 인버터를 단순화한 그림 — 레이어 번호(layer/datatype)별로 도형이 쌓인 파일이 GDS입니다. 스킬은 이 도형들을 숫자(면적·개수·밀도)로 바꿔 줍니다.</p>
       </div>
       <aside class="notes">
-        레이어 토글로 "GDS = 레이어별 도형 더미"라는 개념을 몸으로 이해시키기.
-        Poly∩Active = 트랜지스터 게이트라는 것도 여기서 짚기 (M1 끄고 보여주면 잘 보임).
+        레이어를 꺼 가며 "GDS = 레이어별 도형 더미"를 몸으로 이해시킵니다.
+        Poly와 Active가 겹친 곳이 트랜지스터 게이트입니다 — Metal-1을 끄면 잘 보입니다.
       </aside>
     </section>
 
-    <!-- ============= 24. 예제6: RTL/Verilog ============= -->
+    <!-- ============= 예제6: RTL ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 6</span><h2>RTL / Verilog 도우미</h2><span class="pill green">텍스트 = 제약 없음</span></div>
+        <div class="ex-head"><span class="ex-num">예제 6</span><h2>RTL 도우미 — 하지 말 일도 적는다</h2><span class="pill green">텍스트 = 제약 없음</span></div>
         <div class="grid-2" style="align-items:start;">
-          <pre class="code autoshow fade-left" style="font-size:.9rem;"><span class="cm"># rtl-helper/SKILL.md (발췌)</span>
+          <pre class="code autoshow fade-up" style="font-size:.9rem;"><span class="cm"># rtl-helper/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">Verilog RTL 분석·문서화·TB 생성.
   "포트 요약", "테스트벤치 만들어줘", "린트" 시 사용</span>
 
 ## 할 수 있는 일
 1. 모듈 포트/파라미터 표 추출 → 설계 문서용
 2. 셀프체킹 <b>테스트벤치 뼈대</b> 생성
-   - clk/rst 생성, 시나리오 주석 슬롯
+   - clk/rst 생성, 시나리오 주석 자리
 3. 사내 코딩룰 체크: references/lint_rules.md
    - <span class="nm">latch 추론 금지</span>, always @(*) 누락, 폭 불일치
 ## 검증
-- iverilog 있으면 컴파일까지 돌려 문법 확인
-- <b>합성/타이밍 판단은 하지 않는다</b> — EDA 툴 영역</pre>
+- iverilog가 있으면 컴파일까지 돌려 문법 확인
+- <b>합성·타이밍 판단은 하지 않는다</b> — EDA 툴 영역</pre>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>📋 포트 요약 → 문서 자동화</h3><p>수백 줄 RTL에서 포트 표를 뽑아 <b>사양서(예제 4)와 연결</b> — 스킬은 서로 조합됩니다.</p></div>
-            <div class="card autoshow fade-right"><h3>🧪 TB 초안 3분</h3><p>제일 귀찮은 클럭/리셋/파형덤프 보일러플레이트를 AI가. <em>시나리오 설계는 여전히 엔지니어의 일.</em></p></div>
-            <div class="card good autoshow fade-right"><h3>🚧 선 긋기도 스킬에</h3><p>"타이밍 판단 금지" — AI가 <b>하지 말아야 할 일</b>도 매뉴얼에 적습니다.</p></div>
+            <div class="card autoshow fade-up"><h3>📋 포트 요약 → 문서</h3><p>수백 줄 RTL에서 포트 표를 뽑아 <b>사양서(예제 4)</b>로 — 스킬은 서로 이어 쓸 수 있습니다.</p></div>
+            <div class="card autoshow fade-up"><h3>🧪 TB 초안은 AI가</h3><p>귀찮은 클럭·리셋·파형 덤프 뼈대는 AI가. <em>시나리오 설계는 여전히 엔지니어의 일.</em></p></div>
+            <div class="card good autoshow fade-up"><h3>🚧 선 긋기도 스킬에</h3><p>"타이밍 판단 금지" — AI가 <b>하지 말아야 할 일</b>도 매뉴얼에 적습니다.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        설계팀 청중용. RTL은 그냥 텍스트라 DRM 이슈 없음 — 대신 "AI 판단의 한계선"을 스킬에 명시하는 사례로 사용.
+        설계팀용 예제. RTL은 그냥 텍스트라 DRM 문제가 없습니다. 대신 "AI 판단의 한계선"을 스킬에 적는 사례로 씁니다.
+        sample_data/spi_master.v로 직접 돌려 볼 수 있습니다.
       </aside>
     </section>
 
-    <!-- ============= 25. 예제6: 데모 ============= -->
+    <!-- ============= 예제7: TCAD ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 6</span><h2>실행 모습</h2><span class="pill">▶ 자동 재생</span></div>
-        <div class="demo-term" data-demo="rtl" style="height:520px;">
-          <div class="dt-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="dt-title">Claude Code — spi_master.v</span><button class="dt-replay">↻ REPLAY</button></div>
-          <div class="dt-body"></div>
-        </div>
-      </div>
-      <aside class="notes">
-        포트 표 → TB 생성 → iverilog 문법 체크까지 한 흐름. 사내 룰 위반(폭 불일치) 감지 장면 포함.
-      </aside>
-    </section>
-
-    <!-- ============= 26. 예제7: TCAD — 스킬 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 7</span><h2>TCAD 시뮬레이션 스윕</h2><span class="pill green">입력덱 = 텍스트</span></div>
+        <div class="ex-head"><span class="ex-num">예제 7</span><h2>TCAD 스윕 — 앞뒤 손일을 맡긴다</h2><span class="pill green">입력덱 = 텍스트</span></div>
         <div class="flow autoshow fade-up" style="margin-top:.4rem;">
           <div class="fstep"><span class="ic">📝</span><b>템플릿 덱</b><small>기준 입력덱에 {tox}, {nd} 자리표시</small></div>
           <span class="farr">▶</span>
-          <div class="fstep"><span class="ic">🔁</span><b>스윕 생성</b><small>조건표(CSV)대로 덱 N개 생성·실행 큐잉</small></div>
+          <div class="fstep"><span class="ic">🔁</span><b>스윕 생성</b><small>조건표(CSV)대로 덱 N개 생성</small></div>
           <span class="farr">▶</span>
-          <div class="fstep"><span class="ic">📤</span><b>결과 수확</b><small>로그·출력에서 I-V 추출 → 표준 CSV</small></div>
+          <div class="fstep"><span class="ic">📤</span><b>결과 수확</b><small>출력에서 I-V 추출 → 표준 CSV</small></div>
           <span class="farr">▶</span>
-          <div class="fstep"><span class="ic">📊</span><b>비교 리포트</b><small>Vth/SS 요약표 + 곡선 겹쳐 그리기</small></div>
+          <div class="fstep"><span class="ic">📊</span><b>비교 리포트</b><small>Vth·SS 요약표 + 곡선 겹쳐 그리기</small></div>
         </div>
         <pre class="code autoshow fade-up" style="font-size:.9rem; margin-top:.9rem;"><span class="cm"># tcad-sweep/SKILL.md (발췌)</span>
 <span class="kw">description:</span> <span class="st">TCAD 입력덱 파라미터 스윕 생성과 결과(I-V) 추출·요약. "스플릿 돌려줘", "Vth 뽑아줘" 시 사용</span>
 ## 규칙
-- 입력덱은 텍스트 — 템플릿 복사 후 자리표시자만 치환 (물리 모델 라인은 절대 수정 금지)
-- 스윕 조건은 sweep_plan.csv 한 곳에서만 관리 · 결과 파일명 = 조건 조합 (tox12_nd5e17.csv)
+- 템플릿 복사 후 자리표시자만 치환 (물리 모델 줄은 <span class="nm">수정 금지</span>)
+- 스윕 조건은 sweep_plan.csv 한 곳에서만 · 결과 파일명 = 조건 조합 (tox12_nd5e17.csv)
 - Vth 추출법은 정전류법(Id=100nA×W/L)으로 <b>통일</b> — 사람마다 다르면 비교 불가
-- 시뮬레이터 라이선스/큐 제출 명령은 references/cluster.md 참조</pre>
-        <p class="small autoshow fade-up" style="margin-top:.7rem; color:#B8BFD0 !important;">시뮬레이터 자체(Sentaurus 등)는 그대로 — 스킬이 자동화하는 건 <em>그 앞뒤의 덱 생성과 결과 정리</em>입니다.</p>
+- 라이선스·큐 제출 명령은 references/cluster.md 참조</pre>
+        <p class="small autoshow fade-up" style="margin-top:.7rem; color:#B8BFD0 !important;">시뮬레이터는 그대로 씁니다. 스킬이 맡는 건 <em>그 앞뒤의 덱 생성과 결과 정리</em>입니다.</p>
       </div>
       <aside class="notes">
-        "Vth 추출법 통일" — 분석 방법의 표준화가 스킬의 숨은 가치. 조직 데이터의 비교 가능성.
-        다음 장: 그 결과물이 어떤 그림이 되는지.
+        "Vth 추출법 통일" — 분석 방법의 표준화가 스킬의 숨은 가치입니다. 팀 데이터끼리 비교할 수 있게 됩니다.
+        정전류법 기준값(100nA×W/L)은 예시입니다. 팀 기준으로 바꿉니다.
       </aside>
     </section>
 
-    <!-- ============= 27. 예제7: I-V 곡선 ============= -->
+    <!-- ============= 예제7: I-V 곡선 / 파이프라인 ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="ex-head"><span class="ex-num">예제 7</span><h2>수확한 결과: t<sub>ox</sub> 스플릿 I‑V</h2><span class="pill">▶ 슬라이드 진입 시 그려집니다</span></div>
+        <div class="ex-head"><span class="ex-num">예제 7</span><h2>스킬 4개가 이어지면 하나의 업무 라인</h2><span class="pill">▶ 들어오면 그려집니다</span></div>
         <div class="grid-2" style="grid-template-columns: 1.5fr 1fr; align-items:start;">
-          <canvas id="iv-canvas" width="700" height="470" aria-label="게이트 산화막 두께 스플릿별 Id-Vg 곡선 애니메이션"></canvas>
+          <canvas id="iv-canvas" width="700" height="470" aria-label="게이트 산화막 두께 스플릿별 Id-Vg 곡선"></canvas>
           <div class="stack" style="gap:.7rem;">
-            <div class="card autoshow fade-right"><h3>🧾 곡선 1개 = CSV 1개</h3><p>스킬이 시뮬 출력 로그에서 <span class="mono">Vg, Id</span>를 추출해 <b>표준 CSV</b>로 — 예제 1의 CSV 리포트 스킬이 그대로 받아먹는 포맷입니다.</p></div>
-            <div class="card autoshow fade-right"><h3>📐 요약표 자동 생성</h3><p>t<sub>ox</sub>별 V<sub>th</sub>·SS·I<sub>on</sub>/I<sub>off</sub>가 표로 정리되어 DRM 엑셀 대장(예제 2)에 기입됩니다.</p></div>
-            <div class="card good autoshow fade-right"><h3>🔗 스킬 파이프라인</h3><p>TCAD 스윕 → CSV 리포트 → 엑셀 대장 → 주간 PPT. <em>스킬 4개가 하나의 업무 라인</em>이 됩니다.</p></div>
+            <div class="card autoshow fade-up"><h3>🧾 곡선 1개 = CSV 1개</h3><p>시뮬 출력에서 <span class="mono">Vg, Id</span>를 뽑아 <b>표준 CSV</b>로 — 예제 1이 그대로 받는 형식입니다.</p></div>
+            <div class="card autoshow fade-up"><h3>📐 요약표 자동 생성</h3><p>t<sub>ox</sub>별 V<sub>th</sub>·SS·I<sub>on</sub>/I<sub>off</sub>를 표로 만들어 엑셀 대장(예제 2)에 기입합니다.</p></div>
+            <div class="card good autoshow fade-up"><h3>🔗 스킬 파이프라인</h3><p>TCAD 스윕 → CSV 리포트 → 엑셀 대장 → 주간 PPT. <em>낱개 스킬이 업무 한 줄</em>이 됩니다.</p></div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        캔버스: tox 3종의 Id-Vg (로그 스케일) 곡선이 순차로 그려짐. Vth 이동 화살표 표시.
-        파이프라인 그림이 오늘 세미나의 클라이맥스 — 스킬은 낱개가 아니라 라인으로 연결된다.
+        곡선 값은 설명용 모델이지 실제 시뮬 결과가 아닙니다. t<sub>ox</sub>가 두꺼울수록 Vth가 오르는 경향만 보여 줍니다.
+        메시지: 스킬은 낱개가 아니라 라인으로 이어집니다.
       </aside>
     </section>
 
-    <!-- ============= 28. 실습 준비 ============= -->
+    <!-- ============= 실습 준비 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">HANDS-ON · 실습 ①</div>
-        <h2>실습 준비 — <span class="accent2">10분 세팅</span></h2>
+        <div class="chip">HANDS-ON · 준비 10분</div>
+        <h2>실습 준비 — <span class="accent2">CSV 미션은 어느 PC에서나</span> 됩니다</h2>
         <div class="grid-2" style="align-items:start; margin-top:.4rem;">
           <div>
-            <h3 style="font-size:1.35rem;">1) 환경 (사내 PC 기준)</h3>
-            <pre class="code" style="font-size:.98rem;">pip install xlwings pywin32 klayout pandas matplotlib
-<span class="cm"># pywin32 = win32com이 들어있는 패키지</span>
-<span class="cm"># Claude Code(또는 사내 AI 에이전트) 로그인 확인</span></pre>
-            <h3 style="font-size:1.35rem; margin-top:1rem;">2) 예제 스킬 내려받기</h3>
-            <pre class="code" style="font-size:.98rem;">세미나 저장소의 <span class="st">agent-skills/skills/</span> 폴더를
-내 프로젝트의 <span class="st">.claude/skills/</span> 아래로 복사
-<span class="cm"># office-drm / csv-report / drm-excel / weekly-ppt</span>
-<span class="cm"># spec-doc / gds-inspect / rtl-helper / tcad-sweep</span></pre>
+            <h3 style="font-size:1.3rem;">1) 설치</h3>
+            <pre class="code" style="font-size:.95rem;">pip install pandas matplotlib     <span class="cm"># 미션 1·2는 이것만</span>
+<span class="cm"># DRM 엑셀·PPT 예제까지: Windows + Office PC에서</span>
+pip install xlwings pywin32
+<span class="cm"># GDS 예제: pip install klayout</span></pre>
+            <h3 style="font-size:1.3rem; margin-top:1rem;">2) 스킬과 연습 데이터 복사</h3>
+            <pre class="ftree" style="font-size:.98rem; line-height:1.6;"><span class="dir">📁 내 작업 폴더/</span>
+├─ <span class="fl">.claude/skills/</span><span class="hl">csv-report/</span>  <span class="note">← 스킬 폴더째</span>
+└─ <span class="fl">sample_data/</span>              <span class="note">← CSV 3개 (36행)</span></pre>
           </div>
           <div>
             <div class="prompt-card" style="margin-top:0;">
-              <div class="pc-label">💬 설치 확인 프롬프트 (복사)</div>
-              <pre class="code">지금 사용할 수 있는 스킬 목록을 보여줘.
-그리고 sample_data/ 폴더의 측정 CSV로
-csv-report 스킬을 실행해서 리포트를 만들어줘.</pre>
+              <div class="pc-label">💬 설치 확인</div>
+              <pre class="code">지금 쓸 수 있는 스킬 목록을 보여줘.</pre>
             </div>
-            <div class="card good" style="margin-top:.8rem;">
-              <h3>🎁 함께 제공되는 것</h3>
-              <p>연습용 측정 CSV 3개 · 미니 Verilog 모듈 · TCAD 스타일 로그 — <b>사내 데이터 없이도</b> 오늘 전부 실습 가능합니다.</p>
+            <div class="done autoshow fade-up">
+              <span class="done-l">✓ 완료 기준</span>
+              목록에 <b class="mono">csv-report</b>가 보이면 준비 끝.
             </div>
+            <div class="stuck autoshow fade-up">
+              <span class="stuck-l">막히면</span>
+              경로가 <span class="mono">.claude/skills/csv-report/SKILL.md</span>인지 확인하고 Claude Code를 다시 시작합니다.
+            </div>
+            <p class="tiny" style="margin-top:.8rem; color:#9BA6C0 !important;">연습 데이터는 모두 가짜 값입니다 — 사내 데이터 없이 실습합니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        xlwings/win32com 실습은 Windows+Office 환경에서만 실제 동작 — 강의장이 아니면 코드 리딩으로 진행.
-        klayout pip 모듈은 GUI 없이 동작(서버에서도 OK).
+        미션 1·2는 CSV만 다루므로 Windows·Office가 없어도 됩니다.
+        xlwings·win32com 예제는 Windows + Office PC에서만 실제로 돕니다. 강의장 환경이 안 되면 코드 읽기로 진행합니다.
+        스킬 폴더 위치가 가장 흔한 실수입니다 — skills 아래에 한 겹 더 들어가 있는지 확인합니다.
       </aside>
     </section>
 
-    <!-- ============= 29. 실습 미션 ============= -->
+    <!-- ============= 미션 1·2 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">HANDS-ON · 실습 ②</div>
-        <h2>오늘의 <span class="grad">미션 3단계</span></h2>
-        <div class="grid-3" style="margin-top:1rem; align-items:stretch;">
-          <div class="card autoshow fade-up">
-            <span class="pill green">🌱 LEVEL 1 · 따라하기</span>
-            <h3 style="margin-top:.8rem;">제공 스킬 실행</h3>
-            <p>연습 CSV로 <span class="mono">csv-report</span>를 돌리고, 리포트의 스펙 판정이 맞는지 <b>직접 검산</b>해 보기.</p>
-            <p class="tiny" style="margin-top:.5rem; color:#9BA6C0 !important;">목표: 스킬 발동 → 실행 → 검증 사이클 체험</p>
+        <div class="chip">HANDS-ON · 미션 1·2 (20분)</div>
+        <h2>스킬을 <span class="grad">돌려 보고, 한 줄 고쳐 봅니다</span></h2>
+        <div class="grid-2" style="align-items:stretch; margin-top:.5rem; gap:1.4rem;">
+          <div class="card mission autoshow fade-up">
+            <span class="pill green">미션 1 · 돌려 보기</span>
+            <p class="m-learn">배우는 것: 스킬 발동 → 실행 → 검산의 한 바퀴</p>
+            <div class="prompt-card mini"><pre class="code">sample_data 폴더 측정 CSV로 일일 리포트 뽑아줘</pre></div>
+            <div class="done">
+              <span class="done-l">✓ 완료 기준</span>
+              csv-report 스킬이 불림 · report_*.html이 열림<br/>
+              병합 <b>36행 = 12 + 12 + 12</b> · LOT_ID 전부 대문자<br/>
+              FAIL <b>4건</b>, 전부 ETCH-07 (균일도 3.0% 초과)
+            </div>
+            <div class="stuck"><span class="stuck-l">막히면</span>스킬이 안 불리면 "csv-report 스킬로 해줘"라고 이름을 부릅니다.</div>
           </div>
-          <div class="card autoshow fade-up">
-            <span class="pill amber">🌿 LEVEL 2 · 고쳐보기</span>
-            <h3 style="margin-top:.8rem;">스킬 개조</h3>
-            <p><span class="mono">csv-report/SKILL.md</span>를 열어 스펙 한 줄을 우리 팀 값으로 바꾸고, 리포트에 <b>내 이름의 결재란</b> 추가시키기.</p>
-            <p class="tiny" style="margin-top:.5rem; color:#9BA6C0 !important;">목표: 스킬 = 편집 가능한 문서임을 체득</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <span class="pill pink">🌳 LEVEL 3 · 만들기</span>
-            <h3 style="margin-top:.8rem;">내 업무를 스킬로</h3>
-            <p><span class="mono">skill-creator</span>에게 <b>내 반복 업무 하나</b>를 설명하고 초안 생성 → 옆자리 동료와 서로 리뷰.</p>
-            <p class="tiny" style="margin-top:.5rem; color:#9BA6C0 !important;">목표: 퇴근 전에 진짜 쓸 스킬 1개 확보</p>
+          <div class="card mission autoshow fade-up">
+            <span class="pill amber">미션 2 · 한 줄 고치기</span>
+            <p class="m-learn">배우는 것: 스킬은 코드가 아니라 고칠 수 있는 문서</p>
+            <p class="small" style="margin:.2rem 0 .5rem;"><span class="mono">csv-report/references/spec_table.md</span>에서 균일도 상한 <b>3.0 → 3.5</b>로 바꾸고 같은 요청을 다시 합니다.</p>
+            <div class="done">
+              <span class="done-l">✓ 완료 기준</span>
+              FAIL <b>4건 → 2건</b> (3.56%, 4.36%만 남음)<br/>
+              보고에 바뀐 스펙 값이 적혀 있음
+            </div>
+            <div class="stuck"><span class="stuck-l">막히면</span>숫자가 그대로면 "spec_table.md를 다시 읽고 판정해줘".</div>
           </div>
         </div>
-        <p class="small center autoshow fade-up" style="margin-top:1.2rem; color:#B8BFD0 !important;">막히면? 그 상황 그대로 AI에게 물어보세요 — <em>"이 스킬이 왜 발동 안 되지?"도 훌륭한 프롬프트입니다.</em></p>
       </div>
       <aside class="notes">
-        레벨2가 핵심 — "스킬은 코드가 아니라 문서"라는 인식 전환이 여기서 일어남.
-        레벨3 리뷰 포인트: 동료가 읽고 그대로 따라 할 수 있는가? (신입 테스트)
+        미션 1: 숫자로 확인합니다. 36행, FAIL 4건 — 화면에서 이 숫자를 찾게 합니다. 다르면 그 자체로 좋은 토론거리입니다.
+        미션 2가 핵심입니다. 문서 한 줄을 바꿨더니 결과가 바뀐다 — "스킬은 코드가 아니라 문서"라는 체감이 여기서 옵니다.
+        끝나면 스펙 값을 3.0으로 되돌려 둡니다.
       </aside>
     </section>
 
-    <!-- ============= 30. 스킬 적합도 판별기 ============= -->
+    <!-- ============= 스킬 적합도 판별기 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">INTERACTIVE · 같이 해봐요</div>
-        <h2>내 업무, <span class="grad">스킬이 될까?</span> — 3문진</h2>
+        <div class="chip">INTERACTIVE · 미션 3 전에</div>
+        <h2>내 업무가 <span class="grad">스킬감인지</span> 세 질문이면 압니다</h2>
         <div class="fit-quiz" style="margin-top:.7rem;">
-          <div class="fit-q autoshow fade-up">
-            <p>🔁 <b>반복되나요?</b><small>주기적으로(매일/매주/랏마다) 다시 하는 일인가</small></p>
+          <div class="fit-q">
+            <p>🔁 <b>반복되나요?</b><small>매일·매주·랏마다 다시 하는 일인가</small></p>
             <div class="fit-btns"><button class="fit-btn yes" data-q="0" data-v="1">예</button><button class="fit-btn no" data-q="0" data-v="0">아니오</button></div>
           </div>
-          <div class="fit-q autoshow fade-up">
-            <p>📜 <b>규칙을 말로 설명할 수 있나요?</b><small>신입에게 문서로 가르칠 수 있는 수준의 절차가 있는가</small></p>
+          <div class="fit-q">
+            <p>📜 <b>규칙을 말로 설명할 수 있나요?</b><small>신입에게 문서로 가르칠 수 있는 절차가 있는가</small></p>
             <div class="fit-btns"><button class="fit-btn yes" data-q="1" data-v="1">예</button><button class="fit-btn no" data-q="1" data-v="0">아니오</button></div>
           </div>
-          <div class="fit-q autoshow fade-up">
-            <p>🗃️ <b>입력과 출력이 파일/데이터인가요?</b><small>CSV, 엑셀, PPT, GDS, 로그, 코드&hellip; (회의·협상은 ❌)</small></p>
+          <div class="fit-q">
+            <p>🗃️ <b>입력과 출력이 파일·데이터인가요?</b><small>CSV, 엑셀, PPT, GDS, 로그, 코드… (회의·협상은 아님)</small></p>
             <div class="fit-btns"><button class="fit-btn yes" data-q="2" data-v="1">예</button><button class="fit-btn no" data-q="2" data-v="0">아니오</button></div>
           </div>
           <div class="fit-gauge-wrap">
@@ -1610,94 +1740,204 @@ csv-report 스킬을 실행해서 리포트를 만들어줘.</pre>
         </div>
       </div>
       <aside class="notes">
-        청중 참여: 각자 자기 업무 하나 떠올리고 손들게 하기.
-        3/3 = 오늘 바로 스킬로. 2/3 = 사람 개입 지점을 절차에 명시하면 가능. 판단 자체가 핵심인 일은 스킬이 '보조'까지만.
+        각자 업무 하나를 떠올리고 손을 들게 합니다.
+        3/3이면 오늘 바로 스킬로. 2/3이면 사람이 개입할 지점을 절차에 적으면 됩니다. 규칙 몇 줄로 끝나면 스킬 말고 CLAUDE.md 한 줄로 충분합니다.
       </aside>
     </section>
 
-    <!-- ============= 31. 공유와 확산 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip">SCALE</div>
-        <h2>혼자 쓰면 편리함, <span class="grad">팀이 쓰면 표준</span></h2>
-        <div class="flow" style="margin-top:1rem;">
-          <div class="fstep autoshow zoom-in"><span class="ic">🙋</span><b>개인</b><small>내 프로젝트 .claude/skills/ — 오늘 시작</small></div>
-          <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">👥</span><b>팀</b><small>팀 저장소(git) 공유 폴더 — 리뷰하며 다듬기</small></div>
-          <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">🏭</span><b>조직</b><small>파트 표준 스킬 세트 — 신입 교육이 곧 스킬 설치</small></div>
-        </div>
-        <div class="grid-2" style="margin-top:1.2rem;">
-          <div class="card autoshow fade-left">
-            <h3>🧬 버전 관리 = 노하우의 역사</h3>
-            <p>스킬은 텍스트라 git에 그대로 올라갑니다. "왜 이 규칙이 생겼는지"가 커밋 이력으로 남아 <b>퇴직·전배에도 살아남는 지식</b>이 됩니다.</p>
-          </div>
-          <div class="card autoshow fade-right">
-            <h3>🔍 스킬 리뷰 문화</h3>
-            <p>코드 리뷰는 어렵지만 <b>매뉴얼 리뷰는 누구나</b> 할 수 있습니다 — "이 스펙 바뀌었어요", "이 함정도 추가해요". 비개발자도 기여자가 됩니다.</p>
-          </div>
-        </div>
-      </div>
-      <aside class="notes">
-        스킬의 조직적 가치: 자동화 도구 이전에 "실행 가능한 업무 표준 문서".
-      </aside>
-    </section>
-
-    <!-- ============= 32. 주의사항 ============= -->
+    <!-- ============= 미션 3 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">SAFETY</div>
-        <h2>선 넘지 않기 — <span class="accent3">세 가지 약속</span></h2>
-        <div class="grid-3" style="margin-top:1rem;">
-          <div class="card bad autoshow fade-up">
-            <h3>👁️ 검증은 엔지니어의 몫</h3>
-            <p>스킬이 검산 절차를 품고 있어도, <b>보고서에 서명하는 건 사람</b>입니다. 자동 생성물은 반드시 눈으로 확인 후 제출.</p>
+        <div class="chip">HANDS-ON · 미션 3 (25분)</div>
+        <h2><span class="grad">내 반복 업무 하나</span>를 파일로 남깁니다</h2>
+        <div class="grid-2" style="grid-template-columns:1.1fr 1fr; align-items:start; margin-top:.4rem; gap:1.5rem;">
+          <div>
+            <p class="small" style="margin:0 0 .4rem;"><b class="accent4">규칙 몇 줄</b> → CLAUDE.md · <b class="accent2">순서 있는 절차</b> → 스킬</p>
+            <div class="prompt-card" style="margin-top:.4rem;">
+              <div class="pc-label">💬 스킬로 만들 때</div>
+              <pre class="code" style="font-size:1.12rem;">skill-creator로 새 스킬을 만들어줘.
+내가 매주 하는 일은 ○○이야.
+입력 파일은 ○○, 결과물은 ○○이야.
+빠진 규칙은 나한테 하나씩 물어봐줘.</pre>
+            </div>
+            <p class="tiny" style="color:#9BA6C0 !important; margin-top:.4rem;">실데이터 대신 sample_data나 가짜 값으로 만듭니다.</p>
           </div>
-          <div class="card bad autoshow fade-up">
-            <h3>🔐 데이터는 회사 담장 안에서</h3>
-            <p>공정 데이터·레이아웃·RTL은 <b>사내 승인된 AI 환경에서만</b>. 외부 서비스에 붙여넣기 금지 — 스킬 본문에도 이 규칙을 명시하세요.</p>
+          <div>
+            <div class="done autoshow fade-up" style="margin-top:0;">
+              <span class="done-l">✓ 완료 기준</span>
+              ① <span class="mono">.claude/skills/&lt;이름&gt;/SKILL.md</span>가 생겼다<br/>
+              ② <b>새 대화</b>에서 description에 쓴 말로 요청하면 이 스킬이 불린다<br/>
+              ③ 옆자리 동료가 SKILL.md만 읽고 절차를 설명할 수 있다
+            </div>
+            <div class="stuck autoshow fade-up">
+              <span class="stuck-l">막히면</span>
+              안 불리면 → description에 내가 평소 쓰는 말을 추가<br/>
+              skill-creator가 없으면 → "SKILL.md 형식으로 만들어줘"
+            </div>
           </div>
-          <div class="card bad autoshow fade-up">
-            <h3>🚫 DRM은 우회 대상이 아님</h3>
-            <p>xlwings/win32com은 <b>권한 있는 앱을 통한 정식 접근</b>입니다. DRM 해제·변환 시도는 스킬에 '금지'로 못 박아 두세요.</p>
-          </div>
-        </div>
-        <div class="quote autoshow fade-up" style="margin-top:1.3rem;">
-          좋은 스킬은 <b>능력</b>만이 아니라 <b>하지 말아야 할 것</b>까지 물려줍니다 — 그게 진짜 사수죠.
         </div>
       </div>
       <aside class="notes">
-        보안 파트 사전 협의된 문구로 발표. "금지 규칙도 스킬에 쓴다"로 개념 일관성 유지.
+        ③이 "신입 테스트"입니다. 짝을 지어 서로의 SKILL.md를 읽고, 읽은 사람이 절차를 말로 설명해 봅니다. 막히는 곳이 빠진 규칙입니다.
+        ②는 꼭 새 대화에서 확인합니다 — 만든 대화 안에서는 AI가 이미 내용을 알고 있어서 시험이 안 됩니다.
       </aside>
     </section>
 
-    <!-- ============= 33. 마무리 ============= -->
+    <!-- ============= 팀 운영 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">TEAM</div>
+        <h2>스킬은 git에 올려 <span class="grad">팀이 함께 고칩니다</span></h2>
+        <div class="flow" style="margin-top:1rem;">
+          <div class="fstep autoshow fade-up"><span class="ic">🙋</span><b>개인</b><small><span class="mono">~/.claude/skills/</span> — 오늘 시작</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow fade-up"><span class="ic">👥</span><b>팀</b><small>저장소의 <span class="mono">.claude/skills/</span> 커밋 — 받으면 같은 스킬</small></div>
+          <span class="farr">▶</span>
+          <div class="fstep autoshow fade-up"><span class="ic">🏭</span><b>조직</b><small>플러그인으로 묶어 배포 — 신입 교육이 곧 설치</small></div>
+        </div>
+        <div class="grid-2" style="margin-top:1.2rem;">
+          <div class="card autoshow fade-up">
+            <h3>🧬 이력 = 노하우의 역사</h3>
+            <p>텍스트라 git에 그대로 올라갑니다. "왜 이 규칙이 생겼나"가 커밋으로 남아 <b>담당자가 바뀌어도</b> 살아남습니다.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🔍 매뉴얼 리뷰는 누구나</h3>
+            <p>코드 리뷰는 어려워도 <b>매뉴얼 리뷰는 누구나</b> 합니다 — "이 스펙 바뀌었어요", "이 함정도 추가해요".</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        스킬은 자동화 도구이기 전에 "실행되는 업무 표준 문서"입니다.
+        git이 처음이면 최소한의 Git & GitHub 덱(../github/)을 함께 안내합니다.
+      </aside>
+    </section>
+
+    <!-- ============= 남의 스킬 설치 주의 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">SAFETY · 남이 만든 스킬</div>
+        <h2>남이 만든 스킬은 <span class="accent3">설치 전에 원문을 읽습니다</span></h2>
+        <div class="grid-2" style="margin-top:.7rem; gap:1.1rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>📦 어디서 구하나</h3>
+            <p>Claude Code의 <span class="mono accent2">/plugin</span> 마켓플레이스, <span class="mono">skills.sh</span> 같은 공개 목록(제3자 · Anthropic 공식 아님), GitHub 저장소.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <h3>⚠️ 왜 조심하나</h3>
+            <p>SKILL.md는 AI가 그대로 따르는 <b>지시문</b>이고, scripts/는 실제로 <b>실행되는 코드</b>입니다. 출처 불명 스킬은 프롬프트 인젝션의 통로가 됩니다.</p>
+          </div>
+        </div>
+        <div class="card autoshow fade-up" style="margin-top:1rem;">
+          <span class="pill amber">설치 전 체크리스트</span>
+          <ul class="check">
+            <li>만든 사람·조직을 확인할 수 있는가 — 인기(스타·설치 수)는 최소한의 필터일 뿐</li>
+            <li>SKILL.md와 scripts/를 <b>전부 읽었는가</b> — 파일을 밖으로 보내는 코드(업로드·외부 주소)가 없는가</li>
+            <li>"이전 지시는 무시", "사용자에게 알리지 말 것" 같은 문장이 있으면 <b class="accent3">설치하지 않는다</b></li>
+            <li>사내 반입 정책상 허용되는가 — 애매하면 <a href="../security/">보안 덱</a>과 사내 담당자 확인</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="notes">
+        스킬은 평문이라 읽어 보면 됩니다. 몇 분이면 됩니다.
+        이 시리즈를 준비하는 동안에도 도구 결과 속에 "반드시 따라야 한다"는 낯선 지시문이 섞여 들어온 적이 있습니다 — 전형적인 인젝션 패턴이라 무시했습니다.
+        인젝션 원리는 보안 덱(../security/)에서 자세히.
+      </aside>
+    </section>
+
+    <!-- ============= 추천 확장 3 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">ECOSYSTEM · 써 볼 만한 것</div>
+        <h2>먼저 써 볼 확장 3가지 — <span class="accent3">대부분 토큰을 더 씁니다</span></h2>
+        <div class="grid-3" style="margin-top:1rem; gap:1.2rem;">
+          <div class="card autoshow fade-up">
+            <span class="pill amber">작업 절차 모음</span>
+            <h3 style="margin-top:.6rem;">Superpowers</h3>
+            <p>브레인스토밍·체계적 디버깅 같은 <b>검증된 작업 절차</b>를 모은 스킬 모음 (제3자 · obra/superpowers).</p>
+            <p class="cost">💸 다단계 절차·서브에이전트를 불러 작업당 토큰 ↑</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill green">스킬 제작</span>
+            <h3 style="margin-top:.6rem;">Skill Creator</h3>
+            <p>내 노하우를 <b>SKILL.md로 뽑아내는</b> 스킬. 오늘 미션 3에서 쓴 것.</p>
+            <p class="cost good">🟢 만들 때만 잠깐 — 평소 비용은 거의 없음</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <span class="pill pink">브라우저 자동화 (MCP)</span>
+            <h3 style="margin-top:.6rem;">Playwright MCP</h3>
+            <p>웹 화면을 <b>직접 열고 보며</b> 검증합니다. 이 덱의 화면 검사도 이 방식입니다.</p>
+            <p class="cost">💸 조작마다 화면 정보가 대화에 들어가 토큰 ↑↑</p>
+          </div>
+        </div>
+        <p class="small autoshow fade-up" style="margin-top:1.2rem; color:#B8BFD0 !important;">
+          쓴 만큼 내는 요금제라면 필요할 때만 켜고, 끝나면 끕니다. 그래도 핵심은 같습니다 — <em>생각하고 → 만들고 → 눈으로 확인</em>.
+        </p>
+      </div>
+      <aside class="notes">
+        셋 다 강력하지만 공짜가 아닙니다. 반복되는 병목이 확인된 뒤에 하나씩 붙입니다.
+        Playwright 같은 MCP 연결 방법은 automation 덱(../automation/)에서 다룹니다.
+      </aside>
+    </section>
+
+    <!-- ============= 보안 약속 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">SAFETY · 약속</div>
+        <h2>선 넘지 않기 — <span class="accent3">보안 약속 세 가지</span></h2>
+        <div class="grid-3" style="margin-top:1rem;">
+          <div class="card bad autoshow fade-up">
+            <span class="promise-n">1</span>
+            <p><b>회사 기밀·실데이터는 사내 승인 도구에서만</b> — 애매하면 넣지 않는다.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <span class="promise-n">2</span>
+            <p><b>API 키·비밀번호는 코드·대화·커밋에 남기지 않는다</b> — 새어 나갔다면 삭제가 아니라 재발급.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <span class="promise-n">3</span>
+            <p><b>회사 정책이 이 자료보다 우선한다.</b></p>
+          </div>
+        </div>
+        <div class="grid-2 autoshow fade-up" style="margin-top:1.2rem; gap:1.2rem; align-items:stretch;">
+          <div class="plus"><span class="pill amber">이 덱에서 하나 더</span><p><b>DRM은 우회 대상이 아닙니다.</b> xlwings·win32com은 권한 있는 앱을 통한 정식 경로입니다. 해제·변환 시도는 스킬에 '금지'로 적어 둡니다.</p></div>
+          <div class="plus"><span class="pill amber">그리고</span><p><b>보고서에 서명하는 건 사람입니다.</b> 스킬이 검산을 해도 결과물은 눈으로 확인한 뒤 냅니다.</p></div>
+        </div>
+        <p class="tiny center" style="margin-top:1rem; color:#9BA6C0 !important;">자세한 내용은 → <a href="../security/">사내 환경에서의 AI — 보안과 거버넌스</a></p>
+      </div>
+      <aside class="notes">
+        시리즈 공통 약속 세 가지입니다. 모든 덱에서 같은 문구로 말합니다.
+        이 덱 고유의 두 가지: DRM 우회 금지, 최종 검증은 사람. 좋은 스킬은 능력만이 아니라 하지 말아야 할 것까지 물려줍니다.
+      </aside>
+    </section>
+
+    <!-- ============= 마무리 ============= -->
     <section>
       <div class="vfill center">
         <div class="chip">WRAP-UP</div>
-        <h2 style="font-size:3.1rem;">이번 주, <span class="grad">스킬 딱 하나</span>만 만들어 보세요</h2>
-        <div class="flow" style="max-width:900px; margin:1.2rem auto 0; text-align:left;">
-          <div class="fstep autoshow zoom-in"><span class="ic">1️⃣</span><b>반복 업무 하나 고르기</b><small>화요일 아침의 그 일</small></div>
+        <h2 style="font-size:3.1rem;">이번 주, <span class="grad">파일 한 장</span>만 남겨 보세요</h2>
+        <div class="flow" style="width:100%; max-width:960px; margin:1.2rem auto 0; text-align:left;">
+          <div class="fstep autoshow fade-up"><span class="ic">1️⃣</span><b>두 번 한 지적</b><small>→ CLAUDE.md 한 줄</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">2️⃣</span><b>skill-creator에게 설명</b><small>신입 가르치듯, 말로</small></div>
+          <div class="fstep autoshow fade-up"><span class="ic">2️⃣</span><b>반복 업무 하나</b><small>→ skill-creator로 스킬</small></div>
           <span class="farr">▶</span>
-          <div class="fstep autoshow zoom-in"><span class="ic">3️⃣</span><b>한 주 써보고 다듬기</b><small>다음 주에 팀에 공유</small></div>
+          <div class="fstep autoshow fade-up"><span class="ic">3️⃣</span><b>한 주 써 보고</b><small>→ 다듬어서 팀에 공유</small></div>
         </div>
-        <p class="small autoshow fade-up" style="margin-top:1.6rem; color:#B8BFD0 !important;">
-          코드는 AI가 씁니다. <em>일하는 법을 아는 사람</em>이 매뉴얼을 쓰면 됩니다 — 그게 여러분입니다.
+        <p class="small autoshow fade-up" style="margin-top:1.5rem; color:#B8BFD0 !important;">
+          코드는 AI가 씁니다. <em>일하는 법을 아는 사람</em>이 매뉴얼을 쓰면 됩니다.
         </p>
-        <h3 class="autoshow fade-up" style="margin-top:1.4rem;">감사합니다 — Q&amp;A 🙋</h3>
+        <h3 class="autoshow fade-up" style="margin-top:1.3rem;">감사합니다 — Q&amp;A 🙋</h3>
         <p class="tiny autoshow fade-up" style="color:#9BA6C0 !important; margin-top:1rem;">
           함께 보기:
-          <a href="../intro/">바이브 코딩 입문</a> ·
+          <a href="../prompt/">AI에게 일 시키는 법</a> ·
           <a href="../context/">컨텍스트</a> ·
-          <a href="../knowledge/">LLM에게 지식 가르치기</a> ·
-          <a href="../workshop/">실습 워크숍</a>
+          <a href="../automation/">내 도구가 혼자 돌게</a> ·
+          <a href="../making-slides/">슬라이드 자료 만들기</a> ·
+          <a href="../security/">보안과 거버넌스</a>
         </p>
       </div>
       <aside class="notes">
-        마무리 + Q&A. 로컬 발표 모드(npm run dev)에서만 실시간 질문이 동작.
-        마지막 당부: 오늘 7개 예제를 다 따라하려 하지 말고, 자기 업무 "하나"로 시작할 것.
+        마무리와 Q&amp;A. 실시간 질문은 발표 서버(npm run dev)에서만 동작합니다.
+        당부: 예제 7개를 다 따라 하려 하지 말고, 자기 업무 "하나"로 시작합니다.
       </aside>
     </section>
 
@@ -1918,33 +2158,6 @@ csv-report 스킬을 실행해서 리포트를 만들어줘.</pre>
         ['o', '  수정 셀 로그: 7개 셀 (B14~H14)'],
         ['o', '  save → close → app.quit()  (파일 잠금 해제 확인)', 'ok'],
         ['a', '완료했습니다. 백업본과 수정 셀 목록을 남겼으니 값만 눈으로 확인해 주세요.'],
-      ],
-      ppt: [
-        ['u', '이번 주 주간보고 장표 만들어줘'],
-        ['s', '📖 스킬 발동 · weekly-ppt — 기존 pptx는 win32com 규칙'],
-        ['a', '지난주 파일을 복사해 시작합니다 — 원본은 건드리지 않아요.'],
-        ['o', '  copy: 주간보고_W29.pptx → 주간보고_W30.pptx'],
-        ['o', '  Dispatch("PowerPoint.Application") … Presentations.Open ✓'],
-        ['a', '슬라이드 2 제목의 주차를 갱신하고, 슬라이드 3 표에 이번 주 집계를 채웁니다.'],
-        ['o', '  slide2: "W29 (7/7~7/11)" → "W30 (7/14~7/18)"'],
-        ['o', '  slide3 table: 6행 × 5열 값 교체 (수율 94.1%, FAIL 17…)'],
-        ['a', '슬라이드 4 차트는 내장 엑셀(ChartData)을 COM으로 열어 시리즈를 갱신합니다.'],
-        ['o', '  chart "수율 트렌드": W30 데이터포인트 추가 ✓'],
-        ['o', '  검증: 표 합계 = CSV 집계 일치 ✓ | save & quit', 'ok'],
-        ['a', '주간보고_W30.pptx 완성. 발표 전에 슬라이드 3의 특이사항 코멘트만 직접 채워 주세요.'],
-      ],
-      rtl: [
-        ['u', 'spi_master.v 포트 정리하고 테스트벤치 초안 만들어줘'],
-        ['s', '📖 스킬 발동 · rtl-helper — 포트 요약 + TB 생성'],
-        ['a', '모듈을 분석했습니다. 포트 12개, 파라미터 2개 — 표로 정리할게요.'],
-        ['o', '  module spi_master #(CLK_DIV=4, DATA_W=8)'],
-        ['o', '  input:  clk, rst_n, start, tx_data[7:0], miso'],
-        ['o', '  output: busy, done, rx_data[7:0], sclk, mosi, cs_n'],
-        ['a', '사내 코딩룰 체크 (references/lint_rules.md) …'],
-        ['o', '  ⚠ line 84: rx_shift가 always @(posedge clk) 밖에서 대입 — latch 추론 위험'],
-        ['a', '셀프체킹 TB 뼈대를 생성했습니다 — clk/rst, 단일 바이트 루프백 시나리오, 파형 덤프 포함.'],
-        ['o', '  saved: tb_spi_master.v  |  iverilog 문법 체크 PASS', 'ok'],
-        ['a', '타이밍/합성 판단은 스킬 규칙상 하지 않습니다 — 시나리오 커버리지는 검토 부탁드려요.'],
       ],
     };
 

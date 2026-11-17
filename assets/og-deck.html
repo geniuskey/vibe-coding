@@ -117,10 +117,10 @@
 <script>
 /* 덱별 카드 문구 — h1(큰 제목) · tag(그라데이션 한 줄) · lede(생략 시 decks.js desc) · ask(터미널 첫 프롬프트) · steps(✓ 줄 3개) · done(마지막 노란 줄) */
 const OG = {
-  'setup':         { h1: '0교시', tag: '설치와 첫 실행',
-                     ask: 'claude', steps: ['Node.js 설치', '로그인', '첫 대화'], done: 'Welcome to Claude Code' },
+  'setup':         { h1: '0교시', tag: '설치와 기본 조작',
+                     ask: 'claude', steps: ['설치 한 줄 · 로그인', '첫 대화 · hello.html', 'Esc · @ · 권한 모드'], done: 'Welcome to Claude Code' },
   'intro':         { h1: '바이브 코딩이란 무엇인가?', tag: '코드는 AI가, 방향은 내가', lede: '알파고부터 LLM · 에이전트 · Claude Code까지',
-                     ask: '바이브 코딩이 뭐야?', steps: ['알파고에서 LLM까지', '에이전트의 등장', 'Claude Code 실전'], done: 'STAGE 1 CLEAR' },
+                     ask: '바이브 코딩이 뭐야?', steps: ['알파고에서 LLM까지', '루프와 에이전트', '도메인 지식 × AI'], done: 'STAGE 1 CLEAR' },
   'use-cases':     { h1: '이것도 바이브 코딩으로 됩니다', tag: '코드를 몰라도, 일은 바꿀 수 있다', lede: '추첨기 · 실시간 대시보드 · 주간보고 · 활동 공유',
                      ask: '이번 주 기록 모아서 주간보고 초안 써줘', steps: ['메일 · 메신저 읽기', 'Confluence · Jira 정리', '성과 · 이슈 · 계획'], done: '3시간 → 15분' },
   'prompt':        { h1: 'AI에게 일 시키는 법', tag: '프롬프트 엔지니어링',
@@ -131,6 +131,8 @@ const OG = {
                      ask: '이거 이름이 뭐야?', steps: ['모달 · 드로어', '토스트 · 스낵바', '탭 · 세그먼트'], done: '한 장으로 보는 UI 도감' },
   'github':        { h1: '최소한의 Git & GitHub', tag: '바이브 코딩에 꼭 필요한 만큼', lede: '커밋 · 되돌리기 · 브랜치 · 푸시',
                      ask: 'git commit -m "작동함"', steps: ['저장 지점 만들기', '되돌리기', 'GitHub에 올리기'], done: '망쳐도 돌아올 수 있다' },
+  'debugging':     { h1: '고칠수록 꼬일 때', tag: 'AI와 함께 디버깅하기', lede: '같은 수정만 맴도는 루프를 끊는 법',
+                     ask: '고치기 전에 원인 후보 3개부터', steps: ['재현 · 증상', '가설 · 한 번에 하나', '로그 · 되돌리기'], done: 'bug fixed — 원인: cp949' },
   'context':       { h1: '컨텍스트', tag: 'AI 에이전트의 작업 책상',
                      ask: '/context', steps: ['컨텍스트 창의 원리', 'CLAUDE.md', '압축과 정리'], done: '책상이 정돈되면 답이 좋아진다' },
   'knowledge':     { h1: 'LLM에게 지식을 가르치는 법', tag: '모르는 건 찾아서 답하게',
@@ -143,12 +145,16 @@ const OG = {
                      ask: '이 파일 외부로 보내도 돼?', steps: ['데이터 경로', '프롬프트 인젝션', '권한 설계'], done: 'deny: 외부 전송 차단' },
   'workshop':      { h1: '바이브 코딩 실습 워크숍', tag: '90분 · 3시간 · 8시간 코스', lede: '반도체 엔지니어를 위한 코스 선택형 핸즈온',
                      ask: 'spc.csv 분석 대시보드', steps: ['데이터 읽기', '차트 그리기', 'MY TOOL 완성'], done: '직접 만들어 본다' },
-  'agent-skills':  { h1: '반도체 현업을 위한 Agent Skills', tag: '내 노하우를 AI에게 물려주는 법',
-                     ask: '/weekly-ppt', steps: ['DRM 엑셀 읽기', '사내 규칙 적용', '주간보고 PPT'], done: '한 번 가르치면 계속 쓴다' },
+  'agent-skills':  { h1: '내 노하우를 AI에게 물려주는 법', tag: 'CLAUDE.md · Agent Skills', lede: '반복 설명을 파일로 — 반도체 실무 예제 7종',
+                     ask: '/weekly-ppt', steps: ['CLAUDE.md', 'SKILL.md', '주간보고 PPT'], done: '한 번 가르치면 계속 쓴다' },
   'making-slides': { h1: '슬라이드 자료 만들기', tag: '레퍼런스 → 피드백 → Skill', lede: '바이브 코딩으로 발표 덱을 반복해서 찍어내기',
-                     ask: '이 덱처럼 만들어줘', steps: ['레퍼런스 앵커링', '피드백 루프', 'CLAUDE.md · Skill'], done: 'reveal.js 빌드 없이 실행' },
+                     ask: '이 덱처럼 만들어줘', steps: ['레퍼런스 앵커링', '좌표 + 증상 피드백', '스킬로 굳히기'], done: 'reveal.js 빌드 없이 실행' },
+  'automation':    { h1: '내 도구가 혼자 돌게', tag: '연결 · 예약 실행 · 팀 공유', lede: '파일 하나에서 팀이 같이 쓰는 앱까지',
+                     ask: '매주 금요일 5시에 요약해줘', steps: ['커넥터로 읽기', '예약 실행', '사람이 검토'], done: 'scheduled · Fri 17:00' },
   'forChildren':   { h1: '나만의 게임 만들기', tag: '어린이 × 부모, AI와 함께', kids: true, lede: '복사 · 붙여넣기 8번으로 게임 2개 완성',
                      ask: '점프하는 고양이 게임!', steps: ['액션 게임', '퀴즈 게임', '프롬프트 8단계'], done: 'GAME CLEAR' },
+  'ai-map':        { h1: 'AI 업계 지도', tag: '2026.11 — 각 진영의 전략', lede: '3개월이면 또 바뀝니다',
+                     ask: '요즘 누가 앞서 있어?', steps: ['Google · Anthropic', 'OpenAI · 중국 랩', 'Meta · 르쿤'], done: '다음 갱신: 2027.02' },
 };
 
 const id = new URLSearchParams(location.search).get('id') || 'intro';
@@ -161,10 +167,13 @@ const deck = decks[idx];
 
 const $ = s => document.getElementById(s);
 const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-document.body.classList.add('t' + deck.track.slice(0, 2).replace(/^0/, ''));
+// 색 묶음: 01 기본기 = 기본(민트·보라), 02 더 깊이 = t2, 03 직접 해보기·번외 = t3, 맛보기·핵심 경로 = 기본
+const TONE = { '02': 't2', '03': 't3', '번외': 't3' };
+const tone = TONE[deck.track.slice(0, 2)];
+if (tone) document.body.classList.add(tone);
 if (og.kids) document.body.classList.add('kids');
 
-$('track').textContent = 'TRACK ' + deck.track;
+$('track').textContent = /^\d/.test(deck.track) ? 'TRACK ' + deck.track : deck.track.toUpperCase();
 $('ep').textContent = id === 'ui-ux-cheatsheet' ? '· 부록' : '· ' + String(idx + 1).padStart(2, '0') + '/' + decks.length;
 $('emoji').textContent = deck.emoji;
 $('h1').textContent = og.h1;

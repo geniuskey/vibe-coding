@@ -32,7 +32,7 @@
   <meta property="og:title" content="UI/UX 비주얼 치트시트 — 모양으로 찾는 UI 용어" />
   <meta property="og:description" content="단어 대신 모양으로. 150여 개 UI 용어를 실제로 움직이는 부품으로 모았습니다. 이름을 누르면 복사." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/ui-ux/cheatsheet.html" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/ui-ux-cheatsheet.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/ui-ux-cheatsheet.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -41,7 +41,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="UI/UX 비주얼 치트시트 — 모양으로 찾는 UI 용어" />
   <meta name="twitter:description" content="레이아웃 · 골격 · 대시보드 · 버튼 · 폼 · 오버레이 · 상태 · 토큰 · 테마 — 전부 실제로 동작하는 부품으로." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/ui-ux-cheatsheet.png?v=1" />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/ui-ux-cheatsheet.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -153,7 +153,7 @@
     .t.tall { grid-row: span 2; }
     @media (max-width: 1100px) { .t.w3 { grid-column: 1 / -1; } }
     @media (max-width: 840px) { .t.w2, .t.w3 { grid-column: 1 / -1; } }
-    .t.flash { animation: flash 1.8s ease; }
+    .t.flash { animation: flash 1.2s ease-out; }
     @keyframes flash { 0%, 45% { box-shadow: 0 0 0 3px var(--ac4), 0 0 40px rgba(255,212,107,.35); } 100% { box-shadow: 0 0 0 0 transparent; } }
     .demo { flex: 1; min-height: 176px; padding: 16px 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; position: relative; min-width: 0; }
     .meta { display: flex; flex-wrap: wrap; gap: 3px 14px; padding: 10px 14px 12px; border-top: 1px solid var(--line-soft); background: rgba(6,8,15,.4); border-radius: 0 0 15px 15px; }
@@ -637,7 +637,7 @@
     .car { position: relative; width: 100%; max-width: 250px; }
     .car-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; border-radius: 12px; scrollbar-width: none; }
     .car-track::-webkit-scrollbar { display: none; }
-    .car-s { flex: 0 0 100%; height: 110px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: flex-end; scroll-snap-align: start; color: #fff; background: linear-gradient(135deg, hsl(var(--h) 70% 45%), hsl(calc(var(--h) + 50) 70% 28%)); }
+    .car-s { flex: 0 0 100%; height: 110px; padding: 12px 42px; display: flex; flex-direction: column; justify-content: flex-end; scroll-snap-align: start; color: #fff; background: linear-gradient(135deg, hsl(var(--h) 70% 45%), hsl(calc(var(--h) + 50) 70% 28%)); }
     .car-s small { font: 700 .62rem var(--mono); opacity: .8; }
     .car-s b { font-size: 1.05rem; }
     .car-s span { font-size: .74rem; opacity: .9; }
@@ -1028,10 +1028,8 @@
     .sty-min button { align-self: flex-start; margin-top: 4px; padding: 0; border: 0; background: none; color: #111; font-size: .74rem; text-decoration: underline; text-underline-offset: 3px; }
     .sty-glass { background: #1A1030; }
     .sty-glass::before, .sty-glass::after { content: ""; position: absolute; width: 120px; height: 120px; border-radius: 50%; filter: blur(26px); }
-    .sty-glass::before { top: -24px; left: 6px; background: #FF5CAA; animation: float1 9s ease-in-out infinite alternate; }
-    .sty-glass::after { right: 0; bottom: -30px; background: #2BEAD0; animation: float2 11s ease-in-out infinite alternate; }
-    @keyframes float1 { to { transform: translate(44px, 30px); } }
-    @keyframes float2 { to { transform: translate(-34px, -22px); } }
+    .sty-glass::before { top: -24px; left: 6px; background: #FF5CAA; }
+    .sty-glass::after { right: 0; bottom: -30px; background: #2BEAD0; }
     .sty-glass .c { position: relative; z-index: 1; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px; border-radius: 16px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     .sty-glass small { font-size: .6rem; opacity: .85; }
     .sty-glass b { font-size: 1.2rem; }
@@ -1073,14 +1071,13 @@
 <header class="wrap top">
   <div class="top-row">
     <a class="pillbtn" href="index.html">← 슬라이드로 돌아가기</a>
-    <a class="pillbtn" href="index.html#/36">화면 주문서 템플릿 ↗</a>
+    <a class="pillbtn" href="index.html#/s-template">화면 주문서 템플릿 ↗</a>
   </div>
   <p class="kick">바이브 코더를 위한 UI/UX 용어 사전 · 부록</p>
   <h1>단어 말고 <span class="grad">모양으로 찾는</span> UI 치트시트</h1>
   <p class="lead">
-    슬라이드의 한 장 요약을 <b>실제로 동작하는 부품</b>으로 옮겼습니다. 생김새로 찾고, 눌러서 움직여 보고,
-    <b>점선 이름을 누르면 복사</b>되니 프롬프트에 그대로 붙이세요. 이름에 마우스를 올리면 그림에서 해당 부분이 켜집니다.
-    지금 <b id="termCount">150</b>개 용어.
+    이름이 기억나지 않으면 <b>모양으로</b> 찾으세요. 부품은 실제로 움직이고, <b>점선 이름을 누르면 복사</b>됩니다 —
+    프롬프트에 그대로 붙이면 됩니다. 이름에 마우스를 올리면 그림에서 그 부분이 켜집니다. 용어 <b id="termCount">150</b>개.
   </p>
   <div class="tools">
     <label class="search">
@@ -1098,7 +1095,7 @@
 
   <!-- ============ LAYOUT ============ -->
   <section class="grp" id="layout" aria-labelledby="h-layout">
-    <div class="grp-h"><span class="tag">LAYOUT</span><h2 id="h-layout">화면을 나누는 말</h2><a class="to" href="index.html#/4">슬라이드 4–6 ↗</a></div>
+    <div class="grp-h"><span class="tag">LAYOUT</span><h2 id="h-layout">화면을 나누는 말</h2><a class="to" href="index.html#/s-layout">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="뷰포트 화면 보이는">
@@ -1218,7 +1215,7 @@
 
   <!-- ============ SKELETON ============ -->
   <section class="grp" id="skeleton" aria-labelledby="h-skeleton">
-    <div class="grp-h"><span class="tag">SKELETON</span><h2 id="h-skeleton">화면 골격</h2><a class="to" href="index.html#/7">슬라이드 7–8 ↗</a></div>
+    <div class="grp-h"><span class="tag">SKELETON</span><h2 id="h-skeleton">화면 골격</h2><a class="to" href="index.html#/s-skeleton">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t w3" data-k="헤더 앱바 사이드바 레일 드로어 햄버거 히어로 메인 본문 어사이드 패널 푸터 하단">
@@ -1283,7 +1280,7 @@
 
   <!-- ============ DEVICE ============ -->
   <section class="grp" id="device" aria-labelledby="h-device">
-    <div class="grp-h"><span class="tag">DEVICE</span><h2 id="h-device">기기 용어</h2><a class="to" href="index.html#/9">슬라이드 9 ↗</a></div>
+    <div class="grp-h"><span class="tag">DEVICE</span><h2 id="h-device">기기 용어</h2><a class="to" href="index.html?full#/s-device">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t w3" data-k="베젤 노치 다이내믹 아일랜드 상태 표시줄 스테이터스 세이프 에어리어 안전 영역 홈 인디케이터">
@@ -1327,7 +1324,7 @@
 
   <!-- ============ PAGES ============ -->
   <section class="grp" id="pages" aria-labelledby="h-pages">
-    <div class="grp-h"><span class="tag">PAGES</span><h2 id="h-pages">화면 종류 · 랜딩 해부</h2><a class="to" href="index.html#/10">슬라이드 10–11 ↗</a></div>
+    <div class="grp-h"><span class="tag">PAGES</span><h2 id="h-pages">화면 종류 · 랜딩 해부</h2><a class="to" href="index.html#/s-pages">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t w2 tall" id="lpTile" data-k="랜딩 해부 히어로 소셜 프루프 기능 가격 요금제 자주 묻는 질문 콜투액션 폴드 첫 화면">
@@ -1451,7 +1448,7 @@
 
   <!-- ============ DASHBOARD ============ -->
   <section class="grp" id="dashboard" aria-labelledby="h-dashboard">
-    <div class="grp-h"><span class="tag">DASHBOARD</span><h2 id="h-dashboard">대시보드 해부</h2><a class="to" href="index.html#/12">슬라이드 12 ↗</a></div>
+    <div class="grp-h"><span class="tag">DASHBOARD</span><h2 id="h-dashboard">대시보드 해부</h2><a class="to" href="index.html#/s-dashboard">슬라이드로 ↗</a></div>
     <div class="tiles">
       <div class="t wide" data-k="대시보드 필터 바 기간 날짜 범위 KPI 카드 핵심 지표 델타 증감 스파크라인 선 차트 라인 막대 바 차트 도넛 파이 범례 툴팁">
         <div class="demo">
@@ -1494,7 +1491,7 @@
 
   <!-- ============ BUTTONS ============ -->
   <section class="grp" id="buttons" aria-labelledby="h-buttons">
-    <div class="grp-h"><span class="tag">BUTTONS</span><h2 id="h-buttons">누르는 것</h2><a class="to" href="index.html#/13">슬라이드 13 ↗</a></div>
+    <div class="grp-h"><span class="tag">BUTTONS</span><h2 id="h-buttons">누르는 것</h2><a class="to" href="index.html#/s-buttons">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="주 버튼 프라이머리 메인 행동">
@@ -1565,7 +1562,7 @@
 
   <!-- ============ FORM ============ -->
   <section class="grp" id="form" aria-labelledby="h-form">
-    <div class="grp-h"><span class="tag">FORM</span><h2 id="h-form">입력하는 것</h2><a class="to" href="index.html#/14">슬라이드 14 ↗</a></div>
+    <div class="grp-h"><span class="tag">FORM</span><h2 id="h-form">입력하는 것</h2><a class="to" href="index.html#/s-form">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="텍스트 필드 입력칸 인풋 라벨 레이블 플레이스홀더 헬퍼 도움말">
@@ -1644,7 +1641,7 @@
 
   <!-- ============ NAVIGATION ============ -->
   <section class="grp" id="navigation" aria-labelledby="h-navigation">
-    <div class="grp-h"><span class="tag">NAVIGATION</span><h2 id="h-navigation">이동하는 것</h2><a class="to" href="index.html#/15">슬라이드 15 ↗</a></div>
+    <div class="grp-h"><span class="tag">NAVIGATION</span><h2 id="h-navigation">이동하는 것</h2><a class="to" href="index.html#/s-navigation">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="탭 전환 액티브">
@@ -1735,7 +1732,7 @@
 
   <!-- ============ CONTENT ============ -->
   <section class="grp" id="content" aria-labelledby="h-content">
-    <div class="grp-h"><span class="tag">CONTENT</span><h2 id="h-content">보여주는 것</h2><a class="to" href="index.html#/16">슬라이드 16 ↗</a></div>
+    <div class="grp-h"><span class="tag">CONTENT</span><h2 id="h-content">보여주는 것</h2><a class="to" href="index.html#/s-content">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t w2" data-k="카드 그리드 정보 상자 격자">
@@ -1871,7 +1868,7 @@
 
   <!-- ============ OVERLAY ============ -->
   <section class="grp" id="overlay" aria-labelledby="h-overlay">
-    <div class="grp-h"><span class="tag">OVERLAY</span><h2 id="h-overlay">끼어드는 것</h2><a class="to" href="index.html#/17">슬라이드 17 ↗</a></div>
+    <div class="grp-h"><span class="tag">OVERLAY</span><h2 id="h-overlay">끼어드는 것</h2><a class="to" href="index.html#/s-overlay">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="모달 다이얼로그 대화상자 확인 창 컨펌 스크림 백드롭 오버레이 어두운 막">
@@ -1968,7 +1965,7 @@
 
   <!-- ============ WAITING ============ -->
   <section class="grp" id="waiting" aria-labelledby="h-waiting">
-    <div class="grp-h"><span class="tag">WAITING</span><h2 id="h-waiting">기다림과 빈칸</h2><a class="to" href="index.html#/18">슬라이드 18 ↗</a></div>
+    <div class="grp-h"><span class="tag">WAITING</span><h2 id="h-waiting">기다림과 빈칸</h2><a class="to" href="index.html#/s-waiting">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="스피너 로딩 빙글 프로그레스 진행률 퍼센트 바 인디터미닛">
@@ -2018,7 +2015,7 @@
 
   <!-- ============ PRO PARTS ============ -->
   <section class="grp" id="pro" aria-labelledby="h-pro">
-    <div class="grp-h"><span class="tag">PRO PARTS</span><h2 id="h-pro">한 수 위 부품</h2><a class="to" href="index.html#/20">슬라이드 20 ↗</a></div>
+    <div class="grp-h"><span class="tag">PRO PARTS</span><h2 id="h-pro">한 수 위 부품</h2><a class="to" href="index.html?full#/s-pro">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="날짜 범위 선택기 기간 달력 캘린더 데이트 피커">
@@ -2105,7 +2102,7 @@
 
   <!-- ============ STATES ============ -->
   <section class="grp" id="states" aria-labelledby="h-states">
-    <div class="grp-h"><span class="tag">STATES</span><h2 id="h-states">컴포넌트 상태</h2><a class="to" href="index.html#/22">슬라이드 22 ↗</a></div>
+    <div class="grp-h"><span class="tag">STATES</span><h2 id="h-states">컴포넌트 상태</h2><a class="to" href="index.html#/s-states">슬라이드로 ↗</a></div>
     <div class="tiles">
       <div class="t wide" data-k="상태 기본 호버 포커스 액티브 비활성 로딩 성공 실패 디스에이블">
         <div class="demo">
@@ -2140,7 +2137,7 @@
 
   <!-- ============ TOKENS ============ -->
   <section class="grp" id="tokens" aria-labelledby="h-tokens">
-    <div class="grp-h"><span class="tag">TOKENS</span><h2 id="h-tokens">디자인 토큰</h2><a class="to" href="index.html#/23">슬라이드 23 ↗</a></div>
+    <div class="grp-h"><span class="tag">TOKENS</span><h2 id="h-tokens">디자인 토큰</h2><a class="to" href="index.html#/s-tokens">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="간격 스페이싱 8의 배수 여백 단계">
@@ -2223,7 +2220,7 @@
 
   <!-- ============ TYPE · MEDIA ============ -->
   <section class="grp" id="type" aria-labelledby="h-type">
-    <div class="grp-h"><span class="tag">TYPE · MEDIA</span><h2 id="h-type">글자 · 이미지 · 아이콘</h2><a class="to" href="index.html#/24">슬라이드 24 · 19 ↗</a></div>
+    <div class="grp-h"><span class="tag">TYPE · MEDIA</span><h2 id="h-type">글자 · 이미지 · 아이콘</h2><a class="to" href="index.html?full#/s-type">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t" data-k="행간 줄 간격 라인 하이트 답답함">
@@ -2339,7 +2336,7 @@
 
   <!-- ============ THEME ============ -->
   <section class="grp" id="theme" aria-labelledby="h-theme">
-    <div class="grp-h"><span class="tag">THEME</span><h2 id="h-theme">테마 · 스타일 키워드</h2><a class="to" href="index.html#/26">슬라이드 26–29 ↗</a></div>
+    <div class="grp-h"><span class="tag">THEME</span><h2 id="h-theme">테마 · 스타일 키워드</h2><a class="to" href="index.html#/s-theme">슬라이드로 ↗</a></div>
     <div class="tiles">
 
       <div class="t wide" data-k="테마 머티리얼 쿠퍼티노 플루언트 shadcn 앤트 MUI 다크 모드 같은 카드">
@@ -2417,7 +2414,8 @@
 
 <footer class="wrap foot">
   <p>이름을 알면 지목할 수 있고, 지목할 수 있으면 AI가 알아듣습니다.</p>
-  <p>모양이 떠오르면 여기서 찾고, 이름을 복사해 <a href="index.html#/36">화면 주문서</a> 빈칸에 넣으세요.</p>
+  <p>모양이 떠오르면 여기서 찾고, 이름을 복사해 <a href="index.html#/s-template">화면 주문서</a> 빈칸에 넣으세요.</p>
+  <p>만든 화면을 고칠 때는 <b>좌표 + 증상 + 원하는 상태</b>로 — <a href="../prompt/#/feedback">프롬프트 덱의 피드백 공식</a></p>
   <p><a href="index.html">← UI/UX 용어 사전 슬라이드</a> · <a href="../">바이브 코딩 세미나 전체</a></p>
 </footer>
 

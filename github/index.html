@@ -28,7 +28,7 @@
   <meta property="og:title" content="바이브 코딩을 위한 최소한의 Git &amp; GitHub" />
   <meta property="og:description" content="명령어를 외우지 않는 Git 입문. 사내 GitHub 사용법과 branch 방식 GitHub Pages 배포를 에이전트 프롬프트로 배웁니다." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/github/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/github.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/github.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="바이브 코딩을 위한 최소한의 Git &amp; GitHub" />
   <meta name="twitter:description" content="명령어 암기 0개. 프롬프트로 배우는 사내 GitHub 사용법과 Pages 배포." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/github.png?v=1" />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/github.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -86,11 +86,6 @@
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
-      animation: bgFloat 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgFloat {
-      0%   { transform: translate(0,0) scale(1); }
-      100% { transform: translate(-2%, 2%) scale(1.05); }
     }
     body::after {
       content: "";
@@ -106,7 +101,7 @@
 
     .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
     .reveal .slides { text-align: left; }
-    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; word-break: keep-all; }
 
     /* HARD RULE: every text descendant defaults to pure white. */
     .reveal section,
@@ -267,26 +262,22 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .small { font-size: 1.18rem; }
     .tiny  { font-size: 1.0rem; }
+    .reveal p.small, .reveal li.small, .reveal span.small { font-size: 1.18rem; }
+    .reveal p.tiny, .reveal span.tiny { font-size: 1.0rem; }
     .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
     /* flex 컨테이너에서 chip이 가로로 늘어나지 않도록 */
     .vfill > .chip { align-self: flex-start; }
     .vfill.center > .chip { align-self: center; }
 
-    /* animated gradient text */
+    /* gradient text (정적) */
     .reveal .grad, .reveal section .grad {
       background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
-      background-size: 250% 250% !important;
+      background-size: 100% 100% !important;
       -webkit-background-clip: text !important;
       background-clip: text !important;
       color: transparent !important;
-      animation: gradMove 7s ease infinite;
       font-weight: 800;
       filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
-    }
-    @keyframes gradMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .chip {
@@ -326,9 +317,9 @@
       box-shadow:
         0 30px 60px -20px rgba(0,0,0,0.6),
         inset 0 1px 0 rgba(255,255,255,0.10);
-      transition: transform .4s ease, border-color .4s ease;
+      transition: border-color .25s ease-out;
     }
-    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card:hover { border-color: rgba(155,130,255,0.9); }
     .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
     .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
     .card p + p { margin-top: 0.5rem; }
@@ -368,6 +359,7 @@
       color: #FFFFFF;
       margin: 0;
       white-space: pre-wrap;
+      font-variant-ligatures: none;
     }
     .code .kw { color: var(--accent); font-weight: 600; }
     .code .st { color: var(--accent-2); }
@@ -390,142 +382,23 @@
       color: #E1D9FF;
     }
 
-    /* ========= Auto-sequential reveal — 원본과 동일한 규약 ========= */
+    /* ========= 순서를 돕는 짧은 등장 — 300ms ease-out, 한 장 안에서 최대 0.3s 지연 ========= */
     .autoshow { opacity: 0; }
-    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
-    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
-    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
-    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
-    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
-    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
-    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
-    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
-    .autoshow:nth-child(1) { animation-delay: .05s; }
-    .autoshow:nth-child(2) { animation-delay: .2s; }
-    .autoshow:nth-child(3) { animation-delay: .35s; }
-    .autoshow:nth-child(4) { animation-delay: .5s; }
-    .autoshow:nth-child(5) { animation-delay: .65s; }
-    .autoshow:nth-child(6) { animation-delay: .8s; }
-    .autoshow:nth-child(7) { animation-delay: .95s; }
-    .autoshow:nth-child(8) { animation-delay: 1.1s; }
-
-    /* ==================================================================
-       ctx-box — 컨텍스트 창 시각화의 핵심 컴포넌트
-       고정 px 크기(reveal이 1280x800 캔버스를 통째로 scale하므로 안전),
-       column-reverse로 DOM 순서 = 아래→위 쌓임.
-       ================================================================== */
-    .ctx-wrap { display: flex; gap: 2.4rem; align-items: center; justify-content: center; }
-    .ctx-box {
-      position: relative; margin: 0; flex: 0 0 auto;
-      width: 250px; height: 500px;
-      display: flex; flex-direction: column-reverse;
-      border: 2px solid rgba(155,130,255,0.55);
-      border-radius: 14px;
-      background:
-        repeating-linear-gradient(0deg, transparent 0 49px, rgba(255,255,255,0.05) 49px 50px),
-        rgba(14,18,32,0.65);
-      box-shadow: 0 0 34px rgba(155,130,255,0.14), inset 0 0 24px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
-    .ctx-seg {
-      flex: 0 0 auto; height: var(--h, 0%);
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-      font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 700;
-      white-space: nowrap;
-      border-top: 2px solid rgba(6,8,15,0.7);
-      transition: height .8s cubic-bezier(.25,.8,.3,1);
-    }
-    .ctx-lab { padding: 0 8px; text-shadow: none !important; }
-    .seg-sys   { background: linear-gradient(90deg, rgba(155,130,255,.92), rgba(155,130,255,.68)); color: #0A0620 !important; }
-    .seg-mem   { background: rgba(255,212,107,.88); color: #241A00 !important; }
-    .seg-conv  { background: rgba(43,234,208,.82); color: #00261F !important; }
-    .seg-tool  { background: rgba(255,122,149,.85); color: #2B000B !important; }
-    .seg-plan  { background: repeating-linear-gradient(45deg, rgba(155,130,255,.55) 0 8px, rgba(155,130,255,.22) 8px 16px); color: #E6D9FF !important; }
-    .seg-ghost {
-      background: repeating-linear-gradient(45deg, rgba(255,122,149,.30) 0 8px, rgba(255,122,149,.10) 8px 16px);
-      color: #FFC9D3 !important; text-decoration: line-through; opacity: .8;
-    }
-    .seg-danger { background: linear-gradient(90deg, rgba(255,77,94,.92), rgba(255,77,94,.6)); color: #FFF !important; animation: dangerPulse 1.2s ease-in-out infinite; }
-    @keyframes dangerPulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
-    .ctx-freelabel {
-      position: absolute; top: 12px; left: 0; right: 0; text-align: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 1.05rem;
-      color: #E6D9FF; opacity: .9; pointer-events: none;
-    }
-    .ctx-freelabel .sub { display: block; font-size: .78rem; color: #9BA6C0; margin-top: 3px; }
-    .ctx-counter.warn { color: #FFE08A; }
-    .ctx-counter.crit { color: #FF8A96; }
-    /* 박스 아래 캡션 — figure의 overflow:hidden에 잘리지 않도록 박스 '밖' 형제 요소로 사용 */
-    .ctx-caption {
-      text-align: center; font-size: 1.02rem; font-weight: 800;
-      color: #E6D9FF !important; white-space: nowrap; margin: .6rem 0 0;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    /* 80% auto-compact 한계선 */
-    .ctx-limit {
-      position: absolute; left: 0; right: 0; bottom: 80%; height: 0;
-      border-top: 2px dashed rgba(255,212,107,.75);
-      z-index: 2; pointer-events: none;
-    }
-    .ctx-limit::after {
-      content: attr(data-label);
-      position: absolute; right: 6px; top: -1.45em;
-      font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 700;
-      color: #FFE08A;
-    }
-    /* variants */
-    .ctx-box.slim { width: 205px; height: 440px; }
-    .ctx-box.mini { width: 120px; height: 240px; border-radius: 10px; }
-    .ctx-box.mini .ctx-freelabel { font-size: .8rem; top: 7px; }
-    .ctx-box.mini .ctx-seg { font-size: .6rem; }
-    .ctx-box.danger-box { border-color: var(--danger); animation: ctxAlarm 1.6s ease-in-out infinite; }
-    @keyframes ctxAlarm {
-      0%,100% { box-shadow: 0 0 24px rgba(255,77,94,0.25), inset 0 0 24px rgba(0,0,0,0.5); }
-      50%     { box-shadow: 0 0 54px rgba(255,77,94,0.6), inset 0 0 24px rgba(0,0,0,0.5); }
-    }
-    /* entry animation: 슬라이드 진입 시 세그먼트가 자라남 */
-    @keyframes segFill { from { height: 0; } to { height: var(--h, 0%); } }
-    section.present .ctx-anim .ctx-seg {
-      animation: segFill .9s cubic-bezier(.2,.7,.3,1) forwards;
-      height: 0; transition: none;
-    }
-    section.present .ctx-anim .ctx-seg:nth-child(2) { animation-delay: .15s; }
-    section.present .ctx-anim .ctx-seg:nth-child(3) { animation-delay: .45s; }
-    section.present .ctx-anim .ctx-seg:nth-child(4) { animation-delay: .75s; }
-    section.present .ctx-anim .ctx-seg:nth-child(5) { animation-delay: 1.05s; }
-    section.present .ctx-anim .ctx-seg:nth-child(6) { animation-delay: 1.35s; }
-    section.present .ctx-anim .ctx-seg:nth-child(7) { animation-delay: 1.65s; }
-    /* legend */
-    .ctx-legend { display: flex; flex-direction: column; gap: .65rem; font-size: 1.06rem; }
-    .lg-row { display: flex; align-items: center; gap: .6rem; color: #E6D9FF !important; }
-    .lg-row b { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #FFFFFF; padding-left: 1rem; }
-    .sw { width: 16px; height: 16px; border-radius: 4px; flex: 0 0 auto; }
-    .sw-sys  { background: var(--accent); }
-    .sw-mem  { background: var(--accent-4); }
-    .sw-conv { background: var(--accent-2); }
-    .sw-tool { background: var(--accent-3); }
-    .sw-plan { background: repeating-linear-gradient(45deg, rgba(155,130,255,.7) 0 5px, rgba(155,130,255,.25) 5px 10px); }
-    .sw-free { background: rgba(14,18,32,0.9); border: 1px dashed rgba(155,130,255,.5); }
-
-    /* ========= 시뮬레이션 타임라인 (S8) ========= */
-    .sim-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: 0; padding: 0; }
-    .sim-list > li { margin: 0; }
-    .sim-line {
-      display: flex; align-items: center; gap: .8rem;
-      padding: .55rem 1.1rem; border-radius: 12px;
-      border: 1px solid rgba(190,200,224,0.3);
-      background: rgba(230,236,249,0.05);
-      font-size: 1.14rem !important;
-    }
-    .sim-line .tok { margin-left: auto; font-weight: 800; font-size: 1.05rem; white-space: nowrap; padding-left: .8rem; }
+    section.present .autoshow { animation: asFadeUp .32s cubic-bezier(.2,.7,.3,1) forwards; }
+    section.present .autoshow.fade-in { animation-name: asFadeIn; }
+    @keyframes asFadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn { from { opacity:0; } to { opacity:1; } }
+    .autoshow:nth-child(2) { animation-delay: .06s; }
+    .autoshow:nth-child(3) { animation-delay: .12s; }
+    .autoshow:nth-child(4) { animation-delay: .18s; }
+    .autoshow:nth-child(5) { animation-delay: .24s; }
+    .autoshow:nth-child(n+6) { animation-delay: .3s; }
 
     /* ========= 리스트 유틸 ========= */
     .list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
     .list-clean li { font-size: 1.22rem !important; line-height: 1.5; }
 
-    /* ========= 우선순위 사다리 (S5) ========= */
+    /* ========= 사다리(단계 목록) ========= */
     .ladder { display: flex; flex-direction: column; gap: .45rem; }
     .ladder .rung {
       display: flex; align-items: center; gap: 1rem;
@@ -536,22 +409,14 @@
     }
     .ladder .rung .no {
       font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem;
-      color: #B5A1FF !important; width: 1.4em; flex: 0 0 auto;
+      color: #B5A1FF !important; width: 1.6em; flex: 0 0 auto;
     }
     .ladder .rung .w {
       margin-left: auto; font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem; color: #9BA6C0 !important; white-space: nowrap;
+      font-size: .9rem; color: #C9D2E4 !important; white-space: nowrap; padding-left: 1rem;
     }
-    .ladder .rung:nth-child(1) { border-color: rgba(155,130,255,.85); background: rgba(124,92,255,.30); }
-    .ladder .rung:nth-child(2) { background: rgba(124,92,255,.22); }
-    .ladder .rung:nth-child(3) { background: rgba(124,92,255,.15); }
-    .ladder .rung:nth-child(4) { background: rgba(43,234,208,.14); border-color: rgba(43,234,208,.5); }
-    .ladder .rung:nth-child(5) { background: rgba(40,30,80,.22); }
-    .ladder .rung:nth-child(6) { background: rgba(40,30,80,.16); }
-    .ladder .rung:nth-child(7) { background: rgba(40,30,80,.10); opacity: .8; }
-    .ladder-arrow { text-align: center; color: #8A93B2 !important; font-size: 1rem; margin: -0.2rem 0; }
 
-    /* ========= 에이전트 루프 (S7) ========= */
+    /* ========= 4단계 루프 ========= */
     .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; }
     .loop-step {
       display: flex; flex-direction: column; gap: .25rem; align-items: flex-start;
@@ -561,72 +426,17 @@
     }
     .loop-step .no { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800; color: #B5A1FF !important; }
     .loop-step .nm2 { font-size: 1.12rem; font-weight: 800; }
-    .loop-step.hot { border-color: rgba(255,122,149,.65); background: rgba(255,122,149,.10); }
-    .loop-step.hot .no { color: #FF94AC !important; }
+    .loop-step.hot { border-color: rgba(43,234,208,.65); background: rgba(43,234,208,.08); }
+    .loop-step.hot .no { color: #5BFFE0 !important; }
 
-    /* ========= 문제 테이블 (S9) ========= */
-    .prob-list { display: flex; flex-direction: column; gap: .55rem; }
-    .prob-item {
-      display: flex; align-items: baseline; gap: 1.1rem;
-      padding: .65rem 1.2rem; border-radius: 12px;
-      border: 1px solid rgba(255,122,149,0.35);
-      background: rgba(80,25,45,0.25);
-    }
-    .prob-item .pname { font-weight: 800; font-size: 1.28rem; white-space: nowrap; min-width: 9.5em; }
-    .prob-item .pdesc { font-size: 1.12rem; color: #E8ECF5 !important; }
-
-    /* ========= 성능 공식 (S11) ========= */
-    .formula { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; margin: 1rem 0; }
-    .fx-box {
-      display: flex; flex-direction: column; align-items: center; gap: .3rem;
-      background: rgba(20,22,44,.55);
-      border: 1px solid rgba(155,130,255,.35); border-radius: 16px;
-      padding: .85rem 1.3rem;
-    }
-    .fx-box .fx-name { font-size: 1.22rem; font-weight: 800; }
-    .fx-box .fx-val { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; color: #fff; }
-    .fx-box.dim .fx-val { color: #FF8A96; }
-    .fx-box.hero { border-color: rgba(43,234,208,.7); box-shadow: 0 0 30px rgba(43,234,208,.2); }
-    .fx-op { font-size: 2.2rem; font-weight: 800; color: var(--fg-soft) !important; }
-
-    /* ========= before/after 미니 박스 쌍 (CH4 패턴 슬라이드) ========= */
-    .mini-pair { display: flex; align-items: center; gap: 1rem; justify-content: center; }
-    .mini-pair .arr { font-size: 2rem; font-weight: 800; color: #8A93B2 !important; }
-
-    /* ========= 궤도: 상자 밖의 세계 (S19) ========= */
-    .orbit-col { display: flex; flex-direction: column; gap: 1rem; }
-    .orbit-node {
-      display: flex; flex-direction: column; gap: .2rem;
-      padding: .75rem 1.1rem; border-radius: 14px;
-      border: 1px solid rgba(43,234,208,0.5);
-      background: rgba(15,50,55,0.45);
-      min-width: 15.5em;
-    }
-    .orbit-node .on-name { font-weight: 800; font-size: 1.18rem; color: #A9FFF0 !important; }
-    .orbit-node .on-desc { font-size: .98rem; color: #D6DCEC !important; }
-    .orbit-arrows { display: flex; flex-direction: column; gap: 2.2rem; font-size: 1.9rem; color: #5BFFE0 !important; font-weight: 800; }
-
-    /* ========= 서브에이전트 격리 (S18) ========= */
-    .iso-wrap { display: flex; align-items: center; justify-content: center; gap: 1.4rem; }
-    .iso-side { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-    .iso-note { font-size: .92rem; color: #9BA6C0 !important; font-family: 'JetBrains Mono', monospace; }
-    .iso-arrow { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
-    .iso-arrow .a { font-size: 2rem; font-weight: 800; color: #5BFFE0 !important; }
-    .iso-arrow .t { font-size: .85rem; font-family: 'JetBrains Mono', monospace; color: #A9FFF0 !important; white-space: nowrap; }
-
-    /* ========= 품질 곡선 SVG (S10) ========= */
-    .reveal section svg text {
-      paint-order: stroke fill;
-      stroke: #06080F;
-      stroke-width: 1.2px;
-      stroke-linejoin: round;
-    }
+    /* ========= SVG 글자 가독성 ========= */
+    .reveal section svg text { paint-order: stroke fill; stroke: #06080F; stroke-width: 1.2px; stroke-linejoin: round; }
 
     /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
     .slide-refs {
       position: absolute; left: 56px; bottom: 12px; z-index: 3;
       display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
-      max-width: 66%;
+      max-width: 40%;
       font-family: 'JetBrains Mono', monospace; font-size: .78rem;
       opacity: .8;
     }
@@ -637,334 +447,49 @@
     }
     .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
 
-    /* ========= 하네스 다이어그램 ========= */
-    .harness-box {
-      position: relative; border: 2px dashed rgba(255,212,107,.65); border-radius: 20px;
-      padding: 2rem 1.5rem 1.3rem; background: rgba(70,56,23,.14);
-      display: flex; flex-direction: column; gap: 1rem; align-items: center;
-    }
-    .harness-tag {
-      position: absolute; top: -0.95em; left: 20px;
-      background: #463817; border: 1px solid rgba(255,212,107,.85);
-      color: #FFEFC2 !important; border-radius: 999px; padding: .22em .9em;
-      font-family: 'JetBrains Mono', monospace; font-size: .88rem; font-weight: 800;
-      white-space: nowrap;
-    }
-    .model-orb {
-      display: flex; flex-direction: column; align-items: center; gap: .4rem;
-      padding: 1.1rem 1.4rem; border-radius: 18px; text-align: center;
-      border: 2px solid rgba(155,130,255,.8); background: rgba(124,92,255,.18);
-      font-size: 2rem;
-    }
-    .model-orb span { font-size: .95rem; font-weight: 800; line-height: 1.35; }
-
     /* ========= 참고자료 슬라이드 ========= */
     .ref-col h3 { font-size: 1.3rem; }
     .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
     .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
     .ref-col li a { font-weight: 700; }
-    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
+    .ref-col li .rd { display: block; font-size: .88rem; color: #B8BFD0 !important; }
 
-    /* ========= 스포트라이트 씬 (S2) ========= */
-    .spot-stage {
-      position: relative; height: 500px; margin-top: .2rem;
-      border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(155,130,255,0.22);
-      background:
-        radial-gradient(ellipse 44% 78% at 50% 50%, rgba(124,92,255,0.13), transparent 70%),
-        radial-gradient(ellipse 90% 120% at 50% 50%, rgba(6,8,15,0.2), rgba(3,4,9,0.96) 78%),
-        #04050B;
+    /* ========= 실습 박스 — 배우는 것 · 완료 기준 · 막히면 ========= */
+    .lab-learn { font-size: 1.12rem !important; color: #E2E6F0 !important; margin: 0 0 .7rem; }
+    .lab-learn b { color: #C5FFF5 !important; }
+    .done-box, .stuck-box {
+      border-radius: 12px; padding: .7rem 1rem .8rem;
+      display: flex; flex-direction: column; gap: .3rem;
     }
-    .spot-ghost {
-      position: absolute; display: flex; flex-direction: column; align-items: center; gap: .1rem;
-      font-size: 1.14rem; font-weight: 700; color: #6E7690 !important;
-      opacity: .5; filter: blur(0.5px) grayscale(.65);
-      animation: ghostFloat 7s ease-in-out infinite alternate;
-      text-shadow: none !important;
+    .done-box  { border: 1.5px solid rgba(43,234,208,.75); background: rgba(13,61,56,.45); }
+    .stuck-box { border: 1px dashed rgba(255,212,107,.6); background: rgba(70,56,23,.18); }
+    .done-box .bx-t, .stuck-box .bx-t {
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800; letter-spacing: .05em; margin: 0;
     }
-    .spot-ghost .gx {
-      font-family: 'JetBrains Mono', monospace; font-size: .8rem;
-      color: #565E78 !important; letter-spacing: .1em;
-    }
-    .spot-ghost.g2 { animation-delay: 1.6s; }
-    .spot-ghost.g3 { animation-delay: 3.1s; }
-    .spot-ghost.g4 { animation-delay: 4.4s; }
-    @keyframes ghostFloat {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(-12px); }
-    }
-    .spot-box {
-      position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%);
-      width: 350px; min-height: 320px; padding: 3.2rem 1.1rem 1.1rem;
-      display: flex; flex-direction: column; align-items: center; gap: .55rem;
-      border: 2px solid rgba(155,130,255,0.75); border-radius: 16px;
-      background: rgba(14,18,32,0.78);
-      box-shadow: 0 0 64px rgba(155,130,255,0.26), inset 0 0 30px rgba(0,0,0,0.55);
-      transition: box-shadow .8s ease, border-color .8s ease;
-    }
-    .spot-box .spot-boxlabel {
-      position: absolute; top: .85rem; left: 0; right: 0; text-align: center;
-      font-size: .92rem; font-weight: 800; letter-spacing: .14em;
-      color: #E6D9FF !important;
-    }
-    /* 좋은 재료가 들어오면 상자가 맑게 발광 */
-    .spot-box:has(.spot-chip.good.visible) {
-      border-color: rgba(43,234,208,0.85);
-      box-shadow: 0 0 90px rgba(43,234,208,0.34), inset 0 0 30px rgba(0,0,0,0.5);
-    }
-    /* 잡음이 섞이면 탁해짐 */
-    .spot-box:has(.spot-chip.junk.visible) {
-      border-color: rgba(255,122,149,0.8);
-      box-shadow: 0 0 74px rgba(255,122,149,0.3), inset 0 0 40px rgba(60,10,25,0.7);
-    }
-    .spot-box::after {
-      content: ""; position: absolute; inset: 0; border-radius: 14px; pointer-events: none;
-      background:
-        repeating-linear-gradient(-35deg, rgba(255,122,149,0.09) 0 14px, transparent 14px 30px),
-        radial-gradient(ellipse at 50% 80%, rgba(120,30,55,0.4), transparent 70%);
-      opacity: 0; transition: opacity .9s ease;
-    }
-    .spot-box:has(.spot-chip.junk.visible)::after { opacity: 1; }
-    .spot-chip {
-      display: inline-flex; align-items: center; gap: .35em;
-      padding: .34em .85em; border-radius: 9px; white-space: nowrap;
-      font-size: 1.04rem; font-weight: 800; border: 1px solid;
-      text-shadow: none !important;
-    }
-    .spot-chip.good { background: rgba(13,61,56,0.94); border-color: rgba(43,234,208,0.8); color: #C5FFF5 !important; }
-    .spot-chip.junk { background: rgba(74,26,38,0.94); border-color: rgba(255,122,149,0.75); color: #FFD0DA !important; }
-    /* 커스텀 프래그먼트: 어둠 밖에서 상자 안으로 날아든다 */
-    .reveal .fragment.custom.spot-fly {
-      opacity: 0; visibility: hidden;
-      transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(1.2) rotate(var(--fr, 0deg));
-      transition: opacity .7s ease, transform .75s cubic-bezier(.2,.75,.3,1.04), visibility .7s;
-    }
-    .reveal .fragment.custom.spot-fly.visible {
-      opacity: 1; visibility: visible; transform: none;
-    }
-    /* spot-boxlabel이 첫 자식이므로 chip은 2번째부터 — good: 2·3·4, junk: 5·6·7 */
-    .spot-chip.spot-fly:nth-child(3) { transition-delay: .14s; }
-    .spot-chip.spot-fly:nth-child(4) { transition-delay: .28s; }
-    .spot-chip.spot-fly:nth-child(6) { transition-delay: .14s; }
-    .spot-chip.spot-fly:nth-child(7) { transition-delay: .28s; }
-    .spot-cap {
-      position: absolute; left: 0; right: 0; bottom: 1.05rem; text-align: center;
-      font-size: 1.3rem; font-weight: 800; margin: 0;
-    }
-    .spot-hint { color: #8A93B2 !important; font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
-    .spot-stage:has(.spot-chip.good.visible) .spot-hint { opacity: 0; transition: opacity .5s; }
-    .spot-stage:has(.spot-chip.junk.visible) .cap-good { opacity: 0; transition: opacity .5s; }
-    .spot-cap.fragment { transition: opacity .6s ease .35s; }
+    .done-box .bx-t  { color: #8FF5E2 !important; }
+    .stuck-box .bx-t { color: #FFE08A !important; }
+    .done-box p, .stuck-box p, .done-box li, .stuck-box li { font-size: 1rem !important; line-height: 1.45; margin: 0; color: #E8ECF5 !important; }
+    .done-box ul, .stuck-box ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: .2rem; }
 
-    /* ========= 원형 에이전트 루프 (S7) ========= */
-    .loopc { position: relative; width: 430px; height: 430px; flex: 0 0 auto; }
-    .loopc svg.loopc-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .loopc-node {
-      position: absolute; transform: translate(-50%, -50%);
-      display: flex; flex-direction: column; align-items: center; gap: .1rem;
-      padding: .5rem .95rem; border-radius: 12px; text-align: center;
-      border: 1px solid rgba(190,200,224,0.45);
-      background: rgba(10,13,26,0.92);
-      font-size: 1.02rem; font-weight: 800; white-space: nowrap;
-      box-shadow: 0 10px 26px -12px rgba(0,0,0,0.7);
+    /* ========= 보안 약속 (시리즈 공통) ========= */
+    .promise-list { display: flex; flex-direction: column; gap: .6rem; }
+    .promise {
+      display: grid; grid-template-columns: 2.4rem 1fr; gap: .2rem 1rem; align-items: baseline;
+      padding: .75rem 1.2rem; border-radius: 14px;
+      border: 1px solid rgba(255,122,149,.55); background: rgba(80,25,45,.32);
     }
-    .loopc-node .lno {
-      font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 800;
-      color: #B5A1FF !important; letter-spacing: .1em;
+    .promise .pn { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 900; color: #FF94AC !important; grid-row: span 2; }
+    .promise b { font-size: 1.28rem; line-height: 1.4; }
+    .promise span.why { font-size: 1rem; color: #D6DCEA !important; line-height: 1.45; }
+    .plus-one {
+      margin-top: .7rem; padding: .6rem 1.1rem; border-radius: 12px;
+      border: 1px dashed rgba(155,130,255,.6); background: rgba(40,30,80,.3);
+      font-size: 1.05rem;
     }
-    .loopc-node.hot { border-color: rgba(255,122,149,0.7); background: rgba(58,16,30,0.94); }
-    .loopc-node.hot .lno { color: #FF94AC !important; }
-    .loopc-center {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-      color: #E6D9FF !important; white-space: nowrap;
-      padding: .45em 1em; border-radius: 999px;
-      background: rgba(12,16,30,0.9); border: 1px solid rgba(155,130,255,0.55);
-      box-shadow: 0 0 24px rgba(124,92,255,0.35);
-    }
+    .plus-one .po-t { font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 800; color: #CBBDFF !important; margin-right: .6rem; }
 
-    /* ========= 묻히는 한 줄 (S9) ========= */
-    .bury-strip {
-      display: flex; flex-direction: column; gap: .42rem; justify-content: center;
-      padding: 1rem 1.2rem; border-radius: 16px;
-      border: 1px solid rgba(155,130,255,0.35);
-      background: rgba(10,13,26,0.75);
-      min-height: 430px;
-    }
-    .bury-strip .nb {
-      display: block; height: 11px; border-radius: 6px;
-      width: var(--w, 70%);
-      background: rgba(230,236,249,0.14);
-    }
-    .bury-grp { display: flex; flex-direction: column; gap: .42rem; }
-    /* 노이즈 그룹: 등장 시 위아래로 펼쳐지며 핵심 줄을 밀어냄 */
-    .reveal .fragment.custom.bury-in { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .8s cubic-bezier(.25,.8,.3,1), opacity .6s ease; }
-    .reveal .fragment.custom.bury-in.visible { max-height: 140px; opacity: 1; }
-    .bury-key {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .5rem .9rem; border-radius: 10px; white-space: nowrap;
-      border: 1px solid rgba(255,212,107,0.85);
-      background: rgba(70,56,23,0.55);
-      font-size: 1.08rem; font-weight: 800; color: #FFEFC2 !important;
-      box-shadow: 0 0 22px rgba(255,212,107,0.22);
-      transition: opacity .8s ease, filter .8s ease, box-shadow .8s ease;
-    }
-    .bury-strip:has(.bg1.visible) .bury-key { opacity: .72; box-shadow: 0 0 12px rgba(255,212,107,0.12); }
-    .bury-strip:has(.bg2.visible) .bury-key { opacity: .5; }
-    .bury-strip:has(.bury-tag.visible) .bury-key { opacity: .3; filter: blur(0.5px); box-shadow: none; }
-    .bury-tag {
-      align-self: center; margin-top: .1rem;
-      font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800;
-      color: #FF94AC !important;
-    }
-    .prob-chip {
-      display: flex; align-items: center; gap: .8rem;
-      padding: .6rem 1.1rem; border-radius: 12px;
-      border: 1px solid rgba(255,122,149,0.4);
-      background: rgba(80,25,45,0.28);
-      font-size: 1.22rem; font-weight: 800; white-space: nowrap;
-    }
-
-    /* ========= 분류 씬 (S12) ========= */
-    .triage { display: flex; align-items: stretch; justify-content: center; gap: 1.6rem; }
-    .tri-col { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
-    .tri-col .tri-title {
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-      letter-spacing: .1em; color: #9BA6C0 !important; margin: 0;
-    }
-    .tri-queue { justify-content: center; min-width: 21em; }
-    .tri-item {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .5rem 1rem; border-radius: 11px; white-space: nowrap;
-      border: 1px solid rgba(190,200,224,0.4);
-      background: rgba(230,236,249,0.07);
-      font-size: 1.12rem; font-weight: 800;
-      transition: opacity .65s ease, transform .7s cubic-bezier(.4,0,.8,.4);
-    }
-    /* 대기열 아이템: 판정되면 좌(상자) 또는 우(휴지통)로 날아가며 사라짐 */
-    .reveal .fragment.custom.tri-leave.visible.to-box   { opacity: 0; transform: translateX(-300px) scale(.72); }
-    .reveal .fragment.custom.tri-leave.visible.to-trash { opacity: 0; transform: translate(300px, 60px) rotate(16deg) scale(.8); }
-    .tri-land {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .34em .85em; border-radius: 9px; white-space: nowrap;
-      font-size: .98rem; font-weight: 800; border: 1px solid;
-      text-shadow: none !important;
-    }
-    .tri-land.ok  { background: rgba(13,61,56,0.9); border-color: rgba(43,234,208,0.75); color: #C5FFF5 !important; }
-    .tri-land.no  { background: rgba(74,26,38,0.85); border-color: rgba(255,122,149,0.6); color: #FFB9C7 !important; text-decoration: line-through; opacity: .85; }
-    .tri-bin { font-size: 3.4rem; line-height: 1; filter: drop-shadow(0 0 18px rgba(255,122,149,0.3)); }
-
-    /* ========= 하네스 시연 (S4b) ========= */
-    .hx-arrow {
-      font-size: 1.9rem; font-weight: 800; color: #5E6680 !important;
-      transition: color .5s ease, text-shadow .5s ease;
-    }
-    section:has(.hx2.visible) .hx-arrow {
-      color: #5BFFE0 !important; text-shadow: 0 0 18px rgba(43,234,208,0.8);
-    }
-
-    /* ========= 예산 바 (S6) ========= */
-    .budget-bar {
-      display: flex; height: 40px; border-radius: 11px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.28); width: 100%;
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-    }
-    .budget-bar .bseg { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
-    .budget-bar .b-fixed { flex: 0 0 13.5%; background: linear-gradient(90deg, rgba(155,130,255,.92), rgba(155,130,255,.7)); color: #0A0620 !important; }
-    .budget-bar .b-work  { flex: 1; background: rgba(43,234,208,0.2); border-left: 2px dashed rgba(43,234,208,0.7); color: #A9FFF0 !important; }
-
-    /* ========= 품질 곡선 드로잉 (S10) ========= */
-    .curve-draw { stroke-dasharray: 620; stroke-dashoffset: 620; }
-    section.present .curve-draw { animation: curveDraw 1.8s ease-out .4s forwards; }
-    @keyframes curveDraw { to { stroke-dashoffset: 0; } }
-
-    /* ========= SKILL.md 해부 (S24) =========
-       파일 전체가 처음부터 보이고, 단계가 진행될수록 블록이
-       하이라이트되며 "context 로 들어간" 상태를 표현한다. */
-    .skmd { display: flex; flex-direction: column; gap: .8rem; }
-    .skmd pre.code { font-size: .98rem; line-height: 1.5; }
-    .sk-front {
-      border-color: rgba(43,234,208,0.85) !important;
-      box-shadow: 0 0 26px rgba(43,234,208,0.22);
-    }
-    .sk-tag {
-      align-self: flex-start;
-      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800;
-      color: #A9FFF0 !important; padding: .15em .6em;
-      border: 1px solid rgba(43,234,208,0.5); border-radius: 999px;
-      background: rgba(13,61,56,0.6);
-      transition: color .5s ease, border-color .5s ease, background .5s ease;
-    }
-    .sk-tag.dim { color: #9BA6C0 !important; border-color: rgba(190,200,224,0.4); background: rgba(230,236,249,0.06); }
-    .sk-blk {
-      position: relative; display: flex; flex-direction: column; gap: .4rem;
-      transition: opacity .6s ease, filter .6s ease;
-    }
-    .sk-blk.b-body, .sk-blk.b-sub { opacity: .35; filter: saturate(.4); }
-    .sk-blk::after {
-      content: "→ context 로드됨"; position: absolute; top: -0.95em; right: 12px;
-      font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 800;
-      color: #FFEFC2; padding: .12em .6em; border-radius: 999px;
-      background: #463817; border: 1px solid rgba(255,212,107,0.85);
-      opacity: 0; transition: opacity .5s ease, transform .5s ease;
-      transform: translateY(4px);
-    }
-    .sk-blk.b-front::after {
-      content: "✓ 항상 context 안"; opacity: 1; transform: none;
-      color: #C5FFF5; background: #0D3D38; border-color: rgba(43,234,208,0.85);
-    }
-    section:has(.pd2.visible) .sk-blk.b-body,
-    section:has(.pd3.visible) .sk-blk.b-sub { opacity: 1; filter: none; }
-    section:has(.pd2.visible) .sk-blk.b-body::after,
-    section:has(.pd3.visible) .sk-blk.b-sub::after { opacity: 1; transform: none; }
-    section:has(.pd2.visible) .sk-blk.b-body pre.code,
-    section:has(.pd3.visible) .sk-blk.b-sub pre.code {
-      border-color: rgba(255,212,107,0.8);
-      box-shadow: 0 0 22px rgba(255,212,107,0.18);
-    }
-    section:has(.pd2.visible) .sk-blk.b-body .sk-tag,
-    section:has(.pd3.visible) .sk-blk.b-sub .sk-tag {
-      color: #FFEFC2 !important; border-color: rgba(255,212,107,0.7); background: rgba(70,56,23,0.6);
-    }
-
-    /* ========= MCP vs CLI+Skill (S25) ========= */
-    .vs-num {
-      font-family: 'JetBrains Mono', monospace; font-weight: 800;
-      font-size: 1.5rem; text-align: center; white-space: nowrap;
-    }
-
-    /* ========= 언어별 토큰 효율 (S3) — 토크나이저처럼 청크를 색으로 표시 ========= */
-    .tokcmp {
-      display: flex; flex-direction: column; gap: .55rem;
-      margin: 1.1rem auto 0; max-width: 900px; text-align: left;
-      padding: .95rem 1.3rem; border-radius: 14px;
-      border: 1px solid rgba(155,130,255,0.35);
-      background: rgba(10,13,26,0.6);
-    }
-    .tok-row { display: flex; align-items: center; gap: .9rem; }
-    .tok-lang {
-      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: .9rem;
-      color: #B5A1FF !important; width: 2.2em; flex: 0 0 auto;
-    }
-    .tok-str { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; display: flex; flex-wrap: wrap; row-gap: .2rem; }
-    .tok-str .tk { padding: .08em .06em; border-radius: 4px; white-space: pre; text-shadow: none !important; }
-    .tok-str .tk:nth-child(odd)  { background: rgba(124,92,255,0.34); }
-    .tok-str .tk:nth-child(even) { background: rgba(43,234,208,0.30); }
-    .tok-n { margin-left: auto; padding-left: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; white-space: nowrap; }
-
-    /* ========= fallbacks: overview / print / reduced-motion =========
-       .autoshow와 .ctx-seg 모두 — 가시성이 애니메이션에 묶여 있으므로
-       세 모드 전부에서 강제로 완성 상태를 보여준다. */
-    .reveal.overview .autoshow {
-      opacity: 1 !important;
-      animation: none !important;
-      transform: none !important;
-    }
-    .reveal.overview .ctx-seg {
-      animation: none !important;
-      transition: none !important;
-      height: var(--h, 0%) !important;
-    }
+    /* ========= fallbacks: overview / print / reduced-motion ========= */
+    .reveal.overview .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
     .reveal.overview .slides section {
       display: block !important;
       cursor: pointer;
@@ -975,50 +500,13 @@
     .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
     .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
     @media print {
-      .reveal .autoshow {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
-      }
-      .reveal .ctx-seg {
-        animation: none !important;
-        transition: none !important;
-        height: var(--h, 0%) !important;
-      }
-      /* 커스텀 프래그먼트도 완성 상태로 */
-      .reveal .fragment.custom {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        max-height: none !important;
-      }
-      .reveal .fragment.custom.tri-leave { opacity: 0 !important; }
-      .sk-blk { opacity: 1 !important; filter: none !important; }
-      .sk-blk::after { opacity: 1 !important; transform: none !important; }
-      .curve-draw { stroke-dashoffset: 0 !important; animation: none !important; }
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
       .dl-toolbar { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .reveal .autoshow {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
-      }
-      .reveal .ctx-seg {
-        animation: none !important;
-        transition: none !important;
-        height: var(--h, 0%) !important;
-      }
-      .grad, .ctx-box.danger-box, .seg-danger { animation: none !important; }
-      body::before { animation: none !important; }
-      .spot-ghost { animation: none !important; }
-      .loopc-dot { display: none; }
-      .reveal .fragment.custom.spot-fly,
-      .reveal .fragment.custom.bury-in,
-      .reveal .fragment.custom.tri-leave,
-      .sk-blk, .sk-blk::after, .sk-tag,
-      .tri-item, .bury-key, .spot-box, .spot-box::after { transition: none !important; }
-      .curve-draw { stroke-dashoffset: 0; animation: none !important; }
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .reveal .fragment { transition: none !important; }
+      .card, .dl-btn, .transition-select, .copy-btn { transition: none !important; }
     }
   </style>
   <!-- Git & GitHub 세미나 전용 컴포넌트 -->
@@ -1214,8 +702,8 @@ window.SEMINAR_CONFIG = {
 
 <div class="dl-toolbar">
   <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
-  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
-    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  <a class="dl-btn" href="../#board" title="시리즈 홈: 막혔을 때 펼쳐 보는 처방전">
+    <span aria-hidden="true">↖</span><span>시리즈 홈</span>
   </a>
   <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
     <span aria-hidden="true">⛶</span><span>FULL</span>
@@ -1230,44 +718,44 @@ window.SEMINAR_CONFIG = {
       <div class="vfill">
         <div class="grid-2" style="align-items:center; gap:3rem;">
           <div>
-            <div class="chip">SEMINAR · GIT &amp; GITHUB · FOR VIBE CODERS</div>
+            <div class="chip">SEMINAR · 01 기본기 · GIT &amp; GITHUB</div>
             <h1 style="font-size:3.9rem;">
-              바이브 코딩을 위한<br/><span class="grad">최소한의 Git &amp; GitHub</span>
+              최소한의<br/><span class="grad">Git &amp; GitHub</span>
             </h1>
-            <p style="font-size:1.5rem; margin-top:1.1rem; max-width:560px;">
-              명령어를 외우지 않습니다.<br/><em>에이전트에게 말로 시킵니다.</em>
+            <p style="font-size:1.45rem; margin-top:1.1rem; max-width:560px;">
+              만든 것을 잃어버리지 않고,<br/><em>링크 하나로 공유하는 법.</em>
             </p>
             <p class="small muted" style="margin-top:1.4rem;">
-              사내 GitHub(<span class="mono cfg cfg-ghe">github.company.net</span>) 사용법부터<br/>
-              내가 만든 웹앱을 URL로 공유하는 것까지 — 90분.
+              명령어는 외우지 않습니다. 에이전트에게 말로 시킵니다.<br/>
+              첫 커밋 → 사내 GitHub에 올리기 → 웹 주소로 공개 · 90분
             </p>
           </div>
           <div>
             <div class="prompt-card">
-              <div class="pc-label">💬 오늘 배울 조작법의 전부</div>
+              <div class="pc-label">💬 오늘 가장 많이 쓸 문장</div>
               <pre class="code">지금까지 작업한 것 커밋하고,
 사내 깃헙에 올려줘.</pre>
             </div>
-            <p class="center tiny muted" style="margin-top:.7rem;">← 이 한 문장이면 됩니다. 진짜로.</p>
+            <p class="center tiny muted" style="margin-top:.7rem;">실습 세 개를 끝내면 내 앱이 사내 URL로 열립니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        인사 + 대상 소개: 개발이 본업이 아닌 분들. 오늘의 약속 — 터미널 명령어 암기 0개.
-        바이브 코딩(에이전트에게 말로 시켜 만드는 개발)을 이미 해봤다는 전제. 만든 것을 "잃어버리지 않고, 공유하는" 방법이 오늘의 주제.
+        인사와 대상 소개 — 개발이 본업이 아닌 분들. 오늘의 약속: 터미널 명령어를 외우지 않는다.
+        에이전트로 뭔가 만들어 본 경험이 있다는 전제. 오늘의 주제는 그 결과물을 "잃어버리지 않고, 공유하는" 방법.
+        끝날 때 각자 손에 남는 것: 사내 GitHub 저장소 하나와, 동료에게 보낼 수 있는 Pages 주소 하나.
       </aside>
     </section>
 
-    <!-- ============= 2. 오늘의 여정 ============= -->
     <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
     <section class="tldr" data-depth="summary">
       <div class="chip">3분 요약 · TL;DR</div>
       <h2>결론부터 — 이 세 줄이면 됩니다</h2>
-      <p class="tldr-lede">Git은 세이브 포인트입니다. 명령어는 외우지 마세요 — 에이전트에게 말로 시키면 됩니다.</p>
+      <p class="tldr-lede">Git은 세이브 포인트입니다. 명령어는 외우지 말고 에이전트에게 말로 시키세요.</p>
       <ol class="tldr-points">
-        <li><span class="n">1</span><div><strong>잘 될 때마다 "커밋해줘" — 망가지면 한 문장으로 되돌립니다</strong><span class="sub">"_진짜최종_v3" 파일 대신 이력이 남습니다. 바이브 코딩일수록 자주.</span></div></li>
-        <li><span class="n">2</span><div><strong>업무 코드는 무조건 사내 GitHub에</strong><span class="sub">개인 github.com은 개인 실험용. 헷갈리면 사내 쪽이 정답입니다.</span></div></li>
-        <li><span class="n">3</span><div><strong>GitHub Pages로 저장소가 곧 웹사이트</strong><span class="sub">설정 → Pages → main / root, 클릭 4번. 키·.env는 절대 커밋하지 않습니다.</span></div></li>
+        <li><span class="n">1</span><div><strong>잘 될 때마다 "커밋해줘" — 망가지면 한 문장으로 되돌립니다</strong><span class="sub">"_진짜최종_v3" 파일 대신 이력이 남습니다. AI가 빨리 고칠수록 더 자주.</span></div></li>
+        <li><span class="n">2</span><div><strong>업무 코드는 사내 GitHub에만</strong><span class="sub">github.com은 개인 실험용입니다. 헷갈리면 사내 쪽이 정답.</span></div></li>
+        <li><span class="n">3</span><div><strong>GitHub Pages — 저장소가 곧 웹사이트</strong><span class="sub">Settings → Pages → main · /(root) → Save. 진입 파일은 index.html, 경로는 상대 경로로.</span></div></li>
       </ol>
       <div class="tldr-bottom">
         <div class="tldr-prompt">
@@ -1280,696 +768,756 @@ window.SEMINAR_CONFIG = {
           <ul>
             <li>AI가 고친 뒤로 오히려 망가져서 되돌리고 싶을 때</li>
             <li>만든 도구를 링크 하나로 공유하고 싶을 때</li>
-            <li>동료와 같은 코드를 함께 고치게 될 때</li>
+            <li>배포했는데 화면이 하얗거나 404가 뜰 때</li>
           </ul>
         </div>
       </div>
     </section>
 
+    <!-- ============= 오늘의 순서 ============= -->
     <section data-depth="extra">
       <div class="vfill">
-        <div class="chip">오늘의 여정 · 이론 30% + 실습 70%</div>
-        <h2>오늘 가져가실 세 가지</h2>
+        <div class="chip">오늘의 순서 · 이론 30% + 실습 70%</div>
+        <h2>90분 뒤, 내 앱이 사내 URL로 열립니다</h2>
         <div class="grid-3" style="margin-top:.4rem;">
-          <div class="card autoshow zoom-in">
-            <h3>🧠 개념 딱 6개</h3>
-            <p>Git이 뭔지, 왜 쓰는지.<br/>저장소·커밋·브랜치·푸시·풀·PR — 이게 전부입니다.</p>
-            <p class="tiny muted">CH 1 · 이론</p>
+          <div class="card">
+            <h3>🧠 CH 1 · 단어 6개</h3>
+            <p>저장소 · 커밋 · 브랜치 · 푸시 · 풀 · PR. 이 여섯 개면 오늘 내용이 다 읽힙니다.</p>
           </div>
-          <div class="card autoshow zoom-in">
-            <h3>🏢 사내 GitHub 사용법</h3>
-            <p>github.com과 <span class="mono cfg cfg-ghe">github.company.net</span>은 뭐가 다른지, 어디에 뭘 올려야 하는지.</p>
-            <p class="tiny muted">CH 2 · 이론 + 실습 5개</p>
+          <div class="card">
+            <h3>🏢 CH 2 · 사내 GitHub</h3>
+            <p>첫 커밋 → 사내 GitHub에 올리기 → 되돌리기. 끝나면 내 저장소 페이지가 생깁니다.</p>
           </div>
-          <div class="card autoshow zoom-in">
-            <h3>🚀 내 웹앱 배포</h3>
-            <p>바이브 코딩으로 만든 앱을 GitHub Pages로 — 팀에 <strong>URL 한 줄</strong>로 공유.</p>
-            <p class="tiny muted">CH 3 · 이론 + 실습 2개</p>
+          <div class="card good">
+            <h3>🚀 CH 3 · Pages 배포</h3>
+            <p>Pages를 켜서 <strong>URL 한 줄</strong>로 공유. 화면이 깨질 때 보는 체크리스트까지.</p>
           </div>
         </div>
-        <div class="quote autoshow fade-up" style="margin-top:1.2rem;">
-          모든 사용법은 <strong class="accent">프롬프트(말로 시키기)</strong>가 기본,
-          수동 명령어는 <span class="muted">아래에 작게, 참고용으로만</span> 소개합니다.
-        </div>
+        <p class="small muted" style="margin-top:1.2rem;">모든 사용법은 <strong class="accent">프롬프트(말로 시키기)</strong>가 먼저입니다. 명령어는 각 장 아래 점선 상자에 참고용으로만 둡니다.</p>
       </div>
       <aside class="notes">
-        진행 안내: 실습은 각자 노트북에서 에이전트 플랫폼(Claude Code, OpenCode 등)으로 따라 한다.
-        따라오다 놓치면 손 들지 말고 화면 아래 질문창으로. 실습 슬라이드마다 "복사" 버튼이 있다.
+        진행 안내: 실습은 각자 노트북에서 코딩 에이전트(Claude Code 등)로 따라 한다.
+        실습 장마다 "완료 기준"이 있다 — 그 화면이 보이면 다음으로 넘어간다. 놓치면 화면 아래 질문창으로.
+        프롬프트 카드 오른쪽 위의 "복사" 버튼을 쓰면 오타 걱정이 없다.
       </aside>
     </section>
 
-    <!-- ============= 3. CH1 왜 버전 관리인가 ============= -->
+    <!-- ============= CH1 왜 버전 관리인가 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
-        <h2>이 폴더… 익숙하지 않으세요?</h2>
+        <h2>파일명에 "_최종"을 붙이는 대신, Git이 이력을 남깁니다</h2>
         <div class="grid-2" style="align-items:start; gap:2.5rem; margin-top:.3rem;">
           <div class="vfiles">
-            <div class="vf autoshow fade-left">📄 보고서_v1.pptx <span class="vfd">3월 2일</span></div>
-            <div class="vf autoshow fade-left">📄 보고서_최종.pptx <span class="vfd">3월 9일</span></div>
-            <div class="vf autoshow fade-left">📄 보고서_진짜최종.pptx <span class="vfd">3월 10일</span></div>
-            <div class="vf autoshow fade-left">📄 보고서_진짜최종_수정.pptx <span class="vfd">3월 10일 밤 11시</span></div>
-            <div class="vf doom autoshow fade-left">📄 보고서_진짜최종_수정2_이걸로.pptx <span class="vfd">3월 11일 새벽 2시</span></div>
+            <div class="vf">📄 보고서_v1.pptx <span class="vfd">3월 2일</span></div>
+            <div class="vf">📄 보고서_최종.pptx <span class="vfd">3월 9일</span></div>
+            <div class="vf">📄 보고서_진짜최종.pptx <span class="vfd">3월 10일</span></div>
+            <div class="vf doom">📄 보고서_진짜최종_수정2.pptx <span class="vfd">3월 11일 새벽 2시</span></div>
           </div>
           <div class="stack">
-            <div class="card good autoshow fade-up">
-              <h3>Git은 이 비극을 끝냅니다</h3>
-              <p>파일은 <strong>하나</strong>. 대신 모든 변경의 역사가 <strong>자동으로 기록</strong>됩니다.</p>
-              <p>“3월 9일 버전으로 돌아가줘”가 언제든 가능합니다.</p>
+            <div class="card good">
+              <h3>Git을 쓰면</h3>
+              <p>파일은 <strong>하나</strong>. 바꿀 때마다 "언제·무엇을·왜"가 기록됩니다.</p>
+              <p>"3월 9일 버전으로 돌아가줘"가 언제든 됩니다.</p>
             </div>
-            <p class="small muted autoshow fade-up">Git = 문서·코드의 <strong class="accent2">타임머신 + 자동 기록장치</strong>.<br/>코드만이 아니라 폴더 안 모든 파일에 적용됩니다.</p>
+            <p class="small muted">코드만이 아니라 폴더 안의 모든 파일에 쓸 수 있습니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        비유에 충분히 머물기. "버전 관리"라는 말이 어렵게 느껴지지만 이미 모두가 파일명으로 수동 버전 관리를 하고 있었다.
-        Git은 그걸 파일 하나 + 자동 역사 기록으로 바꿔주는 도구일 뿐.
+        "버전 관리"라는 말이 어렵게 들려도, 다들 이미 파일 이름으로 손수 버전 관리를 하고 있다.
+        Git은 그걸 파일 하나 + 자동 기록으로 바꿔 주는 도구일 뿐이다. 이 비유에 충분히 머문다.
       </aside>
     </section>
 
-    <!-- ============= 4. CH1 바이브 코딩의 안전망 ============= -->
+    <!-- ============= CH1 세이브 포인트 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
-        <h2>바이브 코딩일수록 <span class="grad">세이브 포인트</span>가 필요합니다</h2>
+        <h2>AI가 빨리 고칠수록 <span class="grad">세이브 포인트</span>는 촘촘해야 합니다</h2>
         <div class="grid-3" style="margin-top:.4rem;">
-          <div class="card autoshow zoom-in">
-            <h3>🎮 게임처럼 저장</h3>
-            <p>보스전 전에 세이브하듯, <strong>잘 되는 순간마다</strong> 커밋. AI가 다음 수정에서 망쳐도 안심.</p>
+          <div class="card autoshow">
+            <h3>🎮 잘 될 때 저장</h3>
+            <p>게임에서 보스전 전에 저장하듯, <strong>기능 하나가 잘 될 때마다</strong> 커밋합니다.</p>
           </div>
-          <div class="card autoshow zoom-in">
-            <h3>🕰 3초 되감기</h3>
-            <p>“아까 잘 되던 걸로 돌려줘” 한 마디면 복구됩니다. <strong>실험이 두렵지 않게</strong> 됩니다.</p>
+          <div class="card autoshow">
+            <h3>🕰 한 문장으로 되감기</h3>
+            <p>"아까 잘 되던 걸로 돌려줘"면 복구됩니다. 그래서 <strong>실험이 두렵지 않습니다.</strong></p>
           </div>
-          <div class="card good autoshow zoom-in">
-            <h3>🤖 에이전트가 Git 달인</h3>
-            <p>AI 코딩 에이전트는 git을 <strong>가장 잘 다루는 도구</strong>로 훈련돼 있습니다. 여러분은 시키기만 하면 됩니다.</p>
+          <div class="card good autoshow">
+            <h3>🤖 조작은 에이전트가</h3>
+            <p>코딩 에이전트는 git을 잘 다룹니다. 여러분은 <strong>원하는 결과</strong>만 말하면 됩니다.</p>
           </div>
         </div>
-        <div class="quote autoshow fade-up" style="margin-top:1.2rem;">
-          커밋은 <strong class="accent2">자주</strong>, 후회는 <strong class="accent3">없게</strong>.
-          — AI가 코드를 빨리 만들수록, 되돌아갈 지점도 촘촘해야 합니다.
+        <div class="quote" style="margin-top:1.2rem;">
+          AI는 한 번에 파일 여러 개를 고칩니다. 잘 되던 상태를 잃기도 그만큼 쉽습니다 — <strong class="accent2">"기능 하나 = 커밋 하나"</strong>.
         </div>
       </div>
       <aside class="notes">
-        바이브 코딩 특화 논점: 사람이 손으로 짤 때보다 변경량이 크고 빠르다 → 잘 되는 상태를 잃어버리기도 쉽다.
-        "기능 하나 = 커밋 하나" 리듬을 권장.
+        바이브 코딩에서 특히 중요한 이유: 사람이 손으로 짤 때보다 한 번의 변경이 크고 빠르다. 잘 되는 상태를 잃어버리기도 쉽다.
+        권장 리듬은 "기능 하나 = 커밋 하나". 하루 끝에 한 번 몰아서 하는 게 아니다.
       </aside>
     </section>
 
-    <!-- ============= 5. CH1 개념 6개 ============= -->
+    <!-- ============= CH1 개념 6개 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
-        <h2>오늘 필요한 단어는 <span class="accent">6개</span>뿐</h2>
+        <h2>단어 <span class="accent">6개</span>면 오늘 내용이 다 읽힙니다</h2>
         <div class="ladder" style="margin-top:.3rem;">
-          <div class="rung autoshow fade-left"><span class="no">1</span>📦 저장소 <span class="mono tiny">repository</span><span class="w">프로젝트 폴더 + 그 폴더의 모든 역사</span></div>
-          <div class="rung autoshow fade-left"><span class="no">2</span>💾 커밋 <span class="mono tiny">commit</span><span class="w">세이브 포인트 — "지금 상태를 기록해줘"</span></div>
-          <div class="rung autoshow fade-left"><span class="no">3</span>🌿 브랜치 <span class="mono tiny">branch</span><span class="w">본편을 건드리지 않는 평행 우주 작업본</span></div>
-          <div class="rung autoshow fade-left"><span class="no">4</span>⬆️ 푸시 <span class="mono tiny">push</span><span class="w">내 기록을 GitHub(클라우드)에 올리기</span></div>
-          <div class="rung autoshow fade-left"><span class="no">5</span>⬇️ 풀 <span class="mono tiny">pull</span><span class="w">GitHub의 최신 내용을 내 컴퓨터로 받기</span></div>
-          <div class="rung autoshow fade-left"><span class="no">6</span>🙏 PR <span class="mono tiny">pull request</span><span class="w">"내 작업을 본편에 합쳐주세요" + 동료 리뷰</span></div>
+          <div class="rung"><span class="no">1</span>📦 저장소 <span class="mono tiny">repository</span><span class="w">프로젝트 폴더 + 그 폴더의 모든 기록</span></div>
+          <div class="rung"><span class="no">2</span>💾 커밋 <span class="mono tiny">commit</span><span class="w">세이브 포인트 — 지금 상태를 기록</span></div>
+          <div class="rung"><span class="no">3</span>🌿 브랜치 <span class="mono tiny">branch</span><span class="w">본편을 건드리지 않는 작업용 사본</span></div>
+          <div class="rung"><span class="no">4</span>⬆️ 푸시 <span class="mono tiny">push</span><span class="w">내 기록을 GitHub에 올리기</span></div>
+          <div class="rung"><span class="no">5</span>⬇️ 풀 <span class="mono tiny">pull</span><span class="w">GitHub의 최신 내용을 내려받기</span></div>
+          <div class="rung"><span class="no">6</span>🙏 PR <span class="mono tiny">pull request</span><span class="w">"내 작업을 본편에 합쳐 주세요" + 리뷰</span></div>
         </div>
-        <p class="small muted autoshow fade-up" style="margin-top:.9rem;">
-          이 6개면 오늘 내용 전부를 이해할 수 있습니다.
-          나머지 수백 개의 git 용어는? — <strong class="accent2">에이전트가 압니다.</strong> 우리가 알 필요 없습니다.
+        <p class="small muted" style="margin-top:.9rem;">
+          rebase, stash 같은 다른 용어가 나오면? — 에이전트가 압니다. 궁금하면 "쉬운 말로 설명해줘"라고 물으면 됩니다.
         </p>
       </div>
       <aside class="notes">
-        각 단어를 비유 한 줄로만. 깊이 들어가지 않기 — 실습에서 몸으로 익힌다.
-        rebase, stash, cherry-pick 같은 단어가 나오면 "에이전트가 아는 단어"라고 안심시키기.
+        각 단어는 비유 한 줄로만. 깊이 들어가지 않는다 — 실습에서 몸으로 익힌다.
+        이 장은 설명하며 하나씩 짚는다. 나머지 용어는 "에이전트가 아는 단어"라고 안심시킨다.
       </aside>
     </section>
 
-    <!-- ============= 6. CH1 Git vs GitHub ============= -->
+    <!-- ============= CH1 Git vs GitHub ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · GIT, 딱 필요한 만큼</div>
-        <h2>Git과 GitHub는 <span class="accent3">다른 것</span>입니다</h2>
+        <h2>Git은 내 컴퓨터의 기록, GitHub는 그 기록을 올려 두는 곳</h2>
         <div class="grid-2" style="margin-top:.4rem;">
-          <div class="card autoshow fade-right">
-            <h3>📷 Git — 내 컴퓨터의 기록 엔진</h3>
-            <p>내 폴더의 스냅샷(커밋)을 찍고, 되돌리고, 브랜치를 만드는 <strong>프로그램</strong>.</p>
-            <p class="tiny muted">인터넷 없어도 동작합니다.</p>
+          <div class="card">
+            <h3>📷 Git — 프로그램</h3>
+            <p>내 폴더의 커밋을 만들고, 되돌리고, 브랜치를 나눕니다.</p>
+            <p class="tiny muted">인터넷이 없어도 동작합니다.</p>
           </div>
-          <div class="card autoshow fade-left">
-            <h3>☁️ GitHub — 그 기록을 올려두는 클라우드</h3>
-            <p>저장소를 보관·공유하고, 동료와 리뷰(PR)하고, 웹사이트(Pages)까지 만들어주는 <strong>서비스(웹사이트)</strong>.</p>
-            <p class="tiny muted">사진(Git)과 인스타그램(GitHub)의 관계.</p>
+          <div class="card">
+            <h3>☁️ GitHub — 웹 서비스</h3>
+            <p>저장소를 보관·공유하고, 동료와 리뷰(PR)하고, 웹사이트(Pages)로 내보냅니다.</p>
+            <p class="tiny muted">사진(Git)과 사진 앨범 서비스(GitHub)의 관계.</p>
           </div>
         </div>
-        <div class="formula autoshow fade-up" style="margin-top:1rem;">
-          <div class="fx-box"><span class="fx-name">📷 Git</span><span class="fx-val tiny">내 컴퓨터의 기록</span></div>
-          <span class="fx-op" style="font-size:2rem; font-weight:800;">+</span>
-          <div class="fx-box"><span class="fx-name">☁️ GitHub</span><span class="fx-val tiny">공유 · 협업 · 배포</span></div>
-          <span class="fx-op" style="font-size:2rem; font-weight:800;">=</span>
-          <div class="fx-box hero"><span class="fx-name">🕰 팀의 타임머신</span><span class="fx-val tiny">함께 쓰는 역사</span></div>
-        </div>
+        <p class="small" style="margin-top:1.1rem;">GitLab·Bitbucket도 같은 역할의 서비스입니다. 오늘은 회사가 쓰는 <strong class="accent2">GitHub</strong> 기준으로 설명합니다.</p>
       </div>
       <aside class="notes">
-        흔한 혼동 정리. GitHub 말고도 GitLab, Bitbucket 같은 "Git 클라우드"가 있다는 것 한 줄 언급.
-        그리고 다음 슬라이드 예고: "그런데 우리 회사에는 GitHub가 두 개 있습니다."
+        흔한 혼동 정리. 다음 장 예고: "그런데 우리에겐 GitHub가 두 개 있습니다."
       </aside>
     </section>
 
-    <!-- ============= 7. CH2 두 개의 GitHub ============= -->
+    <!-- ============= CH2 두 개의 GitHub ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · 사내 GITHUB</div>
-        <h2>우리에겐 GitHub가 <span class="grad">두 개</span> 있습니다</h2>
+        <h2>GitHub는 두 개 — 업무 코드는 <span class="grad">사내 GitHub</span>에만</h2>
         <div class="grid-2" style="margin-top:.3rem;">
-          <div class="card autoshow fade-right">
+          <div class="card">
             <h3>🌍 github.com</h3>
-            <p><strong>전 세계 공개</strong> 클라우드 — 인터넷의 GitHub</p>
-            <p class="small">· 개인 이메일로 가입한 <strong>개인 계정</strong><br/>
-            · 오픈소스, 개인 공부, 토이 프로젝트<br/>
-            · 무료 공개 저장소는 <strong class="accent3">전 세계 누구나</strong> 볼 수 있음</p>
+            <p><strong>인터넷의 GitHub</strong> · 개인 이메일로 만든 개인 계정</p>
+            <p class="small">· 오픈소스, 개인 공부, 토이 프로젝트용<br/>
+            · Public 저장소는 <strong class="accent3">전 세계 누구나</strong> 봅니다</p>
           </div>
-          <div class="card good autoshow fade-left">
+          <div class="card good">
             <h3>🏢 <span class="mono cfg cfg-ghe">github.company.net</span></h3>
-            <p><strong>회사가 직접 운영</strong>하는 GitHub Enterprise</p>
-            <p class="small">· <strong>회사 계정(사내 SSO)</strong>으로 로그인<br/>
-            · 업무 코드·문서는 <strong class="accent2">반드시 여기</strong><br/>
-            · 사내망(VPN)에서만 접속 — 밖에서는 안 보임</p>
+            <p><strong>회사가 관리하는</strong> GitHub Enterprise · 회사 계정(SSO)</p>
+            <p class="small">· 업무 코드·문서는 <strong class="accent2">반드시 여기</strong><br/>
+            · 회사 설정에 따라 사내망에서만 열립니다</p>
           </div>
         </div>
-        <div class="warn-banner autoshow fade-up" style="margin-top:1rem;">
+        <div class="warn-banner" style="margin-top:1rem;">
           <span class="wb-icon">🚨</span>
-          <span>회사 코드·데이터는 <strong>절대 github.com에 올리지 않습니다.</strong> 정보 유출이자 보안 규정 위반입니다.</span>
+          <span>둘은 화면이 거의 똑같습니다. 올리기 전에 <strong>주소창</strong>을 보세요 — 다른 것은 주소, 계정, 그리고 "누가 볼 수 있는가"입니다.</span>
         </div>
-        <p class="tiny muted" style="margin-top:.6rem;">화면 생김새와 기능은 거의 똑같습니다. 다른 것은 <strong>주소, 계정, 그리고 “누가 볼 수 있는가”</strong>입니다.</p>
       </div>
       <aside class="notes">
-        오늘의 가장 중요한 슬라이드 중 하나. GitHub Enterprise Server = 회사가 자기 서버에 설치해서 운영하는 GitHub.
-        생김새가 똑같아서 사고가 난다 — 주소창을 확인하는 습관.
-        실제 사내 도메인/계정 규칙은 발표 전에 SEMINAR_CONFIG에 회사 값으로 바꿔둘 것.
+        오늘 가장 중요한 장 중 하나. GitHub Enterprise = 회사가 직접 설치해 운영하거나 계약해 관리하는 GitHub.
+        생김새가 같아서 사고가 난다 — 주소창을 확인하는 습관이 핵심.
+        발표 전에 상단 SEMINAR_CONFIG(또는 ?ghe= 파라미터)로 회사 도메인을 맞춰 둘 것. 사내망 전용 여부도 회사마다 다르다.
       </aside>
     </section>
 
-    <!-- ============= 8. CH2 어디에 올리지 ============= -->
+    <!-- ============= CH2 어디에 올리지 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · 사내 GITHUB</div>
-        <h2>어디에 올리지? — <span class="accent2">3초 판단법</span></h2>
+        <h2>어디에 올릴지는 <span class="accent2">질문 하나</span>로 정합니다</h2>
         <div class="ladder" style="margin-top:.4rem;">
-          <div class="rung autoshow fade-left"><span class="no">Q1</span>업무 관련 코드·데이터·문서가 <strong>조금이라도</strong> 들어있다<span class="w">→ 🏢 사내 GitHub</span></div>
-          <div class="rung autoshow fade-left"><span class="no">Q2</span>회사 정보 0%인 개인 공부·취미 프로젝트<span class="w">→ 🌍 github.com (개인 계정)</span></div>
-          <div class="rung autoshow fade-left"><span class="no">Q3</span>애매하다, 잘 모르겠다<span class="w">→ 🏢 사내 GitHub (안전한 쪽)</span></div>
+          <div class="rung"><span class="no">Q1</span>회사 코드·데이터·문서가 <strong>조금이라도</strong> 들어 있다<span class="w">→ 🏢 사내 GitHub</span></div>
+          <div class="rung"><span class="no">Q2</span>회사 정보가 전혀 없는 개인 공부·취미<span class="w">→ 🌍 github.com (개인 계정)</span></div>
+          <div class="rung"><span class="no">Q3</span>애매하다, 잘 모르겠다<span class="w">→ 🏢 사내 GitHub</span></div>
         </div>
         <div class="grid-2" style="margin-top:1rem;">
-          <div class="card autoshow fade-up">
-            <h3>💡 습관 하나</h3>
-            <p>업무용 브라우저에는 <span class="mono cfg cfg-ghe">github.company.net</span>만 로그인해두기. 계정이 섞이면 실수가 시작됩니다.</p>
+          <div class="card">
+            <h3>💡 브라우저를 나누기</h3>
+            <p>업무용 브라우저에는 <span class="mono cfg cfg-ghe">github.company.net</span>만 로그인해 둡니다. 계정이 섞이면 실수가 시작됩니다.</p>
           </div>
-          <div class="card autoshow fade-up">
-            <h3>🔍 에이전트에게도 알려주기</h3>
-            <p>“이 프로젝트의 원격 저장소는 <strong>사내 GitHub</strong>야”라고 한 번 말해두면, 에이전트가 주소를 헷갈릴 일이 없습니다.</p>
+          <div class="card">
+            <h3>🔍 에이전트에게도 알려 주기</h3>
+            <p>"이 프로젝트의 원격 저장소는 <strong>사내 GitHub</strong>야" 한 번이면 주소를 헷갈리지 않습니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        판단 기준을 규칙 3개로 압축. 회사별 세부 보안 규정(외부 공개 절차, 오픈소스 기여 절차)은 사내 문서 링크로 대체하라고 안내.
+        판단 기준을 질문 하나로 줄였다 — "회사 것이 조금이라도 섞였나?" 섞였거나 애매하면 사내.
+        외부 공개 절차·오픈소스 기여 절차 같은 세부 규정은 사내 문서 링크로 안내한다.
       </aside>
     </section>
 
-    <!-- ============= 9. CH2 조작법: 말로 시키기 ============= -->
-    <section>
+    <!-- ============= CH2 조작법 ============= -->
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 2 · 사내 GITHUB</div>
-        <h2>오늘의 조작법 — <span class="grad">프롬프트가 곧 명령어</span></h2>
-        <p class="small" style="margin:.2rem 0 .6rem;">Claude Code, OpenCode 같은 코딩 에이전트는 git을 훈련받은 전문가입니다.<br/>
-        앞으로 나올 모든 실습 슬라이드는 이 구조입니다:</p>
-        <div class="prompt-card">
-          <div class="pc-label">💬 이렇게 말하세요 — 기본 조작법 (크게)</div>
-          <pre class="code">한국어로, 하고 싶은 일을 그대로. 정확한 용어가 아니어도 됩니다.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면 — 참고용 (작게)</p>
-          <pre class="code">$ 터미널에 직접 치는 명령어. 몰라도 됩니다. 궁금할 때만 보세요.</pre>
-        </div>
-        <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          “왜 명령어부터 안 배우나요?” — 운전을 배울 때 엔진 구조부터 배우지 않는 것과 같습니다.
-          <span class="muted small">필요해지는 날, 그때 배워도 늦지 않습니다.</span>
-        </div>
-      </div>
-      <aside class="notes">
-        에이전트가 위험한 작업(강제 푸시, 히스토리 삭제)은 되묻는다는 것도 언급 — 그 확인 메시지는 꼭 읽을 것.
-        프롬프트 카드의 "복사" 버튼 사용법 시연.
-      </aside>
-    </section>
-
-    <!-- ============= 10. 실습 0 준비 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 0 · 준비물 점검 (5분)</div>
-        <h2>시작 전 3가지만 확인합니다</h2>
-        <div class="step-flow" style="margin-top:.4rem;">
-          <div class="sf-step"><span class="sf-no">1</span><b>에이전트 플랫폼</b><p>Claude Code / OpenCode 등 — 어느 것이든 오늘 내용은 동일합니다</p></div>
-          <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">2</span><b>사내 GitHub 로그인</b><p><span class="mono cfg cfg-ghe">github.company.net</span> 이 브라우저에서 열리는지</p></div>
-          <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">3</span><b>실습 폴더</b><p>바이브 코딩으로 만든 앱 폴더 (없으면 빈 폴더 + 간단한 index.html)</p></div>
-        </div>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">git이 설치돼 있는지 확인해줘. 없으면 설치해주고,
-커밋 기록에 쓸 이름과 회사 이메일을 설정해줘.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면</p>
-          <pre class="code">git --version
-git config --global user.name  "홍길동"
-git config --global user.email "hong@company.com"</pre>
-        </div>
-      </div>
-      <aside class="notes">
-        사내 GitHub 최초 로그인/계정 발급 절차는 회사마다 다르므로 사내 온보딩 문서 링크를 여기서 안내.
-        시간 절약을 위해 세미나 공지에 미리 준비물로 보내두는 것을 추천.
-      </aside>
-    </section>
-
-    <!-- ============= 11. 실습 1 저장소 + 첫 커밋 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 1 · 첫 세이브 포인트 (5분)</div>
-        <h2>내 폴더를 저장소로 만들고, 첫 커밋</h2>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">이 폴더를 git 저장소로 만들고, 지금까지의 작업 전체를
-"첫 버전"이라는 메시지로 커밋해줘.</pre>
-        </div>
-        <div class="grid-2" style="margin-top:.7rem;">
-          <div class="card good autoshow fade-up">
-            <h3>✅ 방금 일어난 일</h3>
-            <p>폴더 안에 숨겨진 <span class="mono">.git</span>(역사 보관함)이 생기고, <strong>세이브 포인트 1호</strong>가 기록됐습니다.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <h3>💡 커밋 메시지도 맡기세요</h3>
-            <p>“적당한 메시지로 커밋해줘”라고 하면 에이전트가 변경 내용을 <strong>요약해서</strong> 써 줍니다.</p>
-          </div>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면</p>
-          <pre class="code">git init && git add -A && git commit -m "첫 버전"</pre>
-        </div>
-      </div>
-      <aside class="notes">
-        확인 방법: "커밋 잘 됐는지 확인해줘" → 에이전트가 git log를 보여준다.
-        .git 폴더는 지우면 역사가 통째로 사라진다는 것 한 줄 경고.
-      </aside>
-    </section>
-
-    <!-- ============= 12. 실습 2 사내 GitHub에 올리기 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 2 · 사내 GitHub에 올리기 (10분)</div>
-        <h2>내 컴퓨터 밖으로 — <span class="accent2">push</span></h2>
-        <div class="step-flow" style="margin-top:.3rem;">
-          <div class="sf-step"><span class="sf-no">1</span><b>웹에서 저장소 만들기</b><p><span class="mono cfg cfg-ghe">github.company.net</span> 접속 → <strong>New repository</strong> → 이름(예: my-first-app)만 정하고 Create</p></div>
-          <span class="sf-arrow">→</span>
-          <div class="sf-step hot"><span class="sf-no">2</span><b>에이전트로 연결 + 푸시</b><p>아래 프롬프트 (주소는 만든 저장소 페이지에서 복사)</p></div>
-          <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">3</span><b>확인</b><p>브라우저 새로고침 — 내 파일이 보이면 성공 🎉</p></div>
-        </div>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">사내 깃헙에 저장소를 만들었어:
-https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">내아이디</span>/my-first-app
-여기를 원격(remote)으로 연결하고 지금까지 커밋을 푸시해줘.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면</p>
-          <pre class="code">git remote add origin https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">내아이디</span>/my-first-app.git
-git push -u origin main</pre>
-          <p class="mb-note">푸시할 때 로그인/토큰을 물어보면 → 에이전트에게 “사내 깃헙 토큰 발급 방법 알려줘”라고 물어보세요. (Settings → Developer settings → Personal access tokens)</p>
-        </div>
-      </div>
-      <aside class="notes">
-        가장 막히기 쉬운 지점: 인증(토큰/SSO 승인). 회사 인증 방식(PAT, SSH, 자격증명 관리자)을 발표 전에 확인해서 여기서 시연.
-        저장소 공개 범위(Private/Internal)도 회사 정책에 맞게 안내.
-      </aside>
-    </section>
-
-    <!-- ============= 13. 실습 3 일상 루프 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 3 · 일상 루프 (5분)</div>
-        <h2>매일 반복될 리듬: <span class="grad">수정 → 커밋 → 푸시</span></h2>
-        <div class="loop-grid" style="margin-top:.4rem;">
-          <div class="loop-step autoshow zoom-in"><span class="no">STEP 1</span><span class="nm2">🎨 바이브 코딩</span><p class="tiny" style="margin:0;">에이전트와 기능 수정</p></div>
-          <div class="loop-step autoshow zoom-in"><span class="no">STEP 2</span><span class="nm2">👀 확인</span><p class="tiny" style="margin:0;">브라우저에서 잘 되는지 내 눈으로</p></div>
-          <div class="loop-step autoshow zoom-in"><span class="no">STEP 3</span><span class="nm2">💾 커밋</span><p class="tiny" style="margin:0;">“커밋해줘” — 세이브 포인트</p></div>
-          <div class="loop-step hot autoshow zoom-in"><span class="no">STEP 4</span><span class="nm2">⬆️ 푸시</span><p class="tiny" style="margin:0;">“푸시해줘” — 클라우드 백업 + 팀 공유</p></div>
-        </div>
-        <div class="prompt-card" style="margin-top:.8rem;">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요 (STEP 3+4 한 번에)</div>
-          <pre class="code">지금까지 변경사항을 보기 좋게 커밋하고 푸시해줘.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면</p>
-          <pre class="code">git add -A && git commit -m "다크모드 추가" && git push</pre>
-        </div>
-        <p class="tiny muted" style="margin-top:.5rem;">커밋 타이밍: 하루의 끝이 아니라 <strong>기능 하나가 잘 될 때마다</strong>. 실습으로 아무 파일이나 한 줄 고치고 위 프롬프트를 실행해보세요.</p>
-      </div>
-      <aside class="notes">
-        여기서 "확인(STEP 2)"을 강조 — 잘 되는 상태에서 커밋해야 세이브 포인트의 의미가 있다.
-        망가진 상태로 커밋해도 큰일은 아니지만(어차피 되돌릴 수 있음), 습관으로는 "확인 후 커밋".
-      </aside>
-    </section>
-
-    <!-- ============= 14. 실습 4 되돌리기 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 4 · 되돌리기 (5분)</div>
-        <h2>망했다? <span class="accent2">한 문장</span>이면 복구됩니다</h2>
-        <div class="stack" style="gap:.6rem; margin-top:.3rem;">
-          <div class="prompt-card mini autoshow fade-up">
-            <div class="pc-label">💬 방금 AI가 코드를 망쳤을 때</div>
-            <pre class="code">마지막 커밋 이후의 변경을 전부 버리고, 마지막 커밋 상태로 되돌려줘.</pre>
-          </div>
-          <div class="prompt-card mini autoshow fade-up">
-            <div class="pc-label">💬 과거의 잘 되던 버전으로 가고 싶을 때</div>
-            <pre class="code">최근 커밋 목록을 보여줘. 어제 오후에 잘 되던 버전으로 돌아가고 싶어.</pre>
-          </div>
-          <div class="prompt-card mini autoshow fade-up">
-            <div class="pc-label">💬 커밋만 취소하고 파일은 그대로 두고 싶을 때</div>
-            <pre class="code">마지막 커밋을 취소해줘. 파일 내용은 그대로 유지하고.</pre>
-          </div>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">🔧 수동으로 하려면</p>
-          <pre class="code">git log --oneline        <span class="cm"># 세이브 포인트 목록</span>
-git restore .            <span class="cm"># 커밋 안 한 변경 버리기</span>
-git revert HEAD          <span class="cm"># 마지막 커밋을 "취소하는 커밋" 만들기</span></pre>
-        </div>
-        <p class="tiny muted" style="margin-top:.5rem;">⚠️ “전부 삭제”, “강제로” 같은 요청에는 에이전트가 한 번 더 확인을 요청합니다 — <strong>그 메시지는 꼭 읽고</strong> 답하세요.</p>
-      </div>
-      <aside class="notes">
-        실습: 일부러 파일 하나를 엉망으로 만들고 첫 번째 프롬프트로 복구해보기. "커밋 = 세이브 포인트"가 체감되는 순간.
-        push까지 된 커밋을 되돌릴 때는 revert(기록을 남기며 취소)가 안전하다는 것 — 에이전트가 알아서 고른다.
-      </aside>
-    </section>
-
-    <!-- ============= 15. 실습 5 브랜치 & PR ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 5 · 브랜치 &amp; Pull Request (10분)</div>
-        <h2>본편은 안전하게, 실험은 <span class="grad">평행 우주</span>에서</h2>
-        <div class="grid-2" style="align-items:start; gap:2rem; margin-top:.2rem;">
-          <div class="stack" style="gap:.6rem;">
-            <div class="card autoshow fade-right">
-              <h3>🌿 브랜치</h3>
-              <p><span class="mono">main</span>(본편)은 늘 잘 도는 상태로 두고, 새 기능은 <strong>복사본 우주</strong>에서 실험합니다.</p>
+        <h2>실습 장은 모두 같은 모양 — <span class="grad">말로 시키고, 눈으로 확인</span></h2>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.3rem;">
+          <div>
+            <div class="prompt-card" style="margin-top:0;">
+              <div class="pc-label">💬 이렇게 말하세요</div>
+              <pre class="code">하고 싶은 일을 한국어로 그대로.
+정확한 용어가 아니어도 됩니다.</pre>
             </div>
-            <div class="card autoshow fade-right">
-              <h3>🙏 Pull Request</h3>
-              <p>“이 우주를 본편에 합쳐주세요” 요청. 동료가 <strong>웹에서 리뷰</strong>하고 버튼 하나로 합칩니다(merge).</p>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면 — 참고용</p>
+              <pre class="code">$ 직접 치는 명령어. 몰라도 됩니다.</pre>
             </div>
-            <p class="tiny muted autoshow fade-up">혼자 하는 프로젝트라면 당분간 main에 바로 커밋해도 충분합니다. 팀 작업이 시작되는 순간, 이 슬라이드로 돌아오세요.</p>
           </div>
           <div class="stack" style="gap:.6rem;">
-            <div class="prompt-card mini">
-              <div class="pc-label">💬 브랜치 만들어 작업 시작</div>
-              <pre class="code">새 기능은 feature/dark-mode 브랜치를 만들어서
-거기서 작업해줘.</pre>
-            </div>
-            <div class="prompt-card mini">
-              <div class="pc-label">💬 작업 끝 — PR 만들기</div>
-              <pre class="code">작업 끝났어. 푸시하고 main으로 Pull Request를
-만들어줘. 제목과 설명도 채워줘.</pre>
+            <div class="done-box"><p class="bx-t">✅ 완료 기준</p><p>이 화면이 보이면 성공 — 다음 장으로.</p></div>
+            <div class="stuck-box"><p class="bx-t">🧯 막히면</p><p>에러 메시지를 통째로 복사해 에이전트에게 붙여 넣기.</p></div>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:1rem;">에이전트가 "기록을 지울까요?", "강제로 올릴까요?"라고 되물으면 — <strong>읽고 나서</strong> 답하세요.</p>
+      </div>
+      <aside class="notes">
+        실습 장의 읽는 법 안내. 위험한 작업(강제 푸시, 기록 삭제)은 에이전트가 되묻는다 — 그 확인 메시지는 꼭 읽는다.
+        프롬프트 카드의 "복사" 버튼을 한 번 시연.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 0 준비 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 0 · 준비 (5분)</div>
+        <h2>git이 내 이름으로 기록하게 설정합니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 커밋에는 "누가 했는지"가 남습니다. 처음 한 번만 이름과 회사 이메일을 알려 주면 됩니다.</p>
+        <div class="grid-2" style="align-items:start; gap:1.6rem;">
+          <div>
+            <div class="prompt-card" style="margin-top:0;">
+              <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+              <pre class="code">git이 설치돼 있는지 확인해줘. 없으면 설치 방법을 알려주고,
+커밋에 쓸 이름은 "홍길동", 이메일은 회사 메일로 설정해줘.</pre>
             </div>
             <div class="manual-box">
               <p class="mb-title">🔧 수동으로 하려면</p>
-              <pre class="code">git checkout -b feature/dark-mode
-<span class="cm"># 작업 후 push → 웹에서 "Compare &amp; pull request" 버튼</span></pre>
+              <pre class="code">git --version
+git config --global user.name  "홍길동"
+git config --global user.email "hong@company.com"</pre>
             </div>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준</p>
+              <ul>
+                <li>에이전트가 <span class="mono">git version 2.x</span>처럼 버전 번호를 보여 준다</li>
+                <li>설정된 이름·이메일이 화면에 출력된다</li>
+                <li>브라우저에서 <span class="mono cfg cfg-ghe">github.company.net</span>에 로그인된다</li>
+              </ul>
+            </div>
+            <div class="stuck-box">
+              <p class="bx-t">🧯 막히면</p>
+              <p>설치 권한이 없다는 메시지 → 사내 소프트웨어 설치 절차로. 사내 GitHub 계정이 없다면 오늘은 짝꿍 화면으로 따라갑니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        사내 GitHub 계정 발급·최초 로그인 절차는 회사마다 다르다 — 사내 온보딩 문서 링크를 여기서 안내.
+        시간을 아끼려면 세미나 공지에 준비물(에이전트 설치, git, 사내 GitHub 로그인)로 미리 보내 둔다.
+        실습 폴더가 없는 사람: "간단한 index.html 하나 만들어줘"로 바로 만든다 — 오늘 끝에 이 파일이 웹 주소로 열린다.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 1 첫 커밋 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 1 · 첫 세이브 포인트 (5분)</div>
+        <h2>내 폴더를 저장소로 만들고 첫 커밋을 남깁니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 커밋 한 번 = 되돌아올 수 있는 지점 하나. 민감한 파일은 처음부터 기록에서 뺍니다.</p>
+        <div class="grid-2" style="align-items:start; gap:1.6rem;">
+          <div>
+            <div class="prompt-card" style="margin-top:0;">
+              <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+              <pre class="code">이 폴더를 git 저장소로 만들고 "첫 버전"으로 커밋해줘.
+.env·키·개인 데이터 파일이 있으면 커밋 전에
+.gitignore에 넣고 무엇을 뺐는지 알려줘.</pre>
+            </div>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면</p>
+              <pre class="code">git init &amp;&amp; git add -A &amp;&amp; git commit -m "첫 버전"</pre>
+            </div>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준</p>
+              <ul>
+                <li>"커밋 목록 보여줘" → <span class="mono">첫 버전</span> 한 줄이 보인다</li>
+                <li>"커밋 안 된 변경 있어?" → <strong>없다</strong>고 답한다</li>
+                <li>제외한 파일이 있으면 그 목록을 들었다</li>
+              </ul>
+            </div>
+            <div class="stuck-box">
+              <p class="bx-t">🧯 막히면</p>
+              <p>"Author identity unknown" → 실습 0의 이름·이메일 설정을 다시. 폴더 안의 숨은 <span class="mono">.git</span>은 기록 보관함이니 지우지 않습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        방금 일어난 일: 폴더 안에 숨은 .git(기록 보관함)이 생기고 세이브 포인트 1호가 기록됐다. .git을 지우면 기록이 통째로 사라진다.
+        커밋 메시지도 맡길 수 있다 — "적당한 메시지로 커밋해줘"라고 하면 변경 내용을 요약해 쓴다.
+        .gitignore를 첫 커밋부터 챙기는 이유: 한 번 커밋된 파일은 지워도 기록에 남는다.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 2 push ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 2 · 사내 GitHub에 올리기 (10분)</div>
+        <h2>push 한 번이면 내 기록이 사내 GitHub에 백업됩니다</h2>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.2rem;">
+          <div>
+            <div class="step-flow" style="margin-top:0;">
+              <div class="sf-step"><span class="sf-no">1</span><b>웹에서 저장소 만들기</b><p><strong>New repository</strong> → 이름 <span class="mono">my-first-app</span> → 공개 범위 <strong>Private</strong> 또는 <strong>Internal</strong> → Create</p></div>
+            </div>
+            <div class="prompt-card">
+              <div class="pc-label">💬 2 · 에이전트에게 이렇게 말하세요</div>
+              <pre class="code">사내 깃헙에 저장소를 만들었어:
+https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">내아이디</span>/my-first-app
+여기를 원격으로 연결하고 지금까지 커밋을 푸시해줘.</pre>
+            </div>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면</p>
+              <pre class="code">git remote add origin https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">내아이디</span>/my-first-app.git
+git push -u origin main</pre>
+            </div>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준 — 3 · 브라우저 새로고침</p>
+              <ul>
+                <li>저장소 페이지에 내 파일 목록이 보인다</li>
+                <li>맨 위에 커밋 메시지 <span class="mono">첫 버전</span>이 보인다</li>
+                <li><span class="mono">.env</span> 같은 제외 파일은 <strong>안 보인다</strong></li>
+              </ul>
+            </div>
+            <div class="stuck-box">
+              <p class="bx-t">🧯 막히면</p>
+              <ul>
+                <li>비밀번호·토큰을 묻는다 → "사내 깃헙 인증 방법 알려줘". 보통 Personal access token이나 SSO 승인입니다.</li>
+                <li>토큰을 <strong>대화창에 붙여 넣지 마세요</strong> — 로그인 창이나 자격 증명 관리자에 넣습니다.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        가장 많이 막히는 곳은 인증이다. 회사 인증 방식(PAT, SSH, 자격 증명 관리자, SSO 승인)을 발표 전에 확인해 여기서 직접 시연한다.
+        공개 범위: Private(나와 초대한 사람) / Internal(사내 전원). 회사 정책에 맞게 안내.
+        토큰을 채팅에 붙여 넣는 실수가 잦다 — 보안 약속 2번(키는 대화에 남기지 않는다)과 연결해 짚는다.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 3 일상 루프 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 3 · 매일의 리듬 (5분)</div>
+        <h2>고치고 → 확인하고 → <span class="grad">커밋·푸시</span>, 이 네 박자를 반복합니다</h2>
+        <div class="loop-grid" style="margin-top:.4rem;">
+          <div class="loop-step"><span class="no">STEP 1</span><span class="nm2">🎨 고치기</span><p class="tiny" style="margin:0;">에이전트와 기능 수정</p></div>
+          <div class="loop-step"><span class="no">STEP 2</span><span class="nm2">👀 확인</span><p class="tiny" style="margin:0;">브라우저에서 내 눈으로</p></div>
+          <div class="loop-step"><span class="no">STEP 3</span><span class="nm2">💾 커밋</span><p class="tiny" style="margin:0;">잘 되는 상태를 저장</p></div>
+          <div class="loop-step hot"><span class="no">STEP 4</span><span class="nm2">⬆️ 푸시</span><p class="tiny" style="margin:0;">사내 GitHub에 백업</p></div>
+        </div>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.8rem;">
+          <div class="prompt-card" style="margin:0;">
+            <div class="pc-label">💬 STEP 3+4를 한 번에</div>
+            <pre class="code">제목 글자색을 파란색으로 바꿔줘.
+잘 되면 변경사항을 커밋하고 푸시해줘.</pre>
+          </div>
+          <div class="done-box">
+            <p class="bx-t">✅ 완료 기준</p>
+            <ul>
+              <li>사내 GitHub 저장소의 커밋 수가 <strong>2</strong>가 된다</li>
+              <li>두 번째 커밋을 눌러 바뀐 줄(초록·빨강)을 본다</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        STEP 2(확인)를 강조한다 — 잘 되는 상태에서 커밋해야 세이브 포인트에 의미가 있다.
+        두 번째 커밋 화면에서 초록(추가)·빨강(삭제) 줄을 보여 주면 "기록이 남는다"가 눈으로 이해된다.
+        커밋 타이밍은 하루의 끝이 아니라 기능 하나가 잘 될 때마다.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 4 되돌리기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 4 · 되돌리기 (5분)</div>
+        <h2>망했다? <span class="accent2">한 문장</span>이면 마지막 커밋으로 돌아갑니다</h2>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.2rem;">
+          <div class="stack" style="gap:.5rem;">
+            <div class="prompt-card mini" style="margin:0;">
+              <div class="pc-label">💬 방금 AI가 망쳤을 때</div>
+              <pre class="code">마지막 커밋 이후의 변경을 버리고 마지막 커밋 상태로 되돌려줘.</pre>
+            </div>
+            <div class="prompt-card mini" style="margin:0;">
+              <div class="pc-label">💬 예전에 잘 되던 버전으로</div>
+              <pre class="code">최근 커밋 목록을 보여줘. 어제 오후에 잘 되던 버전으로 돌아가고 싶어.</pre>
+            </div>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면</p>
+              <pre class="code">git log --oneline   <span class="cm"># 세이브 포인트 목록</span>
+git restore .       <span class="cm"># 커밋 안 한 변경 버리기</span>
+git revert HEAD     <span class="cm"># 마지막 커밋을 취소하는 커밋</span></pre>
+            </div>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준 — 일부러 망가뜨려 보기</p>
+              <ul>
+                <li>"index.html 내용을 전부 지워줘" → 브라우저에서 빈 화면 확인</li>
+                <li>첫 번째 프롬프트로 복구 → 새로고침하면 <strong>원래 화면</strong></li>
+              </ul>
+            </div>
+            <div class="stuck-box">
+              <p class="bx-t">🧯 되돌려도 같은 에러가 반복되면</p>
+              <p>되돌리기는 응급처치입니다. 원인을 찾는 법은 → <a href="../debugging/">고칠수록 꼬일 때 — AI와 함께 디버깅하기</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        실습: 일부러 파일을 망가뜨리고 한 문장으로 복구한다. "커밋 = 세이브 포인트"가 몸으로 느껴지는 순간.
+        이미 푸시한 커밋을 되돌릴 때는 기록을 남기며 취소하는 revert가 안전하다 — 에이전트가 상황에 맞게 고른다.
+        "전부 삭제", "강제로" 같은 요청엔 에이전트가 되묻는다. 그 메시지는 읽고 답한다.
+        같은 에러가 되돌려도 반복된다면 디버깅 덱으로.
+      </aside>
+    </section>
+
+    <!-- ============= 실습 5 브랜치 & PR ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip live">🖐 실습 5 · 브랜치 &amp; PR — 팀 작업이 시작될 때 (10분)</div>
+        <h2>본편(main)은 그대로 두고, 새 기능은 <span class="grad">브랜치</span>에서 만듭니다</h2>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.2rem;">
+          <div class="stack" style="gap:.5rem;">
+            <div class="prompt-card mini" style="margin:0;">
+              <div class="pc-label">💬 브랜치에서 작업 시작</div>
+              <pre class="code">feature/dark-mode 브랜치를 만들어서 거기서 다크 모드를 추가해줘.</pre>
+            </div>
+            <div class="prompt-card mini" style="margin:0;">
+              <div class="pc-label">💬 끝나면 PR</div>
+              <pre class="code">푸시하고 main으로 Pull Request를 만들어줘. 제목과 설명도 채워줘.</pre>
+            </div>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면</p>
+              <pre class="code">git switch -c feature/dark-mode
+<span class="cm"># 작업 후 push → 웹에서 "Compare &amp; pull request"</span></pre>
+            </div>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준</p>
+              <ul>
+                <li>사내 GitHub의 <strong>Pull requests</strong> 탭에 내 PR이 열려 있다</li>
+                <li><strong>Files changed</strong>에서 바뀐 줄이 보인다</li>
+                <li>Merge 후 main에 다크 모드가 들어온다</li>
+              </ul>
+            </div>
+            <p class="tiny muted">혼자 하는 프로젝트라면 당분간 main에 바로 커밋해도 됩니다. 동료와 같은 저장소를 쓰기 시작하면 이 장으로 돌아오세요.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
         PR 리뷰 화면을 웹에서 잠깐 시연(코멘트 달기, Merge 버튼). 사내 협업의 실제 모습이 여기서 보인다.
-        merge 후 브랜치 삭제는 "합쳐진 브랜치 정리해줘"로.
+        AI가 쓴 코드를 PR로 받아 리뷰하는 법은 verification 덱에서 더 다룬다. Merge 후 정리는 "합쳐진 브랜치 정리해줘".
       </aside>
     </section>
 
-    <!-- ============= 16. CH2 상황별 처방전 ============= -->
+    <!-- ============= CH2 상황별 처방전 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · 사내 GITHUB</div>
-        <h2>자주 만나는 상황 — <span class="accent2">이렇게 말하세요</span></h2>
+        <h2>막히면 상황을 그대로 말하세요 — 용어는 몰라도 됩니다</h2>
         <div class="rx-list" style="margin-top:.4rem;">
-          <div class="rx-item autoshow fade-left"><span class="rx-q">⚔️ “충돌(conflict)이 났다는데요?”</span><span class="rx-a">충돌 났어. 안전하게 해결해줘. 판단이 애매한 부분은 나한테 물어봐.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🕵️ “뭐가 바뀌었는지 모르겠어요”</span><span class="rx-a">어제 이후 변경사항을 쉬운 말로 요약해줘.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🤝 “동료 최신 코드를 받고 싶어요”</span><span class="rx-a">원격 저장소의 최신 내용을 받아와줘(pull). 내 작업이랑 겹치면 알려줘.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🚫 “푸시가 거부됐어요”</span><span class="rx-a">푸시가 거부됐어. 원인 확인하고 안전하게 해결해줘.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">📥 “동료 저장소를 통째로 받고 싶어요”</span><span class="rx-a">이 주소를 클론해줘: https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">팀</span>/<span class="ph">저장소</span></span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🔑 “API 키를 실수로 커밋했어요”</span><span class="rx-a">방금 커밋에 시크릿이 들어갔어. 파일과 기록에서 제거해줘. <strong class="accent3">+ 키는 즉시 재발급!</strong></span></div>
+          <div class="rx-item"><span class="rx-q">⚔️ "충돌(conflict)이 났대요"</span><span class="rx-a">충돌 났어. 안전하게 해결해줘. 판단이 애매한 부분은 나한테 물어봐.</span></div>
+          <div class="rx-item"><span class="rx-q">🕵️ "뭐가 바뀌었는지 모르겠어요"</span><span class="rx-a">어제 이후 변경사항을 쉬운 말로 요약해줘.</span></div>
+          <div class="rx-item"><span class="rx-q">🤝 "동료의 최신 코드를 받고 싶어요"</span><span class="rx-a">원격의 최신 내용을 받아와줘(pull). 내 작업과 겹치면 알려줘.</span></div>
+          <div class="rx-item"><span class="rx-q">🚫 "푸시가 거부됐어요"</span><span class="rx-a">푸시가 거부됐어. 원인을 설명하고 안전하게 해결해줘. 강제 푸시는 하지 마.</span></div>
+          <div class="rx-item"><span class="rx-q">📥 "동료 저장소를 받고 싶어요"</span><span class="rx-a">이 주소를 클론해줘: https://<span class="cfg cfg-ghe">github.company.net</span>/<span class="ph">팀</span>/<span class="ph">저장소</span></span></div>
+          <div class="rx-item"><span class="rx-q">🔑 "API 키를 커밋해 버렸어요"</span><span class="rx-a">키를 <strong class="accent3">먼저 재발급</strong>하고, 그다음 "코드에서 키를 빼고 .gitignore 처리해줘".</span></div>
         </div>
-        <p class="tiny muted" style="margin-top:.7rem;">공통 패턴: <strong>상황을 그대로 설명</strong>하면 됩니다. 정확한 용어를 몰라도, 에러 메시지를 복사해서 붙여넣어도 됩니다.</p>
+        <p class="tiny muted" style="margin-top:.7rem;">에러 메시지는 요약하지 말고 <strong>통째로 붙여 넣기</strong> — 비개발자가 쓸 수 있는 가장 강한 기술입니다.</p>
       </div>
       <aside class="notes">
-        이 슬라이드가 실전 안심 장치. "에러 메시지를 통째로 붙여넣기"가 비전문가의 최강 스킬임을 강조.
-        시크릿 유출 건은 다음 보안 슬라이드에서 한 번 더.
+        실전에서 가장 자주 펼칠 장. "에러 메시지를 통째로 붙여 넣기"를 강조한다.
+        푸시 거부 때 "강제 푸시는 하지 마"를 붙이는 이유: 동료의 작업을 덮어쓸 수 있다.
+        키 유출은 기록에서 지우는 것보다 재발급이 먼저 — 한 번 푸시된 키는 누군가 봤다고 가정한다(보안 약속 2번).
       </aside>
     </section>
 
-    <!-- ============= 17. CH3 GitHub Pages란 ============= -->
+    <!-- ============= CH3 GitHub Pages란 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · 내 웹앱 배포</div>
-        <h2>저장소가 곧 <span class="grad">웹사이트</span>가 됩니다 — GitHub Pages</h2>
+        <h2>GitHub Pages — 저장소가 곧 <span class="grad">웹사이트</span>가 됩니다</h2>
         <div class="step-flow" style="margin-top:.4rem;">
-          <div class="sf-step"><span class="sf-no">1</span><b>내 저장소</b><p>바이브 코딩으로 만든 html / css / js 파일들</p></div>
+          <div class="sf-step"><span class="sf-no">1</span><b>내 저장소</b><p>html · css · js 파일들 (진입 파일은 <span class="mono">index.html</span>)</p></div>
           <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">2</span><b>Pages 스위치 ON</b><p>저장소 설정에서 클릭 몇 번 (다음 슬라이드)</p></div>
+          <div class="sf-step"><span class="sf-no">2</span><b>Pages 켜기</b><p>저장소 Settings에서 클릭 몇 번</p></div>
           <span class="sf-arrow">→</span>
-          <div class="sf-step hot"><span class="sf-no">3</span><b>URL 완성</b><p>서버 없이, 무료로, 누구나 접속</p></div>
+          <div class="sf-step hot"><span class="sf-no">3</span><b>URL 완성</b><p>서버 없이 · 푸시하면 자동 반영</p></div>
         </div>
         <div class="grid-2" style="margin-top:.9rem;">
-          <div class="card autoshow fade-up">
-            <h3>🌍 github.com이라면</h3>
-            <p><span class="url-pill">https://<span class="ph">아이디</span>.github.io/<span class="ph">저장소</span>/</span></p>
-          </div>
-          <div class="card good autoshow fade-up">
-            <h3>🏢 사내 GitHub라면</h3>
+          <div class="card good">
+            <h3>🏢 사내 GitHub</h3>
             <p><span class="url-pill">https://<span class="cfg cfg-pages">pages.company.net</span>/<span class="ph">아이디</span>/<span class="ph">저장소</span>/</span></p>
-            <p class="tiny muted">회사 설정에 따라 <span class="mono">https://<span class="cfg cfg-ghe">github.company.net</span>/pages/…</span> 형태일 수도 있습니다.</p>
+            <p class="tiny muted">회사 설정에 따라 주소 형태가 다를 수 있습니다. 보는 사람 범위는 저장소 권한을 따릅니다.</p>
+          </div>
+          <div class="card">
+            <h3>🌍 github.com (개인)</h3>
+            <p><span class="url-pill">https://<span class="ph">아이디</span>.github.io/<span class="ph">저장소</span>/</span></p>
+            <p class="tiny muted">무료 계정은 Public 저장소에서만 Pages가 됩니다 — 즉 <strong>전 세계 공개</strong>.</p>
           </div>
         </div>
-        <p class="small" style="margin-top:.8rem;">바이브 코딩으로 만든 계산기, 팀 대시보드, 소개 페이지… <strong class="accent2">“이거 봐봐” 한 줄 URL</strong>로 공유하세요.</p>
+        <p class="small" style="margin-top:.8rem;">되는 것: 계산기·대시보드·소개 페이지처럼 <strong class="accent2">브라우저에서만 도는 앱</strong>. 안 되는 것: DB·로그인 같은 서버 기능.</p>
       </div>
       <aside class="notes">
-        Pages = 정적 호스팅: 서버 코드(DB, 로그인 처리)는 못 돌리고, 브라우저에서 도는 것(html/css/js)만.
-        바이브 코딩 산출물의 대부분(SPA, 대시보드, 문서)이 정확히 이 범주라 궁합이 좋다.
-        사내 Pages URL 형태는 GHE 설정(서브도메인 격리)에 따라 다름 — 발표 전 확인.
+        Pages = 정적 호스팅. 서버 코드(DB, 로그인 처리)는 못 돌리고 브라우저에서 도는 것(html/css/js)만 된다.
+        바이브 코딩 결과물의 대부분(단일 HTML 앱, 대시보드, 문서)이 정확히 이 범주라 궁합이 좋다.
+        사내 Pages URL 형태와 공개 범위는 GHE 설정에 따라 다르다 — 발표 전 확인. 팀이 함께 쓰는 서버형 앱은 automation 덱에서.
       </aside>
     </section>
 
-    <!-- ============= 18. CH3 branch 방식 선언 ============= -->
+    <!-- ============= CH3 branch 방식 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 3 · 내 웹앱 배포</div>
-        <h2>배포 방식은 두 가지 — 오늘은 <span class="accent2">branch 방식</span>만</h2>
+        <h2>배포 방식은 두 가지 — 오늘은 설정이 없는 <span class="accent2">branch 방식</span></h2>
         <div class="grid-2" style="margin-top:.4rem;">
-          <div class="card bad autoshow fade-right">
+          <div class="card">
             <h3>⚙️ GitHub Actions 방식</h3>
-            <p>푸시하면 로봇이 자동으로 빌드·배포. 강력하지만 <strong>사내에서는 러너 설정·권한 절차가 까다롭습니다.</strong></p>
+            <p>푸시하면 자동으로 빌드·배포합니다. 강력하지만 사내에서는 <strong>러너·권한 설정</strong>이 필요한 경우가 많습니다.</p>
             <p><span class="pill amber">오늘은 다루지 않음</span></p>
           </div>
-          <div class="card good autoshow fade-left">
-            <h3>🌿 Branch 방식 (Deploy from a branch)</h3>
-            <p>“<strong>이 브랜치의 파일을 그대로 웹으로 내보내줘</strong>”라고 GitHub에 알려주는 것. 설정 파일도, 서버 지식도 필요 없습니다.</p>
-            <p><span class="pill green">오늘의 방법 — 클릭 4번</span></p>
+          <div class="card good">
+            <h3>🌿 Deploy from a branch</h3>
+            <p>"<strong>이 브랜치의 파일을 그대로 웹에 내보내</strong>"라고 정해 두는 것. 설정 파일도 서버 지식도 필요 없습니다.</p>
+            <p><span class="pill green">오늘의 방법</span></p>
           </div>
         </div>
-        <div class="quote autoshow fade-up" style="margin-top:1.1rem;">
-          단순한 방법이 <strong class="accent">충분히 좋은 방법</strong>입니다.
-          branch 방식으로 안 되는 게 생기는 날 — 그때 Actions를 배우면 됩니다.
-        </div>
+        <p class="small muted" style="margin-top:1.1rem;">branch 방식으로 안 되는 일이 생기는 날, 그때 Actions를 배워도 늦지 않습니다.</p>
       </div>
       <aside class="notes">
-        왜 branch만? 사내 GHE에서 Actions는 러너 구축/보안 승인 등 관리 절차가 필요해 비전문가 온보딩에 부적합.
-        branch 방식은 서버 관리자 개입 없이 저장소 설정만으로 끝난다(사내 Pages 기능이 켜져 있다는 전제 — 발표 전 확인).
+        왜 branch 방식만? 사내 GHE에서 Actions는 러너 구축·보안 승인 등 관리 절차가 필요한 경우가 많아 첫 배포에 부적합.
+        branch 방식은 저장소 설정만으로 끝난다(사내 Pages 기능이 켜져 있다는 전제 — 발표 전 확인).
       </aside>
     </section>
 
-    <!-- ============= 19. 실습 6 첫 배포 ============= -->
+    <!-- ============= 실습 6 첫 배포 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">🖐 실습 6 · 첫 배포 — 정적 앱 (10분)</div>
-        <h2>클릭 4번으로 내 앱을 웹에 올립니다</h2>
-        <p class="small" style="margin:.1rem 0 .5rem;">전제: 실습 2에서 푸시한 저장소에 <span class="mono">index.html</span>이 있습니다. Pages 설정은 <strong>웹에서 클릭</strong>이 기본입니다:</p>
-        <div class="step-flow">
-          <div class="sf-step"><span class="sf-no">1</span><b>Settings</b><p>내 저장소 페이지 → 오른쪽 위 <strong>Settings</strong> 탭</p></div>
+        <div class="chip live">🖐 실습 6 · 첫 배포 (10분)</div>
+        <h2>Pages에서 main을 고르면, 1~2분 뒤 URL이 생깁니다</h2>
+        <div class="step-flow" style="margin-top:.2rem;">
+          <div class="sf-step"><span class="sf-no">1</span><b>점검 맡기기</b><p>아래 프롬프트로 진입 파일·경로 확인</p></div>
           <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">2</span><b>Pages</b><p>왼쪽 메뉴에서 <strong>Pages</strong> 클릭</p></div>
+          <div class="sf-step"><span class="sf-no">2</span><b>Settings → Pages</b><p>저장소 위쪽 Settings, 왼쪽 메뉴 Pages</p></div>
           <span class="sf-arrow">→</span>
-          <div class="sf-step"><span class="sf-no">3</span><b>Branch 선택</b><p>Source: <strong>Deploy from a branch</strong><br/>Branch: <span class="mono">main</span> + <span class="mono">/(root)</span> → <strong>Save</strong></p></div>
+          <div class="sf-step"><span class="sf-no">3</span><b>Branch 선택</b><p>Deploy from a branch · <span class="mono">main</span> · <span class="mono">/(root)</span> → Save</p></div>
           <span class="sf-arrow">→</span>
-          <div class="sf-step hot"><span class="sf-no">4</span><b>접속</b><p>1~2분 뒤 같은 화면에 뜨는 <strong>URL 클릭</strong> 🎉</p></div>
+          <div class="sf-step hot"><span class="sf-no">4</span><b>접속</b><p>같은 화면 위쪽에 뜨는 URL 클릭</p></div>
         </div>
-        <div class="prompt-card" style="margin-top:.7rem;">
-          <div class="pc-label">💬 배포 전에 에이전트에게 점검을 맡기세요</div>
-          <pre class="code">이 앱을 GitHub Pages(branch 방식)에 올릴 거야.
-하위 경로에서 열려도 깨지지 않게 절대 경로 같은 문제가 있는지
-점검해서 고쳐줘. 그리고 커밋, 푸시까지 해줘.</pre>
-        </div>
-        <p class="tiny muted" style="margin-top:.5rem;">💡 <span class="mono">docs/</span> 폴더만 공개하는 옵션(Branch: main + /docs)도 있습니다 — 저장소 전체가 아니라 일부만 웹에 내보내고 싶을 때.</p>
-      </div>
-      <aside class="notes">
-        여기서 실제로 한 명의 저장소로 라이브 시연. 첫 반영은 몇 분 걸릴 수 있음을 미리 말해 불안 방지.
-        사내 GHE는 Pages 기능이 관리자에 의해 꺼져 있을 수 있음 — 발표 전 반드시 확인, 꺼져 있으면 담당 조직에 요청하는 방법 안내.
-      </aside>
-    </section>
-
-    <!-- ============= 20. 실습 7 SPA 배포 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip live">🖐 실습 7 · SPA(빌드가 필요한 앱) 배포 (10분)</div>
-        <h2>React·Vite 앱은 <span class="accent">빌드 결과물</span>을 올립니다</h2>
-        <p class="small" style="margin:.1rem 0 .5rem;">
-          React/Vue/Vite 앱은 소스 그대로는 웹에서 안 돌아가고, <strong>빌드된 산출물(<span class="mono">dist</span> 폴더)</strong>만 올려야 합니다.
-          Actions 없이 하는 요령: <strong class="accent2">dist를 <span class="mono">gh-pages</span> 브랜치에 밀어 넣고, Pages가 그 브랜치를 보게</strong> 하는 것.
-        </p>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요 (전부 맡기기)</div>
-          <pre class="code">이 앱을 GitHub Pages에 branch 방식으로 배포하고 싶어.
-1) base 경로를 /<span class="ph">저장소이름</span>/ 으로 설정하고
-2) 빌드해서 결과물(dist)을 gh-pages 브랜치로 푸시해줘.
-3) 내가 Pages 설정에서 뭘 선택해야 하는지 알려줘.</pre>
-        </div>
-        <div class="grid-2" style="margin-top:.6rem; gap:1.5rem; align-items:start;">
-          <div class="manual-box" style="margin-top:0;">
-            <p class="mb-title">🔧 수동으로 하려면</p>
-            <pre class="code">npm run build
-git subtree push --prefix dist origin gh-pages
-<span class="cm"># Pages 설정: Branch를 gh-pages + /(root)로</span></pre>
+        <div class="grid-2" style="align-items:start; gap:1.6rem; margin-top:.5rem;">
+          <div class="prompt-card" style="margin:0;">
+            <div class="pc-label">💬 1 · 배포 전 점검</div>
+            <pre class="code">이 앱을 GitHub Pages(branch 방식)로 올릴 거야.
+루트에 index.html이 있는지, css·js·이미지가
+/저장소이름/ 아래에서도 열리는 상대 경로인지
+점검해서 고치고 커밋·푸시해줘.</pre>
           </div>
-          <div class="stack" style="gap:.45rem;">
-            <div class="prompt-card mini" style="margin:0;">
-              <div class="pc-label">💬 다음부터 업데이트할 때</div>
-              <pre class="code">수정한 내용으로 다시 배포해줘.</pre>
+          <div class="stack" style="gap:.5rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준</p>
+              <ul>
+                <li>URL을 열면 내 앱이 <strong>로컬에서와 똑같이</strong> 보인다</li>
+                <li>글자 하나 고쳐 푸시 → 1~2분 뒤 새로고침하면 반영된다</li>
+                <li>옆자리 동료가 그 URL을 연다</li>
+              </ul>
             </div>
-            <div class="prompt-card mini" style="margin:0;">
-              <div class="pc-label">💬 새로고침하면 404가 뜰 때 (SPA 라우팅)</div>
-              <pre class="code">Pages에서 새로고침하면 404가 떠.
-해시 라우팅으로 바꾸거나 404.html 우회를 적용해줘.</pre>
+            <div class="stuck-box">
+              <p class="bx-t">🧯 막히면</p>
+              <p>Settings에 Pages 메뉴가 없다 → 사내에서 기능이 꺼져 있을 수 있습니다. 사내 GitHub 담당 조직에 문의. 화면이 깨지면 다음 장.</p>
             </div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        핵심 그림: 소스는 main에, 완성품(dist)은 gh-pages에 — 진열대 비유(공장은 main, 진열대는 gh-pages).
-        base 경로 문제(Pages는 /저장소이름/ 하위 경로에서 열림)가 SPA 배포 실패 원인 1위 — 프롬프트에 이미 포함해둠.
-        빌드 없는 순수 html 앱이라면 실습 6 방식이면 충분하다는 것 재확인.
+        한 명의 저장소로 라이브 시연한다. 첫 반영은 몇 분 걸릴 수 있음을 미리 말해 불안을 막는다.
+        진입 파일 이름이 index.html이 아니면(예: fab.html) 루트 주소에서 404가 난다 — 점검 프롬프트가 이걸 잡는다.
+        일부만 공개하고 싶으면 Branch: main + /docs 옵션도 있다.
+        사내 GHE는 Pages 기능이 관리자 설정으로 꺼져 있을 수 있다 — 발표 전 반드시 확인.
       </aside>
     </section>
 
-    <!-- ============= 21. CH3 배포 문제 해결 ============= -->
+    <!-- ============= CH3 배포 문제 해결 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · 내 웹앱 배포</div>
-        <h2>배포가 이상할 때 — <span class="accent2">체크리스트</span></h2>
-        <div class="rx-list" style="margin-top:.4rem;">
-          <div class="rx-item autoshow fade-left"><span class="rx-q">⬜ “화면이 하얗게만 나와요”</span><span class="rx-a">배포한 페이지가 하얗게 나와. 브라우저 콘솔 에러 기준으로 경로 문제 고쳐줘.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🔍 “404 Not Found가 떠요”</span><span class="rx-a">Pages 설정의 브랜치/폴더가 맞는지, index.html이 그 위치에 있는지 확인해줘.</span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">⏳ “반영이 안 돼요”</span><span class="rx-a">첫 배포·업데이트 반영은 <strong>몇 분</strong> 걸립니다 + 강력 새로고침 <span class="mono">Ctrl+Shift+R</span></span></div>
-          <div class="rx-item autoshow fade-left"><span class="rx-q">🔒 “동료가 링크를 못 열어요” (사내)</span><span class="rx-a">사내 Pages는 <strong>저장소 접근 권한을 따릅니다</strong> — 저장소를 팀에 공개(Internal)하거나 동료를 초대해줘.</span></div>
+        <h2>배포 화면이 이상하면, 원인은 대개 이 여섯 중 하나입니다</h2>
+        <div class="rx-list" style="margin-top:.3rem;">
+          <div class="rx-item"><span class="rx-q">🔍 주소에서 404</span><span class="rx-a">진입 파일이 <span class="mono">index.html</span>이 아니거나, Pages가 보는 브랜치·폴더가 다릅니다.</span></div>
+          <div class="rx-item"><span class="rx-q">⬜ 화면이 하얗다 · 스타일이 없다</span><span class="rx-a"><span class="mono">/style.css</span> 같은 절대 경로 → <span class="mono">./style.css</span>. 앱은 <span class="mono">/저장소이름/</span> 아래에서 열립니다.</span></div>
+          <div class="rx-item"><span class="rx-q">🔁 새로고침하면 404 (SPA)</span><span class="rx-a">주소 기반 라우터 때문입니다. <span class="mono">index.html</span>을 <span class="mono">404.html</span>로 복사하거나 해시 라우팅으로.</span></div>
+          <div class="rx-item"><span class="rx-q">📁 <span class="mono">_</span>로 시작하는 폴더가 안 보인다</span><span class="rx-a">루트에 빈 <span class="mono">.nojekyll</span> 파일을 둡니다.</span></div>
+          <div class="rx-item"><span class="rx-q">⏳ 고쳤는데 그대로다</span><span class="rx-a">반영에 1~2분. 강력 새로고침 <span class="mono">Ctrl+Shift+R</span>.</span></div>
+          <div class="rx-item"><span class="rx-q">🔒 동료가 못 연다 (사내)</span><span class="rx-a">사내 Pages는 저장소 권한을 따릅니다. 동료를 초대하거나 Internal로.</span></div>
         </div>
-        <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          디버깅의 제1원칙: <strong class="accent">보이는 그대로 에이전트에게 말하기.</strong>
-          스크린샷·에러 메시지를 붙여넣으면 대부분 해결됩니다.
-        </div>
-      </div>
-      <aside class="notes">
-        사내 특이사항: VPN 밖에서는 사내 Pages가 안 열린다(당연하지만 자주 묻는 질문).
-        github.com 무료 계정의 Pages는 public 저장소에서만 된다는 것도 개인 프로젝트용 참고로 한 줄.
-      </aside>
-    </section>
-
-    <!-- ============= 22. 보안 수칙 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip warn">⚠️ 꼭 지켜야 할 것</div>
-        <h2>보안 수칙 <span class="accent3">4가지</span> — 이것만은 외우세요</h2>
-        <div class="grid-2" style="margin-top:.4rem; gap:1.2rem;">
-          <div class="card bad autoshow fade-up">
-            <h3>1️⃣ 회사 코드는 사내 GitHub에만</h3>
-            <p>github.com 업로드 = 외부 유출. <strong>주소창을 확인</strong>하는 습관: <span class="mono cfg cfg-ghe">github.company.net</span></p>
-          </div>
-          <div class="card bad autoshow fade-up">
-            <h3>2️⃣ 비밀번호·API 키는 커밋 금지</h3>
-            <p>키는 <span class="mono">.env</span> 파일에 두고 <span class="mono">.gitignore</span>로 제외.<br/>💬 <em>“커밋하기 전에 시크릿이 들어있는지 검사해줘”</em></p>
-          </div>
-          <div class="card bad autoshow fade-up">
-            <h3>3️⃣ 이미 새 나갔다면 — 재발급이 1순위</h3>
-            <p>기록에서 지우는 것보다 <strong>키를 즉시 무효화·재발급</strong>하는 게 먼저입니다. 한 번 푸시된 것은 “본 사람이 있다”고 가정하세요.</p>
-          </div>
-          <div class="card bad autoshow fade-up">
-            <h3>4️⃣ Pages는 “게시”라는 뜻</h3>
-            <p>사내 Pages도 설정에 따라 <strong>전 임직원이</strong> 볼 수 있습니다. 올리기 전에 내용(고객 정보, 미공개 수치)을 한 번 점검.</p>
-          </div>
+        <div class="prompt-card mini" style="margin-top:.7rem;">
+          <div class="pc-label">💬 어느 것인지 모르겠으면</div>
+          <pre class="code">Pages에 올린 페이지가 깨져. 브라우저 콘솔 에러를 붙여 줄게 — 진입 파일·상대 경로·base 경로·404.html 중 원인을 찾아 고쳐줘.</pre>
         </div>
       </div>
       <aside class="notes">
-        오늘 유일하게 "외우라"고 말하는 슬라이드. 특히 2번 — 바이브 코딩 중 에이전트가 만든 코드에 키가 하드코딩되는 사고가 실제로 잦다.
-        회사 보안 신고 채널이 있다면 여기서 안내.
+        workshop 덱의 Pages 실습에서 실제로 가장 많이 걸린 함정을 모은 표.
+        단일 HTML 앱은 대부분 위 두 줄(진입 파일, 상대 경로)로 끝난다. 새로고침 404는 React·Vue처럼 주소 기반 라우터를 쓸 때만.
+        .nojekyll: Pages가 기본으로 돌리는 Jekyll이 _로 시작하는 폴더를 무시하기 때문.
+        사내 Pages는 사내망 밖에서는 안 열리는 경우가 많다 — 자주 나오는 질문.
       </aside>
     </section>
 
-    <!-- ============= 23. 치트시트 ============= -->
+    <!-- ============= 실습 7 SPA 배포 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip live">🖐 실습 7 · 빌드가 필요한 앱(React·Vite) 배포 (10분)</div>
+        <h2>React·Vite 앱은 소스가 아니라 <span class="accent">빌드 결과물</span>을 올립니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 소스는 <span class="mono">main</span>에, 완성품(<span class="mono">dist</span>)은 <span class="mono">gh-pages</span> 브랜치에. 공장과 진열대를 나누는 것입니다.</p>
+        <div class="grid-2" style="align-items:start; gap:1.6rem;">
+          <div>
+            <div class="prompt-card" style="margin-top:0;">
+              <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+              <pre class="code">이 앱을 GitHub Pages에 branch 방식으로 배포하고 싶어.
+1) base 경로를 /<span class="ph">저장소이름</span>/ 으로 설정하고
+2) 빌드해서 dist를 gh-pages 브랜치로 올려줘.
+3) Pages 설정에서 뭘 골라야 하는지 알려줘.</pre>
+            </div>
+            <div class="manual-box">
+              <p class="mb-title">🔧 수동으로 하려면</p>
+              <pre class="code">npm run build
+npx gh-pages -d dist   <span class="cm"># Pages 설정: gh-pages · /(root)</span></pre>
+            </div>
+          </div>
+          <div class="stack" style="gap:.5rem;">
+            <div class="done-box">
+              <p class="bx-t">✅ 완료 기준</p>
+              <ul>
+                <li>저장소 브랜치 목록에 <span class="mono">gh-pages</span>가 생긴다</li>
+                <li>URL에서 앱이 뜨고, 다른 화면으로 이동한 뒤 새로고침해도 404가 없다</li>
+              </ul>
+            </div>
+            <div class="prompt-card mini" style="margin:0;">
+              <div class="pc-label">💬 다음부터는</div>
+              <pre class="code">수정한 내용으로 다시 배포해줘.</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        빌드 없는 단일 HTML 앱이라면 실습 6으로 충분하다 — 이 장은 Vite·React로 만든 사람만.
+        base 경로 문제(Pages는 /저장소이름/ 하위 경로에서 열림)가 SPA 배포 실패 원인 1위라 프롬프트에 미리 넣어 두었다.
+        gh-pages는 dist 폴더를 별도 브랜치로 올려 주는 npm 도구. 에이전트에게 맡기면 알아서 고른다.
+      </aside>
+    </section>
+
+    <!-- ============= 보안 약속 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">부록 · 오늘의 프롬프트 치트시트</div>
-        <h2>이 장표만 찍어 가세요 📸</h2>
+        <div class="chip warn">⚠️ 시리즈 공통 · 보안 약속</div>
+        <h2>보안 약속 3가지 — 모든 덱에서 같습니다</h2>
+        <div class="promise-list" style="margin-top:.3rem;">
+          <div class="promise"><span class="pn">1</span><b>회사 기밀·실데이터는 사내 승인 도구에서만 — 애매하면 넣지 않는다.</b><span class="why">저장소도 같습니다. 업무 코드는 <span class="mono cfg cfg-ghe">github.company.net</span>, github.com이 아닙니다.</span></div>
+          <div class="promise"><span class="pn">2</span><b>API 키·비밀번호는 코드·대화·커밋에 남기지 않는다 — 새어 나갔다면 삭제가 아니라 재발급.</b><span class="why">한 번 푸시된 키는 기록을 지워도 누군가 봤다고 가정합니다.</span></div>
+          <div class="promise"><span class="pn">3</span><b>회사 정책이 이 자료보다 우선한다.</b><span class="why">공개 범위·외부 게시 절차는 사내 규정을 따릅니다.</span></div>
+        </div>
+        <div class="plus-one"><span class="po-t">이 덱에서 하나 더</span>
+          <strong>.env·키 파일은 첫 커밋 전에 .gitignore로</strong>, 그리고 <strong>Public 저장소·Pages는 "게시"</strong>입니다 — 올리기 전에 고객 정보·미공개 수치가 없는지 한 번 봅니다.
+        </div>
+        <p class="tiny muted" style="margin-top:.7rem;">왜 이 세 가지인지는 → <a href="../security/">사내 환경에서의 AI — 보안과 거버넌스</a></p>
+      </div>
+      <aside class="notes">
+        시리즈 전체가 같은 문구·같은 개수로 쓰는 보안 약속 3가지. 이 덱에서는 git에 맞게 예시만 바꿨다.
+        "이 덱에서 하나 더": .gitignore와 공개 범위. 에이전트가 만든 코드에 키가 그대로 박히는 사고가 실제로 잦다 — "커밋 전에 시크릿이 들어 있는지 검사해줘" 한 줄을 습관으로.
+        사내 Pages도 설정에 따라 전 임직원이 볼 수 있다. 회사 보안 신고 채널이 있다면 여기서 안내.
+      </aside>
+    </section>
+
+    <!-- ============= 치트시트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">부록 · 프롬프트 치트시트</div>
+        <h2>오늘 쓴 문장 14개 — 이 장만 찍어 가세요 📸</h2>
         <div class="cheat-grid" style="margin-top:.4rem;">
-          <div class="cheat"><span class="ct">시작</span><span class="cp">이 폴더를 git 저장소로 만들고 “첫 버전”으로 커밋해줘</span></div>
+          <div class="cheat"><span class="ct">시작</span><span class="cp">이 폴더를 git 저장소로 만들고 "첫 버전"으로 커밋해줘</span></div>
           <div class="cheat"><span class="ct">연결+업로드</span><span class="cp">이 주소를 원격으로 연결하고 푸시해줘: https://<span class="cfg cfg-ghe">github.company.net</span>/…</span></div>
           <div class="cheat"><span class="ct">일상 저장</span><span class="cp">변경사항 보기 좋게 커밋하고 푸시해줘</span></div>
-          <div class="cheat"><span class="ct">상태 확인</span><span class="cp">지금 커밋 안 된 변경이 뭐가 있는지 요약해줘</span></div>
+          <div class="cheat"><span class="ct">상태 확인</span><span class="cp">커밋 안 된 변경이 뭐가 있는지 요약해줘</span></div>
           <div class="cheat"><span class="ct">되돌리기</span><span class="cp">마지막 커밋 상태로 되돌려줘 / 커밋 목록 보여줘</span></div>
           <div class="cheat"><span class="ct">받아오기</span><span class="cp">원격의 최신 내용을 받아와줘 (pull)</span></div>
           <div class="cheat"><span class="ct">복제</span><span class="cp">이 저장소를 클론해줘: https://<span class="cfg cfg-ghe">github.company.net</span>/…</span></div>
           <div class="cheat"><span class="ct">브랜치</span><span class="cp">feature/○○ 브랜치 만들어서 거기서 작업해줘</span></div>
           <div class="cheat"><span class="ct">PR</span><span class="cp">푸시하고 main으로 Pull Request 만들어줘. 설명도 채워줘</span></div>
           <div class="cheat"><span class="ct">충돌</span><span class="cp">충돌 났어. 안전하게 해결해줘. 애매하면 물어봐</span></div>
-          <div class="cheat"><span class="ct">배포(정적)</span><span class="cp">Pages(branch 방식)에 올릴 거야. 경로 점검하고 커밋·푸시해줘</span></div>
-          <div class="cheat"><span class="ct">배포(SPA)</span><span class="cp">base 경로 /<span class="ph">저장소</span>/ 설정하고 dist를 gh-pages 브랜치로 푸시해줘</span></div>
-          <div class="cheat"><span class="ct">보안</span><span class="cp">커밋 전에 시크릿(키·비밀번호) 들어있는지 검사해줘</span></div>
-          <div class="cheat"><span class="ct">배움</span><span class="cp">방금 네가 한 git 작업을 초보자에게 설명하듯 알려줘</span></div>
+          <div class="cheat"><span class="ct">배포 점검</span><span class="cp">Pages에 올릴 거야. index.html·상대 경로 점검하고 커밋·푸시해줘</span></div>
+          <div class="cheat"><span class="ct">배포 깨짐</span><span class="cp">Pages 화면이 깨져. 콘솔 에러 보고 경로·404 문제 고쳐줘</span></div>
+          <div class="cheat"><span class="ct">보안</span><span class="cp">커밋 전에 키·비밀번호가 들어 있는지 검사해줘</span></div>
+          <div class="cheat"><span class="ct">배우기</span><span class="cp">방금 네가 한 git 작업을 초보자에게 설명하듯 알려줘</span></div>
         </div>
-        <p class="tiny muted" style="margin-top:.6rem;">같은 내용이 저장소의 <span class="mono">github/README.md</span>에도 정리돼 있습니다 — 복사해서 쓰세요.</p>
+        <p class="tiny muted" style="margin-top:.6rem;">같은 표가 저장소의 <span class="mono">github/README.md</span>에도 있습니다 — 복사해서 쓰세요.</p>
       </div>
       <aside class="notes">
-        마지막 "배움" 프롬프트를 강조 — 에이전트에게 시키면서 동시에 배우는 방법. 매번 물으면 자연스럽게 git을 이해하게 된다.
+        마지막 "배우기" 프롬프트를 강조 — 시키면서 동시에 배우는 방법. 매번 물으면 자연스럽게 git이 이해된다.
       </aside>
     </section>
 
-    <!-- ============= 24. 마무리 ============= -->
+    <!-- ============= 마무리 ============= -->
     <section>
-      <div class="vfill center">
+      <div class="vfill">
         <div class="chip">마무리</div>
-        <h2>기억할 것은 <span class="grad">세 문장</span>입니다</h2>
-        <div class="stack" style="gap:.8rem; max-width:860px; margin:0 auto; text-align:left;">
-          <div class="rung autoshow fade-up" style="display:flex; align-items:center; gap:1rem; padding:.7rem 1.2rem; border:1px solid rgba(155,130,255,.5); border-radius:12px; background:rgba(124,92,255,.18); font-size:1.35rem; font-weight:700;">
-            1️⃣ 커밋은 세이브 포인트 — <strong class="accent2">기능이 잘 될 때마다</strong> “커밋해줘”
+        <h2>커밋은 자주, 업무는 사내에, 공유는 URL로</h2>
+        <div class="grid-2" style="align-items:start; gap:2rem; margin-top:.3rem;">
+          <div class="ladder">
+            <div class="rung"><span class="no">1</span>기능이 잘 될 때마다 "커밋해줘"</div>
+            <div class="rung"><span class="no">2</span>업무 코드는 <span class="mono cfg cfg-ghe">github.company.net</span></div>
+            <div class="rung"><span class="no">3</span>만든 것은 Pages로 — URL 한 줄로 공유</div>
           </div>
-          <div class="rung autoshow fade-up" style="display:flex; align-items:center; gap:1rem; padding:.7rem 1.2rem; border:1px solid rgba(155,130,255,.5); border-radius:12px; background:rgba(124,92,255,.18); font-size:1.35rem; font-weight:700;">
-            2️⃣ 업무 코드는 <span class="mono cfg cfg-ghe">github.company.net</span> — <strong class="accent3">github.com이 아닙니다</strong>
-          </div>
-          <div class="rung autoshow fade-up" style="display:flex; align-items:center; gap:1rem; padding:.7rem 1.2rem; border:1px solid rgba(155,130,255,.5); border-radius:12px; background:rgba(124,92,255,.18); font-size:1.35rem; font-weight:700;">
-            3️⃣ 만든 것은 Pages(branch 방식)로 — <strong class="accent">URL 한 줄로 공유</strong>
+          <div class="card ref-col">
+            <h3>🔗 다음에 펼칠 덱</h3>
+            <ul>
+              <li><a href="../debugging/">고칠수록 꼬일 때 — AI와 함께 디버깅하기</a><span class="rd">되돌려도 같은 에러가 반복될 때</span></li>
+              <li><a href="../verification/">AI가 쓴 코드를 믿는 법</a><span class="rd">PR로 받은 코드를 검토하는 법</span></li>
+              <li><a href="../automation/">내 도구가 혼자 돌게</a><span class="rd">Pages로 부족할 때 — 연결·예약 실행·팀 공유</span></li>
+              <li><a href="../security/">보안과 거버넌스</a><span class="rd">보안 약속 3가지의 이유</span></li>
+            </ul>
           </div>
         </div>
-        <p style="margin-top:1.6rem; font-size:1.5rem;">질문은 화면 아래 입력창으로 💬</p>
-        <p class="tiny muted" style="margin-top:1rem;">
-          이 자료는 어느 회사에서나 재사용할 수 있습니다 — 사내 주소 표기는
-          <span class="mono">github/index.html</span> 상단의 <span class="mono">SEMINAR_CONFIG</span>에서 바꾸세요.
+        <p class="tiny muted" style="margin-top:1.2rem;">
+          다른 회사에서도 쓸 수 있습니다 — 사내 주소 표기는 <span class="mono">github/index.html</span> 상단 <span class="mono">SEMINAR_CONFIG</span> 또는 <span class="mono">?ghe=</span> 파라미터로 바꿉니다.
         </p>
       </div>
       <aside class="notes">
-        마무리 + Q&A. 로컬 발표 모드(npm run dev)에서만 실시간 질문이 동작한다.
-        다음 단계 추천: 원본 세미나(바이브 코딩이란), 컨텍스트 세미나, 실습 워크숍.
+        마무리와 Q&A. 실시간 질문은 발표 모드(npm run dev)에서만 동작한다.
+        오늘 손에 남은 것을 확인: 사내 저장소 하나, Pages 주소 하나. 아직 못 만든 사람은 치트시트의 "시작"부터 다시.
       </aside>
     </section>
 

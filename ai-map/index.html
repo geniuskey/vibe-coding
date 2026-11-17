@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 업계 지도 — 2026.11 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="2026년 11월 기준 AI 업계 지도. Google DeepMind · Anthropic · OpenAI · 중국 AI 랩 · Meta · xAI, 그리고 얀 르쿤의 AMI Labs까지 — 누가 무엇을 왜 내놨는지 흐름 세 가지로 정리한 번외 세미나 슬라이드." />
+  <meta name="keywords" content="AI 업계, AI 동향, 2026, Gemini 4, Claude 5.5, GPT-6, DeepSeek, Qwen, Meta Muse, Grok, 얀 르쿤, AMI Labs, 바이브 코딩" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vibe-coding.euiyun.com/ai-map/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="AI 업계 지도 — 2026.11" />
+  <meta property="og:description" content="빅 3의 차세대 플래그십, 싸게 쫓아오는 중국 오픈 모델, 기기를 노리는 Meta·xAI, LLM 다음을 건 얀 르쿤 — 2026년 11월의 AI 업계를 한 장 지도로." />
+  <meta property="og:url" content="https://vibe-coding.euiyun.com/ai-map/" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/ai-map.png?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI 업계 지도 — 2026.11" />
+  <meta name="twitter:description" content="모델 이름은 3개월이면 바뀝니다 — 2026.11 AI 업계의 흐름 세 가지." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/ai-map.png?v=1" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "AI 업계 지도 — 2026.11",
+    "headline": "AI 업계 지도 — 2026.11 | 바이브 코딩 세미나",
+    "description": "2026년 11월 기준 AI 업계 지도 — Google DeepMind, Anthropic, OpenAI, 중국 AI 랩, Meta, xAI, AMI Labs의 전략을 흐름 세 가지로 정리.",
+    "url": "https://vibe-coding.euiyun.com/ai-map/",
+    "image": "https://vibe-coding.euiyun.com/og/ai-map.png?v=1",
+    "inLanguage": "ko",
+    "datePublished": "2026-11",
+    "dateModified": "2026-11",
+    "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
+    "isPartOf": "https://vibe-coding.euiyun.com/",
+    "keywords": "AI 업계, AI 동향, Gemini 4, Claude 5.5, GPT-6, DeepSeek, Qwen, 얀 르쿤"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 공용 디자인 시스템 — github/ 덱과 동일한 시각 언어 (각 덱은 자기완결 파일이므로 인라인 유지) -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+    }
+    @keyframes bgFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-2%, 2%) scale(1.05); }
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    /* HARD RULE: every text descendant defaults to pure white. */
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: none !important; /* background-clip:text 위 그림자는 그라데이션을 탁하게 만든다 */
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 340px; text-overflow: ellipsis; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 11px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) {
+        position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+      }
+      .dl-toolbar .dl-btn > span[aria-hidden] { font-size: 0.95rem; }
+    }
+    /* 전체화면을 못 쓰는 브라우저(iOS Safari 등)에서는 버튼을 숨긴다 */
+    .no-fullscreen #fullscreenBtn { display: none; }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* animated gradient text */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 250% 250% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      background-position: 0% 50% !important;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+    @keyframes gradMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    .chip.live { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .chip.warn { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    /* card — glassmorphism */
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* code / chat block */
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal ========= */
+    .autoshow { opacity: 0; }
+    /* 움직임은 설명 순서만 돕는다 — 짧게(350ms), ease-out, 이동 거리 작게 */
+    section.present .autoshow.fade-up    { animation: asFadeUp .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-left  { animation: asFadeLeft .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.fade-right { animation: asFadeRight .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-16px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(16px); } to { opacity:1; transform:none; } }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.96); } to { opacity:1; transform:scale(1); } }
+    .autoshow:nth-child(1) { animation-delay: .05s; }
+    .autoshow:nth-child(2) { animation-delay: .15s; }
+    .autoshow:nth-child(3) { animation-delay: .25s; }
+    .autoshow:nth-child(4) { animation-delay: .35s; }
+    .autoshow:nth-child(5) { animation-delay: .45s; }
+    .autoshow:nth-child(6) { animation-delay: .55s; }
+    .autoshow:nth-child(7) { animation-delay: .65s; }
+    .autoshow:nth-child(8) { animation-delay: .75s; }
+
+    /* ========= fallbacks: overview / print / reduced-motion ========= */
+    .reveal.overview .autoshow {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal.overview .slides section {
+      display: block !important;
+      cursor: pointer;
+      outline: 1px solid rgba(181, 161, 255, 0.28);
+      outline-offset: -1px;
+      border-radius: 6px;
+    }
+    .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
+    .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
+    @media print {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .reveal .fragment.custom {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        max-height: none !important;
+      }
+      .dl-toolbar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .grad { animation: none !important; }
+      body::before { animation: none !important; }
+    }
+  </style>
+  <!-- AI 업계 지도 전용 컴포넌트 -->
+  <style>
+    /* ===== 프롬프트 카드 — "AI에게 이렇게 말하세요" ===== */
+    .prompt-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(38,30,82,0.72), rgba(16,22,44,0.72));
+      border: 1.5px solid rgba(155,130,255,0.65);
+      border-radius: 16px;
+      padding: 1.0rem 1.25rem 1.1rem;
+      margin: .7rem 0;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6);
+    }
+    .prompt-card .pc-label {
+      display: flex; align-items: center; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .92rem; font-weight: 800; letter-spacing: .06em;
+      color: #CBBDFF !important;
+      margin-bottom: .5rem;
+    }
+    .prompt-card pre.code {
+      margin: 0;
+      border: 0;
+      background: rgba(6,8,15,0.55);
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-size: 1.32rem;
+      font-weight: 600;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: keep-all;
+    }
+    .prompt-card.mini pre.code { font-size: 1.1rem; padding: .8rem 1rem; }
+    .prompt-card.mini { padding: .75rem 1rem .85rem; margin: .45rem 0; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px;
+      border: 1px solid rgba(155,130,255,0.55);
+      background: rgba(20,22,44,0.85);
+      color: #E1D9FF; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; font-weight: 700;
+      padding: 4px 12px; cursor: pointer;
+      opacity: .7; transition: opacity .25s ease, transform .25s ease;
+    }
+    .copy-btn:hover { opacity: 1; transform: translateY(-1px); }
+
+    /* ===== 학습 경로 지도 ===== */
+    .path-map { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .path-map .pm-node {
+      display: flex; flex-direction: column; gap: .15rem;
+      padding: .6rem 1rem; border-radius: 12px;
+      border: 1px solid rgba(155,130,255,0.45);
+      background: rgba(20,22,44,0.6);
+      text-decoration: none !important;
+    }
+    .path-map .pm-node b { font-size: 1.05rem; color: #FFFFFF !important; }
+    .path-map .pm-node span { font-size: .82rem; color: #9BA6C0 !important; font-family: 'JetBrains Mono', monospace; }
+    .path-map .pm-node.here { border-color: rgba(43,234,208,0.85); background: rgba(15,60,55,0.4); box-shadow: 0 0 22px rgba(43,234,208,0.18); }
+    .path-map .pm-arrow { color: #8A93B2 !important; font-size: 1.4rem; font-weight: 800; }
+
+    /* ===== 완료 기준 막대 — 실습 STEP 마다 "눈으로 확인할 것" ===== */
+    .done-bar {
+      display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
+      margin-top: .9rem; padding: .55rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(43,234,208,0.6);
+      background: rgba(15,60,55,0.32);
+      font-size: 1.05rem; font-weight: 600; line-height: 1.4;
+    }
+    .done-bar .db-k {
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800; letter-spacing: .04em;
+      color: #5BFFE0 !important; white-space: nowrap;
+    }
+    .done-bar .db-s { margin-left: auto; font-size: .88rem; font-weight: 500; color: #9BA6C0 !important; white-space: nowrap; }
+
+    /* 명령어 표 */
+    .cmd-tbl td { font-size: 1rem; padding: .38rem .7rem; }
+    .cmd-tbl td.mono { color: #5BFFE0 !important; font-weight: 700; white-space: nowrap; width: 1%; }
+    .cmd-tbl th { color: #CBBDFF !important; }
+
+    /* ===== 한 장 지도 타일 ===== */
+    .map-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .map-tile {
+      display: flex; flex-direction: column; gap: .35rem;
+      padding: 1rem 1.2rem; border-radius: 16px;
+      background: rgba(14,18,32,0.72);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 3px solid var(--c, #9B82FF);
+    }
+    .map-tile .mt-name { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800; letter-spacing: .04em; color: var(--c, #B5A1FF) !important; }
+    .map-tile b { font-size: 1.3rem; line-height: 1.3; }
+    .map-tile p { font-size: 1.02rem !important; line-height: 1.45; margin: 0; color: #C9D2E4 !important; }
+    .card .pill + h3 { margin-top: .5rem; }
+    .reveal .card p { font-size: 1.08rem; }
+    .close-list { margin: 0; padding-left: 1.2rem; }
+    .close-list li { font-size: 1.3rem; line-height: 1.7; }
+    .path-map { gap: .8rem; }
+    @media (max-width: 760px) {
+      .map-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/core.css">
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../index.html" title="바이브 코딩 세미나 시리즈 전체 보기">
+    <span aria-hidden="true">↗</span><span>모든 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 표지 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">번외 · AI MAP · 2026년 11월 중순 기준</div>
+        <h1 style="font-size:4.6rem;">
+          <span class="grad">AI 업계 지도</span><br/>— 2026.11
+        </h1>
+        <p style="font-size:1.55rem; margin-top:1.1rem; max-width:900px;">
+          누가, 무엇을, 왜 내놨나 — <em>빅 3와 그 바깥</em>을 한 번에 훑습니다.
+        </p>
+        <p class="small muted" style="margin-top:1.4rem; max-width:980px;">
+          수치는 각 사 발표 기준(자체 측정)이고, 중국 랩·Meta·xAI 일부는 보도 기준입니다. 3개월이면 또 바뀝니다 —
+          <strong class="accent2">이름보다 흐름</strong>을 가져가세요.
+        </p>
+        <p class="tiny muted" style="margin-top:1.6rem;">
+          <a href="../intro/">← 바이브 코딩이란 무엇인가? (이 덱은 원래 그 부록이었습니다)</a>
+        </p>
+      </div>
+      <aside class="notes">
+        intro 덱의 부록을 따로 뗀 덱. 본 강의에서 빠진 "요즘 누가 뭘 냈나" 질문에 답하는 용도 — Q&A 시간이나 점심 뒤 10분짜리로 쓴다.
+        기준일은 2026년 11월 18일. 숫자는 각 사 발표라는 점을 먼저 못 박는다. 장마다 주요 수치의 출처 링크를 노트에 달아 두었다.
+      </aside>
+    </section>
+
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">모델 이름은 3개월이면 바뀝니다. 흐름 세 가지만 가져가세요.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>9월에 빅 3가 차세대 플래그십을 모두 냈고, 10~11월엔 더 싼 보급형과 후속작이 이어졌습니다</strong><span class="sub">Google Gemini 4 · Anthropic 5.5 패밀리 · OpenAI GPT-6. 경쟁의 축이 "더 똑똑하게"에서 "같은 지능을 더 싸게"로 넓어졌습니다.</span></div></li>
+        <li><span class="n">2</span><div><strong>최상위 모델은 "방어하는 쪽"에 먼저 풀립니다</strong><span class="sub">사이버 위험이 높은 모델은 보안 조직부터, 일반 공개판은 제한을 걸어 출시 — 출시와 안전성 심사가 한 묶음이 됐습니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>중국 오픈 모델은 싸게 쫓아오고, Meta·xAI는 "AI가 들어갈 기기"를 노립니다</strong><span class="sub">값싼 토큰이 개인 에이전트 붐을 받치고, 챗봇 밖(안경·차·로봇)이 다음 전장입니다.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지도를 직접 새로 그리는 프롬프트</div>
+          <pre>지난 3개월 동안 나온 주요 AI 모델·제품 소식을 회사별로 표로 정리해줘.
+각 항목에 날짜와 공식 발표 링크를 달고, 공식 확인이 안 된 보도는 따로 표시해줘.</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>회의에서 모르는 모델 이름이 오갈 때</li>
+            <li>"어떤 모델을 써야 하지?" 싶을 때 → <a href="../setup/">0교시 · 모델 고르기</a></li>
+            <li>이 지도가 3개월 넘게 낡았을 때</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 2. 한 장 지도 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">MAP · 한 장으로</div>
+        <h2>여섯 진영, <span class="grad">여섯 가지 전략</span></h2>
+        <div class="map-grid" style="margin-top:.5rem;">
+          <div class="map-tile autoshow fade-in" style="--c:#FFD46B;">
+            <span class="mt-name">Google DeepMind</span>
+            <b>전문가 모델 + 전방위 확산</b>
+            <p>Gemini 4로 세대교체, 도구·기기마다 AI를 심는다</p>
+          </div>
+          <div class="map-tile autoshow fade-in" style="--c:#FF94AC;">
+            <span class="mt-name">Anthropic</span>
+            <b>같은 지능을 더 싸게</b>
+            <p>5.5 패밀리 · 코딩 에이전트(Claude Code) 중심</p>
+          </div>
+          <div class="map-tile autoshow fade-in" style="--c:#5BFFE0;">
+            <span class="mt-name">OpenAI</span>
+            <b>GPT-6를 단계적으로</b>
+            <p>최상위는 방어 조직부터, 보급형으로 넓히기</p>
+          </div>
+          <div class="map-tile autoshow fade-in" style="--c:#B5A1FF;">
+            <span class="mt-name">중국 AI 랩</span>
+            <b>싸게 · 공개하고 · 바짝</b>
+            <p>오픈 웨이트와 낮은 가격으로 격차를 좁힌다</p>
+          </div>
+          <div class="map-tile autoshow fade-in" style="--c:#7EC8FF;">
+            <span class="mt-name">Meta · xAI</span>
+            <b>AI가 들어갈 기기</b>
+            <p>안경 · 메신저 · 차 · 로봇 — 챗봇 밖을 노린다</p>
+          </div>
+          <div class="map-tile autoshow fade-in" style="--c:#E6D9FF;">
+            <span class="mt-name">얀 르쿤 · AMI Labs</span>
+            <b>LLM 다음</b>
+            <p>언어가 아니라 세상을 보고 배우는 "월드 모델"</p>
+          </div>
+        </div>
+        <p class="small muted autoshow fade-up" style="margin-top:1rem;">
+          9월 한 달에 빅 3가 차세대 플래그십을 모두 내놨고, 10~11월엔 보급형과 후속 모델이 이어졌습니다. 이어지는 장에서 하나씩.
+        </p>
+      </div>
+      <aside class="notes">
+        이 한 장이 덱의 요약. 시간이 없으면 이 장만 보여 주고 끝내도 된다.
+        나머지 장은 진영별 상세 — 청중이 관심 있는 회사만 골라 넘겨도 좋다.
+      </aside>
+    </section>
+
+    <!-- ============= 3. Google DeepMind ============= -->
+    <section>
+      <div class="chip">LABS 1/4 · GOOGLE DEEPMIND</div>
+      <h2><span class="accent4">Google</span> — 3.5 Pro를 건너뛰고 Gemini 4로 넘어갔습니다</h2>
+      <div class="grid-2" style="margin-top: 1.1rem; gap: 1.1rem; align-items:stretch;">
+        <div class="card autoshow fade-in" style="border-color: rgba(255,212,107,0.6);">
+          <span class="pill amber">신모델 · 2026.09.30</span>
+          <h3 style="margin-top:.5rem;"><span class="accent4">Gemini 4 Argon</span> — 다음 세대 플래그십</h3>
+          <p>길고 복잡한 업무용 깊은 추론. 출력 한도 <span class="accent2">64K → 1M 토큰</span>.
+          사이버 방어 조직에 먼저 → 10.13 전 세계 출시. 10.28 더 센 <span class="accent4">Gemini 4 Carbon</span> 발표 → 11.10 유료 API 정식 출시.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill green">정리된 라인업</span>
+          <h3 style="margin-top:.5rem;">3.5 Pro는 취소, <span class="accent2">3.8 Flash</span>로 메움</h3>
+          <p>7월로 밀렸던 3.5 Pro는 끝내 나오지 않았고, 9월 2일 <span class="accent2">Gemini 3.8 Flash</span>(9월 중 Live · Cyber 변형 추가)가 자리를 채웠습니다.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill">강점</span>
+          <h3 style="margin-top:.5rem;">전문가 모델을 찍어낸다</h3>
+          <p>AlphaGo · AlphaFold · AlphaProof… 9월에도 <span class="accent2">WeatherNext 3 · AlphaGenome Atlas</span>. 15년 넘게 쌓은 연구 조직의 힘.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill">도구 군단</span>
+          <h3 style="margin-top:.5rem;">Flow · Stitch · Jules · Antigravity</h3>
+          <p>영상 · UI 디자인 · 비동기 코딩 · 에이전트형 에디터에, 9월엔 <span class="accent4">Windows용 Gemini · Googlebook</span>까지. Gemini CLI는 <span class="accent4">Antigravity CLI</span>로 흡수(5월).</p>
+        </div>
+      </div>
+      <aside class="notes">
+        구글의 전략은 "넓게". 연구 조직이 만드는 전문가 모델(날씨·유전체)과, 모든 제품에 Gemini를 심는 확산.
+        눈여겨볼 점: 최상위 모델(Argon)을 사이버 방어 조직에 먼저 풀었다 — OpenAI도 같은 방식(OpenAI 장).
+        3.5 Pro는 6월→7월로 연기된 뒤 결국 출시 계획이 접혔다는 보도(Google 공식 발표는 없음 — "보도 기준"으로 말할 것).
+        출처: Argon 발표(9.30, 64K→1M) https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/ ·
+        Argon 전 세계 출시(10.13) https://9to5google.com/2026/10/13/gemini-app-4-argon/ ·
+        Carbon 발표(10.28) https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/ ·
+        Carbon 정식 출시(11.10) https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/ ·
+        9월 소식 모음(3.8 Flash·Live·Cyber, WeatherNext 3, AlphaGenome Atlas, Windows용 Gemini, Googlebook) https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/ ·
+        Gemini CLI → Antigravity CLI(5.19 I/O) https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/
+      </aside>
+    </section>
+
+    <!-- ============= 4. Anthropic ============= -->
+    <section>
+      <div class="chip">LABS 2/4 · ANTHROPIC</div>
+      <h2><span class="accent3">Anthropic</span> — 한 달 만에 5.5 패밀리, "같은 지능을 더 싸게"</h2>
+      <div class="card autoshow fade-in" style="margin-top: 0.9rem;">
+        <span class="pill pink">2026.09~11 — 10주 동안 5개 모델</span>
+        <p style="margin-top:.6rem; font-size:1.2rem;"><span class="accent3">Fable 5.1</span>(9.1) → <span class="accent3">Opus 5.5</span>(9.22, 작업당 비용 Opus 5보다 <span class="accent2">약 40%↓</span>) → <span class="accent3">Sonnet 5.5</span>(9.28) → <span class="accent3">Haiku 5.5</span>(10.7, 4.5보다 <span class="accent2">약 75%↓</span>) → <span class="accent3">Fable 5.2</span>(11.9, 5.1보다 <span class="accent2">약 20%↓</span>)</p>
+      </div>
+      <div class="grid-3" style="margin-top: 0.8rem; gap: 1rem;">
+        <div class="card autoshow fade-in">
+          <span class="pill">코딩</span>
+          <h3 style="font-size: 1.35rem; margin-top:.5rem;">🛠 Claude Code</h3>
+          <p>새 세션은 Auto 모드로 시작, CLAUDE.md가 없으면 AGENTS.md도 읽는다. 관리자는 Auto 모드를 끄는 등 조직 설정으로 잠글 수 있다.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill green">통합</span>
+          <h3 style="font-size: 1.35rem; margin-top:.5rem;">💬 Cowork = Claude</h3>
+          <p>9.16 — 별도 앱이던 Cowork가 채팅과 하나로. 어느 대화에서든 파일 작업·문서·슬라이드.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill amber">다음 사건</span>
+          <h3 style="font-size: 1.35rem; margin-top:.5rem;">📈 상장 준비</h3>
+          <p>10.26 S-1 공개 제출, 11.10 공모가 범위 $70~78 — 11.19 나스닥(ANT) 거래 시작 예정이라는 보도. <span class="muted">최종 공모가는 미정.</span></p>
+        </div>
+      </div>
+      <p class="small muted autoshow fade-up" style="margin-top:.9rem;">
+        6월엔 미 정부 지시로 Fable 5 · Mythos 5 접근이 2주 넘게 막힌 일도 있었습니다(6.12~6.30) — 이제 모델 출시는 안전성 심사와 한 묶음입니다.
+      </p>
+      <aside class="notes">
+        가격 인하율은 Anthropic 발표 기준. 이 시리즈가 쓰는 도구(Claude Code) 쪽 변화 — Auto 모드 기본값, AGENTS.md 지원, 관리자 잠금 — 는 0교시 덱 내용과 이어진다.
+        상장 관련은 보도 기준이라 날짜를 단정하지 말 것.
+        "40%"는 정가 인하율이 아니라 작업당 비용 기준 — 정가는 $5/$25 → $4/$20(20%↓). Haiku "약 75%"도 평균치(정가는 100K 이하 구간 $1/$5 → $0.10/$0.50).
+        출처: Opus 5.5 https://platform.claude.com/docs/en/models/opus-5-5/overview · https://www.technology.org/2026/09/23/anthropic-claude-opus-5-5-launch-pricing-benchmarks/ ·
+        Haiku 5.5 https://www.developersdigest.tech/blog/claude-haiku-5-5-release-guide-2026 ·
+        Fable 5.2(11.9, $8/$40) https://llm-stats.com/blog/research/claude-fable-5-2-launch ·
+        Cowork 통합(9.16) https://9to5mac.com/2026/09/16/anthropic-merging-claude-cowork-with-chat/ ·
+        AGENTS.md 지원 https://devops.com/claude-code-adds-agents-md-fallback-cutting-instruction-file-sprawl · Auto 모드 https://code.claude.com/docs/en/permission-modes ·
+        S-1 https://www.cnbc.com/2026/10/26/anthropic-ipo-live-updates-ai-s-1-filing.html · 공모가 범위 https://leverageshares.com/us/anthropic-ipo-tracker/ ·
+        6월 접근 차단 https://www.cnn.com/2026/06/13/business/anthropic-mythos-model-national-security · https://en.wikipedia.org/wiki/Claude_Mythos
+      </aside>
+    </section>
+
+    <!-- ============= 5. 중국 AI Labs ============= -->
+    <section>
+      <div class="chip">LABS 3/4 · CHINA</div>
+      <h2><span class="accent2">중국 AI 랩</span> — 싸게, 공개하고, 바짝 쫓습니다</h2>
+      <div class="grid-2" style="margin-top: 1.1rem; gap: 1.1rem; align-items:stretch;">
+        <div class="card autoshow fade-in">
+          <span class="pill green">DeepSeek · 2026.09.10</span>
+          <h3 style="margin-top:.5rem;"><span class="accent2">V4.1 Flash</span> — 오픈 웨이트(MIT)</h3>
+          <p>552B 중 일부(보도에 따라 8~16B)만 켜는 MoE, 컨텍스트 1M. 출시와 함께 <span class="accent4">API 가격 인하</span>, 10.17 업데이트판. 상위 모델 V4.1 Pro는 아직 발표 없음.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill">Alibaba · Moonshot</span>
+          <h3 style="margin-top:.5rem;">Qwen 3.8 → <span class="accent2">Qwen4-Max</span> · Kimi K3</h3>
+          <p>Qwen 3.8(8월, 소형 27B는 Apache 2.0), 9.22 행사에서 Qwen 4 예고 → 11.16 <span class="accent2">Qwen4-Max</span> 출시(폐쇄형). Moonshot <span class="accent2">Kimi K3</span>(7월) — 2.8조 파라미터, 컨텍스트 1M.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill amber">놀라운 숫자</span>
+          <h3 style="margin-top:.5rem;">하루 140조 토큰 <span class="muted" style="font-size: .9rem;">(2026.03)</span></h3>
+          <p>2년 전 하루 1,000억 토큰에서 <span class="accent4">1,400배</span>. 화웨이 <span class="accent2">Ascend</span>로 NVIDIA 의존을 줄이며 비용을 깎는 중.</p>
+        </div>
+        <div class="card autoshow fade-in" style="border-color: rgba(255,148,172,0.6);">
+          <span class="pill pink">격차</span>
+          <h3 style="margin-top:.5rem;">최고 폐쇄형 모델과 <span class="accent3">몇 달 차</span></h3>
+          <p>오픈 모델이 약 4개월 뒤에서 쫓는다는 분석과 함께, 다른 모델의 답을 대량 수집해 학습했다는 <span class="accent3">"증류" 논란</span>도 커지는 중(2월 Anthropic 공개 비판).</p>
+        </div>
+      </div>
+      <p class="small muted autoshow fade-up" style="margin-top:.9rem; text-align:center;">
+        "많이 · 싸게 · 모두에게" — 개인 에이전트 붐을 받치는 건 결국 값싼 토큰입니다. <span class="muted">(중국 랩 수치는 보도 기준)</span>
+      </p>
+      <aside class="notes">
+        사내 관점 한마디: 오픈 웨이트 모델은 사내 서버에 직접 올릴 수 있다는 점에서 관심이 크다. 다만 도입 여부는 보안·라이선스 검토가 먼저(../security/).
+        격차는 잣대마다 다르다: Epoch AI는 약 4개월, Artificial Analysis 지수 v5(10.27)에선 공개 웨이트 최고 32 vs 폐쇄형 최고 58로 26점 차, 9월 Mozilla 보고서에선 3점 차까지. 그래서 슬라이드엔 "몇 달 차"로만 적었다.
+        출처: DeepSeek V4.1 Flash https://artificialanalysis.ai/models/deepseek-v4-1-flash · 가격 인하 https://apidog.com/blog/deepseek-v4-1-flash-pricing/ ·
+        Qwen 3.8 라이선스 https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license/ ·
+        Qwen4-Max(11.16) https://www.technology.org/2026/11/16/alibaba-qwen4-max-flagship-ai-model-safety-cost/ ·
+        Kimi K3 https://www.datacamp.com/blog/kimi-k3 ·
+        하루 140조 토큰(국가데이터국 류례홍, 3.24) https://www.ecns.cn/cns-wire/2026-03-24/detail-ihfaytev9463369.shtml ·
+        격차 https://dealroom.co/news/167512-china-s-open-ai-models-fall-26-points-behind-as-new-index-hides-the-answ/ ·
+        증류 논란(2.23) https://siliconangle.com/2026/02/23/anthropic-slams-chinese-ai-firms-harvesting-data-claude-chatbot/
+      </aside>
+    </section>
+
+    <!-- ============= 6. OpenAI ============= -->
+    <section>
+      <div class="chip">LABS 4/4 · OPENAI</div>
+      <h2><span class="accent2">OpenAI</span> — GPT-6를 방어 조직부터, 단계적으로 풀었습니다</h2>
+      <div class="grid-2" style="margin-top: 1.1rem; gap: 1.2rem; align-items:stretch;">
+        <div class="card autoshow fade-in">
+          <span class="pill green">2026.09.03 — 플래그십</span>
+          <h3 style="margin-top:.5rem;"><span class="accent2">GPT-6 Astra</span></h3>
+          <p>컴퓨터 사용 · 코딩 · 과학에서 최고 성능을 내세운 최상위 모델. ChatGPT Work · Codex · API(<span class="accent4">$10 / $50</span> per 1M 토큰).</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill">2026.09.22 — 보급형</span>
+          <h3 style="margin-top:.5rem;"><span class="accent2">GPT-6 Sol · Luna</span> → 6.1</h3>
+          <p>더 싸고 빠른 라인업 → 9.29 <span class="accent">GPT-6.1 Sol</span>, 10.26 <span class="accent">GPT-6.1 Terra</span>(<span class="accent4">$1 / $5</span>). 10월 예정이던 6.1 Astra는 안전성 문제로 취소.</p>
+        </div>
+      </div>
+      <div class="card autoshow fade-in" style="margin-top: 1rem; border-color: rgba(255,148,172,0.6);">
+        <span class="pill pink">이례적인 조건</span>
+        <h3 style="margin-top:.5rem;">사이버 위험 등급 <span class="accent3">"Critical"</span>에 도달한 첫 모델</h3>
+        <p>그래서 출시는 <span class="accent3">사이버 보안 프로그램 참여 기업부터</span>, 일반 공개판은 위험한 요청을 거절하도록 제한했습니다.
+        Google Argon도 같은 방식 — 최상위 모델은 <span class="accent">"방어하는 쪽에 먼저"</span> 풀립니다.</p>
+      </div>
+      <aside class="notes">
+        가장 어려운 일은 Astra, 나머지는 Sol·Terra — 한 회사 안에서도 "일에 맞게 모델 고르기"가 기본이 됐다(0교시의 모델 고르기와 같은 논리).
+        가격은 발표 시점 기준이며 바뀔 수 있다. 11.5엔 방어 프로그램 전용 GPT-6 Cyber도 나왔다.
+        출처: Astra(9.3, $10/$50, Critical) https://www.csoonline.com/article/4218679/openai-launches-gpt-6-astra-its-first-model-to-cross-a-critical-cybersecurity-threshold.html ·
+        Sol·Luna(9.22) https://x.com/OpenAI/status/2102460975790137662 ·
+        6.1 Sol(9.29) https://techcrunch.com/2026/09/29/openai-launches-gpt-6-1-sol-says-it-nearly-matches-gpt-6-astra-and-costs-less/ ·
+        6.1 Terra(10.26, $1/$5) https://en.wikipedia.org/wiki/GPT-6.1 ·
+        6.1 Astra 취소 https://www.engadget.com/2271626/openai-cancels-gpt-6-1-astra-release-deceptive-behavior/ ·
+        GPT-6 Cyber https://techcrunch.com/2026/11/05/openai-released-a-new-cybersecurity-model-is-that-enough/
+      </aside>
+    </section>
+
+    <!-- ============= 7. Meta · xAI ============= -->
+    <section>
+      <div class="chip">LABS · BONUS · META &amp; xAI</div>
+      <h2><span class="grad">Meta · xAI</span> — 모델보다 "AI가 들어갈 기기"를 다툽니다</h2>
+      <div class="grid-2" style="margin-top: 1.2rem; gap: 1.3rem; align-items:stretch;">
+        <div class="card autoshow fade-in">
+          <span class="pill">🅜 Meta</span>
+          <h3 style="margin-top:.5rem;">기기 확산 + Muse 라인업</h3>
+          <p>Ray-Ban Meta 글래스 · Quest · WhatsApp / Instagram에 심기. Llama 뒤를 잇는 폐쇄형 <span class="accent">Muse Spark</span>(4월) → <span class="accent">Spark 1.1 + Meta Model API</span> 공개 프리뷰(7월), 이미지 모델 <span class="accent">Muse Image</span>(7월).</p>
+          <p>내 PC(24GB GPU)에서도 도는 30B 오픈 모델 <span class="accent4">Muse Glimmer</span>(8월) — 큰 모델은 닫고, 작은 모델은 엽니다.</p>
+        </div>
+        <div class="card autoshow fade-in">
+          <span class="pill green">🅧 xAI</span>
+          <h3 style="margin-top:.5rem;">현실 세계로 들어가는 AI</h3>
+          <p><span class="accent2">Grok 5</span>는 아직 학습 중 — 대신 9.21 <span class="accent2">Grok 4.7</span>이 새 플래그십.</p>
+          <p>2월 SpaceX에 합병된 뒤 X · Tesla 차량 · <span class="accent2">Optimus</span> 로봇까지 — Grok을 <span class="accent4">물리 세계</span>에 심습니다.</p>
+        </div>
+      </div>
+      <p class="small muted autoshow fade-up" style="margin-top: 1.1rem; text-align:center;">
+        빅 3가 "누가 더 똑똑한가"를 다툴 때, 이 둘은 "AI를 어디에 넣을 것인가"를 묻습니다. <span class="muted">(보도 기준)</span>
+      </p>
+      <aside class="notes">
+        챗봇 창 밖이 다음 전장이라는 이야기. 반도체 회사 청중이라면 "기기 안에서 도는 작은 모델" = 온디바이스 AI 수요와 연결해 말하면 잘 닿는다.
+        Grok 5는 xAI가 1월에 "학습 중"이라고 한 뒤 공식 일정 없음(11월 중순 기준 최신은 Grok 4.7).
+        출처: Muse Spark(4.8) https://www.deeplearning.ai/the-batch/with-muse-spark-meta-pivots-away-from-its-open-weights-llama-strategy ·
+        Spark 1.1 + Meta Model API https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/ ·
+        Muse Image(7.7) https://about.fb.com/news/2026/07/introducing-muse-image-meta-ai/ ·
+        Muse Glimmer(8.10, Apache 2.0) https://gcn.com/meta-opens-muse-glimmer-billion-parameter/21144/ ·
+        Grok 4.7(9.21) https://en.wikipedia.org/wiki/Grok_(chatbot) · SpaceX–xAI 합병 https://en.wikipedia.org/wiki/XAI_(company)
+      </aside>
+    </section>
+
+    <!-- ============= 8. 얀 르쿤 ============= -->
+    <section>
+      <div class="chip">EPILOGUE · 한 명의 이단아</div>
+      <h2><span class="accent3">얀 르쿤</span> — "LLM 다음"에 걸고 Meta를 떠났습니다</h2>
+      <div class="grid-2" style="margin-top: 1.1rem; gap: 1.2rem; align-items:stretch;">
+        <div class="card autoshow fade-in">
+          <span class="pill pink">2025.11 — Meta 퇴사</span>
+          <h3 style="margin-top:.5rem;">12년 만의 결별</h3>
+          <p>Llama 4 부진 뒤 Meta는 Scale AI 지분 49% 인수($14.3B) · Superintelligence Labs 신설로 "LLM을 더 크게" 쪽으로 선회 — 르쿤의 신념과 정면 충돌.</p>
+        </div>
+        <div class="card autoshow fade-in" style="border-color: rgba(255,148,172,0.6);">
+          <span class="pill pink">2026.03 — AMI Labs 창립</span>
+          <h3 style="margin-top:.5rem;">파리 · 시드 <span class="accent3">$1.03B</span></h3>
+          <p><em>Advanced Machine Intelligence Labs</em>. 유럽 역대 최대 규모로 보도된 시드(투자 전 기업가치 $3.5B). 자기 길에 크게 걸었습니다.</p>
+        </div>
+      </div>
+      <div class="card autoshow fade-in" style="margin-top: 1rem; border-color: rgba(91,255,224,0.5);">
+        <span class="pill green">기술 비전 — JEPA / 월드 모델</span>
+        <h3 style="margin-top:.5rem;">"언어가 아니라 <span class="accent2">세상</span>을 보고 배워야 한다"</h3>
+        <p>다음 단어 예측 대신 <span class="accent2">영상 · 소리 · 센서 데이터</span>로 물리 세계를 이해하는 모델. 당장 팔 제품보다 연구가 먼저인 장기 베팅입니다.</p>
+      </div>
+      <aside class="notes">
+        intro 덱 9장에서 "LLM은 다음 단어만 예측한다"고 비판한 그 사람. 비판을 말로만 하지 않고 회사를 차렸다.
+        누가 맞을지는 아무도 모른다 — 그래서 도구 이름보다 "AI가 무엇을 잘하고 못하는가"를 아는 게 오래간다(intro의 결론).
+        퇴사 발표는 2025년 11월(연말 퇴사), Meta는 투자 없이 파트너로만. AMI 공식 출범은 2026.3.10, CEO는 Alexandre LeBrun, 르쿤은 회장.
+        출처: 퇴사 https://www.tomshardware.com/tech-industry/metas-godfather-of-ai-departs-the-company-to-form-his-own-startup-turing-award-winner-yann-lecun-advocates-for-the-development-of-world-models-over-llms ·
+        시드 $1.03B / 투자 전 $3.5B https://pitchbook.com/news/articles/yann-lecuns-ami-labs-secures-1b-in-bet-on-world-models ·
+        Scale AI 49% $14.3B(2025.6) https://en.wikipedia.org/wiki/Scale_AI
+      </aside>
+    </section>
+
+    <!-- ============= 9. 마무리 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CLOSING</div>
+        <h2>이 지도는 <span class="grad">3개월이면</span> 바뀝니다</h2>
+        <div class="grid-2" style="margin-top:.6rem; gap:1.4rem; align-items:start;">
+          <div class="stack" style="gap:.8rem;">
+            <p class="autoshow fade-in" style="margin:0;">이름은 바뀌어도, 오늘 본 <strong class="accent2">흐름</strong>은 한동안 갑니다.</p>
+            <ul class="close-list autoshow fade-in">
+              <li>더 똑똑하게 → <strong>같은 지능을 더 싸게</strong></li>
+              <li>최상위 모델은 <strong>방어하는 쪽에 먼저</strong></li>
+              <li>챗봇 밖 — <strong>기기 · 물리 세계</strong>로</li>
+            </ul>
+            <p class="small muted autoshow fade-in" style="margin:0;">새 소식은 늘 <strong>공식 발표</strong>로 확인하세요. 보도와 발표는 다를 때가 많습니다.</p>
+          </div>
+          <div class="autoshow fade-in">
+            <div class="prompt-card">
+              <div class="pc-label">💬 3개월 뒤, 이 지도를 다시 그리는 법</div>
+              <pre class="code">지난 3개월 동안 Google · Anthropic · OpenAI ·
+중국 AI 랩 · Meta · xAI가 낸 모델과 제품을
+회사별 표로 정리해줘. 날짜와 공식 발표 링크를
+달고, 확인 안 된 보도는 따로 표시해줘.</pre>
+            </div>
+          </div>
+        </div>
+        <div class="path-map autoshow fade-up" style="margin-top:1.3rem;">
+          <a class="pm-node" href="../index.html"><b>🗺️ 시리즈로 돌아가기</b><span>전체 세미나 목록</span></a>
+          <a class="pm-node" href="../intro/"><b>🚀 바이브 코딩이란 무엇인가?</b><span>intro/ · 도구보다 본질</span></a>
+          <a class="pm-node" href="../setup/"><b>🧰 0교시 · 모델 고르기</b><span>setup/ · 기본값 + 언제 바꾸나</span></a>
+        </div>
+      </div>
+      <aside class="notes">
+        마무리. "어떤 모델이 최고예요?"라는 질문에는 "3개월 뒤엔 다를 것"이 정답이다. 대신 갱신하는 프롬프트를 남긴다.
+        intro의 메시지와 연결: 표면(모델 이름)은 바뀌고, 본질(AI가 무엇인지 · 어떻게 고르는지)은 남는다.
+      </aside>
+    </section>
+
+
+  </div>
+</div>
+
+<!-- reveal.js 5.1.0 — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  // ===== 프롬프트 카드 복사 버튼 =====
+  (function () {
+    document.querySelectorAll('.prompt-card').forEach((card) => {
+      const pre = card.querySelector('pre');
+      if (!pre) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = '복사';
+      btn.setAttribute('aria-label', '내용 복사');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText.trim());
+          btn.textContent = '복사됨 ✓';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          btn.textContent = 'Ctrl+C로 복사';
+        }
+        setTimeout(() => { btn.textContent = '복사'; }, 1600);
+      });
+      card.appendChild(btn);
+    });
+  })();
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    // <br/>는 textContent 에서 사라져 단어가 붙는다 — 공백으로 바꿔 읽는다
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? brText(h) : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur(); // 방향키가 다시 슬라이드 내비게이션으로 가도록
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+</script>
+
+
+<!-- 통합 발표 플랫폼: 질문·이모지·슬라이드 동기화는 모든 덱이 공유하는 assets/qa.js 하나가 담당한다. -->
+<link rel="stylesheet" href="../assets/qa.css">
+<script src="../assets/qa.js" defer></script>
+
+</body>
+</html>

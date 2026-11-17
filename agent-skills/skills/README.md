@@ -1,6 +1,6 @@
 # 반도체 현업 예제 Agent Skills
 
-`agent-skills/` 세미나(반도체 현업을 위한 Agent Skills)에서 다루는 예제 스킬 모음.
+`agent-skills/` 세미나(내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills)에서 다루는 반도체 실무 예제 스킬 모음.
 각 폴더가 스킬 하나이며, 실체는 `SKILL.md`(업무 매뉴얼) + 선택적인 `references/` 부록이 전부다.
 
 ## 설치
@@ -18,8 +18,11 @@
 
 설치 확인 프롬프트:
 
-> 지금 사용할 수 있는 스킬 목록을 보여줘. 그리고 sample_data/ 폴더의 측정 CSV로
-> csv-report 스킬을 실행해서 리포트를 만들어줘.
+> 지금 쓸 수 있는 스킬 목록을 보여줘.
+
+목록에 `csv-report`가 보이면 준비 끝. 실습 미션 1의 완료 기준: `sample_data/` 로 리포트를 만들면
+병합 36행(12+12+12), FAIL 4건(전부 ETCH-07, 균일도 3.0% 초과). 미션 2에서 `csv-report/references/spec_table.md`의
+균일도 상한을 3.5로 바꾸면 FAIL 2건이 된다(끝나면 3.0으로 되돌릴 것).
 
 ## 스킬 목록
 

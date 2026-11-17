@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>고칠수록 꼬일 때 — AI와 함께 디버깅하기 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="고쳐 달라고 해도 같은 에러가 반복되고, 고칠수록 더 꼬일 때. 재현 → 전달 → 가설 → 한 번에 하나 → 확인의 디버깅 루프, 로그 심기·입력 줄이기·되돌리기·새 세션 리셋, AI의 말을 알아듣는 최소 용어, 사내에서 자주 보는 에러 처방까지 — 비개발자를 위한 AI 디버깅 세미나." />
+  <meta name="keywords" content="AI 디버깅, 바이브 코딩, vibe coding, 같은 에러 반복, 에러 해결, 재현, 가설, 로그, 인코딩, cp949, UTF-8, ModuleNotFoundError, 포트 사용 중, FileNotFoundError, 프록시, 인증서, 권한 거부, DRM, Claude Code" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vibe-coding.euiyun.com/debugging/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="고칠수록 꼬일 때 — AI와 함께 디버깅하기" />
+  <meta property="og:description" content="같은 에러가 반복될 때: 재현 → 전달 → 가설 → 한 번에 하나 → 확인. 로그·입력 줄이기·새 세션 리셋과 사내 단골 에러 처방까지." />
+  <meta property="og:url" content="https://vibe-coding.euiyun.com/debugging/" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/debugging.png?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="고칠수록 꼬일 때 — AI와 함께 디버깅하기" />
+  <meta name="twitter:description" content="'고쳐 줘'를 세게 말하지 말고, 정보와 순서를 바꾸세요 — 비개발자를 위한 AI 디버깅 루프." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/debugging.png?v=1" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "고칠수록 꼬일 때 — AI와 함께 디버깅하기",
+    "headline": "고칠수록 꼬일 때 — AI와 함께 디버깅하기 | 바이브 코딩 세미나",
+    "description": "같은 에러가 반복되고 고칠수록 꼬일 때 쓰는 디버깅 루프(재현·전달·가설·한 번에 하나·확인), 로그 심기·입력 줄이기·되돌리기·새 세션 리셋, 최소 용어, 사내 단골 에러 처방 — 비개발자를 위한 AI 디버깅 세미나.",
+    "url": "https://vibe-coding.euiyun.com/debugging/",
+    "image": "https://vibe-coding.euiyun.com/og/debugging.png?v=1",
+    "inLanguage": "ko",
+    "datePublished": "2026-11",
+    "dateModified": "2026-11",
+    "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
+    "isPartOf": "https://vibe-coding.euiyun.com/",
+    "keywords": "AI 디버깅, 같은 에러 반복, 재현, 가설, 로그, 인코딩, 경로, 포트, 프록시, 바이브 코딩"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+      --ease-out: cubic-bezier(.2,.7,.2,1);
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    /* 배경 메시 — 시리즈 공통 분위기. 움직이지 않는다. */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 { color: #FFFFFF; }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.2;
+      color: #FFFFFF !important;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.85), 0 2px 4px rgba(0,0,0,0.55);
+      word-break: keep-all;
+    }
+    .reveal section p, .reveal section li { text-shadow: 0 1px 2px rgba(0,0,0,0.75); word-break: keep-all; }
+    .reveal .grad { text-shadow: none !important; }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.45rem; }
+    .reveal h3 { font-size: 1.6rem; }
+    .reveal p, .reveal li { font-size: 1.4rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar { position: fixed; top: 16px; right: 16px; z-index: 9999; display: flex; gap: 8px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+      color: #E6D9FF !important; text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity .25s ease, transform .25s ease, background .25s ease, border-color .25s ease;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap; cursor: pointer; touch-action: manipulation;
+    }
+    .dl-btn:hover { opacity: 1; transform: translateY(-2px); background: rgba(124, 92, 255, 0.4); border-color: rgba(91, 255, 224, 0.7); }
+    .dl-btn:focus-visible, .transition-select:focus-visible { opacity: 1; outline: 2px solid #5BFFE0; outline-offset: 2px; }
+    .transition-select {
+      display: inline-flex; align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6; transition: opacity .25s ease, transform .25s ease;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      cursor: pointer; touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 340px; text-overflow: ellipsis; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 11px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .dl-toolbar .dl-btn > span[aria-hidden] { font-size: 0.95rem; }
+    }
+    .no-fullscreen #fullscreenBtn { display: none; }
+
+    .reveal .slide-number {
+      color: #E6D9FF; right: auto; left: 50%; bottom: 14px; transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6); padding: 4px 14px; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { top: auto; bottom: 8px; margin-top: 0; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity .25s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #C9D2E4 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: normal; font-weight: 700; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .reveal .small { font-size: 1.12rem; }
+    .reveal .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* 그라데이션 글자 — 고정(움직이지 않음) */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 60%, #8FF5E2 100%) !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      font-weight: 800;
+    }
+
+    .chip {
+      display: inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem; color: #FFFFFF !important; font-weight: 700; letter-spacing: 0.05em;
+      background: #2A2150; border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.1rem;
+    }
+    .chip.live { background: #0D3D38; border-color: rgba(43,234,208,.85); }
+    .chip.warn { background: #463817; border-color: rgba(255,212,107,.85); }
+
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 16px;
+      padding: 1.1rem 1.4rem;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .card h3 { font-size: 1.32rem; margin: 0 0 .5rem 0; }
+    .card p { font-size: 1.08rem; line-height: 1.55; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: .45rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.3rem; line-height: 1.5;
+      padding: .9rem 1.4rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      margin-top: 1rem;
+      word-break: keep-all;
+    }
+    .quote * { color: #FFFFFF; }
+
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 12px;
+      padding: .9rem 1.1rem;
+      font-family: 'JetBrains Mono', 'D2Coding', monospace;
+      font-size: .98rem; line-height: 1.6;
+      color: #FFFFFF; margin: 0;
+      white-space: pre-wrap; word-break: keep-all;
+      box-shadow: none; width: auto;
+    }
+    .code .kw { color: #B5A1FF; font-weight: 700; }
+    .code .st { color: #5BFFE0; }
+    .code .cm { color: #9BA6C0; }
+    .code .nm { color: #FFE08A; }
+    .code .er { color: #FF94AC; font-weight: 700; }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block; padding: .1em .55em; margin: 0 .1em;
+      border-radius: 7px; background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6); border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace; font-size: .9em; font-weight: 700; color: #E1D9FF;
+    }
+
+    /* ========= 순서대로 나타나기 — 짧고 부드럽게, 한 번만 ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow { animation: asFadeUp .34s var(--ease-out) forwards; }
+    section.present .autoshow.fade-in { animation-name: asFadeIn; }
+    @keyframes asFadeUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn { from { opacity:0; } to { opacity:1; } }
+    .autoshow:nth-child(1) { animation-delay: .04s; }
+    .autoshow:nth-child(2) { animation-delay: .12s; }
+    .autoshow:nth-child(3) { animation-delay: .20s; }
+    .autoshow:nth-child(4) { animation-delay: .28s; }
+    .autoshow:nth-child(5) { animation-delay: .36s; }
+    .autoshow:nth-child(6) { animation-delay: .44s; }
+    .autoshow:nth-child(7) { animation-delay: .52s; }
+    .autoshow:nth-child(8) { animation-delay: .60s; }
+
+    .reveal .fragment.rise { opacity: 0; transform: translateY(8px); transition: opacity .3s var(--ease-out), transform .3s var(--ease-out); }
+    .reveal .fragment.rise.visible { opacity: 1; transform: none; }
+
+    /* ========= 프롬프트 카드 (prompt 덱과 같은 모양) ========= */
+    .prompt-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(38,30,82,0.72), rgba(16,22,44,0.72));
+      border: 1.5px solid rgba(155,130,255,0.65);
+      border-radius: 14px;
+      padding: .75rem 1rem .85rem;
+      box-shadow: 0 24px 48px -22px rgba(0,0,0,0.6);
+    }
+    .prompt-card .pc-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .84rem; font-weight: 800; letter-spacing: .05em;
+      color: #CBBDFF !important; margin-bottom: .4rem; padding-right: 4.5rem;
+    }
+    .prompt-card pre.code {
+      border: 0; background: rgba(6,8,15,0.55);
+      font-family: 'Pretendard', system-ui, sans-serif; font-size: 1.08rem; font-weight: 600; line-height: 1.55;
+      padding: .65rem .85rem;
+    }
+    .prompt-card.good { border-color: rgba(43,234,208,0.7); }
+    .prompt-card.good .pc-label { color: #A9FFF0 !important; }
+    .prompt-card.bad  { border-color: rgba(255,122,149,0.65); }
+    .prompt-card.bad .pc-label { color: #FFB9C7 !important; }
+    .copy-btn {
+      position: absolute; top: 8px; right: 10px;
+      border: 1px solid rgba(155,130,255,0.55); background: rgba(20,22,44,0.85);
+      color: #E1D9FF; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 700;
+      padding: 3px 11px; cursor: pointer; opacity: .75; transition: opacity .2s ease;
+    }
+    .copy-btn:hover, .copy-btn:focus-visible { opacity: 1; }
+
+    /* ========= 훅: 헛도는 대화 ========= */
+    .chat { display: flex; flex-direction: column; gap: .45rem; }
+    .chat .me, .chat .ai {
+      font-size: 1.08rem; line-height: 1.4; padding: .45rem .9rem; border-radius: 12px; max-width: 88%;
+    }
+    .chat .me { align-self: flex-end; background: rgba(155,130,255,.22); border: 1px solid rgba(155,130,255,.5); }
+    .chat .ai { align-self: flex-start; background: rgba(230,236,249,.06); border: 1px solid rgba(190,200,224,.3); font-family: 'JetBrains Mono', monospace; font-size: .98rem; }
+    .chat .ai b { color: #8FF5E2; }
+    .chat .round { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: #9BA6C0 !important; align-self: center; letter-spacing: .1em; }
+    .miss-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
+    .miss-list li { font-size: 1.12rem; line-height: 1.45; padding-left: 1.6em; position: relative; }
+    .miss-list li::before { content: "✗"; position: absolute; left: .2em; color: #FF94AC; font-weight: 800; }
+    .miss-list li.got::before { content: "✓"; color: #5BFFE0; }
+
+    /* ========= 디버깅 루프 (시그니처) ========= */
+    .loop5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; position: relative; }
+    .lp {
+      position: relative;
+      display: flex; flex-direction: column; gap: .3rem;
+      padding: .8rem .9rem .9rem; border-radius: 14px;
+      border: 1px solid rgba(155,130,255,.45); background: rgba(40,30,80,.3);
+      min-height: 132px;
+    }
+    .lp .no { font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 800; color: #B5A1FF !important; letter-spacing: .08em; }
+    .lp .nm { font-size: 1.36rem; font-weight: 800; }
+    .lp .ds { font-size: 1.06rem; line-height: 1.45; color: #D5DCEB !important; }
+    .lp:nth-child(-n+4)::after {
+      content: "→"; position: absolute; right: -.62rem; top: 50%; transform: translate(50%, -50%);
+      color: #9BA6C0; font-weight: 800; font-size: 1.1rem; z-index: 2;
+    }
+    .lp.fix { border-color: rgba(255,212,107,.6); background: rgba(70,56,23,.35); }
+    .lp.fix .no { color: #FFE08A !important; }
+    .lp.ok { border-color: rgba(43,234,208,.6); background: rgba(15,60,55,.35); }
+    .lp.ok .no { color: #5BFFE0 !important; }
+    .loop-back {
+      grid-column: 3 / 6; height: 30px; margin-top: .2rem;
+      border: 2px dashed rgba(255,148,172,.6); border-top: 0; border-radius: 0 0 14px 14px;
+      position: relative;
+    }
+    .loop-back span {
+      position: absolute; left: 50%; bottom: -.75rem; transform: translateX(-50%);
+      background: #0B0E1A; padding: 0 .7rem; white-space: nowrap;
+      font-size: .98rem; font-weight: 700; color: #FFB9C7 !important;
+    }
+    .loop-mini { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .9rem; }
+    .loop-mini span {
+      font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 800;
+      padding: .25em .75em; border-radius: 999px; border: 1px solid rgba(190,200,224,.3); color: #9BA6C0 !important;
+    }
+    .loop-mini span.on { color: #06080F !important; background: #2BEAD0; border-color: #2BEAD0; }
+
+    /* ========= 재현 문장 템플릿 ========= */
+    .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+    .slot { border-radius: 14px; padding: .8rem 1rem; border: 1.5px dashed rgba(155,130,255,.6); background: rgba(20,22,44,.5); }
+    .slot .sl { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800; color: #B5A1FF !important; letter-spacing: .08em; }
+    .slot .sq { font-size: 1.3rem; font-weight: 800; margin: .15rem 0 .35rem; }
+    .slot .sx { font-size: 1.02rem; line-height: 1.45; color: #D5DCEB !important; }
+
+    /* ========= 도구 타일 ========= */
+    .tools5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; }
+    .tool {
+      border-radius: 14px; padding: .9rem .9rem 1rem; border: 1px solid rgba(155,130,255,.45); background: rgba(20,22,44,.55);
+      display: flex; flex-direction: column; gap: .35rem;
+    }
+    .tool .ti { font-size: 1.8rem; line-height: 1; }
+    .tool .tn { font-size: 1.16rem; font-weight: 800; }
+    .tool .td { font-size: .96rem; line-height: 1.45; color: #D5DCEB !important; }
+    .tool .tw { margin-top: auto; font-size: .86rem; color: #8FF5E2 !important; font-weight: 700; }
+
+    /* ========= 반씩 줄이기 막대 ========= */
+    .bisect { display: flex; flex-direction: column; gap: .32rem; }
+    .bis-row { display: flex; align-items: center; gap: .7rem; }
+    .bis-row .bl { font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: #9BA6C0 !important; width: 5.5em; text-align: right; flex: 0 0 auto; }
+    .bis-bar { height: 18px; border-radius: 5px; display: flex; overflow: hidden; }
+    .bis-bar i { display: block; height: 100%; }
+    .bis-bar i.ok { background: rgba(43,234,208,.55); }
+    .bis-bar i.ng { background: rgba(255,122,149,.8); }
+    .bis-row .br { font-size: .9rem; color: #D5DCEB !important; }
+
+    /* ========= 용어 카드 ========= */
+    .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .term { border-radius: 14px; padding: .8rem 1.1rem; border: 1px solid rgba(155,130,255,.4); background: rgba(20,22,44,.55); }
+    .term .tt { font-size: 1.22rem; font-weight: 800; margin-bottom: .2rem; }
+    .term .tt .mono { font-size: .88rem; color: #B5A1FF !important; font-weight: 700; margin-left: .4rem; }
+    .term p { font-size: 1.02rem; line-height: 1.5; margin: 0; color: #E2E6F0 !important; }
+    .term p + p { margin-top: .3rem; }
+
+    .path-box { border-radius: 12px; padding: .6rem .9rem; background: #131829; border: 1px solid rgba(255,255,255,.14); }
+    .path-box .pl { font-size: .82rem; font-weight: 800; letter-spacing: .06em; color: #B5A1FF !important; font-family: 'JetBrains Mono', monospace; }
+    .path-box code { display: block; font-family: 'JetBrains Mono', monospace; font-size: .94rem; color: #FFFFFF; margin-top: .2rem; word-break: break-all; }
+    .path-box.bad { border-color: rgba(255,122,149,.5); }
+    .path-box.good { border-color: rgba(43,234,208,.55); }
+
+    /* ========= 에러 처방 카드 ========= */
+    .err-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+    .err-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .err {
+      border-radius: 14px; padding: .7rem 1rem .8rem;
+      border: 1px solid rgba(255,122,149,.4); background: rgba(40,18,30,.45);
+      display: flex; flex-direction: column; gap: .3rem;
+    }
+    .err .en { font-size: 1.18rem; font-weight: 800; }
+    .err .em {
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; line-height: 1.45;
+      color: #FFB9C7 !important; background: rgba(6,8,15,.55); border-radius: 8px; padding: .3rem .55rem; word-break: normal; overflow-wrap: anywhere;
+    }
+    .err .ew, .err .ef { font-size: .95rem; line-height: 1.45; margin: 0; color: #E2E6F0 !important; }
+    .err .ew b { color: #FFE08A; }
+    .err .ef b { color: #8FF5E2; }
+    .err .ew b, .err .ef b { font-weight: 800; margin-right: .3em; }
+    .err .ef a { font-weight: 700; }
+
+    .warn-line { font-size: 1.05rem; line-height: 1.5; padding: .55rem 1rem; border-radius: 12px; border: 1px solid rgba(255,212,107,.5); background: rgba(70,56,23,.3); margin-top: .8rem; }
+
+    /* ========= 실습 ========= */
+    .lab-cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 1.2rem; align-items: start; }
+    .lab-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; counter-reset: ls; }
+    .lab-steps li {
+      counter-increment: ls; position: relative;
+      font-size: 1.05rem !important; line-height: 1.5; padding: .5rem .9rem .5rem 2.7rem;
+      border-radius: 12px; border: 1px solid rgba(190,200,224,.28); background: rgba(230,236,249,.05);
+    }
+    .lab-steps li::before {
+      content: counter(ls); position: absolute; left: .8rem; top: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #5BFFE0;
+    }
+    .panel { border-radius: 14px; padding: .75rem 1rem .85rem; border: 1px solid rgba(155,130,255,.45); background: rgba(20,22,44,.55); }
+    .panel .pt { font-size: .86rem; font-weight: 800; letter-spacing: .06em; margin-bottom: .35rem; font-family: 'JetBrains Mono', monospace; }
+    .panel ul { margin: 0; padding: 0; list-style: none; }
+    .panel li { font-size: 1.1rem !important; line-height: 1.5; padding-left: 1.3em; position: relative; }
+    .panel li::before { content: "·"; position: absolute; left: .35em; font-weight: 800; }
+    .panel.learn { border-color: rgba(155,130,255,.55); }
+    .panel.learn .pt { color: #CBBDFF !important; }
+    .panel.done { border-color: rgba(43,234,208,.6); background: rgba(15,60,55,.3); }
+    .panel.done .pt { color: #5BFFE0 !important; }
+    .panel.done li::before { content: "☐"; left: 0; color: #5BFFE0; }
+    .panel.stuck { border-color: rgba(255,212,107,.55); background: rgba(70,56,23,.25); }
+    .panel.stuck .pt { color: #FFE08A !important; }
+    .dl-row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; margin-bottom: .8rem; }
+    .dl-chip {
+      display: inline-flex; align-items: center; gap: .35em;
+      padding: .3em .85em; border-radius: 999px; font-size: .92rem; font-weight: 700;
+      border: 1px solid rgba(43,234,208,.7); background: rgba(13,61,56,.8); color: #C5FFF5 !important; text-decoration: none !important;
+    }
+    .dl-chip.plain { border-color: rgba(155,130,255,.55); background: rgba(42,33,80,.8); color: #E1D9FF !important; }
+
+    /* ========= 복붙 카드 묶음 ========= */
+    .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem .8rem; }
+    .pc-grid .prompt-card pre.code { font-size: .98rem; padding: .5rem .75rem; }
+    .pc-grid .prompt-card { padding: .55rem .8rem .65rem; }
+
+    /* ========= 체크리스트 ========= */
+    .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+    .checklist li {
+      font-size: 1.14rem !important; line-height: 1.45; padding: .5rem .9rem .5rem 2.4rem; position: relative;
+      border-radius: 12px; border: 1px solid rgba(43,234,208,.35); background: rgba(15,60,55,.22);
+    }
+    .checklist li::before { content: "☐"; position: absolute; left: .85rem; top: .48rem; color: #5BFFE0; font-weight: 800; }
+    .gloss { width: 100%; border-collapse: collapse; }
+    .gloss td { font-size: 1.0rem; line-height: 1.4; padding: .38rem .6rem; border-bottom: 1px solid rgba(255,255,255,.1); vertical-align: top; }
+    .gloss td:first-child { font-family: 'JetBrains Mono', monospace; font-size: .88rem; color: #FFB9C7; white-space: nowrap; }
+
+    .link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .link-card { border-radius: 14px; padding: .75rem 1rem; border: 1px solid rgba(155,130,255,.45); background: rgba(20,22,44,.55); text-decoration: none !important; display: block; }
+    .link-card b { display: block; font-size: 1.1rem; color: #5BFFE0; margin-bottom: .2rem; }
+    .link-card span { font-size: .96rem; line-height: 1.45; color: #E2E6F0 !important; }
+
+    .recap { display: flex; flex-direction: column; gap: .6rem; }
+    .recap-row {
+      display: grid; grid-template-columns: 13rem 1fr auto; gap: 1rem; align-items: center;
+      padding: .7rem 1.1rem; border-radius: 14px; border: 1px solid rgba(190,200,224,.3); background: rgba(230,236,249,.05);
+    }
+    .recap-row .rd { font-size: 1.12rem; font-weight: 800; }
+    .recap-row .rd small { display: block; font-size: .84rem; color: #9BA6C0 !important; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+    .recap-row .rs { font-size: 1.02rem; line-height: 1.5; color: #E2E6F0 !important; }
+    .recap-row a { font-size: .95rem; font-weight: 700; white-space: nowrap; }
+
+    /* ========= 모바일 ========= */
+    @media (max-width: 760px) {
+      .reveal section { padding: 16px 28px; }
+    }
+
+    /* ========= overview / print / reduced-motion ========= */
+    .reveal.overview .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
+    @media print {
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .reveal .fragment.rise { opacity: 1 !important; transform: none !important; }
+      .dl-toolbar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .reveal .fragment.rise { transition: none !important; transform: none !important; }
+      .dl-btn, .transition-select { transition: none !important; }
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/core.css">
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../" title="바이브 코딩 세미나 시리즈 전체 보기">
+    <span aria-hidden="true">↗</span><span>모든 세미나</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="grid-2" style="align-items:center; grid-template-columns: 1.05fr 1fr; gap:2.4rem;">
+          <div>
+            <div class="chip">SEMINAR · 2026.11 · 01 기본기 · DEBUGGING</div>
+            <h1 style="font-size:4.1rem; line-height:1.12;">고칠수록<br/><span class="grad">꼬일 때</span></h1>
+            <p style="font-size:1.6rem; font-weight:700; margin:.4rem 0 0;">AI와 함께 디버깅하기</p>
+            <p class="muted" style="font-size:1.16rem; margin-top:1.1rem; max-width:520px;">
+              "고쳐 줘"를 더 세게 말하지 말고,<br/>AI에게 주는 <strong class="accent2">정보와 순서</strong>를 바꿉니다.
+            </p>
+            <p class="tiny muted" style="margin-top:1.6rem;">코딩 경험 없어도 됩니다 · 약 40분 · 실습 15분 포함</p>
+          </div>
+          <div class="chat" aria-label="같은 에러가 반복되는 대화 예시">
+            <span class="me">에러 나. 고쳐 줘</span>
+            <span class="ai">● 원인을 찾아 <b>수정했습니다 ✓</b></span>
+            <span class="me">아직 똑같은 에러야</span>
+            <span class="ai">● 다른 부분도 <b>수정했습니다 ✓</b></span>
+            <span class="me">이번엔 다른 데까지 깨졌어…</span>
+            <span class="ai">● 죄송합니다. 다시 <b>수정했습니다 ✓</b></span>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        01 기본기 트랙의 디버깅 덱. 대상은 비개발자 — 코드를 직접 읽지 않아도 된다.
+        오른쪽 대화는 누구나 한 번쯤 겪은 장면이다. "고쳤습니다"가 세 번 나왔는데 문제는 그대로이거나 더 나빠졌다.
+        오늘 메시지는 하나: 같은 요청을 반복하지 말고, AI에게 넘기는 정보와 일의 순서를 바꾼다.
+      </aside>
+    </section>
+
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">같은 에러가 반복되면 "고쳐 줘"를 더 세게 말할 게 아니라, AI에게 주는 정보와 순서를 바꿉니다.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>재현 방법과 에러 원문부터 넘기세요</strong><span class="sub">언제·무엇을 하면·무엇이 나오는지 한 문장, 빨간 글씨 전체, 기대한 결과와 실제 결과.</span></div></li>
+        <li><span class="n">2</span><div><strong>고치기 전에 원인 후보 3개와 확인 방법을 받으세요</strong><span class="sub">확인해서 원인을 고른 뒤, 한 번에 하나만 고치고 같은 절차로 다시 확인합니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>세 번 헛돌면 판을 바꿉니다</strong><span class="sub">로그 심기 · 입력 줄이기 · 되돌리고 다른 접근 · 새 세션 리셋 · 깊이 올려 원인 분석만.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지금 바로 써 보는 프롬프트</div>
+          <pre>아직 고치지 마. 먼저 이 에러의 원인 후보 3개를 가능성 순으로 적고,
+각각을 확인할 방법을 알려 줘.
+확인 결과를 보고 원인을 고른 다음, 한 번에 하나씩만 고치자.</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>같은 에러가 두 번 이상 반복될 때</li>
+            <li>고칠수록 다른 곳이 깨질 때</li>
+            <li>AI가 말하는 에러 용어를 못 알아듣겠을 때</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 3. 훅 — 문제는 정보 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 왜 헛도나</div>
+        <h2>같은 에러가 세 번 나왔다면, 모자란 건 AI의 실력이 아니라 <span class="grad">정보</span>입니다</h2>
+        <div class="grid-2" style="margin-top:.4rem;">
+          <div class="card bad autoshow">
+            <h3>AI가 받은 것</h3>
+            <ul class="miss-list">
+              <li class="got">"에러 나. 고쳐 줘" — 한 줄</li>
+              <li>에러 메시지 원문</li>
+              <li>언제, 무엇을 했을 때 나는지</li>
+              <li>어떤 파일·데이터로 했는지</li>
+              <li>원래 기대한 결과가 무엇인지</li>
+            </ul>
+          </div>
+          <div class="card autoshow">
+            <h3>그래서 AI가 하는 일</h3>
+            <p>가장 흔한 원인을 <strong class="accent4">짐작</strong>해서 고칩니다.</p>
+            <p>짐작이 빗나가도 결과를 직접 확인하지 않았으니 "수정했습니다"라고 보고합니다.</p>
+            <p>다음 요청에서는 또 다른 짐작을 <strong class="accent3">그 위에</strong> 얹습니다.</p>
+          </div>
+        </div>
+        <div class="quote autoshow">의사에게 "아파요"만 말하면 처방도 짐작이 됩니다. 어디가, 언제부터, 어떻게 아픈지를 말해야 합니다.</div>
+        <aside class="notes">
+          AI가 무능해서 헛도는 게 아니다. 왼쪽 목록에서 AI가 실제로 받은 건 한 줄뿐이다.
+          정보가 없으면 AI는 "이런 에러는 보통 이것 때문"이라는 짐작으로 고친다. 짐작이 맞으면 다행, 빗나가면 그 수정이 코드에 남는다.
+          청중에게 묻기: 최근에 "고쳐 줘"만 보낸 적 있는지.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 4. 반복되는 세 가지 이유 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 1 · 왜 헛도나</div>
+        <h2>헛도는 이유는 셋 — 정보 부족, 대화 오염, 추측 수정의 누적</h2>
+        <div class="grid-3" style="margin-top:.4rem; align-items:stretch;">
+          <div class="card autoshow">
+            <h3>🩺 원인 정보가 없다</h3>
+            <p>증상만 받으면 AI는 확인하지 않고 고칩니다.</p>
+            <p class="accent2" style="font-weight:700;">처방 → 재현 방법·에러 원문·기대 vs 실제를 준다</p>
+          </div>
+          <div class="card autoshow">
+            <h3>🌫 대화가 오염됐다</h3>
+            <p>실패한 시도와 틀린 가설이 대화에 쌓이고, AI는 그것을 사실처럼 다시 참고합니다.</p>
+            <p class="accent2" style="font-weight:700;">처방 → 요약을 들고 새 세션으로</p>
+          </div>
+          <div class="card autoshow">
+            <h3>🧱 추측 수정이 쌓였다</h3>
+            <p>빗나간 수정이 지워지지 않고 남아, 원래 버그 위에 새 버그가 덮입니다. "고칠수록 꼬인다"의 정체입니다.</p>
+            <p class="accent2" style="font-weight:700;">처방 → 되돌리고, 한 번에 하나씩</p>
+          </div>
+        </div>
+        <div class="quote autoshow">세 원인 모두 "더 세게 부탁하기"로는 풀리지 않습니다. 주는 정보, 대화의 판, 수정의 순서를 바꿔야 합니다.</div>
+        <aside class="notes">
+          세 가지를 구분하면 처방이 갈린다. (1) 정보 부족 → 다음 장의 디버깅 루프. (2) 대화 오염 → 새 세션 리셋. 원리는 context 덱에서 자세히.
+          (3) 추측 수정 누적 → 되돌리기 + 한 번에 하나. 특히 (3)이 비개발자가 가장 많이 빠지는 함정: 고쳐 달라고 할 때마다 코드가 조금씩 더 이상해진다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 5. 이미 배운 기초 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">이미 배운 것</div>
+        <h2>기본 복구법은 다른 덱에 있습니다 — 이 덱은 그다음 이야기입니다</h2>
+        <div class="recap" style="margin-top:.4rem;">
+          <div class="recap-row autoshow">
+            <span class="rd">복구 3문장<small>prompt</small></span>
+            <span class="rs">에러는 통째로 복붙 · 꼬이면 잘 되던 버전으로 · 반복되면 완전히 다른 방법으로</span>
+            <a href="../prompt/">../prompt/ →</a>
+          </div>
+          <div class="recap-row autoshow">
+            <span class="rd">복구 3단계 · 문장 사전<small>workshop</small></span>
+            <span class="rs">에러 복붙 → 보여주기·묘사 → 국소 수정·되돌리기. <kbd class="key">F12</kbd> 콘솔 여는 법과 "고장 난 앱" 실습</span>
+            <a href="../workshop/">../workshop/ →</a>
+          </div>
+          <div class="recap-row autoshow">
+            <span class="rd">되돌리기<small>github</small></span>
+            <span class="rs">커밋이 세이브 포인트 — 망가지면 마지막 커밋 상태로 되돌린다</span>
+            <a href="../github/">../github/ →</a>
+          </div>
+        </div>
+        <div class="quote autoshow">이 기본기로 대부분은 풀립니다. 이 덱은 그래도 같은 에러가 반복되고, 고칠수록 꼬일 때를 다룹니다.</div>
+        <aside class="notes">
+          겹치는 내용은 다시 설명하지 않는다. 처음 듣는 분이 많으면 workshop의 복구 3단계와 F12 콘솔만 짧게 짚고 넘어간다.
+          이 덱의 위치: 기본 복구로 안 풀릴 때 펼치는 처방전.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 6. 디버깅 루프 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 2 · 디버깅 루프</div>
+        <h2>"고쳐 줘"는 넷째 단계입니다 — 앞의 셋을 먼저</h2>
+        <div class="loop5" style="margin-top:.5rem;">
+          <div class="lp autoshow"><span class="no">① 재현</span><span class="nm">다시 일으키기</span><span class="ds">언제 · 무엇을 하면 · 무엇이 나오나</span></div>
+          <div class="lp autoshow"><span class="no">② 전달</span><span class="nm">정확히 말하기</span><span class="ds">에러 원문 · 스크린샷 · 기대 vs 실제</span></div>
+          <div class="lp autoshow"><span class="no">③ 가설</span><span class="nm">원인 후보 받기</span><span class="ds">후보 3개와 각각의 확인 방법</span></div>
+          <div class="lp fix autoshow"><span class="no">④ 하나씩</span><span class="nm">하나만 고치기</span><span class="ds">확인된 원인 하나, 다른 곳은 그대로</span></div>
+          <div class="lp ok autoshow"><span class="no">⑤ 확인</span><span class="nm">같은 절차로 재확인</span><span class="ds">①을 그대로 다시 — 되면 커밋</span></div>
+          <div class="loop-back autoshow fade-in"><span>안 되면 그 수정은 되돌리고 ③으로</span></div>
+        </div>
+        <div class="quote" style="margin-top:1.6rem;">①–③을 건너뛰고 ④부터 시키면, 그것이 바로 추측 수정입니다.</div>
+        <aside class="notes">
+          오늘의 뼈대. 다섯 단계 이름만 기억하면 된다: 재현 · 전달 · 가설 · 하나씩 · 확인.
+          대부분의 사람은 ④부터 시작한다. 앞의 세 단계는 AI가 짐작하지 않고 원인을 고르게 만드는 단계다.
+          ⑤에서 안 되면 그 수정은 남겨 두지 말고 되돌린 뒤 ③(다른 후보)으로 돌아간다 — 이게 "꼬임"을 막는 핵심.
+          다음 네 장에서 단계마다 실제 문장을 본다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 7. ① 재현 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="loop-mini"><span class="on">① 재현</span><span>② 전달</span><span>③ 가설</span><span>④ 하나씩</span><span>⑤ 확인</span></div>
+        <h2>① 재현 — 언제, 무엇을 하면, 무엇이 나오는지 한 문장으로</h2>
+        <div class="slots" style="margin-top:.4rem;">
+          <div class="slot autoshow"><span class="sl">언제</span><div class="sq">어떤 파일·데이터로</div><div class="sx">"11월 측정 CSV(240행)를 넣었을 때"</div></div>
+          <div class="slot autoshow"><span class="sl">무엇을 하면</span><div class="sq">어떤 순서로 무엇을</div><div class="sx">"페이지를 열고 파일을 고른 직후"</div></div>
+          <div class="slot autoshow"><span class="sl">무엇이 나오나</span><div class="sq">에러·화면이 어떻게</div><div class="sx">"표는 비어 있고, 콘솔에 빨간 줄 2개"</div></div>
+        </div>
+        <div class="grid-2" style="margin-top:1.1rem;">
+          <div class="card autoshow">
+            <h3>매번 나나요, 가끔 나나요?</h3>
+            <p>가끔이라면 "날 때와 안 날 때 무엇이 달랐나"가 가장 큰 단서입니다. 파일, 시간, PC, 클릭 순서를 비교하세요.</p>
+          </div>
+          <div class="card autoshow">
+            <h3>재현이 안 되면 고쳤는지도 모릅니다</h3>
+            <p>이 문장은 ⑤ 확인 단계에서 그대로 다시 씁니다. 그래서 처음에 적어 두는 겁니다.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          재현 문장은 세 칸 채우기다. 예시처럼 구체적으로 — "가끔 안 돼요"가 아니라 "이 파일로, 이 순서로 하면, 이게 나온다".
+          재현 문장이 있으면 AI도 같은 절차로 직접 실행해 볼 수 있다. 또 ⑤에서 "고쳐졌는지"를 판정하는 기준이 된다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 8. ② 전달 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="loop-mini"><span>① 재현</span><span class="on">② 전달</span><span>③ 가설</span><span>④ 하나씩</span><span>⑤ 확인</span></div>
+        <h2>② 전달 — 해석하지 말고 원문, 그리고 "기대 vs 실제"</h2>
+        <div class="grid-2" style="margin-top:.3rem; grid-template-columns: .8fr 1.2fr;">
+          <div class="stack" style="gap:.8rem;">
+            <div class="prompt-card bad autoshow">
+              <div class="pc-label">😵 겉도는 전달</div>
+              <pre class="code">그래프가 이상하게 나와요. 고쳐 주세요.</pre>
+            </div>
+            <div class="card autoshow">
+              <p>📋 에러는 <strong>요약하지 말고 전체</strong>를 붙여 넣습니다. 마지막 줄만 보면 원인이 빠질 때가 많습니다.</p>
+              <p>📸 화면 문제는 스크린샷을 함께 — 말로 설명하기 어려운 어긋남이 그대로 전달됩니다.</p>
+            </div>
+          </div>
+          <div class="prompt-card good autoshow">
+            <div class="pc-label">😎 원인을 찾을 수 있는 전달</div>
+            <pre class="code">monthly.xlsx 를 넣고 [그래프 그리기]를 누르면 막대 그래프가 나와.
+기대: 1월~6월 막대 6개
+실제: 막대 5개, 3월이 없음. 에러 메시지는 없음
+3월 행만 비고 칸에 쉼표가 들어 있어 — 관계있을지도 몰라.
+스크린샷 첨부할게. 아직 고치지 말고 원인부터 같이 보자.</pre>
+          </div>
+        </div>
+        <aside class="notes">
+          오른쪽 카드의 구조: 재현 문장 + 기대 + 실제 + 눈치챈 차이 + 스크린샷. "에러 메시지는 없음"도 중요한 정보다.
+          비개발자가 흔히 하는 실수는 에러를 자기 말로 바꿔 전달하는 것 — "뭔가 파일 문제래요". 원문 그대로가 훨씬 낫다.
+          에러 원문에 실데이터·경로 속 개인정보·키가 섞여 있으면 지우고 붙인다(보안 약속 1·2).
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 9. ③ 가설 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="loop-mini"><span>① 재현</span><span>② 전달</span><span class="on">③ 가설</span><span>④ 하나씩</span><span>⑤ 확인</span></div>
+        <h2>③ 가설 — 고치기 전에 "원인 후보 3개와 확인 방법"을 받습니다</h2>
+        <div class="grid-2" style="margin-top:.3rem;">
+          <div class="stack" style="gap:.8rem;">
+            <div class="prompt-card good autoshow">
+              <div class="pc-label">💬 이렇게 요청</div>
+              <pre class="code">아직 고치지 마. 원인 후보 3개를 가능성 순으로 적고,
+각각을 어떻게 확인할 수 있는지 알려 줘.</pre>
+            </div>
+            <div class="card autoshow">
+              <p>확인도 AI에게 맡길 수 있습니다 — <strong class="accent2">"1번부터 확인해서 결과만 보여 줘"</strong>.</p>
+              <p>결과를 보고 원인이 확정된 후보만 ④로 넘깁니다.</p>
+            </div>
+          </div>
+          <pre class="code autoshow" aria-label="AI가 돌려주는 원인 후보 예시"><span class="cm">● 원인 후보 (가능성 순)</span>
+
+<span class="nm">1.</span> 비고 칸의 쉼표 때문에 3월 행의 칸이 밀림
+   <span class="st">확인:</span> 3월 행만 남긴 파일로 실행해 칸 수 출력
+
+<span class="nm">2.</span> 3월 날짜 형식이 달라 읽을 때 빠짐
+   <span class="st">확인:</span> 읽은 직후 날짜 값을 그대로 출력
+
+<span class="nm">3.</span> 그래프 필터 조건이 3월을 제외
+   <span class="st">확인:</span> 필터 전·후 행 수를 비교</pre>
+        </div>
+        <div class="quote autoshow">후보마다 확인 방법이 붙어 있으면, 짐작이 아니라 증거로 원인을 고를 수 있습니다.</div>
+        <aside class="notes">
+          이 덱에서 단 하나만 가져간다면 이 문장: "아직 고치지 마. 원인 후보 3개와 확인 방법."
+          "고치지 마"가 핵심이다. 이 말이 없으면 AI는 후보를 말하면서 동시에 1번을 고쳐 버린다.
+          후보가 셋이면 첫 짐작에 매달리지 않게 된다. 확인 방법은 대개 로그 출력이나 작은 입력 — 뒤에서 다시 다룬다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 10. ④ 하나씩 ⑤ 확인 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="loop-mini"><span>① 재현</span><span>② 전달</span><span>③ 가설</span><span class="on">④ 하나씩</span><span class="on">⑤ 확인</span></div>
+        <h2>④ 하나만 고치고, ⑤ 처음 재현 절차 그대로 확인합니다</h2>
+        <div class="grid-2" style="margin-top:.3rem; align-items:stretch;">
+          <div class="card autoshow">
+            <h3>④ 한 번에 하나</h3>
+            <p>세 군데를 한꺼번에 고치면 무엇이 효과였는지, 새 문제가 어디서 왔는지 알 수 없습니다.</p>
+            <div class="prompt-card" style="margin-top:.7rem;">
+              <div class="pc-label">💬</div>
+              <pre class="code">1번 원인만 고쳐 줘. 다른 곳은 건드리지 말고, 무엇을 바꿨는지 3줄로 알려 줘.</pre>
+            </div>
+          </div>
+          <div class="card good autoshow">
+            <h3>⑤ 같은 절차로 확인</h3>
+            <p>"수정했습니다"는 보고일 뿐입니다. ①의 재현 문장대로 다시 해 보고 눈으로 확인합니다.</p>
+            <p style="margin-top:.7rem;">✅ 증상이 사라졌다 → <strong class="accent2">커밋</strong>해서 세이브 포인트로</p>
+            <p>❌ 그대로다 → 그 수정은 <strong class="accent3">되돌리고</strong> ③의 다음 후보로</p>
+            <p class="tiny muted" style="margin-top:.6rem;">증거를 받는 법은 → <a href="../verification/">../verification/</a></p>
+          </div>
+        </div>
+        <aside class="notes">
+          ④에서 "다른 곳은 건드리지 마"와 "바꾼 내용을 3줄로"를 꼭 붙인다. 바꾼 내용을 알아야 되돌릴 수 있다.
+          ⑤에서 실패한 수정을 남겨 두면 추측 수정이 쌓인다 — 이게 "고칠수록 꼬인다"의 원인이었다. 안 되면 되돌린다.
+          되면 바로 커밋. github 덱의 세이브 포인트와 연결된다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 11. 판을 바꾸는 다섯 도구 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · 루프가 안 돌 때</div>
+        <h2>세 번 헛돌면 같은 요청을 반복하지 말고, 판을 바꿉니다</h2>
+        <div class="tools5" style="margin-top:.5rem;">
+          <div class="tool autoshow"><span class="ti">🪵</span><span class="tn">로그 심기</span><span class="td">보이지 않던 중간값을 화면에 꺼낸다</span><span class="tw">원인이 안 보일 때</span></div>
+          <div class="tool autoshow"><span class="ti">✂️</span><span class="tn">입력 줄이기</span><span class="td">되는 데이터와 안 되는 데이터를 비교한다</span><span class="tw">특정 데이터에서만 날 때</span></div>
+          <div class="tool autoshow"><span class="ti">↩️</span><span class="tn">되돌리고 다른 접근</span><span class="td">쌓인 추측 수정을 걷어낸다</span><span class="tw">고칠수록 꼬일 때</span></div>
+          <div class="tool autoshow"><span class="ti">🧼</span><span class="tn">새 세션 리셋</span><span class="td">요약 파일만 들고 깨끗한 대화로</span><span class="tw">같은 실수를 반복할 때</span></div>
+          <div class="tool autoshow"><span class="ti">🧠</span><span class="tn">더 깊이 생각</span><span class="td">고치지 말고 원인 분석만 맡긴다</span><span class="tw">위를 다 해도 막힐 때</span></div>
+        </div>
+        <div class="quote autoshow">기준은 단순합니다 — 같은 증상으로 <strong class="accent4">세 번</strong> 고쳤는데 그대로라면, 네 번째 "고쳐 줘"는 보내지 않습니다.</div>
+        <aside class="notes">
+          세 번은 엄격한 규칙이 아니라 손에 잡히는 기준이다. 세 번째에도 같은 증상이면 지금 판에는 원인을 찾을 정보가 없다는 뜻.
+          다섯 도구는 대략 왼쪽부터 쓴다. 각 도구 아래 초록 글씨가 "언제 꺼내나".
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 12. 로그 심기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · 🪵 로그 심기</div>
+        <h2>로그를 심으면, 어디서부터 틀어지는지 눈으로 보입니다</h2>
+        <div class="grid-2" style="margin-top:.3rem;">
+          <div class="stack" style="gap:.8rem;">
+            <p class="autoshow" style="margin:0; font-size:1.2rem;"><strong>로그</strong> = 프로그램이 일하는 중간중간 남기는 메모. 단계마다 값을 찍어 두면, 처음으로 값이 이상해지는 지점이 원인 근처입니다.</p>
+            <div class="prompt-card good autoshow">
+              <div class="pc-label">💬 이렇게 요청</div>
+              <pre class="code">고치지 말고, 파일을 읽은 직후 · 계산 직전 · 화면에 그리기 직전에 값을 출력하는 로그를 넣어 줘. 실행 결과를 보고 어디서 틀어지는지 짚어 줘.</pre>
+            </div>
+            <p class="autoshow small muted" style="margin:0;">로그가 나오는 곳 — 웹페이지는 <kbd class="key">F12</kbd> → Console, 파이썬은 터미널. 원인을 찾은 뒤에는 "디버깅용 로그는 지워 줘".</p>
+          </div>
+          <pre class="code autoshow" aria-label="로그 출력 예시"><span class="cm"># 로그 출력 예시</span>
+[읽기] 행 수: 6
+[읽기] 3월 행 칸 수: <span class="er">8</span>   <span class="cm">← 나머지는 7</span>
+[읽기] 3월 행 금액: <span class="er">"점검"</span>   <span class="cm">← 숫자가 아님</span>
+[계산] 월별 합계: 1월 412 · 2월 398 · <span class="er">3월 NaN</span>
+[그리기] 막대 수: 5
+
+<span class="st">→ 읽는 단계에서 이미 칸이 밀렸다.
+  계산·그리기는 범인이 아니다.</span></pre>
+        </div>
+        <aside class="notes">
+          로그는 비개발자에게 "엑스레이"에 가깝다. 코드를 읽지 못해도 출력만 보면 어디서 값이 처음 이상해지는지 알 수 있다.
+          예시에서 읽기 단계에서 이미 칸 수가 8로 다르다 — 그러면 계산이나 그리기 코드를 고치는 건 헛수고다.
+          로그 넣기도 "고치지 말고"를 붙여야 한다. 관찰과 수정을 섞지 않는 것.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 13. 입력 줄이기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · ✂️ 입력 줄이기</div>
+        <h2>잘 되던 데이터와 안 되는 데이터의 차이가 곧 원인입니다</h2>
+        <div class="grid-2" style="margin-top:.3rem; grid-template-columns: 1fr 1fr;">
+          <div class="card autoshow">
+            <h3>반씩 잘라 범인 행을 찾는다</h3>
+            <div class="bisect" style="margin-top:.4rem;">
+              <div class="bis-row"><span class="bl">1,000행</span><div class="bis-bar" style="width:300px;"><i class="ng" style="width:100%"></i></div></div>
+              <div class="bis-row"><span class="bl">앞 500</span><div class="bis-bar" style="width:150px;"><i class="ok" style="width:100%"></i></div><span class="br">정상</span></div>
+              <div class="bis-row"><span class="bl">뒤 500</span><div class="bis-bar" style="width:150px;"><i class="ng" style="width:100%"></i></div><span class="br">에러 → 다시 반으로</span></div>
+              <div class="bis-row"><span class="bl">…</span><div class="bis-bar" style="width:40px;"><i class="ng" style="width:100%"></i></div></div>
+              <div class="bis-row"><span class="bl">1행</span><div class="bis-bar" style="width:8px;"><i class="ng" style="width:100%"></i></div><span class="br">비고 칸에 줄바꿈</span></div>
+            </div>
+            <p style="margin-top:.6rem;">반씩 줄이면 1,000행도 <strong class="accent2">10번 안에</strong> 한 행까지 좁혀집니다.</p>
+          </div>
+          <div class="stack" style="gap:.8rem;">
+            <div class="prompt-card good autoshow">
+              <div class="pc-label">💬 이렇게 요청</div>
+              <pre class="code">이 CSV를 반으로 나눠 각각 실행해 보고, 에러 나는 쪽을 계속 반으로 줄여서 문제의 행을 찾아 줘. 그 행이 정상 행과 무엇이 다른지 비교해 줘.</pre>
+            </div>
+            <div class="card autoshow">
+              <p>🔒 작게 줄인 샘플은 <strong>값을 가짜로 바꿔도</strong> 에러가 나는지 확인하세요. 그러면 실데이터 없이 AI와 원인을 볼 수 있습니다.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          "특정 파일에서만 에러" 류의 문제에 가장 잘 듣는 방법. 2의 10제곱이 1,024라서 1,000행은 열 번 안쪽으로 한 행이 된다.
+          찾은 행과 정상 행을 나란히 놓고 "뭐가 달라?"라고 물으면 쉼표, 줄바꿈, 빈칸, 다른 날짜 형식, 숫자 속 글자 같은 원인이 바로 보인다.
+          보안 측면 보너스: 작게 줄이고 값을 가짜로 바꾼 샘플은 사내 승인 도구가 아닌 곳에서도 문제없이 보여 줄 수 있는 경우가 많다 — 그래도 회사 정책 우선.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 14. 되돌리기 + 새 세션 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 3 · ↩️ 되돌리기 · 🧼 새 세션</div>
+        <h2>꼬였으면 쌓인 수정을 걷어내고, 대화도 새로 엽니다</h2>
+        <div class="grid-2" style="margin-top:.3rem; align-items:stretch;">
+          <div class="card autoshow">
+            <h3>↩️ 되돌리고 다른 접근</h3>
+            <p>마지막으로 잘 되던 상태(커밋)로 돌아간 뒤, 실패한 방식은 빼고 다시 시작합니다.</p>
+            <div class="prompt-card" style="margin-top:.6rem;">
+              <div class="pc-label">💬</div>
+              <pre class="code">마지막 커밋 상태로 되돌려 줘. 방금까지 쓴 방식은 빼고, 다른 방법으로 접근해 보자.</pre>
+            </div>
+            <p class="tiny muted" style="margin-top:.6rem;">Claude Code는 <kbd class="key">Esc</kbd> 두 번(<span class="mono">/rewind</span>)으로 이전 지점까지 되감을 수도 있습니다 · <a href="../github/">../github/</a></p>
+          </div>
+          <div class="card autoshow">
+            <h3>🧼 새 세션 리셋 — 요약 + 파일</h3>
+            <p>먼저 지금까지를 파일로 남기고, <span class="mono">/clear</span> 또는 새 터미널에서 그 파일만 읽힙니다.</p>
+            <div class="prompt-card" style="margin-top:.6rem;">
+              <div class="pc-label">💬 리셋 전</div>
+              <pre class="code">지금까지를 debug-notes.md 로 정리해 줘: 증상 · 재현 방법 · 시도한 것과 결과 · 남은 가설. 코드는 건드리지 마.</pre>
+            </div>
+            <div class="prompt-card" style="margin-top:.5rem;">
+              <div class="pc-label">💬 새 세션에서</div>
+              <pre class="code">debug-notes.md 를 읽고, 이미 실패한 방법은 빼고 원인 후보부터 다시 세워 줘.</pre>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          되돌리기는 "추측 수정 누적"의 처방, 새 세션은 "대화 오염"의 처방이다. 둘을 같이 쓰는 경우가 많다.
+          새 세션에서 맨손으로 시작하면 같은 실수를 반복하니, 반드시 debug-notes.md 같은 요약을 들고 간다. "시도한 것과 결과"가 가장 값진 줄이다.
+          컨텍스트가 왜 오염되는지, /clear와 /compact의 차이는 context 덱에서.
+        </aside>
+        <div class="slide-refs" style="position:absolute; left:56px; bottom:12px; font-size:.78rem;">
+          <a href="../context/">컨텍스트가 오염되는 원리 → ../context/</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 15. 더 센 모델 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">CH 3 · 🧠 더 깊이 생각시키기</div>
+        <h2>그래도 막히면, 더 깊이 생각하게 해서 "원인 분석만" 맡깁니다</h2>
+        <div class="grid-2" style="margin-top:.3rem;">
+          <div class="stack" style="gap:.8rem;">
+            <div class="card autoshow">
+              <p>막힌 지점에서만 <span class="mono accent2">/effort</span> 로 추론 깊이를 올리거나 <span class="mono accent2">/model</span> 로 더 큰 모델을 고릅니다.</p>
+              <p>분석이 끝나면 원래 설정으로 돌아와 구현합니다 — 비싼 설정은 짧게 씁니다.</p>
+            </div>
+            <div class="card autoshow">
+              <p>다른 도구·다른 계열의 모델에게 같은 요약 파일을 주고 <strong>두 번째 의견</strong>을 받는 것도 같은 방법입니다.</p>
+            </div>
+          </div>
+          <div class="prompt-card good autoshow">
+            <div class="pc-label">💬 이렇게 요청</div>
+            <pre class="code">코드는 고치지 마.
+debug-notes.md 와 관련 파일을 읽고
+1) 지금까지의 수정이 왜 실패했는지
+2) 근본 원인이 무엇인지
+3) 그걸 확인할 방법
+을 분석해 줘.</pre>
+          </div>
+        </div>
+        <p class="tiny muted autoshow" style="margin-top:1rem;">어떤 모델을 언제 고르는지, 비용은 어느 정도인지는 → <a href="../setup/">../setup/</a> 의 모델 고르기</p>
+        <aside class="notes">
+          더 센 모델은 "고쳐 줘"보다 "왜 실패했는지 분석해 줘"에 쓸 때 효과가 크다. 분석과 구현을 나누면 비용도 줄어든다.
+          모델 이름과 가격은 자주 바뀌므로 이 덱에는 적지 않는다 — setup 덱의 모델 고르기 장을 참고.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 16. 용어: 경로 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · AI의 말 알아듣기</div>
+        <h2>"경로"는 파일의 주소 — 기준점이 다르면 같은 주소도 엉뚱한 곳을 가리킵니다</h2>
+        <div class="grid-2" style="margin-top:.3rem;">
+          <div class="stack" style="gap:.6rem;">
+            <div class="path-box autoshow"><span class="pl">절대 경로 · 처음부터 끝까지 전체 주소</span><code>C:\Users\kim\work\report\lots.csv</code><code>/Users/kim/work/report/lots.csv</code></div>
+            <div class="path-box autoshow"><span class="pl">상대 경로 · 지금 있는 폴더 기준</span><code>data/lots.csv</code></div>
+            <p class="autoshow small" style="margin:0;">상대 경로는 <strong class="accent4">어디서 실행했느냐</strong>에 따라 가리키는 곳이 바뀝니다. "파일이 없다"는 에러의 단골 원인입니다.</p>
+          </div>
+          <div class="stack" style="gap:.6rem;">
+            <div class="path-box bad autoshow"><span class="pl">피할 폴더 이름 · 한글 · 공백</span><code>C:\Users\김철수\내 문서\2026 보고\</code></div>
+            <div class="path-box good autoshow"><span class="pl">작업 폴더는 영문 · 공백 없이</span><code>C:\work\yield-report\</code></div>
+            <p class="autoshow small" style="margin:0;">어떤 도구는 공백에서 경로를 끊고, 어떤 도구는 한글 경로를 못 읽습니다. 공백이 있으면 경로를 <span class="mono">"따옴표"</span>로 감쌉니다.</p>
+          </div>
+        </div>
+        <div class="quote autoshow">Windows는 <span class="mono">\</span>, Mac은 <span class="mono">/</span> 로 폴더를 나눕니다. 다른 PC에서 받은 코드가 "파일이 없다"고 하면 이것부터 의심합니다.</div>
+        <aside class="notes">
+          AI가 가장 자주 쓰는 용어가 경로다. 절대 경로는 집 주소 전체, 상대 경로는 "여기서 두 블록 옆" 같은 설명.
+          상대 경로는 실행 위치에 따라 의미가 바뀐다. 터미널을 다른 폴더에서 열고 실행하면 같은 코드가 파일을 못 찾는다.
+          사내 PC는 사용자 폴더 이름이 한글이거나 "내 문서"처럼 공백이 있는 경우가 많다 — 작업 폴더를 C:\work 아래에 따로 만들라고 권한다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 17. 용어 넷 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">CH 4 · AI의 말 알아듣기</div>
+        <h2>이 네 단어만 알면 에러 메시지의 절반이 읽힙니다</h2>
+        <div class="term-grid" style="margin-top:.3rem;">
+          <div class="term autoshow">
+            <div class="tt">📦 패키지 · 모듈 <span class="mono">module</span></div>
+            <p>남이 만들어 둔 부품. <span class="mono">No module named …</span> 는 "그 부품이 안 깔렸다", 또는 "깐 곳과 실행하는 파이썬이 다르다".</p>
+          </div>
+          <div class="term autoshow">
+            <div class="tt">🔌 localhost · 포트 <span class="mono">:8000</span></div>
+            <p>localhost는 "내 컴퓨터 자신", 포트는 그 안의 문 번호입니다.</p>
+            <p>이 주소는 터미널에서 서버가 <strong class="accent4">돌고 있는 동안만</strong> 열립니다. 터미널을 닫으면 서버도 꺼지고, 다른 사람 PC에서는 열리지 않습니다.</p>
+          </div>
+          <div class="term autoshow">
+            <div class="tt">🖥 콘솔 <span class="mono">console</span></div>
+            <p>프로그램이 에러와 로그를 적는 창. 웹페이지는 <kbd class="key">F12</kbd> → Console 탭, 파이썬은 실행한 터미널 그 자체입니다.</p>
+          </div>
+          <div class="term autoshow">
+            <div class="tt">🔤 인코딩 <span class="mono">encoding</span></div>
+            <p>글자를 숫자로 저장하는 규칙. 한글 Windows 엑셀의 CSV는 흔히 <span class="mono">CP949</span>, 요즘 도구의 기본은 <span class="mono">UTF-8</span>.</p>
+            <p>규칙이 다르게 읽으면 <span class="mono accent3">�� · ÇÑ±Û</span> 처럼 깨집니다.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          용어를 외우자는 게 아니라, AI가 "포트가 사용 중이에요"라고 할 때 무슨 뜻인지 감을 잡자는 것.
+          localhost가 특히 많이 헷갈린다: AI가 "http://localhost:8000 에서 확인하세요"라고 해서 열었는데 다음 날 안 열린다 → 서버를 띄운 터미널을 닫았기 때문.
+          팀원에게 localhost 주소를 보내도 열리지 않는다. 공유는 github 덱의 GitHub Pages 배포로.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 18. 에러 처방 ① ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip warn">CH 5 · 사내 단골 에러 처방 ①</div>
+        <h2>데이터·환경 에러 넷 — 이름이 보이면 이렇게 부탁합니다</h2>
+        <div class="err-grid" style="margin-top:.3rem;">
+          <div class="err autoshow">
+            <span class="en">🔤 CSV·엑셀 한글 깨짐</span>
+            <span class="em">UnicodeDecodeError: 'utf-8' codec can't decode … · 화면에 ���</span>
+            <p class="ew"><b>원인</b>엑셀 CSV는 CP949인데 코드는 UTF-8로 읽음</p>
+            <p class="ef"><b>처방</b>"인코딩을 확인하고 맞게 읽어 줘. 엑셀로 다시 열 파일은 utf-8-sig 로 저장해 줘"</p>
+          </div>
+          <div class="err autoshow">
+            <span class="en">📦 모듈 없음</span>
+            <span class="em">ModuleNotFoundError: No module named 'pandas'</span>
+            <p class="ew"><b>원인</b>설치 안 함, 또는 설치한 파이썬과 실행한 파이썬이 다름</p>
+            <p class="ef"><b>처방</b>"지금 실행 중인 파이썬이 무엇인지 확인하고, 그 파이썬에 설치해 줘"</p>
+          </div>
+          <div class="err autoshow">
+            <span class="en">🔌 포트 사용 중</span>
+            <span class="em">Address already in use · EADDRINUSE</span>
+            <p class="ew"><b>원인</b>전에 띄운 서버가 다른 터미널에서 아직 돌고 있음</p>
+            <p class="ef"><b>처방</b>그 터미널에서 <kbd class="key">Ctrl</kbd>+<kbd class="key">C</kbd>, 또는 "다른 포트로 띄워 줘"</p>
+          </div>
+          <div class="err autoshow">
+            <span class="en">📁 파일을 찾을 수 없음</span>
+            <span class="em">FileNotFoundError · No such file or directory · ERR_FILE_NOT_FOUND</span>
+            <p class="ew"><b>원인</b>상대 경로의 기준 폴더가 다름 · 오타 · 한글·공백 폴더</p>
+            <p class="ef"><b>처방</b>"현재 실행 폴더와 파일의 실제 위치를 둘 다 출력해서 비교해 줘"</p>
+          </div>
+        </div>
+        <aside class="notes">
+          에러 이름을 해석할 필요는 없다 — 카드에서 모양이 비슷한 것을 찾고 처방 문장을 함께 붙이면 된다.
+          한글 깨짐: 한글 Windows의 엑셀에서 "CSV (쉼표로 분리)"로 저장하면 보통 CP949다. 엑셀에는 "CSV UTF-8" 저장 옵션도 따로 있다.
+          모듈 없음: PC에 파이썬이 여러 개 깔린 경우가 흔하다. 사내망이면 설치 자체가 프록시에 막힐 수 있다 → 다음 장.
+          설치 단계의 에러(claude 명령을 못 찾음 등)는 setup 덱 TOP 5에 있다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 19. 에러 처방 ② ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip warn">CH 5 · 사내 단골 에러 처방 ②</div>
+        <h2>회사 망·권한·DRM 에러 — 우회하지 말고 정해진 길로</h2>
+        <div class="err-grid three" style="margin-top:.3rem;">
+          <div class="err autoshow">
+            <span class="en">🛡 프록시 · 인증서</span>
+            <span class="em">CERTIFICATE_VERIFY_FAILED · UNABLE_TO_GET_ISSUER_CERT_LOCALLY · SELF_SIGNED_CERT_IN_CHAIN</span>
+            <p class="ew"><b>원인</b>회사 망의 보안 장비가 통신을 중계해서, 도구가 사내 인증서를 모름</p>
+            <p class="ef"><b>처방</b>사내 IT가 안내하는 인증서·프록시 설정을 적용. 모르면 에러 원문을 들고 헬프데스크로</p>
+          </div>
+          <div class="err autoshow">
+            <span class="en">🔒 권한 거부</span>
+            <span class="em">PermissionError: [Errno 13] · EACCES · 액세스가 거부되었습니다</span>
+            <p class="ew"><b>원인</b>그 파일이 엑셀에서 열려 있음 · 보호된 폴더 · 관리자 전용 위치</p>
+            <p class="ef"><b>처방</b>파일을 닫고 다시. 안 되면 내 작업 폴더로 복사해서 작업</p>
+          </div>
+          <div class="err autoshow">
+            <span class="en">🔐 DRM 문서</span>
+            <span class="em">File is not a zip file · 파일이 손상되었습니다 · 알 수 없는 글자</span>
+            <p class="ew"><b>원인</b>사내 DRM으로 암호화된 파일은 프로그램이 직접 못 읽음</p>
+            <p class="ef"><b>처방</b>엑셀·PPT를 실제로 띄워 읽는 방식(xlwings · win32com)으로 → <a href="../agent-skills/">../agent-skills/</a></p>
+          </div>
+        </div>
+        <div class="warn-line autoshow">⚠ AI가 <strong>"인증서 검증을 끄자"</strong>(<span class="mono">verify=False</span>, <span class="mono">NODE_TLS_REJECT_UNAUTHORIZED=0</span>)거나 <strong>"관리자 권한으로 밀어붙이자"</strong>고 하면 멈추세요. 에러는 사라져도 보안 구멍이 남습니다.</div>
+        <p class="tiny muted autoshow" style="margin-top:.6rem;">에러 원문을 붙일 때도 보안 약속은 같습니다 — 실데이터·키가 섞이지 않았는지 보고 붙이기 · 회사 정책이 이 자료보다 우선 → <a href="../security/">../security/</a></p>
+        <aside class="notes">
+          이 세 가지는 코드 문제가 아니라 회사 환경 문제라서, AI가 코드를 아무리 고쳐도 같은 에러가 반복되는 대표 사례다.
+          프록시·인증서: AI는 흔히 검증을 끄는 우회책을 제안한다. 당장은 되지만 회사 보안 정책 위반이 될 수 있다 — 정해진 사내 인증서 설정이 정답.
+          권한 거부: Windows에서 엑셀이 파일을 열고 있으면 다른 프로그램이 쓰지 못한다. 가장 흔한 원인.
+          DRM: 열면 "zip 파일이 아니다" 같은 엉뚱한 에러가 난다. agent-skills 덱에 DRM 엑셀을 xlwings로 다루는 예제가 있다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 20. 실습 안내 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 · 15분</div>
+        <h2>고장 난 랏 수율 리포트를 루프대로 살려 봅니다</h2>
+        <div class="dl-row">
+          <a class="dl-chip" href="lab.zip" download>📦 lab.zip 받기</a>
+          <a class="dl-chip plain" href="lab/lot_report.html" download>lot_report.html</a>
+          <a class="dl-chip plain" href="lab/csv.js" download>csv.js</a>
+          <a class="dl-chip plain" href="lab/lots.csv" download>lots.csv</a>
+          <span class="tiny muted">전부 합성 데이터 · 버그 3개가 숨어 있습니다</span>
+        </div>
+        <div class="lab-cols">
+          <ol class="lab-steps">
+            <li class="autoshow">압축을 푼 폴더에서 Claude Code를 켭니다. <span class="mono">lot_report.html</span> 을 브라우저로 열고 <span class="mono">lots.csv</span> 를 고릅니다.</li>
+            <li class="autoshow"><strong>① 재현 ② 전달</strong> — <kbd class="key">F12</kbd> 콘솔과 화면을 보고, 재현 문장 + 에러 원문 + 기대 vs 실제로 적어 AI에게 줍니다.</li>
+            <li class="autoshow"><strong>③ 가설</strong> — "아직 고치지 마. 원인 후보 3개와 확인 방법"을 받고, 확인 결과로 원인을 고릅니다.</li>
+            <li class="autoshow"><strong>④ 하나씩 ⑤ 확인</strong> — 하나 고칠 때마다 새로고침 → <span class="mono">lots.csv</span> 다시 고르기로 확인합니다. 증상이 바뀌면 다시 ①로.</li>
+          </ol>
+          <div>
+            <div class="panel learn autoshow">
+              <div class="pt">무엇을 배우나</div>
+              <ul>
+                <li>버그가 여러 개일 때 한 번에 하나씩 벗겨 내는 순서</li>
+                <li>경로 · 인코딩 · 데이터 형식 — 사내에서 가장 흔한 세 종류</li>
+              </ul>
+            </div>
+            <div class="prompt-card good autoshow" style="margin-top:.7rem;">
+              <div class="pc-label">💬 첫 문장</div>
+              <pre class="code">lot_report.html 에서 lots.csv 를 고르면 표가 안 나와. 콘솔 에러는 이거야: (붙여넣기). 아직 고치지 말고, 두 파일을 읽고 원인 후보 3개와 확인 방법부터 알려 줘.</pre>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          실습 파일: debugging/lab/ (lot_report.html · csv.js · lots.csv) 또는 debugging/lab.zip. 브라우저에서 파일을 직접 여는 방식이라 서버가 필요 없다.
+          숨은 버그 3개(청중에게는 말하지 않는다):
+          (1) 경로 — HTML이 lib/csv.js 를 부르지만 파일은 같은 폴더에 있다. 증상: 파일을 골라도 아무 반응 없음, 콘솔에 ERR_FILE_NOT_FOUND와 "parseCSV is not defined".
+          (2) 인코딩 — lots.csv 는 엑셀식 CP949인데 UTF-8로 읽는다. 증상: 공정·담당·비고의 한글이 � 로 깨진다(숫자는 영향 없음).
+          (3) 데이터 형식 — 1,000 이상인 칩 수가 "1,120"처럼 따옴표+쉼표로 저장돼 있는데, 쉼표로만 잘라서 칸이 밀린다. 증상: 3·7·10번 랏만 NaN, 전체 수율 NaN%, 저수율 2개로 적게 나옴.
+          버그가 겹쳐 있어서 하나를 고치면 다음 증상이 드러난다 — "증상이 바뀌면 다시 ①"을 체감하는 구조.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 21. 실습 완료 기준 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 · 완료 기준과 막힐 때</div>
+        <h2>눈으로 이 네 가지가 보이면 끝입니다</h2>
+        <div class="grid-2" style="margin-top:.3rem; align-items:stretch;">
+          <div class="panel done autoshow">
+            <div class="pt">완료 기준 — 화면에서 확인</div>
+            <ul>
+              <li>표에 랏 <strong>12행</strong>, 공정·담당·비고의 한글이 정상</li>
+              <li>전체 수율 <strong>92.8%</strong></li>
+              <li>저수율 랏 <strong>3개</strong> — LOT-2611-05 · 07 · 11 이 빨간 줄</li>
+              <li><kbd class="key">F12</kbd> 콘솔에 빨간 줄 <strong>0개</strong></li>
+            </ul>
+            <p class="small" style="margin:.8rem 0 0;">보너스 — "버그마다 원인·증상·고친 방법을 debug-notes.md 로 정리해 줘"</p>
+          </div>
+          <div class="panel stuck autoshow">
+            <div class="pt">막히면</div>
+            <ul>
+              <li><strong>골라도 아무 반응이 없다</strong> → 콘솔의 첫 빨간 줄 원문을 그대로 붙인다</li>
+              <li><strong>글자가 깨진다</strong> → "엑셀에서 내보낸 CSV야" 한 줄을 보탠다</li>
+              <li><strong>몇 행만 숫자가 이상하다</strong> → 이상한 행과 멀쩡한 행을 한 줄씩 붙여 "뭐가 달라?"</li>
+              <li><strong>세 번 헛돈다</strong> → debug-notes.md 로 요약하고 새 세션</li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote autoshow">완료 숫자를 AI에게 미리 알려 주지 마세요. "92.8%가 나오게 해 줘"는 답을 맞추는 코드를 부를 수 있습니다.</div>
+        <aside class="notes">
+          정답 값(92.8%, 저수율 3개)은 사람이 확인하는 기준이다. AI에게 목표 숫자를 주면 값을 억지로 맞추는 수정을 할 수 있다 — verification 덱의 보상 해킹 이야기와 같은 맥락.
+          막힘 대처 네 줄은 각각 이 덱의 도구와 짝이다: 원문 전달, 정보 보태기, 입력 줄이기(행 비교), 새 세션 리셋.
+          시간이 남으면 보너스: debug-notes.md 정리 → 다음에 같은 류의 문제가 나면 이 파일을 먼저 읽히면 된다.
+          해설: (1) 스크립트 경로를 csv.js 로, (2) readAsText(file, 'EUC-KR') 등 인코딩 지정, (3) 따옴표 안 쉼표를 처리하는 CSV 파싱 + 숫자 속 쉼표 제거.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 22. 복붙용 디버깅 프롬프트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">복붙용 · 디버깅 프롬프트</div>
+        <h2>막힐 때 그대로 붙여 넣는 일곱 문장</h2>
+        <div class="pc-grid" style="margin-top:.2rem;">
+          <div class="prompt-card autoshow"><div class="pc-label">① 재현 · ② 전달</div><pre class="code">[파일]로 [동작]을 하면 [결과]가 나와. 기대: … / 실제: … / 에러 원문: (붙여넣기)</pre></div>
+          <div class="prompt-card autoshow"><div class="pc-label">③ 가설 먼저</div><pre class="code">아직 고치지 마. 원인 후보 3개를 가능성 순으로, 각각 확인 방법과 함께 알려 줘.</pre></div>
+          <div class="prompt-card autoshow"><div class="pc-label">④ 하나만</div><pre class="code">1번 원인만 고쳐 줘. 다른 곳은 건드리지 말고, 바꾼 내용을 3줄로 알려 줘.</pre></div>
+          <div class="prompt-card autoshow"><div class="pc-label">🪵 로그</div><pre class="code">고치지 말고, 단계마다 값을 출력하는 로그를 넣어 줘. 실행 결과로 어디서 틀어지는지 짚어 줘.</pre></div>
+          <div class="prompt-card autoshow"><div class="pc-label">✂️ 입력 줄이기</div><pre class="code">되는 데이터와 안 되는 데이터를 가장 작게 줄여서, 둘이 무엇이 다른지 찾아 줘.</pre></div>
+          <div class="prompt-card autoshow"><div class="pc-label">🧼 리셋 전 요약</div><pre class="code">지금까지를 debug-notes.md 로 정리해 줘: 증상 · 재현 방법 · 시도와 결과 · 남은 가설.</pre></div>
+          <div class="prompt-card autoshow" style="grid-column: 1 / -1;"><div class="pc-label">🧠 분석만</div><pre class="code">코드는 고치지 마. 지금까지의 수정이 왜 실패했는지와 근본 원인, 그걸 확인할 방법만 분석해 줘.</pre></div>
+        </div>
+        <aside class="notes">
+          카드마다 오른쪽 위 복사 버튼이 있다. 루프 순서(①~④)와 판을 바꾸는 도구 순서대로 배치했다.
+          공통점: 대부분 "고치지 마"로 시작한다. 관찰·분석과 수정을 분리하는 것이 이 덱 전체의 요령.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 23. 📸 이 장표만 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">📸 이 장표만 찍어 가세요</div>
+        <h2>같은 에러가 두 번 나면 — 이 순서로</h2>
+        <div class="grid-2" style="margin-top:.3rem; grid-template-columns: 1.15fr 1fr;">
+          <ul class="checklist">
+            <li class="autoshow"><strong>재현 문장</strong> — 언제 · 무엇을 하면 · 무엇이 나오나</li>
+            <li class="autoshow"><strong>에러 원문 전체</strong> + 스크린샷 + 기대 vs 실제</li>
+            <li class="autoshow">"아직 고치지 마. <strong>원인 후보 3개와 확인 방법</strong>"</li>
+            <li class="autoshow"><strong>한 번에 하나</strong> → 같은 절차로 재확인 → 되면 커밋, 안 되면 되돌리기</li>
+            <li class="autoshow">세 번 헛돌면 <strong>판 바꾸기</strong> — 로그 · 입력 줄이기 · 되돌리기 · 새 세션 · 깊이 올리기</li>
+          </ul>
+          <div class="card autoshow" style="padding:.8rem 1rem;">
+            <h3 style="font-size:1.12rem;">에러 속 단어 → 뜻</h3>
+            <table class="gloss">
+              <tr><td>No such file</td><td>경로가 틀림 — 기준 폴더 확인</td></tr>
+              <tr><td>No module named</td><td>부품 없음 — 실행 중인 파이썬 확인</td></tr>
+              <tr><td>already in use</td><td>서버가 이미 켜져 있음</td></tr>
+              <tr><td>codec · decode</td><td>인코딩 — CP949 vs UTF-8</td></tr>
+              <tr><td>CERTIFICATE</td><td>회사 망 인증서 — 끄지 말고 IT</td></tr>
+              <tr><td>Permission · EACCES</td><td>파일이 열려 있거나 막힌 위치</td></tr>
+            </table>
+          </div>
+        </div>
+        <aside class="notes">
+          한 장 요약. 왼쪽은 디버깅 루프와 판 바꾸기, 오른쪽은 에러 속 단어 사전. 모니터 옆에 붙여 두라고 권한다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 24. 세 문장 ============= -->
+    <section>
+      <div class="vfill center">
+        <div class="chip">정리 · 기억할 것</div>
+        <h2>세 문장만 가져가세요</h2>
+        <div style="display:flex; flex-direction:column; gap:.8rem; max-width:1000px; margin:.4rem auto 0;">
+          <div class="card autoshow" style="text-align:left;"><h3>1. AI는 본 만큼만 고칩니다</h3><p>"고쳐 줘" 전에 재현 문장과 에러 원문, 기대 vs 실제를 넘기세요.</p></div>
+          <div class="card autoshow" style="text-align:left;"><h3>2. 고치기 전에 원인부터</h3><p>후보 3개와 확인 방법을 받고, 한 번에 하나만 고치고, 같은 절차로 다시 확인합니다.</p></div>
+          <div class="card autoshow" style="text-align:left;"><h3>3. 세 번 헛돌면 판을 바꿉니다</h3><p>로그로 보고, 입력을 줄이고, 되돌리고, 새 세션을 열고, 더 센 눈에게 분석을 맡깁니다.</p></div>
+        </div>
+        <aside class="notes">
+          세 문장 복습. (1) 정보 (2) 순서 (3) 판 바꾸기. 처음의 "헛도는 이유 셋"과 짝이 맞는다는 것을 짚어 준다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 25. 다음 단계 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">다음 단계</div>
+        <h2>고친 다음은 — 증거를 받고, 대화를 관리하고, 세이브 포인트를 남깁니다</h2>
+        <div class="link-grid" style="margin-top:.3rem;">
+          <a class="link-card autoshow" href="../verification/"><b>검증과 테스트 →</b><span>"고쳤습니다" 대신 증거를 받는 법</span></a>
+          <a class="link-card autoshow" href="../context/"><b>컨텍스트 →</b><span>대화가 오염되는 원리 · /clear 와 /compact</span></a>
+          <a class="link-card autoshow" href="../github/"><b>Git &amp; GitHub →</b><span>세이브 포인트와 되돌리기</span></a>
+          <a class="link-card autoshow" href="../setup/"><b>0교시 — 설치와 기본 조작 →</b><span>모델 고르기 · 설치 에러 TOP 5</span></a>
+          <a class="link-card autoshow" href="../agent-skills/"><b>CLAUDE.md · Agent Skills →</b><span>DRM 문서 다루기 · 반복 설명은 파일로</span></a>
+          <a class="link-card autoshow" href="../security/"><b>보안과 거버넌스 →</b><span>에러 로그에 실데이터를 넣기 전에</span></a>
+        </div>
+        <div class="card autoshow" style="margin-top:.9rem; padding:.8rem 1.2rem;">
+          <p style="font-weight:800; color:#FFE08A !important;">🔒 보안 약속 3</p>
+          <p>1. 회사 기밀·실데이터는 사내 승인 도구에서만 — 애매하면 넣지 않는다.</p>
+          <p>2. API 키·비밀번호는 코드·대화·커밋에 남기지 않는다 — 새어 나갔다면 삭제가 아니라 재발급.</p>
+          <p>3. 회사 정책이 이 자료보다 우선한다. &nbsp;자세한 내용은 → <a href="../security/">../security/</a></p>
+        </div>
+        <aside class="notes">
+          디버깅 다음으로 자연스러운 덱은 verification — 고쳤다는 걸 어떻게 믿을지. 대화 오염이 자주 문제라면 context.
+          보안 약속 3줄은 시리즈 공통 문구. 디버깅할 때 특히 1번(에러 로그·샘플 데이터)과 2번(설정 파일 속 키)이 자주 걸린다.
+          질문을 받는다.
+        </aside>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  // ===== 프롬프트 카드 복사 버튼 =====
+  (function () {
+    document.querySelectorAll('.prompt-card').forEach((card) => {
+      const pre = card.querySelector('pre');
+      if (!pre) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = '복사';
+      btn.setAttribute('aria-label', '프롬프트 복사');
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText.trim());
+          btn.textContent = '복사됨 ✓';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          btn.textContent = 'Ctrl+C로 복사';
+        }
+        setTimeout(() => { btn.textContent = '복사'; }, 1600);
+      });
+      card.appendChild(btn);
+    });
+  })();
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? brText(h) : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur();
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+</script>
+
+<!-- 통합 발표 플랫폼: 질문·이모지·슬라이드 동기화는 모든 덱이 공유하는 assets/qa.js 하나가 담당한다. -->
+<link rel="stylesheet" href="../assets/qa.css">
+<script src="../assets/qa.js" defer></script>
+
+</body>
+</html>

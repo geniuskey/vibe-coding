@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>11월 랏 수율 리포트 (디버깅 실습용 — 일부러 고장 낸 파일)</title>
+  <!-- 디버깅 실습용 파일입니다. 일부러 버그를 심어 두었습니다. -->
+  <style>
+    body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', system-ui, sans-serif; margin: 32px; color: #1d2333; background: #f6f7fb; }
+    h1 { font-size: 24px; margin: 0 0 4px; }
+    .hint { color: #5b6478; margin: 0 0 20px; }
+    .pick { display: inline-block; padding: 10px 16px; border-radius: 10px; background: #fff; border: 1px solid #c9cfdd; }
+    .summary { display: flex; gap: 12px; margin: 20px 0; }
+    .summary div { background: #fff; border: 1px solid #dde2ec; border-radius: 10px; padding: 12px 18px; min-width: 150px; }
+    .summary b { display: block; font-size: 26px; }
+    table { border-collapse: collapse; background: #fff; min-width: 760px; }
+    th, td { border-bottom: 1px solid #e3e7ef; padding: 8px 12px; text-align: left; }
+    th { background: #eef1f7; font-size: 13px; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr.low td { background: #ffe9ec; color: #b3132b; font-weight: 600; }
+  </style>
+  <script src="lib/csv.js"></script>
+</head>
+<body>
+  <h1>11월 랏 수율 리포트</h1>
+  <p class="hint">엑셀에서 내보낸 <b>lots.csv</b> 를 고르면 표와 요약이 나옵니다. 수율 90% 미만 랏은 빨간색으로 표시됩니다.</p>
+
+  <label class="pick">📂 CSV 파일 고르기 <input type="file" id="file" accept=".csv" /></label>
+
+  <div class="summary">
+    <div>랏 수 <b id="count">-</b></div>
+    <div>전체 수율 <b id="total">-</b></div>
+    <div>저수율 랏 (90% 미만) <b id="low">-</b></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>랏번호</th><th>공정</th><th>장비</th><th>담당</th><th>투입칩</th><th>양품칩</th><th>수율</th><th>비고</th></tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    document.getElementById('file').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function () { render(parseCSV(reader.result)); };
+      reader.readAsText(file);
+    });
+
+    function render(rows) {
+      let inSum = 0, goodSum = 0, low = 0;
+      const body = document.getElementById('rows');
+      body.innerHTML = '';
+      rows.forEach(function (r) {
+        const v = r; // 칸 순서: 랏번호, 공정, 장비, 담당, 투입칩, 양품칩, 비고
+        const total = toNumber(v[4]);
+        const good = toNumber(v[5]);
+        const yieldPct = good / total * 100;
+        inSum += total;
+        goodSum += good;
+        if (yieldPct < 90) low++;
+        const tr = document.createElement('tr');
+        if (yieldPct < 90) tr.className = 'low';
+        [v[0], v[1], v[2], v[3]].forEach(function (text) {
+          const td = document.createElement('td'); td.textContent = text; tr.appendChild(td);
+        });
+        [v[4], v[5], yieldPct.toFixed(1) + '%'].forEach(function (text) {
+          const td = document.createElement('td'); td.className = 'num'; td.textContent = text; tr.appendChild(td);
+        });
+        const note = document.createElement('td'); note.textContent = v[6] || ''; tr.appendChild(note);
+        body.appendChild(tr);
+      });
+      document.getElementById('count').textContent = rows.length;
+      document.getElementById('total').textContent = (goodSum / inSum * 100).toFixed(1) + '%';
+      document.getElementById('low').textContent = low + '개';
+    }
+  </script>
+</body>
+</html>

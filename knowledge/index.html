@@ -16,7 +16,7 @@
   <title>LLM에게 지식을 가르치는 법 — LLM 위키 · RAG · 지식 그래프 · 온톨로지 | 바이브 코딩 세미나</title>
 
   <!-- SEO -->
-  <meta name="description" content="LLM 시대의 지식 정리 세미나. LLM 위키로 담고, RAG로 찾고, 지식 그래프로 잇고, 온톨로지로 다듬는 법 — 이론 소개부터 에이전트 프롬프트 실습까지 한 덱에." />
+  <meta name="description" content="LLM 시대의 지식 정리 세미나. LLM 위키로 담고, RAG로 찾고, 지식 그래프로 잇고, 온톨로지로 다듬는 법 — 개념 소개와, 결과물이 남는 에이전트 프롬프트 실습 5개." />
   <meta name="keywords" content="LLM wiki, 지식 정리, RAG, 검색 증강 생성, knowledge graph, 지식 그래프, ontology, 온톨로지, 임베딩, 벡터 DB, GraphRAG, 바이브 코딩, vibe coding, Claude Code" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
@@ -28,7 +28,7 @@
   <meta property="og:title" content="LLM에게 지식을 가르치는 법 — LLM 위키 · RAG · 지식 그래프 · 온톨로지" />
   <meta property="og:description" content="위키로 담고, RAG로 찾고, 그래프로 잇고, 온톨로지로 다듬기. 이론 + 에이전트 프롬프트 실습 세미나." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/knowledge/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/knowledge.png?v=1" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/knowledge.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LLM에게 지식을 가르치는 법 — LLM 위키 · RAG · 지식 그래프 · 온톨로지" />
   <meta name="twitter:description" content="LLM 시대의 지식 정리. 이론 소개 + 에이전트 프롬프트 실습." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/knowledge.png?v=1" />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/knowledge.png?v=2" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -86,11 +86,6 @@
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
         radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
-      animation: bgFloat 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgFloat {
-      0%   { transform: translate(0,0) scale(1); }
-      100% { transform: translate(-2%, 2%) scale(1.05); }
     }
     body::after {
       content: "";
@@ -265,28 +260,20 @@
     .row { display: flex; gap: 2rem; align-items: center; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .small { font-size: 1.18rem; }
-    .tiny  { font-size: 1.0rem; }
+    .small, .reveal p.small, .reveal li.small { font-size: 1.18rem; }
+    .tiny, .reveal p.tiny, .reveal li.tiny  { font-size: 1.0rem; }
     .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
     /* flex 컨테이너에서 chip이 가로로 늘어나지 않도록 */
     .vfill > .chip { align-self: flex-start; }
     .vfill.center > .chip { align-self: center; }
 
-    /* animated gradient text */
+    /* gradient text — 정지 그라데이션 (무한 루프 애니메이션 제거) */
     .reveal .grad, .reveal section .grad {
-      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
-      background-size: 250% 250% !important;
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 70%) !important;
       -webkit-background-clip: text !important;
       background-clip: text !important;
       color: transparent !important;
-      animation: gradMove 7s ease infinite;
       font-weight: 800;
-      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
-    }
-    @keyframes gradMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .chip {
@@ -326,9 +313,7 @@
       box-shadow:
         0 30px 60px -20px rgba(0,0,0,0.6),
         inset 0 1px 0 rgba(255,255,255,0.10);
-      transition: transform .4s ease, border-color .4s ease;
     }
-    .card:hover { transform: translateY(-4px); border-color: rgba(155,130,255,0.9); }
     .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
     .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
     .card p + p { margin-top: 0.5rem; }
@@ -390,231 +375,22 @@
       color: #E1D9FF;
     }
 
-    /* ========= Auto-sequential reveal — 원본과 동일한 규약 ========= */
+    /* ========= Auto-sequential reveal — 짧고 부드럽게 (ease-out 320ms, 80ms 간격) ========= */
     .autoshow { opacity: 0; }
-    section.present .autoshow.fade-up    { animation: asFadeUp .6s ease forwards; }
-    section.present .autoshow.fade-in    { animation: asFadeIn .6s ease forwards; }
-    section.present .autoshow.fade-left  { animation: asFadeLeft .6s ease forwards; }
-    section.present .autoshow.fade-right { animation: asFadeRight .6s ease forwards; }
-    section.present .autoshow.zoom-in    { animation: asZoomIn .6s ease forwards; }
-    @keyframes asFadeUp    { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+    section.present .autoshow.fade-up,
+    section.present .autoshow.fade-left,
+    section.present .autoshow.fade-right { animation: asFadeUp .32s cubic-bezier(.2,.7,.3,1) forwards; }
+    section.present .autoshow.fade-in    { animation: asFadeIn .32s ease-out forwards; }
+    section.present .autoshow.zoom-in    { animation: asZoomIn .32s cubic-bezier(.2,.7,.3,1) forwards; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
     @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
-    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-26px); } to { opacity:1; transform:none; } }
-    @keyframes asFadeRight { from { opacity:0; transform: translateX(26px); } to { opacity:1; transform:none; } }
-    @keyframes asZoomIn    { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:scale(1); } }
-    .autoshow:nth-child(1) { animation-delay: .05s; }
-    .autoshow:nth-child(2) { animation-delay: .2s; }
-    .autoshow:nth-child(3) { animation-delay: .35s; }
-    .autoshow:nth-child(4) { animation-delay: .5s; }
-    .autoshow:nth-child(5) { animation-delay: .65s; }
-    .autoshow:nth-child(6) { animation-delay: .8s; }
-    .autoshow:nth-child(7) { animation-delay: .95s; }
-    .autoshow:nth-child(8) { animation-delay: 1.1s; }
+    @keyframes asZoomIn    { from { opacity:0; transform: scale(.97); } to { opacity:1; transform:none; } }
+    .autoshow:nth-child(2) { animation-delay: .08s; }
+    .autoshow:nth-child(3) { animation-delay: .16s; }
+    .autoshow:nth-child(4) { animation-delay: .24s; }
+    .autoshow:nth-child(n+5) { animation-delay: .32s; }
 
-    /* ==================================================================
-       ctx-box — 컨텍스트 창 시각화의 핵심 컴포넌트
-       고정 px 크기(reveal이 1280x800 캔버스를 통째로 scale하므로 안전),
-       column-reverse로 DOM 순서 = 아래→위 쌓임.
-       ================================================================== */
-    .ctx-wrap { display: flex; gap: 2.4rem; align-items: center; justify-content: center; }
-    .ctx-box {
-      position: relative; margin: 0; flex: 0 0 auto;
-      width: 250px; height: 500px;
-      display: flex; flex-direction: column-reverse;
-      border: 2px solid rgba(155,130,255,0.55);
-      border-radius: 14px;
-      background:
-        repeating-linear-gradient(0deg, transparent 0 49px, rgba(255,255,255,0.05) 49px 50px),
-        rgba(14,18,32,0.65);
-      box-shadow: 0 0 34px rgba(155,130,255,0.14), inset 0 0 24px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
-    .ctx-seg {
-      flex: 0 0 auto; height: var(--h, 0%);
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-      font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 700;
-      white-space: nowrap;
-      border-top: 2px solid rgba(6,8,15,0.7);
-      transition: height .8s cubic-bezier(.25,.8,.3,1);
-    }
-    .ctx-lab { padding: 0 8px; text-shadow: none !important; }
-    .seg-sys   { background: linear-gradient(90deg, rgba(155,130,255,.92), rgba(155,130,255,.68)); color: #0A0620 !important; }
-    .seg-mem   { background: rgba(255,212,107,.88); color: #241A00 !important; }
-    .seg-conv  { background: rgba(43,234,208,.82); color: #00261F !important; }
-    .seg-tool  { background: rgba(255,122,149,.85); color: #2B000B !important; }
-    .seg-plan  { background: repeating-linear-gradient(45deg, rgba(155,130,255,.55) 0 8px, rgba(155,130,255,.22) 8px 16px); color: #E6D9FF !important; }
-    .seg-ghost {
-      background: repeating-linear-gradient(45deg, rgba(255,122,149,.30) 0 8px, rgba(255,122,149,.10) 8px 16px);
-      color: #FFC9D3 !important; text-decoration: line-through; opacity: .8;
-    }
-    .seg-danger { background: linear-gradient(90deg, rgba(255,77,94,.92), rgba(255,77,94,.6)); color: #FFF !important; animation: dangerPulse 1.2s ease-in-out infinite; }
-    @keyframes dangerPulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
-    .ctx-freelabel {
-      position: absolute; top: 12px; left: 0; right: 0; text-align: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 1.05rem;
-      color: #E6D9FF; opacity: .9; pointer-events: none;
-    }
-    .ctx-freelabel .sub { display: block; font-size: .78rem; color: #9BA6C0; margin-top: 3px; }
-    .ctx-counter.warn { color: #FFE08A; }
-    .ctx-counter.crit { color: #FF8A96; }
-    /* 박스 아래 캡션 — figure의 overflow:hidden에 잘리지 않도록 박스 '밖' 형제 요소로 사용 */
-    .ctx-caption {
-      text-align: center; font-size: 1.02rem; font-weight: 800;
-      color: #E6D9FF !important; white-space: nowrap; margin: .6rem 0 0;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    /* 80% auto-compact 한계선 */
-    .ctx-limit {
-      position: absolute; left: 0; right: 0; bottom: 80%; height: 0;
-      border-top: 2px dashed rgba(255,212,107,.75);
-      z-index: 2; pointer-events: none;
-    }
-    .ctx-limit::after {
-      content: attr(data-label);
-      position: absolute; right: 6px; top: -1.45em;
-      font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 700;
-      color: #FFE08A;
-    }
-    /* variants */
-    .ctx-box.slim { width: 205px; height: 440px; }
-    .ctx-box.mini { width: 120px; height: 240px; border-radius: 10px; }
-    .ctx-box.mini .ctx-freelabel { font-size: .8rem; top: 7px; }
-    .ctx-box.mini .ctx-seg { font-size: .6rem; }
-    .ctx-box.danger-box { border-color: var(--danger); animation: ctxAlarm 1.6s ease-in-out infinite; }
-    @keyframes ctxAlarm {
-      0%,100% { box-shadow: 0 0 24px rgba(255,77,94,0.25), inset 0 0 24px rgba(0,0,0,0.5); }
-      50%     { box-shadow: 0 0 54px rgba(255,77,94,0.6), inset 0 0 24px rgba(0,0,0,0.5); }
-    }
-    /* entry animation: 슬라이드 진입 시 세그먼트가 자라남 */
-    @keyframes segFill { from { height: 0; } to { height: var(--h, 0%); } }
-    section.present .ctx-anim .ctx-seg {
-      animation: segFill .9s cubic-bezier(.2,.7,.3,1) forwards;
-      height: 0; transition: none;
-    }
-    section.present .ctx-anim .ctx-seg:nth-child(2) { animation-delay: .15s; }
-    section.present .ctx-anim .ctx-seg:nth-child(3) { animation-delay: .45s; }
-    section.present .ctx-anim .ctx-seg:nth-child(4) { animation-delay: .75s; }
-    section.present .ctx-anim .ctx-seg:nth-child(5) { animation-delay: 1.05s; }
-    section.present .ctx-anim .ctx-seg:nth-child(6) { animation-delay: 1.35s; }
-    section.present .ctx-anim .ctx-seg:nth-child(7) { animation-delay: 1.65s; }
-    /* legend */
-    .ctx-legend { display: flex; flex-direction: column; gap: .65rem; font-size: 1.06rem; }
-    .lg-row { display: flex; align-items: center; gap: .6rem; color: #E6D9FF !important; }
-    .lg-row b { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #FFFFFF; padding-left: 1rem; }
-    .sw { width: 16px; height: 16px; border-radius: 4px; flex: 0 0 auto; }
-    .sw-sys  { background: var(--accent); }
-    .sw-mem  { background: var(--accent-4); }
-    .sw-conv { background: var(--accent-2); }
-    .sw-tool { background: var(--accent-3); }
-    .sw-plan { background: repeating-linear-gradient(45deg, rgba(155,130,255,.7) 0 5px, rgba(155,130,255,.25) 5px 10px); }
-    .sw-free { background: rgba(14,18,32,0.9); border: 1px dashed rgba(155,130,255,.5); }
-
-    /* ========= 시뮬레이션 타임라인 (S8) ========= */
-    .sim-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: 0; padding: 0; }
-    .sim-list > li { margin: 0; }
-    .sim-line {
-      display: flex; align-items: center; gap: .8rem;
-      padding: .55rem 1.1rem; border-radius: 12px;
-      border: 1px solid rgba(190,200,224,0.3);
-      background: rgba(230,236,249,0.05);
-      font-size: 1.14rem !important;
-    }
-    .sim-line .tok { margin-left: auto; font-weight: 800; font-size: 1.05rem; white-space: nowrap; padding-left: .8rem; }
-
-    /* ========= 리스트 유틸 ========= */
-    .list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
-    .list-clean li { font-size: 1.22rem !important; line-height: 1.5; }
-
-    /* ========= 우선순위 사다리 (S5) ========= */
-    .ladder { display: flex; flex-direction: column; gap: .45rem; }
-    .ladder .rung {
-      display: flex; align-items: center; gap: 1rem;
-      padding: .55rem 1.2rem; border-radius: 10px;
-      border: 1px solid rgba(155,130,255,0.35);
-      background: rgba(40,30,80,0.28);
-      font-size: 1.18rem; font-weight: 700;
-    }
-    .ladder .rung .no {
-      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem;
-      color: #B5A1FF !important; width: 1.4em; flex: 0 0 auto;
-    }
-    .ladder .rung .w {
-      margin-left: auto; font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem; color: #9BA6C0 !important; white-space: nowrap;
-    }
-    .ladder .rung:nth-child(1) { border-color: rgba(155,130,255,.85); background: rgba(124,92,255,.30); }
-    .ladder .rung:nth-child(2) { background: rgba(124,92,255,.22); }
-    .ladder .rung:nth-child(3) { background: rgba(124,92,255,.15); }
-    .ladder .rung:nth-child(4) { background: rgba(43,234,208,.14); border-color: rgba(43,234,208,.5); }
-    .ladder .rung:nth-child(5) { background: rgba(40,30,80,.22); }
-    .ladder .rung:nth-child(6) { background: rgba(40,30,80,.16); }
-    .ladder .rung:nth-child(7) { background: rgba(40,30,80,.10); opacity: .8; }
-    .ladder-arrow { text-align: center; color: #8A93B2 !important; font-size: 1rem; margin: -0.2rem 0; }
-
-    /* ========= 에이전트 루프 (S7) ========= */
-    .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; }
-    .loop-step {
-      display: flex; flex-direction: column; gap: .25rem; align-items: flex-start;
-      padding: .7rem .9rem; border-radius: 12px;
-      border: 1px solid rgba(190,200,224,0.4);
-      background: rgba(230,236,249,0.06);
-    }
-    .loop-step .no { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800; color: #B5A1FF !important; }
-    .loop-step .nm2 { font-size: 1.12rem; font-weight: 800; }
-    .loop-step.hot { border-color: rgba(255,122,149,.65); background: rgba(255,122,149,.10); }
-    .loop-step.hot .no { color: #FF94AC !important; }
-
-    /* ========= 문제 테이블 (S9) ========= */
-    .prob-list { display: flex; flex-direction: column; gap: .55rem; }
-    .prob-item {
-      display: flex; align-items: baseline; gap: 1.1rem;
-      padding: .65rem 1.2rem; border-radius: 12px;
-      border: 1px solid rgba(255,122,149,0.35);
-      background: rgba(80,25,45,0.25);
-    }
-    .prob-item .pname { font-weight: 800; font-size: 1.28rem; white-space: nowrap; min-width: 9.5em; }
-    .prob-item .pdesc { font-size: 1.12rem; color: #E8ECF5 !important; }
-
-    /* ========= 성능 공식 (S11) ========= */
-    .formula { display: flex; align-items: center; justify-content: center; gap: 1.1rem; flex-wrap: wrap; margin: 1rem 0; }
-    .fx-box {
-      display: flex; flex-direction: column; align-items: center; gap: .3rem;
-      background: rgba(20,22,44,.55);
-      border: 1px solid rgba(155,130,255,.35); border-radius: 16px;
-      padding: .85rem 1.3rem;
-    }
-    .fx-box .fx-name { font-size: 1.22rem; font-weight: 800; }
-    .fx-box .fx-val { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; color: #fff; }
-    .fx-box.dim .fx-val { color: #FF8A96; }
-    .fx-box.hero { border-color: rgba(43,234,208,.7); box-shadow: 0 0 30px rgba(43,234,208,.2); }
-    .fx-op { font-size: 2.2rem; font-weight: 800; color: var(--fg-soft) !important; }
-
-    /* ========= before/after 미니 박스 쌍 (CH4 패턴 슬라이드) ========= */
-    .mini-pair { display: flex; align-items: center; gap: 1rem; justify-content: center; }
-    .mini-pair .arr { font-size: 2rem; font-weight: 800; color: #8A93B2 !important; }
-
-    /* ========= 궤도: 상자 밖의 세계 (S19) ========= */
-    .orbit-col { display: flex; flex-direction: column; gap: 1rem; }
-    .orbit-node {
-      display: flex; flex-direction: column; gap: .2rem;
-      padding: .75rem 1.1rem; border-radius: 14px;
-      border: 1px solid rgba(43,234,208,0.5);
-      background: rgba(15,50,55,0.45);
-      min-width: 15.5em;
-    }
-    .orbit-node .on-name { font-weight: 800; font-size: 1.18rem; color: #A9FFF0 !important; }
-    .orbit-node .on-desc { font-size: .98rem; color: #D6DCEC !important; }
-    .orbit-arrows { display: flex; flex-direction: column; gap: 2.2rem; font-size: 1.9rem; color: #5BFFE0 !important; font-weight: 800; }
-
-    /* ========= 서브에이전트 격리 (S18) ========= */
-    .iso-wrap { display: flex; align-items: center; justify-content: center; gap: 1.4rem; }
-    .iso-side { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-    .iso-note { font-size: .92rem; color: #9BA6C0 !important; font-family: 'JetBrains Mono', monospace; }
-    .iso-arrow { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
-    .iso-arrow .a { font-size: 2rem; font-weight: 800; color: #5BFFE0 !important; }
-    .iso-arrow .t { font-size: .85rem; font-family: 'JetBrains Mono', monospace; color: #A9FFF0 !important; white-space: nowrap; }
-
-    /* ========= 품질 곡선 SVG (S10) ========= */
+    /* ========= SVG 글자 가독성 ========= */
     .reveal section svg text {
       paint-order: stroke fill;
       stroke: #06080F;
@@ -622,349 +398,9 @@
       stroke-linejoin: round;
     }
 
-    /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
-    .slide-refs {
-      position: absolute; left: 56px; bottom: 12px; z-index: 3;
-      display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
-      max-width: 66%;
-      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
-      opacity: .8;
-    }
-    .slide-refs .rl { color: #9BA6C0 !important; font-weight: 800; letter-spacing: .12em; }
-    .slide-refs a {
-      color: #8FF5E2 !important; text-decoration: none !important;
-      border-bottom: 1px dotted rgba(91,255,224,.45); white-space: nowrap;
-    }
-    .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
-
-    /* ========= 하네스 다이어그램 ========= */
-    .harness-box {
-      position: relative; border: 2px dashed rgba(255,212,107,.65); border-radius: 20px;
-      padding: 2rem 1.5rem 1.3rem; background: rgba(70,56,23,.14);
-      display: flex; flex-direction: column; gap: 1rem; align-items: center;
-    }
-    .harness-tag {
-      position: absolute; top: -0.95em; left: 20px;
-      background: #463817; border: 1px solid rgba(255,212,107,.85);
-      color: #FFEFC2 !important; border-radius: 999px; padding: .22em .9em;
-      font-family: 'JetBrains Mono', monospace; font-size: .88rem; font-weight: 800;
-      white-space: nowrap;
-    }
-    .model-orb {
-      display: flex; flex-direction: column; align-items: center; gap: .4rem;
-      padding: 1.1rem 1.4rem; border-radius: 18px; text-align: center;
-      border: 2px solid rgba(155,130,255,.8); background: rgba(124,92,255,.18);
-      font-size: 2rem;
-    }
-    .model-orb span { font-size: .95rem; font-weight: 800; line-height: 1.35; }
-
-    /* ========= 참고자료 슬라이드 ========= */
-    .ref-col h3 { font-size: 1.3rem; }
-    .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
-    .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
-    .ref-col li a { font-weight: 700; }
-    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
-
-    /* ========= 스포트라이트 씬 (S2) ========= */
-    .spot-stage {
-      position: relative; height: 500px; margin-top: .2rem;
-      border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(155,130,255,0.22);
-      background:
-        radial-gradient(ellipse 44% 78% at 50% 50%, rgba(124,92,255,0.13), transparent 70%),
-        radial-gradient(ellipse 90% 120% at 50% 50%, rgba(6,8,15,0.2), rgba(3,4,9,0.96) 78%),
-        #04050B;
-    }
-    .spot-ghost {
-      position: absolute; display: flex; flex-direction: column; align-items: center; gap: .1rem;
-      font-size: 1.14rem; font-weight: 700; color: #6E7690 !important;
-      opacity: .5; filter: blur(0.5px) grayscale(.65);
-      animation: ghostFloat 7s ease-in-out infinite alternate;
-      text-shadow: none !important;
-    }
-    .spot-ghost .gx {
-      font-family: 'JetBrains Mono', monospace; font-size: .8rem;
-      color: #565E78 !important; letter-spacing: .1em;
-    }
-    .spot-ghost.g2 { animation-delay: 1.6s; }
-    .spot-ghost.g3 { animation-delay: 3.1s; }
-    .spot-ghost.g4 { animation-delay: 4.4s; }
-    @keyframes ghostFloat {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(-12px); }
-    }
-    .spot-box {
-      position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%);
-      width: 350px; min-height: 320px; padding: 3.2rem 1.1rem 1.1rem;
-      display: flex; flex-direction: column; align-items: center; gap: .55rem;
-      border: 2px solid rgba(155,130,255,0.75); border-radius: 16px;
-      background: rgba(14,18,32,0.78);
-      box-shadow: 0 0 64px rgba(155,130,255,0.26), inset 0 0 30px rgba(0,0,0,0.55);
-      transition: box-shadow .8s ease, border-color .8s ease;
-    }
-    .spot-box .spot-boxlabel {
-      position: absolute; top: .85rem; left: 0; right: 0; text-align: center;
-      font-size: .92rem; font-weight: 800; letter-spacing: .14em;
-      color: #E6D9FF !important;
-    }
-    /* 좋은 재료가 들어오면 상자가 맑게 발광 */
-    .spot-box:has(.spot-chip.good.visible) {
-      border-color: rgba(43,234,208,0.85);
-      box-shadow: 0 0 90px rgba(43,234,208,0.34), inset 0 0 30px rgba(0,0,0,0.5);
-    }
-    /* 잡음이 섞이면 탁해짐 */
-    .spot-box:has(.spot-chip.junk.visible) {
-      border-color: rgba(255,122,149,0.8);
-      box-shadow: 0 0 74px rgba(255,122,149,0.3), inset 0 0 40px rgba(60,10,25,0.7);
-    }
-    .spot-box::after {
-      content: ""; position: absolute; inset: 0; border-radius: 14px; pointer-events: none;
-      background:
-        repeating-linear-gradient(-35deg, rgba(255,122,149,0.09) 0 14px, transparent 14px 30px),
-        radial-gradient(ellipse at 50% 80%, rgba(120,30,55,0.4), transparent 70%);
-      opacity: 0; transition: opacity .9s ease;
-    }
-    .spot-box:has(.spot-chip.junk.visible)::after { opacity: 1; }
-    .spot-chip {
-      display: inline-flex; align-items: center; gap: .35em;
-      padding: .34em .85em; border-radius: 9px; white-space: nowrap;
-      font-size: 1.04rem; font-weight: 800; border: 1px solid;
-      text-shadow: none !important;
-    }
-    .spot-chip.good { background: rgba(13,61,56,0.94); border-color: rgba(43,234,208,0.8); color: #C5FFF5 !important; }
-    .spot-chip.junk { background: rgba(74,26,38,0.94); border-color: rgba(255,122,149,0.75); color: #FFD0DA !important; }
-    /* 커스텀 프래그먼트: 어둠 밖에서 상자 안으로 날아든다 */
-    .reveal .fragment.custom.spot-fly {
-      opacity: 0; visibility: hidden;
-      transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(1.2) rotate(var(--fr, 0deg));
-      transition: opacity .7s ease, transform .75s cubic-bezier(.2,.75,.3,1.04), visibility .7s;
-    }
-    .reveal .fragment.custom.spot-fly.visible {
-      opacity: 1; visibility: visible; transform: none;
-    }
-    /* spot-boxlabel이 첫 자식이므로 chip은 2번째부터 — good: 2·3·4, junk: 5·6·7 */
-    .spot-chip.spot-fly:nth-child(3) { transition-delay: .14s; }
-    .spot-chip.spot-fly:nth-child(4) { transition-delay: .28s; }
-    .spot-chip.spot-fly:nth-child(6) { transition-delay: .14s; }
-    .spot-chip.spot-fly:nth-child(7) { transition-delay: .28s; }
-    .spot-cap {
-      position: absolute; left: 0; right: 0; bottom: 1.05rem; text-align: center;
-      font-size: 1.3rem; font-weight: 800; margin: 0;
-    }
-    .spot-hint { color: #8A93B2 !important; font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
-    .spot-stage:has(.spot-chip.good.visible) .spot-hint { opacity: 0; transition: opacity .5s; }
-    .spot-stage:has(.spot-chip.junk.visible) .cap-good { opacity: 0; transition: opacity .5s; }
-    .spot-cap.fragment { transition: opacity .6s ease .35s; }
-
-    /* ========= 원형 에이전트 루프 (S7) ========= */
-    .loopc { position: relative; width: 430px; height: 430px; flex: 0 0 auto; }
-    .loopc svg.loopc-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .loopc-node {
-      position: absolute; transform: translate(-50%, -50%);
-      display: flex; flex-direction: column; align-items: center; gap: .1rem;
-      padding: .5rem .95rem; border-radius: 12px; text-align: center;
-      border: 1px solid rgba(190,200,224,0.45);
-      background: rgba(10,13,26,0.92);
-      font-size: 1.02rem; font-weight: 800; white-space: nowrap;
-      box-shadow: 0 10px 26px -12px rgba(0,0,0,0.7);
-    }
-    .loopc-node .lno {
-      font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 800;
-      color: #B5A1FF !important; letter-spacing: .1em;
-    }
-    .loopc-node.hot { border-color: rgba(255,122,149,0.7); background: rgba(58,16,30,0.94); }
-    .loopc-node.hot .lno { color: #FF94AC !important; }
-    .loopc-center {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-      color: #E6D9FF !important; white-space: nowrap;
-      padding: .45em 1em; border-radius: 999px;
-      background: rgba(12,16,30,0.9); border: 1px solid rgba(155,130,255,0.55);
-      box-shadow: 0 0 24px rgba(124,92,255,0.35);
-    }
-
-    /* ========= 묻히는 한 줄 (S9) ========= */
-    .bury-strip {
-      display: flex; flex-direction: column; gap: .42rem; justify-content: center;
-      padding: 1rem 1.2rem; border-radius: 16px;
-      border: 1px solid rgba(155,130,255,0.35);
-      background: rgba(10,13,26,0.75);
-      min-height: 430px;
-    }
-    .bury-strip .nb {
-      display: block; height: 11px; border-radius: 6px;
-      width: var(--w, 70%);
-      background: rgba(230,236,249,0.14);
-    }
-    .bury-grp { display: flex; flex-direction: column; gap: .42rem; }
-    /* 노이즈 그룹: 등장 시 위아래로 펼쳐지며 핵심 줄을 밀어냄 */
-    .reveal .fragment.custom.bury-in { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .8s cubic-bezier(.25,.8,.3,1), opacity .6s ease; }
-    .reveal .fragment.custom.bury-in.visible { max-height: 140px; opacity: 1; }
-    .bury-key {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .5rem .9rem; border-radius: 10px; white-space: nowrap;
-      border: 1px solid rgba(255,212,107,0.85);
-      background: rgba(70,56,23,0.55);
-      font-size: 1.08rem; font-weight: 800; color: #FFEFC2 !important;
-      box-shadow: 0 0 22px rgba(255,212,107,0.22);
-      transition: opacity .8s ease, filter .8s ease, box-shadow .8s ease;
-    }
-    .bury-strip:has(.bg1.visible) .bury-key { opacity: .72; box-shadow: 0 0 12px rgba(255,212,107,0.12); }
-    .bury-strip:has(.bg2.visible) .bury-key { opacity: .5; }
-    .bury-strip:has(.bury-tag.visible) .bury-key { opacity: .3; filter: blur(0.5px); box-shadow: none; }
-    .bury-tag {
-      align-self: center; margin-top: .1rem;
-      font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800;
-      color: #FF94AC !important;
-    }
-    .prob-chip {
-      display: flex; align-items: center; gap: .8rem;
-      padding: .6rem 1.1rem; border-radius: 12px;
-      border: 1px solid rgba(255,122,149,0.4);
-      background: rgba(80,25,45,0.28);
-      font-size: 1.22rem; font-weight: 800; white-space: nowrap;
-    }
-
-    /* ========= 분류 씬 (S12) ========= */
-    .triage { display: flex; align-items: stretch; justify-content: center; gap: 1.6rem; }
-    .tri-col { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
-    .tri-col .tri-title {
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-      letter-spacing: .1em; color: #9BA6C0 !important; margin: 0;
-    }
-    .tri-queue { justify-content: center; min-width: 21em; }
-    .tri-item {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .5rem 1rem; border-radius: 11px; white-space: nowrap;
-      border: 1px solid rgba(190,200,224,0.4);
-      background: rgba(230,236,249,0.07);
-      font-size: 1.12rem; font-weight: 800;
-      transition: opacity .65s ease, transform .7s cubic-bezier(.4,0,.8,.4);
-    }
-    /* 대기열 아이템: 판정되면 좌(상자) 또는 우(휴지통)로 날아가며 사라짐 */
-    .reveal .fragment.custom.tri-leave.visible.to-box   { opacity: 0; transform: translateX(-300px) scale(.72); }
-    .reveal .fragment.custom.tri-leave.visible.to-trash { opacity: 0; transform: translate(300px, 60px) rotate(16deg) scale(.8); }
-    .tri-land {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .34em .85em; border-radius: 9px; white-space: nowrap;
-      font-size: .98rem; font-weight: 800; border: 1px solid;
-      text-shadow: none !important;
-    }
-    .tri-land.ok  { background: rgba(13,61,56,0.9); border-color: rgba(43,234,208,0.75); color: #C5FFF5 !important; }
-    .tri-land.no  { background: rgba(74,26,38,0.85); border-color: rgba(255,122,149,0.6); color: #FFB9C7 !important; text-decoration: line-through; opacity: .85; }
-    .tri-bin { font-size: 3.4rem; line-height: 1; filter: drop-shadow(0 0 18px rgba(255,122,149,0.3)); }
-
-    /* ========= 하네스 시연 (S4b) ========= */
-    .hx-arrow {
-      font-size: 1.9rem; font-weight: 800; color: #5E6680 !important;
-      transition: color .5s ease, text-shadow .5s ease;
-    }
-    section:has(.hx2.visible) .hx-arrow {
-      color: #5BFFE0 !important; text-shadow: 0 0 18px rgba(43,234,208,0.8);
-    }
-
-    /* ========= 예산 바 (S6) ========= */
-    .budget-bar {
-      display: flex; height: 40px; border-radius: 11px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.28); width: 100%;
-      font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 800;
-    }
-    .budget-bar .bseg { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
-    .budget-bar .b-fixed { flex: 0 0 13.5%; background: linear-gradient(90deg, rgba(155,130,255,.92), rgba(155,130,255,.7)); color: #0A0620 !important; }
-    .budget-bar .b-work  { flex: 1; background: rgba(43,234,208,0.2); border-left: 2px dashed rgba(43,234,208,0.7); color: #A9FFF0 !important; }
-
-    /* ========= 품질 곡선 드로잉 (S10) ========= */
-    .curve-draw { stroke-dasharray: 620; stroke-dashoffset: 620; }
-    section.present .curve-draw { animation: curveDraw 1.8s ease-out .4s forwards; }
-    @keyframes curveDraw { to { stroke-dashoffset: 0; } }
-
-    /* ========= SKILL.md 해부 (S24) =========
-       파일 전체가 처음부터 보이고, 단계가 진행될수록 블록이
-       하이라이트되며 "context 로 들어간" 상태를 표현한다. */
-    .skmd { display: flex; flex-direction: column; gap: .8rem; }
-    .skmd pre.code { font-size: .98rem; line-height: 1.5; }
-    .sk-front {
-      border-color: rgba(43,234,208,0.85) !important;
-      box-shadow: 0 0 26px rgba(43,234,208,0.22);
-    }
-    .sk-tag {
-      align-self: flex-start;
-      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800;
-      color: #A9FFF0 !important; padding: .15em .6em;
-      border: 1px solid rgba(43,234,208,0.5); border-radius: 999px;
-      background: rgba(13,61,56,0.6);
-      transition: color .5s ease, border-color .5s ease, background .5s ease;
-    }
-    .sk-tag.dim { color: #9BA6C0 !important; border-color: rgba(190,200,224,0.4); background: rgba(230,236,249,0.06); }
-    .sk-blk {
-      position: relative; display: flex; flex-direction: column; gap: .4rem;
-      transition: opacity .6s ease, filter .6s ease;
-    }
-    .sk-blk.b-body, .sk-blk.b-sub { opacity: .35; filter: saturate(.4); }
-    .sk-blk::after {
-      content: "→ context 로드됨"; position: absolute; top: -0.95em; right: 12px;
-      font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 800;
-      color: #FFEFC2; padding: .12em .6em; border-radius: 999px;
-      background: #463817; border: 1px solid rgba(255,212,107,0.85);
-      opacity: 0; transition: opacity .5s ease, transform .5s ease;
-      transform: translateY(4px);
-    }
-    .sk-blk.b-front::after {
-      content: "✓ 항상 context 안"; opacity: 1; transform: none;
-      color: #C5FFF5; background: #0D3D38; border-color: rgba(43,234,208,0.85);
-    }
-    section:has(.pd2.visible) .sk-blk.b-body,
-    section:has(.pd3.visible) .sk-blk.b-sub { opacity: 1; filter: none; }
-    section:has(.pd2.visible) .sk-blk.b-body::after,
-    section:has(.pd3.visible) .sk-blk.b-sub::after { opacity: 1; transform: none; }
-    section:has(.pd2.visible) .sk-blk.b-body pre.code,
-    section:has(.pd3.visible) .sk-blk.b-sub pre.code {
-      border-color: rgba(255,212,107,0.8);
-      box-shadow: 0 0 22px rgba(255,212,107,0.18);
-    }
-    section:has(.pd2.visible) .sk-blk.b-body .sk-tag,
-    section:has(.pd3.visible) .sk-blk.b-sub .sk-tag {
-      color: #FFEFC2 !important; border-color: rgba(255,212,107,0.7); background: rgba(70,56,23,0.6);
-    }
-
-    /* ========= MCP vs CLI+Skill (S25) ========= */
-    .vs-num {
-      font-family: 'JetBrains Mono', monospace; font-weight: 800;
-      font-size: 1.5rem; text-align: center; white-space: nowrap;
-    }
-
-    /* ========= 언어별 토큰 효율 (S3) — 토크나이저처럼 청크를 색으로 표시 ========= */
-    .tokcmp {
-      display: flex; flex-direction: column; gap: .55rem;
-      margin: 1.1rem auto 0; max-width: 900px; text-align: left;
-      padding: .95rem 1.3rem; border-radius: 14px;
-      border: 1px solid rgba(155,130,255,0.35);
-      background: rgba(10,13,26,0.6);
-    }
-    .tok-row { display: flex; align-items: center; gap: .9rem; }
-    .tok-lang {
-      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: .9rem;
-      color: #B5A1FF !important; width: 2.2em; flex: 0 0 auto;
-    }
-    .tok-str { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; display: flex; flex-wrap: wrap; row-gap: .2rem; }
-    .tok-str .tk { padding: .08em .06em; border-radius: 4px; white-space: pre; text-shadow: none !important; }
-    .tok-str .tk:nth-child(odd)  { background: rgba(124,92,255,0.34); }
-    .tok-str .tk:nth-child(even) { background: rgba(43,234,208,0.30); }
-    .tok-n { margin-left: auto; padding-left: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; white-space: nowrap; }
-
     /* ========= fallbacks: overview / print / reduced-motion =========
-       .autoshow와 .ctx-seg 모두 — 가시성이 애니메이션에 묶여 있으므로
-       세 모드 전부에서 강제로 완성 상태를 보여준다. */
-    .reveal.overview .autoshow {
-      opacity: 1 !important;
-      animation: none !important;
-      transform: none !important;
-    }
-    .reveal.overview .ctx-seg {
-      animation: none !important;
-      transition: none !important;
-      height: var(--h, 0%) !important;
-    }
+       .autoshow 는 가시성이 애니메이션에 묶여 있으므로 세 모드 전부에서 완성 상태를 보여준다. */
+    .reveal.overview .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
     .reveal.overview .slides section {
       display: block !important;
       cursor: pointer;
@@ -975,53 +411,15 @@
     .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
     .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
     @media print {
-      .reveal .autoshow {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
-      }
-      .reveal .ctx-seg {
-        animation: none !important;
-        transition: none !important;
-        height: var(--h, 0%) !important;
-      }
-      /* 커스텀 프래그먼트도 완성 상태로 */
-      .reveal .fragment.custom {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        max-height: none !important;
-      }
-      .reveal .fragment.custom.tri-leave { opacity: 0 !important; }
-      .sk-blk { opacity: 1 !important; filter: none !important; }
-      .sk-blk::after { opacity: 1 !important; transform: none !important; }
-      .curve-draw { stroke-dashoffset: 0 !important; animation: none !important; }
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
       .dl-toolbar { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .reveal .autoshow {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
-      }
-      .reveal .ctx-seg {
-        animation: none !important;
-        transition: none !important;
-        height: var(--h, 0%) !important;
-      }
-      .grad, .ctx-box.danger-box, .seg-danger { animation: none !important; }
-      body::before { animation: none !important; }
-      .spot-ghost { animation: none !important; }
-      .loopc-dot { display: none; }
-      .reveal .fragment.custom.spot-fly,
-      .reveal .fragment.custom.bury-in,
-      .reveal .fragment.custom.tri-leave,
-      .sk-blk, .sk-blk::after, .sk-tag,
-      .tri-item, .bury-key, .spot-box, .spot-box::after { transition: none !important; }
-      .curve-draw { stroke-dashoffset: 0; animation: none !important; }
+      .reveal .autoshow { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .copy-btn { transition: none !important; }
     }
   </style>
-  <!-- Git & GitHub 세미나 전용 컴포넌트 -->
+  <!-- 프롬프트 카드 · 실습 컴포넌트 -->
   <style>
     /* 실습 배지 — 기본 chip의 초록 변형 */
     .chip.live { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
@@ -1065,9 +463,9 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: .78rem; font-weight: 700;
       padding: 4px 12px; cursor: pointer;
-      opacity: .7; transition: opacity .25s ease, transform .25s ease;
+      opacity: .7; transition: opacity .2s ease-out;
     }
-    .copy-btn:hover { opacity: 1; transform: translateY(-1px); }
+    .copy-btn:hover { opacity: 1; }
 
     /* ===== 수동 방법 박스 — 작게, 참고용 ===== */
     .manual-box {
@@ -1196,6 +594,21 @@
   <style>
     /* ===== knowledge 덱 전용 컴포넌트 ===== */
 
+    /* 실습: 배우는 것 · 완료 기준 · 막히면 */
+    .lab-learn { font-size: 1.12rem !important; margin: .1rem 0 .4rem; color: #E8ECF5 !important; }
+    .lab-learn b { color: #A9FFF0 !important; }
+    .lab-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: .9rem; margin-top: .55rem; }
+    .lab-box { border-radius: 12px; padding: .6rem .95rem .7rem; border: 1px solid rgba(43,234,208,0.45); background: rgba(13,61,56,0.28); }
+    .lab-box.help { border-color: rgba(255,212,107,0.45); background: rgba(70,56,23,0.22); }
+    .lab-box .lb-t { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800; letter-spacing: .05em; margin: 0 0 .3rem; color: #A9FFF0 !important; }
+    .lab-box.help .lb-t { color: #FFE08A !important; }
+    .lab-box ul { margin: 0; padding-left: 1.1em; }
+    .lab-box li { font-size: .98rem !important; line-height: 1.45; margin: .12rem 0; }
+    .prompt-card.lab pre.code { font-size: 1.04rem; line-height: 1.5; padding: .75rem 1rem; }
+    .prompt-card.lab { margin: .4rem 0; padding: .8rem 1.05rem .9rem; }
+    .lab-tree { font-size: 1.0rem !important; line-height: 1.6; }
+    .lab-tree .out { color: #A9FFF0 !important; }
+
     /* 지식 그래프 노드 알약 — 개체 종류별 색 */
     .kg-node {
       display: inline-flex; align-items: center; gap: .4rem;
@@ -1245,8 +658,8 @@
 
 <div class="dl-toolbar">
   <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
-  <a class="dl-btn" href="../intro/index.html" title="원본 세미나: 바이브 코딩이란 무엇인가?">
-    <span aria-hidden="true">↗</span><span>원본 세미나</span>
+  <a class="dl-btn" href="../#board" title="시리즈 홈: 막혔을 때 펼쳐 보는 처방전">
+    <span aria-hidden="true">↖</span><span>시리즈 홈</span>
   </a>
   <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
     <span aria-hidden="true">⛶</span><span>FULL</span>
@@ -1255,22 +668,20 @@
 
 <div class="reveal">
   <div class="slides">
-
-    <!-- ============= 1. 타이틀 ============= -->
     <section>
       <div class="vfill">
         <div class="grid-2" style="align-items:center; gap:3rem;">
           <div>
             <div class="chip">SEMINAR · KNOWLEDGE FOR LLMs</div>
             <h1 style="font-size:3.7rem;">
-              LLM에게<br/><span class="grad">우리의 지식을 가르치는 법</span>
+              LLM에게<br/><span class="grad">우리 지식을</span><br/>가르치는 법
             </h1>
             <p style="font-size:1.45rem; margin-top:1.1rem; max-width:580px;">
               <strong class="accent">위키</strong>로 담고, <strong class="accent2">RAG</strong>로 찾고,<br/>
               <strong class="accent4">그래프</strong>로 잇고, <strong class="accent3">온톨로지</strong>로 다듬기
             </p>
             <p class="small muted" style="margin-top:1.4rem;">
-              지식 정리의 이론부터, 에이전트 프롬프트로 하는 실습까지 — 90분.
+              개념 40분 + 실습 50분 — 끝나면 폴더에 쓸 만한 파일 5개가 남습니다.
             </p>
           </div>
           <div>
@@ -1280,26 +691,25 @@
 신입도 이해할 수 있게 답해줘.
 근거가 없으면 없다고 말해줘.</pre>
             </div>
-            <p class="center tiny muted" style="margin-top:.7rem;">← 이 요청이 <em>잘 동작하는 지식</em>을 만드는 게 오늘의 전부입니다.</p>
+            <p class="center tiny muted" style="margin-top:.7rem;">이 한마디가 제대로 통하게 문서를 만드는 것이 오늘의 목표입니다.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
-        인사 + 대상: 바이브 코딩을 해 본 비개발자/개발자 모두. 오늘은 코드가 아니라 "지식"을 다룬다.
+        인사 + 대상: 바이브 코딩을 해 본 비개발자·엔지니어 모두. 오늘은 코드가 아니라 "지식"을 다룬다.
+        진행: 개념 약 40분 → 실습 5개 약 50분. 실습은 Claude Code 같은 에이전트 도구 + 빈 폴더만 있으면 된다.
         핵심 질문 하나로 시작 — 왜 어떤 폴더에서는 에이전트가 척척 답하고, 어떤 폴더에서는 헛소리를 할까? 그 차이가 오늘 배울 내용.
       </aside>
     </section>
 
-    <!-- ============= 2. 문제 제기 ============= -->
-    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
     <section class="tldr" data-depth="summary">
       <div class="chip">3분 요약 · TL;DR</div>
       <h2>결론부터 — 이 세 줄이면 됩니다</h2>
       <p class="tldr-lede">LLM은 똑똑한 신입사원입니다 — 단, 우리 회사 일은 하나도 모릅니다. 모르면 지어냅니다.</p>
       <ol class="tldr-points">
         <li><span class="n">1</span><div><strong>환각은 지식 부족 문제 — 근거 문서를 주고, 출처를 달게 하세요</strong><span class="sub">"문서에 없으면 '근거 없음'이라고 답해" 한 줄이 가장 싼 안전장치입니다.</span></div></li>
-        <li><span class="n">2</span><div><strong>시작은 Markdown 위키 — 한 문서 한 주제, 맨 위에 INDEX.md</strong><span class="sub">문서가 적을 땐 통째로 넣기로 충분. 넘칠 때 RAG(제목 단위 청킹 + 하이브리드 검색).</span></div></li>
-        <li><span class="n">3</span><div><strong>그래프·온톨로지는 "관계"와 "용어 통일"이 필요해질 때만</strong><span class="sub">처음엔 GLOSSARY.md + 작은 YAML 스키마면 됩니다. 문서 100개 미만이면 그래프는 건너뛰세요.</span></div></li>
+        <li><span class="n">2</span><div><strong>시작은 Markdown 위키 — 한 문서 한 주제, 맨 위에 INDEX.md</strong><span class="sub">문서가 적으면 통째로 넣기로 충분합니다. 넘칠 때 RAG(관련 조각만 찾아 넣기)로 넘어갑니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>그래프·온톨로지는 "관계"와 "용어 통일"이 필요해질 때만</strong><span class="sub">처음엔 용어사전(GLOSSARY.md) 한 장이면 됩니다. 문서가 100개 미만이면 그래프는 건너뛰어도 됩니다.</span></div></li>
       </ol>
       <div class="tldr-bottom">
         <div class="tldr-prompt">
@@ -1337,7 +747,7 @@
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
           문제는 <strong>지능</strong>이 아니라 <strong class="accent2">입사 교육</strong>입니다.<br/>
-          <span class="small">오늘 배우는 것 = LLM을 위한 온보딩 자료를 만드는 기술.</span>
+          <span class="small">오늘 배우는 것 = AI를 위한 입사 교육 자료를 만드는 법.</span>
         </div>
       </div>
       <aside class="notes">
@@ -1346,41 +756,39 @@
       </aside>
     </section>
 
-    <!-- ============= 3. 오늘의 지도 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">오늘의 지도</div>
-        <h2>키워드 4개 — <span class="grad">담고, 찾고, 잇고, 다듬기</span></h2>
-        <div class="grid-2" style="margin-top:.4rem; gap:1.1rem;">
-          <div class="card autoshow fade-up">
-            <h3>📚 LLM 위키 <span class="tiny muted">CH 2</span></h3>
-            <p>지식을 <strong>담는 그릇</strong>. 사람과 AI가 함께 읽는 문서를 어떻게 쓰는가.</p>
+        <div class="chip">CH 1 · LLM과 지식</div>
+        <h2>모르면 "모른다"가 아니라 <span class="accent3">지어냅니다</span></h2>
+        <div class="grid-2" style="margin-top:.5rem; gap:1.6rem; align-items:start;">
+          <div class="autoshow fade-right">
+            <pre class="code"><span class="cm"># 근거 문서 없이 물어보면…</span>
+<span class="kw">나:</span> P-100 프로젝트 담당자가 누구야?
+
+<span class="st">AI:</span> P-100 프로젝트는 김민수 책임이
+리드하고 있으며, 2025년 3분기에
+시작된 것으로 알려져 있습니다.
+<span class="cm">→ 전부 지어낸 말. 그런데 말투는 확신에 차 있음.</span></pre>
           </div>
-          <div class="card autoshow fade-up">
-            <h3>🔍 RAG <span class="tiny muted">CH 3</span></h3>
-            <p>필요한 만큼만 <strong>찾아서 먹이기</strong>. 임베딩·벡터 DB·청킹이 여기 등장.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <h3>🕸️ 지식 그래프 <span class="tiny muted">CH 4</span></h3>
-            <p>지식을 <strong>점과 선으로 잇기</strong>. "누가 무엇과 연결되나"에 답하는 법.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <h3>📐 온톨로지 <span class="tiny muted">CH 5</span></h3>
-            <p>용어와 규칙의 <strong>설계도</strong>. 같은 것을 같은 이름으로 부르게 하기.</p>
+          <div class="autoshow fade-left">
+            <p><strong>왜?</strong> LLM은 "가장 그럴듯한 다음 말"을 만드는 기계입니다.
+            근거가 없을수록 <em>더 유창하게</em> 창작합니다.</p>
+            <p class="small" style="margin-top:.6rem;">이것이 <strong class="accent3">환각(hallucination)</strong> —
+            지식 문제이지, 지능 문제가 아닙니다.</p>
           </div>
         </div>
-        <p class="small muted center" style="margin-top:.9rem;">
-          순서가 곧 성숙도입니다 — 앞이 부실하면 뒤가 소용없습니다. 후반부엔 <strong class="accent2">실습 7개</strong>로 전부 직접 만들어 봅니다.
-        </p>
+        <div class="warn-banner autoshow fade-up" style="margin-top:.9rem;">
+          <span class="wb-icon">💊</span>
+          <span>환각의 처방 1순위는 모델 교체가 아니라 <strong>근거 제공</strong> — "이 문서 안에서만 답해. 없으면 없다고 해."</span>
+        </div>
       </div>
       <aside class="notes">
-        네 개념은 경쟁 관계가 아니라 층위 관계라는 걸 미리 심어둔다 (CH6에서 회수).
-        시간 배분: 이론 ~50분, 실습 ~40분. 실습은 Claude Code 등 에이전트 도구만 있으면 됨.
+        실제로 라이브 데모하기 좋은 슬라이드 — 존재하지 않는 사내 프로젝트명을 즉석에서 물어보면 높은 확률로 그럴듯한 답이 나온다.
+        "없으면 없다고 해"라는 지시가 지어내기를 눈에 띄게 줄이고, 근거 문서까지 주면 더 크게 줄어든다는 점을 강조. (사내 승인 도구에서 시연할 것)
       </aside>
     </section>
 
-    <!-- ============= 4. 파라미터 지식 vs 컨텍스트 지식 ============= -->
-    <section>
+    <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 1 · LLM과 지식</div>
         <h2>LLM의 지식은 <span class="grad">두 곳</span>에 삽니다</h2>
@@ -1400,7 +808,7 @@
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
           오늘 배우는 모든 기술 = <strong class="accent2">"적절한 지식을, 적절한 순간에, 컨텍스트로 넣는 기술"</strong>
         </div>
-        <p class="tiny muted" style="margin-top:.5rem;">컨텍스트 창 자체의 관리법은 별도 세미나 <a href="../context/">「컨텍스트 엔지니어링」</a>에서 다뤘습니다.</p>
+        <p class="tiny muted" style="margin-top:.5rem;">컨텍스트 창 자체를 아껴 쓰는 법은 <a href="../context/">컨텍스트 — AI 에이전트의 작업 책상</a>에서 다룹니다.</p>
       </div>
       <aside class="notes">
         파인튜닝을 폄하하지 말 것 — 말투/형식 학습엔 유효. 다만 "사실 지식 주입" 용도로는 컨텍스트 쪽이 압도적으로 실용적이라는 게 업계 합의.
@@ -1408,44 +816,10 @@
       </aside>
     </section>
 
-    <!-- ============= 5. 환각 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 1 · LLM과 지식</div>
-        <h2>모르면 "모른다"가 아니라 <span class="accent3">지어냅니다</span></h2>
-        <div class="grid-2" style="margin-top:.5rem; gap:1.6rem; align-items:start;">
-          <div class="autoshow fade-right">
-            <pre class="code"><span class="cm"># 근거 문서 없이 물어보면…</span>
-<span class="kw">나:</span> P-100 프로젝트 담당자가 누구야?
-
-<span class="st">AI:</span> P-100 프로젝트는 김민수 책임이
-리드하고 있으며, 2025년 3분기에
-시작된 것으로 알려져 있습니다.
-<span class="cm">→ 전부 창작. 그런데 말투는 확신에 참.</span></pre>
-          </div>
-          <div class="autoshow fade-left">
-            <p><strong>왜?</strong> LLM은 "가장 그럴듯한 다음 말"을 만드는 기계입니다.
-            근거가 없을수록 <em>더 유창하게</em> 창작합니다.</p>
-            <p class="small" style="margin-top:.6rem;">이것이 <strong class="accent3">환각(hallucination)</strong> —
-            지식 문제이지, 지능 문제가 아닙니다.</p>
-          </div>
-        </div>
-        <div class="warn-banner autoshow fade-up" style="margin-top:.9rem;">
-          <span class="wb-icon">💊</span>
-          <span>환각의 처방 1순위는 모델 교체가 아니라 <strong>근거 제공</strong> — "이 문서 안에서만 답해. 없으면 없다고 해."</span>
-        </div>
-      </div>
-      <aside class="notes">
-        실제로 라이브 데모하기 좋은 슬라이드 — 존재하지 않는 사내 프로젝트명을 즉석에서 물어보면 높은 확률로 그럴듯한 답이 나온다.
-        "없으면 없다고 해"라는 지시가 실제로 환각률을 크게 줄인다는 점, 그리고 근거 문서가 있으면 더 극적으로 줄어든다는 점을 강조.
-      </aside>
-    </section>
-
-    <!-- ============= 6. 해법 스펙트럼 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip">CH 1 · LLM과 지식</div>
-        <h2>지식을 먹이는 <span class="grad">세 가지 방법</span></h2>
+        <h2>문서가 적으면 <span class="grad">통째로 넣기</span>로 충분합니다</h2>
         <table class="gh-table" style="margin-top:.5rem;">
           <tr><th>방법</th><th>하는 일</th><th>강점</th><th>한계</th></tr>
           <tr class="autoshow fade-up">
@@ -1455,7 +829,7 @@
             <td>컨텍스트 한계, 매번 비용</td>
           </tr>
           <tr class="autoshow fade-up">
-            <td><strong>② RAG</strong> <span class="pill green" style="font-size:.8rem;">오늘의 주인공</span></td>
+            <td><strong>② RAG</strong> <span class="tiny muted">검색해서 넣기</span></td>
             <td>질문과 관련된 <strong>조각만 검색</strong>해 주입</td>
             <td>문서가 아무리 많아도 OK, 항상 최신</td>
             <td>검색이 틀리면 답도 틀림</td>
@@ -1468,66 +842,63 @@
           </tr>
         </table>
         <p class="small muted" style="margin-top:.9rem;">
-          실무 감각: <strong>①부터 시도</strong>하세요. 문서 수십 개까지는 ①이 최강입니다.
-          넘치기 시작할 때 ②로 — ③은 마지막 카드.
+          순서: <strong>①부터</strong>. 문서 수십 개까지는 ①이 가장 정확합니다.
+          넘치기 시작하면 ②로 — ③은 거의 쓸 일이 없습니다.
         </p>
       </div>
       <aside class="notes">
         "RAG를 도입해야 하나요?"라는 질문에 대한 답이 이 표다 — 문서가 컨텍스트에 다 들어가면 RAG는 오버엔지니어링.
-        요즘 모델 컨텍스트(20만~100만 토큰)면 책 한두 권 분량이 들어간다는 것도 언급.
+        요즘 모델 컨텍스트(20만~100만 토큰)면 책 몇 권 분량이 들어간다는 것도 언급.
       </aside>
     </section>
 
-    <!-- ============= 7. 좋은 먹이의 조건 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip">CH 1 · LLM과 지식</div>
-        <h2>정리 안 된 지식은 넣어도 <span class="accent3">소화불량</span></h2>
-        <p class="small" style="margin:.2rem 0 .6rem;">LLM이 잘 소화하는 지식의 4가지 조건 — 그대로 다음 챕터(위키)의 설계 원칙이 됩니다.</p>
-        <div class="grid-2" style="gap:1.1rem;">
+        <div class="chip">오늘의 지도</div>
+        <h2>위키 → RAG → 그래프 → 온톨로지, <span class="grad">앞 단계가 먼저</span>입니다</h2>
+        <div class="grid-2" style="margin-top:.4rem; gap:1.1rem;">
           <div class="card autoshow fade-up">
-            <h3>📝 텍스트로 존재할 것</h3>
-            <p>스캔 이미지, 녹음, 머릿속 ❌ → 텍스트로 변환.
-            <span class="small muted">변환도 에이전트에게: "이 PDF를 마크다운으로"</span></p>
+            <h3>📚 LLM 위키 <span class="tiny muted">CH 2</span></h3>
+            <p>지식을 <strong>담는 그릇</strong>. 사람과 AI가 함께 읽는 문서를 어떻게 쓰는가.</p>
           </div>
           <div class="card autoshow fade-up">
-            <h3>🧱 구조가 있을 것</h3>
-            <p>제목·목록·표가 있는 문서는 기계가 <strong>지도를 그릴 수 있는</strong> 문서입니다.</p>
+            <h3>🔍 RAG <span class="tiny muted">CH 3</span></h3>
+            <p>필요한 만큼만 <strong>찾아서 먹이기</strong>. 임베딩·벡터 DB·청킹이 여기 등장.</p>
           </div>
           <div class="card autoshow fade-up">
-            <h3>🔗 자기완결적일 것</h3>
-            <p>"그 건은 저번에 말한 대로" ❌ → 이름·날짜·결정 내용을 그 자리에.
-            <strong>한 조각만 읽어도 말이 되게.</strong></p>
+            <h3>🕸️ 지식 그래프 <span class="tiny muted">CH 4</span></h3>
+            <p>지식을 <strong>점과 선으로 잇기</strong>. "누가 무엇과 연결되나"에 답하는 법.</p>
           </div>
           <div class="card autoshow fade-up">
-            <h3>🕐 최신 + 출처가 있을 것</h3>
-            <p>작성일·담당자를 명시하고, 낡은 문서엔 폐기 표시.
-            <span class="small muted">AI는 3년 전 규정과 어제 규정을 구분 못 합니다 — 우리가 표시해야.</span></p>
+            <h3>📐 온톨로지 <span class="tiny muted">CH 5</span></h3>
+            <p>용어와 규칙의 <strong>설계도</strong>. 같은 것을 같은 이름으로 부르게 하기.</p>
           </div>
         </div>
+        <p class="small muted center" style="margin-top:.9rem;">
+          앞이 부실하면 뒤는 소용없습니다. 대부분의 팀은 <strong>위키와 RAG까지면 충분</strong>합니다. 후반부 <strong class="accent2">실습 5개</strong>로 전부 직접 만듭니다.
+        </p>
       </div>
       <aside class="notes">
-        "자기완결"이 왜 중요한지는 RAG 청킹(CH3)에서 다시 등장 — 조각으로 잘렸을 때 살아남는 문서의 조건이기 때문.
-        4번: 실제 RAG 사고 사례 대부분이 "구버전 문서가 검색됨"이다.
+        네 개념은 경쟁 관계가 아니라 층위 관계라는 걸 미리 심어둔다 (CH6에서 회수).
+        시간 배분: 개념 ~40분, 실습 ~50분. "작게 시작"이 오늘의 결론이라는 걸 여기서 미리 말해 둔다.
       </aside>
     </section>
 
-    <!-- ============= 8. CH2 — 지식은 어디에 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · LLM 위키</div>
-        <h2>우리 팀 지식은 지금 <span class="grad">어디에</span> 있나요?</h2>
+        <h2>에이전트가 못 읽는 곳의 지식은 <span class="accent3">없는 지식</span>입니다</h2>
         <div class="vfiles" style="margin-top:.5rem;">
           <div class="vf autoshow fade-up">💬 메신저 스레드 어딘가 <span class="vfd">검색하면 나오긴 함… 아마도</span></div>
-          <div class="vf autoshow fade-up">📧 메일함 "참조: 전체" 속 <span class="vfd">첨부파일 v3_final_진짜최종.pptx</span></div>
+          <div class="vf autoshow fade-up">📧 메일함 "참조: 전체" 속 <span class="vfd">첨부파일 v3_final_최종.pptx</span></div>
           <div class="vf autoshow fade-up">📊 발표자료 23번 슬라이드 <span class="vfd">그 표가 어느 파일이더라</span></div>
           <div class="vf autoshow fade-up">💻 각자의 로컬 폴더 <span class="vfd">공유된 적 없음</span></div>
-          <div class="vf doom autoshow fade-up">🧠 퇴사 예정인 김 책임 머릿속 <span class="vfd">D-30</span></div>
+          <div class="vf doom autoshow fade-up">🧠 다음 달 다른 팀으로 가는 김 책임 머릿속 <span class="vfd">D-30</span></div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          에이전트가 읽을 수 없는 곳의 지식은, LLM에게는 <strong class="accent3">없는 지식</strong>입니다.
+          해법: <strong class="accent2">파일로, 한곳에, 읽을 수 있는 형식으로</strong> — 그게 위키입니다.
         </div>
-        <p class="small muted" style="margin-top:.6rem;">해법: <strong>파일로, 한곳에, 읽을 수 있는 형식으로</strong> — 그게 위키입니다.</p>
+        <p class="small muted" style="margin-top:.6rem;">여기서 "위키"는 위키 프로그램이 아니라 <strong>잘 정리된 문서 폴더</strong>를 뜻합니다.</p>
       </div>
       <aside class="notes">
         청중에게 물어보기 좋은 지점: "팀의 가장 중요한 결정사항, 지금 파일로 존재하나요?"
@@ -1535,30 +906,6 @@
       </aside>
     </section>
 
-    <!-- ============= 9. 사람의 위키 vs LLM의 위키 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip">CH 2 · LLM 위키</div>
-        <h2>독자가 하나 늘었다 — <span class="grad">이제 AI도 읽습니다</span></h2>
-        <table class="gh-table" style="margin-top:.5rem;">
-          <tr><th></th><th>사람만 읽던 시절</th><th>AI도 읽는 시절</th></tr>
-          <tr class="autoshow fade-up"><td><strong>형식</strong></td><td>예쁜 서식, 스크린샷 위주</td><td><strong class="accent2">텍스트와 구조</strong> 위주 (이미지엔 설명 텍스트)</td></tr>
-          <tr class="autoshow fade-up"><td><strong>발견</strong></td><td>"어디 있는지 아는 사람"에게 물어봄</td><td><strong class="accent2">검색으로 발견</strong>되도록 제목·용어를 명확히</td></tr>
-          <tr class="autoshow fade-up"><td><strong>단위</strong></td><td>긴 종합 문서 하나</td><td><strong class="accent2">자기완결 문서 여러 개</strong> + 링크</td></tr>
-          <tr class="autoshow fade-up"><td><strong>용어</strong></td><td>팀만 아는 약어 남발</td><td>약어 첫 등장 시 <strong class="accent2">풀어서 정의</strong></td></tr>
-        </table>
-        <p class="small muted" style="margin-top:.9rem;">
-          좋은 소식: <strong>사람에게 좋은 문서는 대체로 LLM에게도 좋습니다.</strong> 기준이 조금 더 엄격해질 뿐입니다 —
-          AI는 눈치가 없으니까요.
-        </p>
-      </div>
-      <aside class="notes">
-        "AI를 위해 문서를 다시 쓰라"가 아니라 "원래 좋은 문서의 기준이 강제된다"는 프레임이 저항감을 줄인다.
-        신입사원 비유 재활용: 신입에게 친절한 문서가 AI에게도 친절하다.
-      </aside>
-    </section>
-
-    <!-- ============= 10. Markdown ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 2 · LLM 위키</div>
@@ -1576,14 +923,14 @@
 - 1차 오픈: <span class="nm">9월 15일</span></pre>
           </div>
           <div class="stack autoshow fade-left" style="gap:.7rem;">
-            <p>✅ <strong>구조가 텍스트 그 자체</strong> — 제목·표·링크가 토큰 몇 개로 표현 (워드·PPT 대비 압도적 효율)</p>
-            <p>✅ <strong>모든 에이전트의 모국어</strong> — LLM은 마크다운으로 학습되고 마크다운으로 말합니다</p>
-            <p>✅ <strong>git과 찰떡</strong> — 지식의 변경 이력·리뷰·되돌리기가 공짜</p>
-            <p>✅ <strong>어디서나 렌더링</strong> — GitHub, 옵시디언, 사내 위키…</p>
+            <p>✅ <strong>구조가 곧 글자</strong> — 제목·표·링크를 기호 몇 개로 표현 (워드·PPT보다 훨씬 가벼움)</p>
+            <p>✅ <strong>AI가 가장 익숙한 형식</strong> — 대부분의 AI가 마크다운으로 읽고 마크다운으로 답합니다</p>
+            <p>✅ <strong>git으로 이력 관리</strong> — 누가 언제 무엇을 바꿨는지 남고 되돌릴 수 있습니다</p>
+            <p>✅ <strong>어디서나 보임</strong> — GitHub, 옵시디언, 사내 위키…</p>
           </div>
         </div>
         <div class="manual-box" style="margin-top:.6rem;">
-          <p class="mb-title">💬 기존 문서 변환도 에이전트 일</p>
+          <p class="mb-title">💬 기존 문서 변환도 AI에게 — 스캔 이미지·녹음은 먼저 글자로</p>
           <pre class="code">이 폴더의 워드/PPT/PDF 문서를 전부 마크다운으로 변환해줘. 표는 마크다운 표로, 이미지는 내용을 설명하는 텍스트로.</pre>
         </div>
       </div>
@@ -1593,11 +940,10 @@
       </aside>
     </section>
 
-    <!-- ============= 11. 작성 원칙 4가지 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · LLM 위키</div>
-        <h2>LLM 친화적 문서의 <span class="grad">4원칙</span></h2>
+        <h2>AI가 잘 읽는 문서의 <span class="grad">4원칙</span> — 사람에게도 좋은 문서입니다</h2>
         <div class="grid-2" style="margin-top:.4rem; gap:1.1rem;">
           <div class="card autoshow fade-up">
             <h3>1️⃣ 제목 계층 = 지도</h3>
@@ -1610,65 +956,65 @@
           </div>
           <div class="card autoshow fade-up">
             <h3>3️⃣ 섹션은 자기완결</h3>
-            <p>"위에서 말한 그 방식" ❌ → 고유명사로.
-            <strong>어느 섹션만 오려 읽어도 성립</strong>해야 합니다.</p>
+            <p>"위에서 말한 그 방식" ❌ → 이름·날짜·결정을 그 자리에.
+            <strong>한 섹션만 오려 읽어도 말이 되게.</strong></p>
           </div>
           <div class="card autoshow fade-up">
             <h3>4️⃣ 머리에 메타데이터</h3>
-            <p>작성일 · 담당 · 상태를 문서 맨 위에 —<br/>
+            <p>작성일 · 담당 · 상태를 맨 위에. AI는 3년 전 규정과 어제 규정을 <strong>스스로 구분하지 못합니다.</strong><br/>
             <span class="mono small">&gt; 상태: 확정 · 담당: 김민수 · 2026-07-01</span></p>
           </div>
         </div>
-        <p class="small muted" style="margin-top:.8rem;">이 원칙들, 어디서 봤죠? — 앞 장 "좋은 먹이의 조건" 4가지가 문서 작법으로 번역된 것입니다.</p>
+        <p class="small muted" style="margin-top:.8rem;">직접 다 고칠 필요는 없습니다 — <strong>규칙을 주면 고치는 건 AI가 합니다</strong> (실습 1).</p>
       </div>
       <aside class="notes">
         1번(제목 계층)이 CH3 청킹 슬라이드에서 정확히 회수된다 — "구조 따라 자르기"가 가능해지는 전제조건.
         "직접 다 고치라는 게 아니다. 규칙을 정하면 고치는 건 에이전트가 한다" — 실습 1 예고.
+        4번(메타데이터): 실제 RAG 사고의 상당수가 "구버전 문서가 검색됨"이다. 날짜·상태·폐기 표시가 그 처방.
+        "사람에게 좋은 문서는 AI에게도 좋다 — 기준이 조금 더 엄격해질 뿐(AI는 눈치가 없다)" 프레임으로 저항감을 줄인다.
       </aside>
     </section>
 
-    <!-- ============= 12. 진입점 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · LLM 위키</div>
-        <h2>에이전트를 위한 <span class="grad">정문</span>을 만드세요</h2>
-        <div class="grid-3" style="margin-top:.4rem; gap:1.1rem;">
-          <div class="card autoshow fade-up">
-            <h3><span class="mono">CLAUDE.md</span></h3>
-            <p>프로젝트 폴더의 안내판. Claude Code가 <strong>자동으로 읽고 시작</strong>합니다 —
-            폴더 소개, 문서 규칙, 답변 규칙을 적는 곳.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <h3><span class="mono">llms.txt</span></h3>
-            <p>웹사이트가 LLM에게 주는 한 장짜리 지도.
-            <span class="mono">/llms.txt</span> 경로에 두는 <strong>공개 관례</strong>입니다.</p>
-          </div>
-          <div class="card autoshow fade-up">
-            <h3><span class="mono">INDEX.md</span></h3>
-            <p>사람+AI 공용 목차. 전체 문서의 <strong>제목과 한 줄 요약</strong> —
-            에이전트가 뭘 읽을지 고르는 출발점.</p>
+        <h2><span class="mono">INDEX.md</span> 한 장이 에이전트의 <span class="grad">출발점</span>입니다</h2>
+        <div class="grid-2" style="margin-top:.4rem; gap:1.6rem; align-items:start;">
+          <pre class="code autoshow fade-up" style="font-size:.98rem;"><span class="cm"># wiki/INDEX.md — 문서마다 제목 + 한 줄 요약</span>
+<span class="kw">## 프로젝트</span>
+- <span class="st">[아폴로 소개](apollo.md)</span> — 예지보전 시스템, PM 김민수
+- <span class="st">[아폴로 결정사항](apollo-decisions.md)</span> — 1차 오픈 9/15
+<span class="kw">## 장비</span>
+- <span class="st">[검사장비A 점검](equip-a.md)</span> — 주간 점검 절차
+<span class="kw">## 규정</span>
+- <span class="st">[연차 신청](leave.md)</span> — 2026 개정판 <span class="nm">(2024판은 폐기)</span></pre>
+          <div class="stack" style="gap:.8rem;">
+            <p class="autoshow fade-up">새 팀에 온 사람이 온보딩 문서부터 찾듯, 에이전트도 <strong class="accent2">목차부터 읽고</strong> 무엇을 열지 고릅니다.</p>
+            <div class="card autoshow fade-up" style="padding:1rem 1.3rem;">
+              <h3 style="font-size:1.2rem;"><span class="mono">CLAUDE.md</span> — 답변 규칙 세 줄이면 충분</h3>
+              <p style="font-size:1.05rem;">"INDEX.md부터 볼 것 · 답마다 출처 파일 · 근거 없으면 '문서에 없음'"</p>
+              <p class="tiny" style="margin-top:.5rem;"><a href="../agent-skills/">→ CLAUDE.md 작성법은 「내 노하우를 AI에게 물려주는 법」</a></p>
+            </div>
+            <p class="tiny muted autoshow fade-up">웹사이트라면 같은 역할로 <span class="mono">/llms.txt</span>를 두는 관례도 있습니다.</p>
           </div>
         </div>
-        <pre class="code autoshow fade-up" style="margin-top:.8rem; font-size:.95rem;"><span class="cm"># CLAUDE.md 예시 (축약)</span>
-이 폴더는 스마트팩토리 TF의 팀 위키다. 질문을 받으면 <span class="st">INDEX.md</span>부터 본다.
-용어는 <span class="st">GLOSSARY.md</span> 기준을 따른다. <span class="nm">문서에 근거가 없으면 "문서에 없음"이라고 답한다.</span></pre>
       </div>
       <aside class="notes">
-        "진입점" 개념 — 사람도 새 팀에 가면 온보딩 문서부터 찾듯, 에이전트에게도 시작점을 지정해주는 것.
-        llms.txt는 Answer.AI의 Jeremy Howard가 2024년 제안한 관례로, 문서 사이트들이 빠르게 채택 중이라는 배경 한 줄.
+        "진입점" 개념 — 사람도 새 팀에 가면 온보딩 문서부터 찾듯, 에이전트에게도 시작점을 지정해 준다. 이 덱에서 실제로 만드는 건 INDEX.md.
+        CLAUDE.md는 Claude Code가 폴더를 열 때 자동으로 읽는 안내 파일. 여기선 답변 규칙 세 줄만 — 무엇을 어떻게 쓰는지는 agent-skills 덱이 정본이니 링크로 넘긴다.
+        llms.txt는 2024년에 제안된 웹 관례(사이트가 LLM용 요약 지도를 /llms.txt 에 둠) — 이름만 언급.
       </aside>
     </section>
 
-    <!-- ============= 13. 위키의 벽 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 2 · LLM 위키</div>
-        <h2>문서 1,000개가 되는 날 — <span class="accent3">위키의 벽</span></h2>
+        <h2>문서가 1,000개면 <span class="accent3">통째로는 못 넣습니다</span></h2>
         <p class="small" style="margin:.2rem 0 .8rem;">잘 정리된 위키도 커지면 통째로는 못 먹입니다.</p>
         <div class="stack autoshow fade-up" style="gap:.9rem;">
           <div>
             <p class="tiny mono muted" style="margin-bottom:.3rem;">컨텍스트 창 (~100만 토큰)</p>
-            <div class="size-bar"><div class="sb-fit" style="width:100%;">문서 300개 남짓 — 들어는 가지만, 질문마다 통째로 읽히면 느리고 비싸고 흐려진다</div></div>
+            <div class="size-bar"><div class="sb-fit" style="width:100%;">문서 300개 남짓 — 들어는 가도, 질문마다 다 읽히면 느리고 비싸고 흐려짐</div></div>
           </div>
           <div>
             <p class="tiny mono muted" style="margin-bottom:.3rem;">팀 위키 전체 (문서 1,000개 ≈ 300만 토큰)</p>
@@ -1687,12 +1033,11 @@
       </aside>
     </section>
 
-    <!-- ============= 14. RAG 개념 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>RAG — <span class="grad">오픈북 시험</span>을 보게 하라</h2>
-        <p class="small" style="margin:.2rem 0 .6rem;"><strong>R</strong>etrieval-<strong>A</strong>ugmented <strong>G</strong>eneration, 검색 증강 생성 — 외우게 하지 말고, 찾아보며 답하게.</p>
+        <h2>RAG = 질문마다 <span class="grad">관련 조각만 찾아</span> 보여 주기</h2>
+        <p class="small" style="margin:.2rem 0 .6rem;"><strong>R</strong>etrieval-<strong>A</strong>ugmented <strong>G</strong>eneration(검색 증강 생성) — 외우게 하지 말고 <strong>오픈북 시험</strong>을 보게 합니다.</p>
         <div class="step-flow" style="margin-top:.5rem;">
           <div class="sf-step autoshow fade-up">
             <span class="sf-no">1</span>
@@ -1709,53 +1054,25 @@
           <div class="sf-step hot autoshow fade-up">
             <span class="sf-no">3</span>
             <b>💬 Generation · 생성</b>
-            <p>근거를 보면서 답한다 — 출처 표시 가능, 환각 급감</p>
+            <p>근거를 보며 답한다 — 출처를 달 수 있고 지어내기가 줄어든다</p>
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          사실 여러분은 이미 쓰고 있습니다 — 에이전트가 <strong>파일을 찾아 읽고 나서 답할 때</strong>, 그게 RAG의 동작 원리입니다.
+          이미 쓰고 있습니다 — 에이전트가 <strong>파일을 찾아 읽고 나서 답할 때</strong>가 바로 RAG입니다.<br/>
+          <span class="small">성패는 1단계 <strong class="accent2">검색</strong>에서 갈립니다 — 엉뚱한 조각을 주면 자신 있게 틀립니다.</span>
         </div>
       </div>
       <aside class="notes">
         오픈북 비유가 이 챕터의 척추: 시험(질문) 전에 책 전체를 외우는 것(파인튜닝)보다, 시험장에서 관련 페이지를 펴는 것(RAG)이 낫다.
         "이미 쓰고 있다"로 심리적 장벽 낮추기 — RAG는 신기술이 아니라 검색+프롬프트의 조합.
+        검색이 틀리면 생성이 아무리 좋아도 틀린다(garbage in, garbage out) — 그래서 이후 장들이 전부 "어떻게 잘 찾나"다.
       </aside>
     </section>
 
-    <!-- ============= 15. 검색이 전부다 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip">CH 3 · RAG</div>
-        <h2>RAG의 성패는 <span class="accent2">1단계 검색</span>에서 갈립니다</h2>
-        <div class="grid-2" style="margin-top:.5rem; gap:1.6rem; align-items:start;">
-          <div class="card bad autoshow fade-right">
-            <h3>엉뚱한 조각을 주면</h3>
-            <p>모델은 그걸 근거 삼아 <strong>자신 있게 잘못</strong> 답합니다.
-            생성이 아무리 좋아도 검색이 틀리면 끝 — Garbage in, garbage out.</p>
-          </div>
-          <div class="autoshow fade-left">
-            <p style="font-size:1.3rem;"><strong>그런데 "관련된 조각"을 어떻게 찾죠?</strong></p>
-            <p class="small" style="margin-top:.6rem;">질문: <em>"휴가 규정 알려줘"</em><br/>
-            문서에는… "연차 신청 절차", "휴무일 안내", "PTO 정책"<br/>
-            <strong class="accent3">겹치는 단어가 하나도 없습니다.</strong></p>
-          </div>
-        </div>
-        <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          단어가 아니라 <strong class="accent2">의미</strong>로 찾아야 합니다 —
-          그 열쇠가 다음 장의 <strong>임베딩</strong>.
-        </div>
-      </div>
-      <aside class="notes">
-        동의어 문제(vocabulary mismatch)는 검색 분야 수십 년의 난제였고, 임베딩이 이걸 크게 완화했다는 흐름.
-        단, 키워드 검색이 무용해진 건 아니라는 반전이 19장에 준비되어 있다.
-      </aside>
-    </section>
-
-    <!-- ============= 16. 임베딩 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>임베딩 — 의미를 <span class="grad">좌표</span>로 바꾸다</h2>
+        <h2>임베딩은 뜻을 <span class="grad">좌표</span>로 바꿔, 단어가 달라도 찾게 합니다</h2>
         <div class="grid-2" style="margin-top:.3rem; gap:1.6rem; align-items:center;">
           <div class="autoshow fade-right">
             <svg viewBox="0 0 420 300" style="width:100%; max-width:440px;" role="img" aria-label="임베딩 공간: 의미가 비슷한 문장이 가까이 모임">
@@ -1769,12 +1086,12 @@
               <circle cx="300" cy="242" r="5" fill="#FF7A95"/><text x="312" y="247" fill="#FFD0DA" font-size="13">장비 반납 규정</text>
               <line x1="198" y1="85" x2="143" y2="148" stroke="#FFD46B" stroke-width="1.5" marker-end="url(#karrow)"/>
               <defs><marker id="karrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#FFD46B"/></marker></defs>
-              <text x="16" y="286" fill="#9BA6C0" font-size="11" font-family="monospace">embedding space (1,536차원을 2차원으로 상상한 그림)</text>
+              <text x="16" y="286" fill="#9BA6C0" font-size="11" font-family="monospace">의미 공간 (수천 차원을 2차원으로 상상한 그림)</text>
             </svg>
           </div>
           <div class="stack autoshow fade-left" style="gap:.7rem;">
-            <p><strong>임베딩 모델</strong>이 텍스트를 숫자 목록(벡터)으로 변환합니다 —
-            예: 1,536개의 좌표값.</p>
+            <p><strong>임베딩 모델</strong>이 문장을 숫자 목록(벡터)으로 바꿉니다 —
+            수백~수천 개의 좌표값.</p>
             <p><strong class="accent2">의미가 비슷하면 좌표가 가깝습니다.</strong><br/>
             "휴가 규정"과 "연차 신청"은 단어가 달라도 이웃.</p>
             <p class="small muted">검색 = "질문의 좌표에서 가장 가까운 문서 조각 찾기"라는 기하학 문제가 됩니다.</p>
@@ -1783,15 +1100,14 @@
       </div>
       <aside class="notes">
         수식 없이 "의미의 지도" 비유로 충분. 차원 수는 모델마다 다름(수백~수천).
-        재미 요소: 고전 예시 king - man + woman ≈ queen — 좌표니까 연산이 된다.
+        질문 "휴가 규정"과 문서 "연차 신청 절차"는 겹치는 단어가 없지만 좌표는 가깝다 — 이게 키워드 검색이 못 하는 일.
       </aside>
     </section>
 
-    <!-- ============= 17. 벡터 DB ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>벡터 DB — 임베딩의 <span class="grad">창고</span></h2>
+        <h2>벡터 DB는 조각과 좌표를 <span class="grad">미리 쌓아 두는 창고</span>입니다</h2>
         <div class="stack" style="margin-top:.4rem; gap:.7rem;">
           <div class="autoshow fade-up">
             <p class="tiny mono muted" style="margin-bottom:.3rem;">📥 저장할 때 (인덱싱 — 미리 한 번)</p>
@@ -1829,16 +1145,15 @@
       </aside>
     </section>
 
-    <!-- ============= 18. 청킹 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>청킹 — <span class="grad">자르는 법</span>이 답변 품질을 정한다</h2>
+        <h2>청킹 — 문서를 <span class="grad">어디서 자르느냐</span>가 답을 정합니다</h2>
         <div class="grid-3" style="margin-top:.4rem; gap:1.1rem;">
           <div class="card bad autoshow fade-up">
             <h3>❌ 너무 크게</h3>
             <p>조각 하나에 주제 셋 —
-            관련 없는 내용까지 딸려 들어가 컨텍스트 낭비, 초점 흐림.</p>
+            상관없는 내용까지 딸려 들어가 초점이 흐려집니다.</p>
           </div>
           <div class="card bad autoshow fade-up">
             <h3>❌ 너무 잘게</h3>
@@ -1852,8 +1167,8 @@
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          CH 2의 원칙이 여기서 회수됩니다 — <strong>제목 계층이 성실하고 섹션이 자기완결적인 문서는,
-          청킹이 <span class="accent2">공짜로</span> 잘 됩니다.</strong>
+          CH 2의 원칙이 여기서 돌아옵니다 — <strong>제목이 성실하고 섹션이 자기완결인 문서는
+          <span class="accent2">저절로</span> 잘 잘립니다.</strong>
         </div>
         <p class="tiny muted" style="margin-top:.5rem;">실전 팁: 조각마다 출처(파일명·섹션 경로·날짜)를 함께 저장 — 인용과 최신성 판단의 재료.</p>
       </div>
@@ -1863,12 +1178,12 @@
       </aside>
     </section>
 
-    <!-- ============= 19. 검색 3종 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>키워드 vs 벡터 vs <span class="grad">하이브리드</span></h2>
-        <table class="gh-table" style="margin-top:.5rem;">
+        <h2>고유명사는 키워드, 뜻은 벡터 — <span class="grad">실무 기본은 둘 다</span></h2>
+        <p class="small" style="margin:.1rem 0 .5rem;">질문 <em>"휴가 규정 알려줘"</em> ↔ 문서 "연차 신청 절차" · "휴무일 안내" — <strong class="accent3">겹치는 단어가 없습니다.</strong></p>
+        <table class="gh-table" style="margin-top:.3rem;">
           <tr><th>방식</th><th>원리</th><th>강한 곳</th><th>약한 곳</th></tr>
           <tr class="autoshow fade-up">
             <td><strong>키워드</strong> <span class="tiny mono muted">grep · BM25</span></td>
@@ -1889,21 +1204,20 @@
           </tr>
         </table>
         <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          Claude Code가 코드베이스에서 <span class="mono">grep</span>을 즐겨 쓰는 이유 —
-          <strong>함수명·에러문구·사번·프로젝트 코드는 키워드가 이깁니다.</strong> 벡터가 만능이 아닙니다.
+          에이전트가 <span class="mono">grep</span>(글자 그대로 찾기)을 즐겨 쓰는 이유 —
+          <strong>장비 번호·에러 문구·프로젝트 코드는 키워드가 이깁니다.</strong> 벡터가 만능은 아닙니다.
         </div>
       </div>
       <aside class="notes">
-        "임베딩 도입 = 검색 문제 해결"이라는 흔한 오해를 교정하는 슬라이드.
+        "임베딩 도입 = 검색 문제 해결"이라는 흔한 오해를 교정하는 슬라이드. 위 예시(휴가 vs 연차)는 실습 2에서 직접 확인한다.
         재순위화(reranker): 1차로 후보 넉넉히 뽑고 더 정밀한 모델로 다시 줄 세우기 — 이름만 언급.
       </aside>
     </section>
 
-    <!-- ============= 20. RAG 실패 모드 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>RAG가 넘어지는 <span class="accent3">4가지 자리</span></h2>
+        <h2>RAG가 틀리는 4가지 자리 — <span class="accent2">셋은 문서 정리로</span> 고칩니다</h2>
         <div class="grid-2" style="margin-top:.4rem; gap:1.1rem;">
           <div class="card bad autoshow fade-up">
             <h3>1️⃣ 검색 미스</h3>
@@ -1926,19 +1240,18 @@
             <span class="small">→ 처방: 다음 챕터에서 👉</span></p>
           </div>
         </div>
-        <p class="small muted" style="margin-top:.8rem;">1~3번의 공통 처방은 결국 <strong>CH 2로 돌아가라</strong> — RAG 튜닝보다 문서 정리가 먼저인 경우가 많습니다.</p>
+        <p class="small muted" style="margin-top:.8rem;">1~3번의 처방은 결국 <strong>CH 2(위키)로 돌아가기</strong> — 검색 설정보다 문서 정리가 먼저인 경우가 많습니다.</p>
       </div>
       <aside class="notes">
         4번이 다음 챕터(지식 그래프)로 가는 다리 — Top-K 조각 검색의 구조적 한계이지 튜닝으로 해결 안 됨.
-        실습 3에서 검색 미스를 일부러 체험시킨다.
+        실습 2에서 검색 미스("휴가" vs "연차")를 일부러 체험시킨다.
       </aside>
     </section>
 
-    <!-- ============= 21. Agentic RAG ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 3 · RAG</div>
-        <h2>요즘 방식 — <span class="grad">에이전트가 스스로 검색합니다</span></h2>
+        <h2>요즘은 <span class="grad">에이전트가 스스로</span> 검색어를 바꿔 가며 찾습니다</h2>
         <div class="grid-2" style="margin-top:.4rem; gap:1.6rem; align-items:start;">
           <div class="card autoshow fade-right">
             <h3>고전 RAG 파이프라인</h3>
@@ -1954,20 +1267,19 @@
         <pre class="code autoshow fade-up" style="margin-top:.8rem; font-size:.92rem;"><span class="cm"># 에이전트의 실제 행동 로그 (축약)</span>
 <span class="kw">grep</span> "휴가"  → 0건. 검색어를 바꿔본다
 <span class="kw">grep</span> "연차"  → 3건. <span class="st">policy/leave.md</span> 발견 → 전체 읽기
-<span class="cm">문서 상단: "2024-01 개정판이 최신" → 개정판을 다시 찾아 읽음</span>
+<span class="cm">문서 상단: "2026 개정판이 최신" → 개정판을 다시 찾아 읽음</span>
 <span class="nm">→ 근거 2건 인용해 답변</span></pre>
         <p class="small muted" style="margin-top:.6rem;">
-          검색이 "파이프라인"에서 <strong>"행동"</strong>이 됐습니다. 그래도 기본기(잘 쓰인 문서 · 청킹 · 인덱스)의 가치는 그대로 —
-          <strong class="accent2">에이전트도 정리된 창고에서 더 빨리, 더 정확히 찾습니다.</strong>
+          그래도 기본기는 그대로 — <strong class="accent2">에이전트도 정리된 창고에서 더 빨리, 더 정확히 찾습니다.</strong>
+          문서 수백 개까지는 벡터 DB 없이 이것으로 충분한 경우가 많습니다.
         </p>
       </div>
       <aside class="notes">
         "그럼 벡터 DB 없어도 되나요?" — 소규모(파일 수백 개)는 에이전트+grep으로 충분한 시대가 됐다. 규모가 커지면 인덱스가 다시 필요.
-        Claude Code로 위키 폴더에 질문하는 것이 그 자체로 Agentic RAG라는 점 — 실습 2·3에서 확인.
+        Claude Code로 위키 폴더에 질문하는 것이 그 자체로 Agentic RAG라는 점 — 실습 2에서 확인.
       </aside>
     </section>
 
-    <!-- ============= 22. KG 도입 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 지식 그래프</div>
@@ -2003,12 +1315,11 @@
         </div>
       </div>
       <aside class="notes">
-        구글이 2012년 "Knowledge Graph"라는 이름을 대중화 — 검색창에 인물 치면 옆에 뜨는 정보 패널이 그것.
+        검색창에 인물을 치면 옆에 뜨는 정보 패널이 지식 그래프의 대표적인 예.
         요점: 표(DB)도 문서(위키)도 아닌 제3의 표현 — "관계가 일급 시민"인 데이터 구조.
       </aside>
     </section>
 
-    <!-- ============= 23. 트리플 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 4 · 지식 그래프</div>
@@ -2034,16 +1345,15 @@
         </div>
       </div>
       <aside class="notes">
-        예전엔 트리플 추출이 NLP 난제였는데 LLM이 게임을 바꿨다 — 실습 4에서 직접 시켜본다.
-        (주어, 관계, 목적어)는 RDF의 (subject, predicate, object)와 같은 개념 — CH5 표준 슬라이드에서 재등장.
+        예전엔 문장에서 트리플을 뽑는 일이 어려운 문제였는데 LLM이 잘한다 — 실습 3에서 직접 시켜 본다.
+        (주어, 관계, 목적어)는 표준 형식 RDF의 (subject, predicate, object)와 같은 개념.
       </aside>
     </section>
 
-    <!-- ============= 24. 그래프가 잘하는 질문 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 지식 그래프</div>
-        <h2>그래프의 주특기 — <span class="grad">다리 건너기</span></h2>
+        <h2>그래프는 <span class="grad">"다리 건너기"</span> 질문에 빠짐없이 답합니다</h2>
         <div class="grid-3" style="margin-top:.4rem; gap:1.1rem;">
           <div class="card autoshow fade-up">
             <h3>🔗 연결 찾기</h3>
@@ -2063,21 +1373,20 @@
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          한 줄 비교 — RAG는 <strong>조각을 읽고</strong>, 그래프는 <strong class="accent2">관계를 걷습니다.</strong>
-          앞 장 실패 모드 4번("전체 종합")의 해법이 여기 있습니다.
+          RAG는 <strong>조각을 읽고</strong>, 그래프는 <strong class="accent2">관계를 따라 걷습니다.</strong>
+          RAG 실패 4번("전체 종합")의 해법입니다.
         </div>
       </div>
       <aside class="notes">
         "빠짐없이"가 그래프의 차별점 — 벡터 검색은 Top-K라서 항상 누락 가능성이 있지만 그래프 순회는 전수 조사.
-        단, 그래프에 안 넣은 사실은 당연히 안 나온다 — 구축 비용 이야기가 26장에서 나옴.
+        단, 그래프에 안 넣은 사실은 당연히 안 나온다 — 구축 비용 이야기는 "전부 그래프로 만들지 마라" 장에서.
       </aside>
     </section>
 
-    <!-- ============= 25. GraphRAG ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 4 · 지식 그래프</div>
-        <h2>GraphRAG — 검색과 그래프의 <span class="grad">합체</span></h2>
+        <h2>GraphRAG — 검색과 그래프를 <span class="grad">함께</span> 씁니다</h2>
         <div class="step-flow" style="margin-top:.5rem;">
           <div class="sf-step autoshow fade-up"><span class="sf-no">1</span><b>📄 문서</b><p>팀 위키 (원천은 언제나 문서)</p></div>
           <span class="sf-arrow">→</span>
@@ -2098,7 +1407,7 @@
             문서가 바뀌면 그래프도 갱신해야 합니다.</p>
           </div>
         </div>
-        <p class="tiny muted" style="margin-top:.6rem;">Microsoft가 2024년 공개한 GraphRAG가 이 조합을 대중화했습니다 — 이후 변형이 계속 등장 중.</p>
+        <p class="tiny muted" style="margin-top:.6rem;">Microsoft가 2024년 공개한 GraphRAG가 이 조합을 널리 알렸습니다.</p>
       </div>
       <aside class="notes">
         커뮤니티 요약: 그래프에서 밀접한 군집(예: 프로젝트 하나와 그 주변)을 찾아 미리 요약해 두는 것 — "조망 질문"에 그 요약들을 먹인다.
@@ -2106,7 +1415,6 @@
       </aside>
     </section>
 
-    <!-- ============= 26. KG 현실 조언 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 4 · 지식 그래프</div>
@@ -2122,7 +1430,7 @@
           </div>
           <div class="rx-item autoshow fade-up">
             <span class="rx-q">3️⃣ 추출은 LLM, 검수는 사람</span>
-            <span style="font-size:1.05rem;">에이전트가 뽑고, 사람이 훑어보며 오추출만 걷어내기 — 실습 4에서 해봅니다.</span>
+            <span style="font-size:1.05rem;">에이전트가 뽑고, 사람이 훑어보며 잘못 뽑힌 것만 걷어내기 — 실습 3에서 해 봅니다.</span>
           </div>
         </div>
         <div class="warn-banner autoshow fade-up" style="margin-top:.9rem;">
@@ -2137,11 +1445,10 @@
       </aside>
     </section>
 
-    <!-- ============= 27. 온톨로지 도입 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 5 · 온톨로지</div>
-        <h2>같은 것을 <span class="accent3">세 가지 이름</span>으로 부르는 회사</h2>
+        <h2>같은 것을 세 이름으로 부르면 AI는 <span class="accent3">셋으로</span> 봅니다</h2>
         <div class="grid-2" style="margin-top:.4rem; gap:1.6rem; align-items:start;">
           <div class="autoshow fade-right">
             <pre class="code" style="font-size:1.0rem;"><span class="cm"># 같은 회사, 같은 대상, 문서 셋</span>
@@ -2166,11 +1473,10 @@
       </div>
       <aside class="notes">
         거창한 철학 용어(존재론)에서 왔지만 실무에선 "용어와 스키마의 약속"으로 이해하면 충분.
-        노드 쪼개짐 문제는 실습 4→5에서 일부러 겪게 한 뒤 고치게 되어 있다 — 여기서 예고해두면 좋다.
+        노드 쪼개짐 문제는 실습 3→4에서 일부러 겪게 한 뒤 고치게 되어 있다 — 여기서 예고해 두면 좋다.
       </aside>
     </section>
 
-    <!-- ============= 28. 구조화의 사다리 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 5 · 온톨로지</div>
@@ -2195,7 +1501,7 @@
             "장비는 프로젝트에 사용된다". 규칙 검사와 추론이 가능해짐.</p>
           </div>
         </div>
-        <p class="small muted" style="margin-top:.8rem;">대부분의 팀은 1~2단에 있습니다. 오늘 목표는 4단의 <strong>미니 버전</strong>을 맛보는 것.</p>
+        <p class="small muted" style="margin-top:.8rem;">대부분의 팀은 1~2단에 있습니다. 오늘은 4단의 <strong>미니 버전</strong>(용어사전 + 규칙 두 줄)만 맛봅니다.</p>
       </div>
       <aside class="notes">
         택소노미까지는 "분류"(is-a 관계 하나), 온톨로지부터 "임의의 관계와 규칙" — 이 한 줄이 둘의 차이를 가른다.
@@ -2203,11 +1509,10 @@
       </aside>
     </section>
 
-    <!-- ============= 29. 온톨로지 구성요소 ============= -->
     <section data-depth="extra">
       <div class="vfill">
         <div class="chip">CH 5 · 온톨로지</div>
-        <h2>설계도의 부품 <span class="grad">5가지</span></h2>
+        <h2>온톨로지의 부품은 5가지 — 사내에선 <span class="grad">YAML 한 장</span>이면 됩니다</h2>
         <div class="grid-2" style="margin-top:.4rem; gap:1.6rem; align-items:start;">
           <table class="gh-table autoshow fade-right">
             <tr><th>부품</th><th>뜻</th><th>예</th></tr>
@@ -2228,47 +1533,16 @@
 <span class="kw">relations:</span>
   - 사람 --(담당한다)--&gt; 프로젝트
   - 프로젝트 --(납품된다)--&gt; 고객사</pre>
-            <p class="tiny muted" style="margin-top:.5rem;">형식은 자유 — 핵심은 <strong>기계도 사람도 읽을 수 있는 한 장의 약속</strong>.</p>
+            <p class="tiny muted" style="margin-top:.5rem;">형식은 자유 — 핵심은 <strong>사람도 AI도 읽는 한 장의 약속</strong>. RDF·OWL·SPARQL 같은 표준은 바깥 기관과 데이터를 주고받을 때 필요해지면 그때.</p>
           </div>
         </div>
       </div>
       <aside class="notes">
         DB 스키마와 뭐가 다르냐는 질문이 나오면: 발상은 유사하나 온톨로지는 특정 저장소에 묶이지 않은 "개념 차원의 약속"이고, 관계·추론·개방성(모르는 사실은 거짓이 아니라 미지)이 강조점.
-        YAML 예시가 실습 5에서 그대로 만들어진다.
+        표준(RDF·OWL·SPARQL·schema.org)은 이름만: 학계·공공데이터·조직 간 교환처럼 바깥과 연결될 때 쓴다. 사내에선 마크다운+YAML로 시작해도 개념은 같다.
       </aside>
     </section>
 
-    <!-- ============= 30. 표준 구경 ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip">CH 5 · 온톨로지</div>
-        <h2>표준의 세계 — <span class="grad">이름만</span> 알아두세요</h2>
-        <table class="gh-table" style="margin-top:.5rem;">
-          <tr><th>이름</th><th>정체</th><th>한 줄 요약</th></tr>
-          <tr class="autoshow fade-up"><td><strong>RDF</strong></td><td>트리플의 표준 포맷</td><td>(주어, 관계, 목적어)를 기계끼리 교환하는 규격</td></tr>
-          <tr class="autoshow fade-up"><td><strong>OWL</strong></td><td>온톨로지 기술 언어</td><td>클래스·관계·제약을 엄밀하게 적는 언어 (추론기가 검증)</td></tr>
-          <tr class="autoshow fade-up"><td><strong>SPARQL</strong></td><td>그래프 질의어</td><td>그래프계의 SQL — "아폴로의 PM은?"을 쿼리로</td></tr>
-          <tr class="autoshow fade-up"><td><strong>schema.org</strong></td><td>웹의 공용 온톨로지</td><td>구글 검색의 리치 결과(평점·레시피·일정)가 이걸로 동작</td></tr>
-        </table>
-        <div class="grid-2" style="margin-top:.9rem; gap:1.2rem;">
-          <div class="card autoshow fade-up">
-            <h3>언제 표준이 필요한가</h3>
-            <p>학계 · 공공데이터 · 조직 간 교환 · 규제 대응 — <strong>바깥과 연결될 때.</strong></p>
-          </div>
-          <div class="card good autoshow fade-up">
-            <h3>사내에서는</h3>
-            <p><strong>마크다운 + YAML로 시작</strong>하면 충분합니다.
-            필요해지면 그때 표준으로 승격 — 개념은 이미 같습니다.</p>
-          </div>
-        </div>
-      </div>
-      <aside class="notes">
-        시맨틱 웹(2000년대) 유산이라 자료가 방대하지만, 오늘 청중에게 필요한 건 "이 단어들이 뭘 가리키는지"까지.
-        위키데이터(Wikidata)가 RDF/SPARQL로 운영되는 대표 사례 — 궁금한 사람에게 놀이터로 추천.
-      </aside>
-    </section>
-
-    <!-- ============= 31. LLM 시대의 온톨로지 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 5 · 온톨로지</div>
@@ -2291,8 +1565,8 @@
           </div>
         </div>
         <div class="quote autoshow fade-up" style="margin-top:1rem;">
-          시작은 거창한 OWL이 아니라 — <strong class="accent2">GLOSSARY.md(용어사전) + ontology.yaml(스키마) 두 파일</strong>이면 됩니다.
-          LLM 시대에 온톨로지는 "만들기 어려운 것"에서 <strong>"에이전트와 함께 반나절이면 초안 나오는 것"</strong>이 됐습니다.
+          시작은 <strong class="accent2">GLOSSARY.md(용어사전) 한 장 + 규칙 몇 줄</strong>이면 됩니다.
+          예전엔 전문가가 몇 달 걸리던 일이, 이제 <strong>AI와 함께 반나절이면 초안</strong>이 나옵니다.
         </div>
       </div>
       <aside class="notes">
@@ -2301,11 +1575,10 @@
       </aside>
     </section>
 
-    <!-- ============= 32. 4총사 비교 ============= -->
     <section>
       <div class="vfill">
         <div class="chip">CH 6 · 큰 그림</div>
-        <h2>네 가지 도구, <span class="grad">한 장 정리</span></h2>
+        <h2>넷은 경쟁자가 아니라 <span class="grad">층</span>입니다</h2>
         <table class="gh-table" style="margin-top:.5rem;">
           <tr><th>도구</th><th>은유</th><th>잘 받는 질문</th><th>시작 비용</th></tr>
           <tr class="autoshow fade-up">
@@ -2326,12 +1599,11 @@
           <tr class="autoshow fade-up">
             <td><strong>📐 온톨로지</strong></td><td>문법책</td>
             <td>(질문보다) 위 셋의 <strong>품질을 끌어올림</strong></td>
-            <td><span class="pill amber">중간</span> 두 파일부터</td>
+            <td><span class="pill amber">중간</span> 용어사전부터</td>
           </tr>
         </table>
         <div class="quote autoshow fade-up" style="margin-top:.9rem;">
-          넷은 경쟁자가 아니라 <strong class="accent2">층</strong>입니다 —
-          1층(위키)이 부실하면 위층 전부가 흔들립니다. <strong>투자 순서도 이 순서.</strong>
+          1층(위키)이 부실하면 위층 전부가 흔들립니다. <strong class="accent2">투자 순서도 이 순서.</strong>
         </div>
       </div>
       <aside class="notes">
@@ -2340,294 +1612,218 @@
       </aside>
     </section>
 
-    <!-- ============= 33. 조합 아키텍처 ============= -->
-    <section data-depth="extra">
+    <section>
       <div class="vfill">
-        <div class="chip">CH 6 · 큰 그림</div>
-        <h2>팀 지식봇의 <span class="grad">설계도</span></h2>
-        <div class="autoshow fade-up" style="margin-top:.3rem;">
-          <svg viewBox="0 0 1100 400" style="width:100%;" role="img" aria-label="지식봇 아키텍처: 위키에서 벡터 인덱스와 지식 그래프를 만들고, 에이전트가 셋을 모두 사용해 답변">
-            <defs><marker id="aarr" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#B5A1FF"/></marker></defs>
-            <!-- 위키 -->
-            <rect x="30" y="140" width="200" height="110" rx="16" fill="rgba(42,33,80,.75)" stroke="rgba(155,130,255,.8)" stroke-width="2"/>
-            <text x="130" y="185" fill="#FFF" font-size="20" font-weight="800" text-anchor="middle">📚 팀 위키 (.md)</text>
-            <text x="130" y="215" fill="#B8BFD0" font-size="13" text-anchor="middle">원천 · 사람이 관리</text>
-            <!-- 온톨로지 -->
-            <rect x="285" y="20" width="215" height="80" rx="14" fill="rgba(74,26,38,.7)" stroke="rgba(255,122,149,.8)" stroke-width="2"/>
-            <text x="392" y="53" fill="#FFD0DA" font-size="17" font-weight="800" text-anchor="middle">📐 온톨로지</text>
-            <text x="392" y="78" fill="#D8B4BE" font-size="12" text-anchor="middle">GLOSSARY.md + ontology.yaml</text>
-            <!-- 벡터 인덱스 -->
-            <rect x="310" y="130" width="190" height="70" rx="14" fill="rgba(13,61,56,.75)" stroke="rgba(43,234,208,.8)" stroke-width="2"/>
-            <text x="405" y="160" fill="#C5FFF5" font-size="17" font-weight="800" text-anchor="middle">🔍 벡터 인덱스</text>
-            <text x="405" y="184" fill="#9BC9C0" font-size="12" text-anchor="middle">청킹 + 임베딩</text>
-            <!-- 그래프 -->
-            <rect x="310" y="225" width="190" height="70" rx="14" fill="rgba(70,56,23,.75)" stroke="rgba(255,212,107,.8)" stroke-width="2"/>
-            <text x="405" y="255" fill="#FFEFC2" font-size="17" font-weight="800" text-anchor="middle">🕸️ 지식 그래프</text>
-            <text x="405" y="279" fill="#CBB98A" font-size="12" text-anchor="middle">LLM 추출 + 사람 검수</text>
-            <!-- 에이전트 -->
-            <rect x="600" y="115" width="230" height="195" rx="18" fill="rgba(20,22,44,.85)" stroke="rgba(155,130,255,.9)" stroke-width="2.5"/>
-            <text x="715" y="155" fill="#FFF" font-size="20" font-weight="800" text-anchor="middle">🤖 에이전트</text>
-            <text x="715" y="188" fill="#C9D2E4" font-size="13" text-anchor="middle">① 검색으로 조각 찾기</text>
-            <text x="715" y="212" fill="#C9D2E4" font-size="13" text-anchor="middle">② 그래프로 관계 확인</text>
-            <text x="715" y="236" fill="#C9D2E4" font-size="13" text-anchor="middle">③ 원문 읽고 교차 검증</text>
-            <text x="715" y="260" fill="#C9D2E4" font-size="13" text-anchor="middle">④ 부족하면 다시 검색</text>
-            <!-- 답변 -->
-            <rect x="895" y="150" width="180" height="110" rx="16" fill="rgba(13,61,56,.8)" stroke="rgba(43,234,208,.9)" stroke-width="2"/>
-            <text x="985" y="192" fill="#FFF" font-size="18" font-weight="800" text-anchor="middle">💬 답변</text>
-            <text x="985" y="220" fill="#A9FFF0" font-size="13" text-anchor="middle">출처 인용 포함</text>
-            <text x="985" y="242" fill="#A9FFF0" font-size="13" text-anchor="middle">"근거 없음"도 답</text>
-            <!-- edges -->
-            <line x1="230" y1="170" x2="303" y2="163" stroke="#B5A1FF" stroke-width="2" marker-end="url(#aarr)"/>
-            <line x1="230" y1="215" x2="303" y2="255" stroke="#B5A1FF" stroke-width="2" marker-end="url(#aarr)"/>
-            <line x1="392" y1="100" x2="398" y2="123" stroke="#FF94AC" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#aarr)"/>
-            <line x1="392" y1="100" x2="200 " y2="140" stroke="#FF94AC" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#aarr)"/>
-            <line x1="450" y1="100" x2="420" y2="218" stroke="#FF94AC" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#aarr)"/>
-            <line x1="500" y1="165" x2="593" y2="185" stroke="#B5A1FF" stroke-width="2" marker-end="url(#aarr)"/>
-            <line x1="500" y1="260" x2="593" y2="240" stroke="#B5A1FF" stroke-width="2" marker-end="url(#aarr)"/>
-            <line x1="830" y1="207" x2="888" y2="205" stroke="#2BEAD0" stroke-width="2.5" marker-end="url(#aarr)"/>
-            <text x="330" y="380" fill="#9BA6C0" font-size="13" font-family="monospace">- - - 온톨로지는 나머지 전부의 "기준"으로 작동</text>
-          </svg>
+        <div class="chip">CH 6 · 작게 시작하기</div>
+        <h2>시작은 <span class="grad">문서 10개</span> — 신호가 올 때만 한 칸씩 올립니다</h2>
+        <div class="step-flow" style="margin-top:.6rem;">
+          <div class="sf-step hot autoshow fade-up"><span class="sf-no">1</span><b>📚 위키</b><p>중요 문서 10개를 마크다운으로 + INDEX.md + 답변 규칙 3줄</p></div>
+          <span class="sf-arrow">→</span>
+          <div class="sf-step autoshow fade-up"><span class="sf-no">2</span><b>🔍 에이전트 검색</b><p>일상 질문을 에이전트에게 — 이것이 이미 RAG</p></div>
+          <span class="sf-arrow">→</span>
+          <div class="sf-step autoshow fade-up"><span class="sf-no">3</span><b>🕸️ 관계 지도</b><p>담당·영향 질문만 그래프로</p></div>
+          <span class="sf-arrow">→</span>
+          <div class="sf-step autoshow fade-up"><span class="sf-no">4</span><b>📐 용어·규칙</b><p>GLOSSARY.md + 규칙 몇 줄</p></div>
         </div>
-        <p class="small muted center" style="margin-top:.3rem;">지금부터의 실습에서, 이 그림의 <strong class="accent2">미니어처를 전부 직접</strong> 만듭니다.</p>
+        <table class="gh-table autoshow fade-up" style="margin-top:.8rem;">
+          <tr><th>다음 칸으로 가는 신호</th><th>그때 할 일</th></tr>
+          <tr><td>문서가 수백 개라 <strong>통째로 넣으면 느리고 흐려진다</strong></td><td>에이전트 검색 → 그래도 부족하면 검색 인덱스</td></tr>
+          <tr><td>"누가·무엇이 연결되나" 질문이 <strong>매주</strong> 나온다</td><td>개체 4~5종·관계 4~5종으로 관계 지도</td></tr>
+          <tr><td>같은 대상을 다른 이름으로 불러 <strong>답이 갈린다</strong></td><td>용어사전 — 이건 언제든 먼저 시작해도 좋습니다</td></tr>
+        </table>
+        <p class="small muted" style="margin-top:.7rem;">신호가 없으면 올라가지 않습니다. <strong>오늘 실습이 이 네 칸의 미니어처</strong>입니다.</p>
       </div>
       <aside class="notes">
-        이 그림이 이론부의 결론. 화살표 방향 강조: 모든 것의 원천은 왼쪽의 위키(.md) — 인덱스와 그래프는 파생물이라 다시 만들 수 있다.
-        점선(온톨로지)은 데이터 흐름이 아니라 "기준·규칙"의 적용선.
+        이론부의 결론 = "작게 시작". 팀 지식봇 프로젝트의 고전적 실패는 처음부터 다 만들려는 빅뱅 접근 — 1년 뒤 아무도 안 쓴다.
+        신호 표를 강조: 각 단계는 "필요해졌다는 증거"가 있을 때만. 용어사전은 비용이 낮아 순서와 무관하게 먼저 해도 된다.
+        "다음 주에 중요 문서 10개만 옮겨 보세요"가 현실적인 첫걸음 — 실습 5에서 각자 계획을 쓴다.
       </aside>
     </section>
 
-    <!-- ============= 34. 실습 0 — 실습장 만들기 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">🖐 실습 0 · 실습장 만들기 (5분)</div>
-        <h2>가상의 팀 문서 세트를 <span class="grad">생성</span>합니다</h2>
-        <p class="small" style="margin:.2rem 0 .5rem;">준비물: Claude Code(또는 다른 에이전트 도구) + 빈 폴더. 여기서 만든 폴더를 실습 6까지 계속 씁니다.</p>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">knowledge-lab 폴더를 만들어줘. 가상의 "스마트팩토리 TF" 팀이 있다고 치고,
-실습용 문서 6개를 만들어줘: 회의록 2개(결정사항 포함), 프로젝트 소개 1개,
-장비 매뉴얼 1개, 신입 온보딩 메모 1개, 2년 전의 낡은 규정 1개.
-일부러 현실적인 문제를 심어줘 — 같은 고객사를 "고객사/거래처/클라이언트"로
-섞어 부르고, 담당자 정보를 여러 문서에 흩어 놓고, 대명사("그 건")도 좀 넣어줘.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">✅ 확인 포인트</p>
-          <pre class="code">문서 6개가 생겼는지, 용어 불일치·흩어진 담당자 정보가 정말 들어갔는지 훑어보기.
-→ 이 "엉망인 상태"가 우리의 출발점입니다. 진짜 팀 문서로 해도 좋아요(보안 등급만 확인!).</pre>
-        </div>
-      </div>
-      <aside class="notes">
-        일부러 문제를 심는 이유: 이후 실습들이 각각 이 문제를 하나씩 해결하는 구조 — 용어 불일치는 실습 5에서, 흩어진 정보는 실습 4에서 드러난다.
-        시간 없으면 진행자가 미리 만들어 배포해도 됨.
-      </aside>
-    </section>
-
-    <!-- ============= 35. 실습 1 — 위키화 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 1 · 위키화 (10분)</div>
-        <h2>흩어진 메모를 <span class="grad">LLM 위키</span>로</h2>
-        <p class="small" style="margin:.2rem 0 .5rem;">CH 2의 4원칙을 그대로 에이전트에게 규칙으로 줍니다.</p>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">knowledge-lab의 문서들을 LLM 친화적 위키로 재구성해서 wiki/ 폴더에 만들어줘.
-규칙: ① 문서 맨 위에 제목·날짜·담당·상태 메타데이터
-② 한 문서 한 주제 (필요하면 쪼개기) ③ 대명사·"그 건" 대신 고유명사
-④ 제목 계층(#, ##)을 성실하게 ⑤ wiki/INDEX.md에 전체 목차 + 문서별 한 줄 요약.
-낡은 규정에는 최신 문서와 모순되는 부분에 "폐기됨" 표시를 달아줘. 원본은 archive/로.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">✅ 확인 포인트</p>
-          <pre class="code">INDEX.md만 읽고 전체 구조가 보이는가? · 아무 섹션이나 하나 잘라 읽어도 말이 되는가?
-(= 자기완결 테스트, 나중에 청킹 품질이 된다)</pre>
-        </div>
-      </div>
-      <aside class="notes">
-        핵심 교훈: "정리는 에이전트가 한다. 사람은 규칙을 정한다." 규칙 5개가 곧 CH2 슬라이드의 원칙들.
-        결과를 서로 비교해보면 재미있음 — 같은 프롬프트라도 문서 분할 방식이 조금씩 다르다 → 규칙을 더 명확히 주는 연습.
-      </aside>
-    </section>
-
-    <!-- ============= 36. 실습 2 — 진입점 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 2 · 진입점 (5분)</div>
-        <h2><span class="mono">CLAUDE.md</span> — 에이전트의 정문 달기</h2>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">knowledge-lab에 CLAUDE.md를 만들어줘. 내용: ① 이 폴더가 무엇인지 두 줄 소개
-② 질문을 받으면 wiki/INDEX.md부터 볼 것 ③ 문서 규칙(메타데이터·용어) 요약
-④ 답변 규칙: 반드시 출처 파일을 인용하고, 문서에 근거가 없으면
-"문서에 없음"이라고 답할 것 — 추측 금지.</pre>
-        </div>
-        <div class="grid-2" style="margin-top:.7rem; gap:1rem;">
-          <div class="prompt-card mini">
-            <div class="pc-label">🧪 테스트 A — 있는 지식</div>
-            <pre class="code">(새 세션에서) 아폴로 프로젝트 PM이 누구야?</pre>
-          </div>
-          <div class="prompt-card mini">
-            <div class="pc-label">🧪 테스트 B — 없는 지식</div>
-            <pre class="code">(새 세션에서) 우리 팀 보너스 지급 규정 알려줘.</pre>
-          </div>
-        </div>
-        <p class="small muted" style="margin-top:.6rem;">A는 <strong>출처와 함께</strong> 답해야 하고, B는 <strong>"문서에 없음"</strong>이 나와야 성공 — 환각 방지 장치가 작동하는 순간입니다.</p>
-      </div>
-      <aside class="notes">
-        새 세션에서 테스트하는 이유: 방금 작업한 세션은 이미 문서 내용을 기억하고 있어 공정한 테스트가 아님.
-        테스트 B가 이 실습의 하이라이트 — CH1 환각 슬라이드의 처방("없으면 없다고 해")이 실제로 동작하는 걸 확인.
-      </aside>
-    </section>
-
-    <!-- ============= 37. 실습 3 — 미니 RAG ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 3 · 미니 RAG (15분)</div>
-        <h2>청킹 → 검색 → 인용 답변을 <span class="grad">눈으로 봅니다</span></h2>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">wiki/ 문서를 ## 제목 경계로 청킹해서 chunks.json으로 저장해줘.
-각 청크에 출처(파일명·섹션 경로·날짜)를 붙여줘.
-그다음 질문 "고객사 납품 일정 알려줘"에 대해 두 방식으로 검색해봐:
-① 키워드 매칭으로 Top-3 청크 ② 의미 관련도로(네가 직접 판단) Top-3 청크.
-두 결과를 표로 비교해서 보여주고, 마지막으로 ②의 청크만 근거로
-출처 인용을 달아 답변해줘.</pre>
-        </div>
-        <div class="manual-box">
-          <p class="mb-title">✅ 확인 포인트</p>
-          <pre class="code">①과 ②의 Top-3가 다른가? (같은 질문, 다른 검색 = CH3 19장 체험)
-· "납품"이라는 단어가 없는 문서를 ②가 찾아냈는가? → 그게 의미 검색의 가치
-· 이번엔 "거래처 일정"으로 물어보기 — 용어 불일치가 검색을 흔드는 걸 관찰 (실습 5 예고)</pre>
-        </div>
-        <p class="tiny muted" style="margin-top:.5rem;">임베딩 API 없이 에이전트의 판단으로 의미 검색을 흉내 낸 것 — 개념 체험이 목적입니다. 실제 시스템은 임베딩+벡터 DB로 같은 일을 대규모로 합니다.</p>
-      </div>
-      <aside class="notes">
-        진짜 임베딩 파이프라인 구축은 세미나 범위 밖 — 대신 "청킹·검색·증강·생성"의 각 단계를 손으로 만져보는 게 목표.
-        여력이 있는 참가자에게는 심화 과제: "위 과정을 수행하는 파이썬 스크립트를 작성해줘 (임베딩은 관련도 점수를 네가 채점한 결과로 대체)".
-      </aside>
-    </section>
-
-    <!-- ============= 38. 실습 4 — 그래프 추출 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 4 · 지식 그래프 (15분)</div>
-        <h2>문서에서 <span class="grad">그래프를 뽑아</span> 그립니다</h2>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">wiki/ 전체에서 (주어, 관계, 목적어) 트리플을 추출해 triples.csv로 저장해줘.
-개체 종류는 사람/프로젝트/고객사/장비 4가지만,
-관계는 담당한다/납품한다/사용한다/결정했다 4가지만 허용해.
-각 트리플에 근거 문서도 적어줘.
-그다음 이 그래프를 mermaid 다이어그램으로 그린 graph.html을 만들어서 열어줘.
-개체 종류별로 색을 다르게.</pre>
-        </div>
-        <div class="grid-2" style="margin-top:.7rem; gap:1rem;">
-          <div class="prompt-card mini">
-            <div class="pc-label">🧪 그래프로 질문하기 (multi-hop)</div>
-            <pre class="code">triples.csv만 보고 답해줘:
-ACME와 연결된 사람을 전부, 연결 경로와 함께.</pre>
-          </div>
-          <div class="manual-box" style="margin-top:0;">
-            <p class="mb-title">✅ 확인 포인트</p>
-            <pre class="code">"고객사 ACME"와 "거래처 ACME"가
-노드 2개로 쪼개졌는가? → 온톨로지가
-필요한 순간. 다음 실습에서 고칩니다.</pre>
+        <div class="chip live">🖐 실습 안내 · 50분</div>
+        <h2>실습이 끝나면 폴더에 <span class="grad">쓸 만한 파일 5개</span>가 남습니다</h2>
+        <div class="grid-2" style="margin-top:.4rem; gap:1.6rem; align-items:start;">
+          <pre class="code lab-tree"><span class="kw">knowledge-lab/</span>
+├─ <span class="out">wiki/INDEX.md</span>    <span class="cm">← 1 · 위키 (15분)</span>
+├─ <span class="out">CLAUDE.md</span>        <span class="cm">← 1 · 답변 규칙 3줄</span>
+├─ <span class="out">FAQ.md</span>           <span class="cm">← 2 · 출처 달린 신입 FAQ (10분)</span>
+├─ <span class="out">team-map.html</span>    <span class="cm">← 3 · 담당·관계 지도 (10분)</span>
+├─ <span class="out">GLOSSARY.md</span>      <span class="cm">← 4 · 용어사전 + 점검 (10분)</span>
+└─ <span class="out">NEXT-STEPS.md</span>    <span class="cm">← 5 · 우리 팀 계획 (5분)</span></pre>
+          <div class="stack" style="gap:.75rem;">
+            <div class="card" style="padding:1rem 1.3rem;">
+              <h3 style="font-size:1.2rem;">🧰 준비물</h3>
+              <p style="font-size:1.05rem;">에이전트 도구(Claude Code 등) + 빈 폴더. 임베딩·벡터 DB 설치는 필요 없습니다. 실습 1에서 가상의 팀 문서를 AI가 만들어 줍니다.</p>
+            </div>
+            <div class="card bad" style="padding:1rem 1.3rem;">
+              <h3 style="font-size:1.2rem;">🔒 진짜 팀 문서로 하고 싶다면</h3>
+              <p style="font-size:1.0rem;">① 회사 기밀·실데이터는 사내 승인 도구에서만 — 애매하면 넣지 않는다. ② API 키·비밀번호는 코드·대화·커밋에 남기지 않는다 — 새어 나갔다면 재발급. ③ 회사 정책이 이 자료보다 우선한다. <a href="../security/">→ 보안 덱</a></p>
+            </div>
           </div>
         </div>
       </div>
       <aside class="notes">
-        허용 개체/관계를 제한하는 프롬프트가 곧 "미니 온톨로지의 씨앗"이라는 걸 여기서 미리 언급해도 좋다 (26장 조언의 실행).
-        mermaid 렌더링이 안 되는 환경이면 "텍스트로 인접 목록을 보여줘"로 대체 가능.
+        실습 전체 지도. 각 실습은 앞 실습의 결과물을 이어 쓴다 — 실습 1을 못 끝낸 사람은 옆 사람 폴더를 복사해도 된다.
+        가상 문서로 연습한 뒤 같은 프롬프트를 자기 팀 문서에 쓰는 게 목표. 보안 약속 3가지는 시리즈 공통 문구.
       </aside>
     </section>
 
-    <!-- ============= 39. 실습 5 — 온톨로지 ============= -->
     <section>
       <div class="vfill">
-        <div class="chip live">🖐 실습 5 · 온톨로지 (10분)</div>
-        <h2>용어사전 + 스키마 = <span class="grad">미니 온톨로지</span></h2>
-        <div class="prompt-card">
+        <div class="chip live">🖐 실습 1 · 위키 만들기 (15분)</div>
+        <h2>흩어진 문서 6개를 <span class="grad">위키 + 목차</span>로 바꿉니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 정리는 AI가, 규칙은 사람이. 4원칙을 규칙으로 주면 위키가 됩니다.</p>
+        <div class="prompt-card lab">
           <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">① wiki/에서 같은 대상을 다르게 부르는 용어들을 찾아
-GLOSSARY.md를 만들어줘 — 대표어·동의어 목록·한 줄 정의.
-② ontology.yaml을 만들어줘 — 개체 클래스 4종의 속성,
-허용 관계 4종, 그리고 제약(예: 프로젝트에는 담당 PM이 정확히 1명).
-③ 이 두 파일을 기준으로 실습 4의 트리플을 다시 추출해서,
-그래프가 어떻게 달라졌는지 전/후를 비교해줘.
-④ 마지막으로 제약을 위반하는 데이터가 있는지 검사해줘.</pre>
+          <pre class="code">knowledge-lab 폴더를 만들고, 가상의 "스마트팩토리 TF" 문서 6개를 만들어줘:
+회의록 2개(결정사항 포함), 아폴로 프로젝트 소개, 검사장비A 점검 매뉴얼, 신입 온보딩 메모,
+2년 전 낡은 규정 1개. 일부러 문제를 심어줘 — 고객사 ACME를 "고객사/거래처/클라이언트"로 섞어 부르고,
+담당자 정보는 여러 문서에 흩고, 휴가는 "연차"라는 말로만, "그 건" 같은 대명사도 넣어줘.
+그다음 wiki/에 위키로 다시 써줘 — 맨 위 날짜·담당·상태, 한 문서 한 주제, 대명사 대신 고유명사,
+낡은 규정과 모순되는 곳엔 "폐기됨" 표시, wiki/INDEX.md에 문서별 한 줄 요약.
+마지막으로 CLAUDE.md에 세 줄만: INDEX.md부터 볼 것 · 답마다 출처 파일 · 근거 없으면 "문서에 없음".</pre>
         </div>
-        <div class="manual-box">
-          <p class="mb-title">✅ 확인 포인트</p>
-          <pre class="code">쪼개졌던 ACME 노드가 하나로 합쳐졌는가? ← 온톨로지의 가치가 체감되는 순간
-· "PM 없는 프로젝트" 같은 제약 위반이 검출됐는가? = 지식의 품질 검사가 자동화됨</pre>
-        </div>
-        <p class="small muted" style="margin-top:.5rem;">CLAUDE.md에 "용어는 GLOSSARY.md 기준" 한 줄을 추가하면 — 이후 모든 대화의 용어가 통일됩니다.</p>
-      </div>
-      <aside class="notes">
-        전/후 비교가 이 실습의 하이라이트: 노드 수가 줄고(동의어 병합) 연결이 늘어난(끊긴 길이 이어짐) 것을 숫자로 보여달라고 하면 효과적.
-        ④ 제약 검사는 온톨로지가 "문서 품질 게이트"로 쓰일 수 있음을 보여준다 — 신규 문서 커밋 전 검사로 확장 가능.
-      </aside>
-    </section>
-
-    <!-- ============= 40. 실습 6 — 종합 설계 ============= -->
-    <section>
-      <div class="vfill">
-        <div class="chip live">🖐 실습 6 · 종합 (10분)</div>
-        <h2>우리 팀 <span class="grad">지식봇 설계서</span> 쓰기</h2>
-        <div class="prompt-card">
-          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
-          <pre class="code">지금까지 knowledge-lab에 만든 것(위키·CLAUDE.md·청킹·그래프·온톨로지)을 바탕으로,
-"우리 팀 지식봇 구축 설계서" DESIGN.md를 써줘.
-먼저 우리 팀 상황(문서 수, 인원, 질문 유형, 보안 요건)을 나에게 물어보고 반영해줘.
-내용: 단계별 로드맵(1단계=위키 정리부터), 각 단계에 필요한 도구와 프롬프트,
-단계별 "이 신호가 오면 다음 단계로" 기준, 예상되는 함정 3가지.</pre>
-        </div>
-        <div class="stack" style="gap:.5rem; margin-top:.8rem;">
-          <p class="small"><strong>진짜 팀에 적용하는 순서</strong> — 오늘 배운 그대로:</p>
-          <div class="step-flow" style="margin:0;">
-            <div class="sf-step"><b>1. 위키부터</b><p>중요 문서 10개를 마크다운으로 + INDEX + CLAUDE.md</p></div>
-            <span class="sf-arrow">→</span>
-            <div class="sf-step"><b>2. 에이전트 검색</b><p>일상 질문을 에이전트에게 — 이게 이미 RAG</p></div>
-            <span class="sf-arrow">→</span>
-            <div class="sf-step hot"><b>3. 필요할 때만</b><p>관계 질문이 잦아지면 그래프 · 용어가 꼬이면 온톨로지</p></div>
-          </div>
+        <div class="lab-grid">
+          <div class="lab-box"><p class="lb-t">✅ 완료 기준 — 눈으로 확인</p><ul><li><span class="mono">wiki/INDEX.md</span> 한 장만 읽어도 문서 전체가 보인다</li><li>아무 섹션 하나를 오려 읽어도 누가·언제·무엇이 나온다</li><li>낡은 규정에 "폐기됨" 표시가 붙어 있다</li></ul></div>
+          <div class="lab-box help"><p class="lb-t">🆘 막히면</p><ul><li>문서가 한 파일로 뭉치면 → "한 문서 한 주제로 쪼개줘"</li><li>결과가 너무 길면 → "각 문서 20줄 이내로"</li><li>진짜 팀 문서는 사내 승인 도구에서만 (보안 약속 ①)</li></ul></div>
         </div>
       </div>
       <aside class="notes">
-        "물어보고 반영해줘"가 포인트 — 에이전트가 요구사항 인터뷰를 하게 만드는 패턴. 참가자마다 다른 설계서가 나온다.
-        세미나 후 실제 행동으로 이어지게 하는 슬라이드: "다음 주에 중요 문서 10개만 옮겨보세요"가 현실적인 첫 걸음.
+        핵심 교훈: "정리는 에이전트가 한다. 사람은 규칙을 정한다." 규칙들이 곧 CH 2의 4원칙.
+        일부러 문제를 심는 이유: 이후 실습이 하나씩 고친다 — "연차"는 실습 2(검색), 흩어진 담당자는 실습 3(지도), 용어 불일치는 실습 4(용어사전).
+        시간이 없으면 진행자가 미리 만든 폴더를 나눠 줘도 된다. CLAUDE.md 작성법 자체는 agent-skills 덱의 몫 — 여기선 세 줄만.
       </aside>
     </section>
 
-    <!-- ============= 41. 치트시트 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 2 · 근거 있는 답변 (10분)</div>
+        <h2>새 세션에서 물어보고, <span class="grad">출처 달린 FAQ</span>를 받습니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — "없으면 없다고" 한 줄이 지어내기를 막습니다. 단어가 달라도 찾는 것이 RAG입니다.</p>
+        <div class="prompt-card lab">
+          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+          <pre class="code">(새 세션에서 knowledge-lab을 열고 하나씩)
+① 아폴로 프로젝트 PM이 누구야?
+② 우리 팀 보너스 지급 규정 알려줘.
+③ 휴가 규정 알려줘.
+④ wiki/만 근거로, 신입이 자주 물을 질문 10개와 답을 FAQ.md로 만들어줘.
+   답마다 [파일명#제목] 출처를 달고, 근거가 없는 질문은 빼줘.</pre>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-box"><p class="lb-t">✅ 완료 기준 — 눈으로 확인</p><ul><li>①은 출처 파일과 함께 답한다</li><li>②는 "문서에 없음" — 지어내지 않는다</li><li>③은 "휴가"라는 단어가 없는 연차 문서를 찾아 답한다</li><li>FAQ.md 답 10개에 전부 출처가 달려 있다</li></ul></div>
+          <div class="lab-box help"><p class="lb-t">🆘 막히면</p><ul><li>②에서 지어내면 → 새 세션인지, knowledge-lab에서 열었는지 확인 (CLAUDE.md가 읽혔나)</li><li>③에서 못 찾으면 → "검색어를 바꿔 가며 다시 찾아봐"</li></ul></div>
+        </div>
+      </div>
+      <aside class="notes">
+        새 세션에서 하는 이유: 방금 작업한 세션은 문서를 이미 기억하고 있어 공정한 테스트가 아니다.
+        ②가 하이라이트 — CH 1 환각 장의 처방("없으면 없다고 해")이 실제로 작동하는 순간. ③은 키워드 vs 의미 검색 체험(에이전트가 검색어를 바꿔 찾는 것 = Agentic RAG).
+        FAQ.md는 그대로 신입 온보딩 자료로 쓸 수 있는 결과물 — 출처가 달려 있어 사람이 검수하기 쉽다는 점을 짚어 준다.
+      </aside>
+    </section>
+
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 3 · 관계 지도 (10분)</div>
+        <h2>흩어진 담당자 정보를 <span class="grad">한 장의 지도</span>로 그립니다</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 점과 선으로 이으면 "이걸 바꾸면 누가 영향받나"에 빠짐없이 답합니다. 그리고 용어가 다르면 지도가 끊깁니다.</p>
+        <div class="prompt-card lab">
+          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+          <pre class="code">wiki/ 전체에서 (주어, 관계, 목적어) 트리플을 뽑아 triples.csv로 저장해줘.
+개체는 사람·프로젝트·고객사·장비 4종, 관계는 담당한다·납품한다·사용한다·결정했다 4종만 허용하고,
+줄마다 근거 문서를 적어줘. 그다음 이 관계를 그린 team-map.html을 만들어 열어줘 —
+종류별로 색을 다르게, 인터넷 연결 없이 열리는 파일 하나로.
+마지막으로 triples.csv만 보고 답해줘: 검사장비A를 바꾸면 영향받는 프로젝트·고객사·담당자는?</pre>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-box"><p class="lb-t">✅ 완료 기준 — 눈으로 확인</p><ul><li>team-map.html이 열리고 사람·프로젝트·고객사·장비가 색으로 구분된다</li><li>영향 질문에 장비 → 프로젝트 → 고객사 <strong>경로</strong>로 답한다</li><li>"고객사 ACME"와 "거래처 ACME"가 따로 떠 있는지 확인 — 다음 실습 재료</li></ul></div>
+          <div class="lab-box help"><p class="lb-t">🆘 막히면</p><ul><li>그림이 안 뜨면 → "외부 라이브러리 없이 SVG로 다시 그려줘"</li><li>점이 너무 많으면 → "허용한 4종 외에는 빼줘"</li></ul></div>
+        </div>
+      </div>
+      <aside class="notes">
+        허용 개체·관계를 4종으로 제한한 것 자체가 "작게 시작" 조언의 실행이자 미니 온톨로지의 씨앗.
+        결과물 team-map.html은 "누가 무엇을 맡고 있나" 지도로 팀 회의에 그대로 띄울 수 있다.
+        ACME 노드가 둘로 쪼개졌다면 성공적인 실패 — 실습 4에서 고친다.
+      </aside>
+    </section>
+
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 4 · 용어 통일 (10분)</div>
+        <h2>용어사전 한 장으로 <span class="grad">끊긴 지도를 잇습니다</span></h2>
+        <p class="lab-learn"><b>배우는 것</b> — 같은 것을 같은 이름으로 부르게 하면 검색·지도·답변이 한꺼번에 좋아집니다 — 온톨로지의 최소 버전.</p>
+        <div class="prompt-card lab">
+          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+          <pre class="code">① wiki/에서 같은 대상을 다르게 부르는 말을 찾아 GLOSSARY.md를 만들어줘 — 대표어·동의어·한 줄 정의.
+② GLOSSARY.md 아래에 규칙 두 줄을 적어줘:
+   "프로젝트에는 PM이 정확히 1명" · "상태는 준비/진행중/완료 중 하나".
+③ 이 기준으로 triples.csv와 team-map.html을 다시 만들고, 전/후 점(노드) 수를 비교해줘.
+④ 규칙을 어기는 문서를 찾아 목록으로 보여줘.
+⑤ CLAUDE.md에 한 줄 추가: "용어는 GLOSSARY.md 기준".</pre>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-box"><p class="lb-t">✅ 완료 기준 — 눈으로 확인</p><ul><li>ACME가 점 하나로 합쳐지고 노드 수가 줄었다</li><li>규칙 위반 목록이 나온다 (예: PM 없는 프로젝트, "종결" 같은 비표준 상태)</li><li>새 세션에서 "거래처 일정"으로 물어도 고객사 문서로 답한다</li></ul></div>
+          <div class="lab-box help"><p class="lb-t">🆘 막히면</p><ul><li>위반이 0건이면 → "규칙 위반 사례를 문서 하나에 일부러 넣어줘" 후 ④ 다시</li><li>용어를 너무 많이 묶으면 → "확실한 동의어만, 애매하면 표시만"</li></ul></div>
+        </div>
+      </div>
+      <aside class="notes">
+        전/후 비교가 하이라이트: 노드 수가 줄고(동의어 병합) 끊긴 길이 이어진다 — 숫자로 보여 달라고 하면 효과적.
+        ④ 규칙 검사는 용어사전이 "문서 품질 점검표"로 쓰일 수 있음을 보여 준다. 정식 온톨로지(ontology.yaml 등)는 필요해지면 그때 — 이 두 줄 규칙이 그 씨앗.
+      </aside>
+    </section>
+
+    <section>
+      <div class="vfill">
+        <div class="chip live">🖐 실습 5 · 우리 팀에 옮기기 (5분)</div>
+        <h2>다음 주에 할 일을 <span class="grad">NEXT-STEPS.md</span> 한 장으로</h2>
+        <p class="lab-learn"><b>배우는 것</b> — 시스템이 아니라 순서. 이번 주엔 문서 10개.</p>
+        <div class="prompt-card lab">
+          <div class="pc-label">💬 에이전트에게 이렇게 말하세요</div>
+          <pre class="code">우리 팀 지식 정리를 시작하려고 해. 먼저 나에게 다섯 가지를 하나씩 물어봐:
+문서 수와 위치 · 자주 받는 질문 3개 · 보안 등급 · 쓸 수 있는 사내 승인 도구 · 함께할 사람.
+내 답을 바탕으로 NEXT-STEPS.md를 써줘 — 이번 주에 옮길 문서 10개를 고르는 기준,
+첫 INDEX.md 목차 초안, 그리고 "검색·관계 지도·용어사전이 필요해지는 신호"를 단계별로.</pre>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-box"><p class="lb-t">✅ 완료 기준 — 눈으로 확인</p><ul><li>다섯 질문에 답했다</li><li>NEXT-STEPS.md에 "이번 주 할 일"이 3줄 이내로 있다</li><li>다음 단계로 넘어갈 <strong>신호</strong>가 적혀 있다</li></ul></div>
+          <div class="lab-box help"><p class="lb-t">🆘 막히면</p><ul><li>답하기 애매한 질문은 "모름"으로 두고 진행</li><li>실제 문서 내용은 붙여 넣지 말고 목록·설명만</li></ul></div>
+        </div>
+      </div>
+      <aside class="notes">
+        "먼저 물어봐"가 포인트 — 에이전트가 요구사항 인터뷰를 하게 만드는 패턴이라 사람마다 다른 계획이 나온다.
+        세미나 후 실제 행동으로 이어지게 하는 장: "다음 주에 중요 문서 10개만 옮겨 보세요".
+      </aside>
+    </section>
+
     <section>
       <div class="vfill">
         <div class="chip">부록 · 오늘의 프롬프트 치트시트</div>
-        <h2>이 장표만 찍어 가세요 📸</h2>
+        <h2>자주 쓰는 프롬프트, <span class="grad">이 한 장</span>에 모았습니다</h2>
         <div class="cheat-grid" style="margin-top:.4rem;">
           <div class="cheat"><span class="ct">변환</span><span class="cp">이 워드/PPT/PDF를 마크다운으로 변환해줘. 표는 표로, 이미지는 설명 텍스트로</span></div>
           <div class="cheat"><span class="ct">위키화</span><span class="cp">이 폴더를 위키로 재구성해줘 — 메타데이터·한 문서 한 주제·INDEX.md 포함</span></div>
-          <div class="cheat"><span class="ct">진입점</span><span class="cp">CLAUDE.md 만들어줘 — 문서 규칙과 "근거 없으면 없다고 답하기" 포함</span></div>
+          <div class="cheat"><span class="ct">답변 규칙</span><span class="cp">CLAUDE.md에 세 줄: INDEX.md부터 · 출처 표기 · 근거 없으면 "문서에 없음"</span></div>
           <div class="cheat"><span class="ct">근거 답변</span><span class="cp">문서에서 근거를 찾아 출처와 함께 답해줘. 없으면 없다고 해</span></div>
-          <div class="cheat"><span class="ct">청킹</span><span class="cp">## 제목 경계로 청킹해서 출처 포함 JSON으로 저장해줘</span></div>
-          <div class="cheat"><span class="ct">검색 비교</span><span class="cp">이 질문을 키워드/의미 두 방식으로 검색해서 Top-3를 비교해줘</span></div>
+          <div class="cheat"><span class="ct">FAQ</span><span class="cp">이 폴더만 근거로 신입 FAQ 10개를 만들어줘 — 답마다 출처, 근거 없으면 제외</span></div>
+          <div class="cheat"><span class="ct">검색 비교</span><span class="cp">이 질문을 글자 그대로/뜻으로 두 방식으로 찾아 결과를 비교해줘</span></div>
           <div class="cheat"><span class="ct">그래프 추출</span><span class="cp">문서에서 트리플을 추출해줘 — 개체 4종·관계 4종만 허용, 근거 표기</span></div>
-          <div class="cheat"><span class="ct">그래프 그림</span><span class="cp">트리플을 mermaid 다이어그램 HTML로 그려줘, 종류별 색 구분</span></div>
+          <div class="cheat"><span class="ct">관계 지도</span><span class="cp">트리플을 HTML 파일 하나로 그려줘 — 종류별 색, 인터넷 없이 열리게</span></div>
           <div class="cheat"><span class="ct">멀티홉</span><span class="cp">X와 Y의 연결 경로를 그래프에서 전부 찾아줘</span></div>
           <div class="cheat"><span class="ct">용어사전</span><span class="cp">같은 대상을 다르게 부르는 용어를 찾아 GLOSSARY.md 만들어줘</span></div>
-          <div class="cheat"><span class="ct">스키마</span><span class="cp">ontology.yaml에 클래스·속성·관계·제약을 정의해줘</span></div>
-          <div class="cheat"><span class="ct">품질 검사</span><span class="cp">온톨로지 제약을 위반하는 데이터를 찾아줘</span></div>
+          <div class="cheat"><span class="ct">규칙</span><span class="cp">용어사전 아래에 지켜야 할 규칙 두세 줄을 적어줘</span></div>
+          <div class="cheat"><span class="ct">품질 검사</span><span class="cp">규칙을 어기는 문서를 찾아 목록으로 보여줘</span></div>
           <div class="cheat"><span class="ct">최신성</span><span class="cp">6개월 넘은 문서를 찾아 담당자별 확인 요청 목록을 만들어줘</span></div>
           <div class="cheat"><span class="ct">배움</span><span class="cp">방금 네가 한 과정을 초보자에게 설명하듯 알려줘</span></div>
         </div>
         <p class="tiny muted" style="margin-top:.6rem;">같은 내용이 저장소의 <span class="mono">knowledge/README.md</span>에도 정리돼 있습니다 — 복사해서 쓰세요.</p>
       </div>
       <aside class="notes">
-        마지막 "배움" 프롬프트는 모든 세미나 공통의 메타 프롬프트 — 시키면서 배우는 습관.
+        마지막 "배움" 프롬프트는 시리즈 공통의 메타 프롬프트 — 시키면서 배우는 습관.
         "최신성" 프롬프트는 위키 운영의 실전 꿀팁: 분기에 한 번 돌리면 위키가 썩는 걸 막는다.
       </aside>
     </section>
 
-    <!-- ============= 42. 마무리 ============= -->
     <section>
       <div class="vfill center">
         <div class="chip">마무리</div>
@@ -2640,14 +1836,15 @@ GLOSSARY.md를 만들어줘 — 대표어·동의어 목록·한 줄 정의.
             2️⃣ 거창한 시스템보다 <strong class="accent4">잘 쓰인 마크다운 10개</strong> — 위키가 모든 것의 1층
           </div>
           <div class="autoshow fade-up" style="display:flex; align-items:center; gap:1rem; padding:.7rem 1.2rem; border:1px solid rgba(155,130,255,.5); border-radius:12px; background:rgba(124,92,255,.18); font-size:1.32rem; font-weight:700;">
-            3️⃣ 검색(RAG)으로 시작하고 — <strong class="accent3">관계(그래프)와 규칙(온톨로지)</strong>은 필요해질 때
+            3️⃣ 검색(RAG)까지면 대부분 충분 — <strong class="accent3">관계(그래프)와 규칙(온톨로지)</strong>은 신호가 올 때
           </div>
         </div>
         <p style="margin-top:1.6rem; font-size:1.5rem;">질문은 화면 아래 입력창으로 💬</p>
         <p class="tiny muted" style="margin-top:1rem;">
-          함께 보면 좋은 자료 — <a href="../context/">컨텍스트 엔지니어링</a> ·
-          <a href="../github/">최소한의 Git &amp; GitHub</a> ·
-          <a href="../workshop/">실습 워크숍</a>
+          다음으로 — <a href="../context/">컨텍스트 — 작업 책상</a> ·
+          <a href="../agent-skills/">CLAUDE.md · 스킬</a> ·
+          <a href="../automation/">사내 도구와 연결하기</a> ·
+          <a href="../github/">위키를 git으로 관리</a>
         </p>
       </div>
       <aside class="notes">
