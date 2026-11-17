@@ -131,7 +131,6 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      padding-bottom: 2.2rem; /* 하단 상태바 자리 */
       overflow-x: hidden;
     }
     ::selection { background: rgba(155,130,255,.45); color: var(--fg); }
@@ -182,7 +181,7 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr);
       gap: 2.5rem;
       align-items: center;
     }
@@ -206,12 +205,6 @@
       width: .5rem; height: .5rem;
       border-radius: 50%;
       background: var(--accent-2);
-      box-shadow: 0 0 8px var(--accent-2);
-      animation: pulse 1.6s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .4; transform: scale(.72); }
     }
     .hero h1 {
       font-size: clamp(2rem, 4.6vw, 3.1rem);
@@ -227,23 +220,9 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: gradslide 8s linear infinite;
     }
     @keyframes gradslide { to { background-position: -300% 0; } }
-    /* 타자기 줄: 처음부터 두 줄 공간을 확보해 긴 문구가 감겨도
-       상단부 높이가 늘었다 줄었다 하지 않는다 (line-height 1.22 × 2줄) */
-    .typeline {
-      display: block;
-      min-height: 2.44em;
-    }
-    .typeline .caret {
-      display: inline-block;
-      width: .55em;
-      margin-left: .08em;
-      border-bottom: .14em solid var(--accent-2);
-      transform: translateY(-.08em);
-      animation: blink 1.05s steps(1) infinite;
-    }
+    .typeline { display: block; }
     @keyframes blink { 50% { opacity: 0; } }
     .hero p.lede {
       max-width: 34rem;
@@ -280,17 +259,15 @@
       font-family: inherit;
     }
     .hero .cta-ghost:hover { border-color: rgba(155,130,255,.5); transform: translateY(-2px); }
+    @media (hover: none) { .hero .cta-ghost kbd { display: none; } }
 
     /* ── 터미널 ───────────────────────────────────── */
     .term {
       position: relative;
       border-radius: 14px;
-      border: 1px solid rgba(155,130,255,.28);
+      border: 1px solid rgba(155,130,255,.2);
       background: rgba(8,10,20,.92);
-      box-shadow:
-        0 18px 60px rgba(0,0,0,.55),
-        0 0 0 1px rgba(0,0,0,.4),
-        0 0 42px rgba(155,130,255,.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
       overflow: hidden;
       backdrop-filter: blur(6px);
     }
@@ -308,22 +285,13 @@
     .term-head .light { width: .68rem; height: .68rem; border-radius: 50%; }
     .light.r { background: #FF5F57; } .light.y { background: #FEBC2E; } .light.g { background: #28C840; }
     .term-head .title { margin: 0 auto; letter-spacing: .04em; }
-    .term-head .live {
-      color: var(--accent-3);
-      display: inline-flex; align-items: center; gap: .35rem;
-    }
-    .term-head .live::before {
-      content: "";
-      width: .45rem; height: .45rem; border-radius: 50%;
-      background: var(--accent-3);
-      animation: pulse 1.2s ease-in-out infinite;
-    }
+    .term-head .state { color: #6B7390; min-width: 5.5em; text-align: right; }
     .term-body {
       font-family: var(--mono);
       font-size: .8rem;
       line-height: 1.75;
       padding: .9rem 1rem 1rem;
-      height: 19.5rem;
+      height: 14rem;
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: rgba(155,130,255,.4) transparent;
@@ -349,18 +317,6 @@
       vertical-align: text-bottom;
       animation: blink 1s steps(1) infinite;
     }
-    .term-foot {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: .45rem .9rem;
-      border-top: 1px solid rgba(155,130,255,.16);
-      background: rgba(14,18,32,.8);
-      font-family: var(--mono);
-      font-size: .68rem;
-      color: #6B7390;
-    }
-    .term-foot .tok { color: var(--accent-4); }
 
     /* ── 본문 섹션 ────────────────────────────────── */
     /* .wrap(클래스)이 main(요소)보다 특이도가 높아 상하 패딩이 0으로
@@ -419,8 +375,6 @@
     .th-hands .tno { color: var(--accent-4); }
     .th-hands .tline { background: linear-gradient(90deg, rgba(255,212,107,.45), transparent); }
     a.card {
-      --mx: 50%;
-      --my: 50%;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -431,27 +385,10 @@
       padding: 1.35rem 1.3rem 1.25rem;
       text-decoration: none;
       color: inherit;
-      transition: border-color .2s ease, box-shadow .2s ease;
-      transform-style: preserve-3d;
-      will-change: transform;
+      transition: border-color .2s ease, transform .2s ease;
       overflow: hidden;
     }
-    a.card::before {
-      /* 마우스를 따라다니는 글로우 */
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(220px circle at var(--mx) var(--my), rgba(155,130,255,.16), transparent 65%);
-      opacity: 0;
-      transition: opacity .25s ease;
-      pointer-events: none;
-    }
-    a.card:hover::before { opacity: 1; }
-    a.card:hover {
-      border-color: rgba(155,130,255,.55);
-      box-shadow: 0 16px 40px rgba(0,0,0,.5), 0 0 24px rgba(155,130,255,.12);
-    }
+    a.card:hover { border-color: rgba(155,130,255,.55); transform: translateY(-2px); }
     .card .top { display: flex; align-items: center; gap: .6rem; }
     .card .emoji { font-size: 1.5rem; line-height: 1; }
     .card h3 { font-size: 1.08rem; font-weight: 700; color: var(--fg); line-height: 1.4; }
@@ -459,7 +396,7 @@
     .card .foot { display: flex; align-items: center; }
     .card .go { font-size: .85rem; font-weight: 600; color: var(--accent-2); }
     .card .key {
-      margin-left: auto;
+      display: none;
       font-family: var(--mono);
       font-size: .68rem;
       color: #6B7390;
@@ -467,22 +404,25 @@
       border-radius: 6px;
       padding: .05rem .45rem;
     }
-    @media (hover: none) { .card .key { display: none; } }
+    /* 키보드를 쓰는 동안엔 이모지 자리에 숫자 키가 뜬다 — 레이아웃은 그대로 */
+    body.keys-on .card .key { display: block; }
+    body.keys-on a.card.mini[data-key] .emoji { visibility: hidden; }
 
     /* 컴팩트 카드 — 트랙 보드용 한 줄 카드 */
     a.card.mini {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
       gap: .4rem .75rem;
       padding: .85rem 1rem;
       border-radius: 13px;
     }
-    .mini .emoji { font-size: 1.35rem; }
+    .mini .emoji { font-size: 1.35rem; grid-column: 1; grid-row: 1; }
+    .mini .mini-main { grid-column: 2; grid-row: 1; }
+    .mini .key { grid-column: 1; grid-row: 1; justify-self: center; font-size: .78rem; }
     .mini h3 { font-size: .96rem; line-height: 1.35; }
     .mini .mini-main { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
     .mini .sym { font-size: .8rem; color: var(--fg-soft); line-height: 1.4; }
-    .mini .key { margin-left: 0; }
     .mini .mdesc { grid-column: 1 / -1; font-size: .84rem; color: var(--fg-soft); margin: 0; }
     /* 데스크톱(호버 가능)에서는 설명을 접어뒀다가, 호버하면 카드가
        아래로 늘어나며 펼친다. 카드 높이가 커지는 만큼 아래 카드들이
@@ -515,11 +455,6 @@
     a.card.step h3 { font-size: 1.28rem; }
     a.card.step .emoji { font-size: 2rem; }
     a.card.step .go { margin-top: .3rem; }
-    a.card.step.s1 { border-color: rgba(43,234,208,.35); }
-    a.card.step.s2 { border-color: rgba(155,130,255,.45); }
-    a.card.step.s3 { border-color: rgba(255,212,107,.4); }
-    a.card.step.s3 .step-no { color: var(--accent-4); }
-    a.card.step.s2 .step-no { color: var(--accent); }
     .path-note { margin-top: .9rem; font-size: .92rem; color: var(--fg-soft); }
     .path-note b { color: var(--fg); }
     .path-note a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dashed rgba(43,234,208,.5); }
@@ -555,39 +490,11 @@
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* ── 하단 진단 상태바 (쓸데없는 고퀄리티) ─────── */
-    #statusbar {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      z-index: 40;
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      padding: .32rem 1rem;
-      font-family: var(--mono);
-      font-size: .66rem;
-      letter-spacing: .03em;
-      color: #6B7390;
-      background: rgba(8,10,20,.85);
-      border-top: 1px solid rgba(155,130,255,.18);
-      backdrop-filter: blur(8px);
-      white-space: nowrap;
-      overflow: hidden;
+    footer .foot-motion {
+      font: inherit; color: var(--accent); background: none; border: 0;
+      padding: 0; cursor: pointer;
     }
-    #statusbar b { color: var(--fg-soft); font-weight: 600; }
-    #statusbar .ok { color: var(--accent-2); }
-    #statusbar .spacer { margin-left: auto; }
-    #statusbar a { color: var(--accent); text-decoration: none; }
-    #statusbar a:hover { text-decoration: underline; }
-    #statusbar .konami-hint { opacity: .55; }
-    @media (max-width: 1080px) { #statusbar .konami-hint { display: none; } }
-    /* 크레딧은 상태바에 — 상태바가 숨는 모바일에서만 footer 에 표시 */
-    .foot-credit { display: none; }
-    @media (max-width: 720px) {
-      #statusbar { display: none; }
-      body { padding-bottom: 0; }
-      .foot-credit { display: inline; }
-    }
+    footer .foot-motion:hover { text-decoration: underline; }
 
     /* ── 커맨드 팔레트 ────────────────────────────── */
     #palette {
@@ -661,7 +568,7 @@
     #toast {
       position: fixed;
       left: 50%;
-      bottom: 3.4rem;
+      bottom: 1.6rem;
       transform: translateX(-50%) translateY(20px);
       z-index: 90;
       padding: .6rem 1.2rem;
@@ -703,30 +610,6 @@
     }
     :root.reduce-motion .reveal { opacity: 1; transform: none; }
 
-    /* ── 모션 토글 버튼 ─────────────────────────────
-       보안 인트라넷/VDI 처럼 시스템이 애니메이션을 꺼둔 환경에서도
-       사용자가 배경·터미널 애니메이션을 직접 켜고 끌 수 있게 한다. */
-    #motion-toggle {
-      position: fixed; top: 14px; right: 14px; z-index: 60;
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 12px; border-radius: 999px; cursor: pointer;
-      font: inherit; font-size: 12.5px; line-height: 1; color: var(--fg-soft);
-      background: rgba(14, 18, 32, .72); border: 1px solid var(--line);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      transition: border-color .15s ease, color .15s ease, transform .15s ease;
-    }
-    #motion-toggle:hover { color: var(--fg); border-color: var(--accent); transform: translateY(-1px); }
-    #motion-toggle:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
-    #motion-toggle .mt-ico {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: #4A5170; box-shadow: none; transition: background .15s ease, box-shadow .15s ease;
-    }
-    #motion-toggle.on .mt-ico {
-      background: var(--accent-2);
-      box-shadow: 0 0 8px 1px rgba(43, 234, 208, .55);
-    }
-    @media (max-width: 640px) { #motion-toggle { top: 10px; right: 10px; padding: 6px 10px; font-size: 12px; } }
-    @media (pointer: coarse) { #motion-toggle { min-height: 44px; padding: 10px 14px; } }
   </style>
 </head>
 <body>
@@ -742,18 +625,13 @@
       <span class="eyebrow"><span class="dot"></span>VIBE CODING SEMINAR SERIES</span>
       <h1>
         바이브 코딩 세미나
-        <span class="typeline"><span class="grad" id="typegrad">코드는 AI가, 방향은 내가</span><span class="caret" aria-hidden="true"></span></span>
+        <span class="typeline"><span class="grad">코드는 AI가, 방향은 내가</span></span>
       </h1>
-      <p class="lede">
-        설치부터 내 업무 도구 완성까지, <b>세 단계</b>면 됩니다.
-        그 밖의 세미나는 일하다 막혔을 때 펼쳐 보는 <b>증상별 처방전</b> —
-        덱마다 핵심 장만 먼저, 3분 요약부터 보여 줍니다.
-      </p>
+      <p class="lede">설치부터 내 업무 도구 완성까지, <b>세 단계</b>면 됩니다.</p>
       <div class="cta-row">
         <a class="cta" href="#path">▶ 3단계로 시작하기</a>
-        <a class="cta-ghost" href="#board">막혔을 때 찾기</a>
         <button class="cta-ghost" id="palette-btn" type="button">
-          커맨드 팔레트 <kbd>Ctrl</kbd><kbd>K</kbd>
+          세미나 찾기 <kbd>Ctrl</kbd><kbd>K</kbd>
         </button>
       </div>
     </div>
@@ -761,14 +639,10 @@
     <div class="term" id="term" aria-label="Claude Code 에이전트 세션 데모 (자동 재생)">
       <div class="term-head">
         <span class="light r"></span><span class="light y"></span><span class="light g"></span>
-        <span class="title">claude-code — vibe-session — 80×24</span>
-        <span class="live">LIVE</span>
+        <span class="title">claude-code</span>
+        <span class="state" id="term-status">idle</span>
       </div>
       <div class="term-body" id="term-body"></div>
-      <div class="term-foot">
-        <span id="term-status">agent: idle</span>
-        <span>tokens: <span class="tok" id="term-tokens">0</span></span>
-      </div>
     </div>
   </div>
 </header>
@@ -800,34 +674,15 @@
         <span class="go">실습 워크숍 열기 →</span>
       </a>
     </div>
-    <p class="path-note">여기까지면 <b>바이브 코딩을 시작하는 데 충분합니다.</b> 나머지 세미나는 순서대로 볼 필요 없이,
-      일하다 <a href="#board">막혔을 때 펼쳐 보는 처방전</a>입니다 — 각 덱은 핵심 장만 먼저 보여 주고, 첫 장 다음에 3분 요약이 있습니다.</p>
+    <p class="path-note">나머지 세미나는 순서 없이, <a href="#board">막혔을 때 펼쳐 보는 처방전</a>입니다 — 어느 덱이든 3분 요약부터 시작합니다.</p>
   </section>
 
   <section class="reveal" id="board">
-    <h2 class="sec">막혔을 때 — 전체 세미나 <span class="hint">증상으로 고르기 · 숫자 키 1–9·0 바로 이동</span></h2>
+    <h2 class="sec">막혔을 때 펼쳐 보는 처방전 <span class="hint">증상으로 고르기 · 숫자 키 1–9·0 바로 이동</span></h2>
 
     <div class="tracks">
       <div class="track">
-        <div class="track-head th-start"><span class="tno">01</span>시작하기<span class="tline"></span></div>
-        <a class="card mini" href="setup/" data-key="1">
-          <span class="emoji">🧰</span>
-          <span class="mini-main">
-            <h3>0교시 — 설치와 첫 실행</h3>
-            <span class="sym">설치·로그인에서 에러가 난다</span>
-          </span>
-          <span class="key">1</span>
-          <p class="mdesc">터미널 열기부터 도구 설치·로그인·첫 대화·트러블슈팅 TOP 5까지 — 워크숍 전에 30분으로 끝내는 환경 세팅.</p>
-        </a>
-        <a class="card mini" href="intro/" data-key="2">
-          <span class="emoji">🚀</span>
-          <span class="mini-main">
-            <h3>바이브 코딩이란 무엇인가?</h3>
-            <span class="sym">바이브 코딩이 뭔지 감부터 잡고 싶다</span>
-          </span>
-          <span class="key">2</span>
-          <p class="mdesc">알파고부터 LLM, 에이전트, Claude Code까지 — 바이브 코딩의 개념과 실전 활용법을 다루는 원본 세미나. 시리즈의 출발점입니다.</p>
-        </a>
+        <div class="track-head th-start"><span class="tno">01</span>기본기<span class="tline"></span></div>
         <a class="card mini" href="use-cases/">
           <span class="emoji">💡</span>
           <span class="mini-main">
@@ -836,116 +691,110 @@
           </span>
           <p class="mdesc">경품 추첨기 10분 · 엑셀→실시간 대시보드 · 주간보고 3시간→15분 · 개발자 주간 활동 자동 공유 — 내레이션이 흐르는 5분짜리 캠페인 덱과 상황별 처방표.</p>
         </a>
-        <a class="card mini" href="prompt/" data-key="3">
+        <a class="card mini" href="prompt/" data-key="1">
           <span class="emoji">🗣️</span>
           <span class="mini-main">
             <h3>AI에게 일 시키는 법 — 프롬프트 엔지니어링</h3>
             <span class="sym">결과가 엉뚱하거나 밋밋하다</span>
           </span>
-          <span class="key">3</span>
+          <span class="key">1</span>
           <p class="mdesc">목표·맥락·제약 3요소 프레임 + 바로 쓰는 패턴 8가지 + 다듬기 루프 — 신입에게 일 시키듯 AI에게 시키는 법.</p>
         </a>
-        <a class="card mini" href="ui-ux/">
+        <a class="card mini" href="ui-ux/" data-key="2">
           <span class="emoji">🎨</span>
           <span class="mini-main">
             <h3>바이브 코더를 위한 UI/UX 용어 사전</h3>
             <span class="sym">원하는 화면을 말로 설명 못 하겠다</span>
           </span>
+          <span class="key">2</span>
           <p class="mdesc">레이아웃 · 사이드바 · 랜딩/대시보드 해부 · 엘리먼트 50종 · 상태 · 타이포 · 테마(머티리얼/쿠퍼티노) — 웹을 안 해봐서 화면을 주문하지 못하는 사람을 위한 용어집.</p>
         </a>
-        <a class="card mini" href="github/" data-key="4">
+        <a class="card mini" href="github/" data-key="3">
           <span class="emoji">🌿</span>
           <span class="mini-main">
             <h3>바이브 코딩을 위한 최소한의 Git &amp; GitHub</h3>
             <span class="sym">AI가 고친 뒤 더 망가졌다 · 링크로 공유하고 싶다</span>
           </span>
-          <span class="key">4</span>
+          <span class="key">3</span>
           <p class="mdesc">AI 에이전트와 협업하려면 버전 관리가 안전망입니다. 바이브 코딩에 꼭 필요한 만큼만 추린 Git &amp; GitHub 안내.</p>
         </a>
       </div>
 
       <div class="track">
         <div class="track-head th-deep"><span class="tno">02</span>더 깊이<span class="tline"></span></div>
-        <a class="card mini" href="context/" data-key="5">
+        <a class="card mini" href="context/" data-key="4">
           <span class="emoji">🧠</span>
           <span class="mini-main">
             <h3>컨텍스트 — AI 에이전트의 작업 책상</h3>
             <span class="sym">대화가 길어지니 앞 내용을 잊는다</span>
           </span>
-          <span class="key">5</span>
+          <span class="key">4</span>
           <p class="mdesc">긴 작업이 산으로 가는 이유는 대부분 컨텍스트 때문. 컨텍스트 창의 원리와 컨텍스트 엔지니어링 기법을 다룹니다.</p>
         </a>
-        <a class="card mini" href="knowledge/" data-key="6">
+        <a class="card mini" href="knowledge/" data-key="5">
           <span class="emoji">📚</span>
           <span class="mini-main">
             <h3>LLM에게 지식을 가르치는 법</h3>
             <span class="sym">AI가 우리 팀 용어·문서를 모르고 지어낸다</span>
           </span>
-          <span class="key">6</span>
+          <span class="key">5</span>
           <p class="mdesc">LLM 위키 · RAG · 지식 그래프 · 온톨로지 — 조직의 지식을 LLM이 쓸 수 있게 만드는 방법들을 비교합니다.</p>
         </a>
-        <a class="card mini" href="verification/">
+        <a class="card mini" href="verification/" data-key="6">
           <span class="emoji">⚖️</span>
           <span class="mini-main">
             <h3>AI가 쓴 코드를 믿는 법 — 검증과 테스트</h3>
             <span class="sym">"다 됐어요"를 믿어도 될지 모르겠다</span>
           </span>
+          <span class="key">6</span>
           <p class="mdesc">돌아간다 ≠ 맞는다. 검증의 사다리 · 테스트 지렛대 · AI 리뷰 · 평가(evals)까지 — AI 코드에 대한 신뢰를 설계하는 법.</p>
         </a>
-        <a class="card mini" href="orchestration/">
+        <a class="card mini" href="orchestration/" data-key="7">
           <span class="emoji">🤖</span>
           <span class="mini-main">
             <h3>서브에이전트와 오케스트레이션</h3>
             <span class="sym">일이 너무 커서 AI가 길을 잃는다</span>
           </span>
+          <span class="key">7</span>
           <p class="mdesc">컨텍스트 격리에서 병렬 fan-out · 파이프라인 · 심판 패널, CI 속 에이전트와 Workflow 스크립트까지 — 에이전트를 혼자가 아니라 팀으로 부리는 법.</p>
         </a>
-        <a class="card mini" href="security/">
+        <a class="card mini" href="security/" data-key="8">
           <span class="emoji">🔐</span>
           <span class="mini-main">
             <h3>사내 환경에서의 AI — 보안과 거버넌스</h3>
             <span class="sym">회사 데이터를 넣어도 되는지 헷갈린다</span>
           </span>
+          <span class="key">8</span>
           <p class="mdesc">데이터는 어디로 가나 · 프롬프트 인젝션 · 권한 설계 · 팀 거버넌스 — 막연한 불안을 구체적 질문과 판단 기준으로 바꿉니다.</p>
         </a>
       </div>
 
       <div class="track">
         <div class="track-head th-hands"><span class="tno">03</span>직접 해보기<span class="tline"></span></div>
-        <a class="card mini" href="workshop/" data-key="7">
-          <span class="emoji">🛠️</span>
-          <span class="mini-main">
-            <h3>바이브 코딩 실습 워크숍</h3>
-            <span class="sym">직접 만들어서 내 도구 하나를 갖고 싶다</span>
-          </span>
-          <span class="key">7</span>
-          <p class="mdesc">반도체 엔지니어를 위한 코스 선택형 핸즈온(90분·3시간·8시간). 쉬운 복붙 실습으로 손을 풀고, 마지막 실습에서 4가지 유형 × 3단계 사다리로 내 업무 도구 하나를 만듭니다.</p>
-        </a>
-        <a class="card mini" href="agent-skills/" data-key="8">
+        <a class="card mini" href="agent-skills/" data-key="9">
           <span class="emoji">🧬</span>
           <span class="mini-main">
             <h3>반도체 현업을 위한 Agent Skills</h3>
             <span class="sym">매주 같은 설명을 반복하고 있다</span>
           </span>
-          <span class="key">8</span>
+          <span class="key">9</span>
           <p class="mdesc">내 업무 노하우를 SKILL.md로 — DRM 엑셀(xlwings)·주간보고 PPT(win32com)·GDS(KLayout)·RTL·TCAD 실무 예제 7종과 실습.</p>
         </a>
-        <a class="card mini" href="making-slides/" data-key="9">
+        <a class="card mini" href="making-slides/" data-key="0">
           <span class="emoji">🎬</span>
           <span class="mini-main">
             <h3>바이브 코딩으로 슬라이드 자료 만들기</h3>
             <span class="sym">발표자료를 빨리 만들어야 한다</span>
           </span>
-          <span class="key">9</span>
+          <span class="key">0</span>
           <p class="mdesc">레퍼런스 HTML로 품질 앵커링 → 피드백 루프 → CLAUDE.md → Agent Skill — 발표자료가 "요청 한 줄"이 되기까지의 5레벨. 이 사이트가 그 증거물.</p>
         </a>
-        <a class="card mini" href="forChildren/" data-key="0">
+        <a class="card mini" href="forChildren/">
           <span class="emoji">🎮</span>
           <span class="mini-main">
             <h3>나만의 게임 만들기</h3>
             <span class="sym">주말에 아이와 뭔가 만들어 보고 싶다</span>
           </span>
-          <span class="key">0</span>
           <p class="mdesc">AI 에이전트와 함께 나만의 게임을 만들어보는 어린이용 세미나. 부모님과 함께 보세요.</p>
         </a>
       </div>
@@ -974,9 +823,10 @@
   <div class="wrap">
     reveal.js 기반, 빌드 없는 단일 HTML 슬라이드
     · 이 페이지도 물론 바이브 코딩으로 만들었습니다
-    · 마지막 업데이트: 2026-11 (AI 도구는 빨리 바뀝니다 — 설치 명령이 안 맞으면 공식 문서를 우선하세요)<span class="foot-credit">
+    · 마지막 업데이트: 2026-11 (AI 도구는 빨리 바뀝니다 — 설치 명령이 안 맞으면 공식 문서를 우선하세요)
     · 만든 사람: <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a>
-    · <a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a></span>
+    · <a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a>
+    · <button class="foot-motion" id="motion-toggle" type="button" aria-pressed="false">애니메이션 끄기</button>
     <span id="present-entry" hidden> · <a href="present/">🎛️ 발표자 콘솔 열기</a></span>
   </div>
 </footer>
@@ -996,25 +846,6 @@
 </script>
 
 </div><!-- /.page -->
-
-<!-- 모션 토글 — 시스템이 애니메이션을 꺼둔 환경에서도 직접 켤 수 있다 -->
-<button id="motion-toggle" type="button" aria-pressed="false" title="배경·터미널 애니메이션 켜기/끄기">
-  <span class="mt-ico" aria-hidden="true"></span>
-  <span class="mt-label">모션</span>
-</button>
-
-<!-- 진단 상태바: 크레딧 겸용 -->
-<div id="statusbar">
-  <span aria-hidden="true">⏻ <b>vibe-os</b> v2.6.7</span>
-  <span aria-hidden="true">FPS <b id="sb-fps">--</b></span>
-  <span aria-hidden="true">UPTIME <b id="sb-uptime">00:00</b></span>
-  <span aria-hidden="true">PARTICLES <b id="sb-particles">0</b></span>
-  <span aria-hidden="true">AGENT <b class="ok" id="sb-agent">idle</b></span>
-  <span class="spacer"></span>
-  <span>만든 사람 <a href="https://github.com/geniuskey" target="_blank" rel="noopener">geniuskey</a></span>
-  <span><a href="https://github.com/geniuskey/vibe-coding" target="_blank" rel="noopener">GitHub 저장소</a></span>
-  <span class="konami-hint" aria-hidden="true">↑↑↓↓←→←→BA</span>
-</div>
 
 <!-- 커맨드 팔레트 -->
 <div id="palette" role="dialog" aria-modal="true" aria-label="커맨드 팔레트">
@@ -1065,6 +896,7 @@
   var GLYPHS = ["{", "}", "<", ">", "/", ";", "λ", "∴", "0", "1", "*", "="];
   var mouse = { x: -9999, y: -9999 };
   var vibemode = false;
+  var animateUntil = 0; // 이스터에그(폭죽·오버로드) 동안만 파티클을 움직인다
   var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   function resize() {
@@ -1085,7 +917,7 @@
       vy: (Math.random() - .5) * .35,
       r: Math.random() * 1.6 + .6,
       hue: Math.random() < .5 ? 255 : 168,          // 보라 / 청록 계열
-      glyph: Math.random() < .12 ? GLYPHS[(Math.random() * GLYPHS.length) | 0] : null,
+      glyph: Math.random() < .05 ? GLYPHS[(Math.random() * GLYPHS.length) | 0] : null,
       tw: Math.random() * Math.PI * 2               // 반짝임 위상
     };
   }
@@ -1111,7 +943,7 @@
       if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
       p.tw += .03;
 
-      var alpha = .35 + Math.sin(p.tw) * .2;
+      var alpha = (.35 + Math.sin(p.tw) * .2) * (vibemode ? 1 : .45);
       var hue = vibemode ? (p.tw * 40) % 360 : p.hue;
       if (p.glyph) {
         ctx.font = "10px monospace";
@@ -1149,6 +981,7 @@
       p.vx = Math.cos(a) * s; p.vy = Math.sin(a) * s;
       particles.push(p);
     }
+    animateUntil = Math.max(animateUntil, performance.now() + 4500);
     setTimeout(function () { resize(); }, 4000); // 개수 원상 복구
   }
 
@@ -1157,88 +990,32 @@
   window.addEventListener("resize", resize);
 
   /* ═══════════════════════════════════════════════════
-     2. 메인 루프 + FPS 측정
+     2. 배경 루프 — 평소엔 정지 프레임 한 장, 이스터에그 동안만 애니메이션
+        (첫 화면에서 움직이는 건 터미널 하나로 충분하다)
   ═══════════════════════════════════════════════════ */
-  var frames = 0, fpsLast = performance.now(), fps = 60;
+  var wasAnimating = false;
   function loop(now) {
-    if (!document.hidden) {
-      if (!reduceMotion) stepParticles();
-      frames++;
-      if (now - fpsLast >= 1000) {
-        fps = frames; frames = 0; fpsLast = now;
-        var el = $("#sb-fps");
-        if (el) el.textContent = fps;
-        var pc = $("#sb-particles");
-        if (pc) pc.textContent = particles.length;
-      }
-    }
+    var animating = !reduceMotion && now < animateUntil;
+    if (!document.hidden && (animating || wasAnimating)) stepParticles();
+    wasAnimating = animating;
     requestAnimationFrame(loop);
   }
   resize();
-  if (reduceMotion) {
-    // 모션 최소화: 움직이지 않는 정적 별자리 한 프레임만 그린다.
-    // (빈 캔버스로 배경이 통째로 사라지던 문제 해결 — 정지 이미지는 접근성 준수)
-    stepParticles();
-    window.addEventListener("resize", function () { if (reduceMotion) stepParticles(); });
-  }
+  stepParticles();
+  window.addEventListener("resize", function () { if (!wasAnimating) stepParticles(); });
   requestAnimationFrame(loop);
 
-  // 모션 토글 버튼 — 클릭하면 선택을 저장하고 새로고침해 전 애니메이션에 일관 적용
+  // 애니메이션 토글(footer) — 선택을 저장하고 새로고침해 전 애니메이션에 일관 적용
+  function toggleMotion() {
+    try { localStorage.setItem("vibe-motion", motionOn ? "off" : "on"); } catch (_) {}
+    location.reload();
+  }
   (function () {
     var btn = $("#motion-toggle");
     if (!btn) return;
-    var labelEl = btn.querySelector(".mt-label");
-    btn.classList.toggle("on", motionOn);
     btn.setAttribute("aria-pressed", motionOn ? "true" : "false");
-    if (labelEl) labelEl.textContent = motionOn ? "모션 켜짐" : "모션 꺼짐";
-    btn.title = motionOn ? "애니메이션 끄기" : "애니메이션 켜기";
-    btn.addEventListener("click", function () {
-      try { localStorage.setItem("vibe-motion", motionOn ? "off" : "on"); } catch (_) {}
-      location.reload();
-    });
-  })();
-
-  // 업타임 — 아무도 안 물어봤지만 계속 셉니다
-  var bootAt = Date.now();
-  setInterval(function () {
-    var s = Math.floor((Date.now() - bootAt) / 1000);
-    var mm = String(Math.floor(s / 60)).padStart(2, "0");
-    var ss = String(s % 60).padStart(2, "0");
-    var el = $("#sb-uptime");
-    if (el) el.textContent = mm + ":" + ss;
-  }, 1000);
-
-  /* ═══════════════════════════════════════════════════
-     3. 히어로 타자기 — 문구 로테이션
-  ═══════════════════════════════════════════════════ */
-  var PHRASES = [
-    "코드는 AI가, 방향은 내가",
-    "AI와 생산성 시리즈",
-    "영어는 새로운 프로그래밍 언어다",
-    "스펙이 절반이다",
-    "컨텍스트가 전부다",
-    "git commit -m \"안전망 확보\""
-  ];
-  (function typewriter() {
-    if (reduceMotion) return;
-    var el = $("#typegrad");
-    var pi = 0, ci = PHRASES[0].length, deleting = true;
-    function tick() {
-      var phrase = PHRASES[pi];
-      if (deleting) {
-        ci--;
-        el.textContent = phrase.slice(0, ci);
-        if (ci === 0) { deleting = false; pi = (pi + 1) % PHRASES.length; setTimeout(tick, 350); return; }
-        setTimeout(tick, 28);
-      } else {
-        phrase = PHRASES[pi];
-        ci++;
-        el.textContent = phrase.slice(0, ci);
-        if (ci >= phrase.length) { deleting = true; setTimeout(tick, 3200); return; }
-        setTimeout(tick, 55 + Math.random() * 60);
-      }
-    }
-    setTimeout(tick, 3000);
+    btn.textContent = motionOn ? "애니메이션 끄기" : "애니메이션 켜기";
+    btn.addEventListener("click", toggleMotion);
   })();
 
   /* ═══════════════════════════════════════════════════
@@ -1247,18 +1024,10 @@
           세션을 자율 재생한다 (탭이 숨겨지면 일시정지)
   ═══════════════════════════════════════════════════ */
   var termBody = $("#term-body");
-  var termTokens = $("#term-tokens");
   var termStatus = $("#term-status");
-  var sbAgent = $("#sb-agent");
-  var tokenCount = 0;
 
-  function addTokens(n) {
-    tokenCount += n;
-    termTokens.textContent = tokenCount.toLocaleString();
-  }
   function setAgent(state) {
-    termStatus.textContent = "agent: " + state;
-    if (sbAgent) sbAgent.textContent = state;
+    termStatus.textContent = state;
   }
 
   // 시나리오 스텝 타입:
@@ -1358,7 +1127,6 @@
       el.innerHTML = promptHtml + '<span class="t-cmd"></span><span class="t-cursor"></span>';
       el.querySelector(".t-cmd").textContent = typed;
       termBody.scrollTop = termBody.scrollHeight;
-      addTokens(1);
       await sleep(26 + Math.random() * 46);
     }
     await sleep(300);
@@ -1384,7 +1152,6 @@
     } else if (step.fail) {
       el.classList.add("t-err");
     }
-    addTokens(20 + ((Math.random() * 40) | 0));
     await sleep(180);
   }
 
@@ -1410,7 +1177,6 @@
         else if (step.t === "tool") await runTool(step);
         else if (step.t === "line") {
           termLine(step.cls).textContent = step.text;
-          addTokens(8 + ((Math.random() * 12) | 0));
           await sleep(280 + Math.random() * 250);
         }
         else if (step.t === "pause") { setAgent(i === scenario.length - 1 ? "idle" : "thinking…"); await sleep(step.ms); }
@@ -1440,6 +1206,7 @@
     { ico: "🎬", label: "바이브 코딩으로 슬라이드 자료 만들기", meta: "making-slides/", run: function () { location.href = "making-slides/"; } },
     { ico: "🎮", label: "나만의 게임 만들기 (어린이 × 부모)", meta: "forChildren/", run: function () { location.href = "forChildren/"; } },
     { ico: "⭐", label: "GitHub 저장소 열기", meta: "external", run: function () { window.open("https://github.com/geniuskey/vibe-coding", "_blank", "noopener"); } },
+    { ico: "🎞️", label: motionOn ? "애니메이션 끄기" : "애니메이션 켜기", meta: "motion", run: function () { toggleMotion(); } },
     { ico: "🌈", label: "vibe --overload", meta: "easter egg", run: function () { enterVibemode(); } },
     { ico: "✨", label: "particles --burst", meta: "easter egg", run: function () { burstParticles(); toast("✨ particle burst"); } },
     { ico: "🥪", label: "sudo make me a sandwich", meta: "xkcd 149", run: function () { toast("🥪 Okay. (root 권한 확인됨)"); } }
@@ -1532,6 +1299,7 @@
 
   function enterVibemode() {
     vibemode = true;
+    animateUntil = Math.max(animateUntil, performance.now() + 12000);
     document.body.classList.add("vibemode");
     burstParticles();
     toast("🌈 VIBE OVERLOAD — 최대 출력 모드");
@@ -1542,6 +1310,12 @@
       setAgent("idle");
     }, 12000);
   }
+
+  // 숫자 키 배지는 키보드를 쓰기 시작하면 보이고, 마우스/터치로 돌아오면 숨긴다
+  document.addEventListener("keydown", function (e) {
+    if (!e.ctrlKey && !e.metaKey && !e.altKey) document.body.classList.add("keys-on");
+  }, true);
+  document.addEventListener("pointerdown", function () { document.body.classList.remove("keys-on"); }, true);
 
   document.addEventListener("keydown", function (e) {
     var inPalette = paletteEl.classList.contains("open");
@@ -1572,26 +1346,6 @@
       konamiPos = got === KONAMI[0] ? 1 : 0;
     }
   });
-
-  /* ═══════════════════════════════════════════════════
-     7. 카드 3D 틸트 + 글로우 추적
-  ═══════════════════════════════════════════════════ */
-  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-    document.querySelectorAll("a.card").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        card.style.setProperty("--mx", (px * 100) + "%");
-        card.style.setProperty("--my", (py * 100) + "%");
-        var rx = (py - .5) * -7, ry = (px - .5) * 9;
-        card.style.transform = "perspective(700px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-3px) scale(1.03)";
-      });
-      card.addEventListener("mouseleave", function () {
-        card.style.transform = "";
-      });
-    });
-  }
 
   /* ═══════════════════════════════════════════════════
      8. 스크롤 리빌
