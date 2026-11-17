@@ -13,10 +13,10 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>이것도 바이브 코딩으로 됩니다 — 0단계 · 5분 맛보기 | 바이브 코딩 세미나</title>
+  <title>이것도 바이브 코딩으로 됩니다 — 0단계 · 맛보기 | 바이브 코딩 세미나</title>
 
   <!-- SEO -->
-  <meta name="description" content="코딩 에이전트(Claude Code · Codex · OpenCode)로 어디까지 할 수 있을까. 경품 추첨기, 엑셀→실시간 대시보드, 리더의 주간보고 초안, 개발자 주간 활동 공유까지 — 보통 사람들이 매주 겪는 일을 바이브 코딩으로 바꾸는 상황별 가이드. 내레이션이 있는 캠페인형 슬라이드." />
+  <meta name="description" content="코딩 에이전트(Claude Code · Codex · OpenCode)로 어디까지 할 수 있을까. 경품 추첨기, 엑셀→실시간 대시보드, 리더의 주간보고 초안, 개발자 주간 활동 공유, 그리고 마케팅·영업·인사·재무·기획·연구·교육 직무별 사례 지도까지 — 보통 사람들이 매주 겪는 일을 바이브 코딩으로 바꾸는 상황별 가이드. 내레이션이 있는 캠페인형 슬라이드." />
   <meta name="keywords" content="바이브 코딩, vibe coding, 코딩 에이전트, Claude Code, Codex, OpenCode, 비개발자, 업무 자동화, 주간보고, 대시보드, 경품 추첨, 활용 사례" />
   <meta name="author" content="geniuskey" />
   <meta name="robots" content="index, follow" />
@@ -604,6 +604,73 @@
     .s16 .links .chip { font-size: 17px; color: #fff !important; }
     .s16 .links button.chip { font-family: 'Pretendard'; cursor: pointer; color: #fff; }
 
+    .s16 .links button.more { border-style: dashed; border-color: rgba(43,234,208,.7); background: rgba(43,234,208,.12); }
+
+    /* ═════ PART 2 공통 — 결과물 태그 (S13 상황별 처방의 "이걸 만든다"와 같은 이름) ═════ */
+    .part { position: absolute; left: 64px; top: 30px; }
+    .otag { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; border: 1px solid; white-space: nowrap; line-height: 1.5; }
+    .otag.f { color: #FFE7A8 !important; border-color: rgba(255,212,107,.55); background: rgba(255,212,107,.1); }
+    .otag.w { color: #9FF3E4 !important; border-color: rgba(43,234,208,.55); background: rgba(43,234,208,.1); }
+    .otag.s { color: #CFC3FF !important; border-color: rgba(155,130,255,.6); background: rgba(155,130,255,.12); }
+    .otag.c { color: #FFC2CF !important; border-color: rgba(255,122,149,.55); background: rgba(255,122,149,.1); }
+    .otag.r { color: #B9D9FF !important; border-color: rgba(120,176,255,.55); background: rgba(120,176,255,.1); }
+    .otag.n { color: #FFD0B0 !important; border-color: rgba(255,162,107,.55); background: rgba(255,162,107,.1); }
+    .otag.q { color: #E6E9F2 !important; border-color: rgba(213,218,232,.45); background: rgba(213,218,232,.08); }
+
+    /* ═════ S17 · S18 직무별 지도 ═════ */
+    .map h2 { position: absolute; left: 64px; top: 62px; font-size: 48px; }
+    .map .legend { position: absolute; left: 64px; right: 64px; top: 130px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .map .legend > span:first-child { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; color: var(--soft) !important; margin-right: 4px; }
+    .map .roles { position: absolute; left: 64px; right: 64px; top: 176px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .map .role { padding: 16px 18px 6px; height: 436px; }
+    .map .rh { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; padding-bottom: 12px; margin-bottom: 2px; border-bottom: 1px solid var(--line); }
+    .map .rh span { font-size: 30px; }
+    .map .it { padding: 12px 0 13px; border-bottom: 1px dashed rgba(255,255,255,.09); }
+    .map .it:last-child { border-bottom: 0; }
+    .map .it b { display: block; font-size: 17.5px; line-height: 1.35; margin-bottom: 4px; }
+    .map .it small { display: block; font-size: 13.5px; line-height: 1.45; color: var(--soft) !important; margin-bottom: 7px; }
+    .map .it .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    /* ═════ S19 만들지 않아도 된다 ═════ */
+    .s19 h2 { position: absolute; left: 64px; top: 62px; font-size: 50px; }
+    .s19 .lead { position: absolute; left: 64px; top: 128px; font-size: 19px; color: var(--dim) !important; }
+    .s19 .grid { position: absolute; left: 64px; right: 64px; top: 182px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .s19 .ask { padding: 20px 24px; height: 206px; display: flex; flex-direction: column; gap: 12px; }
+    .s19 .ask .hd { font-size: 23px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .s19 .ask .hd span { font-size: 30px; }
+    .s19 .ask .say { font-family: var(--mono); font-size: 15.5px; line-height: 1.5; color: #DFFFF8 !important; background: rgba(0,0,0,.35); border-radius: 10px; padding: 10px 14px; border: 1px solid rgba(43,234,208,.25); }
+    .s19 .ask .say::before { content: "› "; color: var(--a2); font-weight: 800; }
+    .s19 .ask .got { font-size: 15.5px; color: var(--dim) !important; margin-top: auto; }
+    .s19 .ask .got::before { content: "✓ "; color: var(--a2); font-weight: 800; }
+
+    /* ═════ S20 잘하는 일 · 사람의 일 ═════ */
+    .s20 h2 { position: absolute; left: 64px; top: 62px; font-size: 50px; }
+    .s20 .cols { position: absolute; left: 64px; right: 64px; top: 158px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .s20 .ch { font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: .14em; margin-bottom: 12px; }
+    .s20 .row { display: flex; gap: 14px; align-items: flex-start; padding: 13px 18px; margin-bottom: 10px; height: 80px; }
+    .s20 .row .ic { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 17px; }
+    .s20 .good .row .ic { background: rgba(43,234,208,.16); color: var(--a2) !important; }
+    .s20 .mine .row { border-color: rgba(255,122,149,.35); }
+    .s20 .mine .row .ic { background: rgba(255,122,149,.16); color: var(--a3) !important; }
+    .s20 .row b { display: block; font-size: 19px; margin-bottom: 3px; }
+    .s20 .row small { display: block; font-size: 14.5px; line-height: 1.45; color: var(--soft) !important; }
+    .s20 .last { position: absolute; left: 64px; right: 64px; top: 590px; text-align: center; font-size: 28px; font-weight: 800; }
+
+    /* ═════ S21 첫 번째를 찾는 질문 ═════ */
+    .s21 h2 { position: absolute; left: 64px; top: 62px; font-size: 52px; }
+    .s21 .qs { position: absolute; left: 64px; right: 64px; top: 172px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .s21 .qq { padding: 24px 26px; height: 220px; position: relative; overflow: hidden; }
+    .s21 .qq .n { position: absolute; right: 18px; top: 0; font-size: 110px; font-weight: 900; color: rgba(255,255,255,.05) !important; }
+    .s21 .qq .ic { font-size: 44px; display: block; margin-bottom: 14px; }
+    .s21 .qq b { display: block; font-size: 25px; line-height: 1.35; margin-bottom: 16px; }
+    .s21 .qq small { display: block; font-size: 15px; line-height: 1.5; color: var(--soft) !important; }
+    .s21 .qq small em { font-style: normal; color: var(--a2) !important; font-weight: 700; }
+    .s21 .final { position: absolute; left: 0; right: 0; top: 450px; text-align: center; font-size: 44px; font-weight: 900; }
+    .s21 .links { position: absolute; left: 0; right: 0; top: 540px; display: flex; gap: 14px; justify-content: center; }
+    .s21 .links a { text-decoration: none; }
+    .s21 .links .chip { font-size: 17px; color: #fff !important; }
+    .s21 .links button.chip { font-family: 'Pretendard'; cursor: pointer; color: #fff; }
+
     /* ────────────────────────────────────────────────────────────
        툴바 · 자막 · 시작 게이트
        ──────────────────────────────────────────────────────────── */
@@ -687,9 +754,9 @@
 
 <div id="gate" role="dialog" aria-label="재생 방식 선택">
   <div class="box">
-    <div class="eye">VIBE CODING · 0단계 · 5분 맛보기</div>
+    <div class="eye">VIBE CODING · 0단계 · 맛보기</div>
     <h1>이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
-    <p>내레이션과 함께 영상처럼 흘러갑니다 — 약 5분, 16장.<br/>발표 중이라면 “소리 없이 보기”를 고르고 방향키로 넘기세요.</p>
+    <p>내레이션과 함께 영상처럼 흘러갑니다 — 핵심 5분(16장) + 더 보기 2분(5장).<br/>급하면 16장 엔딩에서 나가셔도 됩니다.<br/>발표 중이라면 “소리 없이 보기”를 고르고 방향키로 넘기세요.</p>
     <button class="go" id="gateGo">▶ 내레이션과 함께 재생</button>
     <button class="quiet" id="gateQuiet">소리 없이 직접 넘기며 보기</button>
     <div class="keys">M 소리 · A 자동 재생 · C 자막 · R 다시 재생 · ← → 이동</div>
@@ -721,7 +788,7 @@
         <div class="hero">
           <div class="k pop" data-b="3" data-d="0.7"><span class="prompt">이거, 해줘.<span class="caret"></span></span></div>
           <h1 class="k blur" data-b="3" data-d="1.4">이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
-          <p class="sub k" data-b="3" data-d="2.0">0단계 · 5분 맛보기 — 코딩 에이전트에게 맡길 수 있는 일주일의 일들</p>
+          <p class="sub k" data-b="3" data-d="2.0">0단계 · 맛보기 — 코딩 에이전트에게 맡길 수 있는 일주일의 일들</p>
           <div class="tools k" data-b="3" data-d="2.4">
             <span class="chip">Claude Code</span><span class="chip teal">Codex</span><span class="chip pink">OpenCode</span>
           </div>
@@ -1239,7 +1306,7 @@
           <a href="../setup/"><span class="chip teal">① 0교시 — 설치와 기본 조작</span></a>
           <a href="../intro/"><span class="chip">② 바이브 코딩이란?</span></a>
           <a href="../workshop/"><span class="chip yel">③ 실습 워크숍</span></a>
-          <button class="chip pink" id="restartBtn" type="button">↺ 처음부터 다시</button>
+          <button class="chip more" id="moreBtn" type="button">＋ 더 보기 · 직무별 사례 2분 →</button>
         </div>
       </div>
       <aside class="notes">
@@ -1247,6 +1314,177 @@
         <p>일은, 바꿀 수 있습니다.</p>
         <p>바이브 코딩.</p>
         <p>여러분의 일주일을, 다시 여러분에게.</p>
+        <p>여기까지가 핵심입니다. 조금 더 궁금하다면, 직무별 사례가 이어집니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════
+         PART 2 · 더 보기 — 핵심 5분(S01–S16) 뒤에 이어지는 폭넓은 사례.
+         급한 사람은 S16 엔딩에서 나가도 되고, 남은 사람은 직무별로 본다.
+         ═════════════════════════════════════════════════════════ -->
+
+    <!-- ═════════════ S17 직무별 지도 ① ═════════════ -->
+    <section class="s17 map" data-nid="s17" data-title="PART 2 · 직무별 지도 ①">
+      <div class="stage">
+        <div class="part eyebrow k" data-b="0">PART 2 · 더 보기</div>
+        <h2 class="k" data-b="0">내 직무에서는? <span class="grad">① 사무 · 지원</span></h2>
+        <div class="legend k" data-b="0" data-d="0.4"><span>결과물</span><span class="otag f">📄 파일 하나</span><span class="otag w">🌐 웹 앱</span><span class="otag s">⚙️ 스크립트</span><span class="otag c">🔌 커넥터</span><span class="otag r">🗓️ 예약 실행</span><span class="otag n">🧭 웹 조사</span><span class="otag q">💬 질문 · 설명</span></div>
+        <div class="roles">
+          <div class="role card k pop" data-b="1">
+            <div class="rh"><span>📣</span>마케팅 · 홍보</div>
+            <div class="it k" data-b="1" data-d="0.2"><b>캠페인 랜딩 페이지</b><small>문구와 이미지를 주면, 신청 폼까지 달린 한 페이지</small><div class="tags"><span class="otag w">🌐 웹 앱</span></div></div>
+            <div class="it k" data-b="1" data-d="0.4"><b>SNS 이미지 규격 변환</b><small>원본 한 장 → 인스타 · 블로그 · 배너 12종</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="1" data-d="0.6"><b>경쟁사 소식 아침 브리핑</b><small>보도자료 · 가격 페이지를 매일 9시에 요약</small><div class="tags"><span class="otag n">🧭 웹 조사</span><span class="otag r">🗓️ 예약</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="2">
+            <div class="rh"><span>🤝</span>영업 · 고객</div>
+            <div class="it k" data-b="2" data-d="0.2"><b>견적서 생성기</b><small>품목 · 수량을 고르면 회사 양식 PDF로</small><div class="tags"><span class="otag f">📄 파일 하나</span></div></div>
+            <div class="it k" data-b="2" data-d="0.4"><b>문의 메일 분류 · 답장 초안</b><small>유형별로 나누고, 답장은 초안까지만</small><div class="tags"><span class="otag c">🔌 커넥터</span></div></div>
+            <div class="it k" data-b="2" data-d="0.6"><b>고객 명단 합치기</b><small>엑셀 다섯 개 → 중복 · 오타 정리된 한 장</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="3">
+            <div class="rh"><span>👥</span>인사 · 총무</div>
+            <div class="it k" data-b="3" data-d="0.2"><b>수료증 120장</b><small>명단 엑셀 → 이름이 들어간 PDF 120개</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="3" data-d="0.4"><b>회의실 · 비품 예약</b><small>누가 언제 쓰는지 한 화면에, 겹치면 경고</small><div class="tags"><span class="otag w">🌐 웹 앱</span></div></div>
+            <div class="it k" data-b="3" data-d="0.6"><b>입사자 첫 주 안내</b><small>체크리스트 + 자주 묻는 질문 한 페이지</small><div class="tags"><span class="otag f">📄 파일 하나</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="4">
+            <div class="rh"><span>💰</span>재무 · 회계</div>
+            <div class="it k" data-b="4" data-d="0.2"><b>거래내역 ↔ 장부 대사</b><small>두 파일에서 안 맞는 줄만 골라내기</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="4" data-d="0.4"><b>영수증 사진 → 지출 내역</b><small>사진 폴더를 읽어 날짜 · 금액 · 가맹점 표로</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="4" data-d="0.6"><b>예산 집행 현황판</b><small>부서별 남은 예산이 입력하는 즉시 반영</small><div class="tags"><span class="otag w">🌐 웹 앱</span></div></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>여기서부터는, 직무별로 살펴봅니다.</p>
+        <p>마케팅은, 랜딩 페이지와 이미지 변환, 아침마다 경쟁사 소식을.</p>
+        <p>영업은, 견적서와 문의 메일 초안, 흩어진 고객 명단 정리를.</p>
+        <p data-say="인사와 총무는, 수료증 백이십 장과, 회의실 예약 페이지를.">인사와 총무는, 수료증 120장과, 회의실 예약 페이지를.</p>
+        <p>재무는, 장부 대사와 영수증 정리, 예산 현황판을 맡깁니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S18 직무별 지도 ② ═════════════ -->
+    <section class="s18 map" data-nid="s18" data-title="PART 2 · 직무별 지도 ②">
+      <div class="stage">
+        <div class="part eyebrow k" data-b="0">PART 2 · 더 보기</div>
+        <h2 class="k" data-b="0">내 직무에서는? <span class="grad">② 기획 · 전문</span></h2>
+        <div class="legend k" data-b="0" data-d="0.4"><span>결과물</span><span class="otag f">📄 파일 하나</span><span class="otag w">🌐 웹 앱</span><span class="otag s">⚙️ 스크립트</span><span class="otag c">🔌 커넥터</span><span class="otag r">🗓️ 예약 실행</span><span class="otag n">🧭 웹 조사</span><span class="otag q">💬 질문 · 설명</span></div>
+        <div class="roles">
+          <div class="role card k pop" data-b="1">
+            <div class="rh"><span>🗺️</span>기획 · PM</div>
+            <div class="it k" data-b="1" data-d="0.2"><b>눌러 보는 시안</b><small>기획서 한 장 → 클릭되는 화면 프로토타입</small><div class="tags"><span class="otag f">📄 파일 하나</span></div></div>
+            <div class="it k" data-b="1" data-d="0.4"><b>인터뷰 녹취 → 인사이트</b><small>녹취 20개에서 반복되는 불만을 묶어 정리</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="1" data-d="0.6"><b>경쟁 서비스 비교표</b><small>기능 · 가격을 조사해 출처 달린 표로</small><div class="tags"><span class="otag n">🧭 웹 조사</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="2">
+            <div class="rh"><span>🔬</span>연구 · 분석</div>
+            <div class="it k" data-b="2" data-d="0.2"><b>실험 데이터 → 그래프</b><small>CSV 200개를 같은 양식의 그래프로 한 번에</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="2" data-d="0.4"><b>논문 50편 요약표</b><small>PDF에서 방법 · 결과 · 한계만 뽑아 한 표로</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="2" data-d="0.6"><b>데이터에 말로 묻기</b><small>“지난달 지역별 매출 1위는?” → 바로 조회 결과</small><div class="tags"><span class="otag c">🔌 커넥터</span><span class="otag q">💬 질문</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="3">
+            <div class="rh"><span>🎓</span>교육 · 강의</div>
+            <div class="it k" data-b="3" data-d="0.2"><b>수업용 퀴즈 게임</b><small>문제 목록 → 점수판 달린 퀴즈 화면</small><div class="tags"><span class="otag f">📄 파일 하나</span></div></div>
+            <div class="it k" data-b="3" data-d="0.4"><b>학생별 피드백 초안</b><small>채점표에서 한 명씩 맞춤 코멘트를</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="3" data-d="0.6"><b>원고 → 발표 슬라이드</b><small>강의 원고 하나로 넘겨 보는 덱까지 <a href="../making-slides/">→</a></small><div class="tags"><span class="otag f">📄 파일 하나</span></div></div>
+          </div>
+          <div class="role card k pop" data-b="4">
+            <div class="rh"><span>🛠️</span>개발 · IT 운영</div>
+            <div class="it k" data-b="4" data-d="0.2"><b>낯선 코드 읽어 주기</b><small>처음 받은 저장소, 구조와 흐름부터 설명</small><div class="tags"><span class="otag q">💬 질문 · 설명</span></div></div>
+            <div class="it k" data-b="4" data-d="0.4"><b>장애 로그 분석</b><small>로그 수백만 줄에서 문제의 시작점 찾기</small><div class="tags"><span class="otag s">⚙️ 스크립트</span></div></div>
+            <div class="it k" data-b="4" data-d="0.6"><b>매일 아침 점검</b><small>서버 상태 · 인증서 만료를 확인하고 알림</small><div class="tags"><span class="otag r">🗓️ 예약</span></div></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>기획과 전문 직무도, 다르지 않습니다.</p>
+        <p>기획자는, 기획서 한 장으로, 눌러 보는 시안을 만듭니다.</p>
+        <p>연구자는, 수백 개의 데이터를 같은 양식의 그래프로 바꾸고, 논문을 표로 정리합니다.</p>
+        <p>강사는, 퀴즈 게임과, 학생별 피드백 초안을.</p>
+        <p>개발자는, 낯선 코드를 읽히고, 매일 아침 점검을 맡깁니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S19 만들지 않아도 된다 ═════════════ -->
+    <section class="s19" data-nid="s19" data-title="PART 2 · 묻고, 배우고, 고치기">
+      <div class="stage">
+        <div class="part eyebrow k" data-b="0">PART 2 · 더 보기</div>
+        <h2 class="k" data-b="0">꼭 <span class="grad">만들지 않아도</span> 됩니다</h2>
+        <p class="lead k" data-b="0" data-d="0.4">결과물이 “답”인 일 — 묻고, 배우고, 고치기</p>
+        <div class="grid">
+          <div class="ask card k left" data-b="1"><div class="hd"><span>🧮</span>남이 만든 엑셀 이해하기</div><div class="say">이 시트 수식이 뭘 계산하는지, 셀 순서대로 설명해줘.</div><div class="got">계산 흐름 지도 + 참조가 틀린 셀 두 곳</div></div>
+          <div class="ask card k right" data-b="2"><div class="hd"><span>🩹</span>알 수 없는 오류 해결</div><div class="say">이 오류 메시지가 떠. 원인부터 알려주고, 고치기 전에 뭘 할지 보여줘.</div><div class="got">원인 설명 → 확인 → 해결, 한 단계씩</div></div>
+          <div class="ask card k left" data-b="3"><div class="hd"><span>📚</span>쌓인 문서에 물어보기</div><div class="say">이 폴더 규정 문서 기준으로, 해외 출장 숙박비 한도가 얼마야? 근거 조항도.</div><div class="got">답 + 문서 이름 · 조항 번호</div></div>
+          <div class="ask card k right" data-b="4"><div class="hd"><span>🧑‍🏫</span>만들면서 배우기</div><div class="say">방금 만든 거, 다음엔 내가 고칠 수 있게 쉽게 설명해줘.</div><div class="got">내 수준에 맞춘 나만의 해설서</div></div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>꼭, 무언가를 만들어야 하는 것도 아닙니다.</p>
+        <p>남이 만든 복잡한 엑셀도, 수식 하나하나 설명을 들을 수 있고,</p>
+        <p>알 수 없는 오류 메시지도, 원인부터 함께 풉니다.</p>
+        <p>쌓인 규정 문서에, 근거 조항까지 물어볼 수 있습니다.</p>
+        <p>그리고 방금 만든 것을, 내 눈높이로 다시 배웁니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S20 잘하는 일 · 사람의 일 ═════════════ -->
+    <section class="s20" data-nid="s20" data-title="PART 2 · 맡길 일, 쥐고 있을 일">
+      <div class="stage">
+        <div class="part eyebrow k" data-b="0">PART 2 · 더 보기</div>
+        <h2 class="k" data-b="0">물론, <span class="grad">만능은 아닙니다</span></h2>
+        <div class="cols">
+          <div class="good">
+            <div class="ch t2 k" data-b="1">✓ 맡기면 잘하는 일</div>
+            <div class="row card k left" data-b="1" data-d="0.1"><span class="ic">✓</span><div><b>반복 · 변환 · 정리</b><small>규칙이 분명한 일은, 빠르고 지치지 않는다</small></div></div>
+            <div class="row card k left" data-b="1" data-d="0.3"><span class="ic">✓</span><div><b>초안과 시제품</b><small>빈 화면에서 출발하지 않게, 30분 만에 70점</small></div></div>
+            <div class="row card k left" data-b="1" data-d="0.5"><span class="ic">✓</span><div><b>작은 팀 도구</b><small>열 명이 쓰는 도구라면, 오늘 바로</small></div></div>
+            <div class="row card k left" data-b="1" data-d="0.7"><span class="ic">✓</span><div><b>설명과 탐색</b><small>낯선 파일 · 코드 · 오류를 읽어 준다</small></div></div>
+          </div>
+          <div class="mine">
+            <div class="ch t3 k" data-b="2">! 사람이 쥐고 있을 일</div>
+            <div class="row card k right" data-b="2" data-d="0.1"><span class="ic">!</span><div><b>숫자와 사실의 최종 확인</b><small>그럴듯하게 틀릴 수 있다 — 원본과 맞춰 본다</small></div></div>
+            <div class="row card k right" data-b="3"><span class="ic">!</span><div><b>볼 수 없는 곳</b><small>권한 · 연결이 없는 시스템은 모른다 — 자료를 직접 준다</small></div></div>
+            <div class="row card k right" data-b="3" data-d="1.6"><span class="ic">!</span><div><b>많은 사람이 쓰는 서비스</b><small>수백 명 · 개인정보 · 결제가 걸리면 <a href="../security/">개발 · 보안팀과 함께 →</a></small></div></div>
+            <div class="row card k right" data-b="4"><span class="ic">!</span><div><b>무엇이 필요한지, 무엇이 좋은지</b><small>방향과 판단은 위임되지 않는다</small></div></div>
+          </div>
+        </div>
+        <div class="last k blur" data-b="4" data-d="0.8">에이전트는 손이 빠른 동료. <span class="grad">방향은, 사람이 잡습니다.</span></div>
+      </div>
+      <aside class="notes">
+        <p>물론, 만능은 아닙니다.</p>
+        <p>반복하고, 정리하고, 초안을 만드는 일은, 맡기면 잘합니다.</p>
+        <p>하지만 숫자와 사실은, 그럴듯하게 틀릴 수 있습니다. 원본과 꼭 맞춰 보세요.</p>
+        <p>볼 수 없는 시스템은 모르고, 많은 사람이 쓰는 서비스는, 전문 팀과 함께 만듭니다.</p>
+        <p>에이전트는 손이 빠른 동료입니다. 방향은, 사람이 잡습니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S21 첫 번째를 찾는 질문 ═════════════ -->
+    <section class="s21" data-nid="s21" data-title="PART 2 · 첫 번째를 찾는 질문">
+      <div class="stage">
+        <div class="part eyebrow k" data-b="0">PART 2 · 더 보기</div>
+        <h2 class="k" data-b="0">내 일에서, <span class="grad">첫 번째를 찾는 질문</span></h2>
+        <div class="qs">
+          <div class="qq card k pop" data-b="1"><span class="n">1</span><span class="ic">📋</span><b>매주, 복사하고<br/>붙여넣는 일이 있나요?</b><small>취합 · 보고 · 양식 옮기기 → <em>웹 앱 · 스크립트</em></small></div>
+          <div class="qq card k pop" data-b="2"><span class="n">2</span><span class="ic">🔁</span><b>같은 질문을,<br/>계속 받고 있나요?</b><small>안내 · 문의 · 규정 → <em>안내 페이지 · 문서에 묻기</em></small></div>
+          <div class="qq card k pop" data-b="3"><span class="n">3</span><span class="ic">👀</span><b>두 파일을,<br/>눈으로 비교하고 있나요?</b><small>대사 · 검수 · 버전 비교 → <em>비교 스크립트</em></small></div>
+        </div>
+        <div class="final k blur" data-b="4">그 대답이, <span class="grad">첫 번째 프로젝트입니다.</span></div>
+        <div class="links k" data-b="4" data-d="1.0">
+          <a href="../setup/"><span class="chip teal">① 0교시 — 설치와 기본 조작</span></a>
+          <a href="../intro/"><span class="chip">② 바이브 코딩이란?</span></a>
+          <a href="../workshop/"><span class="chip yel">③ 실습 워크숍</span></a>
+          <button class="chip pink restart" type="button">↺ 처음부터 다시</button>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>마지막으로, 세 가지만 물어보세요.</p>
+        <p>매주, 복사하고 붙여넣는 일이 있나요?</p>
+        <p>같은 질문을, 계속 받고 있나요?</p>
+        <p>두 파일을, 눈으로 비교하고 있나요?</p>
+        <p>그 대답이, 여러분의 첫 번째 프로젝트입니다.</p>
       </aside>
     </section>
 
@@ -1655,7 +1893,8 @@
   $('#autoBtn').addEventListener('click', toggleAuto);
   $('#ccBtn').addEventListener('click', toggleCC);
   $('#replayBtn').addEventListener('click', replay);
-  $('#restartBtn').addEventListener('click', () => Reveal.slide(0));
+  $$('.restart').forEach((b) => b.addEventListener('click', () => Reveal.slide(0)));
+  $('#moreBtn').addEventListener('click', () => Reveal.next());
   Narr.sync();
 
   // 시작 게이트 — 브라우저는 사용자 동작 없이 소리를 못 낸다
