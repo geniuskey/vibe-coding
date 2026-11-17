@@ -37,6 +37,25 @@
 - 덱에 붙이는 법: `<head>`에 `<link rel="stylesheet" href="../assets/core.css">`, `reveal.js` 바로 다음(`Reveal.initialize` 앞)에 `<script src="../assets/core.js"></script>`.
 - 적용 덱: prompt · ui-ux · github · context · knowledge · verification · orchestration · security · agent-skills · making-slides. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
 
+### 첫 화면 — 빌드 장면 (루트 `index.html`)
+
+"프롬프트 한 줄이 페이지가 되는 순간"을 실제로 보여 주는 히어로. 움직임은 한 번의 장면과 손이 닿을 때의 반응뿐이고, 다 지어지면 멈춘다.
+
+- **빌드 장면**(세션당 첫 방문 1회): 화면 가운데 터미널에 프롬프트가 두벌식 IME 그대로(`바` → `방` → `바이`) 입력되고,
+  `● Write(index.html)` 순간 터미널에서 입자 수천 개가 흘러나와 거대한 제목 "바이브 코딩"으로 조립된다.
+  이어지는 `Update` 도구 호출과 같은 박자로 부제·문장·버튼이 지어진다. 아무 키·클릭·휠이면 즉시 완성 상태로 건너뛴다.
+- 다시 보기: 히어로의 `↻ 다시 빌드`, 커맨드 팔레트 "빌드 장면 다시 보기", 또는 `?intro`. 해시(`#board` 등)로 들어오면 틀지 않는다.
+- 평소 제목은 진짜 DOM 글자다. 커서가 닿은 자리만 입자로 풀렸다 돌아오고(렌즈), 클릭·탭하면 터졌다 모이며,
+  스크롤로 히어로를 벗어나면 입자가 되어 위로 흩어진다. 입자 50개 중 하나는 `{ } < / ;` 같은 코드 글자.
+- 저사양: 코어·메모리가 적으면 입자를 줄이고, 비행 중 프레임이 느리면 절반만 그린다. "애니메이션 끄기"를 고르면 완성된 정지 화면만 보인다.
+- 제목·부제 글꼴은 Pretendard Variable 에서 히어로 글자만 뽑은 수 KB 서브셋(`assets/home-fonts.css`, JetBrains Mono 포함)이다.
+  **히어로 문구(`data-display` 요소)를 바꿨으면 다시 생성한다** — 안 하면 빠진 글자만 시스템 글꼴로 섞여 보인다:
+
+  ```bash
+  pip install fonttools brotli
+  python3 scripts/build-home-fonts.py
+  ```
+
 공개 사이트: **https://vibe-coding.euiyun.com/**
 
 GitHub Pages 커스텀 도메인은 루트 `CNAME` 파일에 기록한다. 페이지는 도메인 루트에서 제공되므로 URL에 `/vibe-coding/` 접두사를 붙이지 않는다.
@@ -163,4 +182,5 @@ npm test
 | 경로 | 구성요소 | 라이선스 |
 | --- | --- | --- |
 | `vendor/reveal/` | reveal.js 5.1.0 | MIT |
-| `vendor/fonts/` | Pretendard | SIL Open Font License 1.1 |
+| `vendor/fonts/` | Pretendard, JetBrains Mono | SIL Open Font License 1.1 |
+| `assets/home-fonts.css` | 위 두 글꼴의 서브셋 (홈 전용) | SIL Open Font License 1.1 |

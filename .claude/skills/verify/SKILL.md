@@ -58,6 +58,26 @@ Flows worth driving:
 - Reload → current score and best persist via `localStorage.heroSignal`
   and `localStorage.heroSignalBest`.
 
+### Home page (root `index.html`) — the build scene
+
+- A fresh context (empty `sessionStorage`) plays the ~4s build scene once:
+  terminal centered → IME typing → `✻ Vibing…` → particles fly from the
+  `● Write(index.html)` line into the giant title → `Update` lines reveal the
+  rest. Done when `#term-status` reads `done`; the receipt `#rc-text` then
+  shows `N초 · 입자 N개 · …`. `?intro` forces a replay; setting
+  `sessionStorage['vibe-intro-seen']='1'` (via `addInitScript`) skips it.
+- Any key/click/wheel during the scene must jump straight to the final state
+  (`html.intro` gone, every `.hero [data-build]` has `.built`).
+- Particle frames are JS-timed, so screenshots taken mid-scene drift unless
+  the clock is frozen: `page.clock.install({time})` then
+  `page.clock.pauseAt(time + 1000)` **before** `goto`, and step with
+  `clock.runFor(ms)`. CSS transitions still run on real time.
+- After the scene: hovering the title opens the lens (`#t-main.lens`,
+  `window.__fxPerf.lensFrames` grows), click/tap bursts, scrolling past the
+  hero sets `#t-main` inline opacity to 0 and back to `""` at the top.
+- Slow machines: `Emulation.setCPUThrottlingRate` 4–6 should keep
+  `__fxPerf.flightAvg` near 24–33 ms; the scene length is time-based.
+
 ## Gotchas
 
 - The deck needs ~2s after `load` before the canvas/HUD activate (Reveal

@@ -44,7 +44,16 @@
         // 강제해도 애니메이션이 보이게 한다. 사용자가 토글로 직접 끈 경우
         // ("off") 에만 끄고, 그 선택은 계속 존중한다.
         var on = choice !== "off";
+        document.documentElement.classList.add("js");
         document.documentElement.classList.toggle("reduce-motion", !on);
+
+        // 첫 방문(세션당 1회)에만 "프롬프트 → 페이지" 빌드 장면을 튼다. 렌더 전에 정해야
+        // 완성된 화면이 한 프레임 비쳤다가 사라지는 깜빡임이 없다.
+        // 해시로 바로 들어왔거나 이미 본 세션이면 건너뛰고, ?intro 로는 언제든 다시 볼 수 있다.
+        var seen = false;
+        try { seen = sessionStorage.getItem("vibe-intro-seen") === "1"; } catch (_) {}
+        var force = /[?&]intro(=|&|$)/.test(location.search);
+        if (on && (force || (!seen && !location.hash))) document.documentElement.classList.add("intro");
       } catch (_) {}
     })();
   </script>
@@ -109,6 +118,9 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
 
+  <!-- 히어로 제목용 Pretendard 서브셋(수 KB) + 터미널용 JetBrains Mono — scripts/build-home-fonts.py 가 만든다 -->
+  <link rel="stylesheet" href="assets/home-fonts.css" />
+
   <style>
     :root {
       --bg-0: #06080F;
@@ -122,7 +134,14 @@
       --accent-3: #FF7A95;
       --accent-4: #FFD46B;
       --line: rgba(155, 130, 255, 0.18);
-      --mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", "D2Coding", Consolas, "Courier New", monospace;
+      --mono: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Monaco, "Cascadia Code", "D2Coding", Consolas, "Courier New", monospace;
+      --display: "VibeDisplay", "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      --ease-io: cubic-bezier(.65, 0, .2, 1);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: var(--bg-0); color: var(--fg-dim); }
@@ -169,70 +188,145 @@
     }
     .page { position: relative; z-index: 1; }
 
-    /* ── 히어로 ───────────────────────────────────── */
+    /* ── 히어로 — "프롬프트 한 줄이 페이지가 되는 순간" ─────────
+       첫 방문에는 터미널이 무대 가운데서 프롬프트를 받고, Enter 와 함께 입자가
+       흘러나와 제목을 조립한다(스크립트 6. 빌드 장면). 다 지어지면 멈춘다 —
+       그다음부터 스스로 움직이는 건 터미널 하나, 제목은 커서가 닿을 때만 반응한다. */
     header.hero {
       position: relative;
-      padding: 2.8rem 0 2.4rem;
+      isolation: isolate;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4.6rem 0 2.8rem;
       overflow: hidden;
       background:
-        radial-gradient(60rem 30rem at 80% -10%, rgba(155,130,255,.14), transparent 60%),
-        radial-gradient(50rem 25rem at 10% 110%, rgba(43,234,208,.08), transparent 60%);
+        radial-gradient(72rem 34rem at 24% -14%, rgba(155,130,255,.16), transparent 64%),
+        radial-gradient(46rem 30rem at 96% 106%, rgba(43,234,208,.08), transparent 62%);
       border-bottom: 1px solid var(--line);
     }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr);
-      gap: 2.5rem;
-      align-items: center;
+    /* 필름 그레인 — 정지 이미지라 비용이 없다 */
+    header.hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .06;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     }
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; }
-    }
+    .hero-inner { position: relative; z-index: 1; width: 100%; }
+
     .hero .eyebrow {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: .5rem;
-      font-size: .82rem;
-      letter-spacing: .12em;
-      color: var(--accent-2);
-      border: 1px solid rgba(43,234,208,.35);
-      border-radius: 999px;
-      padding: .25rem .9rem;
-      margin-bottom: .9rem;
+      gap: .7rem;
       font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .22em;
+      color: var(--accent-2);
+      margin-bottom: 1rem;
+      white-space: nowrap;
     }
     .eyebrow .dot {
-      width: .5rem; height: .5rem;
+      width: .42rem; height: .42rem;
       border-radius: 50%;
       background: var(--accent-2);
+      box-shadow: 0 0 10px rgba(43,234,208,.7);
+      flex: none;
     }
-    .hero h1 {
-      font-size: clamp(2rem, 4.6vw, 3.1rem);
-      font-weight: 800;
-      color: var(--fg);
-      line-height: 1.22;
-      margin-bottom: .8rem;
-      letter-spacing: -.01em;
-    }
-    .hero h1 .grad {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent), var(--accent-2));
-      background-size: 300% 100%;
+    .eyebrow .eb-line { flex: 0 1 6rem; height: 1px; background: linear-gradient(90deg, rgba(43,234,208,.55), transparent); }
+    .eyebrow .eb-ver { color: #6B7390; letter-spacing: .1em; }
+    @media (max-width: 420px) { .eyebrow .eb-line, .eyebrow .eb-ver { display: none; } }
+
+    /* 거대한 제목 — 글자 자리는 DOM 이 정하고, 캔버스(#title-fx)가 같은 자리에 입자로 그린다.
+       글꼴은 히어로 글자만 뽑은 Pretendard 서브셋(--display). 문구를 바꾸면 build-home-fonts.py 를 다시 돌린다. */
+    .hero h1 { position: relative; z-index: 0; margin: 0; font-weight: inherit; }
+    .t-main {
+      display: block;
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(3.6rem, min(15.4vw, 26vh), 15rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+      margin-left: -.045em;   /* 큰 글자의 왼쪽 사이드베어링 보정 — 아래 문단과 세로줄을 맞춘다 */
+      padding: .02em 0 .06em;
+      color: #fff;
+      background-image:
+        linear-gradient(100deg, transparent 38%, rgba(43,234,208,.95) 46%, #fff 50%, rgba(155,130,255,.95) 54%, transparent 62%),
+        linear-gradient(180deg, #FFFFFF 30%, #CFC6FF 100%);
+      background-size: 280% 100%, 100% 100%;
+      background-position: 150% 0, 0 0;
+      background-repeat: no-repeat;
       -webkit-background-clip: text;
       background-clip: text;
-      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
-    @keyframes gradslide { to { background-position: -300% 0; } }
-    .typeline { display: block; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero p.lede {
-      max-width: 34rem;
-      color: var(--fg-soft);
-      font-size: 1.02rem;
+    .t-main .w { display: inline-block; }
+    .t-main .bl { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+    @media (max-width: 640px) {
+      .t-main { font-size: clamp(3.4rem, 27vw, 8rem); line-height: .96; }
+      .t-main .w { display: block; }
     }
-    .hero .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.2rem; }
+    /* 다 지어진 순간 한 번 지나가는 홀로그램 광택 */
+    .t-main.sheen { animation: sheen 1.3s cubic-bezier(.3, .1, .15, 1) .05s both; }
+    @keyframes sheen { from { background-position: 150% 0, 0 0; } to { background-position: -50% 0, 0 0; } }
+    /* 커서 렌즈 — 커서 주변 글자를 지우고, 그 자리를 캔버스 입자가 채운다 */
+    .t-main.lens {
+      -webkit-mask-image: radial-gradient(circle at var(--mx, -999px) var(--my, -999px), transparent calc(var(--lr, 0px) * .35), #000 var(--lr, 0px));
+              mask-image: radial-gradient(circle at var(--mx, -999px) var(--my, -999px), transparent calc(var(--lr, 0px) * .35), #000 var(--lr, 0px));
+    }
+    /* 제목 뒤 후광 — 입자가 도착할수록 차오르고, 다 지어지면 은은하게 남는다 */
+    .t-glow {
+      position: absolute;
+      z-index: -1;
+      left: -6%; right: 22%; top: -40%; bottom: -50%;
+      background: radial-gradient(closest-side, rgba(155,130,255,.32), rgba(43,234,208,.10) 60%, transparent);
+      filter: blur(28px);
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    #title-fx {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 29rem);
+      gap: 2.6rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) { .hero-row { grid-template-columns: 1fr; gap: 1.9rem; margin-top: 1.3rem; } }
+    .t-sub {
+      position: relative;
+      display: inline-block;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.4rem, 2.9vw, 2.35rem);
+      line-height: 1.25;
+      letter-spacing: -.03em;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-right: .08em;
+      margin-bottom: .5rem;
+    }
+    .hero p.lede { max-width: 34rem; color: var(--fg-soft); font-size: 1.04rem; }
+    .hero p.lede b { color: var(--fg); }
+    .hero .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.35rem; }
     .hero .cta {
       display: inline-block;
-      padding: .7rem 1.5rem;
+      padding: .74rem 1.55rem;
       border-radius: 12px;
       font-weight: 700;
       color: #0B0E1A;
@@ -246,7 +340,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      padding: .68rem 1.2rem;
+      padding: .72rem 1.2rem;
       border-radius: 12px;
       font-weight: 600;
       font-size: .95rem;
@@ -261,50 +355,131 @@
     .hero .cta-ghost:hover { border-color: rgba(155,130,255,.5); transform: translateY(-2px); }
     @media (hover: none) { .hero .cta-ghost kbd { display: none; } }
 
+    /* 빌드 영수증 — 이 화면이 무엇으로, 얼마 만에 지어졌는지 */
+    .hero-receipt {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .4rem .9rem;
+      margin-top: 2.3rem;
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .02em;
+      color: #6B7390;
+    }
+    .hero-receipt .ok { color: var(--accent-2); }
+    @media (max-width: 640px) { .hero-receipt { margin-top: 1.6rem; } .hero-receipt .rc-long { display: none; } }
+    .hero-receipt button {
+      font: inherit;
+      color: var(--fg-soft);
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid rgba(155,130,255,.28);
+      border-radius: 999px;
+      padding: .22rem .75rem;
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .hero-receipt button:hover { color: var(--fg); border-color: rgba(155,130,255,.6); }
+
+    /* ── 빌드 장면 상태 (html.intro) ─────────────── */
+    html.intro .hero [data-build] { opacity: 0; transform: translateY(16px); }
+    html.intro .hero [data-build].built {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .9s var(--ease-out);
+      transition-delay: var(--d, 0s);
+    }
+    /* 부제는 왼쪽부터 쓸어 내듯 나타나고, 가장자리를 빛줄기가 따라간다 */
+    html.intro .t-sub[data-build] { opacity: 1; transform: none; clip-path: inset(-25% 100% -25% 0); }
+    html.intro .t-sub[data-build].built { clip-path: inset(-25% -6% -25% 0); transition: clip-path .8s var(--ease-io); }
+    html.intro .t-sub.built::after {
+      content: "";
+      position: absolute;
+      top: 6%; bottom: 6%;
+      width: 2px;
+      background: #fff;
+      box-shadow: 0 0 14px 3px rgba(43,234,208,.8);
+      animation: wipebar .8s var(--ease-io) both;
+    }
+    @keyframes wipebar { 0% { left: 0; opacity: 1; } 80% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+    html.intro .hero [data-build]:not(.built) { pointer-events: none; }   /* 안 보이는 버튼은 눌리지 않게 */
+    html.intro .t-main:not(.on) { opacity: 0; }
+    html.intro .t-glow { opacity: 0; }
+    .t-main.on { transition: opacity .32s ease; }
+    html.intro .term:not(.staged) { opacity: 0; }
+    /* 스크립트가 아예 돌지 못했을 때를 위한 안전장치 — 4초 뒤엔 무조건 다 보인다 */
+    html.intro:not(.fx-ready) .hero [data-build],
+    html.intro:not(.fx-ready) .t-main,
+    html.intro:not(.fx-ready) .term { animation: failsafe .01s 4s both; }
+    @keyframes failsafe { to { opacity: 1; transform: none; clip-path: none; } }
+
     /* ── 터미널 ───────────────────────────────────── */
     .term {
       position: relative;
-      border-radius: 14px;
-      border: 1px solid rgba(155,130,255,.2);
-      background: rgba(8,10,20,.92);
-      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      z-index: 4;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.085);
+      background: linear-gradient(180deg, rgba(21,25,44,.9), rgba(8,10,19,.94));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 40px 90px -30px rgba(0,0,0,.85),
+        0 0 0 1px rgba(155,130,255,.07);
       overflow: hidden;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     .term-head {
       display: flex;
       align-items: center;
-      gap: .55rem;
-      padding: .6rem .9rem;
-      border-bottom: 1px solid rgba(155,130,255,.16);
-      background: rgba(14,18,32,.8);
+      gap: .5rem;
+      padding: .62rem .9rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
       font-family: var(--mono);
-      font-size: .72rem;
+      font-size: .7rem;
       color: var(--fg-soft);
     }
-    .term-head .light { width: .68rem; height: .68rem; border-radius: 50%; }
+    .term-head .light { width: .66rem; height: .66rem; border-radius: 50%; }
     .light.r { background: #FF5F57; } .light.y { background: #FEBC2E; } .light.g { background: #28C840; }
-    .term-head .title { margin: 0 auto; letter-spacing: .04em; }
+    .term-head .title { margin: 0 auto; letter-spacing: .04em; color: #8A91AB; }
     .term-head .state { color: #6B7390; min-width: 5.5em; text-align: right; }
     .term-body {
       font-family: var(--mono);
-      font-size: .8rem;
-      line-height: 1.75;
-      padding: .9rem 1rem 1rem;
-      height: 14rem;
+      font-size: .78rem;
+      line-height: 1.72;
+      padding: .85rem 1rem 1rem;
+      height: 13rem;
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: rgba(155,130,255,.4) transparent;
       white-space: pre-wrap;
       word-break: break-all;
     }
+    @media (max-width: 900px) { .term-body { height: 12.2rem; font-size: .74rem; } }
     .term-body::-webkit-scrollbar { width: 6px; }
     .term-body::-webkit-scrollbar-thumb { background: rgba(155,130,255,.35); border-radius: 3px; }
+    .t-welcome {
+      display: block;
+      border: 1px solid rgba(155,130,255,.38);
+      border-radius: 8px;
+      padding: .4rem .75rem .45rem;
+      margin-bottom: .65rem;
+      color: var(--fg-soft);
+      line-height: 1.6;
+    }
+    .t-welcome.folded {
+      max-height: 0 !important; opacity: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; border-width: 0;
+      overflow: hidden;
+      transition: max-height .4s var(--ease-io), opacity .25s ease, margin .4s var(--ease-io), padding .4s var(--ease-io);
+    }
+    .t-welcome b { color: var(--accent); font-weight: 600; }
+    .t-welcome .cwd { display: block; color: #6B7390; }
     .t-line { display: block; min-height: 1.3em; }
     .t-cmd { color: var(--fg); font-weight: 600; }
+    .t-comp { color: var(--fg); font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent-2); text-underline-offset: 3px; }
     .t-prompt { color: var(--accent-2); font-weight: 700; }
     .t-dim { color: #6B7390; }
     .t-tool { color: var(--accent); }
+    .t-spin { color: var(--accent-4); }
     .t-ok { color: var(--accent-2); }
     .t-err { color: var(--accent-3); }
     .t-warn { color: var(--accent-4); }
@@ -313,10 +488,12 @@
     .t-cursor {
       display: inline-block;
       width: .55em; height: 1.05em;
+      margin-left: 1px;
       background: var(--accent-2);
       vertical-align: text-bottom;
       animation: blink 1s steps(1) infinite;
     }
+    @keyframes blink { 50% { opacity: 0; } }
 
     /* ── 본문 섹션 ────────────────────────────────── */
     /* .wrap(클래스)이 main(요소)보다 특이도가 높아 상하 패딩이 0으로
@@ -477,9 +654,16 @@
     .rule a { font-family: var(--mono); font-size: .72rem; color: var(--accent); text-decoration: none; }
     .rule a:hover { color: var(--accent-2); }
 
-    /* 스크롤 리빌 */
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.in { opacity: 1; transform: none; }
+    /* 스크롤 리빌 — 섹션 제목 → 카드 순서로 한 박자씩 (--i 는 스크립트가 매긴다).
+       animation(backwards)으로 걸어서 끝나면 원래 hover 트랜지션이 그대로 살아 있다. */
+    .js .reveal:not(.in) > h2, .js .reveal:not(.in) .track-head, .js .reveal:not(.in) .card,
+    .js .reveal:not(.in) .rule, .js .reveal:not(.in) .path-note { opacity: 0; }
+    .reveal.in > h2, .reveal.in .track-head, .reveal.in .card,
+    .reveal.in .rule, .reveal.in .path-note {
+      animation: rise .75s var(--ease-out) backwards;
+      animation-delay: calc(var(--i, 0) * 55ms);
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
     footer {
       border-top: 1px solid var(--line);
@@ -585,10 +769,11 @@
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* ── VIBE OVERLOAD 모드 (코나미 코드) ─────────── */
-    body.vibemode .hero h1 .grad,
+    body.vibemode .t-sub,
+    body.vibemode .t-glow,
     body.vibemode h2.sec::before,
     body.vibemode .hero .cta {
-      animation: hue 2.2s linear infinite, gradslide 4s linear infinite;
+      animation: hue 2.2s linear infinite;
     }
     @keyframes hue { to { filter: hue-rotate(360deg); } }
     body.vibemode #fx { filter: saturate(1.6) brightness(1.25); }
@@ -608,7 +793,6 @@
     :root.reduce-motion *, :root.reduce-motion *::before, :root.reduce-motion *::after {
       animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important;
     }
-    :root.reduce-motion .reveal { opacity: 1; transform: none; }
 
   </style>
 </head>
@@ -619,31 +803,46 @@
 
 <div class="page">
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow"><span class="dot"></span>VIBE CODING SEMINAR SERIES</span>
-      <h1>
-        바이브 코딩 세미나
-        <span class="typeline"><span class="grad">코드는 AI가, 방향은 내가</span></span>
-      </h1>
-      <p class="lede">설치부터 내 업무 도구 완성까지, <b>세 단계</b>면 됩니다.</p>
-      <div class="cta-row">
-        <a class="cta" href="#path">▶ 3단계로 시작하기</a>
-        <button class="cta-ghost" id="palette-btn" type="button">
-          세미나 찾기 <kbd>Ctrl</kbd><kbd>K</kbd>
-        </button>
+<header class="hero" id="top">
+  <!-- 제목 입자 레이어: 빌드 장면에선 터미널에서 흘러나와 제목을 조립하고, 이후엔 커서가 닿은 자리만 입자로 풀린다 -->
+  <canvas id="title-fx" aria-hidden="true"></canvas>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-build><span class="dot"></span>VIBE CODING SEMINAR SERIES<span class="eb-line"></span><span class="eb-ver">2026.11</span></p>
+
+    <!-- 문구를 바꾸면 scripts/build-home-fonts.py 를 다시 돌린다 (data-display 글자만 폰트에 담긴다) -->
+    <h1>
+      <span class="t-glow" aria-hidden="true"></span>
+      <span class="t-main" id="t-main" data-display><span class="w">바이브<i class="bl"></i></span> <span class="w">코딩<i class="bl"></i></span></span>
+      <span class="sr-only"> 세미나</span>
+    </h1>
+
+    <div class="hero-row">
+      <div class="hero-copy">
+        <p class="t-sub" data-build data-display>코드는 AI가, 방향은 내가</p>
+        <p class="lede" data-build>설치부터 내 업무 도구 완성까지, <b>세 단계</b>면 됩니다.</p>
+        <div class="cta-row" data-build style="--d: .1s">
+          <a class="cta" href="#path">▶ 3단계로 시작하기</a>
+          <button class="cta-ghost" id="palette-btn" type="button">
+            세미나 찾기 <kbd id="kbd-mod">Ctrl</kbd><kbd>K</kbd>
+          </button>
+        </div>
+      </div>
+
+      <div class="term" id="term" aria-label="Claude Code 에이전트 세션 데모 (자동 재생)">
+        <div class="term-head">
+          <span class="light r"></span><span class="light y"></span><span class="light g"></span>
+          <span class="title">claude — ~/vibe-coding</span>
+          <span class="state" id="term-status">idle</span>
+        </div>
+        <div class="term-body" id="term-body"></div>
       </div>
     </div>
 
-    <div class="term" id="term" aria-label="Claude Code 에이전트 세션 데모 (자동 재생)">
-      <div class="term-head">
-        <span class="light r"></span><span class="light y"></span><span class="light g"></span>
-        <span class="title">claude-code</span>
-        <span class="state" id="term-status">idle</span>
-      </div>
-      <div class="term-body" id="term-body"></div>
-    </div>
+    <p class="hero-receipt" data-build style="--d: .2s">
+      <span><span class="ok">✓</span> <span id="rc-text">HTML 한 장 · 프레임워크 0 · 빌드 0단계</span></span>
+      <button type="button" id="rebuild">▶ 빌드 장면 보기</button>
+    </p>
   </div>
 </header>
 
@@ -874,6 +1073,7 @@
   var motionOn = motionChoice !== "off";
   var reduceMotion = !motionOn;
   var $ = function (s) { return document.querySelector(s); };
+  var root = document.documentElement;
 
   /* ═══════════════════════════════════════════════════
      0. 토스트
@@ -1019,91 +1219,50 @@
   })();
 
   /* ═══════════════════════════════════════════════════
-     4. 라이브 에이전트 터미널
-        — 이 페이지를 만든 세션을 포함해, 실제 바이브 코딩
-          세션을 자율 재생한다 (탭이 숨겨지면 일시정지)
+     3. 한글 IME 재현 — 두벌식 입력기가 보여 주는 중간 화면 그대로
+        다음 초성이 잠깐 앞 글자의 받침으로 붙었다가, 모음이 오면 떨어져 나간다
+        ("바" → "방" → "바이",  "렬" → "렳" → "렬하")
   ═══════════════════════════════════════════════════ */
-  var termBody = $("#term-body");
-  var termStatus = $("#term-status");
+  var CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+  var JUNG = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+  var JONG = "_ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+  var VOWEL_KEYS = { "ㅘ": "ㅗㅏ", "ㅙ": "ㅗㅐ", "ㅚ": "ㅗㅣ", "ㅝ": "ㅜㅓ", "ㅞ": "ㅜㅔ", "ㅟ": "ㅜㅣ", "ㅢ": "ㅡㅣ" };
+  var FINAL_KEYS = { "ㄳ": "ㄱㅅ", "ㄵ": "ㄴㅈ", "ㄶ": "ㄴㅎ", "ㄺ": "ㄹㄱ", "ㄻ": "ㄹㅁ", "ㄼ": "ㄹㅂ", "ㄽ": "ㄹㅅ", "ㄾ": "ㄹㅌ", "ㄿ": "ㄹㅍ", "ㅀ": "ㄹㅎ", "ㅄ": "ㅂㅅ" };
+  var FINAL_JOIN = {};
+  Object.keys(FINAL_KEYS).forEach(function (k) { FINAL_JOIN[FINAL_KEYS[k]] = k; });
 
-  function setAgent(state) {
-    termStatus.textContent = state;
+  function hsplit(ch) {
+    var c = ch.charCodeAt(0) - 0xAC00;
+    return c >= 0 && c < 11172 ? [(c / 588) | 0, ((c % 588) / 28) | 0, c % 28] : null;
+  }
+  function hjoin(l, v, t) { return String.fromCharCode(0xAC00 + (l * 21 + v) * 28 + (t || 0)); }
+
+  // → [{ s: 화면에 보이는 문자열, comp: 마지막 글자가 아직 조합 중인가 }] — 한 칸이 키 한 번
+  function imeFrames(text) {
+    var out = "", frames = [], live = false;
+    function push(s, comp) { frames.push({ s: s, comp: comp }); }
+    for (var i = 0; i < text.length; i++) {
+      var ch = text.charAt(i), d = hsplit(ch);
+      if (!d) { out += ch; live = false; push(out, false); continue; }
+      var L = CHO.charAt(d[0]), V = JUNG.charAt(d[1]);
+      var p = live ? hsplit(out.slice(-1)) : null, head = out.slice(0, -1), shown = out + L;
+      if (p && !p[2] && JONG.indexOf(L) > 0) shown = head + hjoin(p[0], p[1], JONG.indexOf(L));
+      else if (p && p[2] && FINAL_JOIN[JONG.charAt(p[2]) + L]) shown = head + hjoin(p[0], p[1], JONG.indexOf(FINAL_JOIN[JONG.charAt(p[2]) + L]));
+      push(shown, true);
+      var vk = VOWEL_KEYS[V] || V;
+      push(out + hjoin(d[0], JUNG.indexOf(vk.charAt(0)), 0), true);
+      if (vk.length > 1) push(out + hjoin(d[0], d[1], 0), true);
+      if (d[2]) {
+        var tk = FINAL_KEYS[JONG.charAt(d[2])] || JONG.charAt(d[2]);
+        push(out + hjoin(d[0], d[1], JONG.indexOf(tk.charAt(0))), true);
+        if (tk.length > 1) push(out + hjoin(d[0], d[1], d[2]), true);
+      }
+      out += ch;
+      live = true;
+    }
+    return frames;
   }
 
-  // 시나리오 스텝 타입:
-  //  cmd   — 프롬프트 뒤에 한 글자씩 타이핑
-  //  line  — 통째로 출력 (cls 로 색 지정)
-  //  tool  — 스피너 돌다가 결과로 치환
-  //  pause — 대기
-  //  clear — 화면 비우기
-  var SCENARIOS = [
-    [ // ① 메타: 바로 이 페이지가 만들어진 세션
-      { t: "cmd", text: 'claude "홈 페이지가 너무 심심해. 힘 좀 빡 줘봐"' },
-      { t: "pause", ms: 500 },
-      { t: "tool", text: "Read(index.html)", result: "289 lines · 평범한 카드 그리드 발견", ms: 800 },
-      { t: "tool", text: "Glob(**/*.html)", result: "7 files", ms: 500 },
-      { t: "line", cls: "t-dim", text: "  계획: 파티클 배경 + 라이브 터미널 + 커맨드 팔레트 + 코나미 코드" },
-      { t: "pause", ms: 400 },
-      { t: "tool", text: "Edit(index.html)", result: "+912 −118", ms: 1100 },
-      { t: "line", cls: "t-del", text: "  - <p>심심한 홈페이지</p>" },
-      { t: "line", cls: "t-add", text: "  + <canvas id=\"fx\"></canvas>  // 진심" },
-      { t: "tool", text: "Bash(npm test)", result: "✓ 6 suites, 0 failed", ms: 900 },
-      { t: "tool", text: "Bash(git commit)", result: '"feat: 홈페이지에 진심을 담음"', ms: 700 },
-      { t: "line", cls: "t-ok", text: "✨ 완료 — 지금 보고 계신 바로 이 페이지입니다" },
-      { t: "pause", ms: 3500 }
-    ],
-    [ // ② 워크숍: 웨이퍼 데이터 분석
-      { t: "cmd", text: 'claude "wafer_map.csv 불량 패턴 분류하고 리포트 만들어줘"' },
-      { t: "pause", ms: 500 },
-      { t: "tool", text: "Read(wafer_map.csv)", result: "25,000 rows × 12 cols", ms: 700 },
-      { t: "tool", text: "Write(classify.py)", result: "84 lines", ms: 900 },
-      { t: "tool", text: "Bash(python classify.py)", result: "", ms: 800, fail: true },
-      { t: "line", cls: "t-err", text: "  KeyError: 'die_x' — 컬럼명이 스펙과 다름" },
-      { t: "line", cls: "t-dim", text: "  원인 분석: 실제 헤더는 'DieX'… 스스로 수정합니다" },
-      { t: "tool", text: "Edit(classify.py)", result: "+2 −2", ms: 600 },
-      { t: "tool", text: "Bash(python classify.py)", result: "edge-ring 62% · scratch 21% · random 17%", ms: 1000 },
-      { t: "tool", text: "Write(report.html)", result: "차트 3개 포함", ms: 700 },
-      { t: "line", cls: "t-ok", text: "✔ 8시간 걸리던 일, 커피 식기 전에 끝" },
-      { t: "pause", ms: 3500 }
-    ],
-    [ // ③ 어린이 세미나: 고양이 게임
-      { t: "cmd", text: 'claude "고양이가 장애물 점프하는 게임 만들어줘"' },
-      { t: "pause", ms: 500 },
-      { t: "line", cls: "t-dim", text: "  스펙 확인: 점프 키 = 스페이스바, 고양이 = 🐱, 목숨 = 3개" },
-      { t: "tool", text: "Write(cat-jump.html)", result: "1 file, 의존성 0개", ms: 1000 },
-      { t: "tool", text: "Bash(open cat-jump.html)", result: "게임 실행됨", ms: 700 },
-      { t: "line", cls: "t-warn", text: "  QA 리포트(8세): \"고양이가 너무 느려요\"" },
-      { t: "tool", text: "Edit(cat-jump.html)", result: "SPEED: 5 → 9", ms: 600 },
-      { t: "line", cls: "t-ok", text: "✔ 동생 테스트 통과 — 출시 승인" },
-      { t: "pause", ms: 3500 }
-    ],
-    [ // ④ 컨텍스트 세미나 티저
-      { t: "cmd", text: 'claude "3시간째 같은 버그 고치는 중인데 자꾸 산으로 가"' },
-      { t: "pause", ms: 500 },
-      { t: "line", cls: "t-dim", text: "  진단: 컨텍스트 창 94% — 초반 대화가 밀려나는 중" },
-      { t: "tool", text: "Write(PROGRESS.md)", result: "지금까지의 결론 정리", ms: 900 },
-      { t: "line", cls: "t-warn", text: "  처방: /clear 후 PROGRESS.md 만 들고 새 세션 시작" },
-      { t: "tool", text: "Bash(claude -p PROGRESS.md)", result: "12분 만에 해결", ms: 1100 },
-      { t: "line", cls: "t-ok", text: "✔ 자세한 원리는 → context/ 세미나에서" },
-      { t: "pause", ms: 3500 }
-    ]
-  ];
-
-  var SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
-
-  function termLine(cls) {
-    var el = document.createElement("span");
-    el.className = "t-line" + (cls ? " " + cls : "");
-    termBody.appendChild(el);
-    termBody.scrollTop = termBody.scrollHeight;
-    // 화면이 너무 길어지면 위에서부터 잘라낸다
-    while (termBody.children.length > 120) termBody.removeChild(termBody.firstChild);
-    return el;
-  }
-
-  function sleep(ms) {
-    return new Promise(function (res) { setTimeout(res, ms); });
-  }
   // 탭이 숨겨져 있으면 진행을 멈추고 기다린다 — 배터리를 아끼는 세심함
   function waitVisible() {
     return new Promise(function (res) {
@@ -1115,79 +1274,795 @@
     });
   }
 
-  async function typeCommand(text) {
-    setAgent("listening");
-    var el = termLine();
-    var promptHtml = '<span class="t-prompt">❯ </span>';
-    el.innerHTML = promptHtml;
-    var typed = "";
-    for (var i = 0; i < text.length; i++) {
-      await waitVisible();
-      typed += text[i];
-      el.innerHTML = promptHtml + '<span class="t-cmd"></span><span class="t-cursor"></span>';
-      el.querySelector(".t-cmd").textContent = typed;
-      termBody.scrollTop = termBody.scrollHeight;
-      await sleep(26 + Math.random() * 46);
-    }
-    await sleep(300);
-    el.innerHTML = promptHtml + '<span class="t-cmd"></span>';
-    el.querySelector(".t-cmd").textContent = text;
-  }
+  /* ═══════════════════════════════════════════════════
+     4. 라이브 에이전트 터미널
+        — 첫 장면은 바로 이 화면을 짓는 세션(6. 빌드 장면과 같은 박자),
+          그다음은 실제 바이브 코딩 세션들을 자율 재생한다
+  ═══════════════════════════════════════════════════ */
+  var CANCEL = { cancelled: true };
+  var Term = (function () {
+    var box = $("#term"), body = $("#term-body"), stat = $("#term-status");
+    var gen = 0, timers = [];
+    var SPIN = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+    var STARS = ["✻", "✳", "✢", "·", "✢", "✳"];
+    var VERBS = ["Vibing", "Pondering", "Brewing", "Noodling", "Cogitating"];
+    var PROMPT = "첫 화면, 강렬하게. 과하지 않게.";
 
-  async function runTool(step) {
-    setAgent("working");
-    var el = termLine("t-tool");
-    var f = 0;
-    var spin = setInterval(function () {
-      el.textContent = "● " + step.text + " " + SPINNER[f++ % SPINNER.length];
-      termBody.scrollTop = termBody.scrollHeight;
-    }, 90);
-    await waitVisible();
-    await sleep(step.ms || 700);
-    clearInterval(spin);
-    el.textContent = "● " + step.text;
-    if (step.result) {
-      var r = termLine(step.fail ? "t-err" : "t-dim");
-      r.textContent = "  └ " + step.result;
-    } else if (step.fail) {
-      el.classList.add("t-err");
+    function status(s) { stat.textContent = s; }
+    function scroll() { body.scrollTop = body.scrollHeight; }
+    function line(cls, text) {
+      var el = document.createElement("span");
+      el.className = "t-line" + (cls ? " " + cls : "");
+      if (text != null) el.textContent = text;
+      body.appendChild(el);
+      while (body.children.length > 120) body.removeChild(body.firstChild);
+      scroll();
+      return el;
     }
-    await sleep(180);
-  }
 
-  async function runTerminal() {
-    if (reduceMotion) {
-      // 모션 최소화: 완성된 세션 하나를 정적으로 보여준다
-      termLine().innerHTML = '<span class="t-prompt">❯ </span><span class="t-cmd">claude "홈 페이지가 너무 심심해. 힘 좀 빡 줘봐"</span>';
-      termLine("t-tool").textContent = "● Edit(index.html)";
-      termLine("t-dim").textContent = "  └ +912 −118";
-      termLine("t-ok").textContent = "✨ 완료 — 지금 보고 계신 바로 이 페이지입니다";
-      setAgent("done");
-      return;
+    // 세대(gen)가 바뀌면 진행 중인 대기가 즉시 CANCEL 로 끊긴다 — 건너뛰기가 바로 먹는다
+    function sleep(ms, g) {
+      return new Promise(function (res, rej) {
+        if (g !== gen) return rej(CANCEL);
+        var t = { rej: rej };
+        t.id = setTimeout(function () {
+          var k = timers.indexOf(t);
+          if (k >= 0) timers.splice(k, 1);
+          g !== gen ? rej(CANCEL) : res();
+        }, ms);
+        timers.push(t);
+      });
     }
-    var round = 0;
-    /* eslint-disable no-constant-condition */
-    while (true) {
-      var scenario = SCENARIOS[round % SCENARIOS.length];
-      round++;
-      for (var i = 0; i < scenario.length; i++) {
-        var step = scenario[i];
-        await waitVisible();
-        if (step.t === "cmd") await typeCommand(step.text);
-        else if (step.t === "tool") await runTool(step);
-        else if (step.t === "line") {
-          termLine(step.cls).textContent = step.text;
-          await sleep(280 + Math.random() * 250);
-        }
-        else if (step.t === "pause") { setAgent(i === scenario.length - 1 ? "idle" : "thinking…"); await sleep(step.ms); }
+    function check(g) { if (g !== gen) throw CANCEL; }
+    async function awake(g) { await waitVisible(); check(g); }
+    function cancel() {
+      gen++;
+      timers.splice(0).forEach(function (t) { clearTimeout(t.id); t.rej(CANCEL); });
+      return gen;
+    }
+    function reset() { var g = cancel(); body.textContent = ""; status("idle"); return g; }
+
+    function welcome() {
+      var w = document.createElement("span");
+      w.className = "t-welcome";
+      w.innerHTML = '<b>✻</b> Welcome to <b>Claude Code</b><span class="cwd">cwd: ~/vibe-coding</span>';
+      body.appendChild(w);
+    }
+    // 프롬프트를 보내면 환영 상자는 접혀 빌드 기록에 자리를 내준다
+    function fold() {
+      var w = body.querySelector(".t-welcome");
+      if (!w) return;
+      w.style.maxHeight = w.offsetHeight + "px";
+      void w.offsetHeight;
+      w.classList.add("folded");
+      setTimeout(function () { if (w.parentNode) w.parentNode.removeChild(w); }, 450);
+    }
+    function prompt(text) {
+      var el = line();
+      el.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cmd"></span>';
+      el.lastChild.textContent = text;
+      return el;
+    }
+    async function type(text, g, speed) {
+      status("typing");
+      var el = line();
+      el.innerHTML = '<span class="t-prompt">❯ </span><span class="t-cmd"></span><span class="t-comp"></span><span class="t-cursor"></span>';
+      var cmd = el.children[1], comp = el.children[2], frames = imeFrames(text);
+      for (var i = 0; i < frames.length; i++) {
+        await awake(g);
+        var f = frames[i];
+        cmd.textContent = f.comp ? f.s.slice(0, -1) : f.s;
+        comp.textContent = f.comp ? f.s.slice(-1) : "";   // 조합 중인 글자엔 밑줄 — 실제 입력기처럼
+        scroll();
+        var ms = speed * (.55 + Math.random() * .9);
+        if (!f.comp && /[,.]$/.test(f.s)) ms += speed * 3;
+        await sleep(ms, g);
       }
-      termLine(); // 시나리오 사이 빈 줄
+      await sleep(120, g);
+      el.removeChild(el.lastChild);
+      comp.textContent = "";
+      cmd.textContent = text;
+      return el;
     }
-  }
-  runTerminal();
+    function spinner(verb, g) {
+      var el = line("t-spin"), k = 0, t0 = performance.now();
+      function draw() {
+        el.textContent = STARS[k++ % STARS.length] + " " + verb + "… (" + ((performance.now() - t0) / 1000).toFixed(1) + "s · esc to interrupt)";
+      }
+      draw();
+      var iv = setInterval(function () { g === gen ? draw() : clearInterval(iv); }, 120);
+      return function stop() { clearInterval(iv); if (el.parentNode) el.parentNode.removeChild(el); };
+    }
+    async function tool(label, g, work, fail) {
+      status("working");
+      var el = line("t-tool", "● " + label), f = 0;
+      var iv = setInterval(function () { el.textContent = "● " + label + " " + SPIN[f++ % SPIN.length]; }, 90);
+      try {
+        if (typeof work === "function") await work(el); else await sleep(work || 700, g);
+        check(g);
+      } finally { clearInterval(iv); }
+      el.textContent = "● " + label;
+      if (fail) el.classList.add("t-err");
+      return el;
+    }
+    function result(text, cls) { return line(cls || "t-dim", "  ⎿  " + text); }
+
+    // 무대 가운데로 (FLIP) — 제자리를 재 두고, 그 자리에서 화면 가운데까지 옮겨 둔다
+    function stage() {
+      box.style.transition = "none";
+      box.style.transform = "";
+      var r = box.getBoundingClientRect(), hr = box.closest(".hero").getBoundingClientRect();
+      var top = Math.max(hr.top, 0), bottom = Math.min(hr.bottom, window.innerHeight);
+      var dx = document.documentElement.clientWidth / 2 - (r.left + r.width / 2);
+      var dy = (top + bottom) / 2 - (r.top + r.height / 2);
+      box.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
+      void box.offsetWidth;
+      box.style.transition = "opacity .5s ease";
+      box.classList.add("staged");
+    }
+    function dock(instant) {
+      box.style.transition = instant ? "none" : "transform .66s var(--ease-io), opacity .5s ease";
+      box.style.transform = "";
+      box.classList.add("staged");
+    }
+
+    // 재방문·건너뛰기·모션 끔: 빌드 세션을 끝난 모습 그대로 한 장에
+    function buildTranscript(count) {
+      prompt(PROMPT);
+      line("t-tool", "● Write(index.html)");
+      result(count ? '"바이브 코딩" — 입자 ' + count + "개로 조립" : '"바이브 코딩"');
+      line("t-tool", "● Update(index.html)");
+      result("+ 코드는 AI가, 방향은 내가", "t-add");
+      line("t-tool", "● Update(index.html)");
+      result("+ 버튼 두 개 · 나머지는 덜어냄", "t-add");
+      line("t-ok", "✓ 지금 보고 계신 바로 이 페이지입니다");
+      status("done");
+    }
+
+    // 스텝: cmd(IME 타이핑) · think(✻ 스피너) · tool(⠋ 스피너 → ⎿ 결과) · line · pause
+    var SCENARIOS = [
+      [ // 워크숍: 웨이퍼 데이터 분석
+        { t: "cmd", text: "wafer_map.csv 불량 패턴 분류하고 리포트 만들어줘" },
+        { t: "think", ms: 900 },
+        { t: "tool", text: "Read(wafer_map.csv)", result: "25,000 rows × 12 cols", ms: 700 },
+        { t: "tool", text: "Write(classify.py)", result: "Wrote 84 lines", ms: 900 },
+        { t: "tool", text: "Bash(python classify.py)", result: "KeyError: 'die_x'", ms: 800, fail: true },
+        { t: "line", cls: "t-dim", text: "  실제 헤더는 'DieX' — 스펙과 달라서 스스로 고칩니다" },
+        { t: "tool", text: "Update(classify.py)", result: "+2 −2", ms: 600 },
+        { t: "tool", text: "Bash(python classify.py)", result: "edge-ring 62% · scratch 21% · random 17%", ms: 1000 },
+        { t: "tool", text: "Write(report.html)", result: "차트 3개 포함", ms: 700 },
+        { t: "line", cls: "t-ok", text: "✓ 8시간 걸리던 일, 커피 식기 전에 끝" },
+        { t: "pause", ms: 4200 }
+      ],
+      [ // 어린이 세미나: 고양이 게임
+        { t: "cmd", text: "고양이가 장애물 점프하는 게임 만들어줘" },
+        { t: "think", ms: 700 },
+        { t: "line", cls: "t-dim", text: "  스펙 확인: 점프 = 스페이스바 · 고양이 = 🐱 · 목숨 3개" },
+        { t: "tool", text: "Write(cat-jump.html)", result: "파일 1개, 의존성 0개", ms: 1000 },
+        { t: "tool", text: "Bash(open cat-jump.html)", result: "게임 실행됨", ms: 700 },
+        { t: "line", cls: "t-warn", text: "  QA 리포트(8세): \"고양이가 너무 느려요\"" },
+        { t: "tool", text: "Update(cat-jump.html)", result: "SPEED 5 → 9", ms: 600 },
+        { t: "line", cls: "t-ok", text: "✓ 동생 테스트 통과 — 출시 승인" },
+        { t: "pause", ms: 4200 }
+      ],
+      [ // 컨텍스트 세미나 티저
+        { t: "cmd", text: "3시간째 같은 버그인데 자꾸 산으로 가" },
+        { t: "think", ms: 800 },
+        { t: "line", cls: "t-dim", text: "  진단: 컨텍스트 94% — 초반 대화가 밀려나는 중" },
+        { t: "tool", text: "Write(PROGRESS.md)", result: "지금까지의 결론 12줄", ms: 900 },
+        { t: "line", cls: "t-warn", text: "  처방: /clear → 새 세션에 PROGRESS.md 만 들고 시작" },
+        { t: "tool", text: "Read(PROGRESS.md)", result: "깨끗한 컨텍스트에서 재시작", ms: 800 },
+        { t: "line", cls: "t-ok", text: "✓ 12분 만에 해결 — 원리는 context/ 세미나에서" },
+        { t: "pause", ms: 4200 }
+      ]
+    ];
+
+    async function run(sc, g) {
+      for (var i = 0; i < sc.length; i++) {
+        var s = sc[i];
+        await awake(g);
+        if (s.t === "cmd") await type(s.text, g, 38);
+        else if (s.t === "think") {
+          status("thinking…");
+          var stop = spinner(VERBS[(Math.random() * VERBS.length) | 0], g);
+          try { await sleep(s.ms, g); } finally { stop(); }
+        } else if (s.t === "tool") {
+          await tool(s.text, g, s.ms, s.fail);
+          if (s.result) result(s.result, s.fail ? "t-err" : "t-dim");
+          await sleep(170, g);
+        } else if (s.t === "line") {
+          line(s.cls, s.text);
+          await sleep(280 + Math.random() * 240, g);
+        } else if (s.t === "pause") {
+          status("idle");
+          await sleep(s.ms, g);
+        }
+      }
+    }
+    async function loop(g, delay) {
+      try {
+        await sleep(delay || 0, g);
+        for (var r = 0; ; r++) { line(); await run(SCENARIOS[r % SCENARIOS.length], g); }
+      } catch (e) { if (e !== CANCEL) throw e; }
+    }
+
+    return {
+      PROMPT: PROMPT, status: status, line: line, result: result, sleep: sleep, check: check,
+      cancel: cancel, reset: reset, welcome: welcome, fold: fold, type: type, spinner: spinner, tool: tool,
+      stage: stage, dock: dock, buildTranscript: buildTranscript, loop: loop
+    };
+  })();
 
   /* ═══════════════════════════════════════════════════
-     5. 커맨드 팔레트 (Ctrl/⌘+K, /)
+     5. 제목 입자
+        flight — 터미널의 Write 줄에서 흘러나와 제목 글자 자리로 날아가 앉는다
+        lens   — 이후엔 커서가 닿은 자리만 입자로 풀렸다가 제자리로 돌아온다
+        평소(idle)엔 캔버스를 비우고 숨긴다: 보이는 제목은 언제나 진짜 DOM 글자다
+  ═══════════════════════════════════════════════════ */
+  var FX = (function () {
+    var hero = $(".hero"), cv = $("#title-fx"), title = $("#t-main"), glow = $(".t-glow");
+    var ctx = !reduceMotion && cv && cv.getContext ? cv.getContext("2d") : null;
+    if (!ctx || !title) return null;
+
+    // 사양에 맞춰 입자 수를 정한다 — 저사양·VDI 는 적게, 그래도 느리면 비행 중엔 절반만 그린다
+    var weak = (navigator.hardwareConcurrency || 8) <= 2 || (navigator.deviceMemory || 8) <= 2;
+    var touch = window.matchMedia("(hover: none)").matches;
+    var TARGET = weak ? 2400 : touch ? 4200 : 7800;
+    var MAX_DPR = weak ? 1 : 2;
+    var SHADE = ["#FFFFFF", "#F0EDFF", "#E0DAFF", "#D2C9FF"];   // 제목 세로 그라데이션을 4단으로
+
+    var W = 0, H = 0, N = 0, step = 3, dot = 2, RAD = 110, spread = 1;
+    var HX, HY, X, Y, VX, VY, SX, SY, AX, AY, BX, BY, DL, DU, PH, OX, OY, KIND, SH, GL;
+    // 입자 50개 중 하나는 점이 아니라 코드 글자 — 흘러가는 빛 속에 { } < / ; 가 섞여 보인다
+    var CODE = "{}<>/;=()[]01λ*#", sprites = null, spriteDpr = 0;
+    // 글자마다 작은 캔버스에 한 번만 그려 두고 drawImage 로 찍는다 — [색][글자]: 보라 · 청록 · 흰색
+    function makeSprites(dpr) {
+      var mono = getComputedStyle(document.documentElement).getPropertyValue("--mono").trim() || "monospace";
+      return ["#B9A8FF", "#7FF3E1", "#FFFFFF"].map(function (color) {
+        return CODE.split("").map(function (ch) {
+          var c = document.createElement("canvas"), g = c.getContext("2d");
+          c.width = 12 * dpr; c.height = 16 * dpr;
+          g.scale(dpr, dpr);
+          g.font = "600 12px " + mono;
+          g.textAlign = "center";
+          g.textBaseline = "middle";
+          g.fillStyle = color;
+          g.fillText(ch, 6, 8.5);
+          return c;
+        });
+      });
+    }
+    var box = { x: 0, y: 0, w: 1, h: 1 }, tb = { x: 0, y: 0, w: 1, h: 1 };
+    var mode = "idle", raf = 0, settle = null, dirty = false;
+    var perf = window.__fxPerf = { n: 0, flightFrames: 0, flightAvg: 0, flightWorst: 0, thin: 1, lensFrames: 0, lensAvg: 0 };
+
+    // 제목을 DOM 이 그린 그 자리 그대로 오프스크린에 다시 쓰고, 잉크가 묻은 곳마다 입자를 심는다
+    function layout() {
+      var hr = hero.getBoundingClientRect();
+      W = hero.clientWidth; H = hero.clientHeight;
+      spread = Math.min(1, W / 1100);
+      var dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      cv.style.width = W + "px"; cv.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var cs = getComputedStyle(title);
+      var font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+      var tr = title.getBoundingClientRect();
+      tb = { x: tr.left - hr.left, y: tr.top - hr.top, w: tr.width, h: tr.height };
+      RAD = Math.max(60, Math.min(140, parseFloat(cs.fontSize) * .5));
+
+      // 글자마다 DOM 이 정한 x(자간·줄바꿈 반영)와 줄의 기준선(baseline 표식)을 읽는다
+      var glyphs = [], x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      Array.prototype.forEach.call(title.querySelectorAll(".w"), function (w) {
+        var base = w.querySelector(".bl").getBoundingClientRect().top - hr.top, tn = w.firstChild;
+        for (var i = 0; i < tn.length; i++) {
+          var rg = document.createRange();
+          rg.setStart(tn, i); rg.setEnd(tn, i + 1);
+          var r = rg.getBoundingClientRect();
+          glyphs.push({ ch: tn.data.charAt(i), x: r.left - hr.left, y: base });
+          x0 = Math.min(x0, r.left - hr.left); x1 = Math.max(x1, r.right - hr.left);
+          y0 = Math.min(y0, r.top - hr.top); y1 = Math.max(y1, r.bottom - hr.top);
+        }
+      });
+      var pad = 8;
+      box = { x: Math.floor(x0) - pad, y: Math.floor(y0) - pad, w: Math.ceil(x1 - x0) + pad * 2, h: Math.ceil(y1 - y0) + pad * 2 };
+      var off = document.createElement("canvas");
+      off.width = box.w; off.height = box.h;
+      var o = off.getContext("2d", { willReadFrequently: true });
+      o.font = font;
+      o.textBaseline = "alphabetic";
+      o.fillStyle = "#fff";
+      glyphs.forEach(function (g) { o.fillText(g.ch, g.x - box.x, g.y - box.y); });
+      var img = o.getImageData(0, 0, box.w, box.h).data, ink = 0;
+      for (var k = 3; k < img.length; k += 4) if (img[k] > 127) ink++;
+
+      // 엇갈린(육각) 격자 — 바둑판보다 결이 고르다
+      step = Math.max(1.4, Math.sqrt(ink / (TARGET * .866)));
+      var pts = [], rowH = step * .866;
+      for (var y = rowH / 2, row = 0; y < box.h; y += rowH, row++) {
+        for (var x = (row & 1) ? step : step / 2; x < box.w; x += step) {
+          var jx = x + (Math.random() - .5) * step * .3, jy = y + (Math.random() - .5) * step * .3;
+          var ix = Math.max(0, Math.min(box.w - 1, jx | 0)), iy = Math.max(0, Math.min(box.h - 1, jy | 0));
+          if (img[(iy * box.w + ix) * 4 + 3] > 127) pts.push(box.x + jx, box.y + jy);
+        }
+      }
+      N = pts.length >> 1;
+      dot = Math.max(1.1, step * .62);
+      var F = function () { return new Float32Array(N); };
+      HX = F(); HY = F(); X = F(); Y = F(); VX = F(); VY = F(); SX = F(); SY = F();
+      AX = F(); AY = F(); BX = F(); BY = F(); DL = F(); DU = F(); PH = F(); OX = F(); OY = F();
+      KIND = new Uint8Array(N); SH = new Uint8Array(N); GL = new Uint8Array(N);
+      var cx = box.x + box.w / 2, rise = Math.min(1, H / 800);
+      for (var i = 0; i < N; i++) {
+        HX[i] = X[i] = pts[i * 2];
+        HY[i] = Y[i] = pts[i * 2 + 1];
+        KIND[i] = Math.random() < .5 ? 0 : 1;
+        SH[i] = Math.max(0, Math.min(3, Math.floor(((HY[i] - tb.y) / tb.h - .3) / .7 * 4)));
+        PH[i] = Math.random() * 6.2832;
+        GL[i] = Math.random() < .02 ? 1 + ((Math.random() * CODE.length) | 0) : 0;
+        // 스크롤로 흩어질 때의 방향 — 위로 떠오르며 바깥으로 살짝 퍼진다
+        OX[i] = ((Math.random() - .5) * 200 + (HX[i] - cx) * .2) * spread;
+        OY[i] = -(70 + Math.random() * 300) * rise;
+      }
+      if (spriteDpr !== dpr) { sprites = makeSprites(dpr); spriteDpr = dpr; }
+      perf.n = N;
+      dirty = false;
+      return N;
+    }
+
+    function home() { for (var i = 0; i < N; i++) { X[i] = HX[i]; Y[i] = HY[i]; VX[i] = VY[i] = 0; } }
+    function show() { cv.style.transition = "none"; cv.style.opacity = "1"; cv.style.visibility = "visible"; }
+    function hide() { ctx.clearRect(0, 0, W, H); cv.style.visibility = "hidden"; }
+
+    // 점으로 된 제목 한 장 — 빌드의 마지막 프레임 (곧 진짜 글자와 교차하며 사라진다)
+    function drawDots() {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.globalAlpha = 1;
+      ctx.clearRect(0, 0, W, H);
+      for (var s = 0; s < 4; s++) {
+        ctx.fillStyle = SHADE[s];
+        for (var i = 0; i < N; i++) if (SH[i] === s) ctx.fillRect(HX[i] - dot / 2, HY[i] - dot / 2, dot, dot);
+      }
+    }
+
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function fly(t, kind, thin, ex, ey) {
+      for (var i = 0; i < N; i += thin) {
+        if (KIND[i] !== kind) continue;
+        var p = (t - DL[i]) / DU[i];
+        if (p <= 0 || p >= 1) continue;
+        if (SX[i] !== SX[i]) {                               // 막 출발: 그 순간의 터미널 자리에서
+          SX[i] = ex + (Math.random() - .5) * 24;
+          SY[i] = ey + (Math.random() - .5) * 8;
+          AX[i] = Math.max(8, SX[i] - (30 + Math.random() * 190) * spread);   // 위로 솟구쳤다가
+          AY[i] = SY[i] - 150 - Math.random() * 230;
+        }
+        var e = ease(p), m = 1 - e, a = m * m * m, b = 3 * m * m * e, c = 3 * m * e * e, d = e * e * e;
+        var w = Math.sin(p * 3.1416) * Math.sin(p * 9 + PH[i]) * 12;   // 흐름에 살짝 결을 준다
+        var x = a * SX[i] + b * AX[i] + c * BX[i] + d * HX[i] + w * .7, y = a * SY[i] + b * AY[i] + c * BY[i] + d * HY[i] + w;
+        if (GL[i] && sprites) ctx.drawImage(sprites[kind][GL[i] - 1], x - 6, y - 8, 12, 16);
+        else ctx.fillRect(x - .8, y - .8, 1.6, 1.6);
+      }
+    }
+    function land(t) {
+      var n = 0, big = dot * 1.7;
+      for (var i = 0; i < N; i++) {
+        var age = t - DL[i] - DU[i];
+        if (age < 0) continue;
+        n++;
+        var s = age < .14 ? big - (big - dot) * age / .14 : dot;   // 도착하는 순간 톡 — 한 번 커졌다 앉는다
+        ctx.fillRect(HX[i] - s / 2, HY[i] - s / 2, s, s);
+      }
+      return n;
+    }
+
+    // src(): 지금 이 순간 입자가 나오는 화면 좌표 — 도킹하며 움직이는 터미널의 ● Write 줄을 따라간다
+    function flight(src) {
+      stop();
+      return new Promise(function (resolve) {
+        if (!N) return resolve();
+        var end = 0, fire = 0;
+        for (var i = 0; i < N; i++) {
+          var u = (HX[i] - box.x) / box.w;               // 왼쪽 글자부터 차례로 — 프린터 헤드가 지나가듯
+          DL[i] = u * .42 + Math.random() * .1;
+          DU[i] = .5 + Math.random() * .22;
+          SX[i] = NaN;                                   // 출발점은 출발하는 순간에 정한다
+          BX[i] = HX[i] + (Math.random() - .35) * 150 * spread;   // 아래에서 자리로 파고든다
+          BY[i] = HY[i] + 70 + Math.random() * 170;
+          end = Math.max(end, DL[i] + DU[i]);
+          fire = Math.max(fire, DL[i]);
+        }
+        mode = "flight";
+        show();
+        ctx.clearRect(0, 0, W, H);
+        var t0 = performance.now(), prev = t0, fc = 0, ema = 16, thin = 1;
+        settle = function () {
+          cancelAnimationFrame(raf); raf = 0; settle = null;
+          home(); drawDots();
+          mode = "idle";
+          resolve();
+        };
+        function frame(now) {
+          raf = 0;
+          var dt = now - prev, t = (now - t0) / 1000;
+          prev = now;
+          fc++;
+          perf.flightFrames++;
+          perf.flightAvg += (dt - perf.flightAvg) / perf.flightFrames;
+          if (fc > 2) perf.flightWorst = Math.max(perf.flightWorst, dt);
+          ema = ema * .8 + dt * .2;
+          if (fc > 6 && ema > 27) thin = perf.thin = 2;             // 느린 기기: 남은 비행은 절반만 그린다
+          // 잔상 — 앞 프레임을 지우지 않고 옅게만 걷어 내서 빛줄기처럼 보이게
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.fillStyle = "rgba(0,0,0,.26)";
+          ctx.fillRect(0, 0, W, H);
+          ctx.globalCompositeOperation = "lighter";
+          var hr = hero.getBoundingClientRect(), at = src(), ex = at.x - hr.left, ey = at.y - hr.top;
+          if (t < fire + .1) {                            // 발사구 — 입자가 뿜어져 나오는 동안 빛난다
+            var k = Math.min(1, t / .08) * Math.min(1, (fire + .1 - t) / .2);
+            var gr = ctx.createRadialGradient(ex, ey, 0, ex, ey, 26);
+            gr.addColorStop(0, "rgba(225,215,255," + (.5 * k).toFixed(3) + ")");
+            gr.addColorStop(1, "rgba(155,130,255,0)");
+            ctx.fillStyle = gr;
+            ctx.fillRect(ex - 26, ey - 26, 52, 52);
+          }
+          ctx.fillStyle = "rgba(155,130,255,.9)"; fly(t, 0, thin, ex, ey);
+          ctx.fillStyle = "rgba(43,234,208,.85)"; fly(t, 1, thin, ex, ey);
+          ctx.fillStyle = "rgba(255,255,255,.95)";
+          var arrived = land(t);
+          ctx.globalCompositeOperation = "source-over";
+          if (glow) glow.style.opacity = (.1 + .9 * arrived / N).toFixed(3);
+          if (t > end + .05) { settle(); return; }
+          raf = requestAnimationFrame(frame);
+        }
+        raf = requestAnimationFrame(frame);
+      });
+    }
+
+    // 빌드 끝: 점 제목은 사라지고 진짜 글자가 남는다
+    function fadeOut() {
+      cv.style.transition = "opacity .55s ease";
+      cv.style.opacity = "0";
+      setTimeout(function () { if (mode === "idle") { hide(); if (dirty) layout(); } }, 600);
+      if (glow) { glow.style.transition = "opacity 1.8s ease"; glow.style.opacity = ".5"; }   // CSS 기본값과 같은 쉼 상태로
+    }
+
+    // 무엇을 하던 중이든 멈추고 제자리 — 건너뛰기·다시 빌드에서 쓴다
+    function stop() {
+      if (settle) settle();
+      cancelAnimationFrame(raf); raf = 0;
+      mode = "idle";
+      if (N) home();
+      hide();
+      lensR = burstR = lensT = 0;
+      live = false;
+      sp = 0;
+      title.style.opacity = "";
+      title.classList.remove("lens");
+      if (glow) { glow.style.transition = ""; glow.style.opacity = ""; }
+      if (dirty && N) layout();
+    }
+
+    /* ── 렌즈: 커서 주변 글자를 지우고(.t-main.lens 마스크) 그 자리를 입자가 채운다 ── */
+    var mx = -1e4, my = -1e4, lensR = 0, lensT = 0, burstR = 0, armed = false, live = false, rainbowUntil = 0;
+    var sp = 0;                       // 스크롤 진행도 — 0: 제자리, 1: 다 흩어져 사라짐
+    var vis = [], vA = [];
+    function sstep(a, b, x) { x = Math.max(0, Math.min(1, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
+
+    function enableLens() {
+      if (!N) return;
+      live = true;
+      if (!armed) {
+        armed = true;
+        hero.addEventListener("pointermove", onMove, { passive: true });
+        hero.addEventListener("pointerleave", function () { lensT = 0; if (live && lensR > .5) wake(); });
+        hero.addEventListener("pointerdown", onDown);
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+      onScroll();
+    }
+    // 히어로를 벗어날수록 제목은 입자로 풀려 위로 흩어지고, 돌아오면 다시 모인다
+    function onScroll() {
+      if (!live) return;
+      var hr = hero.getBoundingClientRect();
+      var p = Math.max(0, Math.min(1, -hr.top / Math.max(240, hr.height * .55)));
+      if (Math.abs(p - sp) < .001 && (p > 0 || sp === 0)) return;
+      sp = p;
+      if (p > 0) lensT = 0;
+      wake();
+    }
+    function onMove(e) {
+      if (!live || (e.pointerType && e.pointerType !== "mouse")) return;
+      var hr = hero.getBoundingClientRect(), m = RAD * .5;
+      mx = e.clientX - hr.left; my = e.clientY - hr.top;
+      lensT = sp < .001 && mx > box.x - m && mx < box.x + box.w + m && my > box.y - m && my < box.y + box.h + m ? RAD : 0;
+      if (lensT || lensR > .5) wake();
+    }
+    function onDown(e) {
+      if (!live) return;
+      var hr = hero.getBoundingClientRect(), x = e.clientX - hr.left, y = e.clientY - hr.top;
+      if (x > box.x && x < box.x + box.w && y > box.y && y < box.y + box.h) burst(x, y, 1);
+    }
+    // 클릭·탭: 그 자리에서 입자가 터졌다가 다시 모인다
+    function burst(x, y, power, rainbow) {
+      if (!N || !live || mode === "flight") return;
+      mx = x; my = y;
+      var RR = RAD * 2.4;
+      for (var i = 0; i < N; i++) {
+        var dx = X[i] - x, dy = Y[i] - y, d = Math.sqrt(dx * dx + dy * dy) + .01;
+        if (d < RR) {
+          var f = (1 - d / RR) * 10 * (power || 1) * (.6 + Math.random() * .8);
+          VX[i] += dx / d * f;
+          VY[i] += dy / d * f;
+        }
+      }
+      burstR = Math.max(burstR, RR * .8);
+      if (rainbow) rainbowUntil = performance.now() + 2600;
+      wake();
+    }
+    function wake() {
+      if (mode === "flight" || raf || !N) return;
+      mode = "lens";
+      title.classList.add("lens");
+      show();
+      raf = requestAnimationFrame(tick);
+    }
+    function tick(now) {
+      raf = 0;
+      var c0 = performance.now(), scatter = sp > .001;
+      title.style.opacity = scatter ? (1 - sstep(0, .2, sp)).toFixed(3) : "";
+      lensR += (lensT - lensR) * .14;
+      burstR = burstR > .5 ? burstR * .955 : 0;
+      var R = Math.max(lensR, burstR), inner = R * .35, span = Math.max(1, R * .65);
+      title.style.setProperty("--mx", (mx - tb.x).toFixed(1) + "px");
+      title.style.setProperty("--my", (my - tb.y).toFixed(1) + "px");
+      title.style.setProperty("--lr", R.toFixed(1) + "px");
+
+      var reach = RAD * 1.15, reach2 = reach * reach, push = 2.3 * lensR / RAD, moving = 0;
+      vis.length = 0; vA.length = 0;
+      for (var i = 0; i < N; i++) {
+        var x = X[i], y = Y[i], vx = VX[i], vy = VY[i], dx = x - mx, dy = y - my, d2 = dx * dx + dy * dy;
+        if (push > .02 && d2 < reach2 && d2 > .01) {          // 밀어내되 살짝 소용돌이치게
+          var d = Math.sqrt(d2), f = 1 - d / reach;
+          f = f * f * push / d;
+          vx += (dx - dy * .55) * f;
+          vy += (dy + dx * .55) * f;
+        }
+        var ox = x - HX[i], oy = y - HY[i];
+        if (ox || oy || vx || vy) {                             // 용수철처럼 제자리로
+          vx = (vx - ox * .055) * .86;
+          vy = (vy - oy * .055) * .86;
+          x += vx; y += vy;
+          if (Math.abs(x - HX[i]) + Math.abs(y - HY[i]) < .06 && Math.abs(vx) + Math.abs(vy) < .03) { x = HX[i]; y = HY[i]; vx = vy = 0; }
+          else moving++;
+          X[i] = x; Y[i] = y; VX[i] = vx; VY[i] = vy;
+        }
+        // 보일지: 글자가 지워진 구멍 안이거나, 제자리에서 밀려난 입자
+        var a = (Math.abs(x - HX[i]) + Math.abs(y - HY[i])) * .09;
+        var hx = HX[i] - mx, hy = HY[i] - my;
+        if (R > .5 && hx < R && hx > -R && hy < R && hy > -R) {
+          a += 1 - Math.min(1, Math.max(0, (Math.sqrt(hx * hx + hy * hy) - inner) / span));
+        }
+        if (a > .04) { vis.push(i); vA.push(a > 1 ? 3 : (a * 4) | 0); }
+      }
+
+      ctx.clearRect(0, 0, W, H);
+      var rainbow = now < rainbowUntil;
+      if (scatter) {                                             // 스크롤: 글자 전체가 입자가 되어 떠오른다
+        var e = sp * sp * (3 - 2 * sp), ga = sstep(0, .08, sp) * (1 - sstep(.45, 1, sp));
+        ctx.globalAlpha = ga;
+        for (var s2 = 0; ga > .01 && s2 < 4; s2++) {
+          ctx.fillStyle = SHADE[s2];
+          for (var n = 0; n < N; n++) {
+            if (SH[n] !== s2) continue;
+            var px = X[n] + OX[n] * e, py = Y[n] + OY[n] * e;
+            if (GL[n] && sprites && e > .08) ctx.drawImage(sprites[2][GL[n] - 1], px - 6, py - 8, 12, 16);
+            else ctx.fillRect(px - dot / 2, py - dot / 2, dot, dot);
+          }
+        }
+        vis.length = 0;
+      }
+      for (var q = 0; q < 4; q++) {                              // 알파 4단 × 명암 4단으로 묶어 그린다
+        ctx.globalAlpha = (q + 1) / 4;
+        for (var s = 0; s < 4; s++) {
+          ctx.fillStyle = rainbow ? "hsl(" + ((now / 5 + s * 90) % 360).toFixed(0) + ",95%,70%)" : SHADE[s];
+          for (var j = 0; j < vis.length; j++) {
+            var k = vis[j];
+            if (vA[j] !== q || SH[k] !== s) continue;
+            if (GL[k] && sprites && !rainbow && Math.abs(X[k] - HX[k]) + Math.abs(Y[k] - HY[k]) > 6) ctx.drawImage(sprites[2][GL[k] - 1], X[k] - 6, Y[k] - 8, 12, 16);
+            else ctx.fillRect(X[k] - dot / 2, Y[k] - dot / 2, dot, dot);
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      perf.lensFrames++;
+      perf.lensAvg += (performance.now() - c0 - perf.lensAvg) / perf.lensFrames;
+
+      if (R < .5 && !lensT && !moving && (!scatter || sp >= 1)) { // 다 돌아왔으면 잠든다 — 평소엔 0 프레임
+        mode = "idle";
+        hide();
+        title.classList.remove("lens");
+        if (dirty) layout();
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    var rt = 0;
+    window.addEventListener("resize", function () {
+      dirty = true;
+      clearTimeout(rt);
+      rt = setTimeout(function () { if (mode === "idle" && N) layout(); }, 200);
+    });
+
+    return {
+      layout: layout, flight: flight, fadeOut: fadeOut, stop: stop, enableLens: enableLens, burst: burst,
+      count: function () { return N; },
+      center: function () { return { x: box.x + box.w / 2, y: box.y + box.h / 2 }; }
+    };
+  })();
+
+  /* ═══════════════════════════════════════════════════
+     6. 빌드 장면 — 터미널의 도구 호출과 화면이 실제로 같은 박자로 지어진다
+        첫 방문(세션당 1회) · ?intro · "↻ 다시 빌드" 에서만 튼다.
+        재생 중 아무 키·클릭·휠이면 그 자리에서 완성 상태로 건너뛴다.
+  ═══════════════════════════════════════════════════ */
+  var Intro = (function () {
+    var title = $("#t-main"), rcText = $("#rc-text"), rebuildBtn = $("#rebuild");
+    var builds = [].slice.call(document.querySelectorAll(".hero [data-build]"));
+    var playing = false, playId = 0, count = 0;
+
+    function fontsReady() {
+      if (!document.fonts || !document.fonts.load) return Promise.resolve();
+      var loads = Promise.all([
+        document.fonts.load('900 100px "VibeDisplay"', "바이브 코딩"),
+        document.fonts.load('400 14px "JetBrains Mono"'),
+        document.fonts.load('600 14px "JetBrains Mono"')
+      ]);
+      return Promise.race([loads, new Promise(function (r) { setTimeout(r, 1500); })]).catch(function () {});
+    }
+    function build(sel) {
+      [].forEach.call(document.querySelectorAll(".hero " + sel), function (el) { el.classList.add("built"); });
+    }
+    function fmt(n) { return Number(n).toLocaleString("ko-KR"); }
+    function receipt(secs) {
+      rcText.innerHTML = "";
+      rcText.appendChild(document.createTextNode((secs ? secs + "초 · 입자 " + fmt(count) + "개 · " : "") + "HTML 한 장 · 프레임워크 0"));
+      var tail = document.createElement("span");
+      tail.className = "rc-long";
+      tail.textContent = " · 빌드 0단계";
+      rcText.appendChild(tail);
+      rebuildBtn.textContent = secs ? "↻ 다시 빌드" : "▶ 빌드 장면 보기";
+    }
+
+    var SKIP = ["keydown", "pointerdown", "wheel", "touchstart"];
+    function onSkip(e) {
+      if (e.type === "keydown" && /^(Shift|Control|Alt|Meta|CapsLock)$/.test(e.key)) return;
+      arm(false);
+      Term.cancel();     // 진행 중인 대기를 모두 끊는다 → play() 의 catch 가 완성 상태로 마무리
+      if (FX) FX.stop();
+    }
+    function arm(on) {
+      SKIP.forEach(function (ev) {
+        (on ? window.addEventListener : window.removeEventListener).call(window, ev, onSkip, { capture: true, passive: true });
+      });
+    }
+
+    async function play() {
+      if (playing) return;
+      playing = true;
+      var id = ++playId;
+      try { sessionStorage.setItem("vibe-intro-seen", "1"); } catch (_) {}
+      root.classList.add("intro");
+      builds.forEach(function (el) { el.classList.remove("built"); });
+      title.classList.remove("on", "sheen");
+      if (FX) FX.stop();
+      var g = Term.reset();
+      arm(true);
+      try {
+        await fontsReady();
+        Term.check(g);
+        count = FX ? FX.layout() : 0;
+        Term.welcome();
+        Term.stage();
+        await Term.sleep(220, g);
+        var t0 = performance.now();
+        await Term.type(Term.PROMPT, g, 28);
+        await Term.sleep(90, g);
+        Term.fold();                                    // Enter — 환영 상자는 접히고 생각이 시작된다
+        Term.status("thinking…");
+        var stopSpin = Term.spinner("Vibing", g);
+        try { await Term.sleep(340, g); } finally { stopSpin(); }
+        // Write 와 동시에 터미널은 제자리로 미끄러지고, 입자는 그 터미널에서 뿜어져 나와 제목이 된다
+        await Term.tool("Write(index.html)", g, function (el) {
+          Term.dock();
+          if (!FX) return Term.sleep(900, g);
+          return FX.flight(function () {
+            var r = el.getBoundingClientRect();
+            return { x: r.left + 6, y: r.top + r.height / 2 };
+          });
+        });
+        title.classList.add("on", "sheen");
+        if (FX) FX.fadeOut();
+        Term.result('"바이브 코딩" — 입자 ' + fmt(count) + "개로 조립");
+        await Term.sleep(140, g);
+        await Term.tool("Update(index.html)", g, function () { build(".t-sub"); return Term.sleep(440, g); });
+        Term.result("+ 코드는 AI가, 방향은 내가", "t-add");
+        await Term.tool("Update(index.html)", g, function () {
+          build(".eyebrow"); build(".lede"); build(".cta-row");
+          return Term.sleep(380, g);
+        });
+        Term.result("+ 버튼 두 개 · 나머지는 덜어냄", "t-add");
+        var secs = ((performance.now() - t0) / 1000).toFixed(1);
+        Term.line("t-ok", "✓ " + secs + "s — 지금 보고 계신 바로 이 페이지입니다");
+        Term.status("done");
+        receipt(secs);
+        build(".hero-receipt");
+        arm(false);
+        playing = false;
+        setTimeout(function () { if (id === playId) root.classList.remove("intro"); }, 1000);
+        if (FX) FX.enableLens();
+        Term.loop(g, 5200);
+      } catch (e) {
+        if (e !== CANCEL) { try { console.error(e); } catch (_) {} }
+        if (id === playId) finish();
+      }
+    }
+
+    // 남은 장면 없이 완성 상태로 — 건너뛰기 · 재방문 · 오류 공통
+    function finish() {
+      arm(false);
+      playing = false;
+      playId++;
+      if (FX) FX.stop();
+      Term.dock(true);
+      var g = Term.reset();
+      Term.buildTranscript(count ? fmt(count) : "");
+      builds.forEach(function (el) { el.classList.add("built"); });
+      title.classList.add("on");
+      root.classList.remove("intro");
+      receipt(null);
+      if (FX) FX.enableLens();
+      Term.loop(g, 4200);
+    }
+
+    function replay() {
+      if (playing) return;
+      if (window.scrollY > 4) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(play, 650);
+      } else play();
+    }
+
+    function init() {
+      root.classList.add("fx-ready");
+      receipt(null);
+      if (reduceMotion) {            // 모션을 끈 사람: 완성된 세션 한 장을 정지 화면으로
+        root.classList.remove("intro");
+        rebuildBtn.hidden = true;
+        Term.buildTranscript("");
+        return;
+      }
+      rebuildBtn.addEventListener("click", replay);
+      var want = root.classList.contains("intro") && window.scrollY < 40;
+      if (want) { waitVisible().then(play); return; }
+      root.classList.remove("intro");
+      fontsReady().then(function () {
+        count = FX ? FX.layout() : 0;
+        finish();
+      });
+    }
+
+    return { init: init, replay: replay };
+  })();
+  Intro.init();
+
+  // 맥에서는 단축키 표기를 ⌘ 로
+  if (/Mac|iPhone|iPad|iPod/.test(navigator.platform || "")) { var km = $("#kbd-mod"); if (km) km.textContent = "⌘"; }
+
+  /* ═══════════════════════════════════════════════════
+     7. 커맨드 팔레트 (Ctrl/⌘+K, /)
   ═══════════════════════════════════════════════════ */
   var COMMANDS = [
     { ico: "🧰", label: "0교시 — 설치와 첫 실행", meta: "setup/", run: function () { location.href = "setup/"; } },
@@ -1206,6 +2081,7 @@
     { ico: "🎬", label: "바이브 코딩으로 슬라이드 자료 만들기", meta: "making-slides/", run: function () { location.href = "making-slides/"; } },
     { ico: "🎮", label: "나만의 게임 만들기 (어린이 × 부모)", meta: "forChildren/", run: function () { location.href = "forChildren/"; } },
     { ico: "⭐", label: "GitHub 저장소 열기", meta: "external", run: function () { window.open("https://github.com/geniuskey/vibe-coding", "_blank", "noopener"); } },
+    { ico: "↻", label: "빌드 장면 다시 보기", meta: "?intro", run: function () { Intro.replay(); } },
     { ico: "🎞️", label: motionOn ? "애니메이션 끄기" : "애니메이션 켜기", meta: "motion", run: function () { toggleMotion(); } },
     { ico: "🌈", label: "vibe --overload", meta: "easter egg", run: function () { enterVibemode(); } },
     { ico: "✨", label: "particles --burst", meta: "easter egg", run: function () { burstParticles(); toast("✨ particle burst"); } },
@@ -1292,7 +2168,7 @@
   });
 
   /* ═══════════════════════════════════════════════════
-     6. 전역 키보드: Ctrl+K / "/" 팔레트, 1–9·0 바로가기, 코나미
+     8. 전역 키보드: Ctrl+K / "/" 팔레트, 1–9·0 바로가기, 코나미
   ═══════════════════════════════════════════════════ */
   var KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
   var konamiPos = 0;
@@ -1302,12 +2178,13 @@
     animateUntil = Math.max(animateUntil, performance.now() + 12000);
     document.body.classList.add("vibemode");
     burstParticles();
+    if (FX) { var c = FX.center(); FX.burst(c.x, c.y, 2.2, true); }   // 제목이 무지개로 터졌다가 다시 모인다
     toast("🌈 VIBE OVERLOAD — 최대 출력 모드");
-    setAgent("overloaded");
+    Term.status("overloaded");
     setTimeout(function () {
       vibemode = false;
       document.body.classList.remove("vibemode");
-      setAgent("idle");
+      Term.status("idle");
     }, 12000);
   }
 
@@ -1348,8 +2225,22 @@
   });
 
   /* ═══════════════════════════════════════════════════
-     8. 스크롤 리빌
+     9. 스크롤 리빌 — 섹션마다 위→아래, 왼→오른 물결로 한 박자씩
   ═══════════════════════════════════════════════════ */
+  [].forEach.call(document.querySelectorAll(".reveal"), function (sec) {
+    var els = [].slice.call(sec.querySelectorAll(":scope > h2, .track-head, .card, .rule, .path-note"));
+    var rows = [], cols = [], at = els.map(function (el) {
+      var r = el.getBoundingClientRect(), t = Math.round(r.top / 24), l = Math.round(r.left / 24);
+      if (rows.indexOf(t) < 0) rows.push(t);
+      if (cols.indexOf(l) < 0) cols.push(l);
+      return [t, l];
+    });
+    rows.sort(function (a, b) { return a - b; });
+    cols.sort(function (a, b) { return a - b; });
+    els.forEach(function (el, k) {
+      el.style.setProperty("--i", Math.min(12, rows.indexOf(at[k][0]) + cols.indexOf(at[k][1])));
+    });
+  });
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -1362,7 +2253,7 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     9. 개발자 콘솔 인사 — 여기까지 열어본 당신을 위해
+     10. 개발자 콘솔 인사 — 여기까지 열어본 당신을 위해
   ═══════════════════════════════════════════════════ */
   try {
     console.log(
