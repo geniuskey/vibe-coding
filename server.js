@@ -134,6 +134,7 @@ const STATIC_TYPES = {
   '.ico': 'image/x-icon',
   '.txt': 'text/plain; charset=utf-8',
   '.xml': 'application/xml; charset=utf-8',
+  '.mp3': 'audio/mpeg',
 };
 
 // 정적 사이트(GitHub Pages)는 저장소 전체를 그대로 서빙하므로, 로컬 개발 서버도
@@ -150,7 +151,18 @@ function serveStatic(req, res, url) {
   if (!type) return false;
   fs.readFile(filePath, (err, content) => {
     if (err) { res.writeHead(404); return res.end('Not found'); }
-    res.writeHead(200, { 'Content-Type': type });
+    // Safari 는 <audio> 를 Range 요청으로만 재생한다 — 내레이션 mp3(use-cases/audio) 용 부분 응답
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+    if (range && (range[1] || range[2])) {
+      const size = content.length;
+      let start = range[1] ? Number(range[1]) : size - Number(range[2]);
+      let end = range[1] && range[2] ? Number(range[2]) : size - 1;
+      start = Math.max(0, start); end = Math.min(size - 1, end);
+      if (start > end) { res.writeHead(416, { 'Content-Range': `bytes */${size}` }); return res.end(); }
+      res.writeHead(206, { 'Content-Type': type, 'Accept-Ranges': 'bytes', 'Content-Range': `bytes ${start}-${end}/${size}`, 'Content-Length': end - start + 1 });
+      return res.end(content.subarray(start, end + 1));
+    }
+    res.writeHead(200, { 'Content-Type': type, 'Accept-Ranges': 'bytes' });
     res.end(content);
   });
   return true;

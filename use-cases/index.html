@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="코딩 에이전트(Claude Code · Codex · OpenCode)로 어디까지 할 수 있을까. 경품 추첨기, 엑셀→실시간 대시보드, 리더의 주간보고 초안, 개발자 주간 활동 공유까지 — 보통 사람들이 매주 겪는 일을 바이브 코딩으로 바꾸는 상황별 가이드. 내레이션이 있는 캠페인형 슬라이드." />
+  <meta name="keywords" content="바이브 코딩, vibe coding, 코딩 에이전트, Claude Code, Codex, OpenCode, 비개발자, 업무 자동화, 주간보고, 대시보드, 경품 추첨, 활용 사례" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vibe-coding.euiyun.com/use-cases/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드" />
+  <meta property="og:description" content="경품 추첨기 10분 · 엑셀→실시간 대시보드 · 주간보고 3시간→15분 · 개발자 주간 활동 자동 공유. 코드를 몰라도, 일은 바꿀 수 있습니다." />
+  <meta property="og:url" content="https://vibe-coding.euiyun.com/use-cases/" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="이것도 바이브 코딩으로 됩니다" />
+  <meta name="twitter:description" content="코딩 에이전트로 어디까지 할 수 있을까 — 보통 사람들의 일주일을 바꾸는 상황별 가이드." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/use-cases.png?v=1" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "이것도 바이브 코딩으로 됩니다 — 상황별 활용 가이드",
+    "description": "코딩 에이전트로 경품 추첨기, 실시간 대시보드, 주간보고 초안, 개발자 주간 활동 공유를 만드는 상황별 바이브 코딩 가이드. 비개발자가 바이브 코딩을 해야 하는 이유.",
+    "inLanguage": "ko",
+    "author": { "@type": "Person", "name": "geniuskey" },
+    "url": "https://vibe-coding.euiyun.com/use-cases/"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <style>
+    /* ────────────────────────────────────────────────────────────
+       디자인 토큰 — 시리즈 공통(agent-skills/making-slides)과 같은 팔레트
+       ──────────────────────────────────────────────────────────── */
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --line: rgba(155,130,255,.22);
+      --fg: #FFFFFF;
+      --dim: #D5DAE8;
+      --soft: #9BA6C0;
+      --a1: #9B82FF;   /* purple */
+      --a2: #2BEAD0;   /* teal   */
+      --a3: #FF7A95;   /* pink   */
+      --a4: #FFD46B;   /* yellow */
+      --danger: #FF4D5E;
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --spring: cubic-bezier(.34,1.56,.64,1);
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.14), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.05), transparent 60%);
+      animation: bgFloat 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-2%,2%) scale(1.05); } }
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; font-family: 'Pretendard', system-ui, sans-serif; color: var(--fg); }
+    .reveal .slides { text-align: left; }
+    .reveal .slides > section { padding: 0; box-sizing: border-box; height: 100%; }
+    .reveal section, .reveal section p, .reveal section li, .reveal section span,
+    .reveal section b, .reveal section strong, .reveal section h1, .reveal section h2, .reveal section h3 { color: var(--fg); }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Pretendard', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.03em;
+      text-transform: none; margin: 0; line-height: 1.12; text-shadow: 0 2px 6px rgba(0,0,0,.55);
+    }
+    .reveal p { margin: 0; line-height: 1.55; }
+    .reveal a { color: #5BFFE0 !important; }
+    .grad {
+      background: linear-gradient(100deg, #B8A6FF 0%, #5BFFE0 50%, #FF9AB0 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent !important;
+      -webkit-text-fill-color: transparent; text-shadow: none !important;
+      animation: gradShift 6s ease-in-out infinite alternate;
+    }
+    @keyframes gradShift { to { background-position: 100% 0; } }
+    .mono { font-family: var(--mono); }
+    .t1 { color: var(--a1) !important; } .t2 { color: var(--a2) !important; }
+    .t3 { color: var(--a3) !important; } .t4 { color: var(--a4) !important; }
+    .muted { color: var(--soft) !important; }
+
+    /* 무대: 각 장은 1280×800 좌표계의 절대 배치 캔버스 */
+    .stage { position: absolute; inset: 0; overflow: visible; }
+    .stage *, .stage *::before, .stage *::after { box-sizing: border-box; }
+    .pad { position: absolute; inset: 56px 64px 92px; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 15px; font-weight: 700; letter-spacing: .18em;
+      color: var(--a2) !important; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 2px; background: currentColor; border-radius: 2px; }
+
+    /* ────────────────────────────────────────────────────────────
+       모션 프리미티브 — data-b="N" 은 N번째 내레이션 문장이 시작될 때 .on
+       data-x="N" 은 N번째 문장에서 퇴장(.gone), data-d 는 박자 안의 지연(초)
+       ──────────────────────────────────────────────────────────── */
+    .k {
+      opacity: 0; transform: translateY(28px);
+      transition-property: opacity, transform, filter, clip-path;
+      transition-duration: .7s, .9s, .9s, .9s;
+      transition-timing-function: var(--ease);
+      transition-delay: calc(var(--d, 0) * 1s);
+    }
+    .k.on { opacity: 1; transform: none; filter: none; }
+    .k.pop { transform: scale(.35); transition-timing-function: var(--ease), var(--spring), var(--ease), var(--ease); }
+    .k.left  { transform: translateX(-70px); }
+    .k.right { transform: translateX(70px); }
+    .k.down  { transform: translateY(-40px); }
+    .k.blur  { filter: blur(16px); transform: scale(1.12); }
+    .k.wipe  { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
+    .k.wipe.on { clip-path: inset(0 0 0 0); }
+    .k.slam  { transform: scale(2.6) rotate(-8deg); transition-duration: .25s, .45s, .45s, .45s; transition-timing-function: ease-out, cubic-bezier(.5,0,.75,0), ease, ease; }
+    .k.slam.on { transform: rotate(var(--rot, 0deg)); }
+    .k.on.pop, .k.on.left, .k.on.right, .k.on.down, .k.on.blur { transform: none; }
+    .k.on.blur { filter: none; }
+    .gone {
+      opacity: 0 !important; transform: scale(.88) !important; filter: blur(8px) !important;
+      transition-delay: calc(var(--xd, 0) * 1s) !important; pointer-events: none;
+    }
+    .snap, .snap * { transition: none !important; animation-play-state: paused; }
+    .dim-out { transition: opacity .8s, filter .8s; }
+    .dim-out.dimmed { opacity: .22; filter: grayscale(1); }
+
+    /* 공통 카드 */
+    .card {
+      background: linear-gradient(180deg, rgba(22,27,48,.92), rgba(14,18,32,.92));
+      border: 1px solid var(--line); border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px;
+      background: rgba(155,130,255,.14); border: 1px solid rgba(155,130,255,.4);
+      font-size: 17px; font-weight: 700; white-space: nowrap;
+    }
+    .chip.teal { background: rgba(43,234,208,.12); border-color: rgba(43,234,208,.45); }
+    .chip.pink { background: rgba(255,122,149,.12); border-color: rgba(255,122,149,.45); }
+    .chip.yel  { background: rgba(255,212,107,.12); border-color: rgba(255,212,107,.45); }
+    .prompt {
+      font-family: var(--mono); font-size: 19px; line-height: 1.55; color: #E8FFF9 !important;
+      background: rgba(6,8,15,.85); border: 1px solid rgba(43,234,208,.45); border-radius: 14px;
+      padding: 16px 20px; box-shadow: 0 0 0 4px rgba(43,234,208,.07), 0 16px 40px rgba(0,0,0,.5);
+    }
+    .prompt::before { content: "› "; color: var(--a2); font-weight: 800; }
+    .caret { display: inline-block; width: .55em; height: 1.05em; background: var(--a2); vertical-align: -.15em; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .stamp {
+      display: inline-block; padding: 10px 22px; border: 4px solid var(--danger); border-radius: 10px;
+      color: var(--danger) !important; font-weight: 900; font-size: 34px; letter-spacing: .04em;
+      background: rgba(255,77,94,.08); text-shadow: none;
+    }
+    .big-num { font-weight: 900; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+
+    /* 장 번호 워터마크 */
+    .scene-no {
+      position: absolute; right: 40px; top: 26px; font-family: var(--mono); font-size: 14px;
+      letter-spacing: .2em; color: rgba(184,166,255,.55) !important;
+    }
+
+    /* ═════ S01 콜드 오픈 ═════ */
+    .s01 .clock { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); text-align: center; }
+    .s01 .clock .k { display: block; }
+    .s01 .clock .day { font-family: var(--mono); font-size: 22px; letter-spacing: .4em; color: var(--a4) !important; }
+    .s01 .clock .time { font-size: 150px; font-weight: 900; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
+    .s01 .task {
+      position: absolute; left: calc(50% + var(--x)); top: calc(50% + var(--y));
+      transform: translateY(-260px) rotate(var(--r)); opacity: 0;
+      transition: transform .9s var(--spring), opacity .5s, filter .8s;
+      transition-delay: calc(var(--d,0) * 1s);
+    }
+    .s01 .task.on { opacity: 1; transform: rotate(var(--r)); }
+    .s01 .task .in { display: block; padding: 12px 18px; font-size: 20px; font-weight: 700; white-space: nowrap; border-radius: 14px; }
+    .s01 .task.on .in { animation: jit 2.6s ease-in-out infinite alternate; animation-delay: calc(var(--d,0) * -1s); }
+    @keyframes jit { 0% { transform: translate(0,0) rotate(0); } 100% { transform: translate(4px,-6px) rotate(2deg); } }
+    .s01 .tasks.grey .task { filter: grayscale(1) brightness(.6); }
+    .s01 .task.gone { transform: translate(calc(var(--x) * -1), calc(var(--y) * -1 + 40px)) scale(0) rotate(200deg) !important; filter: blur(2px) !important; transition: transform .8s cubic-bezier(.6,0,.4,1), opacity .8s !important; transition-delay: calc(var(--xd,0) * 1s) !important; }
+    .s01 .hero { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
+    .s01 .hero h1 { font-size: 92px; }
+    .s01 .hero .sub { margin-top: 26px; font-size: 26px; color: var(--dim) !important; }
+    .s01 .hero .prompt { display: inline-block; font-size: 30px; margin-bottom: 34px; }
+    .s01 .tools { margin-top: 30px; display: flex; gap: 12px; justify-content: center; }
+
+    /* ═════ S02 상상의 원 ═════ */
+    .s02 .ring-wrap { position: absolute; left: 640px; top: 385px; width: 0; height: 0; }
+    .s02 .small-c {
+      position: absolute; width: 190px; height: 190px; left: -95px; top: -95px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(155,130,255,.35), rgba(155,130,255,.08));
+      border: 2px solid rgba(155,130,255,.7); display: grid; place-items: center; text-align: center;
+      font-size: 24px; font-weight: 800; z-index: 3;
+    }
+    .s02 .small-c.on { animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 18px rgba(155,130,255,.0), 0 0 40px rgba(155,130,255,.45); } }
+    .s02 .big-c {
+      position: absolute; width: 880px; height: 520px; left: -440px; top: -260px; border-radius: 50%;
+      border: 2px dashed rgba(43,234,208,.55); background: radial-gradient(circle, rgba(43,234,208,.08), transparent 70%);
+      transform: scale(.25); opacity: 0; transition: transform 1.3s var(--spring), opacity .6s;
+    }
+    .s02 .big-c.on { transform: scale(1); opacity: 1; }
+    .s02 .shock { position: absolute; width: 200px; height: 200px; left: -100px; top: -100px; border-radius: 50%; border: 3px solid var(--a2); opacity: 0; }
+    .s02 .shock.on { animation: shock 1.4s ease-out forwards; }
+    @keyframes shock { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(4.2); opacity: 0; } }
+    .s02 .orbit { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+    .s02 .orbit .pos { position: absolute; animation: bob 5s ease-in-out infinite alternate; animation-delay: var(--bd); }
+    @keyframes bob { from { transform: translate(-6px, 5px); } to { transform: translate(6px, -5px); } }
+    .s02 .orbit .pos > .k { translate: -50% -50%; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .s02 .lab { position: absolute; font-family: var(--mono); font-size: 16px; letter-spacing: .14em; }
+    .s02 .lab.l1 { left: 64px; top: 96px; color: var(--a1) !important; }
+    .s02 .lab.l2 { right: 64px; top: 96px; color: var(--a2) !important; text-align: right; }
+    .s02 .lab b { display: block; font-family: 'Pretendard'; font-size: 34px; letter-spacing: -.02em; color: #fff !important; margin-top: 6px; }
+    .s02 .verdict {
+      position: absolute; left: 0; right: 0; bottom: 156px; text-align: center; font-size: 46px; font-weight: 900;
+    }
+    .s02 .verdict .bg { display: inline-block; padding: 14px 34px; border-radius: 18px; background: rgba(6,8,15,.82); border: 1px solid var(--line); backdrop-filter: blur(6px); }
+
+    /* ═════ S03 에이전트 루프 ═════ */
+    .s03 h2 { font-size: 54px; }
+    .s03 .flow { position: absolute; left: 64px; right: 64px; top: 210px; display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 54px; align-items: start; }
+    .s03 .col-h { font-family: var(--mono); font-size: 15px; letter-spacing: .2em; color: var(--soft) !important; margin-bottom: 14px; }
+    .s03 .bubble { padding: 20px 22px; font-size: 22px; line-height: 1.5; border-radius: 22px 22px 22px 6px; background: linear-gradient(135deg, rgba(155,130,255,.25), rgba(155,130,255,.1)); border: 1px solid rgba(155,130,255,.55); min-height: 96px; }
+    .s03 .bubble.re { margin-top: 18px; border-radius: 22px 22px 6px 22px; background: linear-gradient(135deg, rgba(255,212,107,.2), rgba(255,212,107,.06)); border-color: rgba(255,212,107,.5); font-size: 20px; min-height: 0; }
+    .s03 .agent { position: relative; padding: 18px 20px 20px; }
+    .s03 .agent .tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .s03 .agent .tools .chip { font-size: 15px; padding: 5px 11px; }
+    .s03 .plan { list-style: none; padding: 0; margin: 0 0 12px; }
+    .s03 .plan li { font-size: 18px; padding: 4px 0; color: var(--dim) !important; }
+    .s03 .plan li::before { content: "□ "; color: var(--a1); }
+    .s03 .plan.done li::before { content: "■ "; color: var(--a2); }
+    .s03 .term { font-family: var(--mono); font-size: 15px; line-height: 1.75; background: #04060B; border-radius: 10px; padding: 10px 14px; border: 1px solid rgba(255,255,255,.07); min-height: 128px; }
+    .s03 .term div { color: #9FF3E4 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .s03 .term .ok { color: var(--a4) !important; }
+    .s03 .loop-ring { position: absolute; right: -16px; top: -16px; width: 58px; height: 58px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--a2); border-right-color: var(--a2); opacity: 0; transition: opacity .4s; }
+    .s03 .loop-ring.on { opacity: 1; animation: spin 1.1s linear infinite; }
+    .s03 .result { padding: 20px; }
+    .s03 .bars { display: flex; gap: 12px; align-items: flex-end; height: 150px; padding: 8px 4px 0; border-bottom: 1px solid rgba(255,255,255,.15); }
+    .s03 .bars i { flex: 1; height: var(--h); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--c, var(--a1)), rgba(155,130,255,.25)); transform: scaleY(0); transform-origin: bottom; transition: transform 1s var(--spring), background .8s; transition-delay: calc(var(--i) * .09s); }
+    .s03 .result.on .bars i { transform: scaleY(1); }
+    .s03 .result.recolor .bars i { background: linear-gradient(180deg, var(--rc), rgba(255,255,255,.08)); }
+    .s03 .arrow { position: absolute; top: 300px; font-size: 40px; color: var(--a2) !important; }
+    .s03 .back-arrow { position: absolute; left: 330px; right: 330px; top: 566px; height: 60px; border: 2px dashed rgba(255,212,107,.55); border-top: none; border-radius: 0 0 40px 40px; }
+    .s03 .back-arrow span { position: absolute; left: 50%; bottom: -16px; transform: translateX(-50%); background: var(--bg-0); padding: 0 12px; font-size: 18px; color: var(--a4) !important; font-weight: 700; white-space: nowrap; }
+
+    /* ═════ 챕터 머리 ═════ */
+    .case-head { position: absolute; left: 64px; top: 50px; }
+    .case-head .no { font-family: var(--mono); font-size: 18px; letter-spacing: .28em; color: var(--a4) !important; }
+    .case-head h2 { font-size: 52px; margin-top: 8px; }
+    .case-head h2 small { font-size: 26px; font-weight: 700; color: var(--soft) !important; margin-left: 12px; letter-spacing: 0; }
+    .tag-ba { display: inline-block; margin-left: 14px; padding: 4px 12px; border-radius: 8px; font-family: var(--mono); font-size: 16px; vertical-align: middle; letter-spacing: .12em; }
+    .tag-ba.before { background: rgba(255,77,94,.16); color: #FF9AA5 !important; border: 1px solid rgba(255,77,94,.5); }
+    .tag-ba.after { background: rgba(43,234,208,.14); color: #7FFFEA !important; border: 1px solid rgba(43,234,208,.5); }
+
+    /* ═════ S04 경품 추첨 ═════ */
+    .s04 .left { position: absolute; left: 64px; top: 210px; width: 470px; }
+    .s04 .old { display: flex; gap: 14px; margin-bottom: 26px; }
+    .s04 .old .chip { font-size: 19px; position: relative; }
+    .s04 .old .chip::after { content: ""; position: absolute; left: 8px; right: 8px; top: 50%; height: 3px; background: var(--danger); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); transition-delay: calc(var(--sd, .6) * 1s); }
+    .s04 .old.on .chip::after { transform: scaleX(1); }
+    .s04 .old.on .chip { opacity: .55; }
+    .s04 .prompt { font-size: 18px; min-height: 118px; }
+    .s04 .badge10 { margin-top: 26px; display: flex; align-items: baseline; gap: 14px; }
+    .s04 .badge10 .big-num { font-size: 96px; color: var(--a4) !important; }
+    .s04 .badge10 span:last-child { font-size: 22px; color: var(--dim) !important; }
+    .s04 .machine { position: absolute; right: 64px; top: 170px; width: 590px; padding: 26px 28px 24px; text-align: center; }
+    .s04 .machine h3 { font-size: 26px; letter-spacing: .04em; }
+    .s04 .machine h3 .grad { font-size: 30px; }
+    .s04 .reel-win {
+      position: relative; height: 210px; margin: 18px 0 16px; overflow: hidden; border-radius: 14px;
+      background: linear-gradient(180deg, #05070D, #101528 50%, #05070D);
+      border: 2px solid rgba(255,212,107,.55); box-shadow: inset 0 0 40px rgba(0,0,0,.8), 0 0 30px rgba(255,212,107,.15);
+    }
+    .s04 .reel-win::before, .s04 .reel-win::after { content: ""; position: absolute; left: 0; right: 0; height: 70px; z-index: 2; pointer-events: none; }
+    .s04 .reel-win::before { top: 0; background: linear-gradient(180deg, #05070D, transparent); }
+    .s04 .reel-win::after { bottom: 0; background: linear-gradient(0deg, #05070D, transparent); }
+    .s04 .reel-line { position: absolute; left: 10px; right: 10px; top: 70px; height: 70px; border-top: 2px solid rgba(255,212,107,.6); border-bottom: 2px solid rgba(255,212,107,.6); z-index: 3; pointer-events: none; border-radius: 6px; }
+    .s04 .reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+    .s04 .reel div { height: 70px; line-height: 70px; font-size: 40px; font-weight: 800; color: #fff !important; }
+    .s04 .reel div.win { color: var(--a4) !important; text-shadow: 0 0 24px rgba(255,212,107,.8); }
+    .s04 .ctrl { display: flex; gap: 10px; justify-content: center; align-items: center; }
+    .s04 .btn {
+      font: 800 21px 'Pretendard', sans-serif; color: #1A1033; background: linear-gradient(135deg, var(--a4), #FFAE57);
+      border: 0; border-radius: 999px; padding: 12px 28px; cursor: pointer; box-shadow: 0 8px 24px rgba(255,174,87,.35);
+      transition: transform .15s;
+    }
+    .s04 .btn:hover { transform: translateY(-2px) scale(1.03); }
+    .s04 .btn:disabled { opacity: .5; cursor: default; transform: none; }
+    .s04 .btn.ghost { background: transparent; color: var(--dim) !important; border: 1px solid var(--line); box-shadow: none; font-size: 16px; padding: 10px 16px; }
+    .s04 .winners { margin-top: 14px; min-height: 40px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .s04 .winners span { padding: 6px 12px; border-radius: 999px; background: rgba(255,212,107,.14); border: 1px solid rgba(255,212,107,.5); font-size: 17px; font-weight: 700; animation: popIn .5s var(--spring); }
+    @keyframes popIn { from { transform: scale(.3); opacity: 0; } }
+    .s04 .roster-ed { position: absolute; inset: 16px; z-index: 5; display: none; flex-direction: column; gap: 10px; padding: 18px; border-radius: 16px; background: rgba(6,8,15,.97); border: 1px solid var(--line); }
+    .s04 .roster-ed.open { display: flex; }
+    .s04 .roster-ed textarea { flex: 1; resize: none; font: 18px/1.5 'Pretendard', sans-serif; background: #0B0F1C; color: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+    .s04 .hint { margin-top: 10px; font-size: 15px; color: var(--soft) !important; }
+    .confetti { position: absolute; inset: 0; pointer-events: none; z-index: 20; }
+
+    /* ═════ S05 엑셀 → PPT 루프 (Before) ═════ */
+    .s05 .mails { position: absolute; left: 64px; top: 200px; width: 380px; }
+    .s05 .mail { display: flex; align-items: center; gap: 12px; padding: 12px 16px; margin-bottom: 12px; font-size: 18px; transition-property: opacity, transform, filter, clip-path, border-color, background; }
+    .s05 .mail .ic { font-size: 26px; }
+    .s05 .mail .fn { font-family: var(--mono); font-size: 15.5px; }
+    .s05 .mail.hot { border-color: var(--danger); background: rgba(255,77,94,.12); }
+    .s05 .cycle { position: absolute; left: 500px; top: 196px; width: 380px; height: 380px; }
+    .s05 .cycle svg { position: absolute; inset: 0; overflow: visible; }
+    .s05 .node { position: absolute; width: 130px; margin-left: -65px; margin-top: -40px; padding: 12px 6px; text-align: center; font-size: 17px; font-weight: 800; }
+    .s05 .node span { display: block; font-size: 28px; margin-bottom: 2px; }
+    .s05 .dot-run { offset-path: path('M190,40 A150,150 0 1,1 189.9,40'); offset-distance: 0%; width: 16px; height: 16px; border-radius: 50%; background: var(--a3); box-shadow: 0 0 18px var(--a3); position: absolute; left: 0; top: 0; opacity: 0; }
+    .s05 .dot-run.on { opacity: 1; animation: orbitRun 2.4s linear infinite; }
+    @keyframes orbitRun { to { offset-distance: 100%; } }
+    .s05 .hours { position: absolute; left: 500px; top: 600px; width: 380px; text-align: center; }
+    .s05 .hours .big-num { font-size: 54px; color: var(--a3) !important; }
+    .s05 .hours small { font-size: 18px; color: var(--soft) !important; margin-left: 8px; }
+    .s05 .ppt { position: absolute; right: 64px; top: 220px; width: 300px; }
+    .s05 .ppt .slide { aspect-ratio: 16/10; padding: 14px; border-radius: 12px; background: #F4F5FA; position: relative; overflow: hidden; transition: filter 1s; }
+    .s05 .ppt .slide b { color: #1A2140 !important; font-size: 15px; }
+    .s05 .ppt .slide .pb { display: flex; gap: 8px; align-items: flex-end; height: 90px; margin-top: 12px; }
+    .s05 .ppt .slide .pb i { flex: 1; background: #5B6BD6; border-radius: 3px 3px 0 0; }
+    .s05 .ppt.stale .slide { filter: grayscale(1) brightness(.55); }
+    .s05 .ppt .meta { margin-top: 12px; font-size: 16px; color: var(--soft) !important; text-align: center; }
+    .s05 .ppt .stamp { position: absolute; left: 50%; top: 80px; translate: -50% 0; white-space: nowrap; --rot: -10deg; z-index: 3; }
+
+    /* ═════ S06 웹 플랫폼 + 실시간 대시보드 (After) ═════ */
+    .browser { overflow: hidden; }
+    .browser .bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: rgba(255,255,255,.04); border-bottom: 1px solid var(--line); }
+    .browser .bar i { width: 11px; height: 11px; border-radius: 50%; background: #FF5F57; }
+    .browser .bar i:nth-child(2) { background: #FEBC2E; } .browser .bar i:nth-child(3) { background: #28C840; }
+    .browser .bar .url { margin-left: 10px; flex: 1; font-family: var(--mono); font-size: 14px; color: var(--soft) !important; background: rgba(0,0,0,.3); padding: 4px 12px; border-radius: 8px; }
+    .s06 .browser { position: absolute; left: 64px; top: 180px; width: 760px; height: 470px; }
+    .s06 .app { display: grid; grid-template-columns: 220px 1fr; height: calc(100% - 44px); }
+    .s06 .form { padding: 18px; border-right: 1px solid var(--line); background: rgba(0,0,0,.18); }
+    .s06 .form label { display: block; font-size: 13px; color: var(--soft) !important; margin: 10px 0 5px; }
+    .s06 .form .in { height: 36px; border-radius: 8px; background: #0A0E1A; border: 1px solid rgba(255,255,255,.1); padding: 0 10px; font-size: 16px; line-height: 36px; font-weight: 700; }
+    .s06 .form .save { margin-top: 16px; text-align: center; padding: 9px; border-radius: 9px; background: var(--a2); color: #032B26 !important; font-weight: 800; font-size: 16px; position: relative; overflow: hidden; }
+    .s06 .form .save.click { animation: press .5s; }
+    @keyframes press { 40% { transform: scale(.94); filter: brightness(1.3); } }
+    .s06 .rows { margin-top: 16px; font-size: 13px; }
+    .s06 .rows div { display: flex; justify-content: space-between; padding: 5px 2px; border-bottom: 1px dashed rgba(255,255,255,.08); color: var(--dim) !important; }
+    .s06 .dash { padding: 16px 18px; }
+    .s06 .kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .s06 .kpi { padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); }
+    .s06 .kpi small { display: block; font-size: 12px; color: var(--soft) !important; }
+    .s06 .kpi b { font-size: 26px; font-variant-numeric: tabular-nums; }
+    .s06 .live { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 12px; color: #FF8A98 !important; letter-spacing: .14em; float: right; margin-top: -2px; }
+    .s06 .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: blink 1s steps(1) infinite; }
+    .s06 .chart { display: flex; gap: 14px; align-items: flex-end; height: 200px; margin-top: 18px; padding: 0 6px; border-bottom: 1px solid rgba(255,255,255,.14); }
+    .s06 .chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+    .s06 .chart .col i { width: 100%; height: var(--h, 0%); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--a2), rgba(43,234,208,.15)); transition: height 1.1s var(--spring); }
+    .s06 .chart .col.flash i { background: linear-gradient(180deg, var(--a4), rgba(255,212,107,.2)); }
+    .s06 .chart .col span { font-size: 12px; color: var(--soft) !important; margin-top: 6px; position: absolute; bottom: -22px; }
+    .s06 .chart .col { position: relative; }
+    .s06 .ticker { margin-top: 34px; font-size: 14px; color: var(--dim) !important; font-family: var(--mono); height: 20px; }
+    .s06 .side { position: absolute; right: 64px; top: 180px; width: 340px; }
+    .s06 .link { padding: 16px 18px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .s06 .link .url2 { font-family: var(--mono); color: var(--a2) !important; font-size: 17px; }
+    .s06 .viewers { margin-top: 10px; display: flex; align-items: center; gap: 4px; font-size: 15px; color: var(--soft) !important; }
+    .s06 .viewers i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--bg-0); margin-left: -8px; display: inline-block; }
+    .s06 .viewers i:first-child { margin-left: 0; }
+    .cmp { margin-top: 26px; }
+    .cmp .row { margin-bottom: 14px; }
+    .cmp .row .lbl { display: flex; justify-content: space-between; font-size: 16px; margin-bottom: 6px; color: var(--dim) !important; }
+    .cmp .track { height: 20px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .cmp .fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.4s var(--ease); }
+    .cmp .on .fill { width: var(--w); }
+    .s06 .year { margin-top: 18px; text-align: right; }
+    .s06 .year .big-num { font-size: 104px; color: var(--a2) !important; }
+    .s06 .year small { display: block; font-size: 20px; color: var(--dim) !important; margin-top: 4px; }
+
+    /* ═════ S07 리더 주간보고 (Before) ═════ */
+    .s07 .doc { position: absolute; left: 64px; top: 196px; width: 420px; height: 440px; padding: 26px 28px; }
+    .s07 .doc .ttl { font-size: 24px; font-weight: 800; margin-bottom: 18px; }
+    .s07 .doc .ln { height: 12px; border-radius: 6px; background: rgba(255,255,255,.07); margin-bottom: 14px; }
+    .s07 .anaclock { position: absolute; right: 28px; top: 22px; width: 88px; height: 88px; border-radius: 50%; border: 3px solid rgba(255,255,255,.25); }
+    .s07 .anaclock i { position: absolute; left: 50%; bottom: 50%; width: 3px; margin-left: -1.5px; border-radius: 3px; transform-origin: bottom center; background: #fff; }
+    .s07 .anaclock .h { height: 24px; transform: rotate(60deg); }
+    .s07 .anaclock .m { height: 34px; background: var(--a3); }
+    .s07 .anaclock.on .m { animation: spin .5s linear infinite; }
+    .s07 .anaclock.on .h { animation: hourAdv 6s linear forwards; }
+    @keyframes hourAdv { from { transform: rotate(60deg); } to { transform: rotate(165deg); } }
+    .s07 .srcs { position: absolute; left: 530px; top: 196px; width: 686px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .s07 .src { padding: 20px 22px; display: flex; gap: 16px; align-items: center; }
+    .s07 .src .ic { font-size: 44px; }
+    .s07 .src b { font-size: 46px; font-variant-numeric: tabular-nums; display: block; line-height: 1; }
+    .s07 .src small { font-size: 17px; color: var(--soft) !important; }
+    .s07 .src.on.shake { animation: shake .4s ease-in-out 3; animation-delay: calc(var(--sd,0) * 1s); }
+    @keyframes shake { 25% { transform: translateX(-5px) rotate(-1deg); } 75% { transform: translateX(5px) rotate(1deg); } }
+    .s07 .tabs { position: absolute; left: 530px; top: 520px; width: 686px; display: flex; gap: 6px; }
+    .s07 .tabs span { flex: 1; padding: 9px 10px; font-size: 14px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--soft) !important; }
+    .s07 .tabs.on span { animation: tabFlick 1.2s steps(1) infinite; animation-delay: calc(var(--i) * .2s); }
+    @keyframes tabFlick { 0%, 80% { background: rgba(255,255,255,.05); color: var(--soft); } 81%, 100% { background: rgba(155,130,255,.35); color: #fff; } }
+    .s07 .cost { position: absolute; left: 530px; top: 574px; display: flex; align-items: baseline; gap: 14px; }
+    .s07 .cost .big-num { font-size: 76px; color: var(--a3) !important; }
+    .s07 .cost span:last-child { font-size: 22px; color: var(--dim) !important; }
+
+    /* ═════ S08 리더 주간보고 (After) ═════ */
+    .s08 .ask { position: absolute; left: 64px; right: 64px; top: 168px; }
+    .s08 .ask .prompt { font-size: 20px; }
+    .s08 .srcs { position: absolute; left: 64px; top: 290px; width: 230px; display: flex; flex-direction: column; gap: 16px; }
+    .s08 .srcs .chip { font-size: 18px; padding: 10px 16px; justify-content: flex-start; }
+    .s08 .core { position: absolute; left: 430px; top: 380px; width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; font-size: 46px; background: radial-gradient(circle, rgba(155,130,255,.55), rgba(155,130,255,.1)); border: 2px solid var(--a1); }
+    .s08 .core.on { animation: corePulse 1.6s ease-in-out infinite; }
+    @keyframes corePulse { 50% { box-shadow: 0 0 0 16px rgba(155,130,255,.12), 0 0 60px rgba(155,130,255,.6); } }
+    .s08 .core small { position: absolute; bottom: -32px; font-size: 14px; font-family: var(--mono); color: var(--soft) !important; white-space: nowrap; }
+    .s08 svg.flow { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; pointer-events: none; overflow: visible; }
+    .s08 svg.flow path { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 14; opacity: 0; transition: opacity .6s; }
+    .s08 svg.flow.on path { opacity: .9; animation: dashMove .8s linear infinite; }
+    @keyframes dashMove { to { stroke-dashoffset: -32; } }
+    .s08 .report { position: absolute; right: 64px; top: 266px; width: 560px; padding: 22px 26px; }
+    .s08 .report .rh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .s08 .report .rh b { font-size: 22px; }
+    .s08 .report .rh small { font-size: 14px; color: var(--soft) !important; font-family: var(--mono); }
+    .s08 .sec { margin-top: 12px; }
+    .s08 .sec h4 { font-size: 17px; margin: 0 0 6px; color: var(--a2) !important; font-weight: 800; }
+    .s08 .sec p { font-size: 16px; line-height: 1.5; color: var(--dim) !important; }
+    .s08 .cite { display: inline-block; font-family: var(--mono); font-size: 12px; padding: 1px 7px; border-radius: 6px; background: rgba(155,130,255,.18); color: #CFC3FF !important; margin-left: 4px; vertical-align: 1px; }
+    .s08 .mark { background: linear-gradient(transparent 58%, rgba(255,212,107,.45) 58%) no-repeat 0 0 / 0% 100%; transition: background-size .7s var(--ease); transition-delay: calc(var(--md, 0) * 1s + .3s); }
+    .s08 .report.review .mark { background-size: 100% 100%; color: #fff !important; }
+    .s08 .pen { position: absolute; right: 18px; bottom: 16px; font-size: 15px; padding: 5px 12px; }
+    .s08 .result { position: absolute; left: 64px; top: 556px; display: flex; align-items: baseline; gap: 18px; }
+    .s08 .result .from { font-size: 64px; font-weight: 900; color: var(--soft) !important; position: relative; }
+    .s08 .result .from::after { content: ""; position: absolute; left: -6px; right: -6px; top: 52%; height: 6px; background: var(--danger); border-radius: 4px; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease) .3s; }
+    .s08 .result.on .from::after { transform: scaleX(1); }
+    .s08 .result .to { font-size: 86px; font-weight: 900; color: var(--a2) !important; }
+    .s08 .result .arr { font-size: 46px; color: var(--soft) !important; }
+
+    /* ═════ S09 개발자 주간 활동 ═════ */
+    .s09 .grid-wrap { position: absolute; left: 64px; top: 190px; width: 430px; }
+    .s09 .cgrid { display: grid; grid-template-columns: repeat(18, 1fr); gap: 5px; }
+    .s09 .cgrid i { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,.06); transition: background .4s; transition-delay: var(--dl); }
+    .s09 .cgrid.on i.l1 { background: rgba(43,234,208,.3); } .s09 .cgrid.on i.l2 { background: rgba(43,234,208,.55); }
+    .s09 .cgrid.on i.l3 { background: rgba(43,234,208,.85); }
+    .s09 .fog { margin-top: 18px; font-size: 22px; font-weight: 800; color: var(--dim) !important; }
+    .s09 .fog span { font-size: 40px; color: var(--a3) !important; }
+    .s09 .feed { position: absolute; left: 64px; top: 432px; width: 430px; height: 210px; overflow: hidden; mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent); -webkit-mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent); }
+    .s09 .feed .inner { will-change: transform; }
+    .s09 .feed.on .inner { animation: feedUp 7s linear infinite; }
+    @keyframes feedUp { to { transform: translateY(-50%); } }
+    .s09 .feed div { font-family: var(--mono); font-size: 14.5px; padding: 6px 0; color: var(--dim) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .s09 .feed .c { color: var(--a2) !important; } .s09 .feed .p { color: var(--a1) !important; } .s09 .feed .j { color: var(--a4) !important; }
+    .s09 .funnel { position: absolute; left: 512px; top: 380px; font-size: 44px; color: var(--a2) !important; }
+    .s09 .groups { position: absolute; left: 580px; top: 190px; width: 300px; display: flex; flex-direction: column; gap: 14px; }
+    .s09 .grp { padding: 16px 18px; }
+    .s09 .grp b { font-size: 19px; display: block; }
+    .s09 .grp small { font-size: 15px; color: var(--soft) !important; font-family: var(--mono); }
+    .s09 .grp .n { float: right; font-size: 28px; font-weight: 900; color: var(--a2) !important; margin-top: -4px; }
+    .s09 .chat { position: absolute; right: 64px; top: 190px; width: 300px; height: 450px; display: flex; flex-direction: column; }
+    .s09 .chat .bar { padding: 12px 16px; border-bottom: 1px solid var(--line); font-weight: 800; font-size: 17px; }
+    .s09 .chat .msgs { flex: 1; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; }
+    .s09 .msg { padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.05); font-size: 14.5px; line-height: 1.55; }
+    .s09 .msg.bot { background: linear-gradient(135deg, rgba(43,234,208,.18), rgba(155,130,255,.14)); border: 1px solid rgba(43,234,208,.4); }
+    .s09 .msg.bot b { display: block; font-size: 15.5px; margin-bottom: 4px; }
+    .s09 .cron { margin: 0 14px 14px; text-align: center; font-family: var(--mono); font-size: 14px; }
+
+    /* ═════ S10 몽타주 ═════ */
+    .s10 h2 { position: absolute; left: 64px; top: 56px; font-size: 62px; }
+    .s10 .tiles { position: absolute; left: 64px; right: 64px; top: 170px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .s10 .tile { padding: 20px 18px; height: 270px; position: relative; overflow: hidden; }
+    .s10 .tile .tn { font-size: 21px; font-weight: 800; margin-bottom: 14px; }
+    .s10 .tile .tn span { margin-right: 6px; }
+    .s10 .tile.k { transform: perspective(800px) rotateY(-80deg); transform-origin: left center; }
+    .s10 .tile.k.on { transform: none; }
+    .s10 .todo div { font-size: 15.5px; padding: 6px 0; color: var(--dim) !important; opacity: .35; transition: opacity .4s, color .4s; transition-delay: calc(var(--i) * .35s + .6s); }
+    .s10 .todo div::before { content: "☐ "; color: var(--soft); }
+    .s10 .tile.on .todo div { opacity: 1; }
+    .s10 .tile.on .todo div.t::before { content: "☑ "; color: var(--a2); }
+    .s10 .files div { font-family: var(--mono); font-size: 13px; padding: 5px 0; position: relative; height: 20px; }
+    .s10 .files div em, .s10 .files div b { position: absolute; left: 0; top: 5px; font-style: normal; transition: opacity .4s, transform .4s; transition-delay: calc(var(--i) * .25s + .6s); white-space: nowrap; }
+    .s10 .files div em { color: var(--soft) !important; }
+    .s10 .files div b { color: var(--a2) !important; opacity: 0; transform: translateY(8px); font-weight: 600; }
+    .s10 .tile.on .files div em { opacity: 0; transform: translateY(-8px); }
+    .s10 .tile.on .files div b { opacity: 1; transform: none; }
+    .s10 .pie { width: 150px; height: 150px; margin: 10px auto 0; border-radius: 50%; background: conic-gradient(var(--a1) 0 calc(var(--p) * 38%), var(--a2) 0 calc(var(--p) * 66%), var(--a3) 0 calc(var(--p) * 86%), var(--a4) 0 calc(var(--p) * 100%), rgba(255,255,255,.06) 0); --p: 0; transition: --p 1.6s var(--ease) .4s; }
+    .s10 .tile.on .pie { --p: 1; }
+    @property --p { syntax: '<number>'; inherits: false; initial-value: 0; }
+    .s10 .pie-l { margin-top: 12px; font-size: 13px; text-align: center; color: var(--soft) !important; }
+    .s10 .pdfs { position: relative; height: 110px; }
+    .s10 .pdfs i { position: absolute; left: calc(var(--i) * 18px + 20px); top: calc(var(--i) * 6px); width: 64px; height: 84px; border-radius: 6px; background: #F1F2F7; border-top: 14px solid var(--danger); transition: transform .6s var(--ease), opacity .6s; transition-delay: calc(var(--i) * .1s + .5s); }
+    .s10 .tile.on .pdfs i { transform: translate(calc(90px - var(--i) * 18px), calc(var(--i) * -6px)) scale(.4); opacity: 0; }
+    .s10 .sum div { height: 10px; border-radius: 5px; background: var(--a2); margin-bottom: 9px; width: 0; transition: width .6s var(--ease); transition-delay: calc(var(--i) * .2s + 1.1s); }
+    .s10 .tile.on .sum div { width: var(--w); }
+    .s10 .wall { position: absolute; left: 64px; right: 64px; top: 460px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .s10 .wall .chip { font-size: 16px; padding: 6px 12px; }
+    .s10 .final { position: absolute; left: 0; right: 0; top: 596px; text-align: center; font-size: 36px; font-weight: 900; }
+
+    /* ═════ S11 시간 합계 ═════ */
+    .s11 h2 { position: absolute; left: 64px; top: 56px; font-size: 56px; }
+    .s11 .bars { position: absolute; left: 64px; top: 200px; width: 560px; }
+    .s11 .hb { margin-bottom: 26px; }
+    .s11 .hb .lbl { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .s11 .hb .lbl span { font-size: 21px; font-weight: 700; }
+    .s11 .hb .lbl b { font-size: 34px; font-variant-numeric: tabular-nums; }
+    .s11 .hb .lbl small { font-size: 15px; color: var(--soft) !important; display: block; font-weight: 500; margin-top: 2px; }
+    .s11 .hb .track { height: 26px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .s11 .hb .fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.5s var(--ease); }
+    .s11 .hb.on .fill { width: var(--w); }
+    .s11 .total { position: absolute; left: 64px; top: 540px; display: flex; align-items: baseline; gap: 14px; }
+    .s11 .total .big-num { font-size: 104px; }
+    .s11 .total > span:last-child { font-size: 28px; font-weight: 800; }
+    .s11 .cal { position: absolute; right: 64px; top: 200px; width: 470px; }
+    .s11 .cal .cg { display: grid; grid-template-columns: repeat(25, 1fr); gap: 4px; }
+    .s11 .cal .cg i { aspect-ratio: 1; border-radius: 3px; background: rgba(255,255,255,.07); transition: background .3s, box-shadow .3s; transition-delay: var(--dl); }
+    .s11 .cal.on .cg i.hit { background: var(--a2); box-shadow: 0 0 8px rgba(43,234,208,.7); }
+    .s11 .cal .cap { margin-top: 18px; font-size: 18px; color: var(--dim) !important; }
+    .s11 .cal .cap b { font-size: 50px; color: var(--a2) !important; display: block; line-height: 1.1; }
+    .s11 .foot { position: absolute; right: 64px; bottom: 150px; width: 470px; font-size: 14px; color: var(--soft) !important; line-height: 1.5; }
+
+    /* ═════ S12 왜 비개발자인가 ═════ */
+    .s12 h2 { position: absolute; left: 64px; top: 56px; font-size: 60px; }
+    .s12 .path { position: absolute; left: 64px; right: 64px; display: flex; align-items: center; gap: 18px; }
+    .s12 .path.old { top: 210px; }
+    .s12 .path.new { top: 420px; }
+    .s12 .path .lb { width: 120px; font-family: var(--mono); font-size: 15px; letter-spacing: .16em; }
+    .s12 .station { padding: 16px 18px; text-align: center; min-width: 150px; font-size: 18px; font-weight: 800; }
+    .s12 .station span { display: block; font-size: 34px; margin-bottom: 4px; }
+    .s12 .station small { display: block; font-size: 14px; color: var(--soft) !important; font-weight: 500; margin-top: 4px; }
+    .s12 .arrow { font-size: 30px; color: var(--soft) !important; }
+    .s12 .queue { display: flex; gap: 5px; margin-top: 8px; justify-content: center; }
+    .s12 .queue i { width: 14px; height: 18px; border-radius: 3px; background: rgba(255,122,149,.55); }
+    .s12 .queue.on i { animation: qmove 1.4s ease-in-out infinite; animation-delay: calc(var(--i) * .15s); }
+    @keyframes qmove { 50% { transform: translateY(-5px); background: var(--a3); } }
+    .s12 .mismatch.on { animation: shake .45s ease-in-out 3 .4s; border-color: var(--danger); }
+    .s12 .mismatch .ne { color: var(--danger) !important; font-size: 20px; }
+    .s12 .beam { flex: 1; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--a1), var(--a2)); transform: scaleX(0); transform-origin: left; transition: transform 1s var(--ease); transition-delay: calc(var(--d,0)*1s); box-shadow: 0 0 18px rgba(43,234,208,.6); }
+    .s12 .beam.on { transform: scaleX(1); }
+    .s12 .station.hero { border-color: var(--a2); box-shadow: 0 0 30px rgba(43,234,208,.25); }
+    .s12 .insight { position: absolute; left: 64px; right: 64px; top: 548px; padding: 16px 30px; font-size: 30px; font-weight: 800; line-height: 1.4; border-left: 6px solid var(--a2); }
+    .s12 .insight small { display: block; font-size: 18px; color: var(--soft) !important; font-weight: 500; margin-bottom: 6px; }
+
+    /* ═════ S13 상황별 처방 ═════ */
+    .s13 h2 { position: absolute; left: 64px; top: 50px; font-size: 52px; }
+    .s13 .tbl { position: absolute; left: 64px; right: 64px; top: 150px; }
+    .s13 .tr { display: grid; grid-template-columns: 250px 210px 1fr 110px; gap: 16px; align-items: center; padding: 14px 18px; margin-bottom: 10px; }
+    .s13 .tr.th { padding: 0 18px 4px; font-family: var(--mono); font-size: 14px; letter-spacing: .14em; color: var(--soft) !important; background: none; border: 0; box-shadow: none; }
+    .s13 .tr.th span { color: var(--soft) !important; }
+    .s13 .sit { font-size: 19px; font-weight: 800; }
+    .s13 .sit small { display: block; font-size: 14px; color: var(--soft) !important; font-weight: 500; margin-top: 2px; }
+    .s13 .make { font-size: 17px; font-weight: 700; }
+    .s13 .make span { font-size: 24px; margin-right: 6px; vertical-align: -2px; }
+    .s13 .say { font-family: var(--mono); font-size: 14.5px; line-height: 1.5; color: #DFFFF8 !important; background: rgba(0,0,0,.35); border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(43,234,208,.25); }
+    .s13 .time { font-size: 18px; font-weight: 800; text-align: right; color: var(--a4) !important; }
+
+    /* ═════ S14 세 가지 약속 ═════ */
+    .s14 h2 { position: absolute; left: 64px; top: 70px; font-size: 60px; }
+    .s14 .rules { position: absolute; left: 64px; right: 64px; top: 230px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .s14 .rule { padding: 30px 28px; height: 340px; position: relative; overflow: hidden; }
+    .s14 .rule .ic { font-size: 60px; margin-bottom: 18px; display: block; }
+    .s14 .rule b { font-size: 28px; display: block; line-height: 1.3; margin-bottom: 14px; }
+    .s14 .rule p { font-size: 18px; color: var(--dim) !important; line-height: 1.6; }
+    .s14 .rule .n { position: absolute; right: 20px; top: 6px; font-size: 120px; font-weight: 900; color: rgba(255,255,255,.05) !important; }
+    .s14 .rule a { font-size: 16px; display: inline-block; margin-top: 12px; }
+
+    /* ═════ S15 첫걸음 ═════ */
+    .s15 h2 { position: absolute; left: 64px; top: 60px; font-size: 60px; }
+    .s15 .steps { position: absolute; left: 64px; top: 210px; width: 470px; display: flex; flex-direction: column; gap: 20px; }
+    .s15 .step { display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px; }
+    .s15 .step .n { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 22px; background: linear-gradient(135deg, var(--a1), var(--a2)); color: #0A0E1A !important; }
+    .s15 .step b { font-size: 23px; display: block; }
+    .s15 .step small { font-size: 16px; color: var(--soft) !important; }
+    .s15 .term { position: absolute; right: 64px; top: 214px; width: 620px; height: 300px; }
+    .s15 .term .body { padding: 20px 22px; font-family: var(--mono); font-size: 17px; line-height: 1.7; }
+    .s15 .term .body div { color: var(--dim) !important; white-space: pre-wrap; }
+    .s15 .term .body .u { color: #fff !important; }
+    .s15 .term .body .u::before { content: "› "; color: var(--a2); font-weight: 800; }
+    .s15 .term .body .a { color: #9FF3E4 !important; }
+    .s15 .term .body .y { color: var(--a4) !important; }
+
+    /* ═════ S16 엔딩 ═════ */
+    .s16 canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .s16 .end { position: absolute; left: 0; right: 0; top: 170px; text-align: center; }
+    .s16 .end .l1 { font-size: 66px; font-weight: 800; color: var(--dim) !important; }
+    .s16 .end .l2 { font-size: 104px; font-weight: 900; letter-spacing: -.04em; margin-top: 10px; display: block; }
+    .s16 .end .brand { margin-top: 44px; display: inline-flex; align-items: center; gap: 16px; font-size: 30px; font-weight: 800; letter-spacing: .02em; }
+    .s16 .end .brand i { width: 46px; height: 46px; border-radius: 12px; border: 3px solid var(--a2); display: inline-grid; place-items: center; font-style: normal; font-family: var(--mono); font-size: 20px; color: var(--a2) !important; }
+    .s16 .end .tag { margin-top: 20px; font-size: 26px; color: var(--dim) !important; }
+    .s16 .links { position: absolute; left: 0; right: 0; top: 600px; display: flex; gap: 14px; justify-content: center; }
+    .s16 .links a { text-decoration: none; }
+    .s16 .links .chip { font-size: 17px; color: #fff !important; }
+    .s16 .links button.chip { font-family: 'Pretendard'; cursor: pointer; color: #fff; }
+
+    /* ────────────────────────────────────────────────────────────
+       툴바 · 자막 · 시작 게이트
+       ──────────────────────────────────────────────────────────── */
+    .dl-toolbar { position: fixed; top: 16px; right: 16px; z-index: 9999; display: flex; gap: 8px; align-items: center; }
+    .dl-btn, .transition-select {
+      display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px;
+      background: rgba(20,22,44,.85); border: 1px solid rgba(155,130,255,.5); border-radius: 999px;
+      font-family: var(--mono); font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+      color: #E6D9FF !important; text-decoration: none !important; opacity: .65; white-space: nowrap; cursor: pointer;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: opacity .25s, transform .25s, background .25s, border-color .25s;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover, .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .dl-btn.active { opacity: 1; background: rgba(43,234,208,.22); border-color: rgba(43,234,208,.75); color: #DFFFF8 !important; }
+    .dl-btn:focus-visible, .transition-select:focus-visible { opacity: 1; outline: 2px solid #5BFFE0; outline-offset: 2px; }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 260px; }
+    .no-fullscreen #fullscreenBtn { display: none; }
+    @media (max-width: 900px) {
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 260px; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 10px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    }
+
+    /* 자막은 슬라이드 좌표(1280×800) 안, 본문 바로 아래에 둔다 — 슬라이드와 같이 확대·축소되고
+       화면 하단 중앙의 질문 바(qa.js)와 겹치지 않는다 */
+    #cc {
+      position: absolute; left: 50%; top: 664px; transform: translate(-50%, 6px); z-index: 50;
+      width: max-content; max-width: 1100px;
+      padding: 9px 24px; border-radius: 12px; background: rgba(4,6,12,.84); border: 1px solid rgba(255,255,255,.1);
+      font: 600 23px/1.45 'Pretendard', sans-serif; color: #fff; text-align: center;
+      opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none; backdrop-filter: blur(6px);
+    }
+    #cc.show { opacity: 1; transform: translate(-50%, 0); }
+    .cc-off #cc { display: none; }
+    #narr-bar { position: fixed; left: 0; bottom: 0; height: 3px; width: 0; z-index: 60; background: linear-gradient(90deg, var(--a1), var(--a2)); transition: width .25s linear; }
+
+    #gate {
+      position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 40%, rgba(36,28,80,.94), rgba(4,6,12,.97));
+      transition: opacity .6s;
+    }
+    #gate.hide { opacity: 0; pointer-events: none; }
+    #gate .box { text-align: center; padding: 24px; }
+    #gate .eye { font-family: var(--mono); letter-spacing: .3em; color: var(--a2); font-size: 14px; }
+    #gate h1 { font: 900 clamp(34px, 5vw, 64px)/1.15 'Pretendard', sans-serif; letter-spacing: -.03em; margin: 14px 0 12px; color: #fff; }
+    #gate p { font: 500 clamp(15px, 1.6vw, 19px)/1.6 'Pretendard', sans-serif; color: #B8BFD0; margin: 0 0 30px; }
+    #gate .go {
+      font: 800 22px 'Pretendard', sans-serif; padding: 18px 40px; border-radius: 999px; border: 0; cursor: pointer;
+      background: linear-gradient(135deg, #9B82FF, #2BEAD0); color: #0A0E1A; box-shadow: 0 14px 40px rgba(43,234,208,.35);
+      animation: goPulse 2s ease-in-out infinite;
+    }
+    @keyframes goPulse { 50% { box-shadow: 0 14px 60px rgba(155,130,255,.6); transform: scale(1.03); } }
+    #gate .quiet { display: block; margin: 18px auto 0; background: none; border: 0; color: #9BA6C0; font: 600 16px 'Pretendard', sans-serif; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+    #gate .keys { margin-top: 26px; font: 500 13px var(--mono); color: #6F7A96; letter-spacing: .04em; }
+
+    .reveal .slide-number { color: #E6D9FF; right: auto; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(20,22,44,.6); padding: 4px 14px; border-radius: 999px; font-family: var(--mono); }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .progress { color: var(--a2); height: 3px; }
+
+    /* 모션 최소화 · 인쇄: 모든 박자를 펼친 최종 상태로 */
+    @media (prefers-reduced-motion: reduce) {
+      .k, .s01 .task, .s02 .big-c { transition: none !important; }
+      * { animation-duration: .001s !important; animation-iteration-count: 1 !important; }
+    }
+    html.print-pdf #gate, html.print-pdf #cc, html.print-pdf .dl-toolbar { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차"></select>
+  <button id="audioBtn" class="dl-btn" title="내레이션 켜기/끄기 (M)"><span aria-hidden="true">🔇</span><span>VOICE</span></button>
+  <button id="autoBtn" class="dl-btn" title="자동 재생 — 내레이션이 끝나면 다음 장으로 (A)"><span aria-hidden="true">▶</span><span>AUTO</span></button>
+  <button id="ccBtn" class="dl-btn active" title="자막 켜기/끄기 (C)"><span aria-hidden="true">💬</span><span>CC</span></button>
+  <button id="replayBtn" class="dl-btn" title="이 장 다시 재생 (R)"><span aria-hidden="true">↺</span><span>REPLAY</span></button>
+  <a class="dl-btn" href="../" title="세미나 허브로"><span aria-hidden="true">⌂</span><span>HUB</span></a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)"><span aria-hidden="true">⛶</span><span>FULL</span></button>
+</div>
+
+<div id="gate" role="dialog" aria-label="재생 방식 선택">
+  <div class="box">
+    <div class="eye">VIBE CODING · CAMPAIGN</div>
+    <h1>이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
+    <p>내레이션과 함께 한 편의 영상처럼 흘러갑니다. 약 5분.<br/>발표 중이라면 소리 없이 보기를 고르고 방향키로 넘기세요.</p>
+    <button class="go" id="gateGo">▶ 내레이션과 함께 재생</button>
+    <button class="quiet" id="gateQuiet">소리 없이 직접 넘기며 보기</button>
+    <div class="keys">M 소리 · A 자동 재생 · C 자막 · R 다시 재생 · ← → 이동</div>
+  </div>
+</div>
+<div id="narr-bar"></div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ═════════════ S01 콜드 오픈 ═════════════ -->
+    <section class="s01" data-nid="s01" data-title="오프닝 — 이것도 됩니다">
+      <div class="stage">
+        <div class="clock">
+          <span class="k blur day" data-b="0" data-x="3">MONDAY</span>
+          <span class="k blur time" data-b="0" data-d="0.15" data-x="3">09:00</span>
+        </div>
+        <div class="tasks" id="s01-tasks">
+          <div class="task" data-b="1" data-x="3" style="--x:-520px;--y:-40px;--r:-6deg;--d:0"><span class="in card">📊 실적취합_v7_최종.xlsx</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:250px;--y:-60px;--r:5deg;--d:.25"><span class="in card">✉️ 안 읽은 메일 128</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:-160px;--y:120px;--r:-3deg;--d:.5"><span class="in card">📝 주간보고 · 금 17:00 마감</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:-560px;--y:170px;--r:4deg;--d:.75"><span class="in card">🎁 송년회 경품 추첨 준비</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:360px;--y:90px;--r:-5deg;--d:.95"><span class="in card">💬 메신저 99+</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:120px;--y:230px;--r:3deg;--d:1.15"><span class="in card">🎫 Jira 미처리 37건</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:-420px;--y:280px;--r:-2deg;--d:1.35"><span class="in card">📈 PPT 차트 다시 그리기</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:380px;--y:250px;--r:6deg;--d:1.5"><span class="in card">🧾 회의록 정리</span></div>
+          <div class="task" data-b="1" data-x="3" style="--x:-40px;--y:-120px;--r:-4deg;--d:1.65"><span class="in card">📂 파일 300개 이름 바꾸기</span></div>
+        </div>
+        <div class="hero">
+          <div class="k pop" data-b="3" data-d="0.7"><span class="prompt">이거, 해줘.<span class="caret"></span></span></div>
+          <h1 class="k blur" data-b="3" data-d="1.4">이것도, <span class="grad">바이브 코딩</span>으로 됩니다</h1>
+          <p class="sub k" data-b="3" data-d="2.0">상황별 바이브 코딩 가이드 — 코딩 에이전트로 어디까지 할 수 있을까</p>
+          <div class="tools k" data-b="3" data-d="2.4">
+            <span class="chip">Claude Code</span><span class="chip teal">Codex</span><span class="chip pink">OpenCode</span>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>월요일 아침, 아홉 시.</p>
+        <p>쌓여 있는 엑셀, 쏟아지는 메일, 금요일까지 내야 하는 주간보고.</p>
+        <p>우리는 늘, 같은 방식으로 일해 왔습니다.</p>
+        <p>오늘은, 다른 방식을 보여드립니다. 이것도, 바이브 코딩으로 됩니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S02 상상의 원 ═════════════ -->
+    <section class="s02" data-nid="s02" data-title="상상 vs 실제">
+      <div class="stage">
+        <div class="lab l1 k left" data-b="0">WHAT WE IMAGINE<b>우리가 상상하는 것</b></div>
+        <div class="lab l2 k right" data-b="2" data-d="0.4">WHAT IT CAN DO<b>실제로 할 수 있는 것</b></div>
+        <div class="ring-wrap">
+          <div class="big-c" data-b="2"></div>
+          <div class="shock" data-b="2"></div>
+          <div class="small-c k pop" data-b="0">⌨️<br/>코드 작성</div>
+          <div class="orbit" id="s02-orbit"></div>
+        </div>
+        <div class="verdict"><span class="bg k blur" data-b="4">코드는 수단. <span class="grad">목적은, 당신의 일.</span></span></div>
+      </div>
+      <aside class="notes">
+        <p>많은 분들이 코딩 에이전트를, 개발자의 도구라고 생각합니다.</p>
+        <p>코드를 대신 써 주는 도구. 딱, 거기까지라고요.</p>
+        <p>하지만 실제의 원은, 훨씬 큽니다.</p>
+        <p>파일을 읽고, 데이터를 정리하고, 문서를 만들고, 여러 시스템을 연결합니다.</p>
+        <p>코드는 수단일 뿐. 목적은, 여러분의 일입니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S03 원리: 말 → 에이전트 → 결과 ═════════════ -->
+    <section class="s03" data-nid="s03" data-title="원리 — 말하면, 해 본다">
+      <div class="stage">
+        <div class="pad" style="bottom:auto">
+          <div class="eyebrow k" data-b="0">HOW IT WORKS</div>
+          <h2 class="k" data-b="0" data-d="0.15" style="margin-top:12px">원리는 간단합니다 — <span class="grad">말하면, 해 본다</span></h2>
+        </div>
+        <div class="flow">
+          <div class="k left" data-b="1">
+            <div class="col-h">① 내가 말한다</div>
+            <div class="bubble"><span data-fx="type" data-b="1" data-d="0.3" data-text="지난달 설문 엑셀 분석해서, 부서별 만족도 차트로 보여줘."></span></div>
+            <div class="bubble re k" data-b="4" data-d="1.2">“막대 색을 부서 색으로 바꿔줘.”</div>
+          </div>
+          <div class="k pop" data-b="2">
+            <div class="col-h">② 에이전트가 계획하고, 직접 한다</div>
+            <div class="agent card">
+              <div class="loop-ring" data-b="3"></div>
+              <div class="tools"><span class="chip">Claude Code</span><span class="chip teal">Codex</span><span class="chip pink">OpenCode</span></div>
+              <ul class="plan" id="s03-plan">
+                <li class="k left" data-b="2" data-d="0.8">설문 파일 구조 파악</li>
+                <li class="k left" data-b="2" data-d="1.2">부서별 평균 계산</li>
+                <li class="k left" data-b="2" data-d="1.6">차트 페이지 생성 · 확인</li>
+              </ul>
+              <div class="term">
+                <div class="k wipe" data-b="3" data-d="0.1">▸ survey_10월.xlsx 읽는 중… 1,284행</div>
+                <div class="k wipe" data-b="3" data-d="0.9">▸ analyze.py 작성 → 실행</div>
+                <div class="k wipe" data-b="3" data-d="1.7">▸ chart.html 생성 · 브라우저로 확인</div>
+                <div class="k wipe ok" data-b="3" data-d="2.5">✓ 7개 부서 차트 완성</div>
+              </div>
+            </div>
+          </div>
+          <div class="k right" data-b="3" data-d="2.6">
+            <div class="col-h">③ 결과를 본다</div>
+            <div class="result card" id="s03-result" data-b="3" data-d="2.8">
+              <div style="font-weight:800;font-size:18px;margin-bottom:6px">부서별 만족도 · 10월</div>
+              <div class="bars">
+                <i style="--h:62%;--i:0;--rc:#9B82FF"></i><i style="--h:84%;--i:1;--rc:#2BEAD0"></i><i style="--h:48%;--i:2;--rc:#FF7A95"></i>
+                <i style="--h:72%;--i:3;--rc:#FFD46B"></i><i style="--h:91%;--i:4;--rc:#5BA8FF"></i><i style="--h:57%;--i:5;--rc:#FF9F5B"></i><i style="--h:77%;--i:6;--rc:#B8F06A"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow k" data-b="2" style="left:404px">→</div>
+        <div class="arrow k" data-b="3" data-d="2.6" style="left:846px">→</div>
+        <div class="back-arrow k" data-b="4"><span>↺ 보고, 다시 말한다 — 이게 전부</span></div>
+      </div>
+      <aside class="notes">
+        <p>원리는 간단합니다.</p>
+        <p>원하는 것을, 말로 설명하면,</p>
+        <p>Claude Code, Codex, OpenCode 같은 코딩 에이전트가 계획을 세우고,</p>
+        <p>직접 파일을 만들고, 실행하고, 결과까지 확인합니다.</p>
+        <p>여러분은 결과를 보고, 다시 말하면 됩니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S04 CASE 01 경품 추첨 ═════════════ -->
+    <section class="s04" data-nid="s04" data-title="CASE 01 경품 추첨기">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 01 · 팀 문화행사</div>
+          <h2 class="k wipe" data-b="0" data-d="0.2">🎉 경품 추첨 <small>한 번 쓰고 끝나는 이벤트</small></h2>
+        </div>
+        <div class="left">
+          <div class="old k" data-b="1"><span class="chip pink">📄 종이 쪽지</span><span class="chip pink" style="--sd:.9">=RAND() 엑셀</span><span class="chip pink" style="--sd:1.2">🙄 “조작 아냐?”</span></div>
+          <div class="prompt k" data-b="2"><span data-fx="type" data-b="2" data-d="0.2" data-cps="26" data-text="참석자 명단 붙여넣을게. 슬롯머신처럼 돌아가는 경품 추첨기 만들어줘. 당첨자는 중복 없이, 꽃가루도 터뜨려줘."></span><span class="caret"></span></div>
+          <div class="badge10 k pop" data-b="3" data-d="0.6"><span class="big-num">10분</span><span>요청부터 행사 화면까지</span></div>
+        </div>
+        <div class="machine card k pop" data-b="3" id="lottery">
+          <h3>🎰 <span class="grad">2026 송년회 경품 추첨</span></h3>
+          <div class="reel-win"><div class="reel-line"></div><div class="reel" id="reel"></div></div>
+          <div class="ctrl">
+            <button class="btn" id="spinBtn" type="button">🎰 추첨!</button>
+            <button class="btn ghost" id="rosterBtn" type="button">✎ 명단</button>
+            <button class="btn ghost" id="clearBtn" type="button">↺ 초기화</button>
+          </div>
+          <div class="winners" id="winners"></div>
+          <div class="hint k" data-b="4">진짜로 동작합니다 — 명단을 바꿔 행사에서 그대로 쓰세요</div>
+          <div class="roster-ed" id="rosterEd">
+            <b style="font-size:18px">참석자 명단 (한 줄에 한 명)</b>
+            <textarea id="rosterTa" spellcheck="false"></textarea>
+            <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn ghost" id="rosterCancel" type="button">취소</button><button class="btn" id="rosterSave" type="button">저장</button></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>첫 번째 장면. 팀 문화행사, 경품 추첨 시간입니다.</p>
+        <p>종이 쪽지와 엑셀 난수 대신,</p>
+        <p>참석자 명단을 붙여 넣고, 한 줄로 요청합니다.</p>
+        <p>화면 가득 돌아가는 추첨기. 걸리는 시간은, 단 십 분.</p>
+        <p>행사의 분위기가, 달라집니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S05 CASE 02 Before ═════════════ -->
+    <section class="s05" data-nid="s05" data-title="CASE 02 엑셀→PPT의 굴레">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 02 · 데이터 취합과 공유</div>
+          <h2 class="k wipe" data-b="0" data-d="0.2">📊 엑셀 → PPT의 굴레 <span class="tag-ba before">BEFORE</span></h2>
+        </div>
+        <div class="mails">
+          <div class="mail card k right" data-b="0" data-d="0.8" id="m1"><span class="ic">✉️</span><span class="fn">실적취합.xlsx</span></div>
+          <div class="mail card k right" data-b="0" data-d="1.2" id="m2"><span class="ic">✉️</span><span class="fn">실적취합_최종.xlsx</span></div>
+          <div class="mail card k right" data-b="0" data-d="1.6" id="m3"><span class="ic">✉️</span><span class="fn">실적취합_진짜최종.xlsx</span></div>
+          <div class="mail card k right" data-b="1" data-d="1.4" id="m4"><span class="ic">✉️</span><span class="fn">실적취합_진짜최종(2).xlsx</span></div>
+        </div>
+        <div class="cycle k pop" data-b="2">
+          <svg viewBox="0 0 380 380"><circle cx="190" cy="190" r="150" fill="none" stroke="rgba(255,122,149,.35)" stroke-width="2" stroke-dasharray="6 8"/></svg>
+          <div class="dot-run" data-b="2"></div>
+          <div class="node card" style="left:190px;top:40px"><span>📥</span>취합</div>
+          <div class="node card" style="left:340px;top:190px"><span>📋</span>복사·붙여넣기</div>
+          <div class="node card" style="left:190px;top:340px"><span>📈</span>차트 다시</div>
+          <div class="node card" style="left:40px;top:190px"><span>📤</span>메일 발송</div>
+        </div>
+        <div class="hours k" data-b="2" data-d="0.6"><span class="big-num" data-fx="count" data-b="2" data-d="0.6" data-to="4" data-dur="5">0</span><span class="big-num">시간</span><small>매주, 이 루프에</small></div>
+        <div class="ppt k left" data-b="2" data-d="1.2" id="s05-ppt">
+          <div class="slide"><b>4분기 실적 현황 (11/14 기준)</b><div class="pb"><i style="height:60%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:70%"></i></div></div>
+          <div class="meta">보고회의 · 11/17 (월)</div>
+          <div class="stamp k slam" data-b="3" data-d="0.4">이미 지난 데이터</div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>두 번째 장면. 매주, 엑셀 파일이 메일로 날아옵니다.</p>
+        <p>최종, 진짜 최종, 진짜 진짜 최종.</p>
+        <p data-say="취합하고, 복사해서 피피티에 붙이고, 차트를 다시 그리고, 다시 메일로 보냅니다.">취합하고, 복사해서 PPT에 붙이고, 차트를 다시 그리고, 다시 메일로 보냅니다.</p>
+        <p>그런데 보고가 끝나는 순간, 그 데이터는 이미, 지난 데이터입니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S06 CASE 02 After ═════════════ -->
+    <section class="s06" data-nid="s06" data-title="CASE 02 실시간 대시보드">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 02 · 데이터 취합과 공유</div>
+          <h2 class="k wipe" data-b="0" data-d="0.2">🌐 웹 플랫폼 + 실시간 대시보드 <span class="tag-ba after">AFTER</span></h2>
+        </div>
+        <div class="browser card k" data-b="0" data-d="0.5">
+          <div class="bar"><i></i><i></i><i></i><span class="url">team-dashboard.사내/q4</span></div>
+          <div class="app">
+            <div class="form k left" data-b="1">
+              <b style="font-size:16px">실적 입력</b>
+              <label>팀</label><div class="in"><span data-fx="type" data-b="1" data-d="0.4" data-cps="10" data-text="영업 2팀"></span></div>
+              <label>11월 실적 (백만원)</label><div class="in"><span data-fx="type" data-b="1" data-d="1.4" data-cps="8" data-text="1,240"></span></div>
+              <div class="save" id="s06-save">저장</div>
+              <div class="rows" id="s06-rows"></div>
+            </div>
+            <div class="dash">
+              <span class="live k" data-b="2">LIVE</span>
+              <div class="kpis">
+                <div class="kpi k pop" data-b="2" data-d="0"><small>누적 실적</small><b data-fx="count" data-b="2" data-to="18420" data-dur="1.6">0</b></div>
+                <div class="kpi k pop" data-b="2" data-d="0.15"><small>목표 달성률</small><b data-fx="count" data-b="2" data-d="0.15" data-to="87" data-dur="1.6" data-suffix="%">0</b></div>
+                <div class="kpi k pop" data-b="2" data-d="0.3"><small>입력 완료 팀</small><b data-fx="count" data-b="2" data-d="0.3" data-to="11" data-dur="1.6" data-suffix="/12">0</b></div>
+              </div>
+              <div class="chart" id="s06-chart"></div>
+              <div class="ticker" id="s06-ticker"></div>
+            </div>
+          </div>
+        </div>
+        <div class="side">
+          <div class="link card k pop" data-b="3">🔗 <span class="url2">dash.team/q4</span><span class="chip teal" style="font-size:13px;padding:3px 10px;margin-left:auto">복사됨</span></div>
+          <div class="viewers k" data-b="3" data-d="0.5"><i style="background:#9B82FF"></i><i style="background:#2BEAD0"></i><i style="background:#FF7A95"></i><i style="background:#FFD46B"></i><i style="background:#5BA8FF"></i>&nbsp; 24명이 같은 화면을 보는 중</div>
+          <div class="cmp">
+            <div class="row k" data-b="4"><div class="lbl"><span>이전 · 엑셀 → PPT</span><b class="t3">주 4시간</b></div><div class="track"><div class="fill" style="--w:100%;background:var(--a3)"></div></div></div>
+            <div class="row k" data-b="4" data-d="0.6"><div class="lbl"><span>이후 · 웹 대시보드</span><b class="t2">구축 1일 · 이후 0</b></div><div class="track"><div class="fill" style="--w:3%;background:var(--a2)"></div></div></div>
+          </div>
+          <div class="year k" data-b="5"><span class="big-num" data-fx="count" data-b="5" data-to="208" data-dur="1.8">0</span><small>시간 / 년 — 주 4시간 × 52주</small></div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>이제 이렇게 바꿉니다.</p>
+        <p>각자 웹 화면에 숫자를 입력하면,</p>
+        <p>대시보드가, 실시간으로 갱신됩니다.</p>
+        <p>보고는, 링크 하나로 끝납니다.</p>
+        <p>만드는 데 하루. 그다음부터는, 매주 쓰던 네 시간이 사라집니다.</p>
+        <p>일 년이면, 이백 시간이 넘습니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S07 CASE 03 Before ═════════════ -->
+    <section class="s07" data-nid="s07" data-title="CASE 03 주간보고 (전)">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 03 · 리더의 주간보고</div>
+          <h2 class="k wipe" data-b="0" data-d="0.2">📝 금요일 오후의 빈 문서 <span class="tag-ba before">BEFORE</span></h2>
+        </div>
+        <div class="doc card k left" data-b="0" data-d="0.6">
+          <div class="anaclock" data-b="2"><i class="h"></i><i class="m"></i></div>
+          <div class="ttl">주간보고 (11/10 ~ 11/14)</div>
+          <div style="font-size:16px;color:var(--soft)">1. 주요 성과<span class="caret"></span></div>
+          <div style="height:24px"></div>
+          <div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:82%"></div>
+          <div class="ln" style="width:40%"></div><div class="ln" style="width:76%"></div><div class="ln" style="width:60%"></div>
+          <div id="s07-time" style="position:absolute;left:28px;bottom:24px;font-family:var(--mono);font-size:15px;color:var(--a4)">FRI 14:00</div>
+        </div>
+        <div class="srcs">
+          <div class="src card k pop shake" data-b="1" data-d="0" style="--sd:1.8"><span class="ic">✉️</span><div><b data-fx="count" data-b="1" data-to="126" data-dur="1.2">0</b><small>메일</small></div></div>
+          <div class="src card k pop shake" data-b="1" data-d="0.35" style="--sd:1.5"><span class="ic">💬</span><div><b data-fx="count" data-b="1" data-d="0.35" data-to="412" data-dur="1.2">0</b><small>메신저 대화</small></div></div>
+          <div class="src card k pop shake" data-b="1" data-d="0.7" style="--sd:1.2"><span class="ic">📘</span><div><b data-fx="count" data-b="1" data-d="0.7" data-to="14" data-dur="1">0</b><small>Confluence 문서</small></div></div>
+          <div class="src card k pop shake" data-b="1" data-d="1.05" style="--sd:.9"><span class="ic">🎫</span><div><b data-fx="count" data-b="1" data-d="1.05" data-to="38" data-dur="1">0</b><small>Jira 티켓</small></div></div>
+        </div>
+        <div class="tabs k" data-b="2">
+          <span style="--i:0">Outlook – 받은편지함</span><span style="--i:1">팀 채널 #proj-a</span><span style="--i:2">Confluence · 회의록</span><span style="--i:3">Jira · Sprint 42</span><span style="--i:4">팀 채널 #ops</span>
+        </div>
+        <div class="cost k pop" data-b="2" data-d="1"><span class="big-num">3시간+</span><span>기록을 뒤지고, 옮겨 적는 데만</span></div>
+      </div>
+      <aside class="notes">
+        <p>세 번째 장면. 금요일 오후, 팀장님의 주간보고 시간입니다.</p>
+        <p>메일 백여 통, 메신저 수백 개, 컨플루언스 문서, 그리고 지라 티켓.</p>
+        <p>흩어진 기록을 뒤지는 데만, 몇 시간이 걸립니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S08 CASE 03 After ═════════════ -->
+    <section class="s08" data-nid="s08" data-title="CASE 03 주간보고 (후)">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 03 · 리더의 주간보고</div>
+          <h2 class="k wipe" data-b="0" data-d="0.1">🤖 기록은 에이전트가 모으고, 리더는 판단한다 <span class="tag-ba after">AFTER</span></h2>
+        </div>
+        <div class="ask k" data-b="0" data-d="0.4"><div class="prompt"><span data-fx="type" data-b="0" data-d="0.8" data-cps="24" data-text="이번 주 우리 팀 메일·메신저·Confluence·Jira 기록 모아서, 주간보고 초안 써줘. 출처도 달아줘."></span></div></div>
+        <div class="srcs">
+          <span class="chip k left" data-b="1" data-d="0">✉️ 메일</span>
+          <span class="chip teal k left" data-b="1" data-d="0.2">💬 메신저</span>
+          <span class="chip k left" data-b="1" data-d="0.4">📘 Confluence</span>
+          <span class="chip yel k left" data-b="1" data-d="0.6">🎫 Jira</span>
+        </div>
+        <svg class="flow" data-b="1" viewBox="0 0 1280 800">
+          <path d="M296,312 C380,312 380,430 430,440" stroke="#9B82FF"/>
+          <path d="M296,376 C370,376 380,440 430,440" stroke="#2BEAD0"/>
+          <path d="M296,440 C360,440 390,440 430,440" stroke="#9B82FF"/>
+          <path d="M296,504 C370,504 380,440 430,440" stroke="#FFD46B"/>
+          <path d="M550,440 C600,440 610,440 656,440" stroke="#2BEAD0"/>
+        </svg>
+        <div class="core k pop" data-b="1" data-d="0.3">🤖<small>커넥터(MCP)로 읽기</small></div>
+        <div class="report card k right" data-b="2" id="s08-report">
+          <div class="rh"><b>주간보고 초안 · 플랫폼팀</b><small>11/10–11/14 · 자동 생성</small></div>
+          <div class="sec k" data-b="2" data-d="0.4"><h4>✅ 주요 성과</h4><p><span class="mark" style="--md:0">결제 API 응답속도 38% 개선</span>, 배포 완료<span class="cite">Jira-1423</span> · 신규 고객사 2곳 온보딩<span class="cite">메일 11/12</span></p></div>
+          <div class="sec k" data-b="2" data-d="1.0"><h4>⚠️ 이슈 · 리스크</h4><p>QA 인력 부족으로 <span class="mark" style="--md:.5">릴리스 1주 지연 가능</span><span class="cite">#proj-a 11/13</span></p></div>
+          <div class="sec k" data-b="2" data-d="1.6"><h4>🗓️ 다음 주 계획</h4><p>보안 점검 대응, 4분기 로드맵 리뷰<span class="cite">Confluence</span></p></div>
+          <span class="chip yel pen k pop" data-b="3" data-d="0.8">✎ 리더 검토 중</span>
+        </div>
+        <div class="result k" data-b="4"><span class="from">3시간</span><span class="arr">→</span><span class="to">15분</span></div>
+      </div>
+      <aside class="notes">
+        <p>에이전트에게 말합니다. 이번 주 기록을 모아, 주간보고 초안을 써 줘.</p>
+        <p>에이전트는 메일과 메신저, 컨플루언스와 지라를 직접 읽고,</p>
+        <p>성과, 이슈, 다음 주 계획으로, 출처까지 달아 정리합니다.</p>
+        <p>리더는 처음부터 쓰는 대신, 검토하고 판단하는 데 시간을 씁니다.</p>
+        <p>세 시간이, 십오 분이 됩니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S09 CASE 04 개발자 주간 활동 ═════════════ -->
+    <section class="s09" data-nid="s09" data-title="CASE 04 개발자 주간 활동">
+      <div class="stage">
+        <div class="case-head">
+          <div class="no k" data-b="0">CASE 04 · 개발자의 주간 활동 공유</div>
+          <h2 class="k wipe" data-b="0" data-d="0.2">🧑‍💻 “이번 주에 뭐 했더라?” <small>GitHub · Jira</small></h2>
+        </div>
+        <div class="grid-wrap">
+          <div class="cgrid" id="s09-grid" data-b="1"></div>
+          <div class="fog k" data-b="1" data-d="1.2"><span>?</span> 한 일은 많은데, 기억이 안 난다</div>
+        </div>
+        <div class="feed k" data-b="2" id="s09-feed"><div class="inner" id="s09-feed-in"></div></div>
+        <div class="funnel k pop" data-b="3">➜</div>
+        <div class="groups">
+          <div class="grp card k right" data-b="3" data-d="0.2"><span class="n" data-fx="count" data-b="3" data-d="0.2" data-to="21" data-dur="1">0</span><b>🚀 결제 모듈 리팩터링</b><small>PR 3 merged · 커밋 21</small></div>
+          <div class="grp card k right" data-b="3" data-d="0.6"><span class="n" data-fx="count" data-b="3" data-d="0.6" data-to="4" data-dur="1">0</span><b>🐛 장애 대응 · 핫픽스</b><small>Jira 4 closed · PR 1</small></div>
+          <div class="grp card k right" data-b="3" data-d="1.0"><span class="n" data-fx="count" data-b="3" data-d="1.0" data-to="12" data-dur="1">0</span><b>👀 코드 리뷰</b><small>리뷰 12건 · 코멘트 47</small></div>
+          <div class="grp card k right" data-b="3" data-d="1.4"><span class="n">→</span><b>🗓️ 다음 주</b><small>정산 배치 이관 (PLAT-881)</small></div>
+        </div>
+        <div class="chat card k right" data-b="4">
+          <div class="bar"># team-platform</div>
+          <div class="msgs">
+            <div class="msg">이번 주도 수고 많으셨습니다 🙌</div>
+            <div class="msg bot k pop" data-b="4" data-d="0.8"><b>📣 주간 활동 요약 — 김개발</b>결제 모듈 리팩터링 PR 3건 머지, 장애 티켓 4건 종료, 리뷰 12건. 다음 주: 정산 배치 이관.<br/><span class="muted" style="font-size:12.5px">GitHub · Jira에서 자동 생성</span></div>
+          </div>
+          <div class="cron chip teal k" data-b="4" data-d="1.4">⏰ 매주 금 17:00 자동 실행</div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>네 번째 장면. 개발자에게도, 같은 고민이 있습니다.</p>
+        <p>한 주 동안 한 일은 많은데, 막상 정리하려면 기억이 나지 않습니다.</p>
+        <p>깃허브 커밋과 풀 리퀘스트, 지라 티켓을 모아,</p>
+        <p>주제별로 묶은 주간 활동 요약을 만들고,</p>
+        <p>매주 금요일, 팀 채널에 자동으로 공유되게 할 수 있습니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S10 몽타주 ═════════════ -->
+    <section class="s10" data-nid="s10" data-title="이것도 됩니다 — 몽타주">
+      <div class="stage">
+        <h2 class="k blur" data-b="0">이게, <span class="grad">끝이 아닙니다</span></h2>
+        <div class="tiles">
+          <div class="tile card k" data-b="1">
+            <div class="tn"><span>🧾</span>회의록 → 할 일</div>
+            <div class="todo">
+              <div class="t" style="--i:0">QA 인력 충원 요청 — 박PM</div>
+              <div class="t" style="--i:1">릴리스 일정 재공지 — 이팀장</div>
+              <div class="t" style="--i:2">보안 점검표 회신 — 최대리</div>
+              <div style="--i:3">다음 회의 11/24 (월)</div>
+            </div>
+          </div>
+          <div class="tile card k" data-b="2">
+            <div class="tn"><span>📂</span>파일 300개 이름 정리</div>
+            <div class="files">
+              <div style="--i:0"><em>IMG_2931.jpg</em><b>2026-11-03_워크숍_01.jpg</b></div>
+              <div style="--i:1"><em>IMG_2932.jpg</em><b>2026-11-03_워크숍_02.jpg</b></div>
+              <div style="--i:2"><em>스캔(3).pdf</em><b>계약서_A사_2026.pdf</b></div>
+              <div style="--i:3"><em>새 문서 7.docx</em><b>회의록_1112_플랫폼.docx</b></div>
+              <div style="--i:4"><em>final(1).xlsx</em><b>예산_4분기_v2.xlsx</b></div>
+              <div style="--i:5"><em>…</em><b>✓ 300개 완료</b></div>
+            </div>
+          </div>
+          <div class="tile card k" data-b="3">
+            <div class="tn"><span>📋</span>설문 → 분석 · 차트</div>
+            <div class="pie"></div>
+            <div class="pie-l">응답 1,284건 · 주관식 자동 분류</div>
+          </div>
+          <div class="tile card k" data-b="4">
+            <div class="tn"><span>📑</span>쌓인 PDF 요약</div>
+            <div class="pdfs"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i></div>
+            <div class="sum"><div style="--i:0;--w:92%"></div><div style="--i:1;--w:74%"></div><div style="--i:2;--w:85%"></div><div style="--i:3;--w:55%"></div></div>
+          </div>
+        </div>
+        <div class="wall" id="s10-wall"></div>
+        <div class="final k blur" data-b="5" data-d="1.4">반복되는 일이라면, <span class="grad">거의 무엇이든.</span></div>
+      </div>
+      <aside class="notes">
+        <p>이게, 끝이 아닙니다.</p>
+        <p>회의록에서 할 일을 뽑고,</p>
+        <p>수백 개 파일 이름을, 한 번에 정리하고,</p>
+        <p>설문 결과를 분석해, 차트로 만들고,</p>
+        <p>쌓여 있는 PDF를, 요약합니다.</p>
+        <p>반복되는 일이라면, 거의 무엇이든 맡길 수 있습니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S11 돌려받는 시간 ═════════════ -->
+    <section class="s11" data-nid="s11" data-title="돌려받는 시간">
+      <div class="stage">
+        <h2 class="k" data-b="0">돌려받는 시간을 <span class="grad">더해 보면</span></h2>
+        <div class="bars">
+          <div class="hb k" data-b="1"><div class="lbl"><span>📊 실시간 대시보드<small>주 4시간 → 0</small></span><b class="t2"><span data-fx="count" data-b="1" data-to="208" data-dur="1.4">0</span>h</b></div><div class="track"><div class="fill" style="--w:100%;background:linear-gradient(90deg,#2BEAD0,#5BFFE0)"></div></div></div>
+          <div class="hb k" data-b="2"><div class="lbl"><span>📝 리더 주간보고<small>주 3시간 → 15분</small></span><b class="t1"><span data-fx="count" data-b="2" data-to="143" data-dur="1.4">0</span>h</b></div><div class="track"><div class="fill" style="--w:69%;background:linear-gradient(90deg,#9B82FF,#C3B3FF)"></div></div></div>
+          <div class="hb k" data-b="3"><div class="lbl"><span>🧑‍💻 주간 활동 정리<small>주 1시간 → 5분</small></span><b class="t4"><span data-fx="count" data-b="3" data-to="48" data-dur="1.2">0</span>h</b></div><div class="track"><div class="fill" style="--w:23%;background:linear-gradient(90deg,#FFD46B,#FFE7A8)"></div></div></div>
+        </div>
+        <div class="total k pop" data-b="4"><span class="big-num grad">약 <span data-fx="count" data-b="4" data-to="400" data-dur="1.6">0</span></span><span>시간 / 년</span></div>
+        <div class="cal" id="s11-cal" data-b="5">
+          <div class="cg" id="s11-cg"></div>
+          <div class="cap k" data-b="5" data-d="0.6"><b>50일 ≈ 10주</b>근무일 250일 중, 통째로 돌아오는 날</div>
+        </div>
+        <div class="foot k" data-b="5" data-d="1.4">예시 가정 · 연 52주, 하루 8시간 기준. 한 사람이 위 세 가지를 모두 한다고 본 추정치이며, 실제 절감은 업무마다 다릅니다.</div>
+      </div>
+      <aside class="notes">
+        <p>이 시간을, 더해 보면 어떨까요.</p>
+        <p>실시간 대시보드에서, 이백 시간.</p>
+        <p>주간보고에서, 백사십 시간.</p>
+        <p>활동 정리에서, 오십 시간.</p>
+        <p>일 년에 돌려받는 시간, 약 사백 시간.</p>
+        <p>근무일로 오십 일. 열 주에 가까운 시간입니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S12 왜 비개발자인가 ═════════════ -->
+    <section class="s12" data-nid="s12" data-title="왜 비개발자인가">
+      <div class="stage">
+        <h2 class="k" data-b="0">왜, <span class="grad">비개발자가</span> 해야 할까?</h2>
+        <div class="path old dim-out" id="s12-old">
+          <div class="lb k t3" data-b="1">지금까지</div>
+          <div class="station card k pop" data-b="1" data-d="0.1"><span>🙋</span>현업 담당자<small>문제를 가장 잘 앎</small></div>
+          <div class="arrow k" data-b="1" data-d="0.4">→</div>
+          <div class="station card k pop" data-b="1" data-d="0.6"><span>📄</span>요청서 작성<small>설명하다 지침</small></div>
+          <div class="arrow k" data-b="1" data-d="0.9">→</div>
+          <div class="station card k pop" data-b="1" data-d="1.1"><span>🏢</span>개발팀 대기열<div class="queue k" data-b="1" data-d="1.1"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i></div><small>대기 3개월</small></div>
+          <div class="arrow k" data-b="2">→</div>
+          <div class="station card k pop mismatch" data-b="2" data-d="0.2"><span>📦</span>결과물<small class="ne">≠ 원했던 것</small></div>
+        </div>
+        <div class="path new">
+          <div class="lb k t2" data-b="3">이제는</div>
+          <div class="station card hero k pop" data-b="3" data-d="0.1"><span>🙋</span>현업 담당자<small>= 만드는 사람</small></div>
+          <div class="beam" data-b="3" data-d="0.5"></div>
+          <div class="station card k pop" data-b="3" data-d="0.9"><span>🤖</span>코딩 에이전트<small>말하면 만든다</small></div>
+          <div class="beam" data-b="3" data-d="1.2"></div>
+          <div class="station card hero k pop" data-b="3" data-d="1.6"><span>✅</span>오늘 바로<small>원하는 그대로</small></div>
+        </div>
+        <div class="insight card k blur" data-b="4"><small>INSIGHT</small>병목은 <span class="t3">“만들 수 있는가”</span>에서 <span class="t2">“무엇이 필요한지 아는가”</span>로 옮겨 갔습니다.</div>
+      </div>
+      <aside class="notes">
+        <p>왜, 비개발자가 해야 할까요.</p>
+        <p>지금까지는 필요한 도구가 있어도, 요청서를 쓰고, 개발팀의 순서를 기다려야 했습니다.</p>
+        <p>몇 달 뒤 받은 결과는, 원했던 것과 조금 달랐죠.</p>
+        <p>이제는 문제를 가장 잘 아는 사람이, 직접 만듭니다.</p>
+        <p>중요한 것은 코딩 실력이 아니라, 무엇이 필요한지 아는 능력입니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S13 상황별 처방 ═════════════ -->
+    <section class="s13" data-nid="s13" data-title="상황별 처방">
+      <div class="stage">
+        <h2 class="k" data-b="0">상황별 처방 — <span class="grad">무엇을 만들까</span></h2>
+        <div class="tbl">
+          <div class="tr th k" data-b="0" data-d="0.3"><span>이런 상황이라면</span><span>이걸 만든다</span><span>첫 마디는 이렇게</span><span style="text-align:right">준비</span></div>
+          <div class="tr card k left" data-b="1"><div class="sit">🎉 한 번 쓰는 이벤트<small>추첨 · 퀴즈 · 타이머 · 투표</small></div><div class="make"><span>📄</span>HTML 파일 하나</div><div class="say">“명단으로 추첨기 만들어줘. 파일 하나로, 더블클릭하면 열리게.”</div><div class="time">10분</div></div>
+          <div class="tr card k left" data-b="2"><div class="sit">📊 매주 반복되는 취합<small>엑셀 메일 · 복붙 · PPT 차트</small></div><div class="make"><span>🌐</span>웹 앱 + 대시보드</div><div class="say">“팀별로 실적을 입력하면 대시보드가 바로 바뀌는 웹 앱 만들어줘. 먼저 계획부터.”</div><div class="time">하루</div></div>
+          <div class="tr card k left" data-b="3"><div class="sit">🗂️ 흩어진 기록 정리<small>메일 · 메신저 · Confluence · Jira</small></div><div class="make"><span>🔌</span>커넥터(MCP) + 초안</div><div class="say">“이번 주 Jira와 Confluence 기록 읽고, 주간보고 초안 써줘. 출처 달아서.”</div><div class="time">1시간</div></div>
+          <div class="tr card k left" data-b="4"><div class="sit">📂 반복 파일 작업<small>이름 바꾸기 · 변환 · 병합</small></div><div class="make"><span>⚙️</span>스크립트 한 개</div><div class="say">“이 폴더 사진 300장, 촬영 날짜_행사명_번호로 이름 바꿔줘. 바꾸기 전 목록부터.”</div><div class="time">20분</div></div>
+          <div class="tr card k left" data-b="5"><div class="sit">⏰ 정해진 때마다 반복<small>주간 요약 · 일일 점검 · 알림</small></div><div class="make"><span>🗓️</span>스케줄 실행</div><div class="say">“매주 금요일 5시에 GitHub·Jira 활동 요약해서 팀 채널에 올려줘.”</div><div class="time">반나절</div></div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>상황에 따라, 만드는 것도 달라집니다.</p>
+        <p>한 번 쓰는 이벤트라면, 파일 하나짜리 웹페이지면 충분합니다.</p>
+        <p>매주 반복되는 취합이라면, 데이터가 쌓이는 웹 앱을.</p>
+        <p>흩어진 기록을 정리해야 한다면, 메일과 지라를 연결하는 커넥터를.</p>
+        <p>반복되는 파일 작업이라면, 한 번 만든 스크립트를.</p>
+        <p>그리고 정해진 때마다 반복된다면, 스케줄을 걸어 자동으로 돌게 하면 됩니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S14 세 가지 약속 ═════════════ -->
+    <section class="s14" data-nid="s14" data-title="세 가지 약속">
+      <div class="stage">
+        <h2 class="k" data-b="0">단, <span class="grad">세 가지</span>만은 꼭</h2>
+        <div class="rules">
+          <div class="rule card k pop" data-b="1"><span class="n">1</span><span class="ic">🔐</span><b>회사 데이터는<br/>정책부터 확인</b><p>메일·메신저·Jira를 연결하기 전에, 사내 보안 정책과 승인된 도구인지 먼저 봅니다.</p><a href="../security/">→ 보안과 거버넌스</a></div>
+          <div class="rule card k pop" data-b="2"><span class="n">2</span><span class="ic">✅</span><b>초안은 초안,<br/>판단은 사람이</b><p>에이전트가 만든 보고서와 숫자는 출처를 확인하고, 최종 결정은 직접 내립니다.</p><a href="../verification/">→ 검증과 테스트</a></div>
+          <div class="rule card k pop" data-b="3"><span class="n">3</span><span class="ic">🌱</span><b>작게 시작해서<br/>키운다</b><p>추첨기 하나, 스크립트 하나부터. 잘 되면 커밋하고, 다음 단계로 넓힙니다.</p><a href="../workshop/">→ 실습 워크숍</a></div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>단, 세 가지는 꼭 기억하세요.</p>
+        <p>회사 데이터를 연결할 때는, 사내 보안 정책부터 확인할 것.</p>
+        <p>에이전트가 만든 보고서는 초안입니다. 최종 판단은, 사람이 합니다.</p>
+        <p>그리고, 작게 시작할 것.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S15 첫걸음 ═════════════ -->
+    <section class="s15" data-nid="s15" data-title="첫걸음">
+      <div class="stage">
+        <h2 class="k" data-b="0">시작은, <span class="grad">한 문장이면 충분합니다</span></h2>
+        <div class="steps">
+          <div class="step card k left" data-b="1"><span class="n">1</span><div><b>반복한 일 하나 고르기</b><small>이번 주에 두 번 이상 한 일</small></div></div>
+          <div class="step card k left" data-b="2"><span class="n">2</span><div><b>동료에게 설명하듯 말하기</b><small>목표 · 재료 · 원하는 모습</small></div></div>
+          <div class="step card k left" data-b="3"><span class="n">3</span><div><b>보고, 다시 말하기</b><small>“여기만 이렇게 바꿔줘” — 두세 바퀴면 된다</small></div></div>
+        </div>
+        <div class="term card browser k right" data-b="1" data-d="0.4">
+          <div class="bar"><i></i><i></i><i></i><span class="url">~/team-tools — claude</span></div>
+          <div class="body">
+            <div class="y k" data-b="1" data-d="0.8">$ claude</div>
+            <div class="u"><span data-fx="type" data-b="2" data-d="0.1" data-cps="32" data-text="매주 하는 팀 실적 취합을 웹 대시보드로 바꾸고 싶어. 엑셀 양식은 이 폴더에 있어. 만들기 전에 계획부터 보여줘."></span></div>
+            <div class="a k" data-b="2" data-d="2.6">● 계획: 1) 양식 분석 2) 입력 화면 3) 대시보드 4) 공유 링크</div>
+            <div class="u k" data-b="3" data-d="0.3">좋아, 진행해줘. 차트는 팀별 막대로.</div>
+            <div class="a k" data-b="3" data-d="1.2">✓ 완성 — http://localhost:3000 에서 확인하세요</div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>시작은 어렵지 않습니다.</p>
+        <p>이번 주에 반복한 일, 하나를 고르세요.</p>
+        <p>그 일을 동료에게 설명하듯, 에이전트에게 말하세요.</p>
+        <p>그리고 결과를 보고, 다시 말하면 됩니다.</p>
+      </aside>
+    </section>
+
+    <!-- ═════════════ S16 엔딩 ═════════════ -->
+    <section class="s16" data-nid="s16" data-title="엔딩">
+      <div class="stage">
+        <canvas id="s16-canvas" width="1280" height="800"></canvas>
+        <div class="end">
+          <span class="l1 k blur" data-b="0">코드를 몰라도,</span>
+          <span class="l2 k slam" data-b="1"><span class="grad">일은, 바꿀 수 있습니다.</span></span>
+          <div class="brand k pop" data-b="2"><i>&gt;_</i>바이브 코딩</div>
+          <div class="tag k" data-b="3">여러분의 일주일을, 다시 여러분에게.</div>
+        </div>
+        <div class="links k" data-b="3" data-d="1.2">
+          <a href="../setup/"><span class="chip teal">🧰 0교시 — 설치하기</span></a>
+          <a href="../intro/"><span class="chip">🚀 바이브 코딩이란?</span></a>
+          <a href="../workshop/"><span class="chip yel">🛠️ 실습 워크숍</span></a>
+          <button class="chip pink" id="restartBtn" type="button">↺ 처음부터 다시</button>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>코드를 몰라도,</p>
+        <p>일은, 바꿀 수 있습니다.</p>
+        <p>바이브 코딩.</p>
+        <p>여러분의 일주일을, 다시 여러분에게.</p>
+      </aside>
+    </section>
+
+    <div id="cc" aria-live="polite"></div>
+  </div>
+</div>
+
+<!-- reveal.js 5.1.0 — vendor 공유본 재사용 (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<!-- 내레이션 목록 — scripts/build-narration.py 가 생성 (없으면 소리 없이 예상 길이로 진행) -->
+<script src="audio/manifest.js"></script>
+<script>
+(function () {
+  const PRINT = /print-pdf/.test(location.search);
+  if (PRINT) document.documentElement.classList.add('print-pdf');
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MANIFEST = window.NARRATION || {};
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const norm = (t) => (t || '').replace(/\s+/g, ' ').trim();
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  };
+
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true, hashOneBasedIndex: true,
+    controls: true, controlsLayout: 'edges', progress: true, slideNumber: 'c/t',
+    transition: 'fade', transitionSpeed: 'default', backgroundTransition: 'fade',
+    width: 1280, height: 800, margin: 0.02, minScale: 0.2, maxScale: 2.0, center: false,
+    keyboard: {
+      77: () => toggleAudio(),          // M
+      65: () => toggleAuto(),           // A
+      67: () => toggleCC(),             // C
+      82: () => replay(),               // R
+    },
+  });
+
+  /* ═════════ 장면 준비: 박자 지연값, 생성형 요소 ═════════ */
+  $$('[data-d]').forEach((el) => el.style.setProperty('--d', el.dataset.d));
+  $$('[data-xd]').forEach((el) => el.style.setProperty('--xd', el.dataset.xd));
+  $$('[data-fx="type"]').forEach((el) => { el.textContent = ''; });
+
+  // S02 궤도 칩
+  (function () {
+    const orbit = $('#s02-orbit'); if (!orbit) return;
+    const items = ['📂 파일 정리', '📊 데이터 분석', '📝 보고서 초안', '🌐 웹 앱', '📈 실시간 대시보드', '🔗 시스템 연결', '✉️ 메일 요약', '🗂️ 문서 변환', '🎲 이벤트 도구', '⏰ 정기 자동화', '🔍 리서치', '🧾 회의록 정리', '🖼️ 이미지 일괄 처리', '🧮 엑셀 수식 대체'];
+    const cls = ['', 'teal', 'pink', 'yel'];
+    items.forEach((t, i) => {
+      const a = (i / items.length) * Math.PI * 2 - Math.PI / 2;
+      const k = i % 2 ? 1 : .8;   // 바깥/안쪽 두 줄로 엇갈려 겹치지 않게
+      const pos = document.createElement('div');
+      pos.className = 'pos';
+      pos.style.left = Math.cos(a) * 440 * k + 'px';
+      pos.style.top = Math.sin(a) * 255 * k + 'px';
+      pos.style.setProperty('--bd', (-i * .7) + 's');
+      pos.innerHTML = '<div class="k pop" data-b="3" style="--d:' + (i * 0.16).toFixed(2) + '"><span class="chip ' + cls[i % 4] + '">' + t + '</span></div>';
+      orbit.appendChild(pos);
+    });
+  })();
+
+  // S06 차트 · S09 잔디 · 피드 · S10 벽 · S11 달력
+  const TEAMS = ['영업1', '영업2', '마케팅', '기획', '개발', 'CS'];
+  (function () {
+    const chart = $('#s06-chart'); if (!chart) return;
+    TEAMS.forEach((t) => { chart.insertAdjacentHTML('beforeend', '<div class="col"><i></i><span>' + t + '</span></div>'); });
+  })();
+  (function () {
+    const g = $('#s09-grid'); if (!g) return;
+    let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    for (let i = 0; i < 18 * 7; i++) {
+      const v = rnd(); const lv = v > .82 ? 'l3' : v > .6 ? 'l2' : v > .35 ? 'l1' : '';
+      g.insertAdjacentHTML('beforeend', '<i class="' + lv + '" style="--dl:' + (rnd() * 1.1).toFixed(2) + 's"></i>');
+    }
+  })();
+  (function () {
+    const f = $('#s09-feed-in'); if (!f) return;
+    const rows = [
+      ['c', 'a3f9c21  refactor(pay): 결제 승인 로직 분리'], ['p', 'PR #482  결제 모듈 리팩터링 1/3  merged'],
+      ['j', 'PLAT-1423  결제 API 지연 → Done'], ['c', '7be0d14  test(pay): 승인 실패 케이스 추가'],
+      ['p', 'PR #487  hotfix: 정산 타임아웃  merged'], ['j', 'PLAT-1431  야간 배치 실패 → Done'],
+      ['c', 'e51aa02  fix(batch): 재시도 간격 조정'], ['p', 'review  PR #479 · #481 · #485 승인'],
+      ['j', 'PLAT-881  정산 배치 이관 → In Progress'], ['c', '0c4d9b7  docs: 결제 흐름도 갱신'],
+    ];
+    const html = rows.map((r) => '<div class="' + r[0] + '">' + r[1] + '</div>').join('');
+    f.innerHTML = html + html;
+  })();
+  (function () {
+    const w = $('#s10-wall'); if (!w) return;
+    const items = ['📧 반복 메일 초안', '🌏 문서 번역', '🧮 엑셀 수식 디버깅', '📅 일정 충돌 확인', '🧪 교육 퀴즈 앱', '🧾 출장비 정산 양식', '📸 사진 리사이즈', '🔎 경쟁사 자료 조사', '📊 두 엑셀 비교', '🗃️ 사내 위키 정리', '📝 보도자료 초안', '🔔 재고 알림 봇', '🎤 발표 슬라이드', '🔁 CSV → 보고서', '🧹 중복 데이터 정리', '📮 설문 링크 생성'];
+    const cls = ['', 'teal', 'pink', 'yel'];
+    items.forEach((t, i) => w.insertAdjacentHTML('beforeend', '<span class="chip ' + cls[i % 4] + ' k pop" data-b="5" style="--d:' + (i * 0.07).toFixed(2) + '">' + t + '</span>'));
+  })();
+  (function () {
+    const cg = $('#s11-cg'); if (!cg) return;
+    // 근무일 250칸 중 마지막 두 줄(50칸)이 물결처럼 켜진다 — "50일이 통째로"
+    for (let i = 0; i < 250; i++) {
+      const col = i % 25, row = Math.floor(i / 25);
+      const hit = row >= 8;
+      cg.insertAdjacentHTML('beforeend', '<i class="' + (hit ? 'hit' : '') + '" style="--dl:' + (col * 0.05 + row * 0.03).toFixed(2) + 's"></i>');
+    }
+  })();
+
+  /* ═════════ FX: 박자에 맞춰 실행되는 JS 모션 ═════════ */
+  let timers = [];
+  let intervals = [];
+  let rafs = [];
+  const later = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
+  const every = (ms, fn) => { const t = setInterval(fn, ms); intervals.push(t); return t; };
+  function clearFx() {
+    timers.forEach(clearTimeout); intervals.forEach(clearInterval); rafs.forEach(cancelAnimationFrame);
+    timers = []; intervals = []; rafs = [];
+  }
+
+  const FX = {
+    type(el) {
+      const text = el.dataset.text || ''; const cps = Number(el.dataset.cps || 30);
+      const delay = Number(el.dataset.d || 0) * 1000;
+      if (REDUCED || PRINT) { el.textContent = text; return; }
+      let i = 0;
+      later(delay, function step() {
+        el.textContent = text.slice(0, ++i);
+        if (i < text.length) later(1000 / cps * (/[,.\s]/.test(text[i - 1]) ? 2.2 : 1), step);
+      });
+    },
+    count(el) {
+      const to = Number(el.dataset.to); const dur = Number(el.dataset.dur || 1.5) * 1000;
+      const suffix = el.dataset.suffix || ''; const delay = Number(el.dataset.d || 0) * 1000;
+      const fmt = (v) => Math.round(v).toLocaleString('ko-KR') + suffix;
+      if (REDUCED || PRINT) { el.textContent = fmt(to); return; }
+      later(delay, () => {
+        const t0 = performance.now();
+        const tick = (now) => {
+          const p = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(to * e);
+          if (p < 1) rafs.push(requestAnimationFrame(tick));
+        };
+        rafs.push(requestAnimationFrame(tick));
+      });
+    },
+  };
+  const FX_RESET = {
+    type(el) { el.textContent = ''; },
+    count(el) { el.textContent = '0' + (el.dataset.suffix || ''); },
+  };
+
+  // 장면별 박자 훅: HOOKS[nid][beat] = fn(section)
+  const HOOKS = {
+    s01: {
+      2: () => { $('#s01-tasks').classList.add('grey'); },
+    },
+    s03: {
+      3: () => { later(2200, () => $('#s03-plan').classList.add('done')); },
+      4: () => { later(1600, () => $('#s03-result').classList.add('recolor')); },
+    },
+    s04: {
+      3: () => { later(900, () => Lottery.spin(true)); },
+    },
+    s05: {
+      1: () => {
+        ['#m2', '#m3', '#m4'].forEach((id, i) => later(i * 650, () => $(id).classList.add('hot')));
+      },
+      3: () => { $('#s05-ppt').classList.add('stale'); },
+    },
+    s06: {
+      1: () => {
+        later(2300, () => {
+          const s = $('#s06-save'); s.classList.remove('click'); void s.offsetWidth; s.classList.add('click');
+          $('#s06-rows').innerHTML = '';
+          [['영업 2팀', '1,240'], ['마케팅', '860'], ['기획', '540']].forEach((r, i) =>
+            later(300 + i * 280, () => $('#s06-rows').insertAdjacentHTML('afterbegin', '<div style="animation:popIn .4s"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>')));
+        });
+      },
+      2: () => {
+        const cols = $$('#s06-chart .col');
+        const base = [72, 88, 54, 46, 63, 38];
+        cols.forEach((c, i) => later(i * 120, () => c.querySelector('i').style.setProperty('--h', base[i] + '%')));
+        const ticker = $('#s06-ticker');
+        const events = ['방금 전 · 영업2팀 실적 업데이트', '방금 전 · 마케팅 11월 캠페인 반영', '방금 전 · CS 처리 건수 갱신', '방금 전 · 개발팀 목표 수정', '방금 전 · 기획팀 실적 입력 완료'];
+        let k = 0;
+        later(1600, () => every(1700, () => {
+          const i = Math.floor(Math.random() * cols.length);
+          base[i] = Math.max(25, Math.min(96, base[i] + (Math.random() * 26 - 9)));
+          const c = cols[i]; c.querySelector('i').style.setProperty('--h', base[i] + '%');
+          c.classList.add('flash'); later(700, () => c.classList.remove('flash'));
+          ticker.textContent = '● ' + events[k++ % events.length];
+        }));
+      },
+    },
+    s07: {
+      2: () => { ['14:40', '15:25', '16:10', '16:55', '17:30'].forEach((t, i) => later(500 + i * 900, () => { $('#s07-time').textContent = 'FRI ' + t; })); },
+    },
+    s08: {
+      3: () => { $('#s08-report').classList.add('review'); },
+    },
+    s12: {
+      3: () => { later(400, () => $('#s12-old').classList.add('dimmed')); },
+    },
+    s16: {
+      0: () => Particles.start(),
+    },
+  };
+  const RESETS = {
+    s01: () => $('#s01-tasks').classList.remove('grey'),
+    s03: () => { $('#s03-plan').classList.remove('done'); $('#s03-result').classList.remove('recolor'); },
+    s04: () => Lottery.reset(),
+    s05: () => { $$('.s05 .mail').forEach((m) => m.classList.remove('hot')); $('#s05-ppt').classList.remove('stale'); },
+    s06: () => { $$('#s06-chart .col i').forEach((i) => i.style.setProperty('--h', '0%')); $('#s06-rows').innerHTML = ''; $('#s06-ticker').textContent = ''; },
+    s07: () => { $('#s07-time').textContent = 'FRI 14:00'; },
+    s08: () => $('#s08-report').classList.remove('review'),
+    s12: () => $('#s12-old').classList.remove('dimmed'),
+    s16: () => Particles.stop(),
+  };
+
+  /* ═════════ 경품 추첨기 (진짜 동작) ═════════ */
+  const Lottery = (function () {
+    const DEFAULT = ['김민준', '이서연', '박도윤', '최하은', '정시우', '강지아', '조예준', '윤수아', '장하준', '임지우', '한서준', '오채원', '서주원', '신유나', '권은우', '황다은', '안지호', '송하린', '류건우', '전소율', '홍이준', '고아린', '문태오', '양지민', '손로운', '배서아', '백도현', '허윤슬'];
+    const reel = $('#reel'); const btn = $('#spinBtn'); const winnersEl = $('#winners');
+    let names = (store.get('vibeLotteryNames') || '').split('\n').map(norm).filter(Boolean);
+    if (!names.length) names = DEFAULT.slice();
+    let winners = []; let spinning = false; let raf = 0;
+    const ROW = 70;
+    function render(list, offset) {
+      reel.innerHTML = list.map((n) => '<div>' + n.replace(/</g, '&lt;') + '</div>').join('');
+      reel.style.transform = 'translateY(' + offset + 'px)';
+    }
+    function idle() { const pool = names.length ? names : DEFAULT; render([pool[pool.length - 1], pool[0], pool[1 % pool.length]], 0); }
+    function spin(auto) {
+      if (spinning) return;
+      if (auto && winners.length) return;
+      const pool = names.filter((n) => !winners.includes(n));
+      if (!pool.length) { btn.textContent = '모두 당첨!'; return; }
+      spinning = true; btn.disabled = true;
+      const win = pool[Math.floor(Math.random() * pool.length)];
+      const strip = [];
+      const loops = Math.max(4, Math.ceil(40 / pool.length));
+      for (let l = 0; l < loops; l++) pool.forEach((n) => strip.push(n));
+      strip.push(win, pool[0], pool[1 % pool.length]);
+      const target = -(strip.length - 3) * ROW + ROW; // 당첨자를 가운데 줄(위에서 두 번째 칸)에
+      render(strip, 0);
+      const dur = REDUCED ? 10 : 3600; const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 4);
+        reel.style.transform = 'translateY(' + (target * e) + 'px)';
+        if (p < 1) { raf = requestAnimationFrame(tick); return; }
+        spinning = false; btn.disabled = false;
+        reel.children[strip.length - 3].classList.add('win');
+        winners.push(win);
+        winnersEl.insertAdjacentHTML('beforeend', '<span>🏆 ' + winners.length + '등 · ' + win.replace(/</g, '&lt;') + '</span>');
+        Confetti.burst($('.s04 .stage'), 921, 330);
+        btn.textContent = '🎰 다음 추첨!';
+      };
+      raf = requestAnimationFrame(tick);
+    }
+    function reset() { cancelAnimationFrame(raf); spinning = false; btn.disabled = false; winners = []; winnersEl.innerHTML = ''; btn.textContent = '🎰 추첨!'; idle(); }
+    btn.addEventListener('click', () => { Narr.pauseAuto(); spin(false); });
+    $('#clearBtn').addEventListener('click', reset);
+    const ed = $('#rosterEd'), ta = $('#rosterTa');
+    $('#rosterBtn').addEventListener('click', () => { ta.value = names.join('\n'); ed.classList.add('open'); Narr.pauseAuto(); ta.focus(); });
+    $('#rosterCancel').addEventListener('click', () => ed.classList.remove('open'));
+    $('#rosterSave').addEventListener('click', () => {
+      names = ta.value.split('\n').map(norm).filter(Boolean);
+      if (!names.length) names = DEFAULT.slice();
+      store.set('vibeLotteryNames', names.join('\n'));
+      ed.classList.remove('open'); reset();
+    });
+    // 명단 편집 중에는 reveal 단축키가 먹지 않게
+    ta.addEventListener('keydown', (e) => e.stopPropagation());
+    idle();
+    return { spin, reset };
+  })();
+
+  /* ═════════ 꽃가루 ═════════ */
+  const Confetti = {
+    burst(host, x, y) {
+      if (REDUCED) return;
+      const c = document.createElement('canvas'); c.className = 'confetti'; c.width = 1280; c.height = 800; host.appendChild(c);
+      const g = c.getContext('2d'); const cols = ['#9B82FF', '#2BEAD0', '#FF7A95', '#FFD46B', '#FFFFFF'];
+      const ps = Array.from({ length: 160 }, () => {
+        const a = Math.random() * Math.PI * 2, v = 6 + Math.random() * 12;
+        return { x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 7, r: 4 + Math.random() * 6, c: cols[Math.floor(Math.random() * cols.length)], rot: Math.random() * 6, vr: Math.random() * .3 - .15 };
+      });
+      let f = 0;
+      (function draw() {
+        g.clearRect(0, 0, 1280, 800);
+        ps.forEach((p) => { p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+          g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.fillStyle = p.c; g.globalAlpha = Math.max(0, 1 - f / 150); g.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); g.restore(); });
+        if (++f < 150) requestAnimationFrame(draw); else c.remove();
+      })();
+    },
+  };
+
+  /* ═════════ 엔딩 파티클 ═════════ */
+  const Particles = (function () {
+    const c = $('#s16-canvas'); const g = c.getContext('2d'); let raf = 0, on = false;
+    const ps = Array.from({ length: 90 }, () => ({ x: Math.random() * 1280, y: Math.random() * 800, v: .2 + Math.random() * .8, r: .6 + Math.random() * 2.2, h: Math.random() < .5 ? '155,130,255' : '43,234,208' }));
+    function draw() {
+      g.clearRect(0, 0, 1280, 800);
+      ps.forEach((p) => { p.y -= p.v; if (p.y < -10) { p.y = 810; p.x = Math.random() * 1280; }
+        g.beginPath(); g.arc(p.x, p.y, p.r, 0, Math.PI * 2); g.fillStyle = 'rgba(' + p.h + ',' + (.25 + p.r / 4) + ')'; g.fill(); });
+      if (on) raf = requestAnimationFrame(draw);
+    }
+    return { start() { if (REDUCED || on) return; on = true; draw(); }, stop() { on = false; cancelAnimationFrame(raf); g.clearRect(0, 0, 1280, 800); } };
+  })();
+
+  /* ═════════ 내레이션 시퀀서 ═════════
+     장의 <aside class="notes"> 안 <p> 하나 = 한 박자.
+     박자 N이 시작될 때 data-b="N" 요소에 .on, data-x="N" 요소에 .gone.
+     소리가 켜져 있으면 audio/manifest.js 의 mp3 를 재생하고 끝나면 다음 박자,
+     꺼져 있으면 녹음 길이(없으면 글자 수로 추정)만큼 기다린다. */
+  const Narr = (function () {
+    const audio = new Audio(); audio.preload = 'auto';
+    const cc = $('#cc'); const bar = $('#narr-bar');
+    let state = { audio: false, auto: false, cc: store.get('vibeUseCasesCC') !== '0' };
+    let run = 0; let current = null; let lineTimer = 0; let barRaf = 0;
+    if (!state.cc) document.documentElement.classList.add('cc-off');
+
+    function lines(sec) { return $$('aside.notes p', sec).map((p) => ({ text: norm(p.textContent) })); }
+    function clip(sec, i, text) {
+      const list = MANIFEST[sec.dataset.nid]; const m = list && list[i];
+      return m && norm(m.t) === text ? m : null;   // 대본을 고치고 다시 생성하지 않았으면 소리 대신 추정 길이
+    }
+    function estimate(text) { return Math.max(1.6, text.length * 0.13 + 0.4); }
+
+    function resetSection(sec) {
+      sec.classList.add('snap');
+      $$('.on', sec).forEach((el) => el.classList.remove('on'));
+      $$('.gone', sec).forEach((el) => el.classList.remove('gone'));
+      $$('[data-fx]', sec).forEach((el) => FX_RESET[el.dataset.fx] && FX_RESET[el.dataset.fx](el));
+      $$('.confetti', sec).forEach((el) => el.remove());
+      RESETS[sec.dataset.nid] && RESETS[sec.dataset.nid]();
+      void sec.offsetWidth;
+      sec.classList.remove('snap');
+    }
+    function fire(sec, i) {
+      $$('[data-b="' + i + '"]', sec).forEach((el) => {
+        el.classList.add('on');
+        if (el.dataset.fx && FX[el.dataset.fx]) FX[el.dataset.fx](el);
+      });
+      $$('[data-x="' + i + '"]', sec).forEach((el) => el.classList.add('gone'));
+      const h = HOOKS[sec.dataset.nid]; h && h[i] && h[i](sec);
+    }
+    function showAll(sec) {
+      const n = lines(sec).length;
+      for (let i = 0; i < n + 2; i++) fire(sec, i);
+    }
+    function caption(text) {
+      if (!text) { cc.classList.remove('show'); return; }
+      cc.textContent = text; cc.classList.add('show');
+    }
+    function progress(fn) {
+      cancelAnimationFrame(barRaf);
+      const loop = () => { bar.style.width = (fn() * 100).toFixed(2) + '%'; barRaf = requestAnimationFrame(loop); };
+      loop();
+    }
+
+    function stop() {
+      run++; clearTimeout(lineTimer); clearFx(); audio.pause(); audio.onended = null;
+      cancelAnimationFrame(barRaf); bar.style.width = '0'; caption('');
+    }
+    function play(sec) {
+      stop(); current = sec; resetSection(sec);
+      if (PRINT) { showAll(sec); return; }
+      const ls = lines(sec); const my = run;
+      const total = ls.reduce((s, l, i) => s + ((clip(sec, i, l.text) || {}).d || estimate(l.text)) + .35, 0);
+      let elapsedBefore = 0;
+      const step = (i) => {
+        if (my !== run) return;
+        if (i >= ls.length) { finish(sec, my); return; }
+        fire(sec, i);
+        const m = clip(sec, i, ls[i].text);
+        const d = (m && m.d) || estimate(ls[i].text);
+        caption(ls[i].text);
+        const t0 = performance.now(); const base = elapsedBefore;
+        progress(() => Math.min(1, (base + (state.audio && m && !audio.paused ? audio.currentTime : (performance.now() - t0) / 1000)) / total));
+        const next = () => { if (my !== run) return; elapsedBefore = base + d + .35; lineTimer = setTimeout(() => step(i + 1), 350); };
+        if (state.audio && m) {
+          audio.src = 'audio/' + m.f;
+          audio.onended = next;
+          audio.play().catch(() => { lineTimer = setTimeout(next, d * 1000); });
+        } else {
+          lineTimer = setTimeout(next, d * 1000);
+        }
+      };
+      step(0);
+    }
+    function finish(sec, my) {
+      caption(''); cancelAnimationFrame(barRaf); bar.style.width = '100%';
+      if (state.auto && !Reveal.isLastSlide()) lineTimer = setTimeout(() => { if (my === run) Reveal.next(); }, 1600);
+    }
+    function sync() {
+      const ab = $('#audioBtn'), au = $('#autoBtn'), cb = $('#ccBtn');
+      ab.classList.toggle('active', state.audio); ab.firstElementChild.textContent = state.audio ? '🔊' : '🔇';
+      au.classList.toggle('active', state.auto); au.firstElementChild.textContent = state.auto ? '⏸' : '▶';
+      cb.classList.toggle('active', state.cc);
+      document.documentElement.classList.toggle('cc-off', !state.cc);
+    }
+    return {
+      play, stop, sync,
+      replay() { if (current) play(current); },
+      set(k, v) { state[k] = v; if (k === 'cc') store.set('vibeUseCasesCC', v ? '1' : '0'); sync(); },
+      get(k) { return state[k]; },
+      pauseAuto() { if (state.auto) { state.auto = false; sync(); } },
+      unlock() { audio.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA='; audio.play().catch(() => {}); },
+    };
+  })();
+
+  function toggleAudio() { Narr.set('audio', !Narr.get('audio')); Narr.replay(); }
+  function toggleAuto() { Narr.set('auto', !Narr.get('auto')); if (Narr.get('auto')) Narr.replay(); }
+  function toggleCC() { Narr.set('cc', !Narr.get('cc')); }
+  function replay() { Narr.replay(); }
+
+  $('#audioBtn').addEventListener('click', toggleAudio);
+  $('#autoBtn').addEventListener('click', toggleAuto);
+  $('#ccBtn').addEventListener('click', toggleCC);
+  $('#replayBtn').addEventListener('click', replay);
+  $('#restartBtn').addEventListener('click', () => Reveal.slide(0));
+  Narr.sync();
+
+  // 시작 게이트 — 브라우저는 사용자 동작 없이 소리를 못 낸다
+  const gate = $('#gate');
+  let started = false;
+  function startShow(withVoice) {
+    if (started) return; started = true;
+    gate.classList.add('hide');
+    if (withVoice) { Narr.unlock(); Narr.set('audio', true); Narr.set('auto', true); }
+    Narr.play(Reveal.getCurrentSlide());
+  }
+  $('#gateGo').addEventListener('click', () => startShow(true));
+  $('#gateQuiet').addEventListener('click', () => startShow(false));
+  if (PRINT) gate.remove();
+
+  Reveal.on('ready', (e) => {
+    if (PRINT) { $$('.reveal .slides > section').forEach((s) => Narr.play(s)); return; }
+    if (!started) { Narr.stop(); }
+  });
+  Reveal.on('slidechanged', (e) => {
+    if (!started) return;   // 게이트가 떠 있는 동안(주소의 #/N 초기 이동 포함)은 고르기 전까지 재생하지 않는다
+    Narr.play(e.currentSlide);
+  });
+
+  /* ═════════ 목차 · 전체화면 ═════════ */
+  (function () {
+    const sel = $('#tocSelect');
+    const slides = $$('.reveal .slides > section');
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + (s.dataset.title || norm(h ? brText(h) : '').slice(0, 30) || '페이지 ' + (i + 1));
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => { Reveal.slide(Number(sel.value)); sel.blur(); });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+  (function () {
+    const fsBtn = $('#fullscreenBtn');
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
+    fsBtn.addEventListener('click', () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); });
+  })();
+})();
+</script>
+
+<!-- 통합 발표 플랫폼: 질문·이모지·슬라이드 동기화는 모든 덱이 공유하는 assets/qa.js 하나가 담당한다. -->
+<link rel="stylesheet" href="../assets/qa.css">
+<script src="../assets/qa.js" defer></script>
+</body>
+</html>
