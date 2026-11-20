@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXE9T8VSVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DXE9T8VSVP');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>herdr — 에이전트를 무리로 부리는 터미널 | 바이브 코딩 세미나</title>
+
+  <!-- SEO -->
+  <meta name="description" content="여러 AI 코딩 에이전트를 한 화면에서 부리는 터미널 작업 공간 관리자 herdr 소개. space → tab → pane 두 단계 정리, 작업 중·답변 대기·완료 상태 표시, 창을 닫아도 계속 도는 서버 구조까지." />
+  <meta name="keywords" content="herdr, 터미널 멀티플렉서, AI 코딩 에이전트, Claude Code, Codex, 병렬 에이전트, tmux, 바이브 코딩" />
+  <meta name="author" content="geniuskey" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vibe-coding.euiyun.com/herdr/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="바이브 코딩 세미나" />
+  <meta property="og:title" content="herdr — 에이전트를 무리로" />
+  <meta property="og:description" content="여러 AI 코딩 에이전트를 한 화면에서 부리는 터미널 작업 공간 관리자 herdr 소개. space → tab → pane 두 단계 정리, 작업 중·답변 대기·완료 상태 표시, 창을 닫아도 계속 도는 서버 구조까지." />
+  <meta property="og:url" content="https://vibe-coding.euiyun.com/herdr/" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/herdr.png?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="herdr — 에이전트를 무리로" />
+  <meta name="twitter:description" content="에이전트는 빨라졌는데 병목은 나 — 누가 날 기다리는지 보여 주는 터미널, herdr." />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/herdr.png?v=1" />
+
+  <meta name="theme-color" content="#06080F" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PresentationDigitalDocument",
+    "name": "herdr — 에이전트를 무리로",
+    "headline": "herdr — 에이전트를 무리로 부리는 터미널 | 바이브 코딩 세미나",
+    "description": "여러 AI 코딩 에이전트를 한 화면에서 부리는 터미널 작업 공간 관리자 herdr 소개. space → tab → pane 두 단계 정리, 작업 중·답변 대기·완료 상태 표시, 창을 닫아도 계속 도는 서버 구조까지.",
+    "url": "https://vibe-coding.euiyun.com/herdr/",
+    "image": "https://vibe-coding.euiyun.com/og/herdr.png?v=1",
+    "inLanguage": "ko",
+    "datePublished": "2026-11",
+    "dateModified": "2026-11",
+    "author": { "@type": "Person", "name": "geniuskey", "url": "https://github.com/geniuskey" },
+    "isPartOf": "https://vibe-coding.euiyun.com/",
+    "keywords": "herdr, 터미널 멀티플렉서, AI 코딩 에이전트, Claude Code, Codex, 병렬 에이전트, tmux, 바이브 코딩"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOUI4MkZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkJFQUQwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgcng9IjgiIGZpbGw9IiMwRTEyMjAiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTkgMTFsNiA1LTYgNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE3IDIxaDYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" />
+  <!-- reveal.js 5.1.0 reset.css + reveal.css — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+  <link rel="stylesheet" href="../vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="../vendor/fonts/pretendard.css">
+
+  <!-- 공통 CSS(디자인 토큰·배경·컴포넌트)는 context 덱에서 그대로 계승 -->
+  <style>
+    :root {
+      --bg-0: #06080F;
+      --bg-1: #0E1220;
+      --bg-2: #161B30;
+      --fg: #FFFFFF;
+      --fg-dim: #E2E6F0;
+      --fg-soft: #B8BFD0;
+      --accent: #9B82FF;
+      --accent-2: #2BEAD0;
+      --accent-3: #FF7A95;
+      --accent-4: #FFD46B;
+      --danger: #FF4D5E;
+    }
+
+    html { color-scheme: dark; }
+    html, body { background: var(--bg-0) !important; }
+    /* gradient mesh background — 원본 데크와 동일한 분위기 */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,0.13), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0,224,199,0.10), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,94,126,0.04), transparent 60%);
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85), transparent 75%);
+    }
+    .reveal { background: transparent; position: relative; z-index: 1; }
+
+    .reveal { font-family: 'Pretendard', system-ui, sans-serif; color: #FFFFFF; }
+    .reveal .slides { text-align: left; }
+    .reveal section { padding: 16px 52px; box-sizing: border-box; height: 100%; }
+
+    /* HARD RULE: every text descendant defaults to pure white. */
+    .reveal section,
+    .reveal section p,
+    .reveal section li,
+    .reveal section span,
+    .reveal section em,
+    .reveal section strong,
+    .reveal section h1,
+    .reveal section h2,
+    .reveal section h3,
+    .reveal section h4 {
+      color: #FFFFFF;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Pretendard', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin: 0 0 0.4em 0;
+      line-height: 1.15;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 2px 4px rgba(0,0,0,0.55);
+    }
+    .reveal section p,
+    .reveal section li {
+      text-shadow: 0 1px 2px rgba(0,0,0,0.75);
+    }
+    .reveal .quote, .reveal .quote * {
+      text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .reveal .grad {
+      text-shadow: none !important; /* background-clip:text 위 그림자는 그라데이션을 탁하게 만든다 */
+    }
+    .reveal h1 { font-size: 4.2rem; }
+    .reveal h2 { font-size: 2.9rem; }
+    .reveal h3 { font-size: 2.0rem; }
+    .reveal p, .reveal li { font-size: 1.45rem; line-height: 1.6; }
+
+    .reveal a { color: #5BFFE0 !important; }
+
+    /* Toolbar — fixed top-right */
+    .dl-toolbar {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 9999;
+      display: flex;
+      gap: 8px;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      text-decoration: none !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .dl-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: rgba(124, 92, 255, 0.4);
+      border-color: rgba(91, 255, 224, 0.7);
+    }
+    .dl-btn:focus-visible,
+    .transition-select:focus-visible {
+      opacity: 1;
+      outline: 2px solid #5BFFE0;
+      outline-offset: 2px;
+    }
+    .transition-select {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      background: rgba(20, 22, 44, 0.85);
+      border: 1px solid rgba(155, 130, 255, 0.5);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #E6D9FF !important;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .transition-select:hover { opacity: 1; transform: translateY(-2px); }
+    .transition-select option { background: #14162C; color: #E1D9FF; }
+    #tocSelect { width: 340px; max-width: 340px; }
+    @media (max-width: 760px) {
+      .dl-toolbar { top: 8px; right: 8px; left: 8px; gap: 6px; justify-content: flex-end; }
+      #tocSelect { flex: 1 1 auto; width: auto; min-width: 0; max-width: 340px; text-overflow: ellipsis; }
+      .dl-toolbar .dl-btn { flex: none; padding: 7px 11px; }
+      .dl-toolbar .dl-btn > span:not([aria-hidden]) {
+        position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+      }
+      .dl-toolbar .dl-btn > span[aria-hidden] { font-size: 0.95rem; }
+    }
+    /* 전체화면을 못 쓰는 브라우저(iOS Safari 등)에서는 버튼을 숨긴다 */
+    .no-fullscreen #fullscreenBtn { display: none; }
+
+    .reveal .slide-number {
+      color: #E6D9FF;
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 44, 0.6);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .reveal .controls { color: #B5A1FF; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left,
+    .reveal .controls[data-controls-layout="edges"] .navigate-right {
+      top: auto;
+      bottom: 8px;
+      margin-top: 0;
+    }
+    .reveal .controls[data-controls-layout="edges"] .navigate-left { left: 20px; }
+    .reveal .controls[data-controls-layout="edges"] .navigate-right { right: 20px; }
+    .reveal .controls .controls-arrow { opacity: 0.55; transition: opacity 0.3s ease; }
+    .reveal .controls .controls-arrow:hover { opacity: 1; }
+    .reveal .progress { color: #B5A1FF; }
+
+    /* utility */
+    .reveal .accent  { color: #B5A1FF !important; }
+    .reveal .accent2 { color: #5BFFE0 !important; }
+    .reveal .accent3 { color: #FF94AC !important; }
+    .reveal .accent4 { color: #FFE08A !important; }
+    .reveal .muted   { color: #E6D9FF !important; }
+    .reveal .danger  { color: #FF8A96 !important; }
+    .reveal em       { color: #FFE08A !important; font-style: italic; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .center { text-align: center; }
+    .stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .row { display: flex; gap: 2rem; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .small { font-size: 1.18rem; }
+    .tiny  { font-size: 1.0rem; }
+    .vfill { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+    /* flex 컨테이너에서 chip이 가로로 늘어나지 않도록 */
+    .vfill > .chip { align-self: flex-start; }
+    .vfill.center > .chip { align-self: center; }
+
+    /* animated gradient text */
+    .reveal .grad, .reveal section .grad {
+      background: linear-gradient(120deg, #B5A1FF 0%, #5BFFE0 50%, #FF94AC 100%) !important;
+      background-size: 100% 100% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      font-weight: 800;
+      filter: drop-shadow(0 0 22px rgba(155,130,255,0.28));
+    }
+
+    .chip {
+      display:inline-block; padding: .35em 1em;
+      border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem; color: #FFFFFF !important;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #2A2150;
+      border: 1px solid rgba(155, 130, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      background: #2A2150;
+      border: 1px solid rgba(155,130,255,0.8);
+      color: #E1D9FF !important;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill.green { background: #0D3D38; border-color: rgba(43,234,208,0.85); color: #C5FFF5 !important; }
+    .pill.pink  { background: #4A1A26; border-color: rgba(255,122,149,0.85); color: #FFD0DA !important; }
+    .pill.amber { background: #463817; border-color: rgba(255,212,107,0.85); color: #FFEFC2 !important; }
+
+    /* card — glassmorphism */
+    .card {
+      background: linear-gradient(160deg, rgba(40, 30, 80, 0.55), rgba(20, 50, 60, 0.45));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(155,130,255,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow:
+        0 30px 60px -20px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+      transition: border-color .2s ease-out;
+    }
+    .card:hover { border-color: rgba(155,130,255,0.9); }
+    .card h3 { font-size: 1.5rem; margin: 0 0 0.8rem 0; color: #FFFFFF !important; }
+    .card p { font-size: 1.15rem; line-height: 1.6; margin: 0; color: #E8ECF5 !important; }
+    .card p + p { margin-top: 0.5rem; }
+    .card.bad  { border-color: rgba(255,122,149,0.55); background: linear-gradient(160deg, rgba(80,25,45,0.5), rgba(45,18,35,0.45)); }
+    .card.good { border-color: rgba(43,234,208,0.6); background: linear-gradient(160deg, rgba(15,60,55,0.55), rgba(12,42,48,0.45)); }
+
+    .quote {
+      font-size: 1.7rem;
+      line-height: 1.5;
+      padding: 1.4rem 1.8rem;
+      border-left: 4px solid #2BEAD0;
+      background: #131829;
+      border-radius: 0 12px 12px 0;
+      color: #FFFFFF !important;
+      font-style: italic;
+    }
+    .quote * { color: #FFFFFF !important; }
+    .quote .grad { color: transparent !important; }
+
+    .big {
+      font-size: 7.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* code / chat block */
+    pre.code {
+      background: #131829;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .code .kw { color: var(--accent); font-weight: 600; }
+    .code .st { color: var(--accent-2); }
+    .code .cm { color: #E6D9FF; font-style: italic; }
+    .code .nm { color: var(--accent-4); }
+    pre.code.bad  { border-color: rgba(255,122,149,0.55); }
+    pre.code.good { border-color: rgba(43,234,208,0.6); }
+
+    kbd.key {
+      display: inline-block;
+      padding: 0.2em 0.65em;
+      margin: 0 0.1em;
+      border-radius: 7px;
+      background: #201A3D;
+      border: 1px solid rgba(155,130,255,0.6);
+      border-bottom: 3px solid rgba(155,130,255,0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #E1D9FF;
+    }
+
+    /* ========= Auto-sequential reveal — 원본과 동일한 규약 ========= */
+    .autoshow { opacity: 0; }
+    section.present .autoshow { animation: asFadeUp .32s cubic-bezier(.2,.7,.3,1) forwards; }
+    section.present .autoshow.fade-in    { animation-name: asFadeIn; }
+    section.present .autoshow.fade-left  { animation-name: asFadeLeft; }
+    section.present .autoshow.fade-right { animation-name: asFadeRight; }
+    @keyframes asFadeUp    { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes asFadeLeft  { from { opacity:0; transform: translateX(-12px); } to { opacity:1; transform:none; } }
+    @keyframes asFadeRight { from { opacity:0; transform: translateX(12px); } to { opacity:1; transform:none; } }
+    /* 설명 순서만 돕는 짧은 시차 — 최대 0.4초 */
+    section.present .autoshow:nth-child(2) { animation-delay: .06s; }
+    section.present .autoshow:nth-child(3) { animation-delay: .12s; }
+    section.present .autoshow:nth-child(4) { animation-delay: .18s; }
+    section.present .autoshow:nth-child(5) { animation-delay: .24s; }
+    section.present .autoshow:nth-child(6) { animation-delay: .3s; }
+    section.present .autoshow:nth-child(n+7) { animation-delay: .36s; }
+
+    /* ==================================================================
+       ctx-box — 컨텍스트 세미나에서 계승한 컨텍스트 창 시각화.
+       이 덱에서는 "격리" 대목의 연속성을 위해 미니/슬림 변형만 쓴다.
+       ================================================================== */
+    .ctx-box {
+      position: relative; margin: 0; flex: 0 0 auto;
+      width: 250px; height: 500px;
+      display: flex; flex-direction: column-reverse;
+      border: 2px solid rgba(155,130,255,0.55);
+      border-radius: 14px;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 49px, rgba(255,255,255,0.05) 49px 50px),
+        rgba(14,18,32,0.65);
+      box-shadow: 0 0 34px rgba(155,130,255,0.14), inset 0 0 24px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .ctx-seg {
+      flex: 0 0 auto; height: var(--h, 0%);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 700;
+      white-space: nowrap;
+      border-top: 2px solid rgba(6,8,15,0.7);
+      transition: height .8s cubic-bezier(.25,.8,.3,1);
+    }
+    .ctx-lab { padding: 0 8px; text-shadow: none !important; }
+    .seg-sys   { background: linear-gradient(90deg, rgba(155,130,255,.92), rgba(155,130,255,.68)); color: #0A0620 !important; }
+    .seg-mem   { background: rgba(255,212,107,.88); color: #241A00 !important; }
+    .seg-conv  { background: rgba(43,234,208,.82); color: #00261F !important; }
+    .seg-tool  { background: rgba(255,122,149,.85); color: #2B000B !important; }
+    .seg-plan  { background: repeating-linear-gradient(45deg, rgba(155,130,255,.55) 0 8px, rgba(155,130,255,.22) 8px 16px); color: #E6D9FF !important; }
+    .seg-danger { background: linear-gradient(90deg, rgba(255,77,94,.92), rgba(255,77,94,.6)); color: #FFF !important; }
+    .ctx-freelabel {
+      position: absolute; top: 12px; left: 0; right: 0; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 1.05rem;
+      color: #E6D9FF; opacity: .9; pointer-events: none;
+    }
+    .ctx-freelabel .sub { display: block; font-size: .78rem; color: #9BA6C0; margin-top: 3px; }
+    .ctx-caption {
+      text-align: center; font-size: 1.02rem; font-weight: 800;
+      color: #E6D9FF !important; white-space: nowrap; margin: .6rem 0 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ctx-box.slim { width: 205px; height: 440px; }
+    .ctx-box.mini { width: 120px; height: 240px; border-radius: 10px; }
+    .ctx-box.mini .ctx-freelabel { font-size: .8rem; top: 7px; }
+    .ctx-box.mini .ctx-seg { font-size: .6rem; }
+    .ctx-box.danger-box { border-color: var(--danger); box-shadow: 0 0 34px rgba(255,77,94,0.35), inset 0 0 24px rgba(0,0,0,0.5); }
+    /* entry animation: 슬라이드 진입 시 세그먼트가 자라남 */
+    @keyframes segFill { from { height: 0; } to { height: var(--h, 0%); } }
+    section.present .ctx-anim .ctx-seg {
+      animation: segFill .4s cubic-bezier(.2,.7,.3,1) forwards;
+      height: 0; transition: none;
+    }
+    section.present .ctx-anim .ctx-seg:nth-child(2) { animation-delay: .06s; }
+    section.present .ctx-anim .ctx-seg:nth-child(3) { animation-delay: .12s; }
+    section.present .ctx-anim .ctx-seg:nth-child(4) { animation-delay: .18s; }
+    section.present .ctx-anim .ctx-seg:nth-child(5) { animation-delay: .24s; }
+    section.present .ctx-anim .ctx-seg:nth-child(6) { animation-delay: .3s; }
+
+    /* ========= 시뮬레이션 타임라인 리스트 ========= */
+    .sim-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: 0; padding: 0; }
+    .sim-list > li { margin: 0; }
+    .sim-line {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .55rem 1.1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,0.3);
+      background: rgba(230,236,249,0.05);
+      font-size: 1.14rem !important;
+    }
+    .sim-line .tok { margin-left: auto; font-weight: 800; font-size: 1.05rem; white-space: nowrap; padding-left: .8rem; }
+
+    /* ========= 리스트 유틸 ========= */
+    .list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+    .list-clean li { font-size: 1.22rem !important; line-height: 1.5; }
+
+    /* ========= 문제 리스트 ========= */
+    .prob-list { display: flex; flex-direction: column; gap: .55rem; }
+    .prob-item {
+      display: flex; align-items: baseline; gap: 1.1rem;
+      padding: .65rem 1.2rem; border-radius: 12px;
+      border: 1px solid rgba(255,122,149,0.35);
+      background: rgba(80,25,45,0.25);
+    }
+    .prob-item .pname { font-weight: 800; font-size: 1.28rem; white-space: nowrap; min-width: 9.5em; }
+    .prob-item .pdesc { font-size: 1.12rem; color: #E8ECF5 !important; }
+
+    /* ========= 모델 오브 (심판 노드 등) ========= */
+    .model-orb {
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      padding: 1.1rem 1.4rem; border-radius: 18px; text-align: center;
+      border: 2px solid rgba(155,130,255,.8); background: rgba(124,92,255,.18);
+      font-size: 2rem;
+    }
+    .model-orb span { font-size: .95rem; font-weight: 800; line-height: 1.35; }
+
+    /* ========= 슬라이드 하단 레퍼런스 링크 ========= */
+    .slide-refs {
+      position: absolute; left: 56px; bottom: 12px; z-index: 3;
+      display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
+      max-width: calc(50% - 120px);
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      opacity: .8;
+    }
+    .slide-refs .rl { color: #9BA6C0 !important; font-weight: 800; letter-spacing: .12em; }
+    .slide-refs a {
+      color: #8FF5E2 !important; text-decoration: none !important;
+      border-bottom: 1px dotted rgba(91,255,224,.45); white-space: nowrap;
+    }
+    .slide-refs a:hover { color: #5BFFE0 !important; border-bottom-color: #5BFFE0; }
+
+    /* ========= 참고자료 슬라이드 ========= */
+    .ref-col h3 { font-size: 1.3rem; }
+    .ref-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+    .ref-col li { font-size: 1.02rem !important; line-height: 1.45; }
+    .ref-col li a { font-weight: 700; }
+    .ref-col li .rd { display: block; font-size: .88rem; color: #9BA6C0 !important; }
+
+    /* ========= 서브에이전트 격리 구도 (context 덱 계승) ========= */
+    .iso-wrap { display: flex; align-items: center; justify-content: center; gap: 1.4rem; }
+    .iso-side { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+    .iso-note { font-size: .92rem; color: #9BA6C0 !important; font-family: 'JetBrains Mono', monospace; }
+    .iso-arrow { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+    .iso-arrow .a { font-size: 2rem; font-weight: 800; color: #5BFFE0 !important; }
+    .iso-arrow .t { font-size: .85rem; font-family: 'JetBrains Mono', monospace; color: #A9FFF0 !important; white-space: nowrap; }
+
+    /* ==================================================================
+       ▼▼ 이 덱의 시그니처 컴포넌트 4+1종 ▼▼
+       org(조직도) · lanes(fan-out 레인) · sched(파이프라인 시간표)
+       · jp(심판 패널) · fq(판단 플로차트)
+       고정 px 크기 — reveal이 1280x800 캔버스를 통째로 scale하므로 안전.
+       ================================================================== */
+
+    /* ========= org — 부모-자식 에이전트 조직도 ========= */
+    .org { display: flex; flex-direction: column; align-items: center; }
+    .org-node {
+      display: flex; flex-direction: column; align-items: center; gap: .18rem;
+      padding: .7rem 1.15rem; border-radius: 14px; text-align: center;
+      border: 1px solid rgba(190,200,224,0.45); background: rgba(10,13,26,0.92);
+      font-size: 1.05rem; font-weight: 800;
+      box-shadow: 0 12px 28px -14px rgba(0,0,0,0.7);
+    }
+    .org-node .org-ico { font-size: 1.9rem; line-height: 1; }
+    .org-node .org-sub {
+      font-size: .74rem; font-weight: 700; color: #9BA6C0 !important;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
+    }
+    .org-node.boss {
+      border-color: rgba(155,130,255,.85); background: rgba(124,92,255,.18);
+      box-shadow: 0 0 30px rgba(124,92,255,.3);
+    }
+    .org-stem { width: 2px; height: 20px; background: rgba(155,130,255,.55); flex: 0 0 auto; }
+    .org-bar  { height: 2px; background: rgba(155,130,255,.55); flex: 0 0 auto; }
+    .org-kids { display: flex; gap: 20px; align-items: stretch; }
+    .org-kid  { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
+    .org-kid > .org-node { width: 100%; box-sizing: border-box; }
+    /* 부모↔자식 사이 오가는 것 라벨 */
+    .org-flow {
+      display: flex; gap: 1.8rem; align-items: center; padding: .2rem 0;
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800;
+      white-space: nowrap;
+    }
+    /* 자식 노드 속 미니 컨텍스트 게이지 — "깨끗한 새 상자" */
+    .org-ctx {
+      margin-top: .34rem; width: 92px; height: 9px; border-radius: 5px;
+      border: 1px solid rgba(43,234,208,.6); background: rgba(14,18,32,.9);
+      position: relative; overflow: hidden;
+    }
+    .org-ctx::after {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: var(--fill, 10%); background: rgba(43,234,208,.75);
+    }
+    .org-ctx.full { border-color: rgba(255,122,149,.6); }
+    .org-ctx.full::after { background: rgba(255,122,149,.8); }
+    .org-ctx-lab {
+      font-size: .66rem; font-family: 'JetBrains Mono', monospace;
+      color: #A9FFF0 !important; letter-spacing: .04em;
+    }
+
+    /* ========= lanes — 병렬 fan-out 레인 ========= */
+    .lanes {
+      display: flex; flex-direction: column; gap: .45rem;
+      padding: .9rem 1.2rem; border-radius: 16px;
+      border: 1px solid rgba(155,130,255,0.3); background: rgba(10,13,26,0.6);
+    }
+    .lanes-title {
+      font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800;
+      margin: 0 0 .15rem; display: flex; align-items: center; gap: .8rem;
+    }
+    .lanes-title .lc { margin-left: auto; white-space: nowrap; }
+    .lane { display: flex; align-items: center; gap: .8rem; }
+    .lane-name {
+      font-family: 'JetBrains Mono', monospace; font-size: .82rem; font-weight: 800;
+      color: #B5A1FF !important; width: 7em; flex: 0 0 auto; white-space: nowrap;
+    }
+    .lane-track {
+      position: relative; flex: 1; height: 30px; border-radius: 8px;
+      background: rgba(230,236,249,.05); border: 1px solid rgba(190,200,224,.16);
+      overflow: hidden;
+    }
+    .lane-blk {
+      position: absolute; top: 3px; bottom: 3px; left: var(--x, 0%); width: var(--w, 19%);
+      border-radius: 6px; background: rgba(43,234,208,.68);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 800;
+      color: #00261F !important; text-shadow: none !important; white-space: nowrap;
+    }
+    .lane-blk.p { background: rgba(155,130,255,.72); color: #0A0620 !important; }
+    .lane-blk.y { background: rgba(255,212,107,.82); color: #241A00 !important; }
+    section.present .lanes-anim .lane-blk {
+      animation: laneGrow .4s cubic-bezier(.2,.7,.3,1) both;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes laneGrow { from { width: 0; } to { width: var(--w, 19%); } }
+
+    /* ========= sched — 파이프라인 컨베이어 시간표 ========= */
+    .sched-wrap {
+      padding: .85rem 1.1rem; border-radius: 16px;
+      border: 1px solid rgba(155,130,255,0.3); background: rgba(10,13,26,0.6);
+    }
+    .sched-title {
+      font-family: 'JetBrains Mono', monospace; font-size: .92rem; font-weight: 800;
+      margin: 0 0 .5rem; display: flex; align-items: center; gap: .8rem;
+    }
+    .sched-title .lc { margin-left: auto; white-space: nowrap; }
+    .sched { display: grid; grid-template-columns: 4.6em repeat(9, 1fr); gap: 4px; align-items: center; }
+    .sched .sc-name {
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800;
+      color: #9BA6C0 !important; white-space: nowrap;
+    }
+    .sched .sc { height: 24px; border-radius: 6px; background: rgba(230,236,249,.05); border: 1px dashed rgba(190,200,224,.14); box-sizing: border-box; }
+    .sched .sc.f1 { background: rgba(155,130,255,.75); border: none; }
+    .sched .sc.f2 { background: rgba(43,234,208,.7); border: none; }
+    .sched .sc.f3 { background: rgba(255,212,107,.82); border: none; }
+    .sched-legend {
+      display: flex; gap: 1.2rem; margin-top: .55rem; align-items: center;
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 700;
+      color: #C9D0E2 !important;
+    }
+    .sched-legend .sw { width: 13px; height: 13px; border-radius: 4px; display: inline-block; flex: 0 0 auto; }
+    .sched-legend .sw.f1 { background: rgba(155,130,255,.75); }
+    .sched-legend .sw.f2 { background: rgba(43,234,208,.7); }
+    .sched-legend .sw.f3 { background: rgba(255,212,107,.82); }
+
+    /* ========= jp — 심판 패널 ========= */
+    .jp { display: flex; align-items: center; justify-content: center; gap: .9rem; }
+    .jp-col { display: flex; flex-direction: column; gap: .55rem; }
+    .jp-try {
+      display: flex; align-items: center; gap: .7rem;
+      padding: .58rem 1rem; border-radius: 12px;
+      border: 1px solid rgba(190,200,224,.4); background: rgba(230,236,249,.06);
+      font-size: 1.02rem; font-weight: 800; white-space: nowrap;
+    }
+    .jp-try .jp-score {
+      margin-left: auto; font-family: 'JetBrains Mono', monospace; font-weight: 800;
+      font-size: .92rem; padding: .1em .55em; border-radius: 8px; text-shadow: none !important;
+    }
+    .jp-score.hi  { background: rgba(43,234,208,.2); color: #A9FFF0 !important; border: 1px solid rgba(43,234,208,.7); }
+    .jp-score.mid { background: rgba(255,212,107,.16); color: #FFE08A !important; border: 1px solid rgba(255,212,107,.6); }
+    .jp-score.lo  { background: rgba(255,122,149,.15); color: #FF94AC !important; border: 1px solid rgba(255,122,149,.55); }
+    .jp-arrow { font-size: 1.7rem; font-weight: 800; color: #8A93B2 !important; flex: 0 0 auto; }
+    .jp-side {
+      display: flex; flex-direction: column; gap: .2rem; align-items: center; text-align: center;
+      padding: .8rem 1.1rem; border-radius: 14px; font-weight: 800; font-size: 1.02rem;
+      border: 1px solid rgba(190,200,224,.4); background: rgba(10,13,26,.9);
+      white-space: nowrap;
+    }
+    .jp-side .jp-ico { font-size: 1.8rem; line-height: 1; }
+    .jp-side.final { border-color: rgba(43,234,208,.7); background: rgba(13,61,56,.5); box-shadow: 0 0 26px rgba(43,234,208,.18); }
+
+    /* ========= fq — 판단 플로차트 ========= */
+    .fq { display: flex; flex-direction: column; align-items: center; gap: .18rem; }
+    .fq-row { display: flex; align-items: center; gap: .8rem; }
+    .fq-q {
+      padding: .5rem 1.15rem; border-radius: 12px; white-space: nowrap;
+      border: 1px solid rgba(255,212,107,.6); background: rgba(70,56,23,.3);
+      font-size: 1.12rem; font-weight: 800;
+    }
+    .fq-yes {
+      font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 800;
+      color: #A9FFF0 !important; white-space: nowrap;
+    }
+    .fq-res {
+      padding: .48rem 1rem; border-radius: 12px; white-space: nowrap;
+      font-size: 1.04rem; font-weight: 800;
+      border: 1px solid rgba(43,234,208,.6); background: rgba(13,61,56,.5);
+    }
+    .fq-res.solo { border-color: rgba(155,130,255,.7); background: rgba(124,92,255,.2); }
+    .fq-down {
+      font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 800;
+      color: #8A93B2 !important; padding: .05rem 0;
+    }
+
+    /* ========= 표 (한 장 정리) ========= */
+    table.tbl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 1.06rem; }
+    .tbl th {
+      text-align: left; font-family: 'JetBrains Mono', monospace; font-size: .85rem;
+      letter-spacing: .08em; color: #B5A1FF !important;
+      padding: .4rem .9rem; border-bottom: 2px solid rgba(155,130,255,.5);
+      white-space: nowrap;
+    }
+    .tbl td { padding: .58rem .9rem; border-bottom: 1px solid rgba(190,200,224,.18); vertical-align: top; line-height: 1.5; }
+    .tbl td:first-child { font-weight: 800; white-space: nowrap; }
+    .tbl tr.hl td { background: rgba(124,92,255,.12); }
+    .tbl td.say { font-size: .98rem; color: #E8ECF5 !important; }
+
+    /* ========= fallbacks: overview / print / reduced-motion =========
+       가시성이 애니메이션에 묶인 요소 전부 — 세 모드에서 완성 상태 강제 */
+    .reveal.overview .autoshow {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal.overview .ctx-seg,
+    .reveal.overview .lane-blk {
+      animation: none !important;
+      transition: none !important;
+    }
+    .reveal.overview .ctx-seg { height: var(--h, 0%) !important; }
+    .reveal.overview .lane-blk { width: var(--w, 19%) !important; }
+    .reveal.overview .slides section {
+      display: block !important;
+      cursor: pointer;
+      outline: 1px solid rgba(181, 161, 255, 0.28);
+      outline-offset: -1px;
+      border-radius: 6px;
+    }
+    .reveal.overview .slides section:hover { outline: 2px solid #B5A1FF; }
+    .reveal.overview .slides section.present { outline: 3px solid #5BFFE0; }
+    @media print {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .reveal .ctx-seg {
+        animation: none !important;
+        transition: none !important;
+        height: var(--h, 0%) !important;
+      }
+      .reveal .lane-blk { animation: none !important; width: var(--w, 19%) !important; }
+      .reveal .fragment.custom {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        max-height: none !important;
+      }
+      .dl-toolbar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal .autoshow {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .reveal .ctx-seg {
+        animation: none !important;
+        transition: none !important;
+        height: var(--h, 0%) !important;
+      }
+      .reveal .lane-blk { animation: none !important; width: var(--w, 19%) !important; }
+      .reveal .fragment { transition: none !important; }
+    }
+  </style>
+  <style>
+    /* ===== herdr 덱 전용 — 가짜 herdr 창 · 상태 배지 · 중첩 상자 ===== */
+    .hd-win { width: 100%; border-radius: 12px; border: 1px solid rgba(155,130,255,.55); background: #0A0E1A; overflow: hidden;
+      font-family: 'JetBrains Mono', monospace; font-size: .82rem; box-shadow: 0 18px 50px rgba(0,0,0,.45); text-align: left; }
+    .hd-top { display: flex; align-items: center; gap: .4rem; padding: .45rem .7rem; background: #141A2C; border-bottom: 1px solid rgba(190,200,224,.14); }
+    .hd-top i { width: 10px; height: 10px; border-radius: 50%; background: #3A425C; display: inline-block; }
+    .hd-top b { margin-left: .5rem; color: #C9D2E8 !important; font-weight: 700; }
+    .hd-body { display: grid; grid-template-columns: 176px 1fr; min-height: 300px; }
+    .hd-side { border-right: 1px solid rgba(190,200,224,.14); padding: .6rem .55rem; background: #0D1222; }
+    .hd-h { color: #8C97B4 !important; font-size: .7rem; letter-spacing: .14em; font-weight: 800; margin: .1rem 0 .35rem; }
+    .hd-h + .hd-h, .hd-item + .hd-h { margin-top: .8rem; }
+    .hd-item { display: flex; align-items: center; gap: .45rem; padding: .22rem .4rem; border-radius: 6px; color: #DCE3F3 !important; white-space: nowrap; }
+    .hd-item.on { background: rgba(124,92,255,.22); }
+    .hd-main { display: flex; flex-direction: column; }
+    .hd-tabs { display: flex; gap: .2rem; padding: .4rem .5rem 0; border-bottom: 1px solid rgba(190,200,224,.14); }
+    .hd-tab { padding: .25rem .7rem; border-radius: 6px 6px 0 0; color: #8C97B4 !important; }
+    .hd-tab.on { background: #1A2138; color: #FFFFFF !important; font-weight: 700; }
+    .hd-panes { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(190,200,224,.14); }
+    .hd-pane { background: #0A0E1A; padding: .5rem .6rem; color: #C9D2E8 !important; line-height: 1.55; }
+    .hd-pane .pt { color: #8C97B4 !important; font-size: .7rem; display: block; margin-bottom: .25rem; }
+    .hd-pane .q { color: #FFE08A !important; }
+    .hd-pane .ok { color: #5BFFE0 !important; }
+
+    .sd { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .sd.working { background: #FFD46B; box-shadow: 0 0 8px #FFD46B; animation: hdPulse 1.2s ease-in-out infinite; }
+    .sd.blocked { background: #FF7A95; box-shadow: 0 0 10px #FF7A95; }
+    .sd.done    { background: #2BEAD0; box-shadow: 0 0 8px #2BEAD0; }
+    .sd.idle    { background: #6B7593; }
+    .sd.unknown { background: transparent; border: 1.5px dashed #8C97B4; }
+    @keyframes hdPulse { 50% { opacity: .35; } }
+    @media (prefers-reduced-motion: reduce) { .sd.working { animation: none; } }
+
+    /* space → tab → pane 중첩 상자 */
+    .nest { border-radius: 14px; padding: .8rem 1rem 1rem; border: 1.5px solid; }
+    .nest > .nl { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; display: block; margin-bottom: .55rem; }
+    .nest > .nl small { font-family: 'Pretendard', sans-serif; font-weight: 500; color: #C9D2E8 !important; margin-left: .5rem; font-size: .95rem; }
+    .nest.space { border-color: rgba(155,130,255,.85); background: rgba(42,33,80,.35); }
+    .nest.space > .nl { color: #CDBFFF !important; }
+    .nest.tab { border-color: rgba(91,255,224,.7); background: rgba(13,61,56,.35); }
+    .nest.tab > .nl { color: #9FFFF0 !important; }
+    .nest-row { display: flex; gap: .7rem; }
+    .nest-pane { flex: 1; border-radius: 10px; border: 1.5px solid rgba(255,212,107,.75); background: rgba(70,56,23,.35); padding: .5rem .7rem; font-size: 1rem; color: #FFEFC2 !important; }
+    .nest-pane b { color: #FFD46B !important; font-family: 'JetBrains Mono', monospace; display: block; font-size: .85rem; }
+    .nest-dim { flex: 1; border-radius: 10px; border: 1.5px dashed rgba(190,200,224,.35); padding: .5rem .7rem; font-size: .95rem; color: #9BA6C0 !important; display: flex; align-items: center; }
+
+    /* 상태 표 */
+    .tbl td .sd { margin-right: .5rem; vertical-align: middle; }
+    .kbd { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .9em; padding: .05em .45em; border-radius: 5px;
+      border: 1px solid rgba(190,200,224,.45); background: #1A2138; color: #FFFFFF !important; white-space: nowrap; }
+
+    /* server ↔ client 그림 */
+    .sv { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; }
+    .sv-box { border-radius: 14px; padding: .9rem 1rem; text-align: center; border: 1.5px solid rgba(155,130,255,.7); background: rgba(42,33,80,.35); }
+    .sv-box.srv { border-color: rgba(43,234,208,.7); background: rgba(13,61,56,.4); }
+    .sv-box h3 { margin: 0 0 .3rem; font-size: 1.3rem; }
+    .sv-box p { margin: 0; font-size: 1.02rem; color: #E8ECF5 !important; }
+    .sv-arrow { font-family: 'JetBrains Mono', monospace; color: #9BA6C0 !important; text-align: center; font-size: .95rem; line-height: 1.5; }
+  </style>
+  <link rel="stylesheet" href="../assets/core.css">
+</head>
+<body>
+
+<div class="dl-toolbar">
+  <select id="tocSelect" class="transition-select" aria-label="목차 — 슬라이드로 바로 이동" title="목차 — 슬라이드로 바로 이동"></select>
+  <a class="dl-btn" href="../#board" title="시리즈 홈: 막혔을 때 펼쳐 보는 처방전">
+    <span aria-hidden="true">↖</span><span>시리즈 홈</span>
+  </a>
+  <button id="fullscreenBtn" class="dl-btn" title="전체화면 전환 (F)">
+    <span aria-hidden="true">⛶</span><span>FULL</span>
+  </button>
+</div>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============= 1. 타이틀 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="grid-2" style="align-items:center; grid-template-columns: 1fr 1.15fr; gap:2rem;">
+          <div>
+            <div class="chip">SEMINAR · 2026.11 · 번외 · HERDR</div>
+            <h1 style="font-size:3.9rem;">
+              <span class="grad">herdr</span> 🐑<br/>에이전트를 무리로
+            </h1>
+            <p style="font-size:1.5rem; margin-top:1.2rem; max-width:560px;">
+              여럿을 띄워 두고, <em>손이 필요한 녀석만</em> 돌봅니다.<br/>
+              <span class="muted small">AI 코딩 에이전트를 위한 터미널 작업 공간 관리자</span>
+            </p>
+            <p class="tiny muted" style="margin-top:2rem;">
+              <a href="../orchestration/">← 먼저 보면 좋은 세미나: 서브에이전트와 오케스트레이션</a>
+            </p>
+          </div>
+          <div class="hd-win" aria-label="herdr 화면 예시 — 왼쪽 사이드바에 space와 에이전트 상태, 오른쪽에 agents 탭의 pane 두 개">
+            <div class="hd-top"><i></i><i></i><i></i><b>herdr</b></div>
+            <div class="hd-body">
+              <div class="hd-side">
+                <div class="hd-h">SPACES</div>
+                <div class="hd-item on"><span class="sd blocked"></span>vibe-coding</div>
+                <div class="hd-item"><span class="sd working"></span>fab-dashboard</div>
+                <div class="hd-item"><span class="sd idle"></span>notes</div>
+                <div class="hd-h">AGENTS</div>
+                <div class="hd-item"><span class="sd done"></span>claude · login</div>
+                <div class="hd-item"><span class="sd blocked"></span>claude · search</div>
+                <div class="hd-item"><span class="sd working"></span>codex · etl</div>
+              </div>
+              <div class="hd-main">
+                <div class="hd-tabs"><span class="hd-tab on">agents</span><span class="hd-tab">logs</span><span class="hd-tab">server</span></div>
+                <div class="hd-panes">
+                  <div class="hd-pane"><span class="pt">claude · login</span>● 로그인 폼 완성<br/><span class="ok">✓ 테스트 12개 통과</span><br/>&gt; _</div>
+                  <div class="hd-pane"><span class="pt">claude · search</span>검색 API를 바꿀까요?<br/><span class="q">❯ 1. 예</span><br/>&nbsp;&nbsp;2. 아니오</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        번외 덱. 에이전트를 둘 이상 동시에 돌리기 시작한 분들을 위한 도구 소개입니다.
+        herd는 영어로 '가축 무리' — 에이전트 여럿을 한 무리로 몰고 다니는 도구라고 기억하면 쉽습니다.
+        오른쪽 그림이 오늘의 요약: 왼쪽에 프로젝트(space)와 에이전트 상태 점, 오른쪽에 탭과 실제 터미널.
+      </aside>
+    </section>
+
+    <!-- ============= 3분 요약 (핵심 모드 전용 — assets/core.js) ============= -->
+    <section class="tldr" data-depth="summary">
+      <div class="chip">3분 요약 · TL;DR</div>
+      <h2>결론부터 — 이 세 줄이면 됩니다</h2>
+      <p class="tldr-lede">에이전트는 빨라졌는데 병목은 "누가 날 기다리나"를 찾는 나입니다. herdr가 그걸 대신 봐 줍니다.</p>
+      <ol class="tldr-points">
+        <li><span class="n">1</span><div><strong>space → tab → pane, 두 단계로 정리합니다</strong><span class="sub">프로젝트는 space, 용도별 화면은 tab, 그 안의 진짜 터미널이 pane. 창 10개를 뒤질 일이 없습니다.</span></div></li>
+        <li><span class="n">2</span><div><strong>에이전트 상태가 사이드바에 뜹니다 — 작업 중 · 답변 대기 · 완료</strong><span class="sub">화면을 읽어 상태를 알아채고 space까지 올려 보여 줍니다. 🙋 표시만 따라가면 됩니다.</span></div></li>
+        <li><span class="n">3</span><div><strong>창을 닫아도 에이전트는 계속 돕니다</strong><span class="sub">백그라운드 서버가 터미널을 쥐고 있고, 화면은 붙었다 떼었다 하는 손님일 뿐입니다.</span></div></li>
+      </ol>
+      <div class="tldr-bottom">
+        <div class="tldr-prompt">
+          <div class="tldr-label">지금 바로 시작</div>
+          <pre>brew install herdr        # 또는 curl -fsSL https://herdr.dev/install.sh | sh
+herdr integration install claude
+herdr</pre>
+        </div>
+        <div class="tldr-when">
+          <div class="tldr-label">이럴 때 이 덱을 다시 펼치세요</div>
+          <ul>
+            <li>에이전트를 둘 이상 동시에 돌리기 시작했을 때</li>
+            <li>"진행할까요?" 질문을 30분 뒤에 발견했을 때</li>
+            <li>터미널 창이 어느 프로젝트 건지 헷갈릴 때</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 2. 문제 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">PROBLEM · 에이전트가 둘을 넘으면</div>
+        <h2>에이전트는 빨라졌는데, <span class="grad">병목은 나</span>입니다</h2>
+        <div class="grid-3" style="margin-top:.6rem; align-items:stretch;">
+          <div class="card bad autoshow zoom-in">
+            <h3>🪟 창 찾기</h3>
+            <p>터미널 창·탭이 열 개. <strong>어느 게 어느 프로젝트</strong>인지 하나씩 눌러 봐야 압니다.</p>
+          </div>
+          <div class="card bad autoshow zoom-in">
+            <h3>😴 노는 에이전트</h3>
+            <p>"이 파일 고쳐도 될까요?" — 그 질문을 <strong>30분 뒤에</strong> 발견합니다. 그동안 에이전트는 멈춰 있었죠.</p>
+          </div>
+          <div class="card bad autoshow zoom-in">
+            <h3>🔁 확인 왕복</h3>
+            <p>끝났나? 창을 열어 보고, 아직이면 닫고, 또 열고. <strong>확인하느라 내 시간이</strong> 다 갑니다.</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1.1rem; font-size:1.26rem;">
+          필요한 건 더 빠른 에이전트가 아니라 — <strong class="accent2">"지금 누가 날 기다리나"</strong>를 보여 주는 화면입니다.
+        </div>
+        <aside class="notes">
+          청중에게 질문: 에이전트 두 개 이상 동시에 돌려 본 분? 그때 제일 귀찮았던 게 뭐였나요?
+          대부분 "어디 있는지 찾기"와 "끝났는지 확인하기"입니다. 에이전트의 속도가 아니라 사람의 주의력이 병목이 됩니다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 3. herdr란 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">WHAT · herdr란</div>
+        <h2>진짜 터미널은 그대로 두고, <span class="grad">구조를 얹는</span> 도구</h2>
+        <div class="quote autoshow fade-up" style="margin-top:.3rem; font-size:1.2rem;">
+          "Herdr is a terminal workspace manager. It keeps real terminal processes running and adds structure around them."
+          <span class="small muted" style="display:block; margin-top:.3rem;">— herdr 공식 문서 · Concepts</span>
+        </div>
+        <div class="grid-3" style="margin-top:1rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>🦀 가볍게</h3>
+            <p>Rust로 만든 <strong>실행 파일 하나.</strong> Electron 없음. 오픈소스(Apache-2.0).</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>⌨️🖱 둘 다</h3>
+            <p>tmux식 <span class="kbd">ctrl+b</span> 단축키도, <strong>마우스 클릭</strong>도 됩니다. 패널 경계를 끌어 크기 조절까지.</p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>🤖 에이전트를 알아봅니다</h3>
+            <p>Claude Code · Codex · Copilot CLI · Cursor · OpenCode 등 — <strong>상태를 읽어 냅니다.</strong></p>
+          </div>
+        </div>
+        <pre class="code autoshow fade-up" style="margin-top:1rem; font-size:.95rem; padding:.7rem 1rem;">$ brew install herdr                                 <span class="cm"># macOS · mise · Nix도 됨</span>
+$ curl -fsSL https://herdr.dev/install.sh | sh       <span class="cm"># Linux · macOS</span>
+$ herdr                                              <span class="cm"># 실행 — 업데이트는 herdr update</span></pre>
+        <aside class="notes">
+          tmux 같은 터미널 멀티플렉서인데, 처음부터 코딩 에이전트를 염두에 두고 만든 것이 차이입니다.
+          Windows는 PowerShell 설치 스크립트(irm https://herdr.dev/install.ps1 | iex)가 따로 있습니다.
+          같은 이름의 데스크톱 앱(herdr-core 기반, macOS·Windows·Linux)과 모바일 앱도 나왔지만, 이 덱은 터미널판(Herdr TUI) 기준입니다. 데스크톱 앱과 TUI는 에이전트를 공유하지 않습니다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/" target="_blank" rel="noopener">herdr.dev</a>
+          <a href="https://herdr.dev/tui/docs/install/" target="_blank" rel="noopener">Install</a>
+          <a href="https://github.com/herdrdev/herdr" target="_blank" rel="noopener">GitHub · herdrdev/herdr</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 4. 구조 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">STRUCTURE · 두 단계 분류</div>
+        <h2><span class="grad">space → tab</span> 두 단계로, 길을 잃지 않습니다</h2>
+        <div class="nest space autoshow fade-up" style="margin-top:.5rem;">
+          <span class="nl">📁 space<small>프로젝트 하나 — 저장소·작업·조사 하나에 하나씩</small></span>
+          <div class="nest-row" style="gap:.9rem;">
+            <div class="nest tab" style="flex:2;">
+              <span class="nl">🗂 tab: agents<small>용도별 화면</small></span>
+              <div class="nest-row">
+                <div class="nest-pane"><b>pane</b>claude · login</div>
+                <div class="nest-pane"><b>pane</b>claude · search</div>
+                <div class="nest-pane"><b>pane</b>codex · etl</div>
+              </div>
+            </div>
+            <div class="nest-dim">🗂 logs</div>
+            <div class="nest-dim">🗂 server</div>
+            <div class="nest-dim">🗂 review</div>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:1rem;">
+          <p class="small autoshow fade-up" style="margin:0;"><strong class="accent">space</strong> — 프로젝트를 나누는 서랍. 사이드바에 줄지어 섭니다.</p>
+          <p class="small autoshow fade-up" style="margin:0;"><strong class="accent2">tab</strong> — 한 프로젝트 안의 화면 배치. 에이전트용 · 로그용 · 서버용.</p>
+          <p class="small autoshow fade-up" style="margin:0;"><strong class="accent4">pane</strong> — 진짜 터미널 하나. 에이전트가 사는 곳.</p>
+        </div>
+        <aside class="notes">
+          서랍(space) 안에 칸막이(tab), 칸막이 안에 실제 물건(pane). 에이전트가 열 개여도 "어느 프로젝트의 어느 화면"으로 두 번만 고르면 됩니다.
+          용어 주의: 터미널판 공식 문서는 맨 위 단계를 workspace라고 부르고, 데스크톱 앱은 space라고 부릅니다. 같은 개념입니다.
+          탭 이름(agents · logs · server · review)은 공식 문서가 예로 드는 구성 그대로입니다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/concepts/" target="_blank" rel="noopener">herdr · Concepts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 5. 상태 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">STATUS · 핵심 기능</div>
+        <h2>에이전트 상태 다섯 가지 — <span class="grad">누가 날 기다리나</span></h2>
+        <table class="tbl autoshow fade-up" style="margin-top:.4rem;">
+          <thead><tr><th>상태</th><th>뜻</th><th>내가 할 일</th></tr></thead>
+          <tbody>
+            <tr><td><span class="sd working"></span>working</td><td>일하는 중</td><td>그냥 둔다</td></tr>
+            <tr class="hl"><td><span class="sd blocked"></span>blocked</td><td>내 입력 · 승인 · 결정을 기다림</td><td><strong>지금 바로 간다</strong> — 멈춰 있는 시간이 손해</td></tr>
+            <tr><td><span class="sd done"></span>done</td><td>끝났는데 아직 내가 안 봄</td><td>결과 확인 → 다음 일 주기</td></tr>
+            <tr><td><span class="sd idle"></span>idle</td><td>끝났고 확인도 함 — 대기 중</td><td>새 일을 줄 수 있는 빈자리</td></tr>
+            <tr><td><span class="sd unknown"></span>unknown</td><td>상태를 판단할 수 없음</td><td>직접 들여다본다</td></tr>
+          </tbody>
+        </table>
+        <div class="grid-2" style="margin-top:1rem; gap:1.2rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>⬆️ 위로 올라갑니다</h3>
+            <p>pane → tab → space로 상태가 모입니다. 한 명이라도 <strong class="danger">blocked</strong>면 그 space가 통째로 빨갛게.</p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🎯 상태로 찾아가기</h3>
+            <p><span class="kbd">ctrl+b</span> <span class="kbd">g</span> Goto 창에서 blocked · done만 골라 <strong>바로 점프.</strong></p>
+          </div>
+        </div>
+        <aside class="notes">
+          이게 herdr의 핵심. done은 에이전트가 보고하는 게 아니라 herdr가 "끝났는데 아직 안 봤다"를 기억해서 만든 상태입니다 — 그래서 놓치지 않습니다.
+          blocked는 엄격하게 판정합니다: 정말 사람 입력이 필요할 때만 뜹니다.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/agents/" target="_blank" rel="noopener">herdr · Agents</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 6. 어떻게 알아채나 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">STATUS · 어떻게 알아채나</div>
+        <h2>화면을 <span class="grad">읽거나</span>, 에이전트가 <span class="grad">알려 주거나</span></h2>
+        <div class="grid-2" style="margin-top:.5rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>👀 화면 읽기 — 기본</h3>
+            <p>pane에서 지금 돌고 있는 프로그램이 무엇인지 보고, <strong>화면 맨 아래</strong>를 에이전트별 패턴과 맞춰 봅니다.</p>
+            <p>"❯ 1. 예 / 2. 아니오"가 보이면 → <strong class="danger">blocked</strong>.</p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>🪝 연동 설치 — 더 정확하게</h3>
+            <pre class="code" style="font-size:.95rem; padding:.6rem .9rem; margin:.2rem 0 .5rem;">$ herdr integration install claude</pre>
+            <p>에이전트의 훅이 상태를 <strong>직접 보고</strong>합니다. codex · cursor 등도 같은 방식.</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1rem; gap:1.2rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>🔍 왜 그렇게 봤지?</h3>
+            <p><span class="mono">herdr agent explain &lt;pane&gt;</span> — 상태 판단의 근거를 보여 줍니다.</p>
+          </div>
+          <div class="card bad autoshow fade-up">
+            <h3>⚠️ pane 안에 tmux 금지</h3>
+            <p>pane 속에서 tmux를 또 띄우면 에이전트가 <strong>가려져서</strong> 상태를 못 읽습니다.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          지원 목록은 계속 늘어납니다: Claude Code, Codex, GitHub Copilot CLI, Cursor Agent CLI, OpenCode, Pi, Droid, Devin CLI 등은 화면 감지,
+          Gemini CLI · Amp · Cline 등은 상태만. 목록에 없는 프로그램은 그냥 평범한 터미널로 동작합니다.
+          화면 감지로 못 맞히는 경우 idle로 떨어집니다 — 그럴 땐 integration을 설치하세요.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/agents/" target="_blank" rel="noopener">herdr · Agents</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 7. 꺼도 돈다 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">PERSIST · 붙었다 떼었다</div>
+        <h2>창을 닫아도 <span class="grad">에이전트는 계속 일합니다</span></h2>
+        <div class="sv autoshow fade-up" style="margin-top:.6rem;">
+          <div class="sv-box srv">
+            <h3>🖥 herdr 서버</h3>
+            <p>백그라운드에서 <strong>터미널을 쥐고</strong> 있음</p>
+          </div>
+          <div class="sv-arrow">⇄<br/>붙기 · 떼기</div>
+          <div class="sv-box">
+            <h3>🪟 화면 (TUI)</h3>
+            <p>보여 주기만 하는 <strong>손님</strong></p>
+          </div>
+        </div>
+        <table class="tbl autoshow fade-up" style="margin-top:1.1rem;">
+          <tbody>
+            <tr><td><span class="kbd">ctrl+b</span> <span class="kbd">q</span></td><td>화면만 떼기 (detach) — 에이전트는 계속</td></tr>
+            <tr><td><span class="mono">herdr</span></td><td>다시 붙기 — 떠난 자리 그대로</td></tr>
+            <tr><td><span class="mono">herdr session list · attach · stop</span></td><td>이름 붙인 세션을 여러 개 운영</td></tr>
+            <tr><td><span class="mono">herdr server stop</span></td><td>전부 끄기 — 모든 pane이 종료됨</td></tr>
+          </tbody>
+        </table>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.15rem;">
+          단, <strong>재부팅</strong>하면 배치와 폴더만 돌아오고 프로그램은 새로 뜹니다 — 지원 에이전트는 저장된 세션으로 이어 가기 가능.
+        </div>
+        <aside class="notes">
+          tmux를 써 본 분에게는 익숙한 구조. 퇴근할 때 터미널 창을 닫아도 서버가 살아 있으면 에이전트는 계속 돕니다.
+          노트북을 재부팅하면 프로세스는 살아남지 못합니다 — 화면 배치와 작업 폴더만 복원. 긴 작업은 재부팅 전에 마무리.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/concepts/" target="_blank" rel="noopener">herdr · Concepts</a>
+          <a href="https://herdr.dev/tui/docs/cli-reference/" target="_blank" rel="noopener">CLI reference</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 8. 단축키 (extra) ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">CHEATSHEET · 이것만 외우면</div>
+        <h2><span class="kbd" style="font-size:.8em;">ctrl+b</span> 누르고, <span class="grad">한 글자</span></h2>
+        <div class="grid-3" style="margin-top:.5rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>📁 space · tab</h3>
+            <table class="tbl"><tbody>
+              <tr><td><span class="kbd">shift+n</span></td><td>새 space</td></tr>
+              <tr><td><span class="kbd">w</span></td><td>space 이동</td></tr>
+              <tr><td><span class="kbd">c</span></td><td>새 tab</td></tr>
+              <tr><td><span class="kbd">n</span> <span class="kbd">p</span></td><td>다음 · 이전 tab</td></tr>
+              <tr><td><span class="kbd">1</span>…<span class="kbd">9</span></td><td>tab 번호로</td></tr>
+            </tbody></table>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🪟 pane</h3>
+            <table class="tbl"><tbody>
+              <tr><td><span class="kbd">v</span></td><td>오른쪽으로 나누기</td></tr>
+              <tr><td><span class="kbd">-</span></td><td>아래로 나누기</td></tr>
+              <tr><td><span class="kbd">h</span><span class="kbd">j</span><span class="kbd">k</span><span class="kbd">l</span></td><td>pane 사이 이동</td></tr>
+              <tr><td><span class="kbd">z</span></td><td>크게 보기</td></tr>
+              <tr><td><span class="kbd">x</span></td><td>닫기</td></tr>
+            </tbody></table>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>🎯 자주 쓰는 것</h3>
+            <table class="tbl"><tbody>
+              <tr><td><span class="kbd">g</span></td><td>상태로 찾아가기</td></tr>
+              <tr><td><span class="kbd">b</span></td><td>사이드바 켜고 끄기</td></tr>
+              <tr><td><span class="kbd">[</span></td><td>복사 모드</td></tr>
+              <tr><td><span class="kbd">q</span></td><td>화면 떼기</td></tr>
+              <tr><td><span class="kbd">?</span></td><td>단축키 전체 보기</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+        <p class="small muted autoshow fade-up" style="margin-top:1rem;">외우기 싫으면 — 그냥 <strong>마우스로 클릭</strong>하세요. space · tab · pane · 에이전트 모두 눌러집니다.</p>
+        <aside class="notes">
+          기본 prefix는 ctrl+b — tmux와 같습니다. 모르는 게 있으면 ctrl+b ? 하나만 기억하면 됩니다.
+          단축키는 설정 파일에서 바꿀 수 있습니다. 마우스가 싫으면 [ui] mouse_capture = false.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/keyboard/" target="_blank" rel="noopener">herdr · Keyboard</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 9. CLI · 스크립트 (extra) ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">심화 · 스크립트로 부리기</div>
+        <h2>에이전트도 herdr를 <span class="grad">조종할 수 있습니다</span></h2>
+        <pre class="code autoshow fade-up" style="margin-top:.4rem; font-size:1rem;">$ herdr workspace create --cwd ~/project --label api   <span class="cm"># space 만들기</span>
+$ herdr pane run w1:p2 <span class="st">"npm test"</span>                      <span class="cm"># 특정 pane에서 명령 실행</span>
+$ herdr agent wait w1:p1 --until done                  <span class="cm"># 그 에이전트가 끝날 때까지 기다리기</span></pre>
+        <div class="grid-2" style="margin-top:1rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>🔗 "끝나면 다음"을 잇기</h3>
+            <p><span class="mono">agent wait --until done</span> 뒤에 다음 명령을 붙이면 — <strong>사람 없이 바통 터치.</strong></p>
+          </div>
+          <div class="card autoshow fade-up">
+            <h3>🔌 소켓 API</h3>
+            <p>CLI는 로컬 소켓 위의 JSON API를 감싼 것. 상태 변화 이벤트를 <strong>구독</strong>해 알림·대시보드도 만듭니다.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          herdr의 CLI는 모두 로컬 Unix 소켓(~/.config/herdr/herdr.sock)의 줄 단위 JSON API를 부릅니다. herdr api schema로 전체 스키마 확인.
+          Claude Code에게 "herdr CLI로 pane 두 개 만들고 테스트를 돌려줘"라고 시키는 것도 가능 — 에이전트가 자기 작업 공간을 꾸리는 셈.
+        </aside>
+        <div class="slide-refs">
+          <span class="rl">REF</span>
+          <a href="https://herdr.dev/tui/docs/cli-reference/" target="_blank" rel="noopener">CLI reference</a>
+          <a href="https://herdr.dev/tui/docs/socket-api/" target="_blank" rel="noopener">Socket API</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= 10. 내가 herdr를 사용하는 이유 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">MY PICK · 발표자의 한마디</div>
+        <h2>내가 <span class="grad">herdr</span>를 사용하는 이유</h2>
+        <div class="grid-2" style="margin-top:.5rem; align-items:stretch;">
+          <div class="card autoshow fade-up">
+            <h3>🗂 spaces → tabs, 두 단계로 정리</h3>
+            <pre class="code" style="font-size:.95rem; padding:.8rem 1rem;">📁 vibe-coding        <span class="cm"># space = 프로젝트</span>
+   ├ agents  logs  server   <span class="cm"># tab = 용도별 화면</span>
+📁 side-project
+   ├ agents  review</pre>
+            <p style="margin-top:.6rem;">프로젝트는 space로, 그 안의 일은 tab으로 — 에이전트가 여럿이어도 <strong class="accent2">어디서 뭘 하는지 한눈에.</strong></p>
+          </div>
+          <div class="card good autoshow fade-up">
+            <h3>🚦 agents 탭 — 누가 끝났고, 누가 날 기다리나</h3>
+            <pre class="code" style="font-size:.95rem; padding:.8rem 1rem;">✅ feat-login     <span class="cm">완료 — 결과 확인</span>
+🙋 feat-search    <span class="cm">답변 대기 — 내 차례</span>
+⏳ refactor-db    <span class="cm">작업 중</span></pre>
+            <p style="margin-top:.6rem;">완료·답변 대기가 바로 보이니 <strong>멈춘 에이전트에 곧장 다음 일을 줍니다.</strong></p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.26rem;">
+          에이전트가 <strong class="accent2">쉬지 않고 일하는 환경</strong> — 내 할 일은 🙋 표시를 따라가는 것뿐입니다.
+        </div>
+        <aside class="notes">
+          개인 경험담 슬라이드.
+          spaces(프로젝트) → tabs(용도별 화면) 두 단계 분류라 에이전트 여러 개를 띄워도 길을 잃지 않는다.
+          특히 agents 탭에서 작업 완료 여부, 사용자 답변을 기다리는 상태가 바로 보인다 — 노는 에이전트가 없도록 계속 일을 줄 수 있어서 좋다.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 11. 시작하기 ============= -->
+    <section>
+      <div class="vfill">
+        <div class="chip">START · 오늘 해 볼 것</div>
+        <h2>세 단계로 <span class="grad">첫 무리</span>를 꾸려 보세요</h2>
+        <div class="grid-3" style="margin-top:.5rem; align-items:stretch;">
+          <div class="card autoshow zoom-in">
+            <h3>① 설치 · 연동</h3>
+            <pre class="code" style="font-size:.85rem; padding:.6rem .8rem; margin:0;">brew install herdr
+herdr integration install claude</pre>
+          </div>
+          <div class="card autoshow zoom-in">
+            <h3>② 프로젝트마다 space</h3>
+            <p><span class="kbd">ctrl+b</span> <span class="kbd">shift+n</span> 로 space를 만들고 <strong>agents</strong> 탭에 에이전트 2~3개.</p>
+          </div>
+          <div class="card good autoshow zoom-in">
+            <h3>③ 🙋만 따라가기</h3>
+            <p>사이드바의 <strong class="danger">빨간 점</strong>이 뜨면 가서 답하고, <strong class="accent2">초록 점</strong>이면 결과 보고 다음 일.</p>
+          </div>
+        </div>
+        <div class="quote autoshow fade-up" style="margin-top:1.1rem; font-size:1.2rem;">
+          여러 에이전트가 <strong>같은 파일</strong>을 고치면 충돌합니다 — 에이전트마다 작업 폴더를 나누는 법은
+          <a href="../orchestration/">오케스트레이션 세미나</a>의 git worktree 장에서.
+        </div>
+        <aside class="notes">
+          처음엔 에이전트 두 개로 시작하세요. 셋 이상이면 에이전트보다 내가 결과를 검토하는 속도가 먼저 막힙니다.
+          herdr는 화면을 정리해 줄 뿐, 같은 저장소에서 동시에 고치는 충돌은 막아 주지 않습니다 — worktree와 함께 쓰세요.
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= 12. 참고 자료 ============= -->
+    <section data-depth="extra">
+      <div class="vfill">
+        <div class="chip">REFERENCES</div>
+        <h2>더 깊이 보기</h2>
+        <div class="grid-3" style="align-items:stretch; margin-top:.4rem;">
+          <div class="card ref-col autoshow fade-up">
+            <h3>📚 공식 문서</h3>
+            <ul>
+              <li><a href="https://herdr.dev/" target="_blank" rel="noopener">herdr.dev</a><span class="rd">홈 — 터미널판 · 데스크톱 · 모바일</span></li>
+              <li><a href="https://herdr.dev/tui/docs/concepts/" target="_blank" rel="noopener">Concepts</a><span class="rd">workspace · tab · pane · agent · session</span></li>
+              <li><a href="https://herdr.dev/tui/docs/agents/" target="_blank" rel="noopener">Agents</a><span class="rd">상태 다섯 가지 · 지원 에이전트 · 연동</span></li>
+              <li><a href="https://herdr.dev/tui/docs/keyboard/" target="_blank" rel="noopener">Keyboard</a><span class="rd">기본 단축키 전체</span></li>
+            </ul>
+          </div>
+          <div class="card ref-col autoshow fade-up">
+            <h3>🛠 더 해 보기</h3>
+            <ul>
+              <li><a href="https://herdr.dev/tui/docs/cli-reference/" target="_blank" rel="noopener">CLI reference</a><span class="rd">스크립트로 space · pane · 에이전트 다루기</span></li>
+              <li><a href="https://herdr.dev/tui/docs/socket-api/" target="_blank" rel="noopener">Socket API</a><span class="rd">상태 이벤트 구독 · 자동화</span></li>
+              <li><a href="https://github.com/herdrdev/herdr" target="_blank" rel="noopener">GitHub · herdrdev/herdr</a><span class="rd">소스 · 이슈 · 릴리스</span></li>
+            </ul>
+          </div>
+          <div class="card ref-col autoshow fade-up">
+            <h3>🎓 이 시리즈의 세미나</h3>
+            <ul>
+              <li><a href="../orchestration/">서브에이전트와 오케스트레이션</a><span class="rd">여러 에이전트에게 일을 나누는 법 · worktree</span></li>
+              <li><a href="../context/">컨텍스트 — AI 에이전트의 작업 책상</a><span class="rd">에이전트를 나눠 돌리는 이유의 원리</span></li>
+              <li><a href="../setup/">0교시 — 설치와 기본 조작</a><span class="rd">Claude Code 첫 설치부터</span></li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          herdr는 빠르게 바뀌는 도구입니다. 단축키·명령은 발표 전에 공식 문서로 한 번 확인하세요.
+        </aside>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- reveal.js 5.1.0 — inlined for offline/self-contained deck (MIT, Hakim El Hattab) -->
+<script src="../vendor/reveal/reveal.js"></script>
+<!-- 핵심만 보기: data-depth="extra" 장 접기 + 3분 요약 (Reveal.initialize 보다 먼저) -->
+<script src="../assets/core.js"></script>
+<script src="../vendor/reveal/notes.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: typeof RevealNotes !== 'undefined' ? [RevealNotes] : [],
+    hash: true,
+    hashOneBasedIndex: true,
+    controls: true,
+    controlsLayout: 'edges',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: false,
+  });
+
+  // ===== 목차 드롭다운 =====
+  (function () {
+    const sel = document.getElementById('tocSelect');
+    if (!sel) return;
+    const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    const clean = (t) => (t || '').replace(/\s+/g, ' ').trim().slice(0, 34);
+    // <br/>는 textContent 에서 사라져 단어가 붙는다 — 공백으로 바꿔 읽는다
+    const brText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('br').forEach((b) => b.replaceWith(' ')); return c.textContent; };
+    slides.forEach((s, i) => {
+      const h = s.querySelector('h1, h2');
+      const label = clean(h ? brText(h) : '') || ('페이지 ' + (i + 1));
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = (i + 1) + '. ' + label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => {
+      const i = Number(sel.value);
+      if (!Number.isNaN(i)) Reveal.slide(i);
+      sel.blur(); // 방향키가 다시 슬라이드 내비게이션으로 가도록
+    });
+    Reveal.on('slidechanged', (e) => { sel.value = String(e.indexh); });
+    Reveal.on('ready', (e) => { sel.value = String(e.indexh); });
+  })();
+
+  // ===== 전체화면 =====
+  (function () {
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (!fsBtn) return;
+    if (!document.fullscreenEnabled) { document.documentElement.classList.add('no-fullscreen'); return; }
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    });
+  })();
+</script>
+
+
+<!-- 통합 발표 플랫폼: 질문·이모지·슬라이드 동기화는 모든 덱이 공유하는 assets/qa.js 하나가 담당한다. -->
+<link rel="stylesheet" href="../assets/qa.css">
+<script src="../assets/qa.js" defer></script>
+
+</body>
+</html>

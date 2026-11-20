@@ -28,7 +28,7 @@
   <meta property="og:title" content="서브에이전트와 오케스트레이션 — 혼자가 아니라 팀으로" />
   <meta property="og:description" content="에이전트 하나가 버거워지는 순간, 팀을 꾸리는 법. 컨텍스트 격리 원리와 4가지 오케스트레이션 패턴, 자동화·함정까지 시각화한 프레젠테이션." />
   <meta property="og:url" content="https://vibe-coding.euiyun.com/orchestration/" />
-  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/orchestration.png?v=3" />
+  <meta property="og:image" content="https://vibe-coding.euiyun.com/og/orchestration.png?v=4" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="서브에이전트와 오케스트레이션 — 혼자가 아니라 팀으로" />
   <meta name="twitter:description" content="위임·격리·보고 — 사람 조직의 답을 AI 에이전트 팀에 적용하는 법. 패턴 4가지와 판단 기준." />
-  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/orchestration.png?v=3" />
+  <meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/orchestration.png?v=4" />
 
   <meta name="theme-color" content="#06080F" />
 
@@ -50,7 +50,7 @@
     "headline": "서브에이전트와 오케스트레이션 — 혼자가 아니라 팀으로 | 바이브 코딩 세미나",
     "description": "AI 에이전트 하나로 버거운 큰 작업을 서브에이전트 팀으로 나누는 법. 컨텍스트 격리의 원리, 역할 분담·병렬 fan-out·파이프라인·심판 패널 4가지 오케스트레이션 패턴, headless·CI 자동화, 함정과 판단 기준.",
     "url": "https://vibe-coding.euiyun.com/orchestration/",
-    "image": "https://vibe-coding.euiyun.com/og/orchestration.png?v=3",
+    "image": "https://vibe-coding.euiyun.com/og/orchestration.png?v=4",
     "inLanguage": "ko",
     "datePublished": "2026-07",
     "dateModified": "2026-11",
@@ -1385,45 +1385,6 @@ $ git worktree add ../feat-search feature/search
       </div>
     </section>
 
-    <!-- ============= 16b. CH4 조율 도구 ③: herdr (extra) ============= -->
-    <section data-depth="extra">
-      <div class="vfill">
-        <div class="chip">CH 4 · 조율의 실전 도구</div>
-        <h2>내가 <span class="grad">herdr</span>를 사용하는 이유</h2>
-        <div class="grid-2" style="margin-top:.5rem; align-items:stretch;">
-          <div class="card autoshow fade-up">
-            <h3>🗂 spaces → tabs, 두 단계로 정리</h3>
-            <pre class="code" style="font-size:.95rem; padding:.8rem 1rem;">📁 vibe-coding        <span class="cm"># space = 프로젝트</span>
-   ├ agents  logs  server   <span class="cm"># tab = 용도별 화면</span>
-📁 side-project
-   ├ agents  review</pre>
-            <p style="margin-top:.6rem;">프로젝트는 space로, 그 안의 일은 tab으로 — 에이전트가 여럿이어도 <strong class="accent2">어디서 뭘 하는지 한눈에.</strong></p>
-          </div>
-          <div class="card good autoshow fade-up">
-            <h3>🚦 agents 탭 — 누가 끝났고, 누가 날 기다리나</h3>
-            <pre class="code" style="font-size:.95rem; padding:.8rem 1rem;">✅ feat-login     <span class="cm">완료 — 결과 확인</span>
-🙋 feat-search    <span class="cm">답변 대기 — 내 차례</span>
-⏳ refactor-db    <span class="cm">작업 중</span></pre>
-            <p style="margin-top:.6rem;">완료·답변 대기가 바로 보이니 <strong>멈춘 에이전트에 곧장 다음 일을 줍니다.</strong></p>
-          </div>
-        </div>
-        <div class="quote autoshow fade-up" style="margin-top:1rem; font-size:1.26rem;">
-          에이전트가 <strong class="accent2">쉬지 않고 일하는 환경</strong> — 내 할 일은 🙋 표시를 따라가는 것뿐입니다.
-        </div>
-        <aside class="notes">
-          개인 경험담 슬라이드. herdr는 AI 코딩 에이전트용 터미널 멀티플렉서.
-          spaces(프로젝트) → tabs(용도별 화면) 두 단계 분류라 에이전트 여러 개를 띄워도 길을 잃지 않는다.
-          특히 agents 탭에서 작업 완료 여부, 사용자 답변을 기다리는 상태가 바로 보인다 — 노는 에이전트가 없도록 계속 일을 줄 수 있어서 좋다.
-          worktree(앞 장)와 함께 쓰면 에이전트마다 폴더 + 화면이 깔끔하게 나뉜다.
-        </aside>
-        <div class="slide-refs">
-          <span class="rl">REF</span>
-          <a href="https://herdr.dev/" target="_blank" rel="noopener">herdr.dev</a>
-          <a href="https://herdr.dev/docs/concepts/" target="_blank" rel="noopener">herdr · Concepts</a>
-        </div>
-      </div>
-    </section>
-
     <!-- ============= 18. CH5 headless ============= -->
     <section data-depth="extra">
       <div class="vfill">
@@ -1763,6 +1724,7 @@ $ git worktree add ../feat-search feature/search
               <li><a href="../prompt/">프롬프트 엔지니어링</a><span class="rd">지시서 쓰는 법 — 3요소 프레임</span></li>
               <li><a href="../verification/">AI가 쓴 코드를 믿는 법</a><span class="rd">자식이 가져온 결과 검증하기</span></li>
               <li><a href="../automation/">내 도구가 혼자 돌게</a><span class="rd">예약 실행 · 커넥터 · 팀 공유 실전</span></li>
+              <li><a href="../herdr/">herdr — 에이전트를 무리로</a><span class="rd">병렬 에이전트를 한 화면에서 · 답변 대기 알림</span></li>
             </ul>
           </div>
         </div>

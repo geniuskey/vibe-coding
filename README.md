@@ -23,6 +23,7 @@
 | 03 직접 해보기 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 좌표+증상 피드백 · 스스로 검사 — CLAUDE.md·스킬은 `agent-skills/`로, `slide-deck` 예제 스킬 동봉) |
 | 03 직접 해보기 | `automation/` | 내 도구가 혼자 돌게 — 연결(MCP) · 예약 실행 · 팀이 같이 쓰는 앱 |
 | 번외 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
+| 번외 | `herdr/` | herdr — 여러 AI 코딩 에이전트를 한 화면에서 부리는 터미널 (space → tab · 상태 표시) |
 | 번외 | `ai-map/` | AI 업계 지도 — 각 진영의 전략 (입문 덱 부록에서 분리, 분기마다 갱신) |
 
 **핵심 경로는 세 개뿐이다**: `setup/`(40분) → `intro/`(60분) → `workshop/`(90분·3시간·8시간). 시작 전 맛보기로 `use-cases/`(5분).
@@ -45,7 +46,7 @@
 - 공개 사이트·`file://` 에서는 기본 **핵심 모드**, 왼쪽 아래 토글로 전체를 펼친다(선택은 `localStorage.vibe-depth`에 기억, 보던 장으로 복귀).
 - 실제 발표(`server.js`로 띄운 곳)·`?present`·인쇄(`?print-pdf`)는 **항상 전체 모드** — 발표자와 청중의 슬라이드 번호가 같아야 따라가기가 깨지지 않는다. 강제로 고르려면 `?core` / `?full`.
 - 덱에 붙이는 법: `<head>`에 `<link rel="stylesheet" href="../assets/core.css">`, `reveal.js` 바로 다음(`Reveal.initialize` 앞)에 `<script src="../assets/core.js"></script>`.
-- 적용 덱: prompt · ui-ux · github · debugging · context · knowledge · verification · orchestration · security · agent-skills · making-slides · automation · ai-map. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
+- 적용 덱: prompt · ui-ux · github · debugging · context · knowledge · verification · orchestration · security · agent-skills · making-slides · automation · herdr · ai-map. (setup · intro · workshop · forChildren은 처음부터 끝까지 따라가는 덱이라 접지 않는다.)
 
 ### 첫 화면 — 빌드 장면 (루트 `index.html`)
 
