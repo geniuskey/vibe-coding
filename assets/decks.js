@@ -26,6 +26,7 @@ window.SEMINAR_DECKS = [
   { track: '03 직접 해보기', id: 'making-slides', emoji: '🎬', title: '바이브 코딩으로 슬라이드 자료 만들기', desc: '레퍼런스 앵커링 → 좌표+증상 피드백 → 스킬' },
   { track: '03 직접 해보기', id: 'automation', emoji: '🔌', title: '내 도구가 혼자 돌게 — 연결 · 예약 실행 · 팀 공유', desc: '커넥터(MCP) · 예약 실행 · 팀이 같이 쓰는 앱' },
 
+  { track: '번외', id: 'film', emoji: '🎞️', title: '바이브 코딩 — 10분 필름', desc: '장면마다 움직이는 그림으로 보는 10분 소개 (PC · WebGL 2 권장)' },
   { track: '번외', id: 'forChildren', emoji: '🎮', title: '나만의 게임 만들기', desc: '어린이 × 부모 — AI와 함께 게임 만들기' },
   { track: '번외', id: 'herdr', emoji: '🐑', title: 'herdr — 에이전트를 무리로', desc: 'space → tab 정리 · 답변 대기 알림 · 에이전트 여럿을 한 화면에서' },
   { track: '번외', id: 'ai-map', emoji: '🗺️', title: 'AI 업계 지도 — 2026.11', desc: '각 진영의 전략 — 3개월마다 바뀝니다' },

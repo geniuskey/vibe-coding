@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("fonts/PretendardVariable.woff2") format("woff2-variations");
+  font-weight: 45 920;
+  font-display: block;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("fonts/GeistMono-latin.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: block;
+}
+:root {
+  --panel: rgba(12, 14, 20, 0.82);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #eef1f7;
+  --dim: #98a0b3;
+  --sel: #7c8cff;
+  color-scheme: dark;
+}
+html, body { height: 100%; margin: 0; }
+body {
+  overflow: hidden;
+  background: #000;
+  color: var(--text);
+  font: 16px/1.55 "Pretendard Variable", "Apple SD Gothic Neo", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body.idle { cursor: none; }
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; touch-action: none; background: #000; }
+[hidden] { display: none !important; }
+.glass { background: var(--panel); -webkit-backdrop-filter: blur(20px) saturate(1.3); backdrop-filter: blur(20px) saturate(1.3); }
+
+#notes {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 20px 32px calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 40px; align-items: start;
+}
+#notes p { margin: 0; max-width: 68ch; font-size: 20px; line-height: 1.6; white-space: pre-line; letter-spacing: -0.005em; }
+#note-meta { color: var(--dim); font: 500 14px/1.7 "Geist Mono", ui-monospace, monospace; text-align: right; white-space: nowrap; }
+#note-clock { color: var(--text); font-size: 22px; }
+
+#over { position: fixed; inset: 0; overflow: auto; background: rgba(6, 7, 10, 0.9); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+#over .grid {
+  padding: 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 28px 24px; align-content: start; max-width: 1800px; margin: 0 auto;
+}
+#over button { all: unset; cursor: pointer; display: grid; gap: 10px; }
+#over canvas { width: 100%; aspect-ratio: 16 / 9; display: block; border-radius: 6px; outline: 2px solid transparent; outline-offset: 4px; transition: outline-color .2s, transform .25s; background: #111; }
+#over button:hover canvas, #over button:focus-visible canvas { outline-color: rgba(124, 140, 255, 0.55); transform: translateY(-2px); }
+#over button[aria-current="true"] canvas { outline-color: var(--sel); }
+#over span { color: var(--dim); font-size: 15px; display: flex; gap: 10px; align-items: baseline; }
+#over span i { font: normal 500 12px "Geist Mono", ui-monospace, monospace; color: #6d7487; }
+
+#help {
+  position: fixed; right: 28px; bottom: 28px; padding: 20px 24px; border-radius: 12px; border: 1px solid var(--line);
+  display: grid; grid-template-columns: auto auto; gap: 7px 26px; max-width: calc(100vw - 56px); font-size: 15px;
+}
+#help b { font: 500 13px/1.9 "Geist Mono", ui-monospace, monospace; color: var(--text); }
+#help span { color: var(--dim); }
+
+#toast {
+  position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%);
+  padding: 9px 18px; font-size: 15px; border-radius: 999px; border: 1px solid var(--line);
+  transition: opacity .4s, transform .4s; white-space: nowrap;
+}
+#toast.out { opacity: 0; transform: translate(-50%, 6px); }
+
+#load {
+  position: fixed; inset: 0; z-index: 10; background: #050608; display: grid; place-content: center; justify-items: center; gap: 22px;
+  transition: opacity .9s ease;
+}
+#load.done { opacity: 0; pointer-events: none; }
+#load p { margin: 0; color: #a7aec0; font-weight: 300; font-size: 15px; letter-spacing: 0.32em; text-indent: 0.32em; }
+#load .bar { width: 180px; height: 1px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+#load .bar i { display: block; height: 100%; background: #c9cfff; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+
+@media (max-width: 640px) {
+  #notes { grid-template-columns: 1fr; padding: 14px 18px; }
+  #notes p { font-size: 16px; }
+  #over .grid { padding: 18px; gap: 18px; }
+}

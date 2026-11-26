@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>바이브 코딩 — 10분 필름 | 바이브 코딩 세미나</title>
+<meta name="description" content="장면마다 움직이는 그림으로 보는 10분짜리 바이브 코딩 소개. 한 줄 프롬프트, 추상화의 계단, 말하고·만들고·돌려 보고·확인하는 루프, 에이전트, 쓰기 좋은 곳과 조심할 곳, 확인 지점, 네 가지 습관, 손에서 판단으로.">
+<meta name="author" content="geniuskey">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vibe-coding.euiyun.com/film/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="바이브 코딩 세미나">
+<meta property="og:title" content="바이브 코딩 — 10분 필름">
+<meta property="og:description" content="장면마다 움직이는 그림으로 보는 10분짜리 바이브 코딩 소개 (PC · WebGL 2 권장)">
+<meta property="og:url" content="https://vibe-coding.euiyun.com/film/">
+<meta property="og:image" content="https://vibe-coding.euiyun.com/og/film.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vibe-coding.euiyun.com/og/film.png?v=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../assets/qa.css">
+</head>
+<body>
+<canvas id="stage" tabindex="0" aria-label="발표 화면"></canvas>
+<div id="notes" class="glass" hidden><p id="note-text"></p><div id="note-meta"></div></div>
+<div id="over" hidden></div>
+<div id="help" class="glass" hidden>
+  <b>→ · Space · 클릭</b><span>다음</span>
+  <b>← · 왼쪽 클릭</b><span>이전 (애니메이션이 되감깁니다)</span>
+  <b>N</b><span>발표자 노트 · 경과 시간</span>
+  <b>W</b><span>발표자 창 (두 번째 화면용: 노트 · 다음 · 시간)</span>
+  <b>O · Esc</b><span>전체 보기</span>
+  <b>F</b><span>전체 화면</span>
+  <b>M</b><span>음소거</span>
+  <b>B</b><span>배경음악 켜기/끄기</span>
+  <b>P</b><span>진행 표시 켜기/끄기</span>
+  <b>A</b><span>자동 진행</span>
+  <b>.</b><span>화면 잠깐 끄기</span>
+  <b>Home · End</b><span>처음 · 끝</span>
+  <b>?</b><span>이 도움말</span>
+</div>
+<div id="toast" class="glass" hidden></div>
+<div id="load"><p>바이브 코딩</p><div class="bar"><i id="load-bar"></i></div></div>
+<script src="vendor/three.min.js"></script>
+<script src="engine/util.js"></script>
+<script src="engine/glsl.js"></script>
+<script src="engine/gfx.js"></script>
+<script src="engine/text.js"></script>
+<script src="engine/shapes.js"></script>
+<script src="engine/deck.js"></script>
+<script src="engine/transitions.js"></script>
+<script src="audio.js"></script>
+<script src="scenes/01-prompt.js"></script>
+<script src="scenes/02-stairs.js"></script>
+<script src="scenes/03-loop.js"></script>
+<script src="scenes/04-experiments.js"></script>
+<script src="scenes/05-agents.js"></script>
+<script src="scenes/06-fit.js"></script>
+<script src="scenes/07-drift.js"></script>
+<script src="scenes/08-habits.js"></script>
+<script src="scenes/09-balance.js"></script>
+<script src="scenes/10-end.js"></script>
+<script>Deck.start();</script>
+<script src="../assets/qa.js" defer></script>
+</body>
+</html>

@@ -22,6 +22,7 @@
 | 03 직접 해보기 | `agent-skills/` | 내 노하우를 AI에게 물려주는 법 — CLAUDE.md · Agent Skills (반복 설명을 파일로 승격하는 정본 + 반도체 실무 예제, 예제 스킬 모음 `agent-skills/skills/`) |
 | 03 직접 해보기 | `making-slides/` | 바이브 코딩으로 슬라이드 자료 만들기 (레퍼런스 앵커링 · 좌표+증상 피드백 · 스스로 검사 — CLAUDE.md·스킬은 `agent-skills/`로, `slide-deck` 예제 스킬 동봉) |
 | 03 직접 해보기 | `automation/` | 내 도구가 혼자 돌게 — 연결(MCP) · 예약 실행 · 팀이 같이 쓰는 앱 |
+| 번외 | `film/` | 바이브 코딩 — 10분 필름 (장면마다 움직이는 그림 · WebGL 2 · 소스 `film/src/`, `node film/build.mjs`로 빌드) |
 | 번외 | `forChildren/` | 나만의 게임 만들기 (어린이 × 부모) |
 | 번외 | `herdr/` | herdr — 여러 AI 코딩 에이전트를 한 화면에서 부리는 터미널 (space → tab · 상태 표시) |
 | 번외 | `ai-map/` | AI 업계 지도 — 각 진영의 전략 (입문 덱 부록에서 분리, 분기마다 갱신) |
